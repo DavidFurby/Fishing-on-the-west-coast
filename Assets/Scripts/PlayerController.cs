@@ -3,31 +3,46 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     private float horizontalInput;
     private float verticalInput;
-    public int movementSpeed;
-    public float rotationSpeed;
+    [SerializeField] int movementSpeed;
+    [SerializeField] float rotationSpeed;
+    private bool isWithinTriggerArea;
+    private Interactible interactible;
 
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+
+        HandleInput();
     }
     private void FixedUpdate()
     {
-        Vector3 movementDirection = new(horizontalInput, 0.0f, verticalInput);
-        MovePlayer(movementDirection);
-        RotatePlayer(movementDirection);
+        HandleMovement();
 
     }
+    //Handle player input
+    private void HandleInput()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
 
+        ActivateInteractible();
+
+    }
+    //Handle player movement and rotation
+    private void HandleMovement()
+    {
+        Vector3 movementDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
+        MovePlayer(movementDirection);
+        RotatePlayer(movementDirection);
+    }
+    //Move player in specified direction
     private void MovePlayer(Vector3 movementDirection)
     {
         transform.Translate(movementSpeed * Time.deltaTime * movementDirection, Space.World);
     }
+    //Rotate the player to face the specified direction
     private void RotatePlayer(Vector3 movementDirection)
     {
         if (movementDirection != Vector3.zero)
@@ -35,17 +50,36 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(movementDirection);
         }
     }
-    private void OnTriggerStay(Collider other)
+    //Called when player enters trigger
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && other.CompareTag("Interactible"))
+        if (other.CompareTag("Interactible"))
         {
-            TriggerInteractible(other);
+            isWithinTriggerArea = true;
+            interactible = other.GetComponent<Interactible>();
         }
     }
-    private void TriggerInteractible(Collider other)
+
+    //Called when player exists trigger
+    private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Pressed");
-        Interactible interactible = other.gameObject.GetComponent<Interactible>();
-        interactible.triggered = true;
+        if (other.CompareTag("Interactible"))
+        {
+            isWithinTriggerArea = false;
+            interactible = null;
+
+        }
+    }
+
+    //Activates interactible object if player is within trigger area and button is pressed
+    private void ActivateInteractible()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea)
+        {
+            if (interactible != null)
+            {
+                interactible.isActivated = true;
+            }
+        }
     }
 }

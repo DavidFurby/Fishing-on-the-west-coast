@@ -2,47 +2,43 @@ using UnityEngine;
 
 public class Interactible : MonoBehaviour
 {
-    // Start is called before
-    // iytrirst frame update
     public GameObject interactibleIcon;
-    public bool triggered;
-    void Start()
-    {
-
-    }
+    public bool isActivated;
 
 
 
     // Update is called once per frame
     void Update()
     {
-        if (triggered)
-        {
-            Debug.Log(transform.name);
-            if (transform.name == "Bed")
-            {
-                Sleep sleep = GetComponent<Sleep>();
-                sleep.GoToSleep();
-            }
-            else if (transform.name == "Door")
-            {
-                TransitArea openDoor = GetComponent<TransitArea>();
-                openDoor.Transit();
-            }
-        }
+        checkActivated();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void checkActivated()
     {
-        if (other.CompareTag("Player"))
+        if (isActivated)
         {
-            interactibleIcon.SetActive(true);
-        }
-        else
-        {
-            interactibleIcon.SetActive(false);
+            switch (transform.name)
+            {
+                case "Bed":
+                    Sleep sleep = GetComponent<Sleep>();
+                    sleep.GoToSleep();
+                    break;
+                case "Door":
+                    TransitArea openDoor = GetComponent<TransitArea>();
+                    openDoor.Transit();
+                    break;
+            }
+            isActivated = false;
         }
     }
+    //Shows icon when player enters the trigger
+    private void OnTriggerEnter(Collider other)
+    {
+
+        interactibleIcon.SetActive(other.CompareTag("Player"));
+
+    }
+    //Hides the icon when player exits the trigger
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
