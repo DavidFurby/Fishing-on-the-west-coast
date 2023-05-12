@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float rotationSpeed;
     private bool isWithinTriggerArea;
     private Interactible interactible;
+    public bool pauseMovement = false;
 
     // Update is called once per frame
     void Update()
@@ -18,7 +19,10 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        HandleMovement();
+        if (!pauseMovement)
+        {
+            HandleMovement();
+        }
 
     }
     //Handle player input

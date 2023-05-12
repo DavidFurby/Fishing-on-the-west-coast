@@ -27,6 +27,10 @@ public class Interactible : MonoBehaviour
                     TransitArea openDoor = GetComponent<TransitArea>();
                     openDoor.Transit();
                     break;
+                case "Character":
+                    Conversation characterInteraction = GetComponent<Conversation>();
+                    characterInteraction.StartDialog();
+                    break;
             }
             isActivated = false;
         }
