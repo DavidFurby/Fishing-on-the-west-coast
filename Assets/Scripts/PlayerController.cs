@@ -9,17 +9,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float rotationSpeed;
     private bool isWithinTriggerArea;
     private Interactible interactible;
-    public bool pauseMovement = false;
+    public bool pauseControlls = false;
 
-    // Update is called once per frame
     void Update()
     {
+        if (!pauseControlls)
+        {
+            HandleInput();
 
-        HandleInput();
+        }
     }
     private void FixedUpdate()
     {
-        if (!pauseMovement)
+        if (!pauseControlls)
         {
             HandleMovement();
         }
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
     //Move player in specified direction
     private void MovePlayer(Vector3 movementDirection)
     {
-        transform.Translate(movementSpeed * Time.deltaTime * movementDirection, Space.World);
+        transform.Translate(movementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
     }
     //Rotate the player to face the specified direction
     private void RotatePlayer(Vector3 movementDirection)

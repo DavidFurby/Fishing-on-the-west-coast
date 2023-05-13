@@ -9,11 +9,6 @@ public class TransitArea : MonoBehaviour
     public SceneAsset toScene;
     public Animator animator;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void Transit()
     {
         if (toScene != null)
