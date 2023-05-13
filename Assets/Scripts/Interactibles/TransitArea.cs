@@ -22,4 +22,12 @@ public class TransitArea : MonoBehaviour
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(sceneName);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && transform.CompareTag("TransitionArea"))
+        {
+            Transit();
+        }
+    }
 }
