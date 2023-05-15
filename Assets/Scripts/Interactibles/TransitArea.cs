@@ -4,12 +4,16 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TransitArea : MonoBehaviour
+public class TransitArea : MonoBehaviour, IInteractible
 {
     public SceneAsset toScene;
     public Animator animator;
 
-    public void Transit()
+    public void Interact()
+    {
+        Transition();
+    }
+    public void Transition()
     {
         if (toScene != null)
         {
@@ -27,7 +31,7 @@ public class TransitArea : MonoBehaviour
     {
         if (other.CompareTag("Player") && transform.CompareTag("TransitionArea"))
         {
-            Transit();
+            Transition();
         }
     }
 }

@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         {
             if (interactible != null)
             {
-                interactible.isActivated = true;
+                interactible.CheckActivated();
             }
         }
     }
