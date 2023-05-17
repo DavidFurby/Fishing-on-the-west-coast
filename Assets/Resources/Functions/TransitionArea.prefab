@@ -58,5 +58,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b4a00706f5dc84d9abc3febd99f934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toScene: {fileID: 102900000, guid: 76eddb328c0c96a488425509ea184b26, type: 3}
+  toScene: {fileID: 0}
   animator: {fileID: 0}

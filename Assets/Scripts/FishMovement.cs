@@ -1,39 +1,43 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class FishMovement : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float swimSpeed;
     public Vector3 direction;
-    [SerializeField] Camera mainCamera;
-    private float destroyTimer = 4;
+    private Camera mainCamera;
+    private float destroyTimer = 10;
     private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(nameof(Swim));
+        InvokeRepeating(nameof(Swim), swimSpeed, swimSpeed);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         FloatSpeed();
         DestroyOnExit();
-
     }
     // Method to move fish based on speed and direction
     void FloatSpeed()
     {
-        transform.position += speed * Time.fixedDeltaTime * direction;
+        transform.position += direction * speed * Time.fixedDeltaTime;
     }
     // Coroutine to add force to fish's rigidbody
-    IEnumerator Swim()
+    void Swim()
     {
-        rb.AddForce(speed * Time.fixedDeltaTime * direction);
-        yield return new WaitForSeconds(swimSpeed);
+        rb.AddForce(direction * swimSpeed * Time.fixedDeltaTime, ForceMode.Impulse);
+    }
+    //Move towards bait if triggered
+    public void GetBaited(Vector3 baitPosition)
+    {
+        direction = (baitPosition - transform.position).normalized;
     }
     // Method to check if fish should be destroyed based on destroy timer and position
     void DestroyOnExit()

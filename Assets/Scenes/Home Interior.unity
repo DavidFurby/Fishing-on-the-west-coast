@@ -231,6 +231,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3972947131958732035, guid: a3a8c72b9d0cdf646855e808b63b3f6d, type: 3}
+      propertyPath: isActivated
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7267869868903935898, guid: a3a8c72b9d0cdf646855e808b63b3f6d, type: 3}
       propertyPath: m_Name
       value: Home Interior
@@ -279,18 +283,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7267869869648890699, guid: a3a8c72b9d0cdf646855e808b63b3f6d, type: 3}
-      propertyPath: image
-      value: 
+    - target: {fileID: 7267869869685383881, guid: a3a8c72b9d0cdf646855e808b63b3f6d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 7267869869648890699, guid: a3a8c72b9d0cdf646855e808b63b3f6d, type: 3}
-      propertyPath: toScene
-      value: 
-      objectReference: {fileID: 102900000, guid: 9799ed24bc986a145a59933cdef5e45f, type: 3}
-    - target: {fileID: 7267869869648890699, guid: a3a8c72b9d0cdf646855e808b63b3f6d, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1617302883}
     - target: {fileID: 7267869869685383883, guid: a3a8c72b9d0cdf646855e808b63b3f6d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -322,6 +318,25 @@ Light:
   m_CorrespondingSourceObject: {fileID: 7446763481587338451, guid: 1c8d56ce187f44e4c9a2c62fee65388a, type: 3}
   m_PrefabInstance: {fileID: 7446763481955597897}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &733599214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5083463179647434163, guid: a3a8c72b9d0cdf646855e808b63b3f6d, type: 3}
+  m_PrefabInstance: {fileID: 74929290}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &733599218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733599214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b4a00706f5dc84d9abc3febd99f934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toScene: {fileID: 102900000, guid: 9799ed24bc986a145a59933cdef5e45f, type: 3}
+  animator: {fileID: 1617302883}
 --- !u!1 &1437915198 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2474057496710730138, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
