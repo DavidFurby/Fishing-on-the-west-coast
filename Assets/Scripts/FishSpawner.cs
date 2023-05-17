@@ -51,4 +51,12 @@ public class FishSpawner : MonoBehaviour
         //Calculate spawn position
         spawnPosition = new Vector3(spawnHorizontal, spawnVertical, 5);
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fish"))
+        {
+            Destroy(other.gameObject);
+            Debug.Log("Destroyed");
+        }
+    }
 }
