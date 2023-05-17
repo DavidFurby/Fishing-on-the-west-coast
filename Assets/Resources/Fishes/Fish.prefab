@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.2
-  swimSpeed: 20
+  swimSpeed: 10
   direction: {x: 0, y: 0, z: 0}
 --- !u!54 &-3783395524345797868
 Rigidbody:
