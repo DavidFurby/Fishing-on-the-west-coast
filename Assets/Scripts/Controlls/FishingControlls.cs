@@ -3,8 +3,11 @@ using UnityEngine;
 public class FishingControlls : MonoBehaviour
 {
     [SerializeField] CatchArea catchArea;
-    private bool isFishing = false;
-    [SerializeField] Bait baitScript;
+    public bool isFishing = false;
+    [SerializeField] Bait bait;
+    [SerializeField] GameObject fishingRod;
+    private bool isSwingingRod;
+    [SerializeField] Animator animator;
     // Update is called once per frame
     void Update()
     {
@@ -15,7 +18,7 @@ public class FishingControlls : MonoBehaviour
         }
         else
         {
-            ThrowBait();
+            StartFishing();
 
         }
     }
@@ -26,32 +29,45 @@ public class FishingControlls : MonoBehaviour
         {
             Debug.Log("Get em");
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (catchArea.isInCatchArea)
             {
                 Debug.Log("Catch");
             }
 
-            SetFishing();
+            isFishing = false;
         }
 
     }
 
-    private void ThrowBait()
+    private void StartFishing()
     {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ChargeThrow();
+        }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            Debug.Log("up");
-            SetFishing();
+            animator.Play("Reverse Swing");
+            isSwingingRod = false;
+            isFishing = true;
+            bait.ThrowBait();
         }
     }
 
-    private void SetFishing()
+    private void ChargeThrow()
     {
-        isFishing = !isFishing;
-        Debug.Log(isFishing);
-        baitScript.SetBait();
-    }
 
+        if (!isSwingingRod)
+        {
+            isSwingingRod = true;
+            animator.Play("Swing");
+        }
+        if (bait.throwPower < 20)
+        {
+            bait.throwPower++;
+        }
+
+    }
 }
