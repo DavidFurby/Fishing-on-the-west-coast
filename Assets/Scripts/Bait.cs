@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bait : MonoBehaviour
@@ -8,7 +6,12 @@ public class Bait : MonoBehaviour
     {
         if (other.CompareTag("Fish"))
         {
+            Debug.Log("Baited");
             other.GetComponent<FishMovement>().GetBaited(transform.position);
         }
+    }
+    public void SetBait()
+    {
+
     }
 }

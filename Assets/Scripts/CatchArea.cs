@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class CatchArea : MonoBehaviour
 {
+    public bool isInCatchArea;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Fish"))
         {
-            Debug.Log("Get it!");
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                Debug.Log("Got it!");
-            }
+            Debug.Log("Catch Area");
+            isInCatchArea = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fish"))
+        {
+            isInCatchArea = false;
         }
     }
 }

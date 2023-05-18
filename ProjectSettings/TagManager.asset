@@ -8,6 +8,8 @@ TagManager:
   - Interactible
   - Character
   - TransitionArea
+  - Fish
+  - FishingLine
   layers:
   - Default
   - TransparentFX

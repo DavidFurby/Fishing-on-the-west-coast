@@ -5,17 +5,17 @@ public class FishSpawner : MonoBehaviour
 {
     public GameObject[] Fishes;
     public int spawnDelay;
-    [SerializeField] GameObject sea;
     new Renderer renderer;
     private Vector3 seaPosition;
     private float spawnHorizontal;
     private Quaternion spawnRotation;
     private Vector3 spawnPosition;
+
     private void Start()
     {
         //Get the size and center of the sea object
-        seaPosition = sea.transform.position;
-        renderer = sea.GetComponent<Renderer>();
+        seaPosition = transform.position;
+        renderer = GetComponent<Renderer>();
 
         InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
     }
@@ -55,8 +55,16 @@ public class FishSpawner : MonoBehaviour
     {
         if (other.CompareTag("Fish"))
         {
-            Destroy(other.gameObject);
-            Debug.Log("Destroyed");
+            if (other.transform.position.y > seaPosition.y + renderer.bounds.extents.y)
+            {
+                other.attachedRigidbody.AddForce(Vector3.down * 2, ForceMode.Impulse);
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
         }
     }
 }
+
+
