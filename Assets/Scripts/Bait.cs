@@ -4,6 +4,7 @@ public class Bait : MonoBehaviour
 {
     private Rigidbody rb;
     public float throwPower;
+    public Rope rope;
 
     private void Start()
     {
@@ -21,6 +22,6 @@ public class Bait : MonoBehaviour
     {
         Debug.Log(throwPower);
         rb.AddForce(throwPower * Time.deltaTime * new Vector3(1, 1, 0), ForceMode.Impulse);
-        Debug.Log("throw");
+        rope.SetLength((int)throwPower);
     }
 }
