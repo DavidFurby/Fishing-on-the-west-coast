@@ -64,10 +64,9 @@ public class FishingControlls : MonoBehaviour
             isSwingingRod = true;
             animator.Play("Swing");
         }
-        if (bait.throwPower < 20)
-        {
+        if (bait.throwPower < 200)
             bait.throwPower++;
-        }
 
     }
+
 }

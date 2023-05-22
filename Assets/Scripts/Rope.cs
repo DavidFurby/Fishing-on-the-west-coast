@@ -27,12 +27,15 @@ public class Rope : MonoBehaviour
     public float aRope = 0.05f;
     //Mass of one rope section
     public float mRopeSection = 0.2f;
+    public float forceFactor = 1f;
+    public bool forceAdded = false;
+
 
     void Start()
     {
         //Init the line renderer we use to display the rope
         lineRenderer = GetComponent<LineRenderer>();
-        SetLength(4);
+        SetLength(2);
 
     }
 
@@ -40,9 +43,6 @@ public class Rope : MonoBehaviour
     {
         //Display the rope with the line renderer
         DisplayRope();
-
-        //Compare the current length of the rope with the wanted length
-        DebugRopeLength();
 
         //Move what is hanging from the rope to the end of the rope
         whatIsHangingFromTheRope.position = allRopeSections[0].pos;
@@ -56,7 +56,6 @@ public class Rope : MonoBehaviour
     public void SetLength(int length)
     {
         Vector3 pos = whatTheRopeIsConnectedTo.position;
-
         List<Vector3> ropePositions = new();
 
         //Build the rope from the top
@@ -95,7 +94,7 @@ public class Rope : MonoBehaviour
     //Display the rope with a line renderer
     private void DisplayRope()
     {
-        float ropeWidth = 0.2f;
+        float ropeWidth = 0.01f;
 
         lineRenderer.startWidth = ropeWidth;
         lineRenderer.endWidth = ropeWidth;
@@ -202,7 +201,7 @@ public class Rope : MonoBehaviour
     //Calculate accelerations in each rope section which is what is needed to get the next pos and vel
     private List<Vector3> CalculateAccelerations(List<RopeSection> allRopeSections)
     {
-        List<Vector3> accelerations = new List<Vector3>();
+        List<Vector3> accelerations = new();
 
         //Spring constant
         float k = kRope;
@@ -217,7 +216,7 @@ public class Rope : MonoBehaviour
 
 
         //Calculate all forces once because some sections are using the same force but negative
-        List<Vector3> allForces = new List<Vector3>();
+        List<Vector3> allForces = new();
 
         for (int i = 0; i < allRopeSections.Count - 1; i++)
         {
@@ -284,6 +283,11 @@ public class Rope : MonoBehaviour
             //The total force on this spring
             Vector3 totalForce = springForce + gravityForce - dampingForce;
 
+            totalForce = AddForceToRope(i, totalForce);
+
+
+
+
             //Calculate the acceleration a = F / m
             Vector3 acceleration = totalForce / springMass;
 
@@ -295,6 +299,28 @@ public class Rope : MonoBehaviour
 
 
         return accelerations;
+    }
+
+    private Vector3 AddForceToRope(int i, Vector3 totalForce)
+    {
+        if (i == 0 && forceAdded)
+        {
+            Vector3 AddedForce = 2000 * forceFactor * Time.fixedDeltaTime * new Vector3(1, 1, 0).normalized;
+            Debug.Log(AddedForce);
+            totalForce += AddedForce;
+            if (forceFactor >= 0)
+            {
+                forceFactor -= 0.01f;
+            }
+            else
+            {
+                forceAdded = false;
+                forceFactor = 1f;
+            }
+
+        }
+        return totalForce;
+
     }
 
     //Implement maximum stretch to avoid numerical instabilities
@@ -358,22 +384,5 @@ public class Rope : MonoBehaviour
         bottomSection.pos = pos;
 
         allRopeSections[listPos] = bottomSection;
-    }
-
-    //Compare the current length of the rope with the wanted length
-    private void DebugRopeLength()
-    {
-        float currentLength = 0f;
-
-        for (int i = 1; i < allRopeSections.Count; i++)
-        {
-            float thisLength = (allRopeSections[i].pos - allRopeSections[i - 1].pos).magnitude;
-
-            currentLength += thisLength;
-        }
-
-        float wantedLength = ropeSectionLength * (float)(allRopeSections.Count - 1);
-
-        print("Wanted: " + wantedLength + " Actual: " + currentLength);
     }
 }

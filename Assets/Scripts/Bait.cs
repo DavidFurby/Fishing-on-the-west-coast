@@ -2,26 +2,22 @@ using UnityEngine;
 
 public class Bait : MonoBehaviour
 {
-    private Rigidbody rb;
     public float throwPower;
-    public Rope rope;
+    private Rigidbody rb;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetComponent<Rigidbody>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Fish"))
         {
-            Debug.Log("Baited");
             other.GetComponent<FishMovement>().GetBaited(transform.position);
         }
     }
     public void ThrowBait()
     {
-        Debug.Log(throwPower);
-        rb.AddForce(throwPower * Time.deltaTime * new Vector3(1, 1, 0), ForceMode.Impulse);
-        rope.SetLength((int)throwPower);
+        rb.AddForce(new Vector3(1, 1, 0) * throwPower * Time.deltaTime);
     }
 }
