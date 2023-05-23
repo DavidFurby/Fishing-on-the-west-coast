@@ -8,6 +8,8 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] GameObject fishingRod;
     private bool isSwingingRod;
     [SerializeField] Animator animator;
+    [SerializeField] Rope rope;
+
     // Update is called once per frame
     void Update()
     {
@@ -52,7 +54,7 @@ public class FishingControlls : MonoBehaviour
             animator.Play("Reverse Swing");
             isSwingingRod = false;
             isFishing = true;
-            bait.ThrowBait();
+            rope.forceAdded = true;
         }
     }
 
@@ -64,8 +66,8 @@ public class FishingControlls : MonoBehaviour
             isSwingingRod = true;
             animator.Play("Swing");
         }
-        if (bait.throwPower < 200)
-            bait.throwPower++;
+        if (rope.throwPower < 500)
+            rope.throwPower++;
 
     }
 

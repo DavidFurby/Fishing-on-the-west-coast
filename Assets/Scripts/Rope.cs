@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Rope : MonoBehaviour
 {
@@ -29,13 +27,15 @@ public class Rope : MonoBehaviour
     public float mRopeSection = 0.2f;
     public float forceFactor = 1f;
     public bool forceAdded = false;
+    public float throwPower;
+    [SerializeField] int ropeLength;
 
 
     void Start()
     {
         //Init the line renderer we use to display the rope
         lineRenderer = GetComponent<LineRenderer>();
-        SetLength(2);
+        SetLength(ropeLength);
 
     }
 
@@ -82,7 +82,7 @@ public class Rope : MonoBehaviour
             int iterations = 1;
 
             //Time step
-            float timeStep = Time.fixedDeltaTime / (float)iterations;
+            float timeStep = Time.fixedDeltaTime / iterations;
 
             for (int i = 0; i < iterations; i++)
             {
@@ -252,7 +252,6 @@ public class Rope : MonoBehaviour
         for (int i = 0; i < allRopeSections.Count - 1; i++)
         {
             Vector3 springForce = Vector3.zero;
-
             //Spring 1 - above
             springForce += allForces[i];
 
@@ -301,12 +300,12 @@ public class Rope : MonoBehaviour
         return accelerations;
     }
 
+
     private Vector3 AddForceToRope(int i, Vector3 totalForce)
     {
         if (i == 0 && forceAdded)
         {
-            Vector3 AddedForce = 2000 * forceFactor * Time.fixedDeltaTime * new Vector3(1, 1, 0).normalized;
-            Debug.Log(AddedForce);
+            Vector3 AddedForce = throwPower * forceFactor * Time.fixedDeltaTime * new Vector3(1, 0, 0).normalized;
             totalForce += AddedForce;
             if (forceFactor >= 0)
             {
@@ -316,11 +315,18 @@ public class Rope : MonoBehaviour
             {
                 forceAdded = false;
                 forceFactor = 1f;
+                AddRopeSection();
             }
 
         }
         return totalForce;
 
+    }
+    public void AddRopeSection()
+    {
+        Vector3 position = allRopeSections[allRopeSections.Count - 1].pos;
+        position.y -= ropeSectionLength;
+        allRopeSections.Insert(allRopeSections.Count - 1, new RopeSection(position));
     }
 
     //Implement maximum stretch to avoid numerical instabilities
