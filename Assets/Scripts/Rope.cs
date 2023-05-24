@@ -6,6 +6,7 @@ public class Rope : MonoBehaviour
     //Objects that will interact with the rope
     public Transform whatTheRopeIsConnectedTo;
     public Transform whatIsHangingFromTheRope;
+    public Transform theHold;
 
     //Line renderer used to display the rope
     LineRenderer lineRenderer;
@@ -18,17 +19,18 @@ public class Rope : MonoBehaviour
 
     //Data we can change to change the properties of the rope
     //Spring constant
-    public float kRope = 40f;
+    private float kRope = 40f;
     //Damping from rope friction constant
-    public float dRope = 2f;
+    private float dRope = 2f;
     //Damping from air resistance constant
-    public float aRope = 0.05f;
+    private float aRope = 0.05f;
     //Mass of one rope section
-    public float mRopeSection = 0.2f;
+    private float mRopeSection = 0.2f;
     public float forceFactor = 1f;
     public bool forceAdded = false;
     public float throwPower;
     [SerializeField] int ropeLength;
+    [SerializeField] Bait bait;
 
 
     void Start()
@@ -114,12 +116,13 @@ public class Rope : MonoBehaviour
 
     private void UpdateRopeSimulation(List<RopeSection> allRopeSections, float timeStep)
     {
+
         //Move the last position, which is the top position, to what the rope is attached to
         RopeSection lastRopeSection = allRopeSections[allRopeSections.Count - 1];
 
         lastRopeSection.pos = whatTheRopeIsConnectedTo.position;
 
-        allRopeSections[allRopeSections.Count - 1] = lastRopeSection;
+        allRopeSections[^1] = lastRopeSection;
 
 
         //
@@ -282,6 +285,8 @@ public class Rope : MonoBehaviour
             //The total force on this spring
             Vector3 totalForce = springForce + gravityForce - dampingForce;
 
+            totalForce = Float(i, totalForce);
+
             totalForce = AddForceToRope(i, totalForce);
 
 
@@ -303,30 +308,53 @@ public class Rope : MonoBehaviour
 
     private Vector3 AddForceToRope(int i, Vector3 totalForce)
     {
+
         if (i == 0 && forceAdded)
         {
-            Vector3 AddedForce = throwPower * forceFactor * Time.fixedDeltaTime * new Vector3(1, 0, 0).normalized;
-            totalForce += AddedForce;
+            Vector3 AddedForce = throwPower * forceFactor * Time.fixedDeltaTime * new Vector3(1, 1, 0).normalized;
+            MoveSection(AddedForce, i);
             if (forceFactor >= 0)
             {
                 forceFactor -= 0.01f;
+
             }
             else
             {
+                AddRopeSection();
                 forceAdded = false;
                 forceFactor = 1f;
-                AddRopeSection();
-            }
 
+            }
         }
         return totalForce;
 
     }
+
     public void AddRopeSection()
     {
+
         Vector3 position = allRopeSections[allRopeSections.Count - 1].pos;
         position.y -= ropeSectionLength;
         allRopeSections.Insert(allRopeSections.Count - 1, new RopeSection(position));
+    }
+
+    public void RemoveRopeSection()
+    {
+        if (allRopeSections.Count > 0)
+        {
+            allRopeSections.RemoveAt(allRopeSections.Count - 1);
+        }
+    }
+
+    public Vector3 Float(int index, Vector3 totalForce)
+    {
+        if (index == 0 && bait.inWater)
+        {
+            Vector3 floatForce = Vector3.up * 10f;
+            totalForce += floatForce;
+        }
+        return totalForce;
+
     }
 
     //Implement maximum stretch to avoid numerical instabilities

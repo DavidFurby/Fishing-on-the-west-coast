@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class FishingControlls : MonoBehaviour
@@ -52,10 +53,24 @@ public class FishingControlls : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             animator.Play("Reverse Swing");
+
             isSwingingRod = false;
-            isFishing = true;
-            rope.forceAdded = true;
+            StartCoroutine(WaitForSwingAnimation());
         }
+    }
+    IEnumerator WaitForSwingAnimation()
+    {
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Reverse Swing"))
+        {
+            yield return null;
+        }
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+        isFishing = true;
+        rope.forceAdded = true;
+
     }
 
     private void ChargeThrow()
@@ -66,9 +81,8 @@ public class FishingControlls : MonoBehaviour
             isSwingingRod = true;
             animator.Play("Swing");
         }
-        if (rope.throwPower < 500)
+        if (rope.throwPower < 1000)
             rope.throwPower++;
-
     }
 
 }
