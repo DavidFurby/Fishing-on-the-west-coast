@@ -4,24 +4,33 @@ using UnityEngine;
 public class FishingControlls : MonoBehaviour
 {
     [SerializeField] CatchArea catchArea;
-    public bool isFishing = false;
     [SerializeField] Bait bait;
     [SerializeField] GameObject fishingRod;
-    private bool isSwingingRod;
     [SerializeField] Animator animator;
+    public enum GetFishingStatus
+    {
+        StandBy,
+        Throwing,
+        Fishing,
+        Reeling
+    }
+    public GetFishingStatus fishingStatus;
 
+    private void Start()
+    {
+        fishingStatus = GetFishingStatus.StandBy;
+
+    }
     // Update is called once per frame
     void Update()
     {
-        if (isFishing)
+        if (fishingStatus == GetFishingStatus.Fishing)
         {
             ReturnBait();
-
         }
-        else
+        else if (fishingStatus == GetFishingStatus.StandBy)
         {
             StartFishing();
-
         }
     }
 
@@ -37,8 +46,8 @@ public class FishingControlls : MonoBehaviour
             {
                 Debug.Log("Catch");
             }
+            fishingStatus = GetFishingStatus.Reeling;
 
-            isFishing = false;
         }
 
     }
@@ -53,7 +62,6 @@ public class FishingControlls : MonoBehaviour
         {
             animator.Play("Reverse Swing");
 
-            isSwingingRod = false;
             StartCoroutine(WaitForSwingAnimation());
         }
     }
@@ -67,23 +75,17 @@ public class FishingControlls : MonoBehaviour
         {
             yield return null;
         }
-        isFishing = true;
-        bait.thrown = true;
+        fishingStatus = GetFishingStatus.Throwing;
     }
 
 
 
     private void ChargeThrow()
     {
-
-        if (!isSwingingRod)
-        {
-            isSwingingRod = true;
-            animator.Play("Swing");
-            bait.reelingIn = true;
-        }
+        animator.Play("Swing");
         if (bait.throwPower < 50)
             bait.throwPower++;
     }
+
 
 }

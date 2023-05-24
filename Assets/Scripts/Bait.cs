@@ -10,14 +10,16 @@ public class Bait : MonoBehaviour
     private float bounceDamp = 0.1f;
     private float forceFactor = 1f;
     public float throwPower;
-    public bool thrown;
-    public bool reelingIn;
+    private readonly float reelInSpeed = 10f;
+    Vector3 targetPosition;
     [SerializeField] GameObject fishingRodTop;
-
+    [SerializeField] FishingControlls fishingControlls;
     private void Start()
     {
+        targetPosition = fishingRodTop.transform.position;
         rigidBody = GetComponent<Rigidbody>();
         waterLevel = sea.transform.position.y;
+        AttachBait();
     }
 
     private void FixedUpdate()
@@ -43,7 +45,7 @@ public class Bait : MonoBehaviour
     }
     public void AddForce()
     {
-        if (thrown)
+        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Throwing)
         {
             rigidBody.isKinematic = false;
             transform.position = transform.position;
@@ -54,46 +56,55 @@ public class Bait : MonoBehaviour
             }
             else
             {
-                Debug.Log("false");
-                thrown = false;
+                fishingControlls.fishingStatus = FishingControlls.GetFishingStatus.Fishing;
             }
         }
     }
     private void ReelIn()
     {
-        if (reelingIn)
+        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Reeling)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
-                rigidBody.isKinematic = true;
-                transform.position = targetPosition;
-                reelingIn = false;
+                AttachBait();
             }
             else
             {
-                float speed = 8f;
                 Vector3 direction = (targetPosition - transform.position).normalized;
-                transform.Translate(speed * Time.fixedDeltaTime * direction, Space.World);
+                transform.Translate(reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
             }
         }
+    }
+
+    private void AttachBait()
+    {
+        rigidBody.isKinematic = true;
+        transform.position = targetPosition;
+        fishingControlls.fishingStatus = FishingControlls.GetFishingStatus.StandBy;
     }
     private void Float()
     {
         if (inWater)
         {
+            rigidBody.drag = 1f;
             Vector3 actionPoint = transform.position + transform.TransformDirection(Vector3.down);
             float forceFactor = 1f - ((actionPoint.y - waterLevel) / floatHeight);
             if (forceFactor > 0f)
             {
                 Vector3 uplift = -Physics.gravity * (forceFactor - rigidBody.velocity.y * bounceDamp);
+                Debug.Log(uplift);
                 rigidBody.AddForceAtPosition(uplift, actionPoint);
             }
             if (actionPoint.y < waterLevel)
             {
-                Debug.Log("below water");
-                actionPoint.y = waterLevel;
+
+                rigidBody.AddForceAtPosition(Vector3.up * 2, actionPoint);
             }
+        }
+        else
+        {
+            rigidBody.drag = 0f;
         }
     }
 }
