@@ -12,32 +12,27 @@ public class Rope : MonoBehaviour
     LineRenderer lineRenderer;
 
     //A list with all rope section
-    public List<RopeSection> allRopeSections = new List<RopeSection>();
+    public List<RopeSection> allRopeSections = new();
 
     //Rope data
-    private float ropeSectionLength = 1f;
+    private readonly float ropeSectionLength = 1f;
 
     //Data we can change to change the properties of the rope
     //Spring constant
-    private float kRope = 40f;
+    private readonly float kRope = 40f;
     //Damping from rope friction constant
-    private float dRope = 2f;
+    private readonly float dRope = 2f;
     //Damping from air resistance constant
-    private float aRope = 0.05f;
+    private readonly float aRope = 0.05f;
     //Mass of one rope section
-    private float mRopeSection = 0.2f;
-    public float forceFactor = 1f;
-    public bool forceAdded = false;
-    public float throwPower;
-    [SerializeField] int ropeLength;
-    [SerializeField] Bait bait;
+    private readonly float mRopeSection = 0.2f;
 
 
     void Start()
     {
         //Init the line renderer we use to display the rope
         lineRenderer = GetComponent<LineRenderer>();
-        SetLength(ropeLength);
+        SetLength(2);
 
     }
 
@@ -47,7 +42,9 @@ public class Rope : MonoBehaviour
         DisplayRope();
 
         //Move what is hanging from the rope to the end of the rope
-        whatIsHangingFromTheRope.position = allRopeSections[0].pos;
+        RopeSection endRope = allRopeSections[0];
+        endRope.pos = whatIsHangingFromTheRope.position;
+        allRopeSections[0] = endRope;
 
         //Make what's hanging from the rope look at the next to last rope position to make it rotate with the rope
         whatIsHangingFromTheRope.LookAt(allRopeSections[1].pos);
@@ -116,9 +113,8 @@ public class Rope : MonoBehaviour
 
     private void UpdateRopeSimulation(List<RopeSection> allRopeSections, float timeStep)
     {
-
         //Move the last position, which is the top position, to what the rope is attached to
-        RopeSection lastRopeSection = allRopeSections[allRopeSections.Count - 1];
+        RopeSection lastRopeSection = allRopeSections[^1];
 
         lastRopeSection.pos = whatTheRopeIsConnectedTo.position;
 
@@ -131,7 +127,7 @@ public class Rope : MonoBehaviour
         //Calculate acceleration in each rope section which is what is needed to get the next pos and vel
         List<Vector3> accelerations = CalculateAccelerations(allRopeSections);
 
-        List<RopeSection> nextPosVelForwardEuler = new List<RopeSection>();
+        List<RopeSection> nextPosVelForwardEuler = new();
 
         //Loop through all line segments (except the last because it's always connected to something)
         for (int i = 0; i < allRopeSections.Count - 1; i++)
@@ -150,7 +146,7 @@ public class Rope : MonoBehaviour
         }
 
         //Add the last which is always the same because it's attached to something
-        nextPosVelForwardEuler.Add(allRopeSections[allRopeSections.Count - 1]);
+        nextPosVelForwardEuler.Add(allRopeSections[^1]);
 
 
         //
@@ -159,7 +155,7 @@ public class Rope : MonoBehaviour
         //Calculate acceleration in each rope section which is what is needed to get the next pos and vel
         List<Vector3> accelerationFromEuler = CalculateAccelerations(nextPosVelForwardEuler);
 
-        List<RopeSection> nextPosVelHeunsMethod = new List<RopeSection>();
+        List<RopeSection> nextPosVelHeunsMethod = new();
 
         //Loop through all line segments (except the last because it's always connected to something)
         for (int i = 0; i < allRopeSections.Count - 1; i++)
@@ -178,7 +174,7 @@ public class Rope : MonoBehaviour
         }
 
         //Add the last which is always the same because it's attached to something
-        nextPosVelHeunsMethod.Add(allRopeSections[allRopeSections.Count - 1]);
+        nextPosVelHeunsMethod.Add(allRopeSections[^1]);
 
 
 
@@ -285,12 +281,6 @@ public class Rope : MonoBehaviour
             //The total force on this spring
             Vector3 totalForce = springForce + gravityForce - dampingForce;
 
-            totalForce = Float(i, totalForce);
-
-            totalForce = AddForceToRope(i, totalForce);
-
-
-
 
             //Calculate the acceleration a = F / m
             Vector3 acceleration = totalForce / springMass;
@@ -303,58 +293,6 @@ public class Rope : MonoBehaviour
 
 
         return accelerations;
-    }
-
-
-    private Vector3 AddForceToRope(int i, Vector3 totalForce)
-    {
-
-        if (i == 0 && forceAdded)
-        {
-            Vector3 AddedForce = throwPower * forceFactor * Time.fixedDeltaTime * new Vector3(1, 1, 0).normalized;
-            MoveSection(AddedForce, i);
-            if (forceFactor >= 0)
-            {
-                forceFactor -= 0.01f;
-
-            }
-            else
-            {
-                AddRopeSection();
-                forceAdded = false;
-                forceFactor = 1f;
-
-            }
-        }
-        return totalForce;
-
-    }
-
-    public void AddRopeSection()
-    {
-
-        Vector3 position = allRopeSections[allRopeSections.Count - 1].pos;
-        position.y -= ropeSectionLength;
-        allRopeSections.Insert(allRopeSections.Count - 1, new RopeSection(position));
-    }
-
-    public void RemoveRopeSection()
-    {
-        if (allRopeSections.Count > 0)
-        {
-            allRopeSections.RemoveAt(allRopeSections.Count - 1);
-        }
-    }
-
-    public Vector3 Float(int index, Vector3 totalForce)
-    {
-        if (index == 0 && bait.inWater)
-        {
-            Vector3 floatForce = Vector3.up * 10f;
-            totalForce += floatForce;
-        }
-        return totalForce;
-
     }
 
     //Implement maximum stretch to avoid numerical instabilities
