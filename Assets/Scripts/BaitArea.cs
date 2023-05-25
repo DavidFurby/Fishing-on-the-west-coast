@@ -10,7 +10,7 @@ public class BaitArea : MonoBehaviour
         if (collider.gameObject.CompareTag("Fish"))
         {
             FishMovement fishMovement = collider.gameObject.GetComponent<FishMovement>();
-            fishMovement.GetBaited(bait.transform.position);
+            fishMovement.GetBaited(bait);
         }
     }
 }

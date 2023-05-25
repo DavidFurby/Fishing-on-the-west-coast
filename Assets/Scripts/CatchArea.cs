@@ -23,10 +23,8 @@ public class CatchArea : MonoBehaviour
     }
     public void CatchFish()
     {
-        Debug.Log("Catch Fish");
-        Debug.Log(fish);
-        Rigidbody fishRigidBody = fish.GetComponent<Rigidbody>();
-        fishRigidBody.isKinematic = true;
-        fish.transform.position = transform.position;
+        FishMovement fishMovement = fish.GetComponent<FishMovement>();
+        fishMovement.hooked = true;
+
     }
 }

@@ -35,7 +35,6 @@ public class Bait : MonoBehaviour
     {
         if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Throwing)
         {
-            Debug.Log("Throwing");
             rigidBody.isKinematic = false;
             transform.position = transform.position;
             rigidBody.AddForceAtPosition(forceFactor * fishingControlls.throwPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
