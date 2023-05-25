@@ -6,7 +6,6 @@ public class Rope : MonoBehaviour
     //Objects that will interact with the rope
     public Transform whatTheRopeIsConnectedTo;
     public Transform whatIsHangingFromTheRope;
-    public Transform theHold;
 
     //Line renderer used to display the rope
     LineRenderer lineRenderer;

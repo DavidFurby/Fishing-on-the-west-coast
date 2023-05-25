@@ -10,13 +10,14 @@ public class FishSpawner : MonoBehaviour
     private float spawnHorizontal;
     private Quaternion spawnRotation;
     private Vector3 spawnPosition;
+    [SerializeField] GameObject bait;
+    [SerializeField] FishingControlls fishingControlls;
 
     private void Start()
     {
         //Get the size and center of the sea object
         seaPosition = transform.position;
         renderer = GetComponent<Renderer>();
-
         InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
     }
 
@@ -25,7 +26,7 @@ public class FishSpawner : MonoBehaviour
         //Choose random fish from the array
         int randomFishIndex = Random.Range(0, Fishes.Length);
 
-        CalculateSpawnPosition(out spawnHorizontal, out spawnRotation, out spawnPosition);
+        CalculateSpawnPosition();
 
         //Instatiate the fish 
         GameObject fish = Instantiate(Fishes[randomFishIndex], spawnPosition, spawnRotation);
@@ -39,17 +40,20 @@ public class FishSpawner : MonoBehaviour
         fishMovement.direction = spawnHorizontal == seaPosition.x ? Vector3.right : Vector3.left;
     }
 
-    private void CalculateSpawnPosition(out float spawnHorizontal, out Quaternion spawnRotation, out Vector3 spawnPosition)
+    private void CalculateSpawnPosition()
     {
-        //Calculate horizontal and vertical spawn position
-        spawnHorizontal = Random.value < 0.5 ? seaPosition.x : seaPosition.x + renderer.bounds.extents.x * 2;
-        float spawnVertical = Random.Range(seaPosition.y, seaPosition.y + renderer.bounds.extents.y);
+        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Fishing)
+        {
+            //Calculate horizontal and vertical spawn position
+            spawnHorizontal = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;
+            float spawnVertical = Random.Range(seaPosition.y, seaPosition.y + renderer.bounds.extents.y);
 
-        //Calculate spawn rotation based on horizontal position
-        spawnRotation = spawnHorizontal == seaPosition.x ? Quaternion.Euler(0, 0, -90) : Quaternion.Euler(0, 0, 90);
+            //Calculate spawn rotation based on horizontal position
+            spawnRotation = spawnHorizontal == seaPosition.x ? Quaternion.Euler(0, 0, -90) : Quaternion.Euler(0, 0, 90);
 
-        //Calculate spawn position
-        spawnPosition = new Vector3(spawnHorizontal, spawnVertical, 5);
+            //Calculate spawn position
+            spawnPosition = new Vector3(spawnHorizontal, spawnVertical, bait.transform.position.z);
+        }
     }
     private void OnTriggerExit(Collider other)
     {

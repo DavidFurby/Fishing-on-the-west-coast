@@ -11,23 +11,22 @@ public class FishMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (!baited)
-        {
-            InvokeRepeating(nameof(Swim), 1, 5);
-        }
+        InvokeRepeating(nameof(Swim), 1, 5);
     }
     private void FixedUpdate()
     {
-        if (baited)
-        {
-            IsBaited();
-        }
+        IsBaited();
     }
     void IsBaited()
     {
-        direction = (setBaitPosition - transform.position).normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 2 * Time.deltaTime);
+        if (baited)
+        {
+
+
+            direction = (setBaitPosition - transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 2 * Time.deltaTime);
+        }
     }
     // Coroutine to add force to fish's rigidbody
     void Swim()
@@ -38,12 +37,8 @@ public class FishMovement : MonoBehaviour
     //Move towards bait if triggered
     public void GetBaited(Vector3 baitPosition)
     {
-        if (!baited)
-        {
-            setBaitPosition = baitPosition;
-            baited = true;
-        }
-
+        setBaitPosition = baitPosition;
+        baited = true;
     }
 
 }

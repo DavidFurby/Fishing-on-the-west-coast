@@ -10,6 +10,7 @@ TagManager:
   - TransitionArea
   - Fish
   - FishingLine
+  - Sea
   layers:
   - Default
   - TransparentFX

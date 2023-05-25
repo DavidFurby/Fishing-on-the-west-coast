@@ -7,6 +7,7 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] Bait bait;
     [SerializeField] GameObject fishingRod;
     [SerializeField] Animator animator;
+    public float throwPower;
     public enum GetFishingStatus
     {
         StandBy,
@@ -24,7 +25,7 @@ public class FishingControlls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fishingStatus == GetFishingStatus.Fishing)
+        if (fishingStatus == GetFishingStatus.Fishing || fishingStatus == GetFishingStatus.Reeling)
         {
             ReturnBait();
         }
@@ -44,7 +45,7 @@ public class FishingControlls : MonoBehaviour
         {
             if (catchArea.isInCatchArea)
             {
-                Debug.Log("Catch");
+                catchArea.CatchFish();
             }
             fishingStatus = GetFishingStatus.Reeling;
 
@@ -83,8 +84,8 @@ public class FishingControlls : MonoBehaviour
     private void ChargeThrow()
     {
         animator.Play("Swing");
-        if (bait.throwPower < 50)
-            bait.throwPower++;
+        if (throwPower < 100)
+            throwPower++;
     }
 
 
