@@ -1,16 +1,25 @@
+using TMPro;
 using UnityEngine;
 
 public class CatchArea : MonoBehaviour
 {
     public bool isInCatchArea;
     private GameObject fish;
-    [SerializeField] GameObject bait;
+    [SerializeField] FishingControlls fishingControlls;
+    [SerializeField] FishingCanvas fishingCanvas;
+    private FishMovement fishMovement
+        ;
+    private void Update()
+    {
+        CollectFish();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Fish"))
         {
             isInCatchArea = true;
             fish = other.gameObject;
+            fishMovement = fish.GetComponent<FishMovement>();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -23,8 +32,17 @@ public class CatchArea : MonoBehaviour
     }
     public void CatchFish()
     {
-        FishMovement fishMovement = fish.GetComponent<FishMovement>();
-        fishMovement.hooked = true;
-
+        if (fish != null)
+        {
+            fishMovement.hooked = true;
+        }
+    }
+    public void CollectFish()
+    {
+        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.StandBy && fish != null)
+        {
+            Destroy(fish);
+            fishingCanvas.fishCount++;
+        }
     }
 }

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class FishSpawner : MonoBehaviour
 {
-    public GameObject[] Fishes;
-    public int spawnDelay;
+    [SerializeField] GameObject[] Fishes;
+    [SerializeField] int spawnDelay;
     new Renderer renderer;
     private Vector3 seaPosition;
     private float spawnHorizontal;

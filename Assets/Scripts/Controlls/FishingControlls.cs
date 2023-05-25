@@ -37,10 +37,6 @@ public class FishingControlls : MonoBehaviour
 
     private void ReturnBait()
     {
-        if (catchArea.isInCatchArea)
-        {
-            Debug.Log("Get em");
-        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (catchArea.isInCatchArea)
@@ -48,7 +44,6 @@ public class FishingControlls : MonoBehaviour
                 catchArea.CatchFish();
             }
             fishingStatus = GetFishingStatus.Reeling;
-
         }
 
     }
@@ -78,7 +73,6 @@ public class FishingControlls : MonoBehaviour
         }
         fishingStatus = GetFishingStatus.Throwing;
     }
-
 
 
     private void ChargeThrow()

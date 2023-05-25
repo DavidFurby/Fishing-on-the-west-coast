@@ -20,13 +20,17 @@ public class FishMovement : MonoBehaviour
         IsBaited();
         HookToBait();
     }
+    //Rotate towards the bait if baited
     void IsBaited()
     {
-        if (baited)
+        if (baited && !hooked)
         {
             direction = (setBait.transform.position - transform.position).normalized;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 2 * Time.deltaTime);
+            float angle = Quaternion.Angle(transform.rotation, targetRotation);
+            float timeToComplete = angle / 180;
+            float donePercentage = Mathf.Min(1f, Time.fixedDeltaTime / timeToComplete);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, donePercentage);
         }
     }
     // Coroutine to add force to fish's rigidbody
@@ -41,13 +45,14 @@ public class FishMovement : MonoBehaviour
         setBait = bait;
         baited = true;
     }
+
+    //Attach fish to bait if hooked
     public void HookToBait()
     {
         if (hooked)
         {
             rb.isKinematic = true;
             transform.position = setBait.transform.position;
-            Debug.Log(transform.position + "fishPosition");
         }
     }
 }
