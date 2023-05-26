@@ -668,6 +668,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swimSpeed: 20
   direction: {x: 0, y: 0, z: 0}
+  baited: 0
+  hooked: 0
 --- !u!54 &-3783395524345797868
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class Interactible : MonoBehaviour
 
     public void CheckActivated()
     {
-        Component[] components = GetComponents(typeof(Component));
+        Component[] components = GetComponents<Component>();
         foreach (Component component in components)
         {
             if (component is IInteractible)

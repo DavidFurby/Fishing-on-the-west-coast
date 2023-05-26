@@ -8,6 +8,7 @@ public class FishMovement : MonoBehaviour
     public bool baited;
     public bool hooked;
     private GameObject setBait;
+
     // Start is called before the first frame update
     void Start()
     {
