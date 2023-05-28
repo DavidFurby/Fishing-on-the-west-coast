@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toScene: {fileID: 102900000, guid: 876bb2ab86015ab4e988dda1c452318b, type: 3}
-  animator: {fileID: 1700298088}
+  animator: {fileID: 0}
 --- !u!1001 &892063325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -803,11 +803,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!95 &1700298088 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3526002367887095399, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
-  m_PrefabInstance: {fileID: 199934502}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1701786168
 PrefabInstance:
   m_ObjectHideFlags: 0
