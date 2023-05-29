@@ -22,6 +22,23 @@ public class MainManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (Instance != null)
+        {
+            Instance.game.scene = scene.name;
+        }
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
     private void OnApplicationQuit()
     {
         if (Instance != null)
