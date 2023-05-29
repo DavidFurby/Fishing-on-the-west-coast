@@ -452,7 +452,7 @@ AnimationClip:
   - time: 1
     functionName: EndDay
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 4800f854444390e46ab31715d639daf4, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
