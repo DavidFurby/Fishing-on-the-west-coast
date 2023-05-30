@@ -6,9 +6,8 @@ public class CatchArea : MonoBehaviour
     public bool isInCatchArea;
     private GameObject fish;
     [SerializeField] FishingControlls fishingControlls;
-    [SerializeField] FishingCanvas fishingCanvas;
-    private FishMovement fishMovement
-        ;
+    private FishMovement fishMovement;
+
     private void Update()
     {
         CollectFish();
@@ -42,7 +41,7 @@ public class CatchArea : MonoBehaviour
         if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.StandBy && fish != null)
         {
             Destroy(fish);
-            fishingCanvas.fishCount++;
+            MainManager.Instance.game.fishes++;
         }
     }
 }

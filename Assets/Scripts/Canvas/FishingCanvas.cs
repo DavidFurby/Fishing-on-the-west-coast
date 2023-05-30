@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class FishingCanvas : MonoBehaviour
 {
-    public float fishCount = 0;
     [SerializeField] TextMeshProUGUI fishText;
     // Start is called before the first frame update
 
@@ -19,6 +18,6 @@ public class FishingCanvas : MonoBehaviour
     }
     void Update()
     {
-        fishText.text = "Total Fishes:" + fishCount;
+        fishText.text = "Total Fishes:" + MainManager.Instance.game.fishes;
     }
 }
