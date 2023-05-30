@@ -24,7 +24,10 @@ public class MainManager : MonoBehaviour
     }
     void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        if (SceneManager.GetActiveScene().name != "Main Menu")
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
