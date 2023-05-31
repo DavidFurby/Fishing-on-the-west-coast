@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class DialogController : MonoBehaviour
 {
-    [SerializeField] GameObject dialogPanel;
-    [SerializeField] TextMeshProUGUI speakerGUI;
-    [SerializeField] TextMeshProUGUI dialogGUI;
-    [SerializeField] PlayerController playerController;
+    [SerializeField] private GameObject dialogPanel;
+    [SerializeField] private TextMeshProUGUI speakerGUI;
+    [SerializeField] private TextMeshProUGUI dialogGUI;
+    [SerializeField] private PlayerController playerController;
     private Queue<DialogList.DialogItem> currentDialogQueue;
 
     public void Update()
@@ -36,14 +35,18 @@ public class DialogController : MonoBehaviour
     private void EndDialog()
     {
         dialogPanel.SetActive(false);
-        playerController.pauseControlls = false;
         ResetDialog();
+        Invoke(nameof(SetPauseControlls), 0.5f);
     }
     private void ResetDialog()
     {
         currentDialogQueue = null;
         speakerGUI.text = null;
         dialogGUI.text = null;
+    }
+    private void SetPauseControlls()
+    {
+        playerController.pauseControlls = false;
     }
 
     internal void InitiateDialog(Queue<DialogList.DialogItem> dialogQueue)
