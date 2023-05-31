@@ -41,7 +41,7 @@ public class CatchArea : MonoBehaviour
         if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.StandBy && fish != null)
         {
             Destroy(fish);
-            MainManager.Instance.game.fishes++;
+            MainManager.Instance.game.Fishes++;
         }
     }
 }

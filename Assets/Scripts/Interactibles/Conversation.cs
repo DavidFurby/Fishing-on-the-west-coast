@@ -13,7 +13,7 @@ public class Conversation : MonoBehaviour, IInteractible
     public void StartDialog()
     {
         Debug.Log(character);
-        List<DialogList.DialogItem> dialog = DialogList.Instance.SelectDialogTree(character);
+        Queue<DialogList.DialogItem> dialog = DialogList.Instance.SelectDialogTree(character);
         dialogController.InitiateDialog(dialog);
 
 

@@ -53,17 +53,19 @@ public static class SaveSystem
             return null;
         }
     }
-    public static void NewGame()
+    public static bool NewGame()
     {
         string path = Application.persistentDataPath + "/game.save";
         if (File.Exists(path))
         {
             File.Delete(path);
             Debug.Log("Save file has been removed");
+            return true;
         }
         else
         {
             Debug.Log("Save file not found");
+            return false;
         }
     }
 }

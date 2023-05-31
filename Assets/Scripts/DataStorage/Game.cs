@@ -1,10 +1,29 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Game : MonoBehaviour
 {
-    public int days;
-    public int fishes;
-    public string scene;
+    private int days;
+    private int fishes;
+    private string scene;
+
+    public int Days
+    {
+        get { return days; }
+        set { days = value; }
+    }
+
+    public int Fishes
+    {
+        get { return fishes; }
+        set { fishes = value; }
+    }
+
+    public string Scene
+    {
+        get { return scene; }
+        set { scene = value; }
+    }
 
     public void SaveGame()
     {
@@ -20,7 +39,13 @@ public class Game : MonoBehaviour
     }
     public void NewGame()
     {
-        SaveSystem.NewGame();
+        bool removed = SaveSystem.NewGame();
+        if (removed)
+        {
+            days = 0;
+            fishes = 0;
+            scene = "Home";
+        }
 
     }
 }

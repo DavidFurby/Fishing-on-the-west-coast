@@ -6,11 +6,10 @@ using UnityEngine;
 public class DialogController : MonoBehaviour
 {
     [SerializeField] GameObject dialogPanel;
-    [SerializeField] TextMeshProUGUI speaker;
-    [SerializeField] TextMeshProUGUI dialog;
+    [SerializeField] TextMeshProUGUI speakerGUI;
+    [SerializeField] TextMeshProUGUI dialogGUI;
     [SerializeField] PlayerController playerController;
-    private List<DialogList.DialogItem> currentDialogList;
-    private int currentDialogIndex = 0;
+    private Queue<DialogList.DialogItem> currentDialogQueue;
 
     public void Update()
     {
@@ -23,11 +22,11 @@ public class DialogController : MonoBehaviour
 
     private void NextDialog()
     {
-        if (currentDialogIndex < currentDialogList.Count - 1)
+        if (currentDialogQueue.Count > 0)
         {
-            currentDialogIndex++;
-            dialog.text = currentDialogList[currentDialogIndex].text;
-            speaker.text = currentDialogList[currentDialogIndex].character.ToString();
+            var nextDialog = currentDialogQueue.Dequeue();
+            dialogGUI.text = nextDialog.text;
+            speakerGUI.text = nextDialog.character.ToString();
         }
         else
         {
@@ -42,17 +41,17 @@ public class DialogController : MonoBehaviour
     }
     private void ResetDialog()
     {
-        currentDialogIndex = 0;
-        currentDialogList = null;
-        speaker.text = null;
-        dialog.text = null;
+        currentDialogQueue = null;
+        speakerGUI.text = null;
+        dialogGUI.text = null;
     }
 
-    internal void InitiateDialog(List<DialogList.DialogItem> dialog)
+    internal void InitiateDialog(Queue<DialogList.DialogItem> dialogQueue)
     {
-        speaker.text = dialog[0].character.ToString();
-        this.dialog.text = dialog[0].text;
-        currentDialogList = dialog;
+        currentDialogQueue = new Queue<DialogList.DialogItem>(dialogQueue);
+        var firstDialog = currentDialogQueue.Dequeue();
+        speakerGUI.text = firstDialog.character.ToString();
+        dialogGUI.text = firstDialog.text;
         dialogPanel.SetActive(true);
         playerController.pauseControlls = true;
     }

@@ -110,9 +110,8 @@ GameObject:
   - component: {fileID: 162982117643481590}
   - component: {fileID: 162982117643481591}
   - component: {fileID: 162982117643481588}
-  - component: {fileID: 1068824578849847111}
-  - component: {fileID: 8312510477728003981}
-  - component: {fileID: 8788071333455181827}
+  - component: {fileID: 6934244167266268371}
+  - component: {fileID: 223401119963663876}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -206,33 +205,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1068824578849847111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162982117643481589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b01e0c14c7382b4b9b8cd91027ef27a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  counter: {fileID: 5616154929848428468}
---- !u!114 &8312510477728003981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162982117643481589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 566e0fa216cf47745a4e5701e2a9cffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishText: {fileID: 8091641443519237303}
---- !u!114 &8788071333455181827
+--- !u!114 &6934244167266268371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,6 +219,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 3043327081856637772}
   continueButton: {fileID: 2619608156273066102}
+--- !u!114 &223401119963663876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162982117643481589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6950ec6660cd36408d0c2c5fe532106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogPanel: {fileID: 4793509694548644588}
+  speakerGUI: {fileID: 2393199503268520754}
+  dialogGUI: {fileID: 110118727986615096}
+  playerController: {fileID: 0}
 --- !u!1 &487185834741993671
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +246,7 @@ GameObject:
   - component: {fileID: 7961479457975974162}
   - component: {fileID: 3697424743849540272}
   - component: {fileID: 8091641443519237303}
+  - component: {fileID: 360466464011784128}
   m_Layer: 5
   m_Name: Fishes
   m_TagString: Untagged
@@ -381,6 +371,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &360466464011784128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487185834741993671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566e0fa216cf47745a4e5701e2a9cffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishText: {fileID: 8091641443519237303}
 --- !u!1 &1669657184188771845
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +532,7 @@ GameObject:
   - component: {fileID: 2857028773651797304}
   - component: {fileID: 8803025259870874295}
   - component: {fileID: 5616154929848428468}
+  - component: {fileID: 2607958490089336741}
   m_Layer: 5
   m_Name: DayCount
   m_TagString: Untagged
@@ -653,6 +657,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2607958490089336741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816560098017755661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01e0c14c7382b4b9b8cd91027ef27a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counter: {fileID: 5616154929848428468}
 --- !u!1 &2093620521188379526
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,7 +927,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8788071333455181827}
+      - m_Target: {fileID: 6934244167266268371}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Continue
         m_Mode: 1
@@ -971,8 +988,7 @@ GameObject:
   - component: {fileID: 2438584221321699925}
   - component: {fileID: 2687956116760321769}
   - component: {fileID: 5260048510265779078}
-  - component: {fileID: 8217608222368954231}
-  - component: {fileID: 1716945054090989697}
+  - component: {fileID: 8319085232562513430}
   m_Layer: 5
   m_Name: Dialog Panel
   m_TagString: Untagged
@@ -1040,23 +1056,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8217608222368954231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4793509694548644588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6950ec6660cd36408d0c2c5fe532106, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogPanel: {fileID: 4793509694548644588}
-  speaker: {fileID: 2393199503268520754}
-  dialog: {fileID: 110118727986615096}
-  playerController: {fileID: 0}
---- !u!114 &1716945054090989697
+--- !u!114 &8319085232562513430
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1068,7 +1068,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b3485d9669b204ea65793dcde7efa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 0
 --- !u!1 &7594384758808644421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,7 +1462,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8788071333455181827}
+      - m_Target: {fileID: 6934244167266268371}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: NewGame
         m_Mode: 1

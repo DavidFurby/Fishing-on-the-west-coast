@@ -26,16 +26,14 @@ public class DialogList : MonoBehaviour
         Fisherman,
         Dog
     }
-    public GetCharacter character;
-
-    private readonly Dictionary<GetCharacter, List<DialogItem>> characterDialogs = new()
-    {
-        { GetCharacter.Neighbor, new List<DialogItem> { new DialogItem { character = GetCharacter.Neighbor, text = "Haru nån fisk?" }, new DialogItem { character = GetCharacter.Player, text = "Nope inget idag" } } },
-        { GetCharacter.NeigborsWife, new List<DialogItem> { new DialogItem { character = GetCharacter.NeigborsWife, text = "Hörde från gubben att du börjat fiska igen?" }, new DialogItem { character = GetCharacter.Player, text = "Ja jo de är ju säsong igen så de är ju att ta för sig" } } }
-    };
+    private readonly Dictionary<GetCharacter, Queue<DialogItem>> characterDialogs = new()
+{
+    { GetCharacter.Neighbor, new Queue<DialogItem>(new[] { new DialogItem { character = GetCharacter.Neighbor, text = "Haru nån fisk?" }, new DialogItem { character = GetCharacter.Player, text = "Nope inget idag" } }) },
+    { GetCharacter.NeigborsWife, new Queue<DialogItem>(new[] { new DialogItem { character = GetCharacter.NeigborsWife, text = "Hörde från gubben att du börjat fiska igen?" }, new DialogItem { character = GetCharacter.Player, text = "Ja jo de är ju säsong igen så de är ju att ta för sig" } }) }
+};
 
 
-    public List<DialogItem> SelectDialogTree(GetCharacter character)
+    public Queue<DialogItem> SelectDialogTree(GetCharacter character)
     {
         if (characterDialogs.ContainsKey(character))
         {

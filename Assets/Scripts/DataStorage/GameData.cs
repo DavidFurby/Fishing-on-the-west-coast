@@ -9,8 +9,8 @@ public class GameData
 
     public GameData(Game game)
     {
-        daysCount = game.days;
-        fishes = game.fishes;
-        scene = game.scene.ToString();
+        daysCount = game.Days;
+        fishes = game.Fishes;
+        scene = game.Scene.ToString();
     }
 }

@@ -8,7 +8,7 @@ public class EveningTimer : MonoBehaviour
     public void EndDay()
     {
         Debug.Log("End day");
-        MainManager.Instance.game.days++;
+        MainManager.Instance.game.Days++;
         transitArea.Transition();
     }
 }
