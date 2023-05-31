@@ -1,6 +1,7 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DialogController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class DialogController : MonoBehaviour
     [SerializeField] TextMeshProUGUI speaker;
     [SerializeField] TextMeshProUGUI dialog;
     [SerializeField] PlayerController playerController;
-    private string[] currentDialogList;
+    private List<DialogList.DialogItem> currentDialogList;
     private int currentDialogIndex = 0;
 
     public void Update()
@@ -22,10 +23,11 @@ public class DialogController : MonoBehaviour
 
     private void NextDialog()
     {
-        if (currentDialogIndex < currentDialogList.Length - 1)
+        if (currentDialogIndex < currentDialogList.Count - 1)
         {
             currentDialogIndex++;
-            dialog.text = currentDialogList[currentDialogIndex];
+            dialog.text = currentDialogList[currentDialogIndex].text;
+            speaker.text = currentDialogList[currentDialogIndex].character.ToString();
         }
         else
         {
@@ -45,11 +47,12 @@ public class DialogController : MonoBehaviour
         speaker.text = null;
         dialog.text = null;
     }
-    public void InitiateDialog(string speakerText, string[] dialogText)
+
+    internal void InitiateDialog(List<DialogList.DialogItem> dialog)
     {
-        speaker.text = speakerText;
-        dialog.text = dialogText[0];
-        currentDialogList = dialogText;
+        speaker.text = dialog[0].character.ToString();
+        this.dialog.text = dialog[0].text;
+        currentDialogList = dialog;
         dialogPanel.SetActive(true);
         playerController.pauseControlls = true;
     }

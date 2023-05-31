@@ -1,16 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Conversation : MonoBehaviour, IInteractible
 {
     // Start is called before the first frame update
     [SerializeField] DialogController dialogController;
+    [SerializeField] DialogList.GetCharacter character;
     public void Interact()
     {
         StartDialog();
     }
     public void StartDialog()
     {
-        string[] dialogArray = { "Jararararar", "Har du fått nån fisk?", "Bjud lite kanske?" };
-        dialogController.InitiateDialog("Harry", dialogArray);
+        Debug.Log(character);
+        List<DialogList.DialogItem> dialog = DialogList.Instance.SelectDialogTree(character);
+        dialogController.InitiateDialog(dialog);
+
+
     }
 }
