@@ -6,7 +6,7 @@ public class Conversation : MonoBehaviour, IInteractible
     // Start is called before the first frame update
     [SerializeField] DialogController dialogController;
     [SerializeField] DialogList dialogList;
-    [SerializeField] DialogList.GetCharacter character;
+    [SerializeField] DialogList.GameCharacters character;
     public void Interact()
     {
         StartDialog();

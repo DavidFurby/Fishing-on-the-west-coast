@@ -8,7 +8,7 @@ public class DialogList : MonoBehaviour
     {
         day = MainManager.Instance.game.Days;
     }
-    public enum GetCharacter
+    public enum GameCharacters
     {
         Player,
         Neighbor,
@@ -16,24 +16,37 @@ public class DialogList : MonoBehaviour
         Fisherman,
         Dog
     }
-    private readonly Dictionary<GetCharacter, Queue<DialogItem>> characterDialogs = new();
+    private readonly Dictionary<GameCharacters, Queue<DialogItem>> characterDialogs = new();
 
     private void UpdateCharacterDialogs()
     {
-        switch (day)
-        {
-            case 1:
-                characterDialogs[GetCharacter.Neighbor] = new Queue<DialogItem>(new[] { new DialogItem { character = GetCharacter.Neighbor, text = "Day 1 dialog for Neighbor" }, new DialogItem { character = GetCharacter.Player, text = "Day 1 response from Player" } });
-                characterDialogs[GetCharacter.NeigborsWife] = new Queue<DialogItem>(new[] { new DialogItem { character = GetCharacter.NeigborsWife, text = "Day 1 dialog for NeighborsWife" }, new DialogItem { character = GetCharacter.Player, text = "Day 1 response from Player" } });
-                return;
-            case 2:
-                characterDialogs[GetCharacter.Neighbor] = new Queue<DialogItem>(new[] { new DialogItem { character = GetCharacter.Neighbor, text = "Day 2 dialog for Neighbor" }, new DialogItem { character = GetCharacter.Player, text = "Day 2 response from Player" } });
-                characterDialogs[GetCharacter.NeigborsWife] = new Queue<DialogItem>(new[] { new DialogItem { character = GetCharacter.NeigborsWife, text = "Day 2 dialog for NeighborsWife" }, new DialogItem { character = GetCharacter.Player, text = "Day 2 response from Player" } });
-                return;
-        }
+        characterDialogs[GameCharacters.Neighbor] = GetDialogForCharacter(day, GameCharacters.Neighbor);
+        characterDialogs[GameCharacters.NeigborsWife] = GetDialogForCharacter(day, GameCharacters.NeigborsWife);
     }
 
-    public Queue<DialogItem> SelectDialogTree(GetCharacter character)
+    private Queue<DialogItem> GetDialogForCharacter(int day, GameCharacters character)
+    {
+        var dialog = new Queue<DialogItem>();
+        var dialogData = GetDialogDataForDayAndCharacter(day, character);
+        foreach (var item in dialogData)
+        {
+            SetText(item.character, dialog, item.text);
+        }
+        return dialog;
+    }
+    private List<DialogItem> GetDialogDataForDayAndCharacter(int day, GameCharacters character)
+    {
+        // This method could retrieve the dialog data from a separate class or data structure
+        // For example:
+        return DialogDataManager.GetDialogData(day, character);
+    }
+
+    private static void SetText(GameCharacters character, Queue<DialogItem> dialog, string text)
+    {
+        dialog.Enqueue(new DialogItem { character = character, text = text });
+    }
+
+    public Queue<DialogItem> SelectDialogTree(GameCharacters character)
     {
         UpdateCharacterDialogs();
         if (characterDialogs.ContainsKey(character))
@@ -45,7 +58,7 @@ public class DialogList : MonoBehaviour
 
     public class DialogItem
     {
-        public GetCharacter character;
+        public GameCharacters character;
         public string text;
 
     }
