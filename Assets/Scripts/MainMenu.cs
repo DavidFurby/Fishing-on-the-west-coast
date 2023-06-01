@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
         {
             MainManager.Instance.game.NewGame();
         }
+        mainMenu.SetActive(false);
 
         SceneManager.LoadScene("Home");
     }
@@ -37,6 +38,7 @@ public class MainMenu : MonoBehaviour
             MainManager.Instance.game.LoadGame();
             if (MainManager.Instance.game.Scene != null)
             {
+                mainMenu.SetActive(false);
                 SceneManager.LoadScene(MainManager.Instance.game.Scene);
             }
         }

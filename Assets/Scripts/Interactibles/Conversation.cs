@@ -5,6 +5,7 @@ public class Conversation : MonoBehaviour, IInteractible
 {
     // Start is called before the first frame update
     [SerializeField] DialogController dialogController;
+    [SerializeField] DialogList dialogList;
     [SerializeField] DialogList.GetCharacter character;
     public void Interact()
     {
@@ -13,7 +14,7 @@ public class Conversation : MonoBehaviour, IInteractible
     public void StartDialog()
     {
         Debug.Log(character);
-        Queue<DialogList.DialogItem> dialog = DialogList.Instance.SelectDialogTree(character);
+        Queue<DialogList.DialogItem> dialog = dialogList.SelectDialogTree(character);
         dialogController.InitiateDialog(dialog);
 
 

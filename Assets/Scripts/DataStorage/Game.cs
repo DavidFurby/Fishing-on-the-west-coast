@@ -3,14 +3,14 @@ using UnityEngine.Playables;
 
 public class Game : MonoBehaviour
 {
-    private int days;
+    private int day;
     private int fishes;
     private string scene;
 
     public int Days
     {
-        get { return days; }
-        set { days = value; }
+        get { return day; }
+        set { day = value; }
     }
 
     public int Fishes
@@ -33,7 +33,7 @@ public class Game : MonoBehaviour
     {
         GameData gameData = SaveSystem.LoadGame();
 
-        days = gameData.daysCount;
+        day = gameData.daysCount;
         fishes = gameData.fishes;
         scene = gameData.scene;
     }
@@ -42,7 +42,7 @@ public class Game : MonoBehaviour
         bool removed = SaveSystem.NewGame();
         if (removed)
         {
-            days = 0;
+            day = 1;
             fishes = 0;
             scene = "Home";
         }
