@@ -7,7 +7,7 @@ public class CatchArea : MonoBehaviour
     private GameObject fish;
     [SerializeField] FishingControlls fishingControlls;
     private FishMovement fishMovement;
-    [SerializeField] MusicController musicController;
+    [SerializeField] RythmGameController rythmGame;
 
     private void Update()
     {
@@ -20,6 +20,7 @@ public class CatchArea : MonoBehaviour
             isInCatchArea = true;
             fish = other.gameObject;
             fishMovement = fish.GetComponent<FishMovement>();
+
         }
     }
     private void OnTriggerExit(Collider other)
@@ -35,7 +36,7 @@ public class CatchArea : MonoBehaviour
         if (fish != null)
         {
             fishMovement.hooked = true;
-            musicController.startPlaying = true;
+            rythmGame.StartMusicGame();
         }
     }
     public void CollectFish()
@@ -44,7 +45,6 @@ public class CatchArea : MonoBehaviour
         {
             Destroy(fish);
             MainManager.Instance.game.Fishes++;
-            musicController.startPlaying = false;
         }
     }
 }

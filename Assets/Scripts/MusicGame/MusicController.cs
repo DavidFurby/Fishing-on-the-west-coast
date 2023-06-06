@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicController : MonoBehaviour
 {
 
     [SerializeField] AudioSource theMusic;
-    public bool startPlaying = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +13,15 @@ public class MusicController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startPlaying)
-        {
-            theMusic.Play();
-            startPlaying = false;
-        }
+
+    }
+    public void PlayMusicGameMusic()
+    {
+        theMusic.Play();
+
+    }
+    public void StopMusicGameMusic()
+    {
+        theMusic.Play();
     }
 }

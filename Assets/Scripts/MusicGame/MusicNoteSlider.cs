@@ -21,9 +21,8 @@ public class MusicNoteSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (var key in instantiatedKeys)
-        {
-            key.position += speed * Time.deltaTime * Vector3.down;
-        }
+
+        transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
+
     }
 }
