@@ -22,6 +22,6 @@ public class MusicController : MonoBehaviour
     }
     public void StopMusicGameMusic()
     {
-        theMusic.Play();
+        theMusic.Stop();
     }
 }

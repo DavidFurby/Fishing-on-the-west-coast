@@ -14,6 +14,7 @@ public class Bait : MonoBehaviour
     [SerializeField] FishingControlls fishingControlls;
     private Rigidbody rigidBody;
     [SerializeField] CatchArea catchArea;
+    [SerializeField] AudioSource splashSound;
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -27,14 +28,15 @@ public class Bait : MonoBehaviour
         Float();
         ReelIn();
         Shake();
-        Throw();
+        Cast();
     }
 
 
-    public void Throw()
+    public void Cast()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Throwing)
+        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Casting)
         {
+
             rigidBody.isKinematic = false;
             transform.position = transform.position;
             rigidBody.AddForceAtPosition(forceFactor * fishingControlls.throwPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
@@ -46,7 +48,6 @@ public class Bait : MonoBehaviour
             {
                 forceFactor = 1f;
                 fishingControlls.throwPower = 0f;
-                fishingControlls.fishingStatus = FishingControlls.GetFishingStatus.Fishing;
             }
         }
     }

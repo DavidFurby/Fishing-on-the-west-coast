@@ -45,6 +45,7 @@ public class CatchArea : MonoBehaviour
         {
             Destroy(fish);
             MainManager.Instance.game.Fishes++;
+            rythmGame.EndMusicGame();
         }
     }
 }

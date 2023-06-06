@@ -8,10 +8,11 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] GameObject fishingRod;
     [SerializeField] Animator animator;
     public float throwPower;
+    [SerializeField] AudioSource castSound;
     public enum GetFishingStatus
     {
         StandBy,
-        Throwing,
+        Casting,
         Fishing,
         Reeling
     }
@@ -57,7 +58,7 @@ public class FishingControlls : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             animator.Play("Reverse Swing");
-
+            castSound.Play();
             StartCoroutine(WaitForSwingAnimation());
         }
     }
@@ -71,7 +72,7 @@ public class FishingControlls : MonoBehaviour
         {
             yield return null;
         }
-        fishingStatus = GetFishingStatus.Throwing;
+        fishingStatus = GetFishingStatus.Casting;
     }
 
 

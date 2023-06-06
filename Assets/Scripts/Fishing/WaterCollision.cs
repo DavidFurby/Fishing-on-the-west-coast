@@ -1,30 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterCollision : MonoBehaviour
 {
     [SerializeField] GameObject sea;
     [SerializeField] Bait bait;
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] FishingControlls fishingControlls;
+    [SerializeField] AudioSource audioSource;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == sea)
         {
+            if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Casting)
+            {
+                audioSource.Play();
+            }
+            fishingControlls.fishingStatus = FishingControlls.GetFishingStatus.Fishing;
             bait.inWater = true;
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == sea)
