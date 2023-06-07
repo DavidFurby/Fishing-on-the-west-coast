@@ -5,9 +5,17 @@ public class FishMovement : MonoBehaviour
     [SerializeField] private float swimSpeed;
     public Vector3 direction;
     private Rigidbody rb;
-    public bool baited;
-    public bool hooked;
     private GameObject currentBait;
+
+    public enum FishState
+    {
+        Swimming,
+        Baited,
+        Hooked
+    }
+
+    public FishState state;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +33,7 @@ public class FishMovement : MonoBehaviour
     // Rotate towards the bait if baited
     void RotateTowardsBait()
     {
-        if (baited && !hooked && currentBait != null)
+        if (state == FishState.Baited && currentBait != null)
         {
             direction = (currentBait.transform.position - transform.position).normalized;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -47,13 +55,13 @@ public class FishMovement : MonoBehaviour
     public void GetBaited(GameObject bait)
     {
         currentBait = bait;
-        baited = true;
+        state = FishState.Baited;
     }
 
     // Attach fish to bait if hooked
     public void HookToBait()
     {
-        if (hooked && currentBait != null)
+        if (state == FishState.Hooked && currentBait != null)
         {
             transform.position = currentBait.transform.position;
         }
