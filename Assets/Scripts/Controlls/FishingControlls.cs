@@ -9,6 +9,7 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] Animator animator;
     public float throwPower;
     [SerializeField] AudioSource castSound;
+
     public enum GetFishingStatus
     {
         StandBy,
@@ -28,7 +29,7 @@ public class FishingControlls : MonoBehaviour
     {
         if (fishingStatus == GetFishingStatus.Fishing || fishingStatus == GetFishingStatus.Reeling)
         {
-            ReturnBait();
+            ReelInBait();
         }
         else if (fishingStatus == GetFishingStatus.StandBy)
         {
@@ -36,7 +37,7 @@ public class FishingControlls : MonoBehaviour
         }
     }
 
-    private void ReturnBait()
+    private void ReelInBait()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -74,6 +75,7 @@ public class FishingControlls : MonoBehaviour
         }
         fishingStatus = GetFishingStatus.Casting;
     }
+
 
 
     private void ChargeThrow()

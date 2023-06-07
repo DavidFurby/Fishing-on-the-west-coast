@@ -37,12 +37,14 @@ public class CatchArea : MonoBehaviour
         {
             fishMovement.hooked = true;
             rythmGame.StartMusicGame();
+
         }
     }
     public void CollectFish()
     {
         if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.StandBy && fish != null)
         {
+            Debug.Log(fish);
             Destroy(fish);
             MainManager.Instance.game.Fishes++;
             rythmGame.EndMusicGame();

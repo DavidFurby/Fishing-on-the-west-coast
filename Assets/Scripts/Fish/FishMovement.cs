@@ -16,7 +16,7 @@ public class FishMovement : MonoBehaviour
         InvokeRepeating(nameof(Swim), 1, 5);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         IsBaited();
         HookToBait();
@@ -52,7 +52,6 @@ public class FishMovement : MonoBehaviour
     {
         if (hooked)
         {
-            rb.isKinematic = true;
             transform.position = setBait.transform.position;
         }
     }

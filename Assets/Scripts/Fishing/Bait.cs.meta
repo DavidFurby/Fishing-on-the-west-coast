@@ -3,7 +3,13 @@ guid: 0f45076a6a3b494458b996018ada6e0c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sea: {fileID: 461191177775057915, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+  - fishingRodTop: {instanceID: 0}
+  - fishingControlls: {instanceID: 0}
+  - catchArea: {instanceID: 0}
+  - splashSound: {instanceID: 0}
+  - reelSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
