@@ -5,7 +5,7 @@ public class CatchArea : MonoBehaviour
 {
     public bool isInCatchArea;
     private GameObject fish;
-    [SerializeField] private FishingControlls fishingControls;
+    [SerializeField] private FishingControls fishingControls;
     private FishMovement fishMovement;
     [SerializeField] private RythmGameController rythmGame;
 

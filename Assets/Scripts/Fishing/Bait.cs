@@ -11,13 +11,13 @@ public class Bait : MonoBehaviour
     private const float ReelInSpeed = 15f;
     private Vector3 targetPosition;
     [SerializeField] private GameObject fishingRodTop;
-    [SerializeField] private FishingControlls fishingControlls;
+    [SerializeField] private FishingControls fishingControls;
     private Rigidbody rigidBody;
     [SerializeField] private CatchArea catchArea;
     [SerializeField] private AudioSource splashSound;
     [SerializeField] private AudioSource reelSound;
 
-
+    // Start is called before the first frame update
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -26,6 +26,7 @@ public class Bait : MonoBehaviour
         AttachBait();
     }
 
+    // Update is called once per frame
     private void FixedUpdate()
     {
         Float();
@@ -34,13 +35,14 @@ public class Bait : MonoBehaviour
         Cast();
     }
 
+    // Cast the bait
     public void Cast()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Casting)
+        if (fishingControls != null && fishingControls.fishingStatus == FishingControls.GetFishingStatus.Casting)
         {
             rigidBody.isKinematic = false;
             transform.position = transform.position;
-            rigidBody.AddForceAtPosition(forceFactor * fishingControlls.throwPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
+            rigidBody.AddForceAtPosition(forceFactor * fishingControls.throwPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
             if (forceFactor > 0)
             {
                 forceFactor -= 0.1f;
@@ -48,9 +50,10 @@ public class Bait : MonoBehaviour
         }
     }
 
+    // Reel in the bait
     public void ReelIn()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Reeling)
+        if (fishingControls != null && fishingControls.fishingStatus == FishingControls.GetFishingStatus.Reeling)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
             reelSound.Play();
@@ -66,25 +69,38 @@ public class Bait : MonoBehaviour
         }
     }
 
+    // Shake the bait when in catch area
     private void Shake()
     {
-        if (catchArea.isInCatchArea)
+        if (catchArea != null && catchArea.isInCatchArea)
         {
             splashSound.Play();
             transform.position = new Vector3(transform.position.x + Mathf.Sin(Time.time * 20) * 0.01f, transform.position.y, transform.position.z);
         }
     }
 
+    // Attach the bait to the fishing rod
     private void AttachBait()
     {
         reelSound.Stop();
         rigidBody.isKinematic = true;
         transform.position = targetPosition;
-        fishingControlls.fishingStatus = FishingControlls.GetFishingStatus.StandBy;
-        fishingControlls.throwPower = 0f;
+
+        if (fishingControls != null)
+        {
+            fishingControls.fishingStatus = FishingControls.GetFishingStatus.StandBy;
+            fishingControls.throwPower = 0f;
+        }
+
         forceFactor = 1f;
-        catchArea.CollectFish();
+
+        if (catchArea != null)
+        {
+            catchArea.CollectFish();
+        }
     }
+
+    // Make the bait float on water
     private void Float()
     {
         if (inWater)

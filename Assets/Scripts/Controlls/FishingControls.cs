@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class FishingControlls : MonoBehaviour
+public class FishingControls : MonoBehaviour
 {
     [SerializeField] CatchArea catchArea;
     [SerializeField] Bait bait;
