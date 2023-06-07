@@ -83,6 +83,7 @@ public class Bait : MonoBehaviour
         fishingControlls.fishingStatus = FishingControlls.GetFishingStatus.StandBy;
         fishingControlls.throwPower = 0f;
         forceFactor = 1f;
+        catchArea.CollectFish();
     }
     private void Float()
     {

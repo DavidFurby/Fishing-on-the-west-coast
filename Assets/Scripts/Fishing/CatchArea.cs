@@ -8,11 +8,6 @@ public class CatchArea : MonoBehaviour
     [SerializeField] FishingControlls fishingControlls;
     private FishMovement fishMovement;
     [SerializeField] RythmGameController rythmGame;
-
-    private void Update()
-    {
-        CollectFish();
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Fish"))
@@ -42,7 +37,7 @@ public class CatchArea : MonoBehaviour
     }
     public void CollectFish()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.StandBy && fish != null)
+        if (fish != null)
         {
             Debug.Log(fish);
             Destroy(fish);
