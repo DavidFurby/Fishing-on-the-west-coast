@@ -11,7 +11,7 @@ public class FishSpawner : MonoBehaviour
     private Quaternion spawnRotation;
     private Vector3 spawnPosition;
     [SerializeField] GameObject bait;
-    [SerializeField] FishingControls fishingControlls;
+    [SerializeField] FishingControlls fishingControlls;
 
     private void Start()
     {
@@ -42,7 +42,7 @@ public class FishSpawner : MonoBehaviour
 
     private void CalculateSpawnPosition()
     {
-        if (fishingControlls.fishingStatus == FishingControls.GetFishingStatus.Fishing)
+        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Fishing)
         {
             //Calculate horizontal and vertical spawn position
             spawnHorizontal = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;

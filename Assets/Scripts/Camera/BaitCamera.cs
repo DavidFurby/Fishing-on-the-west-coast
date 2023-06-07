@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaitCamera : MonoBehaviour
 {
-    [SerializeField] FishingControls fishingControlls;
+    [SerializeField] FishingControlls fishingControlls;
     [SerializeField] GameObject bait;
     private float cameraDistance;
     private float originalCameraDistance;
@@ -17,7 +17,7 @@ public class BaitCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (fishingControlls.fishingStatus == FishingControls.GetFishingStatus.Casting)
+        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Casting)
         {
 
             transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
@@ -27,7 +27,7 @@ public class BaitCamera : MonoBehaviour
             }
 
         }
-        else if (fishingControlls.fishingStatus == FishingControls.GetFishingStatus.Fishing)
+        else if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Fishing)
         {
 
             transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
