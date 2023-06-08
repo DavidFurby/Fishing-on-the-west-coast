@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -46,4 +47,5 @@ public class CatchArea : MonoBehaviour
             rythmGame.EndMusicGame();
         }
     }
+
 }

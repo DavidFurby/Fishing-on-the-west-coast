@@ -3,7 +3,6 @@ using UnityEngine;
 
 /// <summary>
 /// This class handles the fishing controls for the player.
-/// </summary>
 public class FishingControlls : MonoBehaviour
 {
     #region Serialized Fields
@@ -12,10 +11,11 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private GameObject fishingRod;
     [SerializeField] private Animator animator;
     [SerializeField] private AudioSource castSound;
+    [SerializeField] private BaitCamera baitCamera;
     #endregion
 
     #region Public Fields
-    public float castingPower;
+    public float castingPower = 20f;
     public FishingStatus fishingStatus;
     #endregion
 
@@ -25,7 +25,8 @@ public class FishingControlls : MonoBehaviour
         StandBy,
         Casting,
         Fishing,
-        Reeling
+        Reeling,
+        Catching
     }
     #endregion
 
@@ -59,10 +60,23 @@ public class FishingControlls : MonoBehaviour
         {
             if (catchArea.isInCatchArea)
             {
-                catchArea.CatchFish();
+                fishingStatus = FishingStatus.Catching;
+                baitCamera.CatchAlert();
+                StartCoroutine(StopTimeForOneSecond());
             }
-            fishingStatus = FishingStatus.Reeling;
+            else
+            {
+                fishingStatus = FishingStatus.Reeling;
+            }
         }
+    }
+    IEnumerator StopTimeForOneSecond()
+    {
+
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(1);
+        Time.timeScale = 1;
+        catchArea.CatchFish();
     }
 
     /// <summary>
@@ -105,7 +119,7 @@ public class FishingControlls : MonoBehaviour
     private void ChargeCasting()
     {
         animator.Play("Swing");
-        if (castingPower < 100)
+        if (castingPower < 200)
             castingPower++;
     }
     #endregion
