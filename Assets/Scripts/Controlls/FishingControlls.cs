@@ -27,7 +27,7 @@ public class FishingControlls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fishingStatus == GetFishingStatus.Fishing || fishingStatus == GetFishingStatus.Reeling)
+        if (fishingStatus == GetFishingStatus.Fishing)
         {
             ReelInBait();
         }

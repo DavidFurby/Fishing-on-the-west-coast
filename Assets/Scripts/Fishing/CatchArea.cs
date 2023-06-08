@@ -30,7 +30,7 @@ public class CatchArea : MonoBehaviour
 
     public void CatchFish()
     {
-        if (fish != null && fishMovement != null && rythmGame != null)
+        if (fish != null && fishMovement != null && fishMovement.state != FishMovement.FishState.Hooked && rythmGame != null)
         {
             fishMovement.state = FishMovement.FishState.Hooked;
             rythmGame.StartMusicGame();

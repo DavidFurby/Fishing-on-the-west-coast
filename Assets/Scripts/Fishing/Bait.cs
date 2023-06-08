@@ -56,6 +56,7 @@ public class Bait : MonoBehaviour
             reelSound.Play();
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
+                Debug.Log("Attach");
                 AttachBait();
             }
             else
