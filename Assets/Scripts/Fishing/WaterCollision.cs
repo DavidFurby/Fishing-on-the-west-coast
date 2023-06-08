@@ -11,11 +11,11 @@ public class WaterCollision : MonoBehaviour
     {
         if (other.gameObject == sea)
         {
-            if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Casting)
+            if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Casting)
             {
                 audioSource.Play();
             }
-            fishingControlls.fishingStatus = FishingControlls.GetFishingStatus.Fishing;
+            fishingControlls.fishingStatus = FishingControlls.FishingStatus.Fishing;
             bait.inWater = true;
         }
     }

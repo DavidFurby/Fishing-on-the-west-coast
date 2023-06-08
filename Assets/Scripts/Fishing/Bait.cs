@@ -36,11 +36,11 @@ public class Bait : MonoBehaviour
 
     public void Cast()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Casting)
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Casting)
         {
             rigidBody.isKinematic = false;
             transform.position = transform.position;
-            rigidBody.AddForceAtPosition(forceFactor * fishingControlls.throwPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
+            rigidBody.AddForceAtPosition(forceFactor * fishingControlls.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
             if (forceFactor > 0)
             {
                 forceFactor -= 0.1f;
@@ -50,13 +50,12 @@ public class Bait : MonoBehaviour
 
     public void ReelIn()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Reeling)
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
             reelSound.Play();
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
-                Debug.Log("Attach");
                 AttachBait();
             }
             else
@@ -81,8 +80,8 @@ public class Bait : MonoBehaviour
         reelSound.Stop();
         rigidBody.isKinematic = true;
         transform.position = targetPosition;
-        fishingControlls.fishingStatus = FishingControlls.GetFishingStatus.StandBy;
-        fishingControlls.throwPower = 0f;
+        fishingControlls.fishingStatus = FishingControlls.FishingStatus.StandBy;
+        fishingControlls.castingPower = 0f;
         forceFactor = 1f;
         catchArea.CollectFish();
     }

@@ -42,7 +42,7 @@ public class FishSpawner : MonoBehaviour
 
     private void CalculateSpawnPosition()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Fishing)
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Fishing)
         {
             //Calculate horizontal and vertical spawn position
             spawnHorizontal = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;

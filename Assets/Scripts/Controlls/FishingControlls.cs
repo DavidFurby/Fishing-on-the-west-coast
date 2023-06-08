@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// This class handles the fishing controls for the player.
 /// </summary>
-public class FishingControls : MonoBehaviour
+public class FishingControlls : MonoBehaviour
 {
     #region Serialized Fields
     [SerializeField] private CatchArea catchArea;
@@ -108,6 +108,5 @@ public class FishingControls : MonoBehaviour
         if (castingPower < 100)
             castingPower++;
     }
-
-
+    #endregion
 }

@@ -17,7 +17,7 @@ public class BaitCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Casting)
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Casting)
         {
 
             transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
@@ -27,7 +27,7 @@ public class BaitCamera : MonoBehaviour
             }
 
         }
-        else if (fishingControlls.fishingStatus == FishingControlls.GetFishingStatus.Fishing)
+        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Fishing)
         {
 
             transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
