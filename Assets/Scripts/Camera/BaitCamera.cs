@@ -28,7 +28,7 @@ public class BaitCamera : MonoBehaviour
             }
 
         }
-        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Fishing || fishingControlls.fishingStatus == FishingControlls.FishingStatus.Catching)
+        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Fishing)
         {
 
             transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
@@ -38,15 +38,20 @@ public class BaitCamera : MonoBehaviour
             }
 
         }
+        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Catching)
+        {
+
+            transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
+            if (cameraDistance < bait.transform.position.z - 2)
+            {
+                cameraDistance += 0.2f;
+            }
+
+        }
     }
     public void CatchAlert()
     {
         audioSource.Play();
-        transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
-        if (cameraDistance < bait.transform.position.z - 2)
-        {
-            cameraDistance += 0.5f;
-        }
     }
 }
 
