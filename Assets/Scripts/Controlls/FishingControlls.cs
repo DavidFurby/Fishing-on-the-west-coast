@@ -1,42 +1,58 @@
 using System.Collections;
 using UnityEngine;
 
-public class FishingControlls : MonoBehaviour
+/// <summary>
+/// This class handles the fishing controls for the player.
+/// </summary>
+public class FishingControls : MonoBehaviour
 {
-    [SerializeField] CatchArea catchArea;
-    [SerializeField] Bait bait;
-    [SerializeField] GameObject fishingRod;
-    [SerializeField] Animator animator;
-    public float throwPower;
-    [SerializeField] AudioSource castSound;
+    #region Serialized Fields
+    [SerializeField] private CatchArea catchArea;
+    [SerializeField] private Bait bait;
+    [SerializeField] private GameObject fishingRod;
+    [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource castSound;
+    #endregion
 
-    public enum GetFishingStatus
+    #region Public Fields
+    public float castingPower;
+    public FishingStatus fishingStatus;
+    #endregion
+
+    #region Enums
+    public enum FishingStatus
     {
         StandBy,
         Casting,
         Fishing,
         Reeling
     }
-    public GetFishingStatus fishingStatus;
+    #endregion
 
+    #region Unity Methods
     private void Start()
     {
-        fishingStatus = GetFishingStatus.StandBy;
-
+        fishingStatus = FishingStatus.StandBy;
     }
+
     // Update is called once per frame
     void Update()
     {
-        if (fishingStatus == GetFishingStatus.Fishing)
+        if (fishingStatus == FishingStatus.Fishing)
         {
             ReelInBait();
         }
-        else if (fishingStatus == GetFishingStatus.StandBy)
+        else if (fishingStatus == FishingStatus.StandBy)
         {
             StartFishing();
         }
     }
+    #endregion
 
+    #region Private Methods
+    /// <summary>
+    /// Reels in the bait if the space key is pressed.
+    /// </summary>
     private void ReelInBait()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -45,16 +61,18 @@ public class FishingControlls : MonoBehaviour
             {
                 catchArea.CatchFish();
             }
-            fishingStatus = GetFishingStatus.Reeling;
+            fishingStatus = FishingStatus.Reeling;
         }
-
     }
 
+    /// <summary>
+    /// Starts fishing if the space key is held down.
+    /// </summary>
     private void StartFishing()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            ChargeThrow();
+            ChargeCasting();
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
@@ -63,6 +81,10 @@ public class FishingControlls : MonoBehaviour
             StartCoroutine(WaitForSwingAnimation());
         }
     }
+
+    /// <summary>
+    /// Waits for the swing animation to finish before changing the fishing status.
+    /// </summary>
     IEnumerator WaitForSwingAnimation()
     {
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Reverse Swing"))
@@ -73,16 +95,18 @@ public class FishingControlls : MonoBehaviour
         {
             yield return null;
         }
-        fishingStatus = GetFishingStatus.Casting;
+        fishingStatus = FishingStatus.Casting;
     }
 
+    /// <summary>
+    /// Charges the casting power while the space key is held down.
+    /// </summary>
 
-
-    private void ChargeThrow()
+    private void ChargeCasting()
     {
         animator.Play("Swing");
-        if (throwPower < 100)
-            throwPower++;
+        if (castingPower < 100)
+            castingPower++;
     }
 
 
