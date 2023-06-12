@@ -1,14 +1,12 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class CatchArea : MonoBehaviour
 {
     public bool isInCatchArea;
-    private GameObject fish;
-    [SerializeField] private FishingControlls fishingControls;
+    public GameObject fish;
     private FishMovement fishMovement;
     [SerializeField] private RythmGameController rythmGame;
+    [SerializeField] private AudioSource wowSound;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -42,10 +40,15 @@ public class CatchArea : MonoBehaviour
     {
         if (fish != null && rythmGame != null)
         {
-            Destroy(fish);
             MainManager.Instance.game.Fishes++;
             rythmGame.EndMusicGame();
+            PresentCatch();
         }
     }
 
+    private void PresentCatch()
+    {
+        wowSound.PlayDelayed(2);
+        fishMovement.PresentFish();
+    }
 }

@@ -66,4 +66,11 @@ public class FishMovement : MonoBehaviour
             transform.position = currentBait.transform.position;
         }
     }
+    public void PresentFish()
+    {
+        if (state == FishState.Hooked)
+        {
+            transform.position = Vector3.up;
+        }
+    }
 }

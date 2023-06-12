@@ -39,7 +39,6 @@ public class Bait : MonoBehaviour
         if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Casting)
         {
             rigidBody.isKinematic = false;
-            transform.position = transform.position;
             rigidBody.AddForceAtPosition(forceFactor * fishingControlls.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
             if (forceFactor > 0)
             {
@@ -47,13 +46,11 @@ public class Bait : MonoBehaviour
             }
         }
     }
-
     public void ReelIn()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling || fishingControlls.fishingStatus == FishingControlls.FishingStatus.Catching)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
-            reelSound.Play();
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 AttachBait();
@@ -61,7 +58,16 @@ public class Bait : MonoBehaviour
             else
             {
                 Vector3 direction = (targetPosition - transform.position).normalized;
-                transform.Translate(ReelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+                float reelInSpeed = ReelInSpeed;
+                if (catchArea.fish != null)
+                {
+                    GameObject fish = catchArea.fish.GetComponent<GameObject>();
+                    if (fish != null)
+                    {
+                        reelInSpeed /= fish.GetComponent<Rigidbody>().mass;
+                    }
+                }
+                transform.Translate(reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
             }
         }
     }
