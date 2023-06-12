@@ -38,7 +38,7 @@ public class BaitCamera : MonoBehaviour
             }
 
         }
-        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Catching)
+        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
         {
 
             transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);

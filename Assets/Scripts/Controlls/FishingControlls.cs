@@ -26,7 +26,6 @@ public class FishingControlls : MonoBehaviour
         Casting,
         Fishing,
         Reeling,
-        Catching
     }
     #endregion
 
@@ -39,11 +38,9 @@ public class FishingControlls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fishingStatus == FishingStatus.Fishing)
-        {
-            ReelInBait();
-        }
-        else if (fishingStatus == FishingStatus.StandBy)
+        ReelInBait();
+
+        if (fishingStatus == FishingStatus.StandBy)
         {
             StartFishing();
         }
@@ -56,11 +53,11 @@ public class FishingControlls : MonoBehaviour
     /// </summary>
     private void ReelInBait()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && fishingStatus == FishingStatus.Fishing)
         {
             if (catchArea.isInCatchArea)
             {
-                fishingStatus = FishingStatus.Catching;
+                fishingStatus = FishingStatus.Reeling;
                 baitCamera.CatchAlert();
                 StartCoroutine(StopTimeForOneSecond());
             }

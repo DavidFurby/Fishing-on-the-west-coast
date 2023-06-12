@@ -48,7 +48,8 @@ public class Bait : MonoBehaviour
     }
     public void ReelIn()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling || fishingControlls.fishingStatus == FishingControlls.FishingStatus.Catching)
+        Debug.Log(fishingControlls.fishingStatus);
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
@@ -57,6 +58,7 @@ public class Bait : MonoBehaviour
             }
             else
             {
+                Debug.Log("reeling");
                 Vector3 direction = (targetPosition - transform.position).normalized;
                 float reelInSpeed = ReelInSpeed;
                 if (catchArea.fish != null)
