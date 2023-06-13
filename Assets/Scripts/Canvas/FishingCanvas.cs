@@ -20,4 +20,6 @@ public class FishingCanvas : MonoBehaviour
     {
         fishText.text = "Total Fishes:" + MainManager.Instance.game.Fishes;
     }
+
+
 }

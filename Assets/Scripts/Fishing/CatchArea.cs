@@ -5,12 +5,11 @@ public class CatchArea : MonoBehaviour
     public bool isInCatchArea;
     public GameObject fish;
     private FishMovement fishMovement;
-    [SerializeField] private RythmGameController rythmGame;
-    [SerializeField] private AudioSource wowSound;
+    [SerializeField] private CatchSummary catchSummary;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Fish"))
+        if (other.CompareTag("Fish") && fish == null)
         {
             isInCatchArea = true;
             fish = other.gameObject;
@@ -20,7 +19,7 @@ public class CatchArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish"))
+        if (other.CompareTag("Fish") && fish == other.gameObject)
         {
             isInCatchArea = false;
             fish = null;
@@ -29,26 +28,17 @@ public class CatchArea : MonoBehaviour
 
     public void CatchFish()
     {
-        if (fish != null && fishMovement != null && fishMovement.state != FishMovement.FishState.Hooked && rythmGame != null)
+        if (fish != null && fishMovement != null && fishMovement.state != FishMovement.FishState.Hooked)
         {
             fishMovement.state = FishMovement.FishState.Hooked;
-            rythmGame.StartMusicGame();
         }
     }
 
-    public void CollectFish()
+    public void PresentCatch()
     {
-        if (fish != null && rythmGame != null)
+        if (fish != null)
         {
-            MainManager.Instance.game.Fishes++;
-            rythmGame.EndMusicGame();
-            PresentCatch();
+            catchSummary.PresentSummary(fish);
         }
-    }
-
-    private void PresentCatch()
-    {
-        wowSound.PlayDelayed(2);
-        fishMovement.PresentFish();
     }
 }

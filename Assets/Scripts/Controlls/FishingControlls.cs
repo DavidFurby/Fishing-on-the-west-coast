@@ -7,11 +7,12 @@ public class FishingControlls : MonoBehaviour
 {
     #region Serialized Fields
     [SerializeField] private CatchArea catchArea;
-    [SerializeField] private Bait bait;
     [SerializeField] private GameObject fishingRod;
     [SerializeField] private Animator animator;
     [SerializeField] private AudioSource castSound;
     [SerializeField] private BaitCamera baitCamera;
+    [SerializeField] private RythmGameController rythmGame;
+    private bool pauseControls = false;
     #endregion
 
     #region Public Fields
@@ -38,10 +39,9 @@ public class FishingControlls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ReelInBait();
-
-        if (fishingStatus == FishingStatus.StandBy)
+        if (!pauseControls)
         {
+            ReelInBait();
             StartFishing();
         }
     }
@@ -57,14 +57,13 @@ public class FishingControlls : MonoBehaviour
         {
             if (catchArea.isInCatchArea)
             {
-                fishingStatus = FishingStatus.Reeling;
                 baitCamera.CatchAlert();
                 StartCoroutine(StopTimeForOneSecond());
+                catchArea.CatchFish();
+                rythmGame.StartMusicGame();
             }
-            else
-            {
-                fishingStatus = FishingStatus.Reeling;
-            }
+            SetFishingStatus(FishingStatus.Reeling);
+
         }
     }
     IEnumerator StopTimeForOneSecond()
@@ -73,7 +72,6 @@ public class FishingControlls : MonoBehaviour
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(1);
         Time.timeScale = 1;
-        catchArea.CatchFish();
     }
 
     /// <summary>
@@ -81,16 +79,20 @@ public class FishingControlls : MonoBehaviour
     /// </summary>
     private void StartFishing()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (fishingStatus == FishingStatus.StandBy)
         {
-            ChargeCasting();
+            if (Input.GetKey(KeyCode.Space))
+            {
+                ChargeCasting();
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                animator.Play("Reverse Swing");
+                castSound.Play();
+                StartCoroutine(WaitForSwingAnimation());
+            }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            animator.Play("Reverse Swing");
-            castSound.Play();
-            StartCoroutine(WaitForSwingAnimation());
-        }
+
     }
 
     /// <summary>
@@ -106,7 +108,13 @@ public class FishingControlls : MonoBehaviour
         {
             yield return null;
         }
-        fishingStatus = FishingStatus.Casting;
+        SetFishingStatus(FishingStatus.Casting);
+    }
+
+    public void HandleCatch()
+    {
+        rythmGame.EndMusicGame();
+        catchArea.PresentCatch();
     }
 
     /// <summary>
@@ -118,6 +126,15 @@ public class FishingControlls : MonoBehaviour
         animator.Play("Swing");
         if (castingPower < 200)
             castingPower++;
+    }
+
+    public void SetControlsActive()
+    {
+        pauseControls = !pauseControls;
+    }
+    public void SetFishingStatus(FishingStatus fishingStatus)
+    {
+        this.fishingStatus = fishingStatus;
     }
     #endregion
 }

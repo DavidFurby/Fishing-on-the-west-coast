@@ -3,6 +3,8 @@ using UnityEngine;
 public class FishMovement : MonoBehaviour
 {
     [SerializeField] private float swimSpeed;
+    [SerializeField] public float size;
+    [SerializeField] private string[] info;
     public Vector3 direction;
     private Rigidbody rb;
     private GameObject currentBait;
@@ -47,7 +49,7 @@ public class FishMovement : MonoBehaviour
     // Coroutine to add force to fish's rigidbody
     void Swim()
     {
-        rb.AddForce(swimSpeed * Time.fixedDeltaTime * direction, ForceMode.Impulse);
+        rb.AddForce((swimSpeed) * Time.fixedDeltaTime * direction, ForceMode.Impulse);
         rb.velocity = Vector3.zero;
     }
 
@@ -70,7 +72,11 @@ public class FishMovement : MonoBehaviour
     {
         if (state == FishState.Hooked)
         {
-            transform.position = Vector3.up;
+            transform.position = new Vector3(0, 0, 0);
         }
+    }
+    public void RemoveFish()
+    {
+        Destroy(gameObject);
     }
 }

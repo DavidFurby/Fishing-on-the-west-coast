@@ -8,14 +8,12 @@ public class Bait : MonoBehaviour
     private const float FloatHeight = 2f;
     private const float BounceDamp = 0.5f;
     private float forceFactor = 1f;
-    private const float ReelInSpeed = 15f;
     private Vector3 targetPosition;
     [SerializeField] private GameObject fishingRodTop;
     [SerializeField] private FishingControlls fishingControlls;
     private Rigidbody rigidBody;
     [SerializeField] private CatchArea catchArea;
     [SerializeField] private AudioSource splashSound;
-    [SerializeField] private AudioSource reelSound;
 
 
     private void Start()
@@ -48,23 +46,24 @@ public class Bait : MonoBehaviour
     }
     public void ReelIn()
     {
-        Debug.Log(fishingControlls.fishingStatus);
         if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 AttachBait();
+                if (catchArea.fish != null)
+                {
+                    fishingControlls.HandleCatch();
+                }
             }
             else
             {
-                Debug.Log("reeling");
                 Vector3 direction = (targetPosition - transform.position).normalized;
-                float reelInSpeed = ReelInSpeed;
+                float reelInSpeed = 15f;
                 if (catchArea.fish != null)
                 {
-                    GameObject fish = catchArea.fish.GetComponent<GameObject>();
-                    if (fish != null)
+                    if (catchArea.fish.TryGetComponent<GameObject>(out var fish))
                     {
                         reelInSpeed /= fish.GetComponent<Rigidbody>().mass;
                     }
@@ -85,13 +84,11 @@ public class Bait : MonoBehaviour
 
     private void AttachBait()
     {
-        reelSound.Stop();
         rigidBody.isKinematic = true;
         transform.position = targetPosition;
-        fishingControlls.fishingStatus = FishingControlls.FishingStatus.StandBy;
+        fishingControlls.SetFishingStatus(FishingControlls.FishingStatus.StandBy);
         fishingControlls.castingPower = 0f;
         forceFactor = 1f;
-        catchArea.CollectFish();
     }
     private void Float()
     {

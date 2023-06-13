@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class Game : MonoBehaviour
 {
     private int day;
-    private int fishes;
+    private int catchCount;
     private string scene;
+    private string[] catches;
 
     public int Days
     {
@@ -15,8 +15,14 @@ public class Game : MonoBehaviour
 
     public int Fishes
     {
-        get { return fishes; }
-        set { fishes = value; }
+        get { return catchCount; }
+        set { catchCount = value; }
+    }
+    public string[] Catches
+    {
+        get { return catches; }
+        set { catches = value; }
+
     }
 
     public string Scene
@@ -34,8 +40,9 @@ public class Game : MonoBehaviour
         GameData gameData = SaveSystem.LoadGame();
 
         day = gameData.daysCount;
-        fishes = gameData.fishes;
+        catchCount = gameData.catchCount;
         scene = gameData.scene;
+        catches = gameData.foundCatches;
     }
     public void NewGame()
     {
@@ -43,8 +50,9 @@ public class Game : MonoBehaviour
         if (removed)
         {
             day = 1;
-            fishes = 0;
+            catchCount = 0;
             scene = "Home";
+            catches = new string[0];
         }
 
     }
