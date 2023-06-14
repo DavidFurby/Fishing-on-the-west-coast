@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.VisualScripting;
 
 [System.Serializable]
@@ -6,7 +7,7 @@ public class GameData
 
     public int daysCount = 0;
     public int catchCount = 0;
-    public string[] foundCatches = new string[0];
+    public FishData[] foundCatches = new FishData[0];
     public string scene;
 
 
@@ -15,6 +16,6 @@ public class GameData
         daysCount = game.Days;
         catchCount = game.Fishes;
         scene = game.Scene.ToString();
-        foundCatches = game.Catches;
+        foundCatches = game.Catches.Select(fish => new FishData(fish)).ToArray();
     }
 }

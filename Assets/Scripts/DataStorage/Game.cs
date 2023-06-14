@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -5,7 +6,7 @@ public class Game : MonoBehaviour
     private int day;
     private int catchCount;
     private string scene;
-    private string[] catches;
+    private Fish[] catches = new Fish[0];
 
     public int Days
     {
@@ -18,7 +19,7 @@ public class Game : MonoBehaviour
         get { return catchCount; }
         set { catchCount = value; }
     }
-    public string[] Catches
+    public Fish[] Catches
     {
         get { return catches; }
         set { catches = value; }
@@ -42,7 +43,7 @@ public class Game : MonoBehaviour
         day = gameData.daysCount;
         catchCount = gameData.catchCount;
         scene = gameData.scene;
-        catches = gameData.foundCatches;
+        catches = gameData.foundCatches.Select(fishData => new Fish(fishData)).ToArray();
     }
     public void NewGame()
     {
@@ -52,7 +53,7 @@ public class Game : MonoBehaviour
             day = 1;
             catchCount = 0;
             scene = "Home";
-            catches = new string[0];
+            catches = new Fish[0];
         }
 
     }

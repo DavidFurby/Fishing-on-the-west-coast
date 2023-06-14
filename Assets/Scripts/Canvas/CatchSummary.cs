@@ -1,4 +1,6 @@
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CatchSummary : MonoBehaviour
@@ -25,11 +27,18 @@ public class CatchSummary : MonoBehaviour
 
     public void PresentSummary(GameObject fish)
     {
-        if (fish.GetComponent<FishMovement>())
+        if (fish.GetComponent<Fish>())
         {
+            Fish fishData = fish.GetComponent<Fish>();
+
             SetSummaryActive();
-            catchName.text = fish.name;
-            Size.text += fish.GetComponent<FishMovement>().size.ToString();
+            catchName.text = fish.GetComponent<Fish>().FishName;
+            Size.text += fish.GetComponent<Fish>().Size;
+            if (!MainManager.Instance.game.Catches.Contains(fishData))
+            {
+                MainManager.Instance.game.Catches.SetValue(fishData, MainManager.Instance.game.Catches.Count() - 1);
+            }
+
             isNew.gameObject.SetActive(true);
 
         }

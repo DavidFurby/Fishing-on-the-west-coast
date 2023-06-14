@@ -3,8 +3,6 @@ using UnityEngine;
 public class FishMovement : MonoBehaviour
 {
     [SerializeField] private float swimSpeed;
-    [SerializeField] public float size;
-    [SerializeField] private string[] info;
     public Vector3 direction;
     private Rigidbody rb;
     private GameObject currentBait;

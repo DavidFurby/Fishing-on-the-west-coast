@@ -457,6 +457,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 255210402530367902, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 464174470}
     - target: {fileID: 487185834741993671, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
       propertyPath: m_IsActive
       value: 1
