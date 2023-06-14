@@ -11,7 +11,7 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private AudioSource castSound;
     [SerializeField] private BaitCamera baitCamera;
-    [SerializeField] private RythmGameController rythmGame;
+    [SerializeField] private CatchSummary catchSummary;
     private bool pauseControls = false;
     #endregion
 
@@ -44,6 +44,10 @@ public class FishingControlls : MonoBehaviour
             ReelInBait();
             StartFishing();
         }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EndCatch();
+        }
     }
     #endregion
 
@@ -60,7 +64,6 @@ public class FishingControlls : MonoBehaviour
                 baitCamera.CatchAlert();
                 StartCoroutine(StopTimeForOneSecond());
                 catchArea.CatchFish();
-                rythmGame.StartMusicGame();
             }
             SetFishingStatus(FishingStatus.Reeling);
 
@@ -113,8 +116,18 @@ public class FishingControlls : MonoBehaviour
 
     public void HandleCatch()
     {
-        rythmGame.EndMusicGame();
-        catchArea.PresentCatch();
+        if (catchArea.fish != null)
+        {
+            SetControlsActive();
+            catchSummary.PresentSummary(catchArea.fish);
+
+        }
+    }
+    public void EndCatch()
+    {
+        catchSummary.SetSummaryActive(false);
+        SetControlsActive();
+        catchArea.RemoveCatch();
     }
 
     /// <summary>

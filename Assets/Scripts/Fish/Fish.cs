@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -29,5 +30,10 @@ public class Fish : MonoBehaviour
         fishName = fishData.fishName;
         size = fishData.size;
         info = fishData.info;
+    }
+
+    public void AddFishToInstance()
+    {
+        MainManager.Instance.game.Catches = MainManager.Instance.game.Catches.Append(this).ToArray();
     }
 }

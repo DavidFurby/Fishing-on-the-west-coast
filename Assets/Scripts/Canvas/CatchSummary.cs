@@ -1,54 +1,50 @@
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CatchSummary : MonoBehaviour
 {
     [SerializeField] private GameObject catchSummary;
     [SerializeField] private TextMeshProUGUI catchName;
-    [SerializeField] private TextMeshProUGUI Size;
+    [SerializeField] private TextMeshProUGUI sizeText;
     [SerializeField] private TextMeshProUGUI isNew;
-    [SerializeField] private FishingControlls fishingControlls;
+    [SerializeField] private TextMeshProUGUI newRecord;
 
     private void Start()
     {
-        catchSummary.SetActive(false);
-
+        SetSummaryActive(false);
     }
-    private void Update()
-    {
-        if (catchSummary.activeSelf && Input.GetKeyDown(KeyCode.Space))
-        {
-            SetSummaryActive();
-        }
-    }
-
 
     public void PresentSummary(GameObject fish)
     {
-        if (fish.GetComponent<Fish>())
+        var fishData = fish.GetComponent<Fish>();
+        if (fishData != null)
         {
-            Fish fishData = fish.GetComponent<Fish>();
-
-            SetSummaryActive();
-            catchName.text = fish.GetComponent<Fish>().FishName;
-            Size.text += fish.GetComponent<Fish>().Size;
-            if (!MainManager.Instance.game.Catches.Contains(fishData))
+            SetSummaryActive(true);
+            catchName.text = fishData.FishName;
+            sizeText.text += fishData.Size;
+            if (MainManager.Instance.game.Catches.Any(f => f.Size < fishData.Size))
             {
-                MainManager.Instance.game.Catches.SetValue(fishData, MainManager.Instance.game.Catches.Count() - 1);
+                newRecord.gameObject.SetActive(true);
             }
-
-            isNew.gameObject.SetActive(true);
-
+            else
+            {
+                newRecord.gameObject.SetActive(false);
+            }
+            if (!MainManager.Instance.game.Catches.Any(f => f.FishName == fishData.name))
+            {
+                fishData.AddFishToInstance();
+                isNew.gameObject.SetActive(true);
+            }
+            else
+            {
+                isNew.gameObject.SetActive(false);
+            }
         }
-
     }
 
-    public void SetSummaryActive()
+    public void SetSummaryActive(bool active)
     {
-        catchSummary.SetActive(!catchSummary.activeSelf);
-        fishingControlls.SetControlsActive();
+        catchSummary.SetActive(active);
     }
-
 }

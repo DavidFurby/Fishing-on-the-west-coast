@@ -43,7 +43,7 @@ public class Game : MonoBehaviour
         day = gameData.daysCount;
         catchCount = gameData.catchCount;
         scene = gameData.scene;
-        catches = gameData.foundCatches.Select(fishData => new Fish(fishData)).ToArray();
+        catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Fish>()).ToArray();
     }
     public void NewGame()
     {

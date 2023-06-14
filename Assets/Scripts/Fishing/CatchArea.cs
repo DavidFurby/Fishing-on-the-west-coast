@@ -33,12 +33,10 @@ public class CatchArea : MonoBehaviour
             fishMovement.state = FishMovement.FishState.Hooked;
         }
     }
-
-    public void PresentCatch()
+    public void RemoveCatch()
     {
-        if (fish != null)
-        {
-            catchSummary.PresentSummary(fish);
-        }
+        Destroy(fish);
+        fishMovement = null;
+        isInCatchArea = false;
     }
 }
