@@ -11,7 +11,6 @@ public class MainMenu : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Main Menu")
         {
-            Debug.Log("test");
             mainMenu.SetActive(true);
         }
         if (MainManager.Instance.game.Scene == "")
