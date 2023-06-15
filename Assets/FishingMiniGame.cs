@@ -5,9 +5,8 @@ public class FishingMiniGame : MonoBehaviour
 {
     [SerializeField] private GameObject fishingMiniGame;
     [SerializeField] private Scrollbar balance;
-    [SerializeField] private CatchArea catchArea;
     [SerializeField] private FishingControlls fishingControlls;
-    private float fishSize = 0f;
+    private Fish fish;
 
     // Start is called before the first frame update
     void Start()
@@ -18,22 +17,24 @@ public class FishingMiniGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling && catchArea.fish != null)
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
         {
-            if (fishSize == 0f)
-            {
-                fishSize = catchArea.fish.GetComponent<Fish>().Size;
-                Debug.Log(fishSize);
-            }
             CalculateBalance();
             BalanceLost();
 
             BalanceControls();
 
-            float colorValue = Mathf.Abs(balance.value - 0.5f) * 2;
-            balance.GetComponent<Image>().color = Color.Lerp(Color.blue, Color.red, colorValue);
+            HandleBalanceColor();
         }
     }
+
+    //Change the color of the scrollbar based on its value
+    private void HandleBalanceColor()
+    {
+        float colorValue = Mathf.Abs(balance.value - 0.5f) * 2;
+        balance.GetComponent<Image>().color = Color.Lerp(Color.blue, Color.red, colorValue);
+    }
+
     //Control balance by pressing the keys
     private void BalanceControls()
     {
@@ -58,28 +59,30 @@ public class FishingMiniGame : MonoBehaviour
     //Change balance value based on fishSize
     private void CalculateBalance()
     {
-        if (catchArea.fish != null)
+        if (fish != null)
         {
             if (Random.value < 0.5)
             {
-                balance.value -= Random.Range(0, fishSize / 1000);
+                balance.value -= Random.Range(0, fish.Size / 1000);
             }
             else
             {
-                balance.value += Random.Range(0, fishSize / 1000);
+                balance.value += Random.Range(0, fish.Size / 1000);
             }
             balance.value = Mathf.Clamp(balance.value, 0f, 1f);
         }
     }
 
-    public void SetFishingMiniGame()
+    public void StartFishingMiniGame(Fish fish)
     {
-        fishingMiniGame.SetActive(!fishingMiniGame.activeSelf);
+        fishingMiniGame.SetActive(true);
+        this.fish = fish;
     }
 
-    public void ResetValues()
+    public void EndFishingMiniGame()
     {
         balance.value = 0.5f;
-        fishSize = 0f;
+        fish = null;
+        fishingMiniGame.SetActive(false);
     }
 }

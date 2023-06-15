@@ -15,31 +15,27 @@ public class CatchSummary : MonoBehaviour
         SetSummaryActive(false);
     }
 
-    public void PresentSummary(GameObject fish)
+    public void PresentSummary(Fish fishData)
     {
-        var fishData = fish.GetComponent<Fish>();
-        if (fishData != null)
+        SetSummaryActive(true);
+        catchName.text = fishData.FishName;
+        sizeText.text += fishData.Size;
+        if (MainManager.Instance.game.Catches.Any(f => f.Size < fishData.Size))
         {
-            SetSummaryActive(true);
-            catchName.text = fishData.FishName;
-            sizeText.text += fishData.Size;
-            if (MainManager.Instance.game.Catches.Any(f => f.Size < fishData.Size))
-            {
-                newRecord.gameObject.SetActive(true);
-            }
-            else
-            {
-                newRecord.gameObject.SetActive(false);
-            }
-            if (!MainManager.Instance.game.Catches.Any(f => f.FishName == fishData.name))
-            {
-                fishData.AddFishToInstance();
-                isNew.gameObject.SetActive(true);
-            }
-            else
-            {
-                isNew.gameObject.SetActive(false);
-            }
+            newRecord.gameObject.SetActive(true);
+        }
+        else
+        {
+            newRecord.gameObject.SetActive(false);
+        }
+        if (!MainManager.Instance.game.Catches.Any(f => f.FishName == fishData.name))
+        {
+            fishData.AddFishToInstance();
+            isNew.gameObject.SetActive(true);
+        }
+        else
+        {
+            isNew.gameObject.SetActive(false);
         }
     }
 

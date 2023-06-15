@@ -63,10 +63,11 @@ public class FishingControlls : MonoBehaviour
         {
             if (catchArea.isInCatchArea)
             {
+                var fishData = catchArea.fish.GetComponent<Fish>();
                 baitCamera.CatchAlert();
                 StartCoroutine(StopTimeForOneSecond());
                 catchArea.CatchFish();
-                fishingMiniGame.SetFishingMiniGame();
+                fishingMiniGame.StartFishingMiniGame(fishData);
                 musicController.PlayMusicGameMusic();
             }
             SetFishingStatus(FishingStatus.Reeling);
@@ -96,6 +97,7 @@ public class FishingControlls : MonoBehaviour
             {
                 animator.Play("Reverse Swing");
                 castSound.Play();
+                RemoveAllFishes();
                 StartCoroutine(WaitForSwingAnimation());
             }
         }
@@ -123,9 +125,10 @@ public class FishingControlls : MonoBehaviour
     {
         if (catchArea.fish != null)
         {
+            var fishData = catchArea.fish.GetComponent<Fish>();
             SetControlsActive();
-            catchSummary.PresentSummary(catchArea.fish);
-            fishingMiniGame.SetFishingMiniGame();
+            catchSummary.PresentSummary(fishData);
+            fishingMiniGame.EndFishingMiniGame();
             musicController.StopMusicGameMusic();
         }
     }
@@ -135,16 +138,14 @@ public class FishingControlls : MonoBehaviour
         catchSummary.SetSummaryActive(false);
         SetControlsActive();
         catchArea.RemoveCatch();
-        fishingMiniGame.SetFishingMiniGame();
-        fishingMiniGame.ResetValues();
+        fishingMiniGame.EndFishingMiniGame();
     }
 
     //Drop the fish if you fail the minigame
     public void LoseCatch()
     {
         musicController.StopMusicGameMusic();
-        fishingMiniGame.SetFishingMiniGame();
-        fishingMiniGame.ResetValues();
+        fishingMiniGame.EndFishingMiniGame();
         catchArea.RemoveCatch();
     }
 
@@ -166,6 +167,16 @@ public class FishingControlls : MonoBehaviour
     public void SetFishingStatus(FishingStatus fishingStatus)
     {
         this.fishingStatus = fishingStatus;
+    }
+
+    //Remove all fishes
+    public void RemoveAllFishes()
+    {
+        GameObject[] fishes = GameObject.FindGameObjectsWithTag("Fish");
+        foreach (GameObject fish in fishes)
+        {
+            Destroy(fish);
+        }
     }
     #endregion
 }

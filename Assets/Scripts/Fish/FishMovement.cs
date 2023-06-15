@@ -77,4 +77,12 @@ public class FishMovement : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    public void RemoveAllFishes()
+    {
+        GameObject[] fishes = GameObject.FindGameObjectsWithTag("fish");
+        foreach (GameObject fish in fishes)
+        {
+            Destroy(fish);
+        }
+    }
 }
