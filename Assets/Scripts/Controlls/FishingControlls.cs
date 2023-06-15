@@ -97,7 +97,6 @@ public class FishingControlls : MonoBehaviour
             {
                 animator.Play("Reverse Swing");
                 castSound.Play();
-                RemoveAllFishes();
                 StartCoroutine(WaitForSwingAnimation());
             }
         }
@@ -169,14 +168,5 @@ public class FishingControlls : MonoBehaviour
         this.fishingStatus = fishingStatus;
     }
 
-    //Remove all fishes
-    public void RemoveAllFishes()
-    {
-        GameObject[] fishes = GameObject.FindGameObjectsWithTag("Fish");
-        foreach (GameObject fish in fishes)
-        {
-            Destroy(fish);
-        }
-    }
     #endregion
 }

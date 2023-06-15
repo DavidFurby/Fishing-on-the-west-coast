@@ -20,17 +20,27 @@ public class FishSpawner : MonoBehaviour
         renderer = GetComponent<Renderer>();
         InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
     }
+    private void Update()
+    {
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.StandBy)
+        {
+            RemoveAllFishes();
+        }
+    }
 
     private void SpawnFish()
     {
-        //Choose random fish from the array
-        int randomFishIndex = Random.Range(0, Fishes.Length);
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Fishing)
+        {
+            //Choose random fish from the array
+            int randomFishIndex = Random.Range(0, Fishes.Length);
 
-        CalculateSpawnPosition();
+            CalculateSpawnPosition();
 
-        //Instatiate the fish 
-        GameObject fish = Instantiate(Fishes[randomFishIndex], spawnPosition, spawnRotation);
-        SetDirection(fish);
+            //Instatiate the fish 
+            GameObject fish = Instantiate(Fishes[randomFishIndex], spawnPosition, spawnRotation);
+            SetDirection(fish);
+        }
     }
 
     //Get the fishmovement component and set the direction based on horizontal positon
@@ -68,6 +78,18 @@ public class FishSpawner : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
+    }
+    public void RemoveAllFishes()
+    {
+        GameObject[] fishes = GameObject.FindGameObjectsWithTag("Fish");
+        if (fishes.Length != 0)
+        {
+            foreach (GameObject fish in fishes)
+            {
+                Destroy(fish);
+            }
+        }
+
     }
 }
 
