@@ -12,6 +12,8 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private AudioSource castSound;
     [SerializeField] private BaitCamera baitCamera;
     [SerializeField] private CatchSummary catchSummary;
+    [SerializeField] private FishingMiniGame fishingMiniGame;
+    [SerializeField] private MusicController musicController;
     private bool pauseControls = false;
     #endregion
 
@@ -64,6 +66,8 @@ public class FishingControlls : MonoBehaviour
                 baitCamera.CatchAlert();
                 StartCoroutine(StopTimeForOneSecond());
                 catchArea.CatchFish();
+                fishingMiniGame.SetFishingMiniGame();
+                musicController.PlayMusicGameMusic();
             }
             SetFishingStatus(FishingStatus.Reeling);
 
@@ -114,20 +118,33 @@ public class FishingControlls : MonoBehaviour
         SetFishingStatus(FishingStatus.Casting);
     }
 
+    //Trigger methods when fish has been caught
     public void HandleCatch()
     {
         if (catchArea.fish != null)
         {
             SetControlsActive();
             catchSummary.PresentSummary(catchArea.fish);
-
+            fishingMiniGame.SetFishingMiniGame();
+            musicController.StopMusicGameMusic();
         }
     }
+    //Triggre functions to continue fishing after a fish has been collected
     public void EndCatch()
     {
         catchSummary.SetSummaryActive(false);
         SetControlsActive();
         catchArea.RemoveCatch();
+        fishingMiniGame.SetFishingMiniGame();
+        fishingMiniGame.ResetValues();
+    }
+
+    //Drop the fish if you fail the minigame
+    public void LoseCatch()
+    {
+        musicController.StopMusicGameMusic();
+        fishingMiniGame.SetFishingMiniGame();
+        fishingMiniGame.ResetValues();
     }
 
     /// <summary>

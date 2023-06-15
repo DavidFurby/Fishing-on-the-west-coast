@@ -668,9 +668,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swimSpeed: 20
-  size: 2
-  info:
-  - Is actually a fish
   direction: {x: 0, y: 0, z: 0}
   state: 0
 --- !u!54 &-3783395524345797868
@@ -715,5 +712,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishName: TempFish
-  size: 0
+  size: 2
   info: Is a real fish

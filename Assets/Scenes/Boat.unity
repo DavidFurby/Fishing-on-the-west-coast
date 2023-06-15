@@ -196,7 +196,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27514
+  m_Name: pb_Mesh64426
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -477,6 +477,18 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2235943076996967252, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235943076996967252, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235943076996967252, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2438584221321699925, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -492,11 +504,31 @@ PrefabInstance:
     - target: {fileID: 3808113991231109756, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
       propertyPath: rythmGame
       value: 
-      objectReference: {fileID: 874715294}
+      objectReference: {fileID: 0}
     - target: {fileID: 3808113991231109756, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
       propertyPath: musicController
       value: 
       objectReference: {fileID: 2115485625}
+    - target: {fileID: 4036017122649640654, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: catchArea
+      value: 
+      objectReference: {fileID: 822062796}
+    - target: {fileID: 4036017122649640654, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 464174470}
+    - target: {fileID: 4167083202974090846, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167083202974090846, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167083202974090846, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5292069722252990526, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
       propertyPath: m_TagString
       value: Untagged
@@ -509,9 +541,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 257
       objectReference: {fileID: 0}
+    - target: {fileID: 6894744398542342783, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_Value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6972047039625012577, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061458277442697537, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061458277442697537, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7061458277442697537, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7648369406212168015, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
       propertyPath: m_Size.z
@@ -713,8 +761,9 @@ MonoBehaviour:
   animator: {fileID: 1745764223}
   castSound: {fileID: 1745764232}
   baitCamera: {fileID: 1465610765}
-  rythmGame: {fileID: 1133323911}
   catchSummary: {fileID: 1133323921}
+  fishingMiniGame: {fileID: 1133323931}
+  musicController: {fileID: 1454551179}
   castingPower: 0
   fishingStatus: 0
 --- !u!1 &503535253 stripped
@@ -858,7 +907,7 @@ PrefabInstance:
     - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: rythmGame
       value: 
-      objectReference: {fileID: 1133323911}
+      objectReference: {fileID: 0}
     - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: catchSummary
       value: 
@@ -1155,11 +1204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8165d89629e9d49aded1f97f854248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &874715294 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 176276651168316432, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
-  m_PrefabInstance: {fileID: 160242668}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &892063325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1484,17 +1528,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishText: {fileID: 201021327}
---- !u!114 &1133323911 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3808113991231109756, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
-  m_PrefabInstance: {fileID: 160242668}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133323900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b06a02ed391ef4fb7d7aff67fc66c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1133323921 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 255210402530367902, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
@@ -1504,6 +1537,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6ab26a0ea4114c45bb86c5a5715308f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1133323931 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4036017122649640654, guid: 7b751c63437aeef41a365953fde9d79a, type: 3}
+  m_PrefabInstance: {fileID: 160242668}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133323900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c6b7fe427a2d641be07b3a90878018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1182136880 stripped
@@ -1940,7 +1984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4697b22905274042b5639c0175cd289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theMusic: {fileID: 0}
+  theMusic: {fileID: 1454551177}
 --- !u!1 &1465610751 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7259948634341948591, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
