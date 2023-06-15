@@ -712,5 +712,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishName: TempFish
-  size: 2
+  size: 10
   info: Is a real fish

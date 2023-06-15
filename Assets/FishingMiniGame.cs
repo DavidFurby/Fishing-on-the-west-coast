@@ -18,9 +18,9 @@ public class FishingMiniGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling && catchArea.fish != null)
         {
-            if (catchArea.fish != null && fishSize == 0f)
+            if (fishSize == 0f)
             {
                 fishSize = catchArea.fish.GetComponent<Fish>().Size;
                 Debug.Log(fishSize);
@@ -62,7 +62,6 @@ public class FishingMiniGame : MonoBehaviour
         {
             if (Random.value < 0.5)
             {
-                Debug.Log(Random.Range(0, fishSize));
                 balance.value -= Random.Range(0, fishSize / 1000);
             }
             else

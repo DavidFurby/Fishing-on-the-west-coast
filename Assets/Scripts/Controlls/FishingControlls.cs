@@ -145,6 +145,7 @@ public class FishingControlls : MonoBehaviour
         musicController.StopMusicGameMusic();
         fishingMiniGame.SetFishingMiniGame();
         fishingMiniGame.ResetValues();
+        catchArea.RemoveCatch();
     }
 
     /// <summary>
