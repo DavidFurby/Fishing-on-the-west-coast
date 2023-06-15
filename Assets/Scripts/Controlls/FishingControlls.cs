@@ -14,6 +14,7 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private CatchSummary catchSummary;
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private MusicController musicController;
+    [SerializeField] private FishingCanvas fishCanvas;
     private bool pauseControls = false;
     #endregion
 
@@ -129,6 +130,7 @@ public class FishingControlls : MonoBehaviour
             catchSummary.PresentSummary(fishData);
             fishingMiniGame.EndFishingMiniGame();
             musicController.StopMusicGameMusic();
+            fishCanvas.AddFishToCount();
         }
     }
     //Triggre functions to continue fishing after a fish has been collected

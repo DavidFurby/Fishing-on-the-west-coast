@@ -21,5 +21,8 @@ public class FishingCanvas : MonoBehaviour
         fishText.text = "Total Fishes:" + MainManager.Instance.game.Fishes;
     }
 
-
+    public void AddFishToCount()
+    {
+        MainManager.Instance.game.Fishes++;
+    }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bait : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Bait : MonoBehaviour
     [SerializeField] private GameObject fishingRodTop;
     [SerializeField] private FishingControlls fishingControlls;
     private Rigidbody rigidBody;
+    [SerializeField] private Scrollbar balance;
     [SerializeField] private CatchArea catchArea;
     [SerializeField] private AudioSource splashSound;
 
@@ -49,30 +51,51 @@ public class Bait : MonoBehaviour
         if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            if (IsCloseToTarget(targetPosition))
             {
                 AttachBait();
-                if (catchArea.fish != null)
-                {
-                    fishingControlls.HandleCatch();
-                }
+                HandleCatch();
             }
             else
             {
-                Vector3 direction = (targetPosition - transform.position).normalized;
-                float reelInSpeed = 15f;
-                if (catchArea.fish != null)
-                {
-                    if (catchArea.fish.TryGetComponent<GameObject>(out var fish))
-                    {
-                        reelInSpeed /= fish.GetComponent<Rigidbody>().mass;
-                    }
-                }
-                transform.Translate(reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+                MoveTowardsTarget(targetPosition);
             }
         }
     }
 
+    private bool IsCloseToTarget(Vector3 targetPosition)
+    {
+        return Vector3.Distance(transform.position, targetPosition) < 0.1f;
+    }
+
+    private void HandleCatch()
+    {
+        if (catchArea.fish != null)
+        {
+            fishingControlls.HandleCatch();
+        }
+    }
+
+    private void MoveTowardsTarget(Vector3 targetPosition)
+    {
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        float reelInSpeed = CalculateReelInSpeed();
+        transform.Translate(reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+    }
+
+    private float CalculateReelInSpeed()
+    {
+        float reelInSpeed = 15f;
+        if (catchArea.fish != null)
+        {
+            if (catchArea.fish.TryGetComponent<GameObject>(out var fish))
+            {
+                reelInSpeed /= fish.GetComponent<Fish>().Size;
+                transform.position = balance.value * Time.deltaTime * (balance.value >= 0.5 ? Vector3.up : Vector3.down);
+            }
+        }
+        return reelInSpeed;
+    }
     private void Shake()
     {
         if (catchArea.isInCatchArea)
