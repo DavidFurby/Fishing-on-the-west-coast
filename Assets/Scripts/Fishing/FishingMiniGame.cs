@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,10 @@ public class FishingMiniGame : MonoBehaviour
     [SerializeField] private Scrollbar balance;
     [SerializeField] private FishingControlls fishingControlls;
     private Fish fish;
+    private const float DEFAULT_FORCE = 0.0005f;
+    private float downwardForce = DEFAULT_FORCE;
+    private float upwardForce = DEFAULT_FORCE;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +31,47 @@ public class FishingMiniGame : MonoBehaviour
         }
     }
 
+    #region Balance
+
+    //Change balance value based on fishSize
+    private void CalculateBalance()
+    {
+        if (fish != null)
+        {
+            float targetValue;
+            if (Random.value < 0.5)
+            {
+                targetValue = balance.value -= Random.Range(0, fish.Size * downwardForce);
+            }
+            else
+            {
+                targetValue = balance.value += Random.Range(0, fish.Size * upwardForce);
+            }
+            targetValue = Mathf.Clamp(targetValue, 0f, 1f);
+            balance.value = Mathf.Lerp(balance.value, targetValue, Time.deltaTime * 1000f);
+        }
+    }
+    //Add weight towards the balance is moving towards
+    private void AddForce()
+    {
+        if (balance.value >= 0.5)
+        {
+            upwardForce = 0.0005f;
+        }
+        else
+        {
+            downwardForce = 0.0005f;
+        }
+        StartCoroutine(ResetForce());
+    }
+    //Reset the added force after 
+    IEnumerator ResetForce()
+    {
+        yield return new WaitForSeconds(1);
+        downwardForce = DEFAULT_FORCE;
+        upwardForce = DEFAULT_FORCE;
+    }
+
     //Change the color of the scrollbar based on its value
     private void HandleBalanceColor()
     {
@@ -38,11 +84,11 @@ public class FishingMiniGame : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            balance.value -= 0.05f;
+            balance.value -= 0.0005f;
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
-            balance.value += 0.05f;
+            balance.value += 0.0005f;
         }
     }
 
@@ -54,27 +100,14 @@ public class FishingMiniGame : MonoBehaviour
             fishingControlls.LoseCatch();
         }
     }
-    //Change balance value based on fishSize
-    private void CalculateBalance()
-    {
-        if (fish != null)
-        {
-            if (Random.value < 0.5)
-            {
-                balance.value -= Random.Range(0, fish.Size / 1000);
-            }
-            else
-            {
-                balance.value += Random.Range(0, fish.Size / 1000);
-            }
-            balance.value = Mathf.Clamp(balance.value, 0f, 1f);
-        }
-    }
+
+    #endregion
 
     public void StartFishingMiniGame(Fish fish)
     {
         fishingMiniGame.SetActive(true);
         this.fish = fish;
+        InvokeRepeating(nameof(AddForce), 2, 2);
     }
 
     public void EndFishingMiniGame()
