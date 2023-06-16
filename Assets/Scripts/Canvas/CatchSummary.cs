@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -20,18 +21,34 @@ public class CatchSummary : MonoBehaviour
         SetSummaryActive(true);
         catchName.text = fishData.FishName;
         sizeText.text += fishData.Size;
-        if (MainManager.Instance.game.Catches.Any(f => f.Size < fishData.Size))
+
+        CheckSizeDifference(fishData);
+
+        CheckIfNew(fishData);
+    }
+
+
+
+    //Check if fish is larger than the saved fish of the same name
+    private void CheckSizeDifference(Fish fishData)
+    {
+        Fish fish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
+        if (fish != null)
         {
-            newRecord.gameObject.SetActive(true);
+            int index = Array.IndexOf(MainManager.Instance.game.Catches, fish);
+            fishData.ReplaceFishInInstance(index);
         }
         else
         {
             newRecord.gameObject.SetActive(false);
         }
-        if (!MainManager.Instance.game.Catches.Any(f => f.FishName == fishData.name))
+    }
+    //Check if fish hasnt been caught before
+    private void CheckIfNew(Fish fishData)
+    {
+        if (!MainManager.Instance.game.Catches.Any(f => f.Id == fishData.Id))
         {
             fishData.AddFishToInstance();
-            isNew.gameObject.SetActive(true);
         }
         else
         {

@@ -17,13 +17,11 @@ public class FishingMiniGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.ReelingFish)
         {
             CalculateBalance();
             BalanceLost();
-
             BalanceControls();
-
             HandleBalanceColor();
         }
     }

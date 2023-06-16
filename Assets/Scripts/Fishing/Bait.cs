@@ -48,7 +48,7 @@ public class Bait : MonoBehaviour
     }
     public void ReelIn()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling)
+        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling || fishingControlls.fishingStatus == FishingControlls.FishingStatus.ReelingFish)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
             if (IsCloseToTarget(targetPosition))

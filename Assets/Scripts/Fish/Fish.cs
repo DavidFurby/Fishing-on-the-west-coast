@@ -5,10 +5,16 @@ using UnityEngine;
 [Serializable]
 public class Fish : MonoBehaviour
 {
+    [SerializeField] private int id;
     [SerializeField] private string fishName;
     [SerializeField] private float size;
     [SerializeField] private string info;
 
+    public int Id
+    {
+        get { return id; }
+        set { id = value; }
+    }
     public string FishName
     {
         get { return fishName; }
@@ -35,5 +41,9 @@ public class Fish : MonoBehaviour
     public void AddFishToInstance()
     {
         MainManager.Instance.game.Catches = MainManager.Instance.game.Catches.Append(this).ToArray();
+    }
+    public void ReplaceFishInInstance(int index)
+    {
+        MainManager.Instance.game.Catches[index] = this;
     }
 }

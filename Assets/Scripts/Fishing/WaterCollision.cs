@@ -15,10 +15,9 @@ public class WaterCollision : MonoBehaviour
             {
                 splashSound.Play();
             }
-            if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.Reeling)
+            if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.Reeling && fishingControlls.fishingStatus != FishingControlls.FishingStatus.ReelingFish)
             {
-                fishingControlls.fishingStatus = FishingControlls.FishingStatus.Fishing;
-
+                fishingControlls.SetFishingStatus(FishingControlls.FishingStatus.Fishing);
             }
             bait.inWater = true;
         }

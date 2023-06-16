@@ -30,6 +30,7 @@ public class FishingControlls : MonoBehaviour
         Casting,
         Fishing,
         Reeling,
+        ReelingFish,
     }
     #endregion
 
@@ -70,8 +71,12 @@ public class FishingControlls : MonoBehaviour
                 catchArea.CatchFish();
                 fishingMiniGame.StartFishingMiniGame(fishData);
                 musicController.PlayMusicGameMusic();
+                SetFishingStatus(FishingStatus.ReelingFish);
             }
-            SetFishingStatus(FishingStatus.Reeling);
+            else
+            {
+                SetFishingStatus(FishingStatus.Reeling);
+            }
 
         }
     }
