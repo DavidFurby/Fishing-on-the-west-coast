@@ -88,11 +88,10 @@ public class Bait : MonoBehaviour
         float reelInSpeed = 15f;
         if (catchArea.fish != null)
         {
-            if (catchArea.fish.TryGetComponent<GameObject>(out var fish))
-            {
-                reelInSpeed /= fish.GetComponent<Fish>().Size;
-                transform.position = balance.value * Time.deltaTime * (balance.value >= 0.5 ? Vector3.up : Vector3.down);
-            }
+            reelInSpeed /= catchArea.fish.GetComponent<Fish>().Size;
+            transform.position = new Vector3(transform.position.x, transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1), transform.position.z);
+            Debug.Log(transform.position);
+
         }
         return reelInSpeed;
     }
