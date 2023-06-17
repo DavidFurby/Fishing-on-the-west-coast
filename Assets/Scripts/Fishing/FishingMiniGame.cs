@@ -84,11 +84,11 @@ public class FishingMiniGame : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            balance.value -= 0.0005f;
+            balance.value -= 0.005f;
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
-            balance.value += 0.0005f;
+            balance.value += 0.005f;
         }
     }
 

@@ -88,13 +88,14 @@ public class Bait : MonoBehaviour
         float reelInSpeed = 15f;
         if (catchArea.fish != null)
         {
-            reelInSpeed /= catchArea.fish.GetComponent<Fish>().Size;
-            transform.position = new Vector3(transform.position.x, transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1), transform.position.z);
-            Debug.Log(transform.position);
-
+            reelInSpeed /= catchArea.fish.GetComponent<Fish>().Size / 10;
+            transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
         }
         return reelInSpeed;
     }
+
+
+
     private void Shake()
     {
         if (catchArea.isInCatchArea)
