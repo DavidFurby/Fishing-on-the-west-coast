@@ -41,14 +41,8 @@ public class Fish : MonoBehaviour
     }
     private void Start()
     {
-        SetSizeBasedOnAverage();
+        size = UnityEngine.Random.Range(size, size * 2);
     }
-
-    private void SetSizeBasedOnAverage()
-    {
-        size = Mathf.Round(UnityEngine.Random.Range(size / 2, size * 2)) / 100f;
-    }
-
     public void DestroyFish()
     {
         Destroy(gameObject);

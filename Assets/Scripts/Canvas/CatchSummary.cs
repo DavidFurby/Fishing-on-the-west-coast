@@ -27,8 +27,7 @@ public class CatchSummary : MonoBehaviour
     public void PresentSummary()
     {
         catchName.text = currentlyPresentedFish.FishName;
-        sizeText.text = sizeText.text + " " + currentlyPresentedFish.Size.ToString();
-
+        sizeText.text = currentlyPresentedFish.Size.ToString("f2");
         CheckSizeDifference(currentlyPresentedFish);
         CheckIfNew(currentlyPresentedFish);
         AddFishToCount();
