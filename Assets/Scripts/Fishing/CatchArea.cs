@@ -57,6 +57,6 @@ public class CatchArea : MonoBehaviour
         fishMovement = null;
         fish = null;
         isInCatchArea = false;
-        totalFishes = null;
+        totalFishes.Clear();
     }
 }

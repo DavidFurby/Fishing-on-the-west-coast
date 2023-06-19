@@ -11,14 +11,14 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sizeText;
     [SerializeField] private TextMeshProUGUI isNew;
     [SerializeField] private TextMeshProUGUI newRecord;
-    private List<Fish> fishes;
+    private List<Fish> caughtFishes;
     private Fish currentlyPresentedFish;
     private int fishIndex;
     [SerializeField] private FishingControlls fishingControlls;
 
     public void InititateCatchSummary(List<Fish> fishes)
     {
-        this.fishes = fishes;
+        caughtFishes = fishes;
         currentlyPresentedFish = fishes[0];
         SetSummaryActive();
         PresentSummary();
@@ -36,11 +36,10 @@ public class CatchSummary : MonoBehaviour
     //If there are more fishes switch summary. otherwise end the summary
     public void NextSummary()
     {
-        if (fishIndex < fishes.Count - 1)
+        if (fishIndex < caughtFishes.Count - 1)
         {
-            SetSummaryActive();
-            currentlyPresentedFish = fishes[fishIndex++];
-            SetSummaryActive();
+            fishIndex++;
+            currentlyPresentedFish = caughtFishes[fishIndex];
             PresentSummary();
         }
         else
@@ -55,14 +54,14 @@ public class CatchSummary : MonoBehaviour
 
 
 
-    //Check if fish is larger than the saved fish of the same name
+    // Check if fish is larger than the saved fish of the same name
     private void CheckSizeDifference(Fish fishData)
     {
-        Fish fish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
-        if (fish != null)
+        var existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
+        if (existingFish != null)
         {
             newRecord.gameObject.SetActive(true);
-            int index = Array.IndexOf(MainManager.Instance.game.Catches, fish);
+            int index = Array.IndexOf(MainManager.Instance.game.Catches, existingFish);
             fishData.ReplaceFishInInstance(index);
         }
         else
@@ -98,7 +97,7 @@ public class CatchSummary : MonoBehaviour
     //Reset values
     private void ResetValues()
     {
-        fishes.Clear();
+        caughtFishes.Clear();
         currentlyPresentedFish = null;
         fishIndex = 0;
     }
