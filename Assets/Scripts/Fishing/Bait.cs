@@ -16,6 +16,7 @@ public class Bait : MonoBehaviour
     [SerializeField] private Scrollbar balance;
     [SerializeField] private CatchArea catchArea;
     [SerializeField] private AudioSource splashSound;
+    private float reelInSpeed = 15f;
 
 
     private void Start()
@@ -85,7 +86,6 @@ public class Bait : MonoBehaviour
 
     private float CalculateReelInSpeed()
     {
-        float reelInSpeed = 15f;
         if (catchArea.fish != null)
         {
             reelInSpeed /= catchArea.fish.GetComponent<Fish>().Size / 10;
@@ -110,6 +110,11 @@ public class Bait : MonoBehaviour
         rigidBody.isKinematic = true;
         transform.position = targetPosition;
         fishingControlls.SetFishingStatus(FishingControlls.FishingStatus.StandBy);
+        ResetValues();
+    }
+
+    private void ResetValues()
+    {
         fishingControlls.castingPower = 0f;
         forceFactor = 1f;
     }

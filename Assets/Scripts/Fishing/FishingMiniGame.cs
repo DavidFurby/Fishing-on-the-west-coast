@@ -105,6 +105,7 @@ public class FishingMiniGame : MonoBehaviour
     {
         if (balance.value <= 0f || balance.value >= 1f)
         {
+            EndFishingMiniGame();
             fishingControlls.LoseCatch();
         }
     }
