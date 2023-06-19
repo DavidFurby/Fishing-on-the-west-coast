@@ -21,18 +21,6 @@ public class CatchArea : MonoBehaviour
             CatchFishWhileReeling(other);
         }
     }
-
-    //Automatically catch another fish if it collides while reeling another fish
-    private void CatchFishWhileReeling(Collider other)
-    {
-        GameObject newFish = other.gameObject;
-        FishMovement newFishMovement = newFish.GetComponent<FishMovement>();
-        newFishMovement.GetBaited(totalFishes[totalFishes.Count - 1].gameObject);
-        newFishMovement.SetFishState(FishMovement.FishState.Hooked);
-        totalFishes.Add(newFish.GetComponent<Fish>());
-        fishingControlls.CatchAlert();
-    }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Fish") && fish == other.gameObject)
@@ -42,6 +30,17 @@ public class CatchArea : MonoBehaviour
         }
     }
 
+    //Automatically catch another fish if it collides while reeling another fish
+    private void CatchFishWhileReeling(Collider other)
+    {
+        StartCoroutine(fishingControlls.CatchAlert());
+        GameObject newFish = other.gameObject;
+        FishMovement newFishMovement = newFish.GetComponent<FishMovement>();
+        newFishMovement.GetBaited(totalFishes[^1].gameObject);
+        newFishMovement.SetFishState(FishMovement.FishState.Hooked);
+        totalFishes.Add(newFish.GetComponent<Fish>());
+    }
+    //Catch fish while fishing
     public void CatchFish()
     {
         if (fish != null && fishMovement != null && fishMovement.state != FishMovement.FishState.Hooked)
@@ -50,11 +49,14 @@ public class CatchArea : MonoBehaviour
             totalFishes.Add(fish.GetComponent<Fish>());
         }
     }
+
+    //Reset the values if the catch is lost
     public void RemoveCatch()
     {
         fish.DestroyFish();
         fishMovement = null;
         fish = null;
         isInCatchArea = false;
+        totalFishes = null;
     }
 }

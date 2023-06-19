@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Linq;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class Fish : MonoBehaviour
     [SerializeField] private string fishName;
     [SerializeField] private float size;
     [SerializeField] private string info;
+
 
     public int Id
     {
@@ -37,6 +39,16 @@ public class Fish : MonoBehaviour
         size = fishData.size;
         info = fishData.info;
     }
+    private void Start()
+    {
+        SetSizeBasedOnAverage();
+    }
+
+    private void SetSizeBasedOnAverage()
+    {
+        size = Mathf.Round(UnityEngine.Random.Range(size / 2, size * 2)) / 100f;
+    }
+
     public void DestroyFish()
     {
         Destroy(gameObject);

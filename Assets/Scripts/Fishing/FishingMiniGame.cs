@@ -45,7 +45,6 @@ public class FishingMiniGame : MonoBehaviour
             {
                 weight += fishesOnHook[i].Size;
             }
-            Debug.Log(weight);
             float targetValue;
             if (Random.value < 0.5)
             {

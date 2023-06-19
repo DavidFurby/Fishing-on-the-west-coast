@@ -144,9 +144,14 @@ public class FishingControlls : MonoBehaviour
     //Drop the fish if you fail the minigame
     public void LoseCatch()
     {
-        musicController.StopFishingMiniGameMusic();
-        fishingMiniGame.EndFishingMiniGame();
-        catchArea.RemoveCatch();
+        if (fishingStatus == FishingStatus.ReelingFish)
+        {
+            musicController.StopFishingMiniGameMusic();
+            fishingMiniGame.EndFishingMiniGame();
+            catchArea.RemoveCatch();
+            SetFishingStatus(FishingStatus.Reeling);
+        }
+
     }
 
     /// <summary>

@@ -63,7 +63,7 @@ public class FishMovement : MonoBehaviour
         state = fishState;
     }
     //Set the position of the fish to the bait if hooked
-    public void FollowBait()
+    private void FollowBait()
     {
         if (state == FishState.Hooked && currentBait != null)
         {

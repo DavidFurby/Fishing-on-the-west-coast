@@ -27,7 +27,7 @@ public class CatchSummary : MonoBehaviour
     public void PresentSummary()
     {
         catchName.text = currentlyPresentedFish.FishName;
-        sizeText.text = currentlyPresentedFish.Size.ToString();
+        sizeText.text = sizeText.text + " " + currentlyPresentedFish.Size.ToString();
 
         CheckSizeDifference(currentlyPresentedFish);
         CheckIfNew(currentlyPresentedFish);
@@ -39,7 +39,9 @@ public class CatchSummary : MonoBehaviour
     {
         if (fishIndex < fishes.Count - 1)
         {
+            SetSummaryActive();
             currentlyPresentedFish = fishes[fishIndex++];
+            SetSummaryActive();
             PresentSummary();
         }
         else
@@ -60,6 +62,7 @@ public class CatchSummary : MonoBehaviour
         Fish fish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
         if (fish != null)
         {
+            newRecord.gameObject.SetActive(true);
             int index = Array.IndexOf(MainManager.Instance.game.Catches, fish);
             fishData.ReplaceFishInInstance(index);
         }
@@ -73,6 +76,7 @@ public class CatchSummary : MonoBehaviour
     {
         if (!MainManager.Instance.game.Catches.Any(f => f.Id == fishData.Id))
         {
+            isNew.gameObject.SetActive(true);
             fishData.AddFishToInstance();
         }
         else
