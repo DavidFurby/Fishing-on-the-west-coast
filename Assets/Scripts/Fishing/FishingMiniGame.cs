@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class FishingMiniGame : MonoBehaviour
     [SerializeField] private GameObject fishingMiniGame;
     [SerializeField] private Scrollbar balance;
     [SerializeField] private FishingControlls fishingControlls;
-    private Fish fish;
+    private List<Fish> fishesOnHook;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
@@ -36,17 +37,25 @@ public class FishingMiniGame : MonoBehaviour
     //Change balance value based on fishSize
     private void CalculateBalance()
     {
-        if (fish != null)
+        if (fishesOnHook.Count > 0)
         {
+            float weight = 0f;
+
+            for (int i = 0; i < fishesOnHook.Count; i++)
+            {
+                weight += fishesOnHook[i].Size;
+            }
+            Debug.Log(weight);
             float targetValue;
             if (Random.value < 0.5)
             {
-                targetValue = balance.value -= Random.Range(0, fish.Size * downwardForce);
+                targetValue = balance.value - Random.Range(0, weight * downwardForce);
             }
             else
             {
-                targetValue = balance.value += Random.Range(0, fish.Size * upwardForce);
+                targetValue = balance.value + Random.Range(0, weight * upwardForce);
             }
+
             targetValue = Mathf.Clamp(targetValue, 0f, 1f);
             balance.value = Mathf.Lerp(balance.value, targetValue, Time.deltaTime * 1000f);
         }
@@ -103,17 +112,17 @@ public class FishingMiniGame : MonoBehaviour
 
     #endregion
 
-    public void StartFishingMiniGame(Fish fish)
+    public void StartFishingMiniGame(List<Fish> fishes)
     {
         fishingMiniGame.SetActive(true);
-        this.fish = fish;
+        fishesOnHook = fishes;
         InvokeRepeating(nameof(AddForce), 2, 2);
     }
 
     public void EndFishingMiniGame()
     {
         balance.value = 0.5f;
-        fish = null;
+        fishesOnHook = null;
         fishingMiniGame.SetActive(false);
     }
 }

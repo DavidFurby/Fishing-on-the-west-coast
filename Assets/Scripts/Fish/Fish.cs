@@ -37,6 +37,10 @@ public class Fish : MonoBehaviour
         size = fishData.size;
         info = fishData.info;
     }
+    public void DestroyFish()
+    {
+        Destroy(gameObject);
+    }
 
     public void AddFishToInstance()
     {

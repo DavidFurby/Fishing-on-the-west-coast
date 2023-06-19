@@ -47,7 +47,7 @@ public class BaitCamera : MonoBehaviour
 
         }
     }
-    public void CatchAlert()
+    public void CatchAlertSound()
     {
         audioSource.Play();
     }

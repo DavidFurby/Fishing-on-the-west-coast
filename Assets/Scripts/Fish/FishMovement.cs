@@ -11,7 +11,7 @@ public class FishMovement : MonoBehaviour
     {
         Swimming,
         Baited,
-        Hooked
+        Hooked,
     }
 
     public FishState state;
@@ -27,7 +27,7 @@ public class FishMovement : MonoBehaviour
     void FixedUpdate()
     {
         RotateTowardsBait();
-        HookToBait();
+        FollowBait();
     }
 
     // Rotate towards the bait if baited
@@ -55,34 +55,19 @@ public class FishMovement : MonoBehaviour
     public void GetBaited(GameObject bait)
     {
         currentBait = bait;
-        state = FishState.Baited;
+        SetFishState(FishState.Baited);
     }
 
-    // Attach fish to bait if hooked
-    public void HookToBait()
+    public void SetFishState(FishState fishState)
+    {
+        state = fishState;
+    }
+    //Set the position of the fish to the bait if hooked
+    public void FollowBait()
     {
         if (state == FishState.Hooked && currentBait != null)
         {
             transform.position = currentBait.transform.position;
-        }
-    }
-    public void PresentFish()
-    {
-        if (state == FishState.Hooked)
-        {
-            transform.position = new Vector3(0, 0, 0);
-        }
-    }
-    public void RemoveFish()
-    {
-        Destroy(gameObject);
-    }
-    public void RemoveAllFishes()
-    {
-        GameObject[] fishes = GameObject.FindGameObjectsWithTag("fish");
-        foreach (GameObject fish in fishes)
-        {
-            Destroy(fish);
         }
     }
 }

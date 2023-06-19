@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -10,21 +11,45 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sizeText;
     [SerializeField] private TextMeshProUGUI isNew;
     [SerializeField] private TextMeshProUGUI newRecord;
+    private List<Fish> fishes;
+    private Fish currentlyPresentedFish;
+    private int fishIndex;
+    [SerializeField] private FishingControlls fishingControlls;
 
-    private void Start()
+    public void InititateCatchSummary(List<Fish> fishes)
     {
-        SetSummaryActive(false);
+        this.fishes = fishes;
+        currentlyPresentedFish = fishes[0];
+        SetSummaryActive();
+        PresentSummary();
     }
 
-    public void PresentSummary(Fish fishData)
+    public void PresentSummary()
     {
-        SetSummaryActive(true);
-        catchName.text = fishData.FishName;
-        sizeText.text += fishData.Size;
+        catchName.text = currentlyPresentedFish.FishName;
+        sizeText.text = currentlyPresentedFish.Size.ToString();
 
-        CheckSizeDifference(fishData);
+        CheckSizeDifference(currentlyPresentedFish);
+        CheckIfNew(currentlyPresentedFish);
+        AddFishToCount();
 
-        CheckIfNew(fishData);
+    }
+    //If there are more fishes switch summary. otherwise end the summary
+    public void NextSummary()
+    {
+        if (fishIndex < fishes.Count - 1)
+        {
+            currentlyPresentedFish = fishes[fishIndex++];
+            PresentSummary();
+        }
+        else
+        {
+            EndSummary();
+        }
+    }
+    public void AddFishToCount()
+    {
+        MainManager.Instance.game.Fishes++;
     }
 
 
@@ -55,9 +80,23 @@ public class CatchSummary : MonoBehaviour
             isNew.gameObject.SetActive(false);
         }
     }
-
-    public void SetSummaryActive(bool active)
+    //Reset data and set fishingStatus to Standby to end summary
+    private void EndSummary()
     {
-        catchSummary.SetActive(active);
+        SetSummaryActive();
+        ResetValues();
+        fishingControlls.SetFishingStatus(FishingControlls.FishingStatus.StandBy);
+    }
+
+    public void SetSummaryActive()
+    {
+        catchSummary.SetActive(!catchSummary.activeSelf);
+    }
+    //Reset values
+    private void ResetValues()
+    {
+        fishes.Clear();
+        currentlyPresentedFish = null;
+        fishIndex = 0;
     }
 }

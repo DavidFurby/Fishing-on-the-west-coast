@@ -30,7 +30,7 @@ public class FishSpawner : MonoBehaviour
 
     private void SpawnFish()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Fishing)
+        if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.StandBy)
         {
             //Choose random fish from the array
             int randomFishIndex = Random.Range(0, Fishes.Length);
@@ -52,7 +52,7 @@ public class FishSpawner : MonoBehaviour
 
     private void CalculateSpawnPosition()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Fishing)
+        if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.StandBy)
         {
             //Calculate horizontal and vertical spawn position
             spawnHorizontal = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;

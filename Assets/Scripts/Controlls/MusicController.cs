@@ -4,12 +4,12 @@ public class MusicController : MonoBehaviour
 {
 
     [SerializeField] AudioSource theMusic;
-    public void PlayMusicGameMusic()
+    public void PlayMiniGameMusic()
     {
         theMusic.Play();
 
     }
-    public void StopMusicGameMusic()
+    public void StopFishingMiniGameMusic()
     {
         theMusic.Stop();
     }

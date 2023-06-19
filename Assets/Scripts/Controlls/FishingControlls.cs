@@ -7,15 +7,12 @@ public class FishingControlls : MonoBehaviour
 {
     #region Serialized Fields
     [SerializeField] private CatchArea catchArea;
-    [SerializeField] private GameObject fishingRod;
     [SerializeField] private Animator animator;
     [SerializeField] private AudioSource castSound;
     [SerializeField] private BaitCamera baitCamera;
     [SerializeField] private CatchSummary catchSummary;
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private MusicController musicController;
-    [SerializeField] private FishingCanvas fishCanvas;
-    private bool pauseControls = false;
     #endregion
 
     #region Public Fields
@@ -31,6 +28,7 @@ public class FishingControlls : MonoBehaviour
         Fishing,
         Reeling,
         ReelingFish,
+        InspectFish,
     }
     #endregion
 
@@ -43,15 +41,11 @@ public class FishingControlls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!pauseControls)
-        {
-            ReelInBait();
-            StartFishing();
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            EndCatch();
-        }
+
+        ReelInBait();
+        StartFishing();
+        EndCatch();
+
     }
     #endregion
 
@@ -63,14 +57,12 @@ public class FishingControlls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && fishingStatus == FishingStatus.Fishing)
         {
-            if (catchArea.isInCatchArea)
+            if (catchArea.isInCatchArea && catchArea.fish != null)
             {
-                var fishData = catchArea.fish.GetComponent<Fish>();
-                baitCamera.CatchAlert();
-                StartCoroutine(StopTimeForOneSecond());
+                StartCoroutine(CatchAlert());
                 catchArea.CatchFish();
-                fishingMiniGame.StartFishingMiniGame(fishData);
-                musicController.PlayMusicGameMusic();
+                fishingMiniGame.StartFishingMiniGame(catchArea.totalFishes);
+                musicController.PlayMiniGameMusic();
                 SetFishingStatus(FishingStatus.ReelingFish);
             }
             else
@@ -80,12 +72,13 @@ public class FishingControlls : MonoBehaviour
 
         }
     }
-    IEnumerator StopTimeForOneSecond()
+    public IEnumerator CatchAlert()
     {
-
+        baitCamera.CatchAlertSound();
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(1);
         Time.timeScale = 1;
+        Debug.Log("Alert");
     }
 
     /// <summary>
@@ -125,32 +118,33 @@ public class FishingControlls : MonoBehaviour
         SetFishingStatus(FishingStatus.Casting);
     }
 
-    //Trigger methods when fish has been caught
+    //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
-        if (catchArea.fish != null)
+        if (catchArea.totalFishes.Count > 0)
         {
-            var fishData = catchArea.fish.GetComponent<Fish>();
-            SetControlsActive();
-            catchSummary.PresentSummary(fishData);
+            SetFishingStatus(FishingStatus.InspectFish);
             fishingMiniGame.EndFishingMiniGame();
-            musicController.StopMusicGameMusic();
-            fishCanvas.AddFishToCount();
+            musicController.StopFishingMiniGameMusic();
+            catchSummary.InititateCatchSummary(catchArea.totalFishes);
         }
     }
+
     //Triggre functions to continue fishing after a fish has been collected
     public void EndCatch()
     {
-        catchSummary.SetSummaryActive(false);
-        SetControlsActive();
-        catchArea.RemoveCatch();
-        fishingMiniGame.EndFishingMiniGame();
+        if (fishingStatus == FishingStatus.InspectFish && Input.GetKeyDown(KeyCode.Space))
+        {
+            catchSummary.NextSummary();
+        }
+
     }
+
 
     //Drop the fish if you fail the minigame
     public void LoseCatch()
     {
-        musicController.StopMusicGameMusic();
+        musicController.StopFishingMiniGameMusic();
         fishingMiniGame.EndFishingMiniGame();
         catchArea.RemoveCatch();
     }
@@ -164,11 +158,6 @@ public class FishingControlls : MonoBehaviour
         animator.Play("Swing");
         if (castingPower < 200)
             castingPower++;
-    }
-
-    public void SetControlsActive()
-    {
-        pauseControls = !pauseControls;
     }
     public void SetFishingStatus(FishingStatus fishingStatus)
     {
