@@ -2,16 +2,18 @@ using UnityEngine;
 using Yarn.Unity;
 using System;
 using TMPro;
+using System.Collections;
 
 public class DialogView : DialogueViewBase
 {
 
     [SerializeField] RectTransform container;
     Action advanceHandler;
-    [SerializeField] TextMeshProUGUI speaker;
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI speakerGUI;
+    [SerializeField] TextMeshProUGUI textGUI;
     [SerializeField] PlayerController playerController;
-
+    private string dialogueLine;
+    private Coroutine textRevealCoroutine;
     private void Start()
     {
         ShowDialog(false);
@@ -19,9 +21,10 @@ public class DialogView : DialogueViewBase
     public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)
     {
         ShowDialog(true);
-        speaker.text = dialogueLine.CharacterName;
-        text.text = dialogueLine.Text.Text;
+        this.dialogueLine = dialogueLine.Text.Text;
+        speakerGUI.text = dialogueLine.CharacterName;
         advanceHandler = requestInterrupt;
+        textRevealCoroutine = StartCoroutine(RevealText(this.dialogueLine));
     }
 
     public override void DismissLine(Action onDismissalComplete)
@@ -57,7 +60,25 @@ public class DialogView : DialogueViewBase
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            UserRequestedViewAdvancement();
+            if (textGUI.text.Length == dialogueLine.Length)
+            {
+                UserRequestedViewAdvancement();
+
+            }
+            else
+            {
+                StopCoroutine(textRevealCoroutine);
+                textGUI.text = dialogueLine;
+            }
+        }
+    }
+
+    private IEnumerator RevealText(string fullText)
+    {
+        for (int i = 0; i <= fullText.Length; i++)
+        {
+            textGUI.text = fullText.Substring(0, i);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 }
