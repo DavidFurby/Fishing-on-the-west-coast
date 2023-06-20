@@ -41,7 +41,6 @@ public class DialogView : DialogueViewBase
     public override void DialogueComplete()
     {
         Invoke(nameof(ActivateControls), 0.5f);
-
         base.DialogueComplete();
     }
 
