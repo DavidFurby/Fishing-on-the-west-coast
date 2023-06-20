@@ -36,7 +36,6 @@ public class DialogController : MonoBehaviour
     {
         dialogPanel.SetActive(false);
         ResetDialog();
-        Invoke(nameof(SetPauseControlls), 0.5f);
     }
     private void ResetDialog()
     {
@@ -44,10 +43,7 @@ public class DialogController : MonoBehaviour
         speakerGUI.text = null;
         dialogGUI.text = null;
     }
-    private void SetPauseControlls()
-    {
-        playerController.pauseControlls = false;
-    }
+
 
     internal void InitiateDialog(Queue<DialogList.DialogItem> dialogQueue)
     {
@@ -56,6 +52,5 @@ public class DialogController : MonoBehaviour
         speakerGUI.text = firstDialog.character.ToString();
         dialogGUI.text = firstDialog.text;
         dialogPanel.SetActive(true);
-        playerController.pauseControlls = true;
     }
 }

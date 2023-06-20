@@ -5,26 +5,29 @@ public class PlayerController : MonoBehaviour
 {
     private float horizontalInput;
     private float verticalInput;
-    [SerializeField] int movementSpeed;
-    [SerializeField] float rotationSpeed;
+    [SerializeField] private int movementSpeed;
+    [SerializeField] private float rotationSpeed;
     private bool isWithinTriggerArea;
     private Interactible interactible;
-    public bool pauseControlls = false;
+    public PlayerStatus playerStatus;
+
+    public enum PlayerStatus
+    {
+        StandBy,
+        Interacting
+    }
 
     void Update()
     {
-        if (!pauseControlls)
-        {
-            HandleInput();
 
-        }
+        HandleInput();
+
     }
     private void FixedUpdate()
     {
-        if (!pauseControlls)
-        {
-            HandleMovement();
-        }
+
+        HandleMovement();
+
 
     }
     //Handle player input
@@ -32,16 +35,23 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+        if (playerStatus == PlayerStatus.StandBy)
+        {
+            ActivateInteractible();
 
-        ActivateInteractible();
+        }
 
     }
     //Handle player movement and rotation
     private void HandleMovement()
     {
-        Vector3 movementDirection = new Vector3(horizontalInput, 0.0f, verticalInput);
-        MovePlayer(movementDirection);
-        RotatePlayer(movementDirection);
+        if (playerStatus == PlayerStatus.StandBy)
+        {
+            Vector3 movementDirection = new(horizontalInput, 0.0f, verticalInput);
+            MovePlayer(movementDirection);
+            RotatePlayer(movementDirection);
+        }
+
     }
     //Move player in specified direction
     private void MovePlayer(Vector3 movementDirection)
@@ -84,8 +94,14 @@ public class PlayerController : MonoBehaviour
         {
             if (interactible != null)
             {
+                SetPlayerStatus(PlayerStatus.Interacting);
                 interactible.CheckActivated();
             }
         }
+    }
+
+    public void SetPlayerStatus(PlayerStatus playerStatus)
+    {
+        this.playerStatus = playerStatus;
     }
 }

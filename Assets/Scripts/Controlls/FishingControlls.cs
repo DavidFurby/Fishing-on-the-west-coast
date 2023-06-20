@@ -147,6 +147,7 @@ public class FishingControlls : MonoBehaviour
         if (fishingStatus == FishingStatus.ReelingFish)
         {
             musicController.StopFishingMiniGameMusic();
+            fishingMiniGame.EndFishingMiniGame();
             catchArea.RemoveCatch();
             SetFishingStatus(FishingStatus.Reeling);
         }

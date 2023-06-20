@@ -10,6 +10,7 @@ public class DialogView : DialogueViewBase
     Action advanceHandler;
     [SerializeField] TextMeshProUGUI speaker;
     [SerializeField] TextMeshProUGUI text;
+    [SerializeField] PlayerController playerController;
 
     private void Start()
     {
@@ -35,6 +36,18 @@ public class DialogView : DialogueViewBase
         {
             advanceHandler?.Invoke();
         }
+    }
+
+    public override void DialogueComplete()
+    {
+        Invoke(nameof(ActivateControls), 0.5f);
+
+        base.DialogueComplete();
+    }
+
+    private void ActivateControls()
+    {
+        playerController.SetPlayerStatus(PlayerController.PlayerStatus.StandBy);
     }
     public void ShowDialog(bool active)
     {
