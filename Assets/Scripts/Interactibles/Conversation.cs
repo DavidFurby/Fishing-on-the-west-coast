@@ -13,7 +13,8 @@ public class Conversation : MonoBehaviour, IInteractible
         Neighbour,
         NeigborsWife,
         Fisherman,
-        Dog
+        Dog,
+        ShopKeeper
     }
     public void Interact()
     {

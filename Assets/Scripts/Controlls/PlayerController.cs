@@ -10,32 +10,51 @@ public class PlayerController : MonoBehaviour
     private bool isWithinTriggerArea;
     private Interactible interactible;
     public PlayerStatus playerStatus;
+    [SerializeField] private Shop shop;
 
     public enum PlayerStatus
     {
         StandBy,
-        Interacting
+        Interacting,
+        Shopping
     }
 
     void Update()
     {
-
         HandleInput();
-
+        HandleShoppingInput();
     }
     private void FixedUpdate()
     {
 
         HandleMovement();
+    }
 
+    private void HandleShoppingInput()
+    {
+        if (playerStatus == PlayerStatus.Shopping)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                shop.ScrollBetweenItems(false);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                shop.ScrollBetweenItems(true);
 
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                shop.CloseShop();
+            }
+        }
     }
     //Handle player input
     private void HandleInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        if (playerStatus == PlayerStatus.StandBy)
+        if (playerStatus == PlayerStatus.StandBy && Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactible != null)
         {
             ActivateInteractible();
 
@@ -90,14 +109,8 @@ public class PlayerController : MonoBehaviour
     //Activates interactible object if player is within trigger area and button is pressed
     private void ActivateInteractible()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea)
-        {
-            if (interactible != null)
-            {
-                SetPlayerStatus(PlayerStatus.Interacting);
-                interactible.CheckActivated();
-            }
-        }
+        SetPlayerStatus(PlayerStatus.Interacting);
+        interactible.CheckActivated();
     }
 
     public void SetPlayerStatus(PlayerStatus playerStatus)

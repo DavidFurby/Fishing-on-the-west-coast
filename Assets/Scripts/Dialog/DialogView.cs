@@ -22,7 +22,6 @@ public class DialogView : DialogueViewBase
     {
         ShowDialog(true);
         this.dialogueLine = dialogueLine.TextWithoutCharacterName.Text;
-        Debug.Log(dialogueLine.CharacterName);
         speakerGUI.text = dialogueLine.CharacterName;
         advanceHandler = requestInterrupt;
         textRevealCoroutine = StartCoroutine(RevealText(this.dialogueLine));
@@ -50,7 +49,10 @@ public class DialogView : DialogueViewBase
 
     private void ActivateControls()
     {
-        playerController.SetPlayerStatus(PlayerController.PlayerStatus.StandBy);
+        if (playerController.playerStatus == PlayerController.PlayerStatus.Interacting)
+        {
+            playerController.SetPlayerStatus(PlayerController.PlayerStatus.StandBy);
+        }
     }
     public void ShowDialog(bool active)
     {
@@ -59,12 +61,11 @@ public class DialogView : DialogueViewBase
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && container.gameObject.activeSelf)
         {
             if (textGUI.text.Length == dialogueLine.Length)
             {
                 UserRequestedViewAdvancement();
-
             }
             else
             {
