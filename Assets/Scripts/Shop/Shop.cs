@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Yarn.Unity;
 
 public class Shop : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Shop : MonoBehaviour
     public ShopItem focusedShopItem;
     private int focusedShopItemIndex = 0;
     [SerializeField] PlayerController playerController;
+    [SerializeField] DialogManager dialogManager;
     private void Start()
     {
         focusedShopItem = shopItems[focusedShopItemIndex];
@@ -60,6 +62,9 @@ public class Shop : MonoBehaviour
             }
         }
         focusedShopItem = shopItems[focusedShopItemIndex];
+        dialogManager.RestartDialog("ShopItem");
+        dialogManager.RemoveHandler("setShopItemName");
+        dialogManager.SetShopItemName();
         FocusItem();
     }
 }

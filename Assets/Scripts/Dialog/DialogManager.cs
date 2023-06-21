@@ -5,8 +5,7 @@ using Yarn.Unity;
 public class DialogManager : MonoBehaviour
 {
     [SerializeField] private DialogueRunner dialogueRunner;
-    [SerializeField]
-    private Shop shop;
+    [SerializeField] private Shop shop;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +25,13 @@ public class DialogManager : MonoBehaviour
     {
         dialogueRunner.AddCommandHandler("openShop", () =>
         {
-            shop.OpenShop();
+            dialogueRunner.Stop();
             SetShopItemName();
+            shop.OpenShop();
+            dialogueRunner.StartDialogue("ShopItem");
         });
     }
-    private void SetShopItemName()
+    public void SetShopItemName()
     {
         dialogueRunner.AddCommandHandler("setShopItemName", () =>
         {
@@ -39,5 +40,14 @@ public class DialogManager : MonoBehaviour
             dialogueRunner.VariableStorage.SetValue("$shopItemPrice", shopItem.Price);
             dialogueRunner.VariableStorage.SetValue("$shopItemDescription", shopItem.Description);
         });
+    }
+    public void RemoveHandler(string handlerName)
+    {
+        dialogueRunner.RemoveCommandHandler(handlerName);
+    }
+    public void RestartDialog(string node)
+    {
+        dialogueRunner.Stop();
+        dialogueRunner.StartDialogue(node);
     }
 }

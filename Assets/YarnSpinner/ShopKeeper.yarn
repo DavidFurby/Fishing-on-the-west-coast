@@ -7,7 +7,6 @@ tags:
 
 ShopKeeper: Hiya what can i do for you today?
 <<openShop>>
-<<jump ShopItem>>
 ===
 
 title: ShopItem
