@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int movementSpeed;
     [SerializeField] private float rotationSpeed;
     private bool isWithinTriggerArea;
+    private Animator animator;
     private Interactible interactible;
     public PlayerStatus playerStatus;
 
@@ -16,6 +17,27 @@ public class PlayerController : MonoBehaviour
         StandBy,
         Interacting
     }
+
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+
+        // Find the player model by its tag
+        GameObject playerModel = GameObject.FindWithTag("PlayerModel");
+
+        // Check if the player model was found
+        if (playerModel != null)
+        {
+            // Get the Animator component attached to the player model
+            animator = playerModel.GetComponent<Animator>();
+        }
+        else
+        {
+            Debug.LogError("(*`n*) - where the FUCK is GUBBEN's model!?");
+        }
+    }
+
 
     void Update()
     {
@@ -37,8 +59,23 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         if (playerStatus == PlayerStatus.StandBy)
         {
-            ActivateInteractible();
 
+           if (horizontalInput != 0 || verticalInput != 0)
+            {
+                if (animator.GetBool("walking") != true)
+                {
+                    animator.SetBool("walking", true);
+                }
+            }
+            else
+            {
+                if (animator.GetBool("walking") != false)
+                {
+                    animator.SetBool("walking", false);
+                }
+            }
+
+            ActivateInteractible();
         }
 
     }
