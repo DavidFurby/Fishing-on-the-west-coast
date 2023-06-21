@@ -12,6 +12,8 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private BaitCamera baitCamera;
     [SerializeField] private CatchSummary catchSummary;
     [SerializeField] private FishingMiniGame fishingMiniGame;
+    [SerializeField] private Animator playerAnimator;
+
     [SerializeField] private MusicController musicController;
     #endregion
 
@@ -35,7 +37,21 @@ public class FishingControlls : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
+        GameObject playerModel = GameObject.FindWithTag("PlayerModel");
+
+        // Check if the player model was found
+        if (playerModel != null)
+        {
+            // Get the Animator component attached to the player model
+            playerAnimator = playerModel.GetComponent<Animator>();
+        }
+        else
+        {
+            Debug.LogError("(*`n*) - where the FUCK is GUBBEN's model!?");
+        }
+
         fishingStatus = FishingStatus.StandBy;
+        
     }
 
     // Update is called once per frame
@@ -90,10 +106,15 @@ public class FishingControlls : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
+                if(playerAnimator.GetBool("chargingThrow") == false)
+                    playerAnimator.SetBool("chargingThrow", true);
                 ChargeCasting();
             }
             if (Input.GetKeyUp(KeyCode.Space))
             {
+                if(playerAnimator.GetBool("chargingThrow") == true)
+                    playerAnimator.SetBool("chargingThrow", false);
+
                 animator.Play("Reverse Swing");
                 castSound.Play();
                 StartCoroutine(WaitForSwingAnimation());
@@ -162,7 +183,10 @@ public class FishingControlls : MonoBehaviour
     {
         animator.Play("Swing");
         if (castingPower < 200)
+        {
             castingPower++;
+            playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed")+ 0.01f);
+        }
     }
     public void SetFishingStatus(FishingStatus fishingStatus)
     {

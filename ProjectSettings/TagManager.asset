@@ -12,6 +12,7 @@ TagManager:
   - FishingLine
   - Sea
   - Key
+  - PlayerModel
   layers:
   - Default
   - TransparentFX
