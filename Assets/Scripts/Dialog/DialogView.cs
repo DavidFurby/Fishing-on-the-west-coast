@@ -21,7 +21,8 @@ public class DialogView : DialogueViewBase
     public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)
     {
         ShowDialog(true);
-        this.dialogueLine = dialogueLine.Text.Text;
+        this.dialogueLine = dialogueLine.TextWithoutCharacterName.Text;
+        Debug.Log(dialogueLine.CharacterName);
         speakerGUI.text = dialogueLine.CharacterName;
         advanceHandler = requestInterrupt;
         textRevealCoroutine = StartCoroutine(RevealText(this.dialogueLine));

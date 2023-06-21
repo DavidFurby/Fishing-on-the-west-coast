@@ -261,8 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 385534355}
-  speaker: {fileID: 818115411}
-  text: {fileID: 1902160473}
+  speakerGUI: {fileID: 818115411}
+  textGUI: {fileID: 1902160473}
   playerController: {fileID: 1514824441}
 --- !u!1001 &515395860
 PrefabInstance:
