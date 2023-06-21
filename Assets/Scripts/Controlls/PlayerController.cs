@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         if (playerModel != null)
         {
             // Get the Animator component attached to the player model
-            animator = playerModel.GetComponent<Animator>();
+            animator = playerModel.GetComponent<Animator>();           
         }
         else
         {
