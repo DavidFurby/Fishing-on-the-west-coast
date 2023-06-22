@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 
@@ -37,6 +38,10 @@ namespace Yarn.Unity
         public void Reset()
         {
             canvasGroup = GetComponentInParent<CanvasGroup>();
+        }
+        public void ShowListDialog(bool active)
+        {
+            canvasGroup.gameObject.SetActive(active);
         }
 
         public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)

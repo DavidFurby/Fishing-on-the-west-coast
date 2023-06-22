@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -63,6 +62,7 @@ public class DialogManager : MonoBehaviour
     public void EndDialog()
     {
         view.ShowDialog(false);
+        listView.ShowListDialog(false);
         dialogueRunner.Stop();
     }
 }

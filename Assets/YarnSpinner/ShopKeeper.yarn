@@ -25,10 +25,10 @@ position: -223,-79
 ---
 ShopKeeper: That will be {$shopItemPrice}. You want it?
 
--> Fisherman: Ye sure
-<<jump Buy>>
--> Fisherman: No ill skip
-<<jump Decline>>
+-> Player: Ill buy it
+    <<jump Buy>>
+-> Player: Maybe not
+    <<jump Decline>>
 ===
 
 title: Buy
