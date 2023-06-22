@@ -36,6 +36,7 @@ tags:
 colorID: 0
 position: -223,-79
 ---
+<<buyShopItem>>
 ShopKepper: Aye thanks matey
 ===
 

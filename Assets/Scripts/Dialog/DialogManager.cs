@@ -13,6 +13,7 @@ public class DialogManager : MonoBehaviour
     {
         SetDayHandler();
         OpenShopHandler();
+        BuyShopItem();
     }
 
     private void SetDayHandler()
@@ -38,6 +39,13 @@ public class DialogManager : MonoBehaviour
             dialogueRunner.VariableStorage.SetValue("$shopItemName", shopItem.name);
             dialogueRunner.VariableStorage.SetValue("$shopItemPrice", shopItem.Price);
             dialogueRunner.VariableStorage.SetValue("$shopItemDescription", shopItem.Description);
+        });
+    }
+    private void BuyShopItem()
+    {
+        dialogueRunner.AddCommandHandler("buyShopItem", () =>
+        {
+            shop.BuyItem();
         });
     }
     public void RemoveHandler(string handlerName)

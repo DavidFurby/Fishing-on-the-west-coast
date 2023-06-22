@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -14,6 +15,7 @@ public class Shop : MonoBehaviour
     #region Private Fields
     public ShopItem focusedShopItem;
     private int focusedShopItemIndex = 0;
+    [SerializeField] ShopItem emptySpot;
     #endregion
 
     #region MonoBehaviour Methods
@@ -67,6 +69,19 @@ public class Shop : MonoBehaviour
         dialogManager.SetShopItemNameHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
         FocusItem();
+    }
+    public void BuyItem()
+    {
+        if (focusedShopItem != null)
+        {
+            GameObject replacement = Instantiate(emptySpot.gameObject, focusedShopItem.transform.position, focusedShopItem.transform.rotation);
+            replacement.transform.parent = focusedShopItem.transform.parent;
+            shopItems[focusedShopItemIndex] = replacement.GetComponent<ShopItem>();
+            var prevItem = focusedShopItem;
+            focusedShopItem = replacement.GetComponent<ShopItem>();
+            FocusItem();
+            Destroy(prevItem.gameObject);
+        }
     }
 }
 #endregion
