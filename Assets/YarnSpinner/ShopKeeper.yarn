@@ -16,4 +16,33 @@ position: -223,-79
 ---
 <<setShopItemName>>
 {$shopItemName}<br>{$shopItemPrice}<br>{$shopItemDescription}
+<<jump ShopItemOptions>>
+===
+title: ShopItemOptions
+tags:
+colorID: 0
+position: -223,-79
+---
+ShopKeeper: That will be {$shopItemPrice}. You want it?
+
+-> Fisherman: Ye sure
+<<jump Buy>>
+-> Fisherman: No ill skip
+<<jump Decline>>
+===
+
+title: Buy
+tags:
+colorID: 0
+position: -223,-79
+---
+ShopKepper: Aye thanks matey
+===
+
+title: Decline
+tags:
+colorID: 0
+position: -223,-79
+---
+ShopKepper: Oh maybe next time then
 ===

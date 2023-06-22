@@ -6,14 +6,16 @@ public class DialogManager : MonoBehaviour
 {
     [SerializeField] private DialogueRunner dialogueRunner;
     [SerializeField] private Shop shop;
+    [SerializeField] private DialogView view;
+    [SerializeField] private DialogListView listView;
     // Start is called before the first frame update
     void Start()
     {
-        SetDay();
-        OpenShop();
+        SetDayHandler();
+        OpenShopHandler();
     }
 
-    private void SetDay()
+    private void SetDayHandler()
     {
         dialogueRunner.AddCommandHandler("getDayOfMonth", () =>
         {
@@ -21,21 +23,18 @@ public class DialogManager : MonoBehaviour
             dialogueRunner.VariableStorage.SetValue("$day", day);
         });
     }
-    private void OpenShop()
+    private void OpenShopHandler()
     {
         dialogueRunner.AddCommandHandler("openShop", () =>
         {
-            dialogueRunner.Stop();
-            SetShopItemName();
             shop.OpenShop();
-            dialogueRunner.StartDialogue("ShopItem");
         });
     }
-    public void SetShopItemName()
+    public void SetShopItemNameHandler(ShopItem shopItem)
     {
+        RemoveHandler("setShopItemName");
         dialogueRunner.AddCommandHandler("setShopItemName", () =>
         {
-            ShopItem shopItem = shop.focusedShopItem;
             dialogueRunner.VariableStorage.SetValue("$shopItemName", shopItem.name);
             dialogueRunner.VariableStorage.SetValue("$shopItemPrice", shopItem.Price);
             dialogueRunner.VariableStorage.SetValue("$shopItemDescription", shopItem.Description);
@@ -45,9 +44,17 @@ public class DialogManager : MonoBehaviour
     {
         dialogueRunner.RemoveCommandHandler(handlerName);
     }
-    public void RestartDialog(string node)
+    public void StartDialog(string node)
     {
-        dialogueRunner.Stop();
+        if (dialogueRunner.IsDialogueRunning)
+        {
+            dialogueRunner.Stop();
+        }
         dialogueRunner.StartDialogue(node);
+    }
+    public void EndDialog()
+    {
+        view.ShowDialog(false);
+        dialogueRunner.Stop();
     }
 }

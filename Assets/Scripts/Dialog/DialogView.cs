@@ -37,12 +37,14 @@ public class DialogView : DialogueViewBase
     {
         if (container.gameObject.activeSelf)
         {
+            Debug.Log("advance");
             advanceHandler?.Invoke();
         }
     }
 
     public override void DialogueComplete()
     {
+        Debug.Log("complete");
         Invoke(nameof(ActivateControls), 0.5f);
         base.DialogueComplete();
     }

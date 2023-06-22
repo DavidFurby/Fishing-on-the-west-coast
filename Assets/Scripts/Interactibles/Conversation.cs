@@ -4,8 +4,8 @@ using Yarn.Unity;
 public class Conversation : MonoBehaviour, IInteractible
 {
     // Start is called before the first frame update
-    [SerializeField] GameCharacters character;
-    [SerializeField] DialogueRunner runner;
+    [SerializeField] private GameCharacters character;
+    [SerializeField] private DialogManager dialogManager;
 
     public enum GameCharacters
     {
@@ -22,11 +22,7 @@ public class Conversation : MonoBehaviour, IInteractible
     }
     public void StartDialog()
     {
-        if (!runner.IsDialogueRunning)
-        {
-            // Start the "Start" node
-            runner.StartDialogue(character.ToString());
-        }
+        dialogManager.StartDialog(character.ToString());
 
     }
 }
