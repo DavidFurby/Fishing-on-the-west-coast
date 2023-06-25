@@ -38,7 +38,7 @@ public class DialogManager : MonoBehaviour
     {
         dialogueRunner.AddCommandHandler("openShop", () =>
         {
-            shop.OpenShop();
+            StartCoroutine(shop.OpenShop());
         });
     }
     public void SetShopItemNameHandler(ShopItem shopItem)

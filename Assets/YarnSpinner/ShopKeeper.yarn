@@ -1,5 +1,6 @@
 ﻿title: ShopKeeper
 tags:
+position: 288,-188
 ---
 <<declare $shopItemName = "" as string>>
 <<declare $shopItemPrice = 0 as number>>
@@ -12,7 +13,7 @@ ShopKeeper: Hiya what can i do for you today?
 title: ShopItem
 tags:
 colorID: 0
-position: -223,-79
+position: -193,-302
 ---
 <<setShopItemName>>
 {$shopItemName}<br>{$shopItemPrice}<br>{$shopItemDescription}
@@ -21,29 +22,33 @@ position: -223,-79
 title: ShopItemOptions
 tags:
 colorID: 0
-position: -223,-79
+position: -285,-135
 ---
-ShopKeeper: That will be {$shopItemPrice}. You want it?
+<<lockControls>>
+ShopKepper: that will be {$shopItemPrice}
 
--> Player: Ill buy it
-    <<jump Buy>>
--> Player: Maybe not
-    <<jump Decline>>
+-> Player: Cool ill buy it
+    <<lockControls>>
+    <<jump BuyItem>>
+-> Player: Think ill skip
+    <<lockControls>>
+    <<jump DeclineItem>>
 ===
 
-title: Buy
+title: BuyItem
 tags:
 colorID: 0
-position: -223,-79
+position: -2,38
 ---
-<<buyShopItem>>
-ShopKepper: Aye thanks matey
+ <<buyShopItem>>
+ ShopKepper: Aye thanks matey
+
 ===
 
-title: Decline
+title: DeclineItem
 tags:
 colorID: 0
-position: -223,-79
+position: -129,307
 ---
 ShopKepper: Oh maybe next time then
 ===

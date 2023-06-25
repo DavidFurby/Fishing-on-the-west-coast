@@ -39,12 +39,12 @@ public class Shop : MonoBehaviour
     /// <summary>
     /// Opens the shop.
     /// </summary>
-    public void OpenShop()
+    public IEnumerator OpenShop()
     {
+        yield return new WaitForSeconds(0.5f);
         playerController.SetPlayerStatus(PlayerController.PlayerStatus.Shopping);
         FocusItem();
-        dialogManager.SetShopItemNameHandler(focusedShopItem);
-        dialogManager.StartDialog("ShopItem");
+        UpdateDialog();
     }
 
     /// <summary>
@@ -66,10 +66,8 @@ public class Shop : MonoBehaviour
     {
         focusedShopItemIndex = (focusedShopItemIndex + (forward ? 1 : -1) + shopItems.Length) % shopItems.Length;
         focusedShopItem = shopItems[focusedShopItemIndex];
-        dialogManager.EndDialog();
-        dialogManager.SetShopItemNameHandler(focusedShopItem);
-        dialogManager.StartDialog("ShopItem");
         FocusItem();
+        UpdateDialog();
     }
     public void BuyItem()
     {
@@ -83,6 +81,12 @@ public class Shop : MonoBehaviour
             FocusItem();
             Destroy(prevItem.gameObject);
         }
+    }
+    public void UpdateDialog()
+    {
+        dialogManager.EndDialog();
+        dialogManager.SetShopItemNameHandler(focusedShopItem);
+        dialogManager.StartDialog("ShopItem");
     }
 }
 #endregion
