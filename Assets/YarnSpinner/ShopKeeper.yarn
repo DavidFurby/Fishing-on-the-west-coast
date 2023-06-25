@@ -56,3 +56,11 @@ position: -129,307
 ---
 ShopKepper: Oh maybe next time then
 ===
+title: InsufficentPayment
+tags:
+colorID: 0
+position: -2,38
+---
+Ohh looks like you don't have enough fishes for that one yet.
+<<jump ShopItem>>
+===

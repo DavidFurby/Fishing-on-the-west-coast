@@ -84,13 +84,20 @@ public class Shop : MonoBehaviour
     {
         if (focusedShopItem != null)
         {
-            GameObject replacement = Instantiate(emptySpot.gameObject, focusedShopItem.transform.position, focusedShopItem.transform.rotation);
-            replacement.transform.parent = focusedShopItem.transform.parent;
-            shopItems[focusedShopItemIndex] = replacement.GetComponent<ShopItem>();
-            var prevItem = focusedShopItem;
-            focusedShopItem = replacement.GetComponent<ShopItem>();
-            FocusItem();
-            Destroy(prevItem.gameObject);
+            if (MainManager.Instance.game.Fishes >= focusedShopItem.Price)
+            {
+                GameObject replacement = Instantiate(emptySpot.gameObject, focusedShopItem.transform.position, focusedShopItem.transform.rotation);
+                replacement.transform.parent = focusedShopItem.transform.parent;
+                shopItems[focusedShopItemIndex] = replacement.GetComponent<ShopItem>();
+                var prevItem = focusedShopItem;
+                focusedShopItem = replacement.GetComponent<ShopItem>();
+                FocusItem();
+                Destroy(prevItem.gameObject);
+            }
+            else
+            {
+                dialogManager.StartDialog("InsufficentPayment");
+            }
         }
     }
     public void UpdateDialog()
