@@ -62,7 +62,7 @@ public class DialogManager : MonoBehaviour
     public void EndDialog()
     {
         view.ShowDialog(false);
-        listView.ShowListDialog(false);
+        listView.CloseListView();
         dialogueRunner.Stop();
     }
 }

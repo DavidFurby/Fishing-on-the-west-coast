@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 
@@ -30,18 +29,24 @@ namespace Yarn.Unity
 
         public void Start()
         {
-            canvasGroup.alpha = 0;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
+            CloseListView();
         }
 
         public void Reset()
         {
             canvasGroup = GetComponentInParent<CanvasGroup>();
         }
-        public void ShowListDialog(bool active)
+
+        public void CloseListView()
         {
-            canvasGroup.gameObject.SetActive(active);
+            canvasGroup.alpha = 0;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        }
+        public void ResetValues()
+        {
+            optionViews = new();
+            lastSeenLine = null;
         }
 
         public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)

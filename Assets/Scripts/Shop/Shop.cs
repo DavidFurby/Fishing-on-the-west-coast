@@ -66,6 +66,7 @@ public class Shop : MonoBehaviour
     {
         focusedShopItemIndex = (focusedShopItemIndex + (forward ? 1 : -1) + shopItems.Length) % shopItems.Length;
         focusedShopItem = shopItems[focusedShopItemIndex];
+        dialogManager.EndDialog();
         dialogManager.SetShopItemNameHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
         FocusItem();
