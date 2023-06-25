@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -30,7 +29,9 @@ namespace Yarn.Unity
 
         public void Start()
         {
-            CloseListView();
+            canvasGroup.alpha = 0;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
         }
 
         public void Reset()
@@ -38,18 +39,6 @@ namespace Yarn.Unity
             canvasGroup = GetComponentInParent<CanvasGroup>();
         }
 
-        public void CloseListView()
-        {
-            ResetValues();
-            canvasGroup.alpha = 0;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-        }
-        public void ResetValues()
-        {
-            optionViews = new();
-            lastSeenLine = null;
-        }
         public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)
         {
             // Don't do anything with this line except note it and
@@ -76,7 +65,7 @@ namespace Yarn.Unity
 
             // Set up all of the option views
             int optionViewsCreated = 0;
-            Debug.Log(dialogueOptions.Length);
+
             for (int i = 0; i < dialogueOptions.Length; i++)
             {
                 var optionView = optionViews[i];

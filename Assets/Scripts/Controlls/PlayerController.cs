@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Interactible interactible;
     public PlayerStatus playerStatus;
     [SerializeField] private Shop shop;
+    public bool selectedItem = true;
 
     public enum PlayerStatus
     {
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleShoppingInput()
     {
-        if (playerStatus == PlayerStatus.Shopping)
+        if (playerStatus == PlayerStatus.Shopping && !selectedItem)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {

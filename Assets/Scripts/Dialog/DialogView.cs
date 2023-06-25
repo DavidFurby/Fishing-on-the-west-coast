@@ -14,19 +14,36 @@ public class DialogView : DialogueViewBase
     [SerializeField] PlayerController playerController;
     private string dialogueLine;
     private Coroutine textRevealCoroutine;
-    public bool useTextRevealCoroutine;
+    private bool useTextRevealCoroutine;
+    [SerializeField] DialogManager dialogManager;
     private void Start()
     {
+        useTextRevealCoroutine = false;
         ShowDialog(false);
-        useTextRevealCoroutine = true;
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && container.gameObject.activeSelf)
+        {
+            if (textGUI.text.Length == dialogueLine.Length)
+            {
+                UserRequestedViewAdvancement();
+            }
+            else
+            {
+                StopCoroutine(textRevealCoroutine);
+                textGUI.text = dialogueLine;
+            }
+        }
     }
     public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)
     {
+
         ShowDialog(true);
         this.dialogueLine = dialogueLine.TextWithoutCharacterName.Text;
         speakerGUI.text = dialogueLine.CharacterName;
         advanceHandler = requestInterrupt;
-        if (useTextRevealCoroutine)
+        if (!dialogManager.CurrentNodeShouldShowTextDirectly())
         {
             textRevealCoroutine = StartCoroutine(RevealText(this.dialogueLine));
         }
@@ -70,22 +87,7 @@ public class DialogView : DialogueViewBase
         container.gameObject.SetActive(active);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && container.gameObject.activeSelf)
-        {
-            Debug.Log("press");
-            if (textGUI.text.Length == dialogueLine.Length)
-            {
-                UserRequestedViewAdvancement();
-            }
-            else
-            {
-                StopCoroutine(textRevealCoroutine);
-                textGUI.text = dialogueLine;
-            }
-        }
-    }
+
 
     private IEnumerator RevealText(string fullText)
     {
@@ -94,9 +96,5 @@ public class DialogView : DialogueViewBase
             textGUI.text = fullText[..i];
             yield return new WaitForSeconds(0.05f);
         }
-    }
-    public void SetTextRevealCoroutine()
-    {
-        useTextRevealCoroutine = !useTextRevealCoroutine;
     }
 }

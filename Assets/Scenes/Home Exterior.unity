@@ -515,7 +515,7 @@ MonoBehaviour:
   speakerGUI: {fileID: 7778558434945362637}
   textGUI: {fileID: 7778558435767890595}
   playerController: {fileID: 1514824441}
-  useTextRevealCoroutine: 0
+  dialogManager: {fileID: 3831113771061472607}
 --- !u!1001 &515395860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1905,7 +1905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4795000944814138905, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
       propertyPath: m_text
-      value: 
+      value: 'This is a long text to show dialog '
       objectReference: {fileID: 0}
     - target: {fileID: 4839244576286263127, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
       propertyPath: m_Pivot.x
@@ -2618,6 +2618,7 @@ MonoBehaviour:
   shop: {fileID: 525335665}
   view: {fileID: 494047335}
   listView: {fileID: 3292657647251926263}
+  playerController: {fileID: 1514824441}
 --- !u!1 &4540255440768278816
 GameObject:
   m_ObjectHideFlags: 0

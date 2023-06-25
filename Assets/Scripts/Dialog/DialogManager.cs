@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -7,12 +8,22 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private Shop shop;
     [SerializeField] private DialogView view;
     [SerializeField] private DialogListView listView;
+    [SerializeField] private PlayerController playerController;
     // Start is called before the first frame update
+
+    //Nodes that should present text instantly
+    public enum InstantTextNodes
+    {
+        ShopItem,
+    }
+
     void Start()
     {
         SetDayHandler();
         OpenShopHandler();
         BuyShopItem();
+        SetShopItemNameHandler(shop.focusedShopItem);
+        LockControls();
     }
 
     private void SetDayHandler()
@@ -32,7 +43,6 @@ public class DialogManager : MonoBehaviour
     }
     public void SetShopItemNameHandler(ShopItem shopItem)
     {
-        SetTextRevealCoroutine();
         RemoveHandler("setShopItemName");
         dialogueRunner.AddCommandHandler("setShopItemName", () =>
         {
@@ -41,12 +51,11 @@ public class DialogManager : MonoBehaviour
             dialogueRunner.VariableStorage.SetValue("$shopItemDescription", shopItem.Description);
         });
     }
-    public void SetTextRevealCoroutine()
+    public void LockControls()
     {
-        RemoveHandler("setTextRevealCoroutine");
-        dialogueRunner.AddCommandHandler("setTextRevealCoroutine", () =>
+        dialogueRunner.AddCommandHandler("lockControls", () =>
         {
-            view.SetTextRevealCoroutine();
+            playerController.selectedItem = !playerController.selectedItem;
         });
     }
     private void BuyShopItem()
@@ -71,7 +80,11 @@ public class DialogManager : MonoBehaviour
     public void EndDialog()
     {
         view.ShowDialog(false);
-        listView.CloseListView();
         dialogueRunner.Stop();
     }
+    public bool CurrentNodeShouldShowTextDirectly()
+    {
+        return System.Enum.GetNames(typeof(InstantTextNodes)).Contains(dialogueRunner.CurrentNodeName);
+    }
+
 }
