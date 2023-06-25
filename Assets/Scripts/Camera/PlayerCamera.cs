@@ -4,7 +4,7 @@ public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] GameObject player;
     public CameraStatus cameraStatus;
-    private ShopItem shopItem;
+    private Vector3 shopItemPosition;
     private float cameraDistance;
     private float originalCameraDistance;
     public enum CameraStatus
@@ -26,7 +26,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void FollowPlayer()
     {
-        if (cameraStatus == CameraStatus.Player)
+        if (cameraStatus == CameraStatus.Player && player != null)
         {
             transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 4, cameraDistance);
             if (cameraDistance != originalCameraDistance)
@@ -39,16 +39,16 @@ public class PlayerCamera : MonoBehaviour
     {
         if (cameraStatus == CameraStatus.ShoppingItem)
         {
-            transform.position = new Vector3(shopItem.transform.position.x, shopItem.transform.position.y + 0.5f, cameraDistance);
+            transform.position = new Vector3(shopItemPosition.x, shopItemPosition.y + 0.5f, cameraDistance);
 
-            float targetDistance = shopItem.transform.position.z - 1.5f;
+            float targetDistance = shopItemPosition.z - 1.5f;
             cameraDistance += (targetDistance - cameraDistance) * 0.1f;
         }
     }
 
-    public void SetShopItem(ShopItem shopItem)
+    public void SetShopItem(Vector3 shopItemPosition)
     {
-        this.shopItem = shopItem;
+        this.shopItemPosition = shopItemPosition;
     }
     public void SetCameraStatus(CameraStatus cameraStatus)
     {

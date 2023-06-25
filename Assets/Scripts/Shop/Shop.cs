@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Yarn.Unity;
 
 public class Shop : MonoBehaviour
 {
@@ -10,18 +9,30 @@ public class Shop : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private DialogManager dialogManager;
+    [SerializeField] ShopItem emptySpot;
+    private readonly List<Vector3> shopItemPositions = new();
+
     #endregion
 
     #region Private Fields
     public ShopItem focusedShopItem;
     private int focusedShopItemIndex = 0;
-    [SerializeField] ShopItem emptySpot;
     #endregion
 
     #region MonoBehaviour Methods
     private void Start()
     {
-        focusedShopItem = shopItems[focusedShopItemIndex];
+        for (int positionIndex = 1; positionIndex <= 6; positionIndex++)
+        {
+            string positionName = "Position " + positionIndex;
+            Transform childTransform = transform.Find(positionName);
+            if (childTransform != null)
+            {
+                Vector3 childPosition = childTransform.position;
+                shopItemPositions.Add(childPosition);
+            }
+        }
+        SpawnItems();
     }
     #endregion
 
@@ -33,7 +44,7 @@ public class Shop : MonoBehaviour
     public void FocusItem()
     {
         playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.ShoppingItem);
-        playerCamera.SetShopItem(focusedShopItem);
+        playerCamera.SetShopItem(shopItemPositions[focusedShopItemIndex]);
     }
 
     /// <summary>
@@ -87,6 +98,15 @@ public class Shop : MonoBehaviour
         dialogManager.EndDialog();
         dialogManager.SetShopItemNameHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
+    }
+    private void SpawnItems()
+    {
+        for (int i = 0; i < shopItemPositions.Count; i++)
+        {
+            GameObject newObject = Instantiate(shopItems[i].gameObject, shopItemPositions[i], Quaternion.identity);
+            newObject.transform.parent = transform;
+        }
+        focusedShopItem = shopItems[focusedShopItemIndex];
     }
 }
 #endregion
