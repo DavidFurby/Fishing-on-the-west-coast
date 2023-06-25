@@ -32,12 +32,21 @@ public class DialogManager : MonoBehaviour
     }
     public void SetShopItemNameHandler(ShopItem shopItem)
     {
+        SetTextRevealCoroutine();
         RemoveHandler("setShopItemName");
         dialogueRunner.AddCommandHandler("setShopItemName", () =>
         {
             dialogueRunner.VariableStorage.SetValue("$shopItemName", shopItem.name);
             dialogueRunner.VariableStorage.SetValue("$shopItemPrice", shopItem.Price);
             dialogueRunner.VariableStorage.SetValue("$shopItemDescription", shopItem.Description);
+        });
+    }
+    public void SetTextRevealCoroutine()
+    {
+        RemoveHandler("setTextRevealCoroutine");
+        dialogueRunner.AddCommandHandler("setTextRevealCoroutine", () =>
+        {
+            view.SetTextRevealCoroutine();
         });
     }
     private void BuyShopItem()

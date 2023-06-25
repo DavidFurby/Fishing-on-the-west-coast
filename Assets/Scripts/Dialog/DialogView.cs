@@ -14,9 +14,11 @@ public class DialogView : DialogueViewBase
     [SerializeField] PlayerController playerController;
     private string dialogueLine;
     private Coroutine textRevealCoroutine;
+    public bool useTextRevealCoroutine;
     private void Start()
     {
         ShowDialog(false);
+        useTextRevealCoroutine = true;
     }
     public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)
     {
@@ -24,7 +26,16 @@ public class DialogView : DialogueViewBase
         this.dialogueLine = dialogueLine.TextWithoutCharacterName.Text;
         speakerGUI.text = dialogueLine.CharacterName;
         advanceHandler = requestInterrupt;
-        textRevealCoroutine = StartCoroutine(RevealText(this.dialogueLine));
+        if (useTextRevealCoroutine)
+        {
+            textRevealCoroutine = StartCoroutine(RevealText(this.dialogueLine));
+        }
+        else
+        {
+            textGUI.text = this.dialogueLine;
+        }
+
+
     }
 
     public override void DismissLine(Action onDismissalComplete)
@@ -37,7 +48,6 @@ public class DialogView : DialogueViewBase
     {
         if (container.gameObject.activeSelf)
         {
-            Debug.Log("advance");
             advanceHandler?.Invoke();
         }
     }
@@ -64,6 +74,7 @@ public class DialogView : DialogueViewBase
     {
         if (Input.GetKeyDown(KeyCode.Space) && container.gameObject.activeSelf)
         {
+            Debug.Log("press");
             if (textGUI.text.Length == dialogueLine.Length)
             {
                 UserRequestedViewAdvancement();
@@ -80,8 +91,12 @@ public class DialogView : DialogueViewBase
     {
         for (int i = 0; i <= fullText.Length; i++)
         {
-            textGUI.text = fullText.Substring(0, i);
+            textGUI.text = fullText[..i];
             yield return new WaitForSeconds(0.05f);
         }
+    }
+    public void SetTextRevealCoroutine()
+    {
+        useTextRevealCoroutine = !useTextRevealCoroutine;
     }
 }
