@@ -111,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac630ec9f4fb0b149b25a03b1380a222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
-  itemName: Bait
+  name: Bait
   price: 20
   description: Bait for attracting fishes

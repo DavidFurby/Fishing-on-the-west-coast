@@ -16,8 +16,12 @@ colorID: 0
 position: -193,-302
 ---
 <<setShopItemName>>
+<<if $shopItemName == "Empty spot">>
+Sold out
+<<else>>
 {$shopItemName}<br>{$shopItemPrice}<br>{$shopItemDescription}
 <<jump ShopItemOptions>>
+<<endif>>
 ===
 title: ShopItemOptions
 tags:

@@ -46,9 +46,11 @@ public class DialogManager : MonoBehaviour
         RemoveHandler("setShopItemName");
         dialogueRunner.AddCommandHandler("setShopItemName", () =>
         {
-            dialogueRunner.VariableStorage.SetValue("$shopItemName", shopItem.name);
+            dialogueRunner.VariableStorage.SetValue("$shopItemName", shopItem.Name);
             dialogueRunner.VariableStorage.SetValue("$shopItemPrice", shopItem.Price);
             dialogueRunner.VariableStorage.SetValue("$shopItemDescription", shopItem.Description);
+
+
         });
     }
     public void LockControls()
