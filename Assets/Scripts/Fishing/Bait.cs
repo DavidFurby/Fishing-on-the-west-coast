@@ -69,12 +69,12 @@ public class Bait : MonoBehaviour
     {
         if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.StandBy)
         {
-            distance.text = "Distance " + Vector3.Distance(fishingRodTop.transform.position, transform.position).ToString("F2") + " meter";
+            distance.text = "Distance: " + Vector3.Distance(fishingRodTop.transform.position, transform.position).ToString("F2") + " meter";
 
         }
         else
         {
-            distance.text = "Distance " + "0" + " meter";
+            distance.text = "Distance: " + "0" + " meter";
         }
     }
     private bool IsCloseToTarget(Vector3 targetPosition)
