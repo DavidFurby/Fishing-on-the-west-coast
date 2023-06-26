@@ -13,6 +13,8 @@ public class FishingMiniGame : MonoBehaviour
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
+    [SerializeField] private MusicController musicController;
+
 
 
     // Start is called before the first frame update
@@ -118,6 +120,7 @@ public class FishingMiniGame : MonoBehaviour
         fishingMiniGame.SetActive(true);
         fishesOnHook = fishes;
         InvokeRepeating(nameof(AddForce), 2, 2);
+        musicController.PlayMiniGameMusic();
     }
 
     public void EndFishingMiniGame()
@@ -125,5 +128,6 @@ public class FishingMiniGame : MonoBehaviour
         balance.value = 0.5f;
         fishesOnHook = null;
         fishingMiniGame.SetActive(false);
+        musicController.StopFishingMiniGameMusic();
     }
 }

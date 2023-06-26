@@ -479,7 +479,6 @@ MonoBehaviour:
   catchSummary: {fileID: 1491492617}
   fishingMiniGame: {fileID: 1491492618}
   playerAnimator: {fileID: 0}
-  musicController: {fileID: 1454551179}
   castingPower: 0
   fishingStatus: 0
 --- !u!1 &503535253 stripped
@@ -1287,7 +1286,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1491492624}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1891,6 +1890,7 @@ MonoBehaviour:
   fishingMiniGame: {fileID: 1875585888}
   balance: {fileID: 2063051626}
   fishingControlls: {fileID: 464174470}
+  musicController: {fileID: 1454551179}
 --- !u!224 &1491492624 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8690102946955983174, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}

@@ -12,7 +12,6 @@ public class Bait : MonoBehaviour
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
-    private float reelInSpeed = 15f;
     [SerializeField] private GameObject fishingRodTop;
     [SerializeField] private FishingControlls fishingControlls;
     [SerializeField] private Scrollbar balance;
@@ -68,7 +67,15 @@ public class Bait : MonoBehaviour
     //Calculate distance cast
     private void CalculateDistance()
     {
-        distance.text = "Distance " + Vector3.Distance(fishingRodTop.transform.position, transform.position).ToString("F2") + " meter";
+        if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.StandBy)
+        {
+            distance.text = "Distance " + Vector3.Distance(fishingRodTop.transform.position, transform.position).ToString("F2") + " meter";
+
+        }
+        else
+        {
+            distance.text = "Distance " + "0" + " meter";
+        }
     }
     private bool IsCloseToTarget(Vector3 targetPosition)
     {
@@ -86,19 +93,10 @@ public class Bait : MonoBehaviour
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
-        float reelInSpeed = CalculateReelInSpeed();
-        transform.Translate(reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+        transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
+        transform.Translate(fishingControlls.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
     }
 
-    private float CalculateReelInSpeed()
-    {
-        if (catchArea.fish != null)
-        {
-            reelInSpeed /= catchArea.fish.GetComponent<Fish>().Size / 10;
-            transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
-        }
-        return reelInSpeed;
-    }
 
 
 

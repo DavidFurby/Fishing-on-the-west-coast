@@ -13,8 +13,9 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private CatchSummary catchSummary;
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private Animator playerAnimator;
+    private float initialReelInSpeed = 15f;
+    public float reelInSpeed;
 
-    [SerializeField] private MusicController musicController;
     #endregion
 
     #region Public Fields
@@ -37,6 +38,7 @@ public class FishingControlls : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
+        reelInSpeed = initialReelInSpeed;
         GameObject playerModel = GameObject.FindWithTag("PlayerModel");
 
         // Check if the player model was found
@@ -51,7 +53,7 @@ public class FishingControlls : MonoBehaviour
         }
 
         fishingStatus = FishingStatus.StandBy;
-        
+
     }
 
     // Update is called once per frame
@@ -78,7 +80,7 @@ public class FishingControlls : MonoBehaviour
                 StartCoroutine(CatchAlert());
                 catchArea.CatchFish();
                 fishingMiniGame.StartFishingMiniGame(catchArea.totalFishes);
-                musicController.PlayMiniGameMusic();
+                CalculateReelInSpeed();
                 SetFishingStatus(FishingStatus.ReelingFish);
             }
             else
@@ -88,13 +90,22 @@ public class FishingControlls : MonoBehaviour
 
         }
     }
+
+
+    public void CalculateReelInSpeed()
+    {
+        for (int i = 0; i < catchArea.totalFishes.Count; i++)
+        {
+            reelInSpeed = initialReelInSpeed - (catchArea.totalFishes[i].Size / 10);
+        }
+        Debug.Log(reelInSpeed);
+    }
     public IEnumerator CatchAlert()
     {
         baitCamera.CatchAlertSound();
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(1);
         Time.timeScale = 1;
-        Debug.Log("Alert");
     }
 
     /// <summary>
@@ -106,13 +117,13 @@ public class FishingControlls : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                if(playerAnimator.GetBool("chargingThrow") == false)
+                if (playerAnimator.GetBool("chargingThrow") == false)
                     playerAnimator.SetBool("chargingThrow", true);
                 ChargeCasting();
             }
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                if(playerAnimator.GetBool("chargingThrow") == true)
+                if (playerAnimator.GetBool("chargingThrow") == true)
                     playerAnimator.SetBool("chargingThrow", false);
 
                 animator.Play("Reverse Swing");
@@ -146,7 +157,6 @@ public class FishingControlls : MonoBehaviour
         {
             SetFishingStatus(FishingStatus.InspectFish);
             fishingMiniGame.EndFishingMiniGame();
-            musicController.StopFishingMiniGameMusic();
             catchSummary.InititateCatchSummary(catchArea.totalFishes);
         }
     }
@@ -167,7 +177,6 @@ public class FishingControlls : MonoBehaviour
     {
         if (fishingStatus == FishingStatus.ReelingFish)
         {
-            musicController.StopFishingMiniGameMusic();
             fishingMiniGame.EndFishingMiniGame();
             catchArea.RemoveCatch();
             SetFishingStatus(FishingStatus.Reeling);
@@ -185,7 +194,7 @@ public class FishingControlls : MonoBehaviour
         if (castingPower < 200)
         {
             castingPower++;
-            playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed")+ 0.01f);
+            playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.01f);
         }
     }
     public void SetFishingStatus(FishingStatus fishingStatus)

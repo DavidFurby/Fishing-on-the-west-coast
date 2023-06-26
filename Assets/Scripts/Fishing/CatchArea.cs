@@ -39,6 +39,7 @@ public class CatchArea : MonoBehaviour
         newFishMovement.GetBaited(totalFishes[^1].gameObject);
         newFishMovement.SetFishState(FishMovement.FishState.Hooked);
         totalFishes.Add(newFish.GetComponent<Fish>());
+        fishingControlls.CalculateReelInSpeed();
     }
     //Catch fish while fishing
     public void CatchFish()
