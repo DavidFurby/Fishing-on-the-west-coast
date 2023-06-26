@@ -1,0 +1,66 @@
+﻿title: ShopKeeper
+tags:
+position: 288,-188
+---
+<<declare $shopItemName = "" as string>>
+<<declare $shopItemPrice = 0 as number>>
+<<declare $shopItemDescription = "" as string>>
+
+ShopKeeper: Hiya what can i do for you today?
+<<openShop>>
+===
+
+title: ShopItem
+tags:
+colorID: 0
+position: -193,-302
+---
+<<setShopItemName>>
+<<if $shopItemName == "Empty spot">>
+Sold out
+<<else>>
+{$shopItemName}<br>{$shopItemPrice}<br>{$shopItemDescription}
+<<jump ShopItemOptions>>
+<<endif>>
+===
+title: ShopItemOptions
+tags:
+colorID: 0
+position: -285,-135
+---
+<<lockControls>>
+ShopKepper: that will be {$shopItemPrice}
+
+-> Player: Cool ill buy it
+    <<lockControls>>
+    <<jump BuyItem>>
+-> Player: Think ill skip
+    <<lockControls>>
+    <<jump DeclineItem>>
+===
+
+title: BuyItem
+tags:
+colorID: 0
+position: -2,38
+---
+ <<buyShopItem>>
+ ShopKepper: Aye thanks matey
+
+===
+
+title: DeclineItem
+tags:
+colorID: 0
+position: -129,307
+---
+ShopKepper: Oh maybe next time then
+===
+title: InsufficentPayment
+tags:
+colorID: 0
+position: -2,38
+---
+Ohh looks like you don't have enough fishes for that one yet.
+<<jump ShopItem>>
+===

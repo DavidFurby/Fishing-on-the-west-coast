@@ -11,11 +11,14 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Interactible interactible;
     public PlayerStatus playerStatus;
+    [SerializeField] private Shop shop;
+    public bool selectedItem = true;
 
     public enum PlayerStatus
     {
         StandBy,
-        Interacting
+        Interacting,
+        Shopping
     }
 
 
@@ -41,23 +44,40 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
         HandleInput();
-
+        HandleShoppingInput();
     }
     private void FixedUpdate()
     {
 
         HandleMovement();
+    }
 
+    private void HandleShoppingInput()
+    {
+        if (playerStatus == PlayerStatus.Shopping && !selectedItem)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                shop.ScrollBetweenItems(false);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                shop.ScrollBetweenItems(true);
 
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                shop.CloseShop();
+            }
+        }
     }
     //Handle player input
     private void HandleInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        if (playerStatus == PlayerStatus.StandBy)
+        if (playerStatus == PlayerStatus.StandBy && Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactible != null)
         {
 
            if (horizontalInput != 0 || verticalInput != 0)
@@ -127,14 +147,8 @@ public class PlayerController : MonoBehaviour
     //Activates interactible object if player is within trigger area and button is pressed
     private void ActivateInteractible()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea)
-        {
-            if (interactible != null)
-            {
-                SetPlayerStatus(PlayerStatus.Interacting);
-                interactible.CheckActivated();
-            }
-        }
+        SetPlayerStatus(PlayerStatus.Interacting);
+        interactible.CheckActivated();
     }
 
     public void SetPlayerStatus(PlayerStatus playerStatus)
