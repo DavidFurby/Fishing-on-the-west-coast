@@ -18,6 +18,6 @@ public class GameData
         catchCount = game.Fishes;
         scene = game.Scene.ToString();
         foundCatches = game.Catches.Select(fish => new FishData(fish)).ToArray();
-        foundFishingRods = game.
+        foundFishingRods = game.FishingRods.Select(fishingRod => new FishingRodData(fishingRod)).ToArray();
     }
 }

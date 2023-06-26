@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
@@ -87,13 +88,16 @@ public class Shop : MonoBehaviour
         {
             if (MainManager.Instance.game.Fishes >= focusedShopItem.Price)
             {
-                GameObject replacement = Instantiate(emptySpot.gameObject, focusedShopItem.transform.position, focusedShopItem.transform.rotation);
+                if (!IsFishingRodInInventory(focusedShopItem))
+                {
+                    FishingRod fishingRod = focusedShopItem.gameObject.GetComponent<FishingRod>();
+                    fishingRod.AddFishingRodToInstance();
+                }
+                GameObject replacement = Instantiate(emptySpot.gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
                 replacement.transform.parent = focusedShopItem.transform.parent;
                 shopItems[focusedShopItemIndex] = replacement.GetComponent<ShopItem>();
-                var prevItem = focusedShopItem;
                 focusedShopItem = replacement.GetComponent<ShopItem>();
                 FocusItem();
-                Destroy(prevItem.gameObject);
             }
             else
             {
@@ -117,7 +121,6 @@ public class Shop : MonoBehaviour
             {
                 // If the fishing rod is already in the player's inventory, spawn an empty spot instead
                 SpawnEmptySpot(i);
-                break;
             }
             else
             {
@@ -132,14 +135,23 @@ public class Shop : MonoBehaviour
 
     private bool IsFishingRodInInventory(ShopItem shopItem)
     {
-        FishingRod fishingRod = shopItem.gameObject.GetComponent<FishingRod>();
-        var fishingRods = MainManager.Instance.game.FishingRods;
-        return fishingRods.Contains(fishingRod);
+        if (shopItem.gameObject.TryGetComponent<FishingRod>(out var fishingRod))
+        {
+            var fishingRods = MainManager.Instance.game.FishingRods;
+            return !MainManager.Instance.game.FishingRods.Any(f => f.Id == fishingRod.Id);
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
     private void SpawnEmptySpot(int index)
     {
-        Instantiate(emptySpot, shopItemPositions[index], Quaternion.identity);
+        shopItems[index] = emptySpot;
+        GameObject gameObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
+        gameObject.transform.parent = transform;
     }
 
     private void SpawnShopItem(int index)

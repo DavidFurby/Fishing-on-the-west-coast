@@ -39,4 +39,8 @@ public class FishingRod : MonoBehaviour
         strength = fishingRodData.strength;
         throwRange = fishingRodData.throwRange;
     }
+    public void AddFishingRodToInstance()
+    {
+        MainManager.Instance.game.FishingRods = MainManager.Instance.game.FishingRods.Append(this).ToArray();
+    }
 }
