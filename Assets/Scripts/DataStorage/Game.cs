@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     private int catchCount;
     private string scene;
     private Fish[] catches = new Fish[0];
+    private FishingRod[] fishingRods = new FishingRod[0];
 
     public int Days
     {
@@ -23,6 +24,12 @@ public class Game : MonoBehaviour
     {
         get { return catches; }
         set { catches = value; }
+
+    }
+    public FishingRod[] FishingRods
+    {
+        get { return fishingRods; }
+        set { fishingRods = value; }
 
     }
 
@@ -44,6 +51,7 @@ public class Game : MonoBehaviour
         catchCount = gameData.catchCount;
         scene = gameData.scene;
         catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Fish>()).ToArray();
+        fishingRods = gameData.foundFishingRods.Select(fishingRodData => gameObject.AddComponent<FishingRod>()).ToArray();
     }
     public void NewGame()
     {
@@ -54,6 +62,7 @@ public class Game : MonoBehaviour
             catchCount = 0;
             scene = "Home";
             catches = new Fish[0];
+            fishingRods = new FishingRod[0];
         }
 
     }

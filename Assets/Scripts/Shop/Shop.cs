@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
@@ -108,12 +109,43 @@ public class Shop : MonoBehaviour
     }
     private void SpawnItems()
     {
+        // Loop through all shop item positions
         for (int i = 0; i < shopItemPositions.Count; i++)
         {
-            GameObject newObject = Instantiate(shopItems[i].gameObject, shopItemPositions[i], Quaternion.identity);
-            newObject.transform.parent = transform;
+            // Check if the current shop item is a fishing rod and is already in the player's inventory
+            if (IsFishingRodInInventory(shopItems[i]))
+            {
+                // If the fishing rod is already in the player's inventory, spawn an empty spot instead
+                SpawnEmptySpot(i);
+                break;
+            }
+            else
+            {
+                // Otherwise, spawn the shop item
+                SpawnShopItem(i);
+            }
         }
+
+        // Set the initial focused shop item
         focusedShopItem = shopItems[focusedShopItemIndex];
+    }
+
+    private bool IsFishingRodInInventory(ShopItem shopItem)
+    {
+        FishingRod fishingRod = shopItem.gameObject.GetComponent<FishingRod>();
+        var fishingRods = MainManager.Instance.game.FishingRods;
+        return fishingRods.Contains(fishingRod);
+    }
+
+    private void SpawnEmptySpot(int index)
+    {
+        Instantiate(emptySpot, shopItemPositions[index], Quaternion.identity);
+    }
+
+    private void SpawnShopItem(int index)
+    {
+        GameObject newObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
+        newObject.transform.parent = transform;
     }
 }
 #endregion
