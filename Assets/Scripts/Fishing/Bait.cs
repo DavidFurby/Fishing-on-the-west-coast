@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,14 +11,14 @@ public class Bait : MonoBehaviour
     private const float BounceDamp = 0.5f;
     private float forceFactor = 1f;
     private Vector3 targetPosition;
+    private Rigidbody rigidBody;
+    private float reelInSpeed = 15f;
     [SerializeField] private GameObject fishingRodTop;
     [SerializeField] private FishingControlls fishingControlls;
-    private Rigidbody rigidBody;
     [SerializeField] private Scrollbar balance;
     [SerializeField] private CatchArea catchArea;
     [SerializeField] private AudioSource splashSound;
-    private float reelInSpeed = 15f;
-
+    [SerializeField] private TextMeshProUGUI distance;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class Bait : MonoBehaviour
         ReelIn();
         Shake();
         Cast();
+        CalculateDistance();
     }
 
     public void Cast()
@@ -63,7 +65,11 @@ public class Bait : MonoBehaviour
             }
         }
     }
-
+    //Calculate distance cast
+    private void CalculateDistance()
+    {
+        distance.text = "Distance " + Vector3.Distance(fishingRodTop.transform.position, transform.position).ToString("F2") + " meter";
+    }
     private bool IsCloseToTarget(Vector3 targetPosition)
     {
         return Vector3.Distance(transform.position, targetPosition) < 0.1f;
