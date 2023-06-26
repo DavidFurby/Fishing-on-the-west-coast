@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
@@ -137,8 +136,7 @@ public class Shop : MonoBehaviour
     {
         if (shopItem.gameObject.TryGetComponent<FishingRod>(out var fishingRod))
         {
-            var fishingRods = MainManager.Instance.game.FishingRods;
-            return !MainManager.Instance.game.FishingRods.Any(f => f.Id == fishingRod.Id);
+            return MainManager.Instance.game.FishingRods.Any(f => f.Id == fishingRod.Id);
         }
         else
         {
