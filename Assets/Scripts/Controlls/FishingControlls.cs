@@ -14,19 +14,20 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private Animator playerAnimator;
     private readonly float initialReelInSpeed = 15f;
-    public float reelInSpeed;
 
     #endregion
 
     #region Public Fields
-    public float castingPower = 20f;
+    public float castingPower;
     public FishingStatus fishingStatus;
+    public float reelInSpeed;
     #endregion
 
     #region Enums
     public enum FishingStatus
     {
         StandBy,
+        Charging,
         Casting,
         Fishing,
         Reeling,
@@ -112,8 +113,9 @@ public class FishingControlls : MonoBehaviour
     /// </summary>
     private void StartFishing()
     {
-        if (fishingStatus == FishingStatus.StandBy)
+        if (fishingStatus == FishingStatus.StandBy || fishingStatus == FishingStatus.Charging)
         {
+            SetFishingStatus(FishingStatus.Charging);
             if (Input.GetKey(KeyCode.Space))
             {
                 if (playerAnimator.GetBool("chargingThrow") == false)
@@ -146,13 +148,16 @@ public class FishingControlls : MonoBehaviour
         {
             yield return null;
         }
+        castingPower *= fishingMiniGame.chargeRate;
+        Debug.Log(fishingMiniGame.chargeRate);
+        fishingMiniGame.SetChargingBalance(false);
         SetFishingStatus(FishingStatus.Casting);
     }
 
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
-        if (catchArea.totalFishes.Count > 0)
+        if (catchArea.totalFishes.Count > 0 && fishingStatus == FishingStatus.StandBy)
         {
             SetFishingStatus(FishingStatus.InspectFish);
             fishingMiniGame.EndFishingMiniGame();
@@ -195,10 +200,19 @@ public class FishingControlls : MonoBehaviour
             castingPower++;
             playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.01f);
         }
+        else
+        {
+            fishingMiniGame.SetChargingBalance(true);
+        }
     }
     public void SetFishingStatus(FishingStatus fishingStatus)
     {
         this.fishingStatus = fishingStatus;
+    }
+    public void ResetValues()
+    {
+        castingPower = 0;
+        reelInSpeed = initialReelInSpeed;
     }
 
     #endregion

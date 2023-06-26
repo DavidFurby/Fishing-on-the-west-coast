@@ -79,7 +79,7 @@ public class Bait : MonoBehaviour
     }
     private bool IsCloseToTarget(Vector3 targetPosition)
     {
-        return Vector3.Distance(transform.position, targetPosition) < 0.1f;
+        return Vector3.Distance(transform.position, targetPosition) < 1f;
     }
 
     private void MoveTowardsTarget(Vector3 targetPosition)
@@ -106,12 +106,13 @@ public class Bait : MonoBehaviour
         rigidBody.isKinematic = true;
         transform.position = targetPosition;
         fishingControlls.SetFishingStatus(FishingControlls.FishingStatus.StandBy);
+        Debug.Log("attached");
         ResetValues();
     }
 
     private void ResetValues()
     {
-        fishingControlls.castingPower = 0f;
+        fishingControlls.ResetValues();
         forceFactor = 1f;
     }
     private void Float()

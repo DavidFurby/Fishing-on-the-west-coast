@@ -10,10 +10,13 @@ public class FishingMiniGame : MonoBehaviour
     [SerializeField] private Scrollbar balance;
     [SerializeField] private FishingControlls fishingControlls;
     [SerializeField] private MusicController musicController;
+    [SerializeField] private Scrollbar castingPower;
     private List<Fish> fishesOnHook;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
+    private bool castingPowerDirection = true;
+    public float chargeRate;
 
 
 
@@ -21,6 +24,7 @@ public class FishingMiniGame : MonoBehaviour
     void Start()
     {
         fishingMiniGame.SetActive(false);
+        castingPower.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -32,6 +36,10 @@ public class FishingMiniGame : MonoBehaviour
             BalanceLost();
             BalanceControls();
             HandleBalanceColor();
+        }
+        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Charging)
+        {
+            ChargingBalance();
         }
     }
 
@@ -129,5 +137,25 @@ public class FishingMiniGame : MonoBehaviour
         fishesOnHook = null;
         fishingMiniGame.SetActive(false);
         musicController.StopFishingMiniGameMusic();
+    }
+
+    public void SetChargingBalance(bool active)
+    {
+        castingPower.gameObject.SetActive(active);
+    }
+
+    private void ChargingBalance()
+    {
+        chargeRate = Mathf.Min(castingPower.value, 1 - castingPower.value) + 1f;
+
+        castingPower.value += castingPowerDirection ? 0.01f : -0.01f;
+        if (castingPower.value >= 1)
+        {
+            castingPowerDirection = false;
+        }
+        else if (castingPower.value <= 0)
+        {
+            castingPowerDirection = true;
+        }
     }
 }
