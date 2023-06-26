@@ -56,7 +56,7 @@ public class Bait : MonoBehaviour
             if (IsCloseToTarget(targetPosition))
             {
                 AttachBait();
-                HandleCatch();
+                fishingControlls.HandleCatch();
             }
             else
             {
@@ -80,14 +80,6 @@ public class Bait : MonoBehaviour
     private bool IsCloseToTarget(Vector3 targetPosition)
     {
         return Vector3.Distance(transform.position, targetPosition) < 0.1f;
-    }
-
-    private void HandleCatch()
-    {
-        if (catchArea.fish != null)
-        {
-            fishingControlls.HandleCatch();
-        }
     }
 
     private void MoveTowardsTarget(Vector3 targetPosition)

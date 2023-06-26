@@ -9,11 +9,11 @@ public class FishingMiniGame : MonoBehaviour
     [SerializeField] private GameObject fishingMiniGame;
     [SerializeField] private Scrollbar balance;
     [SerializeField] private FishingControlls fishingControlls;
+    [SerializeField] private MusicController musicController;
     private List<Fish> fishesOnHook;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
-    [SerializeField] private MusicController musicController;
 
 
 

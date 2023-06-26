@@ -13,7 +13,7 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private CatchSummary catchSummary;
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private Animator playerAnimator;
-    private float initialReelInSpeed = 15f;
+    private readonly float initialReelInSpeed = 15f;
     public float reelInSpeed;
 
     #endregion
@@ -59,7 +59,6 @@ public class FishingControlls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         ReelInBait();
         StartFishing();
         EndCatch();

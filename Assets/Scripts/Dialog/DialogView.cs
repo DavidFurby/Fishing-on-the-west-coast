@@ -8,14 +8,14 @@ public class DialogView : DialogueViewBase
 {
 
     [SerializeField] RectTransform container;
-    Action advanceHandler;
     [SerializeField] TextMeshProUGUI speakerGUI;
     [SerializeField] TextMeshProUGUI textGUI;
     [SerializeField] PlayerController playerController;
+    [SerializeField] DialogManager dialogManager;
+    Action advanceHandler;
     private string dialogueLine;
     private Coroutine textRevealCoroutine;
     private bool useTextRevealCoroutine;
-    [SerializeField] DialogManager dialogManager;
     private void Start()
     {
         useTextRevealCoroutine = false;
