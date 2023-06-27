@@ -67,7 +67,7 @@ public class Bait : MonoBehaviour
     //Calculate distance cast
     private void CalculateDistance()
     {
-        if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.StandBy)
+        if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.StandBy || fishingControlls.fishingStatus != FishingControlls.FishingStatus.InspectFish)
         {
             distance.text = "Distance: " + Vector3.Distance(fishingRodTop.transform.position, transform.position).ToString("F2") + " meter";
 
@@ -106,7 +106,6 @@ public class Bait : MonoBehaviour
         rigidBody.isKinematic = true;
         transform.position = targetPosition;
         fishingControlls.SetFishingStatus(FishingControlls.FishingStatus.StandBy);
-        Debug.Log("attached");
         ResetValues();
     }
 

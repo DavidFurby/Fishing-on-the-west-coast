@@ -70,7 +70,7 @@ public class FishingMiniGame : MonoBehaviour
             balance.value = Mathf.Lerp(balance.value, targetValue, Time.deltaTime * 1000f);
         }
     }
-    //Add weight towards the balance is moving towards
+    //Add weight towards the direction the bait moving towards
     private void AddForce()
     {
         if (balance.value >= 0.5)

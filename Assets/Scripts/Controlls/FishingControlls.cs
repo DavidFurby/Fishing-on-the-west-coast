@@ -85,6 +85,7 @@ public class FishingControlls : MonoBehaviour
             }
             else
             {
+                reelInSpeed = 50f;
                 SetFishingStatus(FishingStatus.Reeling);
             }
 
@@ -149,7 +150,6 @@ public class FishingControlls : MonoBehaviour
             yield return null;
         }
         castingPower *= fishingMiniGame.chargeRate;
-        Debug.Log(fishingMiniGame.chargeRate);
         fishingMiniGame.SetChargingBalance(false);
         SetFishingStatus(FishingStatus.Casting);
     }
