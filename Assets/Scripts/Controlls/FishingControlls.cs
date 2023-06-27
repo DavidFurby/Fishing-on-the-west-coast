@@ -149,7 +149,7 @@ public class FishingControlls : MonoBehaviour
             yield return null;
         }
         castingPower *= fishingMiniGame.chargeRate;
-        fishingMiniGame.SetChargingBalance();
+        fishingMiniGame.SetChargingBalance(false);
         SetFishingStatus(FishingStatus.Casting);
     }
 

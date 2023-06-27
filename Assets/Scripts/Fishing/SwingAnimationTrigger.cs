@@ -6,6 +6,6 @@ public class SwingAnimationTrigger : MonoBehaviour
 
     public void TriggerSetChargingBalance()
     {
-        miniGame.SetChargingBalance();
+        miniGame.SetChargingBalance(true);
     }
 }
