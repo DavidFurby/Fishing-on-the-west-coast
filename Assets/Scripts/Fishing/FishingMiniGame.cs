@@ -138,9 +138,9 @@ public class FishingMiniGame : MonoBehaviour
         musicController.StopFishingMiniGameMusic();
     }
 
-    public void SetChargingBalance(bool active)
+    public void SetChargingBalance()
     {
-        castingPower.gameObject.SetActive(active);
+        castingPower.gameObject.SetActive(!castingPower.gameObject.activeSelf);
     }
 
     private void ChargingBalance()

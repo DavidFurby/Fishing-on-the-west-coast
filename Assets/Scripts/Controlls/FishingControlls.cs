@@ -149,7 +149,7 @@ public class FishingControlls : MonoBehaviour
             yield return null;
         }
         castingPower *= fishingMiniGame.chargeRate;
-        fishingMiniGame.SetChargingBalance(false);
+        fishingMiniGame.SetChargingBalance();
         SetFishingStatus(FishingStatus.Casting);
     }
 
@@ -198,10 +198,6 @@ public class FishingControlls : MonoBehaviour
         {
             castingPower++;
             playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.01f);
-        }
-        else
-        {
-            fishingMiniGame.SetChargingBalance(true);
         }
     }
     public void SetFishingStatus(FishingStatus fishingStatus)
