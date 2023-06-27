@@ -94,7 +94,7 @@ public class Bait : MonoBehaviour
 
     private void Shake()
     {
-        if (catchArea.isInCatchArea)
+        if (catchArea.IsInCatchArea)
         {
             splashSound.Play();
             transform.position = new Vector3(transform.position.x + Mathf.Sin(Time.time * 20) * 0.01f, transform.position.y, transform.position.z);

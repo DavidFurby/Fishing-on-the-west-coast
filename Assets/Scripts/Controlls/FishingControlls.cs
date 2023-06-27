@@ -75,7 +75,7 @@ public class FishingControlls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && fishingStatus == FishingStatus.Fishing)
         {
-            if (catchArea.isInCatchArea && catchArea.fish != null)
+            if (catchArea.IsInCatchArea && catchArea.fish != null)
             {
                 StartCoroutine(CatchAlert());
                 catchArea.CatchFish();
@@ -119,21 +119,17 @@ public class FishingControlls : MonoBehaviour
             SetFishingStatus(FishingStatus.Charging);
             if (Input.GetKey(KeyCode.Space))
             {
-                if (playerAnimator.GetBool("chargingThrow") == false)
-                    playerAnimator.SetBool("chargingThrow", true);
+                playerAnimator.SetBool("chargingThrow", true);
                 ChargeCasting();
             }
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                if (playerAnimator.GetBool("chargingThrow") == true)
-                    playerAnimator.SetBool("chargingThrow", false);
-
+                playerAnimator.SetBool("chargingThrow", false);
                 animator.Play("Reverse Swing");
                 castSound.Play();
                 StartCoroutine(WaitForSwingAnimation());
             }
         }
-
     }
 
     /// <summary>

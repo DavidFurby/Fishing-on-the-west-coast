@@ -16,7 +16,7 @@ public class CatchSummary : MonoBehaviour
     private int fishIndex;
     [SerializeField] private FishingControlls fishingControlls;
 
-    public void InititateCatchSummary(List<Fish> fishes)
+    public void InitiateCatchSummary(List<Fish> fishes)
     {
         caughtFishes = fishes;
         currentlyPresentedFish = fishes[0];
@@ -31,8 +31,8 @@ public class CatchSummary : MonoBehaviour
         CheckSizeDifference(currentlyPresentedFish);
         CheckIfNew(currentlyPresentedFish);
         AddFishToCount();
-
     }
+
     //If there are more fishes switch summary. otherwise end the summary
     public void NextSummary()
     {
@@ -47,12 +47,11 @@ public class CatchSummary : MonoBehaviour
             EndSummary();
         }
     }
+
     public void AddFishToCount()
     {
         MainManager.Instance.game.Fishes++;
     }
-
-
 
     // Check if fish is larger than the saved fish of the same name
     private void CheckSizeDifference(Fish fishData)
@@ -69,7 +68,8 @@ public class CatchSummary : MonoBehaviour
             newRecord.gameObject.SetActive(false);
         }
     }
-    //Check if fish hasnt been caught before
+
+    //Check if fish hasn't been caught before
     private void CheckIfNew(Fish fishData)
     {
         if (!MainManager.Instance.game.Catches.Any(f => f.Id == fishData.Id))
@@ -82,6 +82,7 @@ public class CatchSummary : MonoBehaviour
             isNew.gameObject.SetActive(false);
         }
     }
+
     //Reset data and set fishingStatus to Standby to end summary
     private void EndSummary()
     {
@@ -94,6 +95,7 @@ public class CatchSummary : MonoBehaviour
     {
         catchSummary.SetActive(!catchSummary.activeSelf);
     }
+
     //Reset values
     private void ResetValues()
     {
