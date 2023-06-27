@@ -24,7 +24,7 @@ public class CatchSummary : MonoBehaviour
         PresentSummary();
     }
 
-    public void PresentSummary()
+    private void PresentSummary()
     {
         catchName.text = currentlyPresentedFish.FishName;
         sizeText.text = currentlyPresentedFish.Size.ToString("f2");
@@ -48,7 +48,7 @@ public class CatchSummary : MonoBehaviour
         }
     }
 
-    public void AddFishToCount()
+    private void AddFishToCount()
     {
         MainManager.Instance.game.Fishes++;
     }
@@ -56,17 +56,21 @@ public class CatchSummary : MonoBehaviour
     // Check if fish is larger than the saved fish of the same name
     private void CheckSizeDifference(Fish fishData)
     {
-        var existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
-        if (existingFish != null)
+        if (fishData != null)
         {
-            newRecord.gameObject.SetActive(true);
-            int index = Array.IndexOf(MainManager.Instance.game.Catches, existingFish);
-            fishData.ReplaceFishInInstance(index);
+            var existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
+            if (existingFish != null)
+            {
+                newRecord.gameObject.SetActive(true);
+                int index = Array.IndexOf(MainManager.Instance.game.Catches, existingFish);
+                fishData.ReplaceFishInInstance(index);
+            }
+            else
+            {
+                newRecord.gameObject.SetActive(false);
+            }
         }
-        else
-        {
-            newRecord.gameObject.SetActive(false);
-        }
+
     }
 
     //Check if fish hasn't been caught before

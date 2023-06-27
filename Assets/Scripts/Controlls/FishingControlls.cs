@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -190,8 +191,9 @@ public class FishingControlls : MonoBehaviour
 
     private void ChargeCasting()
     {
+        FishingRod strongestRod = MainManager.Instance.game.FishingRods.OrderByDescending(rod => rod.Strength).First();
         animator.Play("Swing");
-        if (castingPower < 200)
+        if (castingPower < strongestRod.Strength)
         {
             castingPower++;
             playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.01f);

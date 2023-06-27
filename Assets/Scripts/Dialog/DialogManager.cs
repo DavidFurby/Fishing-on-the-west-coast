@@ -20,10 +20,14 @@ public class DialogManager : MonoBehaviour
     void Start()
     {
         SetDayHandler();
-        OpenShopHandler();
         BuyShopItem();
-        SetShopItemNameHandler(shop.focusedShopItem);
         LockControls();
+        if (shop != null)
+        {
+            OpenShopHandler();
+
+            SetShopItemNameHandler(shop.focusedShopItem);
+        }
     }
 
     private void SetDayHandler()
