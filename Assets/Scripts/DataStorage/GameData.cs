@@ -10,7 +10,8 @@ public class GameData
     public FishingRodData[] foundFishingRods = new FishingRodData[0];
     public FishingRodData equippedFishingRod;
     public string scene;
-
+    public BaitData[] foundBaits = new BaitData[0];
+    public BaitData equppedBait;
 
     public GameData(Game game)
     {
@@ -20,5 +21,6 @@ public class GameData
         foundCatches = game.Catches.Select(fish => new FishData(fish)).ToArray();
         foundFishingRods = game.FishingRods.Select(fishingRod => new FishingRodData(fishingRod)).ToArray();
         equippedFishingRod = new FishingRodData(game.EquippedFishingRod);
+        foundBaits = game.Baits.Select(bait => new BaitData(bait)).ToArray();
     }
 }

@@ -8,6 +8,10 @@ public class Game : MonoBehaviour
     public Fish[] Catches { get; set; } = new Fish[0];
     public FishingRod[] FishingRods { get; set; } = new FishingRod[0];
     public FishingRod EquippedFishingRod { get; set; }
+
+    public Bait[] Baits { get; set; } = new Bait[0];
+
+    public Bait EquippedBait { get; set; }
     public string Scene { get; set; }
 
     public void SaveGame()
@@ -28,6 +32,11 @@ public class Game : MonoBehaviour
         EquippedFishingRod.FishingRodName = gameData.equippedFishingRod.fishingRodName;
         EquippedFishingRod.Strength = gameData.equippedFishingRod.strength;
         EquippedFishingRod.ThrowRange = gameData.equippedFishingRod.throwRange;
+
+        Baits = gameData.foundBaits.Select(baitData => gameObject.AddComponent<Bait>()).ToArray();
+        EquippedBait = gameObject.AddComponent<Bait>();
+        EquippedBait.BaitName = gameData.equippedFishingRod.fishingRodName;
+        EquippedBait.Level = gameData.equppedBait.level;
     }
 
     public void NewGame()
@@ -41,6 +50,8 @@ public class Game : MonoBehaviour
             Catches = new Fish[0];
             FishingRods = new FishingRod[] { gameObject.AddComponent<FishingRod>() };
             EquippedFishingRod = FishingRods[0];
+            Baits = new Bait[] { gameObject.AddComponent<Bait>() };
+            EquippedBait = Baits[0];
         }
     }
 }
