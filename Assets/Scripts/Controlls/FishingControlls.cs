@@ -119,9 +119,9 @@ public class FishingControlls : MonoBehaviour
     {
         if (fishingStatus == FishingStatus.StandBy || fishingStatus == FishingStatus.Charging)
         {
-            SetFishingStatus(FishingStatus.Charging);
             if (Input.GetKey(KeyCode.Space))
             {
+                SetFishingStatus(FishingStatus.Charging);
                 playerAnimator.SetBool("chargingThrow", true);
                 ChargeCasting();
             }
@@ -149,6 +149,7 @@ public class FishingControlls : MonoBehaviour
             yield return null;
         }
         castingPower *= fishingMiniGame.chargeRate;
+        Debug.Log(fishingMiniGame.chargeRate);
         fishingMiniGame.SetChargingBalance(false);
         SetFishingStatus(FishingStatus.Casting);
     }

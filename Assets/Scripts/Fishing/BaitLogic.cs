@@ -21,6 +21,7 @@ public class BaitLogic : MonoBehaviour
 
     private void Start()
     {
+        distance.gameObject.SetActive(false);
         rigidBody = GetComponent<Rigidbody>();
         targetPosition = fishingRodTop.transform.position;
         waterLevel = sea.transform.position.y + 1f;
@@ -67,16 +68,15 @@ public class BaitLogic : MonoBehaviour
     //Calculate distance cast
     private void CalculateDistance()
     {
-        if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.StandBy || fishingControlls.fishingStatus != FishingControlls.FishingStatus.InspectFish)
+        bool isStandBy = fishingControlls.fishingStatus == FishingControlls.FishingStatus.StandBy;
+        distance.gameObject.SetActive(!isStandBy);
+        if (!isStandBy)
         {
-            distance.text = "Distance: " + Vector3.Distance(fishingRodTop.transform.position, transform.position).ToString("F2") + " meter";
-
-        }
-        else
-        {
-            distance.text = "Distance: " + "0" + " meter";
+            float dist = Vector3.Distance(fishingRodTop.transform.position, transform.position);
+            distance.text = $"Distance: {dist:F2} meter";
         }
     }
+
     private bool IsCloseToTarget(Vector3 targetPosition)
     {
         return Vector3.Distance(transform.position, targetPosition) < 1f;
