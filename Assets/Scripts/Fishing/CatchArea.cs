@@ -23,8 +23,14 @@ public class CatchArea : MonoBehaviour
             IsInCatchArea = true;
             if (other.GetComponent<FishMovement>().state == FishMovement.FishState.Baited)
             {
-                other.gameObject.TryGetComponent(out fishMovement);
-                other.gameObject.TryGetComponent(out fish);
+                if (other.TryGetComponent(out FishMovement fishMovement))
+                {
+                    this.fishMovement = fishMovement;
+                }
+                if (other.TryGetComponent(out Fish fish))
+                {
+                    this.fish = fish;
+                }
             }
 
         }
@@ -46,24 +52,21 @@ public class CatchArea : MonoBehaviour
     //Automatically catch another fish if it collides while reeling another fish
     private void CatchFishWhileReeling(Collider other)
     {
-        if (fishingControlls != null)
+        StartCoroutine(fishingControlls?.CatchAlert());
+        if (other.TryGetComponent(out FishMovement newFishMovement))
         {
-            StartCoroutine(fishingControlls.CatchAlert());
-            GameObject newFish = other.gameObject;
-            if (newFish.TryGetComponent(out FishMovement newFishMovement))
+            if (totalFishes.Count > 0)
             {
-                if (totalFishes.Count > 0)
-                {
-                    newFishMovement.GetBaited(totalFishes[totalFishes.Count - 1].gameObject);
-                }
-                newFishMovement.SetFishState(FishMovement.FishState.Hooked);
-                if (newFish.TryGetComponent(out Fish newFishComponent))
-                {
-                    totalFishes.Add(newFishComponent);
-                }
-                fishingControlls.CalculateReelInSpeed();
+                newFishMovement.GetBaited(totalFishes[totalFishes.Count - 1].gameObject);
             }
+            newFishMovement.SetFishState(FishMovement.FishState.Hooked);
+            if (other.TryGetComponent(out Fish newFishComponent))
+            {
+                totalFishes.Add(newFishComponent);
+            }
+            fishingControlls.CalculateReelInSpeed();
         }
+
     }
 
     //Catch fish while fishing
@@ -79,10 +82,9 @@ public class CatchArea : MonoBehaviour
     //Reset the values if the catch is lost
     public void RemoveCatch()
     {
-        if (fish != null)
-        {
-            fish.DestroyFish();
-        }
+
+        fish?.DestroyFish();
+
         fishMovement = null;
         fish = null;
         IsInCatchArea = false;
