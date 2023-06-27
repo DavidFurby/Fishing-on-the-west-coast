@@ -1,4 +1,6 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class MainManager : MonoBehaviour
             return;
         }
         Instance = this;
-        if (Instance != null)
+        if (Instance != null && SceneManager.GetActiveScene().name != "Main Menu")
         {
             Instance.game.LoadGame();
         }

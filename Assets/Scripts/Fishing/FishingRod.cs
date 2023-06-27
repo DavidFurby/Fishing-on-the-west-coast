@@ -8,8 +8,8 @@ public class FishingRod : MonoBehaviour
 {
     [SerializeField] private int id;
     [SerializeField] private string fishingRodName;
-    [SerializeField] private float strength;
-    [SerializeField] private string throwRange;
+    [SerializeField] private int strength;
+    [SerializeField] private int throwRange;
 
 
     public int Id
@@ -22,17 +22,22 @@ public class FishingRod : MonoBehaviour
         get { return fishingRodName; }
         set { fishingRodName = value; }
     }
-    public float Strength
+    public int Strength
     {
         get { return strength; }
         set { strength = value; }
     }
-    public string ThrowRange
+    public int ThrowRange
     {
         get { return throwRange; }
         set { throwRange = value; }
     }
-
+    public FishingRod()
+    {
+        fishingRodName = "basic rod";
+        strength = 20;
+        throwRange = 100;
+    }
     public FishingRod(FishingRodData fishingRodData)
     {
         fishingRodName = fishingRodData.fishingRodName;

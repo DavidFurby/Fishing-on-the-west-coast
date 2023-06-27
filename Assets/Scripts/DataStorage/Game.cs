@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
     private string scene;
     private Fish[] catches = new Fish[0];
     private FishingRod[] fishingRods = new FishingRod[0];
+    private FishingRod equippedFishingRod;
 
     public int Days
     {
@@ -33,6 +34,12 @@ public class Game : MonoBehaviour
 
     }
 
+    public FishingRod EquippedFishingRod
+    {
+        get { return equippedFishingRod; }
+        set { equippedFishingRod = value; }
+    }
+
     public string Scene
     {
         get { return scene; }
@@ -52,6 +59,12 @@ public class Game : MonoBehaviour
         scene = gameData.scene;
         catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Fish>()).ToArray();
         fishingRods = gameData.foundFishingRods.Select(fishingRodData => gameObject.AddComponent<FishingRod>()).ToArray();
+        equippedFishingRod = gameObject.AddComponent<FishingRod>();
+        equippedFishingRod.FishingRodName = gameData.equippedFishingRod.fishingRodName;
+        equippedFishingRod.Strength = gameData.equippedFishingRod.strength;
+        equippedFishingRod.ThrowRange = gameData.equippedFishingRod.throwRange;
+        Debug.Log(equippedFishingRod.FishingRodName);
+
     }
     public void NewGame()
     {
@@ -60,9 +73,11 @@ public class Game : MonoBehaviour
         {
             day = 1;
             catchCount = 0;
-            scene = "Home";
+            scene = "Boat";
             catches = new Fish[0];
-            fishingRods = new FishingRod[0];
+            FishingRods = new FishingRod[] { gameObject.AddComponent<FishingRod>() };
+            EquippedFishingRod = FishingRods[0];
+            Debug.Log(EquippedFishingRod.FishingRodName);
         }
 
     }
