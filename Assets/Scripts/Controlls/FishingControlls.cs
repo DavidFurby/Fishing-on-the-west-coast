@@ -16,6 +16,7 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     private readonly float initialReelInSpeed = 15f;
     private FishingRod currentFishingRod;
+    public Bait currentBait;
 
     #endregion
 
@@ -41,8 +42,8 @@ public class FishingControlls : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
-        currentFishingRod = MainManager.Instance.game.EquippedFishingRod;
-        reelInSpeed = initialReelInSpeed;
+        fishingStatus = FishingStatus.StandBy;
+        SetInitialValues();
         GameObject playerModel = GameObject.FindWithTag("PlayerModel");
 
         // Check if the player model was found
@@ -55,9 +56,6 @@ public class FishingControlls : MonoBehaviour
         {
             Debug.LogError("(*`n*) - where the FUCK is GUBBEN's model!?");
         }
-
-        fishingStatus = FishingStatus.StandBy;
-
     }
 
     // Update is called once per frame
@@ -93,6 +91,12 @@ public class FishingControlls : MonoBehaviour
             }
 
         }
+    }
+    private void SetInitialValues()
+    {
+        currentFishingRod = MainManager.Instance.game.EquippedFishingRod;
+        currentBait = MainManager.Instance.game.EquippedBait;
+        reelInSpeed = initialReelInSpeed;
     }
 
 
@@ -148,8 +152,7 @@ public class FishingControlls : MonoBehaviour
         {
             yield return null;
         }
-        castingPower *= fishingMiniGame.chargeRate;
-        Debug.Log(fishingMiniGame.chargeRate);
+        castingPower *= fishingMiniGame.castPower;
         fishingMiniGame.SetChargingBalance(false);
         SetFishingStatus(FishingStatus.Casting);
     }

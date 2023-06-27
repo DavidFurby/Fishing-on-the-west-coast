@@ -30,7 +30,7 @@ public class Bait : MonoBehaviour
     public Bait()
     {
         baitName = "Basic bait";
-        level = 0;
+        level = 1;
     }
 
     public Bait(BaitData baitData)

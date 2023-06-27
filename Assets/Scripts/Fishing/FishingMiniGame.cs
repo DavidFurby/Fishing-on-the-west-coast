@@ -9,13 +9,13 @@ public class FishingMiniGame : MonoBehaviour
     [SerializeField] private Scrollbar balance;
     [SerializeField] private FishingControlls fishingControlls;
     [SerializeField] private MusicController musicController;
-    [SerializeField] private Scrollbar castingPower;
+    [SerializeField] private Scrollbar castingPowerBalance;
     private List<Fish> fishesOnHook;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
     private bool castingPowerDirection = true;
-    public float chargeRate;
+    public float castPower = 1;
 
 
 
@@ -23,7 +23,7 @@ public class FishingMiniGame : MonoBehaviour
     void Start()
     {
         fishingMiniGame.SetActive(false);
-        castingPower.gameObject.SetActive(false);
+        castingPowerBalance.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -140,21 +140,25 @@ public class FishingMiniGame : MonoBehaviour
 
     public void SetChargingBalance(bool active)
     {
-        castingPower.gameObject.SetActive(active);
+        castingPowerBalance.gameObject.SetActive(active);
     }
 
     private void ChargingBalance()
     {
-        chargeRate = Mathf.Min(castingPower.value, 1 - castingPower.value) + 1f;
+        if (castingPowerBalance.gameObject.activeSelf)
+        {
+            castPower = Mathf.Min(castingPowerBalance.value, 1 - castingPowerBalance.value) + 1f;
 
-        castingPower.value += castingPowerDirection ? 0.01f : -0.01f;
-        if (castingPower.value >= 1)
-        {
-            castingPowerDirection = false;
+            castingPowerBalance.value += castingPowerDirection ? 0.05f : -0.05f;
+            if (castingPowerBalance.value >= 1)
+            {
+                castingPowerDirection = false;
+            }
+            else if (castingPowerBalance.value <= 0)
+            {
+                castingPowerDirection = true;
+            }
         }
-        else if (castingPower.value <= 0)
-        {
-            castingPowerDirection = true;
-        }
+
     }
 }

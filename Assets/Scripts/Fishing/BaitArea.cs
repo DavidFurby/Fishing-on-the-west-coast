@@ -1,16 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BaitArea : MonoBehaviour
 {
     [SerializeField] GameObject bait;
+    [SerializeField] FishingControlls fishingControlls;
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("Fish"))
         {
             FishMovement fishMovement = collider.gameObject.GetComponent<FishMovement>();
-            fishMovement.GetBaited(bait);
+            Fish fish = collider.gameObject.GetComponent<Fish>();
+            float probabilty = GetProbability(fish.Level, fishingControlls.currentBait.Level);
+
+            if (Random.Range(0f, 1f) < probabilty)
+            {
+                fishMovement.GetBaited(bait);
+            }
+
         }
+    }
+    private float GetProbability(int fishLevel, int baitLevel)
+    {
+        int difference = Mathf.Abs(fishLevel - baitLevel);
+        return 1f / (1f + difference);
     }
 }

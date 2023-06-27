@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Xml.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -23,8 +21,12 @@ public class CatchArea : MonoBehaviour
         if (other.CompareTag("Fish") && fish == null)
         {
             IsInCatchArea = true;
-            other.gameObject.TryGetComponent(out fishMovement);
-            other.gameObject.TryGetComponent(out fish);
+            if (other.GetComponent<FishMovement>().state == FishMovement.FishState.Baited)
+            {
+                other.gameObject.TryGetComponent(out fishMovement);
+                other.gameObject.TryGetComponent(out fish);
+            }
+
         }
         else if (fishingControlls != null && fishingControlls.fishingStatus == FishingControlls.FishingStatus.ReelingFish && other.CompareTag("Fish") && fish != null)
         {

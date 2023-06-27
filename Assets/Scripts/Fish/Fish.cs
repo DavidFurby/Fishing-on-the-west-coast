@@ -9,6 +9,7 @@ public class Fish : MonoBehaviour
     [SerializeField] private string fishName;
     [SerializeField] private float size;
     [SerializeField] private string info;
+    [SerializeField] private int level;
 
     public int Id
     {
@@ -33,12 +34,18 @@ public class Fish : MonoBehaviour
         get => info;
         set => info = value;
     }
+    public int Level
+    {
+        get => level;
+        set => level = value;
+    }
 
     public Fish(FishData fishData)
     {
         fishName = fishData.fishName;
         size = fishData.size;
         info = fishData.info;
+        level = fishData.level;
     }
 
     private void Start()
