@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bait : MonoBehaviour
+public class BaitLogic : MonoBehaviour
 {
     [SerializeField] private GameObject sea;
     public bool inWater = false;

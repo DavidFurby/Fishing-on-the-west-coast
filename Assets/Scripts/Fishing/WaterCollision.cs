@@ -3,7 +3,7 @@ using UnityEngine;
 public class WaterCollision : MonoBehaviour
 {
     [SerializeField] GameObject sea;
-    [SerializeField] Bait bait;
+    [SerializeField] BaitLogic bait;
     [SerializeField] FishingControlls fishingControlls;
     [SerializeField] AudioSource splashSound;
 
