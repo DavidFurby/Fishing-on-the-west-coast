@@ -157,7 +157,7 @@ public class FishingControlls : MonoBehaviour
         {
             SetFishingStatus(FishingStatus.InspectFish);
             fishingMiniGame.EndFishingMiniGame();
-            catchSummary.InititateCatchSummary(catchArea.totalFishes);
+            catchSummary.InitiateCatchSummary(catchArea.totalFishes);
         }
     }
 

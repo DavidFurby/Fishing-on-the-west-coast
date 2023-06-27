@@ -13,44 +13,42 @@ public class BaitCamera : MonoBehaviour
         cameraDistance = transform.position.z;
         originalCameraDistance = cameraDistance;
     }
-    // Update is called once per frame
+
     void LateUpdate()
     {
         if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Casting)
         {
-
-            transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
+            UpdateCameraPosition();
             if (cameraDistance < bait.transform.position.z - 2)
             {
                 cameraDistance += 0.1f;
             }
-
         }
         else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Fishing)
         {
-
-            transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
+            UpdateCameraPosition();
             if (cameraDistance > originalCameraDistance)
             {
                 cameraDistance -= 0.01f;
             }
-
         }
         else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.ReelingFish)
         {
-
-            transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
+            UpdateCameraPosition();
             if (cameraDistance < bait.transform.position.z - 2)
             {
                 cameraDistance += 0.2f;
             }
-
         }
     }
+
+    private void UpdateCameraPosition()
+    {
+        transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
+    }
+
     public void CatchAlertSound()
     {
         audioSource.Play();
     }
 }
-
-
