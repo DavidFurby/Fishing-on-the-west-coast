@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using System.Linq;
 using UnityEngine;
 
@@ -8,29 +7,31 @@ public class FishingRod : MonoBehaviour
 {
     [SerializeField] private int id;
     [SerializeField] private string fishingRodName;
-    [SerializeField] private float strength;
-    [SerializeField] private string throwRange;
-
+    [SerializeField] private int strength;
+    [SerializeField] private int throwRange;
 
     public int Id
     {
-        get { return id; }
-        set { id = value; }
+        get => id;
+        set => id = value;
     }
+
     public string FishingRodName
     {
-        get { return fishingRodName; }
-        set { fishingRodName = value; }
+        get => fishingRodName;
+        set => fishingRodName = value;
     }
-    public float Strength
+
+    public int Strength
     {
-        get { return strength; }
-        set { strength = value; }
+        get => strength;
+        set => strength = value;
     }
-    public string ThrowRange
+
+    public int ThrowRange
     {
-        get { return throwRange; }
-        set { throwRange = value; }
+        get => throwRange;
+        set => throwRange = value;
     }
 
     public FishingRod(FishingRodData fishingRodData)
@@ -39,6 +40,14 @@ public class FishingRod : MonoBehaviour
         strength = fishingRodData.strength;
         throwRange = fishingRodData.throwRange;
     }
+
+    public FishingRod(string fishingRodName, int strength, int throwRange)
+    {
+        this.fishingRodName = fishingRodName;
+        this.strength = strength;
+        this.throwRange = throwRange;
+    }
+
     public void AddFishingRodToInstance()
     {
         MainManager.Instance.game.FishingRods = MainManager.Instance.game.FishingRods.Append(this).ToArray();

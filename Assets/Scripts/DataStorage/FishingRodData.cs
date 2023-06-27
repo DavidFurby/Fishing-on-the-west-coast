@@ -4,8 +4,8 @@
 public class FishingRodData
 {
     public string fishingRodName;
-    public float strength;
-    public string throwRange;
+    public int strength;
+    public int throwRange;
 
     public FishingRodData(FishingRod fishingRod)
     {
