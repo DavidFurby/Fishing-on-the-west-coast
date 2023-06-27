@@ -196,4 +196,11 @@ AnimationClip:
     script: {fileID: 0}
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 3
+    functionName: TriggerSetChargingBalance
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: d88d0e5ea8c00164481f3c07e95fe7d7, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
