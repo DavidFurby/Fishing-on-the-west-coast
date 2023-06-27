@@ -22,5 +22,6 @@ public class GameData
         foundFishingRods = game.FishingRods.Select(fishingRod => new FishingRodData(fishingRod)).ToArray();
         equippedFishingRod = new FishingRodData(game.EquippedFishingRod);
         foundBaits = game.Baits.Select(bait => new BaitData(bait)).ToArray();
+        equppedBait = new BaitData(game.EquippedBait);
     }
 }

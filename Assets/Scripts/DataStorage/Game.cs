@@ -27,6 +27,7 @@ public class Game : MonoBehaviour
         Fishes = gameData.catchCount;
         Scene = gameData.scene;
         Catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Fish>()).ToArray();
+
         FishingRods = gameData.foundFishingRods.Select(fishingRodData => gameObject.AddComponent<FishingRod>()).ToArray();
         EquippedFishingRod = gameObject.AddComponent<FishingRod>();
         EquippedFishingRod.FishingRodName = gameData.equippedFishingRod.fishingRodName;

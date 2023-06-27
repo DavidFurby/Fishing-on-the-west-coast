@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5205310210804255604}
   - component: {fileID: 98317873238864070}
   - component: {fileID: 3792797310491721612}
+  - component: {fileID: -3613531828330039984}
   m_Layer: 0
   m_Name: Bait
   m_TagString: Untagged
@@ -114,3 +115,15 @@ MonoBehaviour:
   name: Bait
   price: 20
   description: Bait for attracting fishes
+--- !u!114 &-3613531828330039984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662299406853993162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e0716c3139ebf4cb2960d79b3630ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

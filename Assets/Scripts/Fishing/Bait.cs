@@ -29,18 +29,18 @@ public class Bait : MonoBehaviour
 
     public Bait()
     {
-        baitName = "basic bait";
+        baitName = "Basic bait";
         level = 0;
     }
 
     public Bait(BaitData baitData)
     {
-        baitData = baitData.baitName;
+        baitName = baitData.baitName;
         level = baitData.level;
     }
 
-    public void AddFishingRodToInstance()
+    public void AddBaitToInstance()
     {
-        MainManager.Instance.game.FishingRods = MainManager.Instance.game.baits.Append(this).ToArray();
+        MainManager.Instance.game.Baits = MainManager.Instance.game.Baits.Append(this).ToArray();
     }
 }

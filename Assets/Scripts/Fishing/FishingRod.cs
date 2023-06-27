@@ -36,7 +36,7 @@ public class FishingRod : MonoBehaviour
 
     public FishingRod()
     {
-        fishingRodName = "basic rod";
+        fishingRodName = "Basic rod";
         strength = 20;
         throwRange = 100;
     }

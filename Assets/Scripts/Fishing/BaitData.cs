@@ -8,7 +8,7 @@ public class BaitData
 
     public BaitData(Bait baitData)
     {
-        baitName = baitData.baitName;
-        level = baitData.level;
+        baitName = baitData.BaitName;
+        level = baitData.Level;
     }
 }
