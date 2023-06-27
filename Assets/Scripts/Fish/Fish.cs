@@ -10,26 +10,28 @@ public class Fish : MonoBehaviour
     [SerializeField] private float size;
     [SerializeField] private string info;
 
-
     public int Id
     {
-        get { return id; }
-        set { id = value; }
+        get => id;
+        set => id = value;
     }
+
     public string FishName
     {
-        get { return fishName; }
-        set { fishName = value; }
+        get => fishName;
+        set => fishName = value;
     }
+
     public float Size
     {
-        get { return size; }
-        set { size = value; }
+        get => size;
+        set => size = value;
     }
+
     public string Info
     {
-        get { return info; }
-        set { info = value; }
+        get => info;
+        set => info = value;
     }
 
     public Fish(FishData fishData)
@@ -38,10 +40,12 @@ public class Fish : MonoBehaviour
         size = fishData.size;
         info = fishData.info;
     }
+
     private void Start()
     {
         size = UnityEngine.Random.Range(size, size * 2);
     }
+
     public void DestroyFish()
     {
         Destroy(gameObject);
@@ -51,6 +55,7 @@ public class Fish : MonoBehaviour
     {
         MainManager.Instance.game.Catches = MainManager.Instance.game.Catches.Append(this).ToArray();
     }
+
     public void ReplaceFishInInstance(int index)
     {
         MainManager.Instance.game.Catches[index] = this;
