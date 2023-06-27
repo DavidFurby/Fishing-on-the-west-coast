@@ -20,7 +20,6 @@ public class MainMenu : MonoBehaviour
     }
     public void NewGame()
     {
-        Debug.Log("new game");
         if (MainManager.Instance != null)
         {
             MainManager.Instance.game.NewGame();

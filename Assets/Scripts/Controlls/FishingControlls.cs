@@ -15,6 +15,7 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private Animator playerAnimator;
     private readonly float initialReelInSpeed = 15f;
+    private FishingRod currentFishingRod;
 
     #endregion
 
@@ -40,6 +41,7 @@ public class FishingControlls : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
+        currentFishingRod = MainManager.Instance.game.EquippedFishingRod;
         reelInSpeed = initialReelInSpeed;
         GameObject playerModel = GameObject.FindWithTag("PlayerModel");
 
@@ -191,9 +193,8 @@ public class FishingControlls : MonoBehaviour
 
     private void ChargeCasting()
     {
-        FishingRod strongestRod = MainManager.Instance.game.FishingRods.OrderByDescending(rod => rod.Strength).First();
         animator.Play("Swing");
-        if (castingPower < strongestRod.Strength)
+        if (castingPower < currentFishingRod.ThrowRange)
         {
             castingPower++;
             playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.01f);
