@@ -136,7 +136,7 @@ public class Shop : MonoBehaviour
     {
         if (shopItem.gameObject.TryGetComponent<FishingRod>(out var fishingRod))
         {
-            return MainManager.Instance.game.FishingRods.Any(f => f.Id == fishingRod.Id);
+            return MainManager.Instance.game.FoundFishingRods.Any(f => f.Id == fishingRod.Id);
         }
         else
         {

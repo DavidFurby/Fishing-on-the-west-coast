@@ -11,7 +11,9 @@ public class GameData
     public FishingRodData equippedFishingRod;
     public string scene;
     public BaitData[] foundBaits = new BaitData[0];
-    public BaitData equppedBait;
+    public BaitData equippedBait;
+    public HatData[] foundHats;
+    public HatData equippedHat;
 
     public GameData(Game game)
     {
@@ -19,9 +21,11 @@ public class GameData
         catchCount = game.Fishes;
         scene = game.Scene.ToString();
         foundCatches = game.Catches.Select(fish => new FishData(fish)).ToArray();
-        foundFishingRods = game.FishingRods.Select(fishingRod => new FishingRodData(fishingRod)).ToArray();
+        foundFishingRods = game.FoundFishingRods.Select(fishingRod => new FishingRodData(fishingRod)).ToArray();
         equippedFishingRod = new FishingRodData(game.EquippedFishingRod);
-        foundBaits = game.Baits.Select(bait => new BaitData(bait)).ToArray();
-        equppedBait = new BaitData(game.EquippedBait);
+        foundBaits = game.FoundBaits.Select(bait => new BaitData(bait)).ToArray();
+        equippedBait = new BaitData(game.EquippedBait);
+        foundHats = game.FoundHats.Select(hat => new HatData(hat)).ToArray();
+        equippedHat = new HatData(game.EquippedHat);
     }
 }

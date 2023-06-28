@@ -31,15 +31,15 @@ public class EquipmentMenu : MonoBehaviour
         {
             if (listOfWheels[i].name == "BaitWheel")
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.Baits.Select((bait) => new WheelEquipment(bait.BaitName, bait.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new WheelEquipment(bait.Id, bait.BaitName, bait.Description)).ToArray());
             }
             else if (listOfWheels[i].name == "FishingRodWheel")
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FishingRods.Select((fishingRod) => new WheelEquipment(fishingRod.FishingRodName, fishingRod.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new WheelEquipment(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Description)).ToArray());
             }
             else if (listOfWheels[i].name == "HatWheel")
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.Baits.Select((bait) => new WheelEquipment(bait.BaitName, bait.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundHats.Select((hat) => new WheelEquipment(hat.Id, hat.HatName, hat.Description)).ToArray());
             }
         }
     }

@@ -49,6 +49,6 @@ public class Bait : MonoBehaviour
 
     public void AddBaitToInstance()
     {
-        MainManager.Instance.game.Baits = MainManager.Instance.game.Baits.Append(this).ToArray();
+        MainManager.Instance.game.FoundBaits = MainManager.Instance.game.FoundBaits.Append(this).ToArray();
     }
 }

@@ -6,12 +6,16 @@ public class Game : MonoBehaviour
     public int Days { get; set; }
     public int Fishes { get; set; }
     public Fish[] Catches { get; set; } = new Fish[0];
-    public FishingRod[] FishingRods { get; set; } = new FishingRod[0];
+    public FishingRod[] FoundFishingRods { get; set; } = new FishingRod[0];
     public FishingRod EquippedFishingRod { get; set; }
 
-    public Bait[] Baits { get; set; } = new Bait[0];
+    public Bait[] FoundBaits { get; set; } = new Bait[0];
 
     public Bait EquippedBait { get; set; }
+
+    public Hat[] FoundHats { get; set; } = new Hat[0];
+
+    public Hat EquippedHat { get; set; }
     public string Scene { get; set; }
 
     public void SaveGame()
@@ -28,16 +32,22 @@ public class Game : MonoBehaviour
         Scene = gameData.scene;
         Catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Fish>()).ToArray();
 
-        FishingRods = gameData.foundFishingRods.Select(fishingRodData => gameObject.AddComponent<FishingRod>()).ToArray();
+        FoundFishingRods = gameData.foundFishingRods.Select(fishingRodData => gameObject.AddComponent<FishingRod>()).ToArray();
         EquippedFishingRod = gameObject.AddComponent<FishingRod>();
         EquippedFishingRod.FishingRodName = gameData.equippedFishingRod.fishingRodName;
         EquippedFishingRod.Strength = gameData.equippedFishingRod.strength;
         EquippedFishingRod.ThrowRange = gameData.equippedFishingRod.throwRange;
 
-        Baits = gameData.foundBaits.Select(baitData => gameObject.AddComponent<Bait>()).ToArray();
+        FoundBaits = gameData.foundBaits.Select(baitData => gameObject.AddComponent<Bait>()).ToArray();
         EquippedBait = gameObject.AddComponent<Bait>();
         EquippedBait.BaitName = gameData.equippedFishingRod.fishingRodName;
-        EquippedBait.Level = gameData.equppedBait.level;
+        EquippedBait.Level = gameData.equippedBait.level;
+        EquippedBait.Description = gameData.equippedBait.description;
+
+        FoundHats = gameData.foundHats.Select(hatData => gameObject.AddComponent<Hat>()).ToArray();
+        EquippedHat = gameObject.AddComponent<Hat>();
+        EquippedHat.HatName = gameData.equippedHat.hatName;
+        EquippedHat.Description = gameData.equippedHat.description;
     }
 
     public void NewGame()
@@ -49,10 +59,12 @@ public class Game : MonoBehaviour
             Fishes = 0;
             Scene = "Boat";
             Catches = new Fish[0];
-            FishingRods = new FishingRod[] { gameObject.AddComponent<FishingRod>() };
-            EquippedFishingRod = FishingRods[0];
-            Baits = new Bait[] { gameObject.AddComponent<Bait>() };
-            EquippedBait = Baits[0];
+            FoundFishingRods = new FishingRod[] { gameObject.AddComponent<FishingRod>() };
+            EquippedFishingRod = FoundFishingRods[0];
+            FoundBaits = new Bait[] { gameObject.AddComponent<Bait>() };
+            EquippedBait = FoundBaits[0];
+            FoundHats = new Hat[] { gameObject.AddComponent<Hat>() };
+            EquippedHat = FoundHats[0];
         }
     }
 }

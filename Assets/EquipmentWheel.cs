@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentWheel : MonoBehaviour
 {
@@ -9,13 +10,6 @@ public class EquipmentWheel : MonoBehaviour
     private float slotHeight;
     private float spacing;
     private bool wheelIsFocused;
-
-    private void Start()
-    {
-        parentHeight = GetComponent<RectTransform>().rect.height;
-        slotHeight = equipmentSlot.GetComponent<RectTransform>().rect.height;
-        spacing = (parentHeight - 3 * slotHeight) / 4;
-    }
 
     private void Update()
     {
@@ -28,32 +22,32 @@ public class EquipmentWheel : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                ScrollDown();
+                Scroll(-1);
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                ScrollUp();
+                Scroll(1);
             }
         }
     }
 
-    private void ScrollDown()
+    private void Scroll(int direction)
     {
         for (int i = 0; i < ListOfEquipmentSlots.Length; i++)
         {
             RectTransform slotTransform = ListOfEquipmentSlots[i].GetComponent<RectTransform>();
-            float yPosition = slotTransform.anchoredPosition.y - (slotHeight + spacing);
+            float yPosition = slotTransform.anchoredPosition.y + direction * (slotHeight + spacing);
             slotTransform.anchoredPosition = new Vector2(0, yPosition);
-        }
-    }
 
-    private void ScrollUp()
-    {
-        for (int i = 0; i < ListOfEquipmentSlots.Length; i++)
-        {
-            RectTransform slotTransform = ListOfEquipmentSlots[i].GetComponent<RectTransform>();
-            float yPosition = slotTransform.anchoredPosition.y + (slotHeight + spacing);
-            slotTransform.anchoredPosition = new Vector2(0, yPosition);
+            // Check if the last slot has gone past the bottom
+            if (i == ListOfEquipmentSlots.Length - 1 && yPosition < -parentHeight / 2)
+            {
+                // Update its y position
+                yPosition = ListOfEquipmentSlots[0].GetComponent<RectTransform>().anchoredPosition.y - direction * (slotHeight + spacing);
+                // Move the last slot to the start of the list
+                ListOfEquipmentSlots[i].transform.SetAsFirstSibling();
+                slotTransform.anchoredPosition = new Vector2(0, yPosition);
+            }
         }
     }
 
@@ -64,7 +58,7 @@ public class EquipmentWheel : MonoBehaviour
         {
             foreach (GameObject slot in ListOfEquipmentSlots)
             {
-                Destroy(slot);
+                DestroyImmediate(slot);
             }
         }
 
@@ -77,9 +71,13 @@ public class EquipmentWheel : MonoBehaviour
             ListOfEquipmentSlots[i] = newEquipmentSlot;
             // Make the equipment slot smaller
             newEquipmentSlot.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-
+            // Set the color of the slot to a random color
+            if (newEquipmentSlot.TryGetComponent<Image>(out var slotImage))
+            {
+                slotImage.color = Random.ColorHSV();
+            }
             //position the slots
-            CalculateThePositionOfSlots(i, newEquipmentSlot);
+            CalculateThePositionOfSlot(i, newEquipmentSlot);
         }
     }
 
@@ -92,9 +90,11 @@ public class EquipmentWheel : MonoBehaviour
         }
     }
 
-    private void CalculateThePositionOfSlots(int i, GameObject equipmentSlot)
+    private void CalculateThePositionOfSlot(int i, GameObject equipmentSlot)
     {
-
+        parentHeight = GetComponent<RectTransform>().rect.height;
+        slotHeight = equipmentSlot.GetComponent<RectTransform>().rect.height;
+        spacing = (parentHeight - 3 * slotHeight) / 4;
         float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing);
         equipmentSlot.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, yPosition);
     }
@@ -107,11 +107,13 @@ public class EquipmentWheel : MonoBehaviour
 
 public class WheelEquipment
 {
+    public int id;
     public string name;
     public string description;
 
-    public WheelEquipment(string name, string description)
+    public WheelEquipment(int id, string name, string description)
     {
+        this.id = id;
         this.name = name;
         this.description = description;
     }

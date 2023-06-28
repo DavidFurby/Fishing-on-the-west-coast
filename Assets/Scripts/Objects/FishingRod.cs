@@ -58,6 +58,6 @@ public class FishingRod : MonoBehaviour
 
     public void AddFishingRodToInstance()
     {
-        MainManager.Instance.game.FishingRods = MainManager.Instance.game.FishingRods.Append(this).ToArray();
+        MainManager.Instance.game.FoundFishingRods = MainManager.Instance.game.FoundFishingRods.Append(this).ToArray();
     }
 }
