@@ -5,10 +5,12 @@ public class BaitData
 {
     public string baitName;
     public int level;
+    public string description;
 
-    public BaitData(Bait baitData)
+    public BaitData(Bait bait)
     {
-        baitName = baitData.BaitName;
-        level = baitData.Level;
+        baitName = bait.BaitName;
+        level = bait.Level;
+        description = bait.Description;
     }
 }

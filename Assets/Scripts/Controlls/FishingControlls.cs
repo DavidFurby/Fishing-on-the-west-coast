@@ -16,11 +16,11 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     private readonly float initialReelInSpeed = 15f;
     private FishingRod currentFishingRod;
-    public Bait currentBait;
 
     #endregion
 
     #region Public Fields
+    public Bait currentBait;
     public float castingPower;
     public FishingStatus fishingStatus;
     public float reelInSpeed;
@@ -64,7 +64,6 @@ public class FishingControlls : MonoBehaviour
         ReelInBait();
         StartFishing();
         EndCatch();
-
     }
     #endregion
 
