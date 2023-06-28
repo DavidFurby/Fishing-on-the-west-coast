@@ -507,6 +507,7 @@ MonoBehaviour:
   catchSummary: {fileID: 1491492617}
   fishingMiniGame: {fileID: 1491492618}
   playerAnimator: {fileID: 0}
+  currentBait: {fileID: 0}
   castingPower: 0
   fishingStatus: 0
   reelInSpeed: 0
@@ -692,6 +693,10 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 464174470}
     - target: {fileID: 5059312361471932162, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -766,7 +771,7 @@ PrefabInstance:
       objectReference: {fileID: 109290014}
     - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_VersionIndex
-      value: 1008
+      value: 1011
       objectReference: {fileID: 0}
     - target: {fileID: 5360848329395529453, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
@@ -1807,8 +1812,8 @@ MonoBehaviour:
   balance: {fileID: 2063051626}
   fishingControlls: {fileID: 464174470}
   musicController: {fileID: 1454551179}
-  castingPower: {fileID: 1126792821}
-  chargeRate: 0
+  castingPowerBalance: {fileID: 1126792821}
+  castPower: 1
 --- !u!43 &1582240365
 Mesh:
   m_ObjectHideFlags: 0

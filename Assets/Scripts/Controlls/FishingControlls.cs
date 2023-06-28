@@ -106,7 +106,6 @@ public class FishingControlls : MonoBehaviour
         {
             reelInSpeed = initialReelInSpeed - (catchArea.totalFishes[i].Size / 10);
         }
-        Debug.Log(reelInSpeed);
     }
     public IEnumerator CatchAlert()
     {
