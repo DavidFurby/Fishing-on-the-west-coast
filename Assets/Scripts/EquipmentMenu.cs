@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using static Game;
 
 public class EquipmentMenu : MonoBehaviour
 {
@@ -31,15 +32,15 @@ public class EquipmentMenu : MonoBehaviour
         {
             if (listOfWheels[i].name == "BaitWheel")
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new WheelEquipment(bait.Id, bait.BaitName, bait.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new Equipment(bait.Id, bait.BaitName, bait.Description)).ToArray());
             }
             else if (listOfWheels[i].name == "FishingRodWheel")
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new WheelEquipment(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new Equipment(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Description)).ToArray());
             }
             else if (listOfWheels[i].name == "HatWheel")
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundHats.Select((hat) => new WheelEquipment(hat.Id, hat.HatName, hat.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundHats.Select((hat) => new Equipment(hat.Id, hat.HatName, hat.Description)).ToArray());
             }
         }
     }

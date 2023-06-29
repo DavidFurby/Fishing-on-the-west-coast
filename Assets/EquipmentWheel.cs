@@ -1,57 +1,52 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Game;
 
 public class EquipmentWheel : MonoBehaviour
 {
     [SerializeField] private GameObject equipmentSlot;
+    [SerializeField] private Equipment equipmentTag;
     private GameObject[] ListOfEquipmentSlots;
-    private float parentHeight;
-    private float slotHeight;
-    private float spacing;
     private bool wheelIsFocused;
+    float parentHeight;
+    float slotHeight;
+    float spacing;
 
     private void Update()
-    {
-        ScrollEquipments();
-    }
-
-    private void ScrollEquipments()
     {
         if (wheelIsFocused)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                Scroll(-1);
+                ScrollList(-1);
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                Scroll(1);
+                ScrollList(1);
             }
         }
     }
 
-    private void Scroll(int direction)
+    public void ScrollList(int direction)
     {
-        for (int i = 0; i < ListOfEquipmentSlots.Length; i++)
+        float scrollAmount = (slotHeight - parentHeight) * direction;
+        foreach (var slot in ListOfEquipmentSlots)
         {
-            RectTransform slotTransform = ListOfEquipmentSlots[i].GetComponent<RectTransform>();
-            float yPosition = slotTransform.anchoredPosition.y + direction * (slotHeight + spacing);
-            slotTransform.anchoredPosition = new Vector2(0, yPosition);
-
-            // Check if the last slot has gone past the bottom
-            if (i == ListOfEquipmentSlots.Length - 1 && yPosition < -parentHeight / 2)
+            Vector2 newPosition = slot.transform.localPosition;
+            newPosition.y += scrollAmount;
+            if (newPosition.y > parentHeight / 2 + slotHeight / 2)
             {
-                // Update its y position
-                yPosition = ListOfEquipmentSlots[0].GetComponent<RectTransform>().anchoredPosition.y - direction * (slotHeight + spacing);
-                // Move the last slot to the start of the list
-                ListOfEquipmentSlots[i].transform.SetAsFirstSibling();
-                slotTransform.anchoredPosition = new Vector2(0, yPosition);
+                newPosition.y -= parentHeight + slotHeight + spacing;
             }
+            else if (newPosition.y < -parentHeight / 2 - slotHeight / 2)
+            {
+                newPosition.y += parentHeight + slotHeight + spacing;
+            }
+            slot.transform.localPosition = newPosition;
         }
     }
-
-    public void SetEquipment(WheelEquipment[] equipment)
+    public void SetEquipment(Equipment[] equipment)
     {
         // Destroy any existing equipment slots
         if (ListOfEquipmentSlots != null)
@@ -61,27 +56,38 @@ public class EquipmentWheel : MonoBehaviour
                 DestroyImmediate(slot);
             }
         }
+        parentHeight = GetComponent<RectTransform>().rect.height;
+        slotHeight = equipmentSlot.GetComponent<RectTransform>().rect.height;
+        spacing = (parentHeight - 3 * slotHeight) / 2;
+        int equippedIndex = 0;
+        for (int i = 0; i < equipment.Length; i++)
+        {
+            if (equipment[i].id == MainManager.Instance.game.EquippedFishingRod.Id)
+            {
+                equippedIndex = i;
+                break;
+            }
+        }
 
         // Create new equipment slots
         ListOfEquipmentSlots = new GameObject[equipment.Length];
         for (int i = 0; i < equipment.Length; i++)
         {
+            float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing) + equippedIndex * (slotHeight + spacing);
+            Debug.Log(yPosition);
             GameObject newEquipmentSlot = Instantiate(equipmentSlot, transform);
-            SetText(i, newEquipmentSlot, equipment);
-            ListOfEquipmentSlots[i] = newEquipmentSlot;
-            // Make the equipment slot smaller
-            newEquipmentSlot.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            // Set the color of the slot to a random color
+            newEquipmentSlot.transform.localScale = new Vector2(0.5f, 0.5f);
+            newEquipmentSlot.transform.localPosition = new Vector2(0, yPosition);
             if (newEquipmentSlot.TryGetComponent<Image>(out var slotImage))
             {
                 slotImage.color = Random.ColorHSV();
             }
-            //position the slots
-            CalculateThePositionOfSlot(i, newEquipmentSlot);
+            SetText(i, newEquipmentSlot, equipment);
+            ListOfEquipmentSlots[i] = newEquipmentSlot;
         }
     }
 
-    private void SetText(int i, GameObject newEquipmentSlot, WheelEquipment[] equipment)
+    private void SetText(int i, GameObject newEquipmentSlot, Equipment[] equipment)
     {
         TextMeshProUGUI textComponent = newEquipmentSlot.GetComponentInChildren<TextMeshProUGUI>();
         if (textComponent != null)
@@ -89,32 +95,10 @@ public class EquipmentWheel : MonoBehaviour
             textComponent.text = equipment[i].name;
         }
     }
-
-    private void CalculateThePositionOfSlot(int i, GameObject equipmentSlot)
-    {
-        parentHeight = GetComponent<RectTransform>().rect.height;
-        slotHeight = equipmentSlot.GetComponent<RectTransform>().rect.height;
-        spacing = (parentHeight - 3 * slotHeight) / 4;
-        float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing);
-        equipmentSlot.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, yPosition);
-    }
-
     public void SetWheelFocus(bool focus)
     {
         wheelIsFocused = focus;
     }
 }
 
-public class WheelEquipment
-{
-    public int id;
-    public string name;
-    public string description;
 
-    public WheelEquipment(int id, string name, string description)
-    {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
-}

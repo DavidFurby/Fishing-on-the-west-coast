@@ -18,6 +18,29 @@ public class Game : MonoBehaviour
     public Hat EquippedHat { get; set; }
     public string Scene { get; set; }
 
+    public enum ItemTag
+    {
+        FishingRod,
+        Bait,
+        Hat
+    }
+    public Equipment GetEquipment(ItemTag itemTag)
+    {
+        Equipment equipment = null;
+        switch (itemTag)
+        {
+            case ItemTag.FishingRod:
+                equipment = new Equipment(EquippedFishingRod.Id, EquippedFishingRod.FishingRodName, EquippedFishingRod.Description);
+                break;
+            case ItemTag.Bait:
+                equipment = new Equipment(EquippedBait.Id, EquippedBait.BaitName, EquippedBait.Description);
+                break;
+            case ItemTag.Hat:
+                equipment = new Equipment(EquippedHat.Id, EquippedHat.HatName, EquippedHat.Description);
+                break;
+        }
+        return equipment;
+    }
     public void SaveGame()
     {
         SaveSystem.SaveGame(this);
@@ -65,6 +88,19 @@ public class Game : MonoBehaviour
             EquippedBait = FoundBaits[0];
             FoundHats = new Hat[] { gameObject.AddComponent<Hat>() };
             EquippedHat = FoundHats[0];
+        }
+    }
+    public class Equipment
+    {
+        public int id;
+        public string name;
+        public string description;
+
+        public Equipment(int id, string name, string description)
+        {
+            this.id = id;
+            this.name = name;
+            this.description = description;
         }
     }
 }
