@@ -5,6 +5,8 @@ public class Game : MonoBehaviour
 {
     public int Days { get; set; }
     public int Fishes { get; set; }
+
+    public float BestDistance { get; set; }
     public Fish[] Catches { get; set; } = new Fish[0];
     public FishingRod[] FoundFishingRods { get; set; } = new FishingRod[0];
     public FishingRod EquippedFishingRod { get; set; }
@@ -67,6 +69,7 @@ public class Game : MonoBehaviour
 
         Days = gameData.daysCount;
         Fishes = gameData.catchCount;
+        BestDistance = gameData.bestDistance;
         Scene = gameData.scene;
         Catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Fish>()).ToArray();
 
@@ -130,6 +133,7 @@ public class Game : MonoBehaviour
         {
             Days = 1;
             Fishes = 0;
+            BestDistance = 0;
             Scene = "Boat";
             Catches = new Fish[0];
             FoundFishingRods = new FishingRod[] { gameObject.AddComponent<FishingRod>() };

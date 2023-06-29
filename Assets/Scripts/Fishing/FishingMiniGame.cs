@@ -15,7 +15,7 @@ public class FishingMiniGame : MonoBehaviour
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
     private bool castingPowerDirection = true;
-    public float castPower = 1;
+    [HideInInspector] public float castPower = 1;
 
 
 

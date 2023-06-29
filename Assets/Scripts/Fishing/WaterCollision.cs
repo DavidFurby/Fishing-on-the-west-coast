@@ -6,6 +6,7 @@ public class WaterCollision : MonoBehaviour
     [SerializeField] BaitLogic bait;
     [SerializeField] FishingControlls fishingControlls;
     [SerializeField] AudioSource splashSound;
+    [SerializeField] SeaSpawner seaSpawner;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,7 @@ public class WaterCollision : MonoBehaviour
 
             if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.Reeling && fishingControlls.fishingStatus != FishingControlls.FishingStatus.ReelingFish)
             {
+                bait.UpdateDistanceRecord();
                 fishingControlls.SetFishingStatus(FishingControlls.FishingStatus.Fishing);
             }
             splashSound.Play();

@@ -191,7 +191,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27752
+  m_Name: pb_Mesh81848
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -661,6 +661,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 681066786}
     - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: seaSpawner
+      value: 
+      objectReference: {fileID: 1440346365}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1759076622}
@@ -814,7 +818,7 @@ PrefabInstance:
       objectReference: {fileID: 109290014}
     - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_VersionIndex
-      value: 1011
+      value: 1026
       objectReference: {fileID: 0}
     - target: {fileID: 5360848329395529453, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
@@ -866,8 +870,8 @@ PrefabInstance:
       objectReference: {fileID: 2699195810860827606}
     - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: distance
-      value: 
-      objectReference: {fileID: 1604509529238438839}
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: catchArea
       value: 
@@ -888,6 +892,10 @@ PrefabInstance:
       propertyPath: fishingRodTop
       value: 
       objectReference: {fileID: 1182136880}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 1604509529238438839}
     - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingControlls
       value: 
@@ -1241,7 +1249,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27660
+  m_Name: pb_Mesh81774
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1555,6 +1563,8 @@ MonoBehaviour:
   spawnDelay: 5
   bait: {fileID: 7448718}
   fishingControlls: {fileID: 464174470}
+  distanceRecordMarker: {fileID: 4654798063134710352, guid: 650ed65096bddb2419513abc5108751b, type: 3}
+  fishingRodTop: {fileID: 1182136880}
 --- !u!1 &1454551176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,13 +2261,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &1896059145
+--- !u!43 &1903395963
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterVolume-75142
+  m_Name: WaterVolume-81780
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2690,7 +2700,7 @@ PrefabInstance:
     - target: {fileID: 461191177775057919, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1896059145}
+      objectReference: {fileID: 1903395963}
     - target: {fileID: 626775376293174244, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: m_LocalScale.y
       value: 10
