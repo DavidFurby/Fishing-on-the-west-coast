@@ -6,6 +6,7 @@ public class GameData
 
     public int daysCount = 0;
     public int catchCount = 0;
+    public float bestDistance;
     public FishData[] foundCatches = new FishData[0];
     public FishingRodData[] foundFishingRods = new FishingRodData[0];
     public FishingRodData equippedFishingRod;
@@ -19,6 +20,7 @@ public class GameData
     {
         daysCount = game.Days;
         catchCount = game.Fishes;
+        bestDistance = game.BestDistance;
         scene = game.Scene.ToString();
         foundCatches = game.Catches.Select(fish => new FishData(fish)).ToArray();
         foundFishingRods = game.FoundFishingRods.Select(fishingRod => new FishingRodData(fishingRod)).ToArray();

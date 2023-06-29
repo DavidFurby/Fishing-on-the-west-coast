@@ -11,7 +11,7 @@ public class CatchArea : MonoBehaviour
     /// </summary>
     public bool IsInCatchArea { get; private set; }
 
-    public Fish fish;
+    [HideInInspector] public Fish fish;
     private FishMovement fishMovement;
     [SerializeField] private FishingControlls fishingControlls;
     public readonly List<Fish> totalFishes = new();

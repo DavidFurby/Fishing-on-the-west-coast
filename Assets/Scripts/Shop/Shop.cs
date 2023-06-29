@@ -16,7 +16,7 @@ public class Shop : MonoBehaviour
     #endregion
 
     #region Private Fields
-    public ShopItem focusedShopItem;
+    [HideInInspector] public ShopItem focusedShopItem;
     private int focusedShopItemIndex = 0;
     #endregion
 

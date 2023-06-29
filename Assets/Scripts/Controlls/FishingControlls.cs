@@ -20,10 +20,10 @@ public class FishingControlls : MonoBehaviour
     #endregion
 
     #region Public Fields
-    public Bait currentBait;
-    public float castingPower = 20f;
-    public FishingStatus fishingStatus;
-    public float reelInSpeed;
+    [HideInInspector] public Bait currentBait;
+    [HideInInspector] public float castingPower = 20f;
+    [HideInInspector] public FishingStatus fishingStatus;
+    [HideInInspector] public float reelInSpeed;
     #endregion
 
     #region Enums
