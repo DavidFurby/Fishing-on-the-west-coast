@@ -5,13 +5,14 @@ using static Game;
 
 public class EquipmentWheel : MonoBehaviour
 {
-    [SerializeField] private GameObject equipmentSlot;
-    [SerializeField] private Equipment equipmentTag;
-    private GameObject[] ListOfEquipmentSlots;
+    [SerializeField] private ItemSlot ItemSlot;
+    [SerializeField] public ItemTag itemTag;
+    private ItemSlot[] ListOfEquipmentSlots;
     private bool wheelIsFocused;
     float parentHeight;
     float slotHeight;
     float spacing;
+    int middleIndex;
 
     private void Update()
     {
@@ -26,9 +27,20 @@ public class EquipmentWheel : MonoBehaviour
                 ScrollList(1);
             }
         }
+
+    }
+    public void ChangeEquipedItem()
+    {
+        for (int i = 0; i < ListOfEquipmentSlots.Length; i++)
+        {
+            if (i == middleIndex)
+            {
+                MainManager.Instance.game.SetEquipment(ListOfEquipmentSlots[i].ItemId, itemTag);
+            }
+        }
     }
 
-    public void ScrollList(int direction)
+    private void ScrollList(int direction)
     {
         // Rotate the order of the equipment slots in the array
         if (direction == 1)
@@ -38,18 +50,18 @@ public class EquipmentWheel : MonoBehaviour
             {
                 ListOfEquipmentSlots[i] = ListOfEquipmentSlots[i + 1];
             }
-            ListOfEquipmentSlots[ListOfEquipmentSlots.Length - 1] = firstSlot;
+            ListOfEquipmentSlots[^1] = firstSlot;
         }
         else if (direction == -1)
         {
-            var lastSlot = ListOfEquipmentSlots[ListOfEquipmentSlots.Length - 1];
+            var lastSlot = ListOfEquipmentSlots[^1];
             for (int i = ListOfEquipmentSlots.Length - 1; i > 0; i--)
             {
                 ListOfEquipmentSlots[i] = ListOfEquipmentSlots[i - 1];
             }
             ListOfEquipmentSlots[0] = lastSlot;
         }
-        int middleIndex = ListOfEquipmentSlots.Length / 2;
+        middleIndex = ListOfEquipmentSlots.Length / 2;
 
         // Update the position of the equipment slots
         for (int i = 0; i < ListOfEquipmentSlots.Length; i++)
@@ -60,7 +72,7 @@ public class EquipmentWheel : MonoBehaviour
         }
     }
 
-    public void SetEquipment(Equipment[] equipment)
+    public void SetEquipment(Item[] equipment)
     {
         // Destroy any existing equipment slots
         if (ListOfEquipmentSlots != null)
@@ -71,32 +83,32 @@ public class EquipmentWheel : MonoBehaviour
             }
         }
         parentHeight = GetComponent<RectTransform>().rect.height;
-        slotHeight = equipmentSlot.GetComponent<RectTransform>().rect.height;
+        slotHeight = ItemSlot.GetComponent<RectTransform>().rect.height;
         spacing = (parentHeight - 3 * slotHeight) / 2;
 
-        int middleIndex = equipment.Length / 2;
+        middleIndex = equipment.Length / 2;
 
         // Create new equipment slots
-        ListOfEquipmentSlots = new GameObject[equipment.Length];
+        ListOfEquipmentSlots = new ItemSlot[equipment.Length];
         for (int i = 0; i < equipment.Length; i++)
         {
             float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing) + middleIndex * (slotHeight + spacing);
-            var newEquipmentSlot = Instantiate(equipmentSlot, transform);
-            newEquipmentSlot.transform.localScale = new Vector2(0.5f, 0.5f);
-            newEquipmentSlot.transform.localPosition = new Vector2 { x = 0, y = yPosition };
-            if (newEquipmentSlot.TryGetComponent<Image>(out var slotImage))
+            var newItemSlot = Instantiate(ItemSlot, transform);
+            newItemSlot.transform.localScale = new Vector2(0.5f, 0.5f);
+            newItemSlot.transform.localPosition = new Vector2 { x = 0, y = yPosition };
+            if (newItemSlot.TryGetComponent<Image>(out var slotImage))
             {
                 slotImage.color = Random.ColorHSV();
             }
-            SetText(i, newEquipmentSlot, equipment);
-            ListOfEquipmentSlots[i] = newEquipmentSlot;
+            newItemSlot.ItemId = equipment[i].id;
+            SetText(i, newItemSlot, equipment);
+            ListOfEquipmentSlots[i] = newItemSlot;
         }
     }
 
-    private void SetText(int i, GameObject newEquipmentSlot, Equipment[] equipment)
+    private void SetText(int i, ItemSlot newItemSlot, Item[] equipment)
     {
-        TextMeshProUGUI text = newEquipmentSlot.GetComponentInChildren<TextMeshProUGUI>();
-        text.text = equipment[i].name;
+        newItemSlot.SetTextField(equipment[i].name);
     }
 
     public void SetWheelFocus(bool focus)

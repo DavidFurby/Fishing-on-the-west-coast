@@ -24,22 +24,37 @@ public class Game : MonoBehaviour
         Bait,
         Hat
     }
-    public Equipment GetEquipment(ItemTag itemTag)
+    public Item GetEquipment(ItemTag itemTag)
     {
-        Equipment equipment = null;
+        Item item = null;
         switch (itemTag)
         {
             case ItemTag.FishingRod:
-                equipment = new Equipment(EquippedFishingRod.Id, EquippedFishingRod.FishingRodName, EquippedFishingRod.Description);
+                item = new Item(EquippedFishingRod.Id, EquippedFishingRod.FishingRodName, EquippedFishingRod.Description);
                 break;
             case ItemTag.Bait:
-                equipment = new Equipment(EquippedBait.Id, EquippedBait.BaitName, EquippedBait.Description);
+                item = new Item(EquippedBait.Id, EquippedBait.BaitName, EquippedBait.Description);
                 break;
             case ItemTag.Hat:
-                equipment = new Equipment(EquippedHat.Id, EquippedHat.HatName, EquippedHat.Description);
+                item = new Item(EquippedHat.Id, EquippedHat.HatName, EquippedHat.Description);
                 break;
         }
-        return equipment;
+        return item;
+    }
+    public void SetEquipment(int id, ItemTag tag)
+    {
+        switch (tag)
+        {
+            case ItemTag.FishingRod:
+                EquippedFishingRod = FoundFishingRods.First((rod) => rod.Id == id);
+                break;
+            case ItemTag.Bait:
+                EquippedBait = FoundBaits.First((bait) => bait.Id == id);
+                break;
+            case ItemTag.Hat:
+                EquippedHat = FoundHats.First((hat) => hat.Id == id);
+                break;
+        }
     }
     public void SaveGame()
     {
@@ -55,22 +70,57 @@ public class Game : MonoBehaviour
         Scene = gameData.scene;
         Catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Fish>()).ToArray();
 
-        FoundFishingRods = gameData.foundFishingRods.Select(fishingRodData => gameObject.AddComponent<FishingRod>()).ToArray();
+        LoadFishingRod(gameData);
+
+        LoadBait(gameData);
+
+        LoadHats(gameData);
+    }
+
+    private void LoadHats(GameData gameData)
+    {
+        FoundHats = gameData.foundHats.Select(hatData =>
+        {
+            Hat hat = gameObject.AddComponent<Hat>();
+            hat.HatName = hatData.hatName;
+            hat.Description = hatData.description;
+            return hat;
+        }).ToArray();
+        EquippedHat = gameObject.AddComponent<Hat>();
+        EquippedHat.HatName = gameData.equippedHat.hatName;
+        EquippedHat.Description = gameData.equippedHat.description;
+    }
+
+    private void LoadBait(GameData gameData)
+    {
+        FoundBaits = gameData.foundBaits.Select(baitData =>
+        {
+            Bait bait = gameObject.AddComponent<Bait>();
+            bait.BaitName = baitData.baitName;
+            bait.Level = baitData.level;
+            bait.Description = baitData.description;
+            return bait;
+        }).ToArray();
+        EquippedBait = gameObject.AddComponent<Bait>();
+        EquippedBait.BaitName = gameData.equippedBait.baitName;
+        EquippedBait.Level = gameData.equippedBait.level;
+        EquippedBait.Description = gameData.equippedBait.description;
+    }
+
+    private void LoadFishingRod(GameData gameData)
+    {
+        FoundFishingRods = gameData.foundFishingRods.Select(fishingRodData =>
+        {
+            FishingRod fishingRod = gameObject.AddComponent<FishingRod>();
+            fishingRod.FishingRodName = fishingRodData.fishingRodName;
+            fishingRod.Strength = fishingRodData.strength;
+            fishingRod.ThrowRange = fishingRodData.throwRange;
+            return fishingRod;
+        }).ToArray();
         EquippedFishingRod = gameObject.AddComponent<FishingRod>();
         EquippedFishingRod.FishingRodName = gameData.equippedFishingRod.fishingRodName;
         EquippedFishingRod.Strength = gameData.equippedFishingRod.strength;
         EquippedFishingRod.ThrowRange = gameData.equippedFishingRod.throwRange;
-
-        FoundBaits = gameData.foundBaits.Select(baitData => gameObject.AddComponent<Bait>()).ToArray();
-        EquippedBait = gameObject.AddComponent<Bait>();
-        EquippedBait.BaitName = gameData.equippedFishingRod.fishingRodName;
-        EquippedBait.Level = gameData.equippedBait.level;
-        EquippedBait.Description = gameData.equippedBait.description;
-
-        FoundHats = gameData.foundHats.Select(hatData => gameObject.AddComponent<Hat>()).ToArray();
-        EquippedHat = gameObject.AddComponent<Hat>();
-        EquippedHat.HatName = gameData.equippedHat.hatName;
-        EquippedHat.Description = gameData.equippedHat.description;
     }
 
     public void NewGame()
@@ -90,13 +140,13 @@ public class Game : MonoBehaviour
             EquippedHat = FoundHats[0];
         }
     }
-    public class Equipment
+    public class Item
     {
         public int id;
         public string name;
         public string description;
 
-        public Equipment(int id, string name, string description)
+        public Item(int id, string name, string description)
         {
             this.id = id;
             this.name = name;

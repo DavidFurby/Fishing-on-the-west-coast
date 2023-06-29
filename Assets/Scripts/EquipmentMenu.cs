@@ -4,7 +4,7 @@ using static Game;
 
 public class EquipmentMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject equipmentWheel;
+    [SerializeField] private GameObject equipmentMenu;
     [SerializeField] private EquipmentWheel[] listOfWheels;
     [SerializeField] private GameObject equipmentFocus;
     private EquipmentWheel focusedWheel;
@@ -14,7 +14,7 @@ public class EquipmentMenu : MonoBehaviour
     void Start()
     {
         PopulateWheels();
-        equipmentWheel.SetActive(false);
+        equipmentMenu.SetActive(false);
         focusedWheel = listOfWheels[0];
         focusedWheelIndex = 0;
         SetFocus();
@@ -24,23 +24,24 @@ public class EquipmentMenu : MonoBehaviour
     void Update()
     {
         HandleInputs();
+
     }
 
     private void PopulateWheels()
     {
         for (int i = 0; i < listOfWheels.Length; i++)
         {
-            if (listOfWheels[i].name == "BaitWheel")
+            if (listOfWheels[i].itemTag == ItemTag.FishingRod)
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new Equipment(bait.Id, bait.BaitName, bait.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new Item(bait.Id, bait.BaitName, bait.Description)).ToArray());
             }
-            else if (listOfWheels[i].name == "FishingRodWheel")
+            else if (listOfWheels[i].itemTag == ItemTag.Bait)
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new Equipment(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new Item(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Description)).ToArray());
             }
-            else if (listOfWheels[i].name == "HatWheel")
+            else if (listOfWheels[i].itemTag == ItemTag.Hat)
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundHats.Select((hat) => new Equipment(hat.Id, hat.HatName, hat.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundHats.Select((hat) => new Item(hat.Id, hat.HatName, hat.Description)).ToArray());
             }
         }
     }
@@ -49,15 +50,35 @@ public class EquipmentMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            equipmentWheel.SetActive(!equipmentWheel.activeSelf);
-            Time.timeScale = equipmentWheel.activeSelf ? 0 : 1;
+            SetMenu();
         }
-        if (equipmentWheel.activeSelf)
+        if (equipmentMenu.activeSelf)
         {
             ScrollBetweenWheels();
+
+            TriggerChangeEquipedItem();
+
         }
+
     }
 
+    private void SetMenu()
+    {
+        equipmentMenu.SetActive(!equipmentMenu.activeSelf);
+        Time.timeScale = equipmentMenu.activeSelf ? 0 : 1;
+    }
+
+    private void TriggerChangeEquipedItem()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            for (int i = 0; i < listOfWheels.Length; i++)
+            {
+                listOfWheels[i].ChangeEquipedItem();
+            }
+            SetMenu();
+        }
+    }
     private void ScrollBetweenWheels()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
