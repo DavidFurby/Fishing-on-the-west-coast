@@ -30,20 +30,33 @@ public class EquipmentWheel : MonoBehaviour
 
     public void ScrollList(int direction)
     {
-        float scrollAmount = (slotHeight - parentHeight) * direction;
-        foreach (var slot in ListOfEquipmentSlots)
+        // Rotate the order of the equipment slots in the array
+        if (direction == 1)
         {
-            Vector2 newPosition = slot.transform.localPosition;
-            newPosition.y += scrollAmount;
-            if (newPosition.y > parentHeight / 2 + slotHeight / 2)
+            var firstSlot = ListOfEquipmentSlots[0];
+            for (int i = 0; i < ListOfEquipmentSlots.Length - 1; i++)
             {
-                newPosition.y -= parentHeight + slotHeight + spacing;
+                ListOfEquipmentSlots[i] = ListOfEquipmentSlots[i + 1];
             }
-            else if (newPosition.y < -parentHeight / 2 - slotHeight / 2)
+            ListOfEquipmentSlots[^1] = firstSlot;
+        }
+        else if (direction == -1)
+        {
+            var lastSlot = ListOfEquipmentSlots[ListOfEquipmentSlots.Length - 1];
+            for (int i = ListOfEquipmentSlots.Length - 1; i > 0; i--)
             {
-                newPosition.y += parentHeight + slotHeight + spacing;
+                ListOfEquipmentSlots[i] = ListOfEquipmentSlots[i - 1];
             }
-            slot.transform.localPosition = newPosition;
+            ListOfEquipmentSlots[0] = lastSlot;
+        }
+        int middleIndex = ListOfEquipmentSlots.Length / 2;
+
+        // Update the position of the equipment slots
+        for (int i = 0; i < ListOfEquipmentSlots.Length; i++)
+        {
+            float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing) + middleIndex * (slotHeight + spacing);
+            Vector2 newPosition = new(0, yPosition);
+            ListOfEquipmentSlots[i].transform.localPosition = newPosition;
         }
     }
     public void SetEquipment(Equipment[] equipment)
@@ -59,22 +72,14 @@ public class EquipmentWheel : MonoBehaviour
         parentHeight = GetComponent<RectTransform>().rect.height;
         slotHeight = equipmentSlot.GetComponent<RectTransform>().rect.height;
         spacing = (parentHeight - 3 * slotHeight) / 2;
-        int equippedIndex = 0;
-        for (int i = 0; i < equipment.Length; i++)
-        {
-            if (equipment[i].id == MainManager.Instance.game.EquippedFishingRod.Id)
-            {
-                equippedIndex = i;
-                break;
-            }
-        }
+
+        int middleIndex = equipment.Length / 2;
 
         // Create new equipment slots
         ListOfEquipmentSlots = new GameObject[equipment.Length];
         for (int i = 0; i < equipment.Length; i++)
         {
-            float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing) + equippedIndex * (slotHeight + spacing);
-            Debug.Log(yPosition);
+            float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing) + middleIndex * (slotHeight + spacing);
             GameObject newEquipmentSlot = Instantiate(equipmentSlot, transform);
             newEquipmentSlot.transform.localScale = new Vector2(0.5f, 0.5f);
             newEquipmentSlot.transform.localPosition = new Vector2(0, yPosition);
