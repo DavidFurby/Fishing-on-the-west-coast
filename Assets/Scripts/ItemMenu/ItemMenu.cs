@@ -13,11 +13,7 @@ public class ItemMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PopulateWheels();
         itemMenu.SetActive(false);
-        focusedWheel = listOfWheels[0];
-        focusedWheelIndex = 0;
-        SetFocus();
     }
 
     // Update is called once per frame
@@ -50,6 +46,7 @@ public class ItemMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
+            ResetValues();
             SetMenu();
         }
         if (itemMenu.activeSelf)
@@ -66,6 +63,13 @@ public class ItemMenu : MonoBehaviour
     {
         itemMenu.SetActive(!itemMenu.activeSelf);
         Time.timeScale = itemMenu.activeSelf ? 0 : 1;
+    }
+    private void ResetValues()
+    {
+        PopulateWheels();
+        focusedWheel = listOfWheels[0];
+        focusedWheelIndex = 0;
+        SetFocus();
     }
 
     private void TriggerChangeEquipedItem()

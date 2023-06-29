@@ -21,7 +21,7 @@ public class FishingControlls : MonoBehaviour
 
     #region Public Fields
     public Bait currentBait;
-    public float castingPower;
+    public float castingPower = 20f;
     public FishingStatus fishingStatus;
     public float reelInSpeed;
     #endregion
@@ -61,9 +61,13 @@ public class FishingControlls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ReelInBait();
-        StartFishing();
-        EndCatch();
+        if (Time.timeScale == 1)
+        {
+            ReelInBait();
+            StartFishing();
+            EndCatch();
+        }
+
     }
     #endregion
 
