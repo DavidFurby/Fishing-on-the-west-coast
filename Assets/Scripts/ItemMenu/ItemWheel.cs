@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Game;
 
-public class EquipmentWheel : MonoBehaviour
+public class ItemWheel : MonoBehaviour
 {
     [SerializeField] private ItemSlot ItemSlot;
     [SerializeField] public ItemTag itemTag;

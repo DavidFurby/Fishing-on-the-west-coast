@@ -2,19 +2,19 @@ using System.Linq;
 using UnityEngine;
 using static Game;
 
-public class EquipmentMenu : MonoBehaviour
+public class ItemMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject equipmentMenu;
-    [SerializeField] private EquipmentWheel[] listOfWheels;
-    [SerializeField] private GameObject equipmentFocus;
-    private EquipmentWheel focusedWheel;
+    [SerializeField] private GameObject menuObject;
+    [SerializeField] private ItemWheel[] listOfWheels;
+    [SerializeField] private GameObject ItemFocus;
+    private ItemWheel focusedWheel;
     private int focusedWheelIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         PopulateWheels();
-        equipmentMenu.SetActive(false);
+        menuObject.SetActive(false);
         focusedWheel = listOfWheels[0];
         focusedWheelIndex = 0;
         SetFocus();
@@ -52,7 +52,7 @@ public class EquipmentMenu : MonoBehaviour
         {
             SetMenu();
         }
-        if (equipmentMenu.activeSelf)
+        if (menuObject.activeSelf)
         {
             ScrollBetweenWheels();
 
@@ -64,8 +64,8 @@ public class EquipmentMenu : MonoBehaviour
 
     private void SetMenu()
     {
-        equipmentMenu.SetActive(!equipmentMenu.activeSelf);
-        Time.timeScale = equipmentMenu.activeSelf ? 0 : 1;
+        menuObject.SetActive(!menuObject.activeSelf);
+        Time.timeScale = menuObject.activeSelf ? 0 : 1;
     }
 
     private void TriggerChangeEquipedItem()
@@ -95,8 +95,8 @@ public class EquipmentMenu : MonoBehaviour
 
     private void SetFocus()
     {
-        equipmentFocus.transform.SetParent(focusedWheel.transform);
-        equipmentFocus.transform.position = focusedWheel.transform.position;
+        ItemFocus.transform.SetParent(focusedWheel.transform);
+        ItemFocus.transform.position = focusedWheel.transform.position;
         for (int i = 0; i < listOfWheels.Length; i++)
         {
             listOfWheels[i].SetWheelFocus(i == focusedWheelIndex);
