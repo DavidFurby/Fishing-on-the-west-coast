@@ -38,7 +38,7 @@ public class EquipmentWheel : MonoBehaviour
             {
                 ListOfEquipmentSlots[i] = ListOfEquipmentSlots[i + 1];
             }
-            ListOfEquipmentSlots[^1] = firstSlot;
+            ListOfEquipmentSlots[ListOfEquipmentSlots.Length - 1] = firstSlot;
         }
         else if (direction == -1)
         {
@@ -59,12 +59,13 @@ public class EquipmentWheel : MonoBehaviour
             ListOfEquipmentSlots[i].transform.localPosition = newPosition;
         }
     }
+
     public void SetEquipment(Equipment[] equipment)
     {
         // Destroy any existing equipment slots
         if (ListOfEquipmentSlots != null)
         {
-            foreach (GameObject slot in ListOfEquipmentSlots)
+            foreach (var slot in ListOfEquipmentSlots)
             {
                 DestroyImmediate(slot);
             }
@@ -80,9 +81,9 @@ public class EquipmentWheel : MonoBehaviour
         for (int i = 0; i < equipment.Length; i++)
         {
             float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing) + middleIndex * (slotHeight + spacing);
-            GameObject newEquipmentSlot = Instantiate(equipmentSlot, transform);
+            var newEquipmentSlot = Instantiate(equipmentSlot, transform);
             newEquipmentSlot.transform.localScale = new Vector2(0.5f, 0.5f);
-            newEquipmentSlot.transform.localPosition = new Vector2(0, yPosition);
+            newEquipmentSlot.transform.localPosition = new Vector2 { x = 0, y = yPosition };
             if (newEquipmentSlot.TryGetComponent<Image>(out var slotImage))
             {
                 slotImage.color = Random.ColorHSV();
@@ -94,16 +95,12 @@ public class EquipmentWheel : MonoBehaviour
 
     private void SetText(int i, GameObject newEquipmentSlot, Equipment[] equipment)
     {
-        TextMeshProUGUI textComponent = newEquipmentSlot.GetComponentInChildren<TextMeshProUGUI>();
-        if (textComponent != null)
-        {
-            textComponent.text = equipment[i].name;
-        }
+        TextMeshProUGUI text = newEquipmentSlot.GetComponentInChildren<TextMeshProUGUI>();
+        text.text = equipment[i].name;
     }
+
     public void SetWheelFocus(bool focus)
     {
         wheelIsFocused = focus;
     }
 }
-
-
