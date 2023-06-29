@@ -58,7 +58,7 @@ public class CatchSummary : MonoBehaviour
     {
         if (fishData != null)
         {
-            var existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
+            Fish existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
             if (existingFish != null)
             {
                 newRecord.gameObject.SetActive(true);

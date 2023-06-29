@@ -1871,6 +1871,7 @@ GameObject:
   - component: {fileID: 8329055628719503433}
   - component: {fileID: 1329545930158402998}
   - component: {fileID: 7604071456582398650}
+  - component: {fileID: 4750084909923351845}
   m_Layer: 5
   m_Name: Options List View
   m_TagString: Untagged
@@ -1952,6 +1953,23 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &4750084909923351845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5677998077115946823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd77f4cef5c5e045934b630ceb3dc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 7604071456582398650}
+  optionViewPrefab: {fileID: 5665317717604146022, guid: 3ff4e0d87ab7d4789a1565ac303e8261, type: 3}
+  lastLineText: {fileID: 3469018475808432669}
+  fadeTime: 0.1
+  showUnavailableOptions: 0
 --- !u!1 &5829456798388032499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,6 +2832,7 @@ GameObject:
   - component: {fileID: 8690102946955983176}
   - component: {fileID: 8690102946955983179}
   - component: {fileID: 6565557488972089579}
+  - component: {fileID: 1895464653570278105}
   m_Layer: 5
   m_Name: ExplorerCanvas
   m_TagString: Untagged
@@ -2923,6 +2942,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counter: {fileID: 3975239137118596875}
+--- !u!114 &1895464653570278105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690102946955983178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1100e54c45314459e18955886d8321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 7318683539157651714}
+  speakerGUI: {fileID: 792666931071664297}
+  textGUI: {fileID: 4795000944814138905}
+  playerController: {fileID: 0}
+  dialogManager: {fileID: 0}
 --- !u!1 &8690102948342108886
 GameObject:
   m_ObjectHideFlags: 0
