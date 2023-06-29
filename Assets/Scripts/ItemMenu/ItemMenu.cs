@@ -4,7 +4,7 @@ using static Game;
 
 public class ItemMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject menuObject;
+    [SerializeField] private GameObject itemMenu;
     [SerializeField] private ItemWheel[] listOfWheels;
     [SerializeField] private GameObject ItemFocus;
     private ItemWheel focusedWheel;
@@ -14,7 +14,7 @@ public class ItemMenu : MonoBehaviour
     void Start()
     {
         PopulateWheels();
-        menuObject.SetActive(false);
+        itemMenu.SetActive(false);
         focusedWheel = listOfWheels[0];
         focusedWheelIndex = 0;
         SetFocus();
@@ -31,11 +31,11 @@ public class ItemMenu : MonoBehaviour
     {
         for (int i = 0; i < listOfWheels.Length; i++)
         {
-            if (listOfWheels[i].itemTag == ItemTag.FishingRod)
+            if (listOfWheels[i].itemTag == ItemTag.Bait)
             {
                 listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new Item(bait.Id, bait.BaitName, bait.Description)).ToArray());
             }
-            else if (listOfWheels[i].itemTag == ItemTag.Bait)
+            else if (listOfWheels[i].itemTag == ItemTag.FishingRod)
             {
                 listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new Item(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Description)).ToArray());
             }
@@ -52,7 +52,7 @@ public class ItemMenu : MonoBehaviour
         {
             SetMenu();
         }
-        if (menuObject.activeSelf)
+        if (itemMenu.activeSelf)
         {
             ScrollBetweenWheels();
 
@@ -64,8 +64,8 @@ public class ItemMenu : MonoBehaviour
 
     private void SetMenu()
     {
-        menuObject.SetActive(!menuObject.activeSelf);
-        Time.timeScale = menuObject.activeSelf ? 0 : 1;
+        itemMenu.SetActive(!itemMenu.activeSelf);
+        Time.timeScale = itemMenu.activeSelf ? 0 : 1;
     }
 
     private void TriggerChangeEquipedItem()
