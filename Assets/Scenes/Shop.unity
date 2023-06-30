@@ -416,17 +416,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98836833}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &494047342 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1895464653570278105, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
-  m_PrefabInstance: {fileID: 1853444634}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b1100e54c45314459e18955886d8321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &504191085
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +568,7 @@ MonoBehaviour:
   playerController: {fileID: 1514824441}
   dialogManager: {fileID: 3831113771061472607}
   emptySpot: {fileID: 3792797310491721612, guid: 683473d9bf376f6428801ce3980cf8d8, type: 3}
+  pauseShoppingControls: 0
   focusedShopItem: {fileID: 0}
 --- !u!1 &734797377
 GameObject:
@@ -1508,11 +1498,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1895464653570278105, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
+    - target: {fileID: 0}
       propertyPath: dialogManager
       value: 
       objectReference: {fileID: 3831113771061472607}
-    - target: {fileID: 1895464653570278105, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
+    - target: {fileID: 0}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1514824441}
@@ -1920,6 +1910,14 @@ PrefabInstance:
       propertyPath: onNodeStart.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4544370871106483103, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
+      propertyPath: dialogManager
+      value: 
+      objectReference: {fileID: 3831113771061472607}
+    - target: {fileID: 4544370871106483103, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1514824441}
     - target: {fileID: 4737038257622127435, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
       propertyPath: startAutomatically
       value: 0
@@ -2504,7 +2502,7 @@ PrefabInstance:
     - target: {fileID: 2541802518774182699, guid: df4414b36c312814aa9272096431fea3, type: 3}
       propertyPath: view
       value: 
-      objectReference: {fileID: 494047342}
+      objectReference: {fileID: 0}
     - target: {fileID: 2541802518774182699, guid: df4414b36c312814aa9272096431fea3, type: 3}
       propertyPath: listView
       value: 
@@ -2516,7 +2514,7 @@ PrefabInstance:
     - target: {fileID: 2864578554049000253, guid: df4414b36c312814aa9272096431fea3, type: 3}
       propertyPath: dialogueViews.Array.data[0]
       value: 
-      objectReference: {fileID: 494047342}
+      objectReference: {fileID: 0}
     - target: {fileID: 2864578554049000253, guid: df4414b36c312814aa9272096431fea3, type: 3}
       propertyPath: dialogueViews.Array.data[1]
       value: 
