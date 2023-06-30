@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CatchSummary : MonoBehaviour
 {
-    [SerializeField] private GameObject catchSummary;
+    [SerializeField] private RectTransform catchSummary;
     [SerializeField] private TextMeshProUGUI catchName;
     [SerializeField] private TextMeshProUGUI sizeText;
     [SerializeField] private TextMeshProUGUI isNew;
@@ -97,7 +97,7 @@ public class CatchSummary : MonoBehaviour
 
     public void SetSummaryActive()
     {
-        catchSummary.SetActive(!catchSummary.activeSelf);
+        catchSummary.gameObject.SetActive(!catchSummary.gameObject.activeSelf);
     }
 
     //Reset values

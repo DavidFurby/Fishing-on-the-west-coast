@@ -201,7 +201,7 @@ PrefabInstance:
     - target: {fileID: 1895464653570278105, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
       propertyPath: playerController
       value: 
-      objectReference: {fileID: 1712695124}
+      objectReference: {fileID: 0}
     - target: {fileID: 2415331168150052781, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -823,10 +823,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2474057496710730138, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
   m_PrefabInstance: {fileID: 1930309283}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1712695124 stripped
+--- !u!114 &1712695124
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2474057496485410267, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-  m_PrefabInstance: {fileID: 1930309283}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712695123}
   m_Enabled: 1
@@ -834,6 +835,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e2669d04061e54f990f9000de1e1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 10
+  rotationSpeed: 5
+  playerStatus: 0
 --- !u!1001 &1930309283
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -83,7 +83,7 @@ public class FishingControlls : MonoBehaviour
             {
                 StartCoroutine(CatchAlert());
                 catchArea.CatchFish();
-                fishingMiniGame.StartFishingMiniGame(catchArea.totalFishes);
+                fishingMiniGame.StartBalanceMiniGame(catchArea.totalFishes);
                 CalculateReelInSpeed();
                 SetFishingStatus(FishingStatus.ReelingFish);
             }
@@ -165,7 +165,7 @@ public class FishingControlls : MonoBehaviour
         if (catchArea.totalFishes.Count > 0 && fishingStatus == FishingStatus.StandBy)
         {
             SetFishingStatus(FishingStatus.InspectFish);
-            fishingMiniGame.EndFishingMiniGame();
+            fishingMiniGame.EndBalanceMiniGame();
             catchSummary.InitiateCatchSummary(catchArea.totalFishes);
         }
     }
@@ -186,7 +186,7 @@ public class FishingControlls : MonoBehaviour
     {
         if (fishingStatus == FishingStatus.ReelingFish)
         {
-            fishingMiniGame.EndFishingMiniGame();
+            fishingMiniGame.EndBalanceMiniGame();
             catchArea.RemoveCatch();
             SetFishingStatus(FishingStatus.Reeling);
         }

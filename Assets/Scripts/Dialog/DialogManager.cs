@@ -7,7 +7,6 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private DialogueRunner dialogueRunner;
     [SerializeField] private Shop shop;
     [SerializeField] private DialogView view;
-    [SerializeField] private DialogListView listView;
     // Start is called before the first frame update
 
     //Nodes that should present text instantly
