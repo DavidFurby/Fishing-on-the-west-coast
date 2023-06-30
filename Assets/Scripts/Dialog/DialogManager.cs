@@ -19,12 +19,13 @@ public class DialogManager : MonoBehaviour
     void Start()
     {
         SetDayHandler();
-        BuyShopItem();
         if (shop != null)
         {
             OpenShopHandler();
             LockShopControls();
-            SetShopItemNameHandler(shop.focusedShopItem);
+            SetShopItemHandler(shop.focusedShopItem);
+            BuyShopItem();
+            SetTokens();
         }
     }
 
@@ -43,10 +44,10 @@ public class DialogManager : MonoBehaviour
             StartCoroutine(shop.OpenShop());
         });
     }
-    public void SetShopItemNameHandler(ShopItem shopItem)
+    public void SetShopItemHandler(ShopItem shopItem)
     {
-        RemoveHandler("setShopItemName");
-        dialogueRunner.AddCommandHandler("setShopItemName", () =>
+        RemoveHandler("setShopItem");
+        dialogueRunner.AddCommandHandler("setShopItem", () =>
         {
             dialogueRunner.VariableStorage.SetValue("$shopItemName", shopItem.Name);
             dialogueRunner.VariableStorage.SetValue("$shopItemPrice", shopItem.Price);
@@ -55,12 +56,17 @@ public class DialogManager : MonoBehaviour
 
         });
     }
+    public void SetTokens()
+    {
+        RemoveHandler("setTokens");
+        dialogueRunner.AddCommandHandler("setTokens", () => dialogueRunner.VariableStorage.SetValue("$currentTokens", MainManager.Instance.game.Fishes));
+    }
     //lock controls if item has been selected in shop
     public void LockShopControls()
     {
         dialogueRunner.AddCommandHandler("lockShopControls", () =>
         {
-            shop.pauseControls = !shop.pauseControls;
+            shop.pauseShoppingControls = !shop.pauseShoppingControls;
         });
     }
     private void BuyShopItem()

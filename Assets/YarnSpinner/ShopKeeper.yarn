@@ -5,6 +5,7 @@ position: 288,-188
 <<declare $shopItemName = "" as string>>
 <<declare $shopItemPrice = 0 as number>>
 <<declare $shopItemDescription = "" as string>>
+<<declare $currentTokens = 0 as number>>
 
 ShopKeeper: Hiya what can i do for you today?
 <<openShop>>
@@ -15,7 +16,8 @@ tags:
 colorID: 0
 position: -193,-302
 ---
-<<setShopItemName>>
+<<setShopItem>>
+<<setTokens>>
 <<if $shopItemName == "Empty spot">>
 Sold out
 <<else>>
@@ -33,7 +35,11 @@ ShopKepper: that will be {$shopItemPrice}
 
 -> Player: Cool ill buy it
     <<lockShopControls>>
+    <<if $shopItemPrice <= $currentTokens>>
     <<jump BuyItem>>
+    <<else>>
+    <<jump InsufficentPayment>>
+    <<endif>>
 -> Player: Think ill skip
     <<lockShopControls>>
     <<jump DeclineItem>>
@@ -46,7 +52,6 @@ position: -2,38
 ---
  <<buyShopItem>>
  ShopKepper: Aye thanks matey
-
 ===
 
 title: DeclineItem
@@ -55,6 +60,7 @@ colorID: 0
 position: -129,307
 ---
 ShopKepper: Oh maybe next time then
+<<jump ShopItem>>
 ===
 title: InsufficentPayment
 tags:

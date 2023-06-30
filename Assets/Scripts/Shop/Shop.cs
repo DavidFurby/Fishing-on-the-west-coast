@@ -13,7 +13,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] ShopItem emptySpot;
     private readonly List<Vector3> shopItemPositions = new();
-    public bool pauseControls;
+    [HideInInspector] public bool pauseShoppingControls;
 
     #endregion
 
@@ -94,34 +94,27 @@ public class Shop : MonoBehaviour
     {
         if (focusedShopItem != null)
         {
-            if (MainManager.Instance.game.Fishes >= focusedShopItem.Price)
+            if (!IsFishingRodInInventory(focusedShopItem))
             {
-                if (!IsFishingRodInInventory(focusedShopItem))
-                {
-                    FishingRod fishingRod = focusedShopItem.gameObject.GetComponent<FishingRod>();
-                    fishingRod.AddFishingRodToInstance();
-                }
-                GameObject replacement = Instantiate(gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
-                replacement.transform.parent = transform.parent;
-                shopItems[focusedShopItemIndex] = replacement.GetComponent<ShopItem>();
-                focusedShopItem = replacement.GetComponent<ShopItem>();
-                FocusItem();
+                FishingRod fishingRod = focusedShopItem.gameObject.GetComponent<FishingRod>();
+                fishingRod.AddFishingRodToInstance();
             }
-            else
-            {
-                dialogManager.StartDialog("InsufficentPayment");
-            }
+            GameObject replacement = Instantiate(gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
+            replacement.transform.parent = transform.parent;
+            shopItems[focusedShopItemIndex] = replacement.GetComponent<ShopItem>();
+            focusedShopItem = replacement.GetComponent<ShopItem>();
+            FocusItem();
         }
     }
     public void UpdateDialog()
     {
         dialogManager.EndDialog();
-        dialogManager.SetShopItemNameHandler(focusedShopItem);
+        dialogManager.SetShopItemHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
     }
     private void HandleShoppingInput()
     {
-        if (playerController.playerStatus == PlayerStatus.Shopping && !pauseControls)
+        if (playerController.playerStatus == PlayerStatus.Shopping && !pauseShoppingControls)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
