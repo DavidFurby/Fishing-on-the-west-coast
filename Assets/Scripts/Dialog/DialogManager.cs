@@ -8,7 +8,6 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private Shop shop;
     [SerializeField] private DialogView view;
     [SerializeField] private DialogListView listView;
-    [SerializeField] private PlayerController playerController;
     // Start is called before the first frame update
 
     //Nodes that should present text instantly
@@ -21,11 +20,10 @@ public class DialogManager : MonoBehaviour
     {
         SetDayHandler();
         BuyShopItem();
-        LockControls();
         if (shop != null)
         {
             OpenShopHandler();
-
+            LockShopControls();
             SetShopItemNameHandler(shop.focusedShopItem);
         }
     }
@@ -57,11 +55,12 @@ public class DialogManager : MonoBehaviour
 
         });
     }
-    public void LockControls()
+    //lock controls if item has been selected in shop
+    public void LockShopControls()
     {
-        dialogueRunner.AddCommandHandler("lockControls", () =>
+        dialogueRunner.AddCommandHandler("lockShopControls", () =>
         {
-            playerController.selectedItem = !playerController.selectedItem;
+            shop.pauseControls = !shop.pauseControls;
         });
     }
     private void BuyShopItem()

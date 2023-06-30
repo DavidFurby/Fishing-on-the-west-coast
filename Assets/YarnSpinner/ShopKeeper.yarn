@@ -28,14 +28,14 @@ tags:
 colorID: 0
 position: -285,-135
 ---
-<<lockControls>>
+<<lockShopControls>>
 ShopKepper: that will be {$shopItemPrice}
 
 -> Player: Cool ill buy it
-    <<lockControls>>
+    <<lockShopControls>>
     <<jump BuyItem>>
 -> Player: Think ill skip
-    <<lockControls>>
+    <<lockShopControls>>
     <<jump DeclineItem>>
 ===
 

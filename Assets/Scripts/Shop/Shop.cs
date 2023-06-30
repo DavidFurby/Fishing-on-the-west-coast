@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static PlayerController;
 
 public class Shop : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] ShopItem emptySpot;
     private readonly List<Vector3> shopItemPositions = new();
+    public bool pauseControls;
 
     #endregion
 
@@ -35,6 +37,10 @@ public class Shop : MonoBehaviour
         }
         SpawnItems();
     }
+    private void Update()
+    {
+        HandleShoppingInput();
+    }
     #endregion
 
     #region Public Methods
@@ -42,6 +48,8 @@ public class Shop : MonoBehaviour
     /// <summary>
     /// Focuses on an item in the shop.
     /// </summary>
+    /// 
+
     public void FocusItem()
     {
         playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.ShoppingItem);
@@ -54,7 +62,8 @@ public class Shop : MonoBehaviour
     public IEnumerator OpenShop()
     {
         yield return new WaitForSeconds(0.5f);
-        playerController.SetPlayerStatus(PlayerController.PlayerStatus.Shopping);
+        playerController.SetPlayerStatus(PlayerStatus.Shopping);
+        playerController.gameObject.SetActive(false);
         FocusItem();
         UpdateDialog();
     }
@@ -65,7 +74,7 @@ public class Shop : MonoBehaviour
     public void CloseShop()
     {
         dialogManager.EndDialog();
-        playerController.SetPlayerStatus(PlayerController.PlayerStatus.StandBy);
+        playerController.SetPlayerStatus(PlayerStatus.StandBy);
         playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.Player);
         focusedShopItemIndex = 0;
     }
@@ -92,8 +101,8 @@ public class Shop : MonoBehaviour
                     FishingRod fishingRod = focusedShopItem.gameObject.GetComponent<FishingRod>();
                     fishingRod.AddFishingRodToInstance();
                 }
-                GameObject replacement = Instantiate(emptySpot.gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
-                replacement.transform.parent = focusedShopItem.transform.parent;
+                GameObject replacement = Instantiate(gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
+                replacement.transform.parent = transform.parent;
                 shopItems[focusedShopItemIndex] = replacement.GetComponent<ShopItem>();
                 focusedShopItem = replacement.GetComponent<ShopItem>();
                 FocusItem();
@@ -109,6 +118,25 @@ public class Shop : MonoBehaviour
         dialogManager.EndDialog();
         dialogManager.SetShopItemNameHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
+    }
+    private void HandleShoppingInput()
+    {
+        if (playerController.playerStatus == PlayerStatus.Shopping && !pauseControls)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                ScrollBetweenItems(false);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                ScrollBetweenItems(true);
+
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CloseShop();
+            }
+        }
     }
     private void SpawnItems()
     {

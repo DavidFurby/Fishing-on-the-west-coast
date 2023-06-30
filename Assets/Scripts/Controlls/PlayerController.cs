@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Interactible interactible;
     public PlayerStatus playerStatus;
-    [SerializeField] private Shop shop;
-    public bool selectedItem = true;
 
     public enum PlayerStatus
     {
@@ -33,7 +31,7 @@ public class PlayerController : MonoBehaviour
         if (playerModel != null)
         {
             // Get the Animator component attached to the player model
-            animator = playerModel.GetComponent<Animator>();           
+            animator = playerModel.GetComponent<Animator>();
         }
         else
         {
@@ -45,7 +43,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleInput();
-        HandleShoppingInput();
     }
     private void FixedUpdate()
     {
@@ -53,25 +50,7 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
     }
 
-    private void HandleShoppingInput()
-    {
-        if (playerStatus == PlayerStatus.Shopping && !selectedItem)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                shop.ScrollBetweenItems(false);
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                shop.ScrollBetweenItems(true);
 
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                shop.CloseShop();
-            }
-        }
-    }
     //Handle player input
     private void HandleInput()
     {
@@ -80,7 +59,7 @@ public class PlayerController : MonoBehaviour
         if (playerStatus == PlayerStatus.StandBy && Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactible != null)
         {
 
-           if (horizontalInput != 0 || verticalInput != 0)
+            if (horizontalInput != 0 || verticalInput != 0)
             {
                 if (animator.GetBool("walking") != true)
                 {
