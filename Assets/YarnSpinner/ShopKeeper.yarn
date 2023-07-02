@@ -8,6 +8,7 @@ position: 288,-188
 <<declare $currentTokens = 0 as number>>
 
 ShopKeeper: Hiya what can i do for you today?
+ShopKeeper: Testing testing
 <<openShop>>
 ===
 

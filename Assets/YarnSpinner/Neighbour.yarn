@@ -51,6 +51,9 @@ colorID: 0
 position: -223,-79
 ---
 Today is the third day of the month!
+Neightbour: NEti!
+-> Okay Cool
+-> Not cool
 ===
 
 title: DayFour
@@ -59,6 +62,7 @@ colorID: 0
 position: -537,1
 ---
 Neighbour: Today is the fourth day of the month!
+Neightbour: NEti!
 -> Okay Cool
 -> Not cool
 ===

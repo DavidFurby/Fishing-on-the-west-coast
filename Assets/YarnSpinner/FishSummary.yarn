@@ -1,0 +1,8 @@
+﻿title: FishSummary
+tags:
+---
+<<declare $fishName = "" as string>>
+<<declare $fishSize = 0 as number>>
+<<declare $fishDescription = "" as string>>
+<<declare $currentTokens = 0 as number>>
+===

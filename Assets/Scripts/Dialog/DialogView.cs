@@ -23,8 +23,10 @@ public class DialogView : DialogueViewBase
     }
     private void Update()
     {
+        Debug.Log(container.gameObject.activeSelf);
         if (Input.GetKeyDown(KeyCode.Space) && container.gameObject.activeSelf)
         {
+            Debug.Log("pressed");
             if (textGUI.text.Length == dialogueLine.Length)
             {
                 UserRequestedViewAdvancement();
@@ -57,7 +59,6 @@ public class DialogView : DialogueViewBase
 
     public override void DismissLine(Action onDismissalComplete)
     {
-        ShowDialog(false);
         onDismissalComplete();
     }
 
@@ -71,6 +72,7 @@ public class DialogView : DialogueViewBase
 
     public override void DialogueComplete()
     {
+        ShowDialog(false);
         Invoke(nameof(ActivateControls), 0.5f);
         base.DialogueComplete();
     }
