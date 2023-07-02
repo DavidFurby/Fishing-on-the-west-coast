@@ -23,10 +23,8 @@ public class DialogView : DialogueViewBase
     }
     private void Update()
     {
-        Debug.Log(container.gameObject.activeSelf);
         if (Input.GetKeyDown(KeyCode.Space) && container.gameObject.activeSelf)
         {
-            Debug.Log("pressed");
             if (textGUI.text.Length == dialogueLine.Length)
             {
                 UserRequestedViewAdvancement();
@@ -40,7 +38,6 @@ public class DialogView : DialogueViewBase
     }
     public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)
     {
-
         ShowDialog(true);
         this.dialogueLine = dialogueLine.TextWithoutCharacterName.Text;
         speakerGUI.text = dialogueLine.CharacterName;
@@ -59,6 +56,7 @@ public class DialogView : DialogueViewBase
 
     public override void DismissLine(Action onDismissalComplete)
     {
+        ShowDialog(false);
         onDismissalComplete();
     }
 
@@ -67,6 +65,7 @@ public class DialogView : DialogueViewBase
         if (container.gameObject.activeSelf)
         {
             advanceHandler?.Invoke();
+
         }
     }
 
