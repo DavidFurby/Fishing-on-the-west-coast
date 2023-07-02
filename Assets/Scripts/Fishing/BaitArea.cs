@@ -9,7 +9,7 @@ public class BaitArea : MonoBehaviour
         if (collider.gameObject.CompareTag("Fish"))
         {
             FishMovement fishMovement = collider.gameObject.GetComponent<FishMovement>();
-            Fish fish = collider.gameObject.GetComponent<Fish>();
+            Catch fish = collider.gameObject.GetComponent<Catch>();
             float probabilty = GetProbability(fish.Level, fishingControlls.currentBait.Level);
 
             if (Random.Range(0f, 1f) < probabilty)

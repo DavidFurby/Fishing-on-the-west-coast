@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yarn.Unity;
 
-public class ShopDialogHandlers : MonoBehaviour
+public class ShopHandlers : MonoBehaviour
 {
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private Shop shop;

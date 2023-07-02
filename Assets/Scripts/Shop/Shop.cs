@@ -11,7 +11,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private DialogManager dialogManager;
-    [SerializeField] private ShopDialogHandlers dialogHandlers;
+    [SerializeField] private ShopHandlers dialogHandlers;
     [SerializeField] ShopItem emptySpot;
     private readonly List<Vector3> shopItemPositions = new();
     [HideInInspector] public bool pauseShoppingControls;

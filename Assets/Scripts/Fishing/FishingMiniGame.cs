@@ -9,7 +9,7 @@ public class FishingMiniGame : MonoBehaviour
     [SerializeField] private FishingControlls fishingControlls;
     [SerializeField] private MusicController musicController;
     [SerializeField] private Scrollbar castingPowerBalance;
-    private List<Fish> fishesOnHook;
+    private List<Catch> fishesOnHook;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
@@ -121,7 +121,7 @@ public class FishingMiniGame : MonoBehaviour
 
     #endregion
 
-    public void StartBalanceMiniGame(List<Fish> fishes)
+    public void StartBalanceMiniGame(List<Catch> fishes)
     {
         reelingBalance.gameObject.SetActive(true);
         fishesOnHook = fishes;

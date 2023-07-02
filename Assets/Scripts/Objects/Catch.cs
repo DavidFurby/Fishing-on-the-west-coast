@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 [Serializable]
-public class Fish : MonoBehaviour
+public class Catch : MonoBehaviour
 {
     [SerializeField] private int id;
     [SerializeField] private string fishName;
@@ -17,7 +17,7 @@ public class Fish : MonoBehaviour
         set => id = value;
     }
 
-    public string FishName
+    public string CatchName
     {
         get => fishName;
         set => fishName = value;
@@ -29,7 +29,7 @@ public class Fish : MonoBehaviour
         set => size = value;
     }
 
-    public string Info
+    public string Description
     {
         get => info;
         set => info = value;
@@ -40,7 +40,7 @@ public class Fish : MonoBehaviour
         set => level = value;
     }
 
-    public Fish(FishData fishData)
+    public Catch(FishData fishData)
     {
         fishName = fishData.fishName;
         size = fishData.size;

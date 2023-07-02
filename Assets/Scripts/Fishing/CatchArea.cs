@@ -11,10 +11,10 @@ public class CatchArea : MonoBehaviour
     /// </summary>
     public bool IsInCatchArea { get; private set; }
 
-    [HideInInspector] public Fish fish;
+    [HideInInspector] public Catch fish;
     private FishMovement fishMovement;
     [SerializeField] private FishingControlls fishingControlls;
-    public readonly List<Fish> totalFishes = new();
+    public readonly List<Catch> totalFishes = new();
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,7 +27,7 @@ public class CatchArea : MonoBehaviour
                 {
                     this.fishMovement = fishMovement;
                 }
-                if (other.TryGetComponent(out Fish fish))
+                if (other.TryGetComponent(out Catch fish))
                 {
                     this.fish = fish;
                 }
@@ -60,7 +60,7 @@ public class CatchArea : MonoBehaviour
                 newFishMovement.GetBaited(totalFishes[totalFishes.Count - 1].gameObject);
             }
             newFishMovement.SetFishState(FishMovement.FishState.Hooked);
-            if (other.TryGetComponent(out Fish newFishComponent))
+            if (other.TryGetComponent(out Catch newFishComponent))
             {
                 totalFishes.Add(newFishComponent);
             }
@@ -75,7 +75,7 @@ public class CatchArea : MonoBehaviour
         if (fish != null && fishMovement != null && fishMovement.state != FishMovement.FishState.Hooked)
         {
             fishMovement.SetFishState(FishMovement.FishState.Hooked);
-            totalFishes.Add(fish.GetComponent<Fish>());
+            totalFishes.Add(fish.GetComponent<Catch>());
         }
     }
 

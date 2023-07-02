@@ -7,7 +7,7 @@ public class Game : MonoBehaviour
     public int Fishes { get; set; }
 
     public float BestDistance { get; set; }
-    public Fish[] Catches { get; set; } = new Fish[0];
+    public Catch[] Catches { get; set; } = new Catch[0];
     public FishingRod[] FoundFishingRods { get; set; } = new FishingRod[0];
     public FishingRod EquippedFishingRod { get; set; }
 
@@ -71,7 +71,7 @@ public class Game : MonoBehaviour
         Fishes = gameData.catchCount;
         BestDistance = gameData.bestDistance;
         Scene = gameData.scene;
-        Catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Fish>()).ToArray();
+        Catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Catch>()).ToArray();
 
         LoadFishingRod(gameData);
 
@@ -135,7 +135,7 @@ public class Game : MonoBehaviour
             Fishes = 0;
             BestDistance = 0;
             Scene = "Boat";
-            Catches = new Fish[0];
+            Catches = new Catch[0];
             FoundFishingRods = new FishingRod[] { gameObject.AddComponent<FishingRod>() };
             EquippedFishingRod = FoundFishingRods[0];
             FoundBaits = new Bait[] { gameObject.AddComponent<Bait>() };

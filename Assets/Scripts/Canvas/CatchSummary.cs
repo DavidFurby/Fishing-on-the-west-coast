@@ -11,12 +11,12 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sizeText;
     [SerializeField] private TextMeshProUGUI isNew;
     [SerializeField] private TextMeshProUGUI newRecord;
-    private List<Fish> caughtFishes;
-    private Fish currentlyPresentedFish;
+    private List<Catch> caughtFishes;
+    private Catch currentlyPresentedFish;
     private int fishIndex;
     [SerializeField] private FishingControlls fishingControlls;
 
-    public void InitiateCatchSummary(List<Fish> fishes)
+    public void InitiateCatchSummary(List<Catch> fishes)
     {
         caughtFishes = fishes;
         currentlyPresentedFish = fishes[0];
@@ -26,7 +26,7 @@ public class CatchSummary : MonoBehaviour
 
     private void PresentSummary()
     {
-        catchName.text = currentlyPresentedFish.FishName;
+        catchName.text = currentlyPresentedFish.CatchName;
         sizeText.text = currentlyPresentedFish.Size.ToString("f2");
         CheckSizeDifference(currentlyPresentedFish);
         CheckIfNew(currentlyPresentedFish);
@@ -54,11 +54,11 @@ public class CatchSummary : MonoBehaviour
     }
 
     // Check if fish is larger than the saved fish of the same name
-    private void CheckSizeDifference(Fish fishData)
+    private void CheckSizeDifference(Catch fishData)
     {
         if (fishData != null)
         {
-            Fish existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
+            Catch existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
             if (existingFish != null)
             {
                 newRecord.gameObject.SetActive(true);
@@ -74,7 +74,7 @@ public class CatchSummary : MonoBehaviour
     }
 
     //Check if fish hasn't been caught before
-    private void CheckIfNew(Fish fishData)
+    private void CheckIfNew(Catch fishData)
     {
         if (!MainManager.Instance.game.Catches.Any(f => f.Id == fishData.Id))
         {

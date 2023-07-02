@@ -8,11 +8,11 @@ public class FishData
     public string info;
     public int level;
 
-    public FishData(Fish fish)
+    public FishData(Catch fish)
     {
-        fishName = fish.FishName;
+        fishName = fish.CatchName;
         size = fish.Size;
-        info = fish.Info;
+        info = fish.Description;
         level = fish.Level;
     }
 }

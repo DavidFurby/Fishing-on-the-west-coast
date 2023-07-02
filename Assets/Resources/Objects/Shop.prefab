@@ -593,6 +593,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   playerController: {fileID: 0}
   dialogManager: {fileID: 0}
+  dialogHandlers: {fileID: 0}
   emptySpot: {fileID: 3792797310491721612, guid: 683473d9bf376f6428801ce3980cf8d8, type: 3}
   pauseShoppingControls: 0
   focusedShopItem: {fileID: 0}
@@ -608,6 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a275155b7b384e48a30135994a3e73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogManager: {fileID: 0}
+  shop: {fileID: 7437166623380843911}
 --- !u!1 &7437166623401904539
 GameObject:
   m_ObjectHideFlags: 0
