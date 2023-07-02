@@ -539,6 +539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7437166623380843910}
   - component: {fileID: 7437166623380843911}
+  - component: {fileID: 4104706642165702814}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -595,6 +596,18 @@ MonoBehaviour:
   emptySpot: {fileID: 3792797310491721612, guid: 683473d9bf376f6428801ce3980cf8d8, type: 3}
   pauseShoppingControls: 0
   focusedShopItem: {fileID: 0}
+--- !u!114 &4104706642165702814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7437166623380843929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a275155b7b384e48a30135994a3e73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7437166623401904539
 GameObject:
   m_ObjectHideFlags: 0
