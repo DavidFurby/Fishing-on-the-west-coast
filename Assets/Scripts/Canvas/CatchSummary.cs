@@ -40,6 +40,7 @@ public class CatchSummary : MonoBehaviour
         }
         caughtFishes = fishes;
         currentlyPresentedFish = fishes[0];
+        UpdateDataValues();
         handlers.StartSummar(currentlyPresentedFish);
     }
 
@@ -51,15 +52,20 @@ public class CatchSummary : MonoBehaviour
         if (fishIndex < caughtFishes.Count - 1)
         {
             IncrementFishIndex();
-            newRecord.gameObject.SetActive(CheckSizeDifference(currentlyPresentedFish));
-            isNew.gameObject.SetActive(CheckIfNew(currentlyPresentedFish));
-            MainManager.Instance.game.Fishes++;
+            UpdateDataValues();
             handlers.StartSummar(currentlyPresentedFish);
         }
         else
         {
             EndSummary();
         }
+    }
+
+    private void UpdateDataValues()
+    {
+        newRecord.gameObject.SetActive(CheckSizeDifference(currentlyPresentedFish));
+        isNew.gameObject.SetActive(CheckIfNew(currentlyPresentedFish));
+        MainManager.Instance.game.TotalCatches++;
     }
 
     // Increment the fish index and update the currently presented fish
@@ -90,17 +96,16 @@ public class CatchSummary : MonoBehaviour
     }
 
     // Check if fish hasn't been caught before
-    private bool CheckIfNew(Catch fishData)
+    private bool CheckIfNew(Catch catchData)
     {
-        if (fishData == null)
+        if (catchData == null)
         {
             Debug.LogError("Fish data is null");
             return false;
         }
-
-        if (!MainManager.Instance.game.Catches.Any(f => f.Id == fishData.Id))
+        if (!MainManager.Instance.game.Catches.Any(f => f.Id == catchData.Id))
         {
-            fishData.AddFishToInstance();
+            catchData.AddFishToInstance();
             return true;
         }
 
@@ -115,6 +120,7 @@ public class CatchSummary : MonoBehaviour
         ResetValues();
         handlers.EndSummary();
         fishingControls.SetFishingStatus(FishingController.FishingStatus.StandBy);
+        Debug.Log(fishingControls.fishingStatus);
     }
 
     // Reset values

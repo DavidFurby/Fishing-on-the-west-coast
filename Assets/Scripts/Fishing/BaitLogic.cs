@@ -136,8 +136,9 @@ public class BaitLogic : MonoBehaviour
     {
         rigidBody.isKinematic = true;
         transform.position = targetPosition;
-        fishingControlls.SetFishingStatus(FishingController.FishingStatus.StandBy);
         ResetValues();
+        fishingControlls.SetFishingStatus(FishingController.FishingStatus.StandBy);
+
     }
 
     private void ResetValues()

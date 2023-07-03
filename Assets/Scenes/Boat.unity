@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1930309283}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464174469}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46e2669d04061e54f990f9000de1e1c6, type: 3}
   m_Name: 
@@ -2463,6 +2463,10 @@ PrefabInstance:
       propertyPath: playerAnimations
       value: 
       objectReference: {fileID: 2026150467}
+    - target: {fileID: 8567108648708625402, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2474057496485410267, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}

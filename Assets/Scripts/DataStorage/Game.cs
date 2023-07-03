@@ -4,7 +4,7 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     public int Days { get; set; }
-    public int Fishes { get; set; }
+    public int TotalCatches { get; set; }
 
     public float BestDistance { get; set; }
     public Catch[] Catches { get; set; } = new Catch[0];
@@ -68,7 +68,7 @@ public class Game : MonoBehaviour
         GameData gameData = SaveSystem.LoadGame();
 
         Days = gameData.daysCount;
-        Fishes = gameData.catchCount;
+        TotalCatches = gameData.TotalCatches;
         BestDistance = gameData.bestDistance;
         Scene = gameData.scene;
         Catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Catch>()).ToArray();
@@ -132,7 +132,7 @@ public class Game : MonoBehaviour
         if (removed)
         {
             Days = 1;
-            Fishes = 0;
+            TotalCatches = 0;
             BestDistance = 0;
             Scene = "Boat";
             Catches = new Catch[0];
