@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CatchSummaryHandlers : MonoBehaviour
@@ -20,9 +21,9 @@ public class CatchSummaryHandlers : MonoBehaviour
         dialogManager.RemoveHandler("setCatchSummary");
         dialogManager.AddCommandHandler("setCatchSummary", () =>
         {
-            Debug.Log(catchResult.Size.ToString());
+            Debug.Log(catchResult.Size.ToString("2F"));
             dialogManager.SetVariableValue("$catchName", catchResult.CatchName);
-            dialogManager.SetVariableValue("$catchSize", catchResult.Size.ToString());
+            dialogManager.SetVariableValue("$catchSize", $"Size: {catchResult.Size:F2} cm");
             dialogManager.SetVariableValue("$catchDescription", catchResult.Description);
 
         });

@@ -200,7 +200,7 @@ AnimationClip:
   - time: 3
     functionName: TriggerSetChargingBalance
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: d88d0e5ea8c00164481f3c07e95fe7d7, type: 3}
+    objectReferenceParameter: {fileID: 11500000, guid: 397a58daf2c0ec34d9c6f78895f9df77, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

@@ -2,9 +2,9 @@
 tags:
 ---
 <<declare $catchName = "" as string>>
-<<declare $cathSize = "" as string>>
+<<declare $catchSize = "" as string>>
 <<declare $catchDescription = "" as string>>
 
 <<setCatchSummary>>
-{$catchName}:{$cathSize}cm <br>{$catchDescription}
+{$catchName}:{$catchSize}<br>{$catchDescription}
 ===
