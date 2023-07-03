@@ -1149,7 +1149,6 @@ MonoBehaviour:
   fishingMiniGame: {fileID: 1275887656}
   fishingRodLogic: {fileID: 1745764250}
   playerAnimations: {fileID: 2026150468}
-  currentBait: {fileID: 0}
   fishingStatus: 0
 --- !u!95 &502981710 stripped
 Animator:
@@ -1322,6 +1321,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitLogic
+      value: 
+      objectReference: {fileID: 1759076623}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingControlls
       value: 
       objectReference: {fileID: 464174475}
@@ -1399,7 +1402,7 @@ PrefabInstance:
       objectReference: {fileID: 109290014}
     - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_VersionIndex
-      value: 1041
+      value: 1044
       objectReference: {fileID: 0}
     - target: {fileID: 5360848329395529453, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
@@ -2262,6 +2265,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1759076623 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1881676126 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7194481759871860316, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
