@@ -9,7 +9,7 @@ public class FishingRodLogic : MonoBehaviour
     [HideInInspector] public float reelInSpeed;
     [HideInInspector] public float castingPower;
     private FishingRod currentFishingRod;
-    private readonly float initialCastingPower = 20f;
+    private readonly float initialCastingPower = 50;
     private readonly float initialReelInSpeed = 15f;
 
     // Start is called before the first frame update

@@ -31,11 +31,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6195600696095669464}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 956, y: 20.780014}
+  m_AnchoredPosition: {x: 930, y: -1.219986}
   m_SizeDelta: {x: 200, y: 40.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1618426052650354241
@@ -332,13 +332,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8153890519689913594}
+  m_Father: {fileID: 6195600696095669464}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 943, y: -38.440018}
-  m_SizeDelta: {x: 200, y: 40.22}
+  m_AnchoredPosition: {x: 862, y: 35.11}
+  m_SizeDelta: {x: 1480, y: 40.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5441119372228046021
 CanvasRenderer:
@@ -599,8 +599,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 2308330358438935481}
   - {fileID: 9035670618934626437}
   m_Father: {fileID: 2787229962505493440}
   m_RootOrder: 3
@@ -638,7 +639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Here's a big long line of dialogue, ready to be shown to the player.
+  m_text: General text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -736,8 +737,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2308330358438935481}
+  m_Children: []
   m_Father: {fileID: 2787229962505493440}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

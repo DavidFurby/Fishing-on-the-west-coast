@@ -100,7 +100,6 @@ public class CatchSummary : MonoBehaviour
 
         if (!MainManager.Instance.game.Catches.Any(f => f.Id == fishData.Id))
         {
-            Debug.Log("new");
             fishData.AddFishToInstance();
             return true;
         }

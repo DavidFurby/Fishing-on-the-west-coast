@@ -6,5 +6,5 @@ tags:
 <<declare $catchDescription = "" as string>>
 
 <<setCatchSummary>>
-{$catchName}<br>{$cathSize}cm <br>{$catchDescription}
+{$catchName}:{$cathSize}cm <br>{$catchDescription}
 ===
