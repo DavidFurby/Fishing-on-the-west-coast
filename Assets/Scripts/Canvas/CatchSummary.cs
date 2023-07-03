@@ -84,7 +84,7 @@ public class CatchSummary : MonoBehaviour
             return false;
         }
 
-        Catch existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
+        Catch existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.Id == fishData.Id && f.Size < fishData.Size);
         if (existingFish != null)
         {
             int index = Array.IndexOf(MainManager.Instance.game.Catches, existingFish);
