@@ -2,7 +2,7 @@
 tags:
 ---
 <<declare $catchName = "" as string>>
-<<declare $cathSize = "0" as string>>
+<<declare $cathSize = "" as string>>
 <<declare $catchDescription = "" as string>>
 
 <<setCatchSummary>>

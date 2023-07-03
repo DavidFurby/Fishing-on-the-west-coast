@@ -20,6 +20,7 @@ public class CatchSummaryHandlers : MonoBehaviour
         dialogManager.RemoveHandler("setCatchSummary");
         dialogManager.AddCommandHandler("setCatchSummary", () =>
         {
+            Debug.Log(catchResult.Size.ToString());
             dialogManager.SetVariableValue("$catchName", catchResult.CatchName);
             dialogManager.SetVariableValue("$catchSize", catchResult.Size.ToString());
             dialogManager.SetVariableValue("$catchDescription", catchResult.Description);

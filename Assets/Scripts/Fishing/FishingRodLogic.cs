@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static FishingController;
 
 public class FishingRodLogic : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class FishingRodLogic : MonoBehaviour
     [HideInInspector] public float reelInSpeed;
     [HideInInspector] public float castingPower;
     private FishingRod currentFishingRod;
-    private readonly float initialCastingPower = 50;
+    private readonly float initialCastingPower = 20;
     private readonly float initialReelInSpeed = 15f;
 
     // Start is called before the first frame update
@@ -66,8 +67,9 @@ public class FishingRodLogic : MonoBehaviour
     }
 
     // Play the swing animation and wait for it to finish
-    public IEnumerator SwingAnimation(float castPower)
+    public IEnumerator SwingAnimation(float castPower, System.Action<FishingController.FishingStatus> setFishingStatus)
     {
+        castingPower *= castPower;
         while (!fishingRodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
             yield return null;
@@ -76,7 +78,8 @@ public class FishingRodLogic : MonoBehaviour
         {
             yield return null;
         }
-        castingPower *= castPower;
+        setFishingStatus(FishingStatus.Casting);
+
     }
 
     // Play the reverse swing animation

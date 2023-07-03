@@ -93,8 +93,9 @@ public class FishingController : MonoBehaviour
                 fishingRodLogic.ChargeCasting(playerAnimations.SetChargingThrowSpeed);
 
             }
-            else if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Space))
             {
+                fishingMiniGame.SetChargingBalance(false);
                 playerAnimations.SetChargingThrowAnimation(false);
                 fishingRodLogic.PlayerReverseSwingAnimation();
                 castSound.Play();
@@ -108,9 +109,7 @@ public class FishingController : MonoBehaviour
     /// </summary>
     void WaitForSwingAnimation()
     {
-        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower));
-        fishingMiniGame.SetChargingBalance(false);
-        SetFishingStatus(FishingStatus.Casting);
+        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower, SetFishingStatus));
     }
 
     //Trigger methods when fish has been reeled in to inspect fishes
