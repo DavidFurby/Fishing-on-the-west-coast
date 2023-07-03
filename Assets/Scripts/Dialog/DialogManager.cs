@@ -21,9 +21,9 @@ public class DialogManager : MonoBehaviour
 
     private void SetDayHandler()
     {
+        int day = MainManager.Instance.game.Days;
         dialogueRunner.AddCommandHandler("getDayOfMonth", () =>
         {
-            int day = MainManager.Instance.game.Days;
             dialogueRunner.VariableStorage.SetValue("$day", day);
         });
     }
