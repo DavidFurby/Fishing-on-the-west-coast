@@ -3,7 +3,7 @@ using UnityEngine;
 public class BaitArea : MonoBehaviour
 {
     [SerializeField] GameObject bait;
-    [SerializeField] FishingControlls fishingControlls;
+    [SerializeField] FishingController fishingControlls;
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("Fish"))

@@ -12,6 +12,7 @@ ScriptedImporter:
   - {fileID: 6391573757903218779, guid: c44746aeede937343a257e6262e5bfc0, type: 3}
   - {fileID: 6391573757903218779, guid: f25fca0a4cea650478695b13f608974d, type: 3}
   - {fileID: 6391573757903218779, guid: 926de2be8121acf4e98dfeafd7ab077c, type: 3}
+  - {fileID: 6391573757903218779, guid: 05fb93c1fcbf6994ebf78cb4a8dd1640, type: 3}
   compileErrors: []
   serializedDeclarations:
   - name: $day
@@ -22,6 +23,38 @@ ScriptedImporter:
     description: 
     isImplicit: 0
     sourceYarnAsset: {fileID: 6391573757903218779, guid: c44746aeede937343a257e6262e5bfc0, type: 3}
+  - name: $shopItemName
+    typeName: String
+    defaultValueBool: 0
+    defaultValueNumber: 0
+    defaultValueString: 
+    description: 
+    isImplicit: 0
+    sourceYarnAsset: {fileID: 6391573757903218779, guid: 926de2be8121acf4e98dfeafd7ab077c, type: 3}
+  - name: $shopItemPrice
+    typeName: Number
+    defaultValueBool: 0
+    defaultValueNumber: 0
+    defaultValueString: 
+    description: 
+    isImplicit: 0
+    sourceYarnAsset: {fileID: 6391573757903218779, guid: 926de2be8121acf4e98dfeafd7ab077c, type: 3}
+  - name: $shopItemDescription
+    typeName: String
+    defaultValueBool: 0
+    defaultValueNumber: 0
+    defaultValueString: 
+    description: 
+    isImplicit: 0
+    sourceYarnAsset: {fileID: 6391573757903218779, guid: 926de2be8121acf4e98dfeafd7ab077c, type: 3}
+  - name: $currentTokens
+    typeName: Number
+    defaultValueBool: 0
+    defaultValueNumber: 0
+    defaultValueString: 
+    description: 
+    isImplicit: 0
+    sourceYarnAsset: {fileID: 6391573757903218779, guid: 926de2be8121acf4e98dfeafd7ab077c, type: 3}
   defaultLanguage: sv-SE
   languagesToSourceAssets: []
   useAddressableAssets: 0

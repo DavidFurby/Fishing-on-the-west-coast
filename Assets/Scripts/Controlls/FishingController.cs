@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// This class handles the fishing controls for the player.
-public class FishingControlls : MonoBehaviour
+public class FishingController : MonoBehaviour
 {
     #region Serialized Fields
     [SerializeField] private CatchArea catchArea;
@@ -15,6 +15,8 @@ public class FishingControlls : MonoBehaviour
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private Animator playerAnimator;
     private readonly float initialReelInSpeed = 15f;
+    private readonly float initialCastingPower = 20f;
+
     private FishingRod currentFishingRod;
 
     #endregion
@@ -65,7 +67,6 @@ public class FishingControlls : MonoBehaviour
         {
             ReelInBait();
             StartFishing();
-            EndCatch();
         }
 
     }
@@ -100,6 +101,7 @@ public class FishingControlls : MonoBehaviour
         currentFishingRod = MainManager.Instance.game.EquippedFishingRod;
         currentBait = MainManager.Instance.game.EquippedBait;
         reelInSpeed = initialReelInSpeed;
+        castingPower = initialCastingPower;
     }
 
 
@@ -170,16 +172,6 @@ public class FishingControlls : MonoBehaviour
         }
     }
 
-    //Triggre functions to continue fishing after a fish has been collected
-    public void EndCatch()
-    {
-        if (fishingStatus == FishingStatus.InspectFish && Input.GetKeyDown(KeyCode.Space))
-        {
-            catchSummary.NextSummary();
-        }
-
-    }
-
 
     //Drop the fish if you fail the minigame
     public void LoseCatch()
@@ -212,7 +204,7 @@ public class FishingControlls : MonoBehaviour
     }
     public void ResetValues()
     {
-        castingPower = 0;
+        castingPower = initialCastingPower;
         reelInSpeed = initialReelInSpeed;
     }
 

@@ -6,22 +6,22 @@ public class BaitLogic : MonoBehaviour
 {
     [SerializeField] private GameObject sea;
     [SerializeField] private GameObject fishingRodTop;
-    [SerializeField] private FishingControlls fishingControlls;
+    [SerializeField] private FishingController fishingControlls;
     [SerializeField] private Scrollbar balance;
     [SerializeField] private CatchArea catchArea;
     [SerializeField] private AudioSource splashSound;
     [SerializeField] private TextMeshProUGUI distanceTextUI;
     [SerializeField] private GameObject distanceRecordMarker;
-    private GameObject currentDistanceRecordMarker;
 
-    [HideInInspector] private float distance;
+    [HideInInspector] public bool inWater = false;
+    private GameObject currentDistanceRecordMarker;
+    private float distance;
     private float waterLevel;
     private const float FloatHeight = 2f;
     private const float BounceDamp = 0.5f;
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
-    [HideInInspector] public bool inWater = false;
 
 
     private void Start()
@@ -45,7 +45,7 @@ public class BaitLogic : MonoBehaviour
 
     public void Cast()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Casting)
+        if (fishingControlls.fishingStatus == FishingController.FishingStatus.Casting)
         {
             rigidBody.isKinematic = false;
             rigidBody.AddForceAtPosition(forceFactor * fishingControlls.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
@@ -57,7 +57,7 @@ public class BaitLogic : MonoBehaviour
     }
     public void ReelIn()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Reeling || fishingControlls.fishingStatus == FishingControlls.FishingStatus.ReelingFish)
+        if (fishingControlls.fishingStatus == FishingController.FishingStatus.Reeling || fishingControlls.fishingStatus == FishingController.FishingStatus.ReelingFish)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
             if (IsCloseToTarget(targetPosition))
@@ -96,7 +96,7 @@ public class BaitLogic : MonoBehaviour
     //Calculate distance cast
     private void CalculateDistance()
     {
-        bool isStandBy = fishingControlls.fishingStatus == FishingControlls.FishingStatus.StandBy;
+        bool isStandBy = fishingControlls.fishingStatus == FishingController.FishingStatus.StandBy;
         distanceTextUI.gameObject.SetActive(!isStandBy);
         if (!isStandBy)
         {
@@ -133,7 +133,7 @@ public class BaitLogic : MonoBehaviour
     {
         rigidBody.isKinematic = true;
         transform.position = targetPosition;
-        fishingControlls.SetFishingStatus(FishingControlls.FishingStatus.StandBy);
+        fishingControlls.SetFishingStatus(FishingController.FishingStatus.StandBy);
         ResetValues();
     }
 

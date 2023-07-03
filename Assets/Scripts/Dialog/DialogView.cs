@@ -36,6 +36,10 @@ public class DialogView : DialogueViewBase
             }
         }
     }
+    public override void DialogueStarted()
+    {
+        base.DialogueStarted();
+    }
     public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)
     {
         ShowDialog(true);
@@ -50,9 +54,8 @@ public class DialogView : DialogueViewBase
         {
             textGUI.text = this.dialogueLine;
         }
-
-
     }
+
 
     public override void DismissLine(Action onDismissalComplete)
     {
@@ -87,8 +90,6 @@ public class DialogView : DialogueViewBase
     {
         container.gameObject.SetActive(active);
     }
-
-
 
     private IEnumerator RevealText(string fullText)
     {

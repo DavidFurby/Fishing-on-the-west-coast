@@ -1,0 +1,10 @@
+﻿title: CatchSummary
+tags:
+---
+<<declare $catchName = "" as string>>
+<<declare $cathSize = "0" as string>>
+<<declare $catchDescription = "" as string>>
+
+<<setCatchSummary>>
+{$catchName}<br>{$cathSize}cm <br>{$catchDescription}
+===

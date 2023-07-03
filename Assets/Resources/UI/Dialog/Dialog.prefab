@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 956, y: 38.780014}
+  m_AnchoredPosition: {x: 956, y: 20.780014}
   m_SizeDelta: {x: 200, y: 40.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1618426052650354241
@@ -145,7 +145,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3908296289530916182}
   - component: {fileID: 8948595559244347741}
-  - component: {fileID: 7645604529508998961}
   m_Layer: 5
   m_Name: Dialog
   m_TagString: Untagged
@@ -192,24 +191,6 @@ MonoBehaviour:
   textGUI: {fileID: 122818685043059931}
   playerController: {fileID: 0}
   dialogManager: {fileID: 0}
---- !u!114 &7645604529508998961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 808846734424407668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ab26a0ea4114c45bb86c5a5715308f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  catchSummary: {fileID: 8867706024651151886}
-  catchName: {fileID: 5205892179518769771}
-  sizeText: {fileID: 122818685043059931}
-  isNew: {fileID: 4934132871607495153}
-  newRecord: {fileID: 6913958875015182316}
-  fishingControlls: {fileID: 0}
 --- !u!1 &1005244104030969221
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -410}
+  m_AnchoredPosition: {x: 0, y: -343}
   m_SizeDelta: {x: 1420, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &3506521741793014411
@@ -356,7 +337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 943, y: 11.559982}
+  m_AnchoredPosition: {x: 943, y: -38.440018}
   m_SizeDelta: {x: 200, y: 40.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5441119372228046021

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BaitCamera : MonoBehaviour
 {
-    [SerializeField] FishingControlls fishingControlls;
+    [SerializeField] FishingController fishingControlls;
     [SerializeField] GameObject bait;
     private float cameraDistance;
     private float originalCameraDistance;
@@ -16,7 +16,7 @@ public class BaitCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Casting)
+        if (fishingControlls.fishingStatus == FishingController.FishingStatus.Casting)
         {
             UpdateCameraPosition();
             if (cameraDistance < bait.transform.position.z - 2)
@@ -24,7 +24,7 @@ public class BaitCamera : MonoBehaviour
                 cameraDistance += 0.1f;
             }
         }
-        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Fishing)
+        else if (fishingControlls.fishingStatus == FishingController.FishingStatus.Fishing)
         {
             UpdateCameraPosition();
             if (cameraDistance > originalCameraDistance)
@@ -32,7 +32,7 @@ public class BaitCamera : MonoBehaviour
                 cameraDistance -= 0.01f;
             }
         }
-        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.ReelingFish)
+        else if (fishingControlls.fishingStatus == FishingController.FishingStatus.ReelingFish)
         {
             UpdateCameraPosition();
             if (cameraDistance < bait.transform.position.z - 2)

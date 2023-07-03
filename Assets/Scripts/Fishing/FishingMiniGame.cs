@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FishingMiniGame : MonoBehaviour
 {
     [SerializeField] private Scrollbar reelingBalance;
-    [SerializeField] private FishingControlls fishingControlls;
+    [SerializeField] private FishingController fishingControlls;
     [SerializeField] private MusicController musicController;
     [SerializeField] private Scrollbar castingPowerBalance;
     private List<Catch> fishesOnHook;
@@ -28,14 +28,14 @@ public class FishingMiniGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.ReelingFish)
+        if (fishingControlls.fishingStatus == FishingController.FishingStatus.ReelingFish)
         {
             CalculateBalance();
             BalanceLost();
             BalanceControls();
             HandleBalanceColor();
         }
-        else if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.Charging)
+        else if (fishingControlls.fishingStatus == FishingController.FishingStatus.Charging)
         {
             ChargingBalance();
         }

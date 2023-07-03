@@ -12,7 +12,7 @@ public class SeaSpawner : MonoBehaviour
     [SerializeField] GameObject[] Fishes;
     [SerializeField] int spawnDelay;
     [SerializeField] GameObject bait;
-    [SerializeField] FishingControlls fishingControlls;
+    [SerializeField] FishingController fishingControlls;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class SeaSpawner : MonoBehaviour
     }
     private void Update()
     {
-        if (fishingControlls.fishingStatus == FishingControlls.FishingStatus.StandBy)
+        if (fishingControlls.fishingStatus == FishingController.FishingStatus.StandBy)
         {
             RemoveAllFishes();
         }
@@ -31,7 +31,7 @@ public class SeaSpawner : MonoBehaviour
 
     private void SpawnFish()
     {
-        if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.StandBy)
+        if (fishingControlls.fishingStatus != FishingController.FishingStatus.StandBy)
         {
             //Choose random fish from the array
             int randomFishIndex = Random.Range(0, Fishes.Length);
@@ -53,7 +53,7 @@ public class SeaSpawner : MonoBehaviour
 
     private void CalculateSpawnPosition()
     {
-        if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.StandBy)
+        if (fishingControlls.fishingStatus != FishingController.FishingStatus.StandBy)
         {
             //Calculate horizontal and vertical spawn position
             fishSpawnDirection = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;

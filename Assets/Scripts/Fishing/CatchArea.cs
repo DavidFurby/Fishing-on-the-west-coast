@@ -13,7 +13,7 @@ public class CatchArea : MonoBehaviour
 
     [HideInInspector] public Catch fish;
     private FishMovement fishMovement;
-    [SerializeField] private FishingControlls fishingControlls;
+    [SerializeField] private FishingController fishingControlls;
     public readonly List<Catch> totalFishes = new();
 
     private void OnTriggerEnter(Collider other)
@@ -34,7 +34,7 @@ public class CatchArea : MonoBehaviour
             }
 
         }
-        else if (fishingControlls != null && fishingControlls.fishingStatus == FishingControlls.FishingStatus.ReelingFish && other.CompareTag("Fish") && fish != null)
+        else if (fishingControlls != null && fishingControlls.fishingStatus == FishingController.FishingStatus.ReelingFish && other.CompareTag("Fish") && fish != null)
         {
             CatchFishWhileReeling(other);
         }

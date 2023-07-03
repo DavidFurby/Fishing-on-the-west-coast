@@ -4,7 +4,7 @@ public class WaterCollision : MonoBehaviour
 {
     [SerializeField] GameObject sea;
     [SerializeField] BaitLogic bait;
-    [SerializeField] FishingControlls fishingControlls;
+    [SerializeField] FishingController fishingControlls;
     [SerializeField] AudioSource splashSound;
     [SerializeField] SeaSpawner seaSpawner;
 
@@ -13,10 +13,10 @@ public class WaterCollision : MonoBehaviour
         if (other.gameObject == sea)
         {
 
-            if (fishingControlls.fishingStatus != FishingControlls.FishingStatus.Reeling && fishingControlls.fishingStatus != FishingControlls.FishingStatus.ReelingFish)
+            if (fishingControlls.fishingStatus != FishingController.FishingStatus.Reeling && fishingControlls.fishingStatus != FishingController.FishingStatus.ReelingFish)
             {
                 bait.UpdateDistanceRecord();
-                fishingControlls.SetFishingStatus(FishingControlls.FishingStatus.Fishing);
+                fishingControlls.SetFishingStatus(FishingController.FishingStatus.Fishing);
             }
             splashSound.Play();
             bait.inWater = true;
