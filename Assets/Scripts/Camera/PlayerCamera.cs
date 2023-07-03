@@ -28,7 +28,7 @@ public class PlayerCamera : MonoBehaviour
     {
         if (cameraStatus == CameraStatus.Player && player != null)
         {
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 4, cameraDistance);
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2, cameraDistance);
             if (cameraDistance != originalCameraDistance)
             {
                 cameraDistance = originalCameraDistance;

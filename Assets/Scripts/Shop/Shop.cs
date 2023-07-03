@@ -77,6 +77,7 @@ public class Shop : MonoBehaviour
         dialogManager.EndDialog();
         playerController.SetPlayerStatus(PlayerStatus.StandBy);
         playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.Player);
+        playerController.gameObject.SetActive(true);
         focusedShopItemIndex = 0;
     }
 
