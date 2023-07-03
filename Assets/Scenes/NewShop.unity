@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8690102946955983174, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8690102946955983174, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
       propertyPath: m_AnchorMax.x
@@ -588,7 +588,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7259948634341948586, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7259948634341948586, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -817,7 +817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6479849822776239128, guid: c1bcd050751bded41ab7b731c796620b, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6479849822776239128, guid: c1bcd050751bded41ab7b731c796620b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -994,6 +994,14 @@ PrefabInstance:
       propertyPath: movementSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8567108648708625402, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
+      propertyPath: rotationSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567108648708625402, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
+      propertyPath: playerAnimations
+      value: 
+      objectReference: {fileID: 1930309285}
     m_RemovedComponents:
     - {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
@@ -1008,6 +1016,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e2669d04061e54f990f9000de1e1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1930309285 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3146058961067761133, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
+  m_PrefabInstance: {fileID: 1930309283}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b358b2dec8b6042a3566eac568f337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2096369982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1017,7 +1036,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
       propertyPath: m_LocalPosition.x

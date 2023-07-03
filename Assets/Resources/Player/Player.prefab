@@ -78,16 +78,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catchArea: {fileID: 0}
-  animator: {fileID: 7749939959796266060}
   castSound: {fileID: 0}
   baitCamera: {fileID: 0}
   catchSummary: {fileID: 0}
   fishingMiniGame: {fileID: 0}
-  playerAnimator: {fileID: 7749939959796266060}
+  fishingRodLogic: {fileID: 0}
+  playerAnimations: {fileID: 0}
   currentBait: {fileID: 0}
-  castingPower: 20
   fishingStatus: 0
-  reelInSpeed: 0
 --- !u!114 &8567108648708625402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 0
   rotationSpeed: 0
+  playerAnimations: {fileID: 0}
   playerStatus: 0
 --- !u!1001 &4393164685794489119
 PrefabInstance:
@@ -297,3 +296,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3146058961067761133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724862312394714924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b358b2dec8b6042a3566eac568f337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

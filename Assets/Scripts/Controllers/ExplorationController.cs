@@ -4,8 +4,9 @@ public class ExplorationController : MonoBehaviour
 {
     [SerializeField] private int movementSpeed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private PlayerAnimations playerAnimations;
+
     private bool isWithinTriggerArea;
-    private PlayerAnimations playerAnimations;
     private Interactible interactible;
     public PlayerStatus playerStatus;
 
