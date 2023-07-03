@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 461191177775057918}
   - component: {fileID: 461191177775057904}
   - component: {fileID: 1440346369}
+  - component: {fileID: 5824225006748754863}
   m_Layer: 0
   m_Name: Sea
   m_TagString: Untagged
@@ -161,3 +162,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 13, y: 2, z: 8.5}
   m_Center: {x: 6, y: 0.5, z: 7.25}
+--- !u!114 &5824225006748754863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461191177775057915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac495199f0570d45a3dedc12608a764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fishes:
+  - {fileID: 7521382160921142941, guid: edf9de8729580044c8d37796f9df9ba6, type: 3}
+  spawnDelay: 5
+  bait: {fileID: 0}
+  fishingControlls: {fileID: 0}

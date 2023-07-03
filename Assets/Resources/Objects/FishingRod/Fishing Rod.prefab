@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bait: {fileID: 2130861395229521769}
+  fishingControlls: {fileID: 0}
 --- !u!135 &4129918311801042411
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -77,6 +78,8 @@ GameObject:
   - component: {fileID: 593633358998976009}
   - component: {fileID: 2644297377122525327}
   - component: {fileID: 4510624369764729982}
+  - component: {fileID: 4078761858913091938}
+  - component: {fileID: 7523756534232179830}
   m_Layer: 0
   m_Name: Fishing Rod
   m_TagString: Untagged
@@ -5690,6 +5693,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4078761858913091938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5059312361471932163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88d0e5ea8c00164481f3c07e95fe7d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7523756534232179830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5059312361471932163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397a58daf2c0ec34d9c6f78895f9df77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  catchArea: {fileID: 2130861396537784916}
+  fishingRodAnimations: {fileID: 4078761858913091938}
+  gameMiniGame: {fileID: 0}
+  reelInSpeed: 0
+  castingPower: 20
 --- !u!1 &5497549539269400902
 GameObject:
   m_ObjectHideFlags: 0
@@ -5751,7 +5783,8 @@ MonoBehaviour:
   sea: {fileID: 0}
   bait: {fileID: 7265845191129862532}
   fishingControlls: {fileID: 0}
-  audioSource: {fileID: 0}
+  splashSound: {fileID: 0}
+  seaSpawner: {fileID: 0}
 --- !u!1001 &1309168490384934092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5819,6 +5852,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1133023541558047653, guid: 20597bb47e64fcd4785f8cd2ff7112ad, type: 3}
   m_PrefabInstance: {fileID: 1309168490384934092}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2130861396537784916 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1133023540585266840, guid: 20597bb47e64fcd4785f8cd2ff7112ad, type: 3}
+  m_PrefabInstance: {fileID: 1309168490384934092}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8165d89629e9d49aded1f97f854248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3214824157491522763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4518869952318875655, guid: 20597bb47e64fcd4785f8cd2ff7112ad, type: 3}

@@ -5,6 +5,7 @@ public class FishingRodLogic : MonoBehaviour
 {
     [SerializeField] private CatchArea catchArea;
     [SerializeField] private FishingRodAnimations fishingRodAnimations;
+    [SerializeField] private FishingMiniGame gameMiniGame;
     [HideInInspector] public float reelInSpeed;
     [HideInInspector] public float castingPower;
     private FishingRod currentFishingRod;
@@ -21,6 +22,11 @@ public class FishingRodLogic : MonoBehaviour
             return;
         }
         SetInitialValues();
+    }
+
+    public void TriggerSetChargingBalance()
+    {
+        gameMiniGame.SetChargingBalance(true);
     }
 
     // Calculate the reel in speed based on the size of the caught fishes

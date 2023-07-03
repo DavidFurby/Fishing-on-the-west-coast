@@ -191,7 +191,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27728
+  m_Name: pb_Mesh27736
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -352,17 +352,6 @@ Mesh:
 --- !u!114 &176468540 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1604509529445302945, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
-  m_PrefabInstance: {fileID: 229474582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &214270310 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6593741001342054128, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
   m_PrefabInstance: {fileID: 229474582}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -614,6 +603,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5748939074532554492, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: dialogManager
+      value: 
+      objectReference: {fileID: 798635894}
     - target: {fileID: 5753961924156659057, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -986,6 +979,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishingCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: handlers
+      value: 
+      objectReference: {fileID: 1989589368}
+    - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: fishingControls
+      value: 
+      objectReference: {fileID: 464174475}
     - target: {fileID: 9026283299946631790, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1145,35 +1146,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8690102948342108883, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
   m_PrefabInstance: {fileID: 229474582}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &503535253 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4232111198103392871, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
-  m_PrefabInstance: {fileID: 4232111197888523286}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &503535260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 503535253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36aa02d38bb10b548bc7b8879596b15c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WaterVolumeHelper: {fileID: 1440346363}
---- !u!114 &638555785 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2183249405359975386, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
-  m_PrefabInstance: {fileID: 229474582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &674621320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1417,7 +1389,7 @@ PrefabInstance:
       objectReference: {fileID: 109290014}
     - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_VersionIndex
-      value: 1035
+      value: 1041
       objectReference: {fileID: 0}
     - target: {fileID: 5360848329395529453, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
@@ -1507,6 +1479,10 @@ PrefabInstance:
       propertyPath: distanceRecordMarker
       value: 
       objectReference: {fileID: 4654798063134710352, guid: 650ed65096bddb2419513abc5108751b, type: 3}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: gameMiniGame
+      value: 
+      objectReference: {fileID: 1275887656}
     - target: {fileID: 7671095890555715121, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -1651,6 +1627,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5829287329367523406, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 7448718}
+    - target: {fileID: 5829287329367523406, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1465610769}
+    - target: {fileID: 5829287329367523406, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 464174475}
     - target: {fileID: 7259948634341948586, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1706,11 +1694,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7259948634341948587, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
---- !u!224 &933187805 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7271141382788062479, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
-  m_PrefabInstance: {fileID: 229474582}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &970918385 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6867100824253132907, guid: 367672ab0c2a7414ebcdde881610a4f1, type: 3}
@@ -1733,7 +1716,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh43338
+  m_Name: pb_Mesh27682
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2014,11 +1997,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf39edffa406b4d4c8db438c744f592a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1440346365
+--- !u!114 &1440346365 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+  m_PrefabInstance: {fileID: 461191178146340792}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681066786}
   m_Enabled: 1
@@ -2026,11 +2008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac495199f0570d45a3dedc12608a764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fishes:
-  - {fileID: 7521382160921142941, guid: edf9de8729580044c8d37796f9df9ba6, type: 3}
-  spawnDelay: 5
-  bait: {fileID: 7448718}
-  fishingControlls: {fileID: 464174475}
 --- !u!1 &1465610751 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7259948634341948591, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
@@ -2090,11 +2067,10 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1465610765
+--- !u!114 &1465610765 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5829287329367523406, guid: 6e510f30e4c61a2439cddead4b44986c, type: 3}
+  m_PrefabInstance: {fileID: 892063325}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465610751}
   m_Enabled: 1
@@ -2102,9 +2078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fb36e2816c0dc49bbf5a3bf93472c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingControlls: {fileID: 464174475}
-  bait: {fileID: 7448718}
-  audioSource: {fileID: 1465610769}
 --- !u!82 &1465610769
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2391,24 +2364,10 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 4510624369764729982, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
   m_PrefabInstance: {fileID: 722546679}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1745764241
+--- !u!114 &1745764250 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745764221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d88d0e5ea8c00164481f3c07e95fe7d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  miniGame: {fileID: 1275887656}
---- !u!114 &1745764250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745764221}
   m_Enabled: 1
@@ -2416,10 +2375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397a58daf2c0ec34d9c6f78895f9df77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catchArea: {fileID: 822062796}
-  fishingRodAnimations: {fileID: 1745764241}
-  reelInSpeed: 0
-  castingPower: 20
 --- !u!4 &1759076611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
@@ -2526,17 +2481,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1852116502 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6325068662099578218, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
-  m_PrefabInstance: {fileID: 229474582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1881676126 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7194481759871860316, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
@@ -2719,43 +2663,28 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2474057496485410267, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
---- !u!1 &1989589366 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -4253579225698434387, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+--- !u!114 &1989589368 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5748939074532554492, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
   m_PrefabInstance: {fileID: 229474582}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1989589368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989589366}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91b529546ea095d42973a4b6585b6352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogManager: {fileID: 798635894}
---- !u!114 &1989589369
+--- !u!114 &1989589369 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+  m_PrefabInstance: {fileID: 229474582}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989589366}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6ab26a0ea4114c45bb86c5a5715308f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catchSummary: {fileID: 933187805}
-  catchName: {fileID: 1852116502}
-  sizeText: {fileID: 638555785}
-  isNew: {fileID: 214270310}
-  newRecord: {fileID: 2125019527}
-  fishingControls: {fileID: 464174475}
-  handlers: {fileID: 1989589368}
 --- !u!1 &2026150464 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7724862312394714924, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
@@ -2870,17 +2799,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2125019527 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4614909520830116077, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
-  m_PrefabInstance: {fileID: 229474582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &461191178146340792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2968,6 +2886,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 7448718}
+    - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 464174475}
     m_RemovedComponents:
     - {fileID: 2613624702870127253, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
@@ -3045,7 +2971,7 @@ PrefabInstance:
       objectReference: {fileID: 984379040}
     - target: {fileID: 4232111198103392865, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
       propertyPath: m_VersionIndex
-      value: 128
+      value: 131
       objectReference: {fileID: 0}
     - target: {fileID: 4232111198103392866, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
       propertyPath: m_Mesh
@@ -3111,5 +3037,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 7586783181257172545, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
+      propertyPath: WaterVolumeHelper
+      value: 
+      objectReference: {fileID: 1440346363}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
