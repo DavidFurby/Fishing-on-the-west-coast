@@ -16,7 +16,6 @@ public class FishingController : MonoBehaviour
     #endregion
 
     #region Public Fields
-    [HideInInspector] public Bait currentBait;
     [HideInInspector] public FishingStatus fishingStatus;
     #endregion
 
@@ -37,7 +36,6 @@ public class FishingController : MonoBehaviour
     private void Start()
     {
         fishingStatus = FishingStatus.StandBy;
-        SetInitialValues();
     }
 
     // Update is called once per frame
@@ -71,10 +69,6 @@ public class FishingController : MonoBehaviour
             }
 
         }
-    }
-    private void SetInitialValues()
-    {
-        currentBait = MainManager.Instance.game.EquippedBait;
     }
 
     public IEnumerator CatchAlert()

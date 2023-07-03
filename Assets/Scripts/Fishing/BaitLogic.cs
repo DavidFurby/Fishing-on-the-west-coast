@@ -13,6 +13,7 @@ public class BaitLogic : MonoBehaviour
     [SerializeField] private TextMeshProUGUI distanceTextUI;
     [SerializeField] private GameObject distanceRecordMarker;
     [SerializeField] private FishingRodLogic fishingRodLogic;
+    [SerializeField] public Bait currentBait;
 
     [HideInInspector] public bool inWater = false;
     private GameObject currentDistanceRecordMarker;
@@ -27,6 +28,7 @@ public class BaitLogic : MonoBehaviour
 
     private void Start()
     {
+        currentBait = MainManager.Instance.game.EquippedBait;
         distanceTextUI.gameObject.SetActive(false);
         rigidBody = GetComponent<Rigidbody>();
         targetPosition = fishingRodTop.transform.position;

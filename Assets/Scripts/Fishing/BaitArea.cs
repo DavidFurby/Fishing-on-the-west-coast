@@ -2,19 +2,18 @@ using UnityEngine;
 
 public class BaitArea : MonoBehaviour
 {
-    [SerializeField] GameObject bait;
-    [SerializeField] FishingController fishingControlls;
+    [SerializeField] BaitLogic baitLogic;
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("Fish"))
         {
             FishMovement fishMovement = collider.gameObject.GetComponent<FishMovement>();
             Catch fish = collider.gameObject.GetComponent<Catch>();
-            float probabilty = GetProbability(fish.Level, fishingControlls.currentBait.Level);
-
+            float probabilty = GetProbability(fish.Level, baitLogic.currentBait.Level);
             if (Random.Range(0f, 1f) < probabilty)
             {
-                fishMovement.GetBaited(bait);
+                Debug.Log(baitLogic.currentBait.Level);
+                fishMovement.GetBaited(baitLogic.gameObject);
             }
 
         }

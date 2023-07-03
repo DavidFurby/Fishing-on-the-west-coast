@@ -1327,7 +1327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a3d2302178e6f4797f27eb9a3576b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogController: {fileID: 0}
+  character: 0
+  dialogManager: {fileID: 0}
 --- !u!114 &2408182468102815801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1340,7 +1341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d667a73c70686f24885c9d0da4a7efa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactibleIcon: {fileID: 0}
+  interactibleIcon: {fileID: 2472687266873945648, guid: c2d2ae80d0e1f86488aa2cc03588f4ba, type: 3}
 --- !u!1 &3662289201302429308
 GameObject:
   m_ObjectHideFlags: 0
