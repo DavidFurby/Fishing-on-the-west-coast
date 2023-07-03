@@ -12,7 +12,6 @@ public class BaitArea : MonoBehaviour
             float probabilty = GetProbability(fish.Level, baitLogic.currentBait.Level);
             if (Random.Range(0f, 1f) < probabilty)
             {
-                Debug.Log(baitLogic.currentBait.Level);
                 fishMovement.GetBaited(baitLogic.gameObject);
             }
 

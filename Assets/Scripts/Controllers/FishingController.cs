@@ -58,7 +58,7 @@ public class FishingController : MonoBehaviour
             {
                 StartCoroutine(CatchAlert());
                 catchArea.CatchFish();
-                fishingMiniGame.StartBalanceMiniGame(catchArea.totalFishes);
+                fishingMiniGame.StartBalanceMiniGame(catchArea.totalCatches);
                 fishingRodLogic.CalculateReelInSpeed();
                 SetFishingStatus(FishingStatus.ReelingFish);
             }
@@ -116,11 +116,11 @@ public class FishingController : MonoBehaviour
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
-        if (catchArea.totalFishes.Count > 0 && fishingStatus == FishingStatus.StandBy)
+        if (catchArea.totalCatches.Count > 0 && fishingStatus == FishingStatus.StandBy)
         {
             SetFishingStatus(FishingStatus.InspectFish);
             fishingMiniGame.EndBalanceMiniGame();
-            catchSummary.InitiateCatchSummary(catchArea.totalFishes);
+            catchSummary.InitiateCatchSummary(catchArea.totalCatches);
         }
     }
 

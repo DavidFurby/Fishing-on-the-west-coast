@@ -50,7 +50,6 @@ public class CatchSummary : MonoBehaviour
     {
         if (fishIndex < caughtFishes.Count - 1)
         {
-            Destroy(currentlyPresentedFish);
             IncrementFishIndex();
             newRecord.gameObject.SetActive(CheckSizeDifference(currentlyPresentedFish));
             isNew.gameObject.SetActive(CheckIfNew(currentlyPresentedFish));
@@ -101,6 +100,7 @@ public class CatchSummary : MonoBehaviour
 
         if (!MainManager.Instance.game.Catches.Any(f => f.Id == fishData.Id))
         {
+            Debug.Log("new");
             fishData.AddFishToInstance();
             return true;
         }
@@ -116,7 +116,6 @@ public class CatchSummary : MonoBehaviour
         ResetValues();
         handlers.EndSummary();
         fishingControls.SetFishingStatus(FishingController.FishingStatus.StandBy);
-        Debug.Log(fishingControls.fishingStatus);
     }
 
     // Reset values

@@ -32,9 +32,9 @@ public class FishingRodLogic : MonoBehaviour
     // Calculate the reel in speed based on the size of the caught fishes
     public void CalculateReelInSpeed()
     {
-        foreach (var fish in catchArea.totalFishes)
+        foreach (Catch @catch in catchArea.totalCatches)
         {
-            reelInSpeed = initialReelInSpeed - (fish.Size / 10);
+            reelInSpeed = initialReelInSpeed - (@catch.Size / 10);
         }
     }
 
@@ -77,7 +77,6 @@ public class FishingRodLogic : MonoBehaviour
             yield return null;
         }
         castingPower *= castPower;
-        Debug.Log(castingPower);
     }
 
     // Play the reverse swing animation

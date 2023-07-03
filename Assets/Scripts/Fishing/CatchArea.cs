@@ -10,7 +10,7 @@ public class CatchArea : MonoBehaviour
     /// Gets a value indicating whether a fish is in the catch area.
     /// </summary>
     public bool IsInCatchArea { get; private set; }
-    public readonly List<Catch> totalFishes = new();
+    public readonly List<Catch> totalCatches = new();
     private FishMovement fishMovement;
     [HideInInspector] public Catch fish;
     [SerializeField] private FishingController fishingControlls;
@@ -55,14 +55,14 @@ public class CatchArea : MonoBehaviour
         StartCoroutine(fishingControlls?.CatchAlert());
         if (other.TryGetComponent(out FishMovement newFishMovement))
         {
-            if (totalFishes.Count > 0)
+            if (totalCatches.Count > 0)
             {
-                newFishMovement.GetBaited(totalFishes[totalFishes.Count - 1].gameObject);
+                newFishMovement.GetBaited(totalCatches[totalCatches.Count - 1].gameObject);
             }
             newFishMovement.SetFishState(FishMovement.FishState.Hooked);
             if (other.TryGetComponent(out Catch newFishComponent))
             {
-                totalFishes.Add(newFishComponent);
+                totalCatches.Add(newFishComponent);
             }
             FishingRodLogic.CalculateReelInSpeed();
         }
@@ -75,7 +75,7 @@ public class CatchArea : MonoBehaviour
         if (fish != null && fishMovement != null && fishMovement.state != FishMovement.FishState.Hooked)
         {
             fishMovement.SetFishState(FishMovement.FishState.Hooked);
-            totalFishes.Add(fish.GetComponent<Catch>());
+            totalCatches.Add(fish.GetComponent<Catch>());
         }
     }
 
@@ -88,6 +88,6 @@ public class CatchArea : MonoBehaviour
         fishMovement = null;
         fish = null;
         IsInCatchArea = false;
-        totalFishes.Clear();
+        totalCatches.Clear();
     }
 }

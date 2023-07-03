@@ -6,7 +6,6 @@ using System.Collections;
 
 public class DialogView : DialogueViewBase
 {
-
     [SerializeField] RectTransform container;
     [SerializeField] TextMeshProUGUI speakerGUI;
     [SerializeField] TextMeshProUGUI textGUI;
@@ -15,12 +14,12 @@ public class DialogView : DialogueViewBase
     Action advanceHandler;
     private string dialogueLine;
     private Coroutine textRevealCoroutine;
-    private bool useTextRevealCoroutine;
+
     private void Start()
     {
-        useTextRevealCoroutine = false;
         ShowDialog(false);
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && container.gameObject.activeSelf)
@@ -36,16 +35,14 @@ public class DialogView : DialogueViewBase
             }
         }
     }
-    public override void DialogueStarted()
-    {
-        base.DialogueStarted();
-    }
+
     public override void RunLine(LocalizedLine dialogueLine, Action onDialogueLineFinished)
     {
         ShowDialog(true);
         this.dialogueLine = dialogueLine.TextWithoutCharacterName.Text;
         speakerGUI.text = dialogueLine.CharacterName;
         advanceHandler = requestInterrupt;
+
         if (!dialogManager.CurrentNodeShouldShowTextDirectly())
         {
             textRevealCoroutine = StartCoroutine(RevealText(this.dialogueLine));
@@ -55,7 +52,6 @@ public class DialogView : DialogueViewBase
             textGUI.text = this.dialogueLine;
         }
     }
-
 
     public override void DismissLine(Action onDismissalComplete)
     {
@@ -68,7 +64,6 @@ public class DialogView : DialogueViewBase
         if (container.gameObject.activeSelf)
         {
             advanceHandler?.Invoke();
-
         }
     }
 
@@ -86,10 +81,13 @@ public class DialogView : DialogueViewBase
             playerController.SetPlayerStatus(ExplorationController.PlayerStatus.StandBy);
         }
     }
+
     public void ShowDialog(bool active)
     {
         container.gameObject.SetActive(active);
     }
+
+    #region Private Methods
 
     private IEnumerator RevealText(string fullText)
     {
@@ -99,4 +97,6 @@ public class DialogView : DialogueViewBase
             yield return new WaitForSeconds(0.05f);
         }
     }
+
+    #endregion
 }
