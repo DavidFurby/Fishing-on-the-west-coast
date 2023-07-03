@@ -12,8 +12,8 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI isNew;
     [SerializeField] private TextMeshProUGUI newRecord;
 
-    [SerializeField] private FishingController fishingControls;
-    [SerializeField] private CatchSummaryHandlers handlers;
+    [SerializeField] private readonly FishingController fishingControls;
+    [SerializeField] private readonly CatchSummaryHandlers handlers;
     private List<Catch> caughtFishes;
     private Catch currentlyPresentedFish;
     private int fishIndex;
@@ -21,13 +21,16 @@ public class CatchSummary : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && fishingControls.fishingStatus == FishingController.FishingStatus.InspectFish)
+        if (Input.GetKeyDown(KeyCode.Space) && fishingControls.fishingStatus.CompareTag(FishingController.FishingStatus.InspectFish.ToString()))
         {
             NextSummary();
         }
     }
 
-    // Initialize the catch summary with a list of caught fishes
+    /// <summary>
+    /// Initialize the catch summary with a list of caught fishes.
+    /// </summary>
+    /// <param name="fishes">The list of caught fishes.</param>
     public void InitiateCatchSummary(List<Catch> fishes)
     {
         if (fishes.Count == 0)
@@ -40,15 +43,17 @@ public class CatchSummary : MonoBehaviour
         handlers.StartSummar(currentlyPresentedFish);
     }
 
-    // If there are more fishes, switch summary. Otherwise, end the summary
+    /// <summary>
+    /// If there are more fishes, switch summary. Otherwise, end the summary.
+    /// </summary>
     public void NextSummary()
     {
         if (fishIndex < caughtFishes.Count - 1)
         {
             Destroy(currentlyPresentedFish);
             IncrementFishIndex();
-            CheckSizeDifference(currentlyPresentedFish);
-            CheckIfNew(currentlyPresentedFish);
+            newRecord.gameObject.SetActive(CheckSizeDifference(currentlyPresentedFish));
+            isNew.gameObject.SetActive(CheckIfNew(currentlyPresentedFish));
             MainManager.Instance.game.Fishes++;
             handlers.StartSummar(currentlyPresentedFish);
         }
@@ -66,49 +71,47 @@ public class CatchSummary : MonoBehaviour
     }
 
     // Check if fish is larger than the saved fish of the same name
-    private void CheckSizeDifference(Catch fishData)
+    private bool CheckSizeDifference(Catch fishData)
     {
         if (fishData == null)
         {
             Debug.LogError("Fish data is null");
-            return;
+            return false;
         }
 
         Catch existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.name == fishData.name && f.Size < fishData.Size);
         if (existingFish != null)
         {
-            newRecord.gameObject.SetActive(true);
             int index = Array.IndexOf(MainManager.Instance.game.Catches, existingFish);
             fishData.ReplaceFishInInstance(index);
+            return true;
         }
-        else
-        {
-            newRecord.gameObject.SetActive(false);
-        }
+
+        return false;
     }
 
     // Check if fish hasn't been caught before
-    private void CheckIfNew(Catch fishData)
+    private bool CheckIfNew(Catch fishData)
     {
         if (fishData == null)
         {
             Debug.LogError("Fish data is null");
-            return;
+            return false;
         }
 
         if (!MainManager.Instance.game.Catches.Any(f => f.Id == fishData.Id))
         {
-            isNew.gameObject.SetActive(true);
             fishData.AddFishToInstance();
+            return true;
         }
-        else
-        {
-            isNew.gameObject.SetActive(false);
-        }
+
+        return false;
     }
 
-    // Reset data and set fishingStatus to Standby to end summary
-    private void EndSummary()
+    /// <summary>
+    /// Reset data and set fishingStatus to Standby to end summary.
+    /// </summary>
+    public void EndSummary()
     {
         SetSummaryActive();
         ResetValues();
