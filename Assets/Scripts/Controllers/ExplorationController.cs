@@ -1,14 +1,11 @@
 using UnityEngine;
 
-
-public class PlayerController : MonoBehaviour
+public class ExplorationController : MonoBehaviour
 {
-    private float horizontalInput;
-    private float verticalInput;
     [SerializeField] private int movementSpeed;
     [SerializeField] private float rotationSpeed;
     private bool isWithinTriggerArea;
-    private Animator animator;
+    private PlayerAnimations playerAnimations;
     private Interactible interactible;
     public PlayerStatus playerStatus;
 
@@ -19,81 +16,53 @@ public class PlayerController : MonoBehaviour
         Shopping
     }
 
-
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-
-        // Find the player model by its tag
-        GameObject playerModel = GameObject.FindWithTag("PlayerModel");
-
-        // Check if the player model was found
-        if (playerModel != null)
-        {
-            // Get the Animator component attached to the player model
-            animator = playerModel.GetComponent<Animator>();
-        }
-        else
-        {
-            Debug.LogError("(*`n*) - where the FUCK is GUBBEN's model!?");
-        }
-    }
-
-
     void Update()
     {
         HandleInput();
     }
+
     private void FixedUpdate()
     {
-
         HandleMovement();
     }
-
 
     //Handle player input
     private void HandleInput()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
         if (playerStatus == PlayerStatus.StandBy && Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactible != null)
         {
-
             if (horizontalInput != 0 || verticalInput != 0)
             {
-                if (animator.GetBool("walking") != true)
-                {
-                    animator.SetBool("walking", true);
-                }
+                playerAnimations.SetPlayerWalkAnimation(true);
             }
             else
             {
-                if (animator.GetBool("walking") != false)
-                {
-                    animator.SetBool("walking", false);
-                }
+                playerAnimations.SetPlayerWalkAnimation(false);
             }
 
             ActivateInteractible();
         }
-
     }
+
     //Handle player movement and rotation
     private void HandleMovement()
     {
         if (playerStatus == PlayerStatus.StandBy)
         {
-            Vector3 movementDirection = new(horizontalInput, 0.0f, verticalInput);
+            Vector3 movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
             MovePlayer(movementDirection);
             RotatePlayer(movementDirection);
         }
-
     }
+
     //Move player in specified direction
     private void MovePlayer(Vector3 movementDirection)
     {
         transform.Translate(movementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
     }
+
     //Rotate the player to face the specified direction
     private void RotatePlayer(Vector3 movementDirection)
     {
@@ -102,6 +71,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(movementDirection);
         }
     }
+
     //Called when player enters trigger
     private void OnTriggerEnter(Collider other)
     {
@@ -119,7 +89,6 @@ public class PlayerController : MonoBehaviour
         {
             isWithinTriggerArea = false;
             interactible = null;
-
         }
     }
 

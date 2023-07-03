@@ -191,7 +191,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh43390
+  m_Name: pb_Mesh27728
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1577,7 +1577,7 @@ PrefabInstance:
       objectReference: {fileID: 109290014}
     - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_VersionIndex
-      value: 1032
+      value: 1035
       objectReference: {fileID: 0}
     - target: {fileID: 5360848329395529453, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
@@ -1655,6 +1655,10 @@ PrefabInstance:
       propertyPath: distanceTextUI
       value: 
       objectReference: {fileID: 176468540}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodLogic
+      value: 
+      objectReference: {fileID: 1745764250}
     - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingControlls
       value: 
@@ -2396,6 +2400,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   miniGame: {fileID: 1275887656}
+--- !u!114 &1745764250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745764221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397a58daf2c0ec34d9c6f78895f9df77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  catchArea: {fileID: 822062796}
+  fishingRodAnimations: {fileID: 1745764241}
+  reelInSpeed: 0
+  castingPower: 20
 --- !u!4 &1759076611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
@@ -2684,6 +2704,14 @@ PrefabInstance:
       propertyPath: fishingMiniGame
       value: 
       objectReference: {fileID: 1275887656}
+    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
+      propertyPath: fishingRodLogic
+      value: 
+      objectReference: {fileID: 1745764250}
+    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
+      propertyPath: playerAnimations
+      value: 
+      objectReference: {fileID: 2026150467}
     m_RemovedComponents:
     - {fileID: 2474057496485410267, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
@@ -2724,6 +2752,23 @@ MonoBehaviour:
   newRecord: {fileID: 2125019527}
   fishingControls: {fileID: 464174475}
   handlers: {fileID: 1989589368}
+--- !u!1 &2026150464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7724862312394714924, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
+  m_PrefabInstance: {fileID: 1930309283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2026150467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026150464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b358b2dec8b6042a3566eac568f337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2052816422
 GameObject:
   m_ObjectHideFlags: 0

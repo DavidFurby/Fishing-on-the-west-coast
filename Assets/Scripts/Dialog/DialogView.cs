@@ -10,7 +10,7 @@ public class DialogView : DialogueViewBase
     [SerializeField] RectTransform container;
     [SerializeField] TextMeshProUGUI speakerGUI;
     [SerializeField] TextMeshProUGUI textGUI;
-    [SerializeField] PlayerController playerController;
+    [SerializeField] ExplorationController playerController;
     [SerializeField] DialogManager dialogManager;
     Action advanceHandler;
     private string dialogueLine;
@@ -81,9 +81,9 @@ public class DialogView : DialogueViewBase
 
     private void ActivateControls()
     {
-        if (playerController.playerStatus == PlayerController.PlayerStatus.Interacting)
+        if (playerController.playerStatus == ExplorationController.PlayerStatus.Interacting)
         {
-            playerController.SetPlayerStatus(PlayerController.PlayerStatus.StandBy);
+            playerController.SetPlayerStatus(ExplorationController.PlayerStatus.StandBy);
         }
     }
     public void ShowDialog(bool active)

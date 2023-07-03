@@ -12,6 +12,7 @@ public class BaitLogic : MonoBehaviour
     [SerializeField] private AudioSource splashSound;
     [SerializeField] private TextMeshProUGUI distanceTextUI;
     [SerializeField] private GameObject distanceRecordMarker;
+    [SerializeField] private FishingRodLogic fishingRodLogic;
 
     [HideInInspector] public bool inWater = false;
     private GameObject currentDistanceRecordMarker;
@@ -48,7 +49,7 @@ public class BaitLogic : MonoBehaviour
         if (fishingControlls.fishingStatus == FishingController.FishingStatus.Casting)
         {
             rigidBody.isKinematic = false;
-            rigidBody.AddForceAtPosition(forceFactor * fishingControlls.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
+            rigidBody.AddForceAtPosition(forceFactor * fishingRodLogic.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
             if (forceFactor > 0)
             {
                 forceFactor -= 0.1f;
@@ -114,7 +115,7 @@ public class BaitLogic : MonoBehaviour
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
         transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
-        transform.Translate(fishingControlls.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+        transform.Translate(fishingRodLogic.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
     }
 
 
@@ -139,7 +140,7 @@ public class BaitLogic : MonoBehaviour
 
     private void ResetValues()
     {
-        fishingControlls.ResetValues();
+        fishingRodLogic.SetInitialValues();
         forceFactor = 1f;
     }
     private void Float()

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -8,24 +7,17 @@ public class FishingController : MonoBehaviour
 {
     #region Serialized Fields
     [SerializeField] private CatchArea catchArea;
-    [SerializeField] private Animator animator;
     [SerializeField] private AudioSource castSound;
     [SerializeField] private BaitCamera baitCamera;
     [SerializeField] private CatchSummary catchSummary;
     [SerializeField] private FishingMiniGame fishingMiniGame;
-    [SerializeField] private Animator playerAnimator;
-    private readonly float initialReelInSpeed = 15f;
-    private readonly float initialCastingPower = 20f;
-
-    private FishingRod currentFishingRod;
-
+    [SerializeField] private FishingRodLogic fishingRodLogic;
+    [SerializeField] private PlayerAnimations playerAnimations;
     #endregion
 
     #region Public Fields
     [HideInInspector] public Bait currentBait;
-    [HideInInspector] public float castingPower = 20f;
     [HideInInspector] public FishingStatus fishingStatus;
-    [HideInInspector] public float reelInSpeed;
     #endregion
 
     #region Enums
@@ -46,29 +38,13 @@ public class FishingController : MonoBehaviour
     {
         fishingStatus = FishingStatus.StandBy;
         SetInitialValues();
-        GameObject playerModel = GameObject.FindWithTag("PlayerModel");
-
-        // Check if the player model was found
-        if (playerModel != null)
-        {
-            // Get the Animator component attached to the player model
-            playerAnimator = playerModel.GetComponent<Animator>();
-        }
-        else
-        {
-            Debug.LogError("(*`n*) - where the FUCK is GUBBEN's model!?");
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale == 1)
-        {
-            ReelInBait();
-            StartFishing();
-        }
-
+        ReelInBait();
+        StartFishing();
     }
     #endregion
 
@@ -85,12 +61,12 @@ public class FishingController : MonoBehaviour
                 StartCoroutine(CatchAlert());
                 catchArea.CatchFish();
                 fishingMiniGame.StartBalanceMiniGame(catchArea.totalFishes);
-                CalculateReelInSpeed();
+                fishingRodLogic.CalculateReelInSpeed();
                 SetFishingStatus(FishingStatus.ReelingFish);
             }
             else
             {
-                reelInSpeed = 50f;
+                fishingRodLogic.ReelInSpeed();
                 SetFishingStatus(FishingStatus.Reeling);
             }
 
@@ -98,20 +74,9 @@ public class FishingController : MonoBehaviour
     }
     private void SetInitialValues()
     {
-        currentFishingRod = MainManager.Instance.game.EquippedFishingRod;
         currentBait = MainManager.Instance.game.EquippedBait;
-        reelInSpeed = initialReelInSpeed;
-        castingPower = initialCastingPower;
     }
 
-
-    public void CalculateReelInSpeed()
-    {
-        for (int i = 0; i < catchArea.totalFishes.Count; i++)
-        {
-            reelInSpeed = initialReelInSpeed - (catchArea.totalFishes[i].Size / 10);
-        }
-    }
     public IEnumerator CatchAlert()
     {
         baitCamera.CatchAlertSound();
@@ -130,15 +95,16 @@ public class FishingController : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 SetFishingStatus(FishingStatus.Charging);
-                playerAnimator.SetBool("chargingThrow", true);
-                ChargeCasting();
+                playerAnimations.SetChargingThrowAnimation(true);
+                fishingRodLogic.ChargeCasting(playerAnimations.SetChargingThrowSpeed);
+
             }
-            if (Input.GetKeyUp(KeyCode.Space))
+            else if (Input.GetKeyUp(KeyCode.Space))
             {
-                playerAnimator.SetBool("chargingThrow", false);
-                animator.Play("Reverse Swing");
+                playerAnimations.SetChargingThrowAnimation(false);
+                fishingRodLogic.PlayerReverseSwingAnimation();
                 castSound.Play();
-                StartCoroutine(WaitForSwingAnimation());
+                WaitForSwingAnimation();
             }
         }
     }
@@ -146,17 +112,9 @@ public class FishingController : MonoBehaviour
     /// <summary>
     /// Waits for the swing animation to finish before changing the fishing status.
     /// </summary>
-    IEnumerator WaitForSwingAnimation()
+    void WaitForSwingAnimation()
     {
-        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Reverse Swing"))
-        {
-            yield return null;
-        }
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-        {
-            yield return null;
-        }
-        castingPower *= fishingMiniGame.castPower;
+        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower));
         fishingMiniGame.SetChargingBalance(false);
         SetFishingStatus(FishingStatus.Casting);
     }
@@ -185,28 +143,9 @@ public class FishingController : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Charges the casting power while the space key is held down.
-    /// </summary>
-
-    private void ChargeCasting()
-    {
-        animator.Play("Swing");
-        if (castingPower < currentFishingRod.ThrowRange)
-        {
-            castingPower++;
-            playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.01f);
-        }
-    }
     public void SetFishingStatus(FishingStatus fishingStatus)
     {
         this.fishingStatus = fishingStatus;
     }
-    public void ResetValues()
-    {
-        castingPower = initialCastingPower;
-        reelInSpeed = initialReelInSpeed;
-    }
-
     #endregion
 }

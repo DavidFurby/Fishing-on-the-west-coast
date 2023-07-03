@@ -10,11 +10,11 @@ public class CatchArea : MonoBehaviour
     /// Gets a value indicating whether a fish is in the catch area.
     /// </summary>
     public bool IsInCatchArea { get; private set; }
-
-    [HideInInspector] public Catch fish;
-    private FishMovement fishMovement;
-    [SerializeField] private FishingController fishingControlls;
     public readonly List<Catch> totalFishes = new();
+    private FishMovement fishMovement;
+    [HideInInspector] public Catch fish;
+    [SerializeField] private FishingController fishingControlls;
+    [SerializeField] private FishingRodLogic FishingRodLogic;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,7 +64,7 @@ public class CatchArea : MonoBehaviour
             {
                 totalFishes.Add(newFishComponent);
             }
-            fishingControlls.CalculateReelInSpeed();
+            FishingRodLogic.CalculateReelInSpeed();
         }
 
     }

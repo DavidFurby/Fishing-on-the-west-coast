@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static PlayerController;
+using static ExplorationController;
 
 public class Shop : MonoBehaviour
 {
     #region Serialized Fields
     [SerializeField] private ShopItem[] shopItems;
     [SerializeField] private PlayerCamera playerCamera;
-    [SerializeField] private PlayerController playerController;
+    [SerializeField] private ExplorationController playerController;
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private ShopHandlers dialogHandlers;
     [SerializeField] ShopItem emptySpot;
