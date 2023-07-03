@@ -12,8 +12,8 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI isNew;
     [SerializeField] private TextMeshProUGUI newRecord;
 
-    [SerializeField] private readonly FishingController fishingControls;
-    [SerializeField] private readonly CatchSummaryHandlers handlers;
+    [SerializeField] private FishingController fishingControls;
+    [SerializeField] private CatchSummaryHandlers handlers;
     private List<Catch> caughtFishes;
     private Catch currentlyPresentedFish;
     private int fishIndex;
@@ -21,7 +21,7 @@ public class CatchSummary : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && fishingControls.fishingStatus.CompareTag(FishingController.FishingStatus.InspectFish.ToString()))
+        if (Input.GetKeyDown(KeyCode.Space) && fishingControls.fishingStatus == FishingController.FishingStatus.InspectFish)
         {
             NextSummary();
         }
@@ -113,16 +113,10 @@ public class CatchSummary : MonoBehaviour
     /// </summary>
     public void EndSummary()
     {
-        SetSummaryActive();
         ResetValues();
         handlers.EndSummary();
         fishingControls.SetFishingStatus(FishingController.FishingStatus.StandBy);
         Debug.Log(fishingControls.fishingStatus);
-    }
-
-    public void SetSummaryActive()
-    {
-        catchSummary.gameObject.SetActive(!catchSummary.gameObject.activeSelf);
     }
 
     // Reset values
