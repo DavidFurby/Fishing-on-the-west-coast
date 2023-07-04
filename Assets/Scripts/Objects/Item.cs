@@ -29,11 +29,23 @@ public class Item : MonoBehaviour
         get { return description; }
         set { description = value; }
     }
+
     public Item(int id, string name, int price, string description)
     {
         Id = id;
         Name = name;
         Price = price;
         Description = description;
+    }
+
+    public static Item CreateItem(int id, string name, int price, string description)
+    {
+        var itemGameObject = new GameObject("Item");
+        var item = itemGameObject.AddComponent<Item>();
+        item.Id = id;
+        item.Name = name;
+        item.Price = price;
+        item.Description = description;
+        return item;
     }
 }

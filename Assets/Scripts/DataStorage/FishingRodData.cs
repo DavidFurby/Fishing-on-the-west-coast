@@ -3,6 +3,7 @@
 [Serializable]
 public class FishingRodData
 {
+    public int id;
     public string fishingRodName;
     public string description;
     public int strength;
@@ -11,6 +12,7 @@ public class FishingRodData
 
     public FishingRodData(FishingRod fishingRod)
     {
+        id = fishingRod.Id;
         fishingRodName = fishingRod.FishingRodName;
         description = fishingRod.Description;
         strength = fishingRod.Strength;

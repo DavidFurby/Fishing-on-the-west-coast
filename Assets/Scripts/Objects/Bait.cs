@@ -55,6 +55,17 @@ public class Bait : MonoBehaviour
         price = baitData.price;
     }
 
+    public static Bait CreateBait(int id, string name, int price, string description)
+    {
+        var itemGameObject = new GameObject("Bait");
+        var item = itemGameObject.AddComponent<Bait>();
+        item.Id = id;
+        item.BaitName = name;
+        item.Price = price;
+        item.Description = description;
+        return item;
+    }
+
     public void AddBaitToInstance()
     {
         MainManager.Instance.game.FoundBaits = MainManager.Instance.game.FoundBaits.Append(this).ToArray();

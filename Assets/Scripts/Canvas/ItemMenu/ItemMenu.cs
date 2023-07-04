@@ -27,17 +27,18 @@ public class ItemMenu : MonoBehaviour
             switch (wheel.itemTag)
             {
                 case ItemTag.Bait:
-                    wheel.SetEquipment(MainManager.Instance.game.FoundBaits.Select(bait => new Item(bait.Id, bait.BaitName, bait.Price, bait.Description)).ToArray());
+                    wheel.SetEquipment(MainManager.Instance.game.FoundBaits.Select(bait => Item.CreateItem(bait.Id, bait.BaitName, bait.Price, bait.Description)).ToArray());
                     break;
                 case ItemTag.FishingRod:
-                    wheel.SetEquipment(MainManager.Instance.game.FoundFishingRods.Select(fishingRod => new Item(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Price, fishingRod.Description)).ToArray());
+                    wheel.SetEquipment(MainManager.Instance.game.FoundFishingRods.Select(fishingRod => Item.CreateItem(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Price, fishingRod.Description)).ToArray());
                     break;
                 case ItemTag.Hat:
-                    wheel.SetEquipment(MainManager.Instance.game.FoundHats.Select(hat => new Item(hat.Id, hat.HatName, hat.Price, hat.Description)).ToArray());
+                    wheel.SetEquipment(MainManager.Instance.game.FoundHats.Select(hat => Item.CreateItem(hat.Id, hat.HatName, hat.Price, hat.Description)).ToArray());
                     break;
             }
         }
     }
+
 
     private void HandleInputs()
     {

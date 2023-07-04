@@ -64,6 +64,17 @@ public class FishingRod : MonoBehaviour
         price = fishingRodData.price;
     }
 
+    public static FishingRod CreateFishingRod(int id, string name, int price, string description)
+    {
+        var itemGameObject = new GameObject("FishingRod");
+        var item = itemGameObject.AddComponent<FishingRod>();
+        item.Id = id;
+        item.FishingRodName = name;
+        item.Price = price;
+        item.Description = description;
+        return item;
+    }
+
     public void AddFishingRodToInstance()
     {
         MainManager.Instance.game.FoundFishingRods = MainManager.Instance.game.FoundFishingRods.Append(this).ToArray();

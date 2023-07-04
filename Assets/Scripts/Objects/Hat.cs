@@ -47,6 +47,16 @@ public class Hat : MonoBehaviour
         description = hatData.description;
         price = hatData.price;
     }
+    public static Hat CreateHat(int id, string name, int price, string description)
+    {
+        var itemGameObject = new GameObject("Hat");
+        var item = itemGameObject.AddComponent<Hat>();
+        item.Id = id;
+        item.HatName = name;
+        item.Price = price;
+        item.Description = description;
+        return item;
+    }
 
     public void AddHatToInstance()
     {
