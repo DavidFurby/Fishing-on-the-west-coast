@@ -15,11 +15,11 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopHandlers dialogHandlers;
     [SerializeField] Item emptySpot;
     private readonly List<Vector3> shopItemPositions = new();
-    [HideInInspector] public bool pauseShoppingControls;
 
     #endregion
 
     #region Private Fields
+    [HideInInspector] public bool pauseShoppingControls;
     [HideInInspector] public Item focusedShopItem;
     private int focusedShopItemIndex = 0;
     #endregion
@@ -97,11 +97,7 @@ public class Shop : MonoBehaviour
     {
         if (focusedShopItem != null)
         {
-            if (IsFishingRod(focusedShopItem))
-            {
-                FishingRod fishingRod = focusedShopItem.gameObject.GetComponent<FishingRod>();
-                fishingRod.AddFishingRodToInstance();
-            }
+            MainManager.Instance.game.AddItem(focusedShopItem);
             ReplaceItemOnSelf();
             FocusItem();
         }
@@ -148,7 +144,7 @@ public class Shop : MonoBehaviour
             if (i < shopItems.Length && shopItems[i] != null)
             {
                 // Check if the current shop item is a fishing rod and is already in the player's inventory
-                if (IsFishingRod(shopItems[i]) && shopItems[i].gameObject.TryGetComponent<FishingRod>(out FishingRod fishingRod) && !IsFishingRodInInventory(fishingRod))
+                if (MainManager.Instance.game.HasItem(i))
                 {
                     // If the fishing rod is already in the player's inventory, spawn an empty spot instead
                     SpawnEmptySpot(i);
@@ -167,24 +163,6 @@ public class Shop : MonoBehaviour
 
         // Set the initial focused shop item
         focusedShopItem = shopItems[focusedShopItemIndex];
-    }
-
-    private bool IsFishingRod(Item shopItem)
-    {
-        if (shopItem.gameObject.TryGetComponent<FishingRod>(out _))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }
-
-    private static bool IsFishingRodInInventory(FishingRod fishingRod)
-    {
-        return MainManager.Instance.game.FoundFishingRods.Any(f => f.Id == fishingRod.Id);
     }
 
     private void SpawnEmptySpot(int index)

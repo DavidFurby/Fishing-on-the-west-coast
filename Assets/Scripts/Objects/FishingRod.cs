@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Game;
 
 [Serializable]
 public class FishingRod : MonoBehaviour
@@ -12,6 +13,7 @@ public class FishingRod : MonoBehaviour
     [SerializeField] private int strength;
     [SerializeField] private int throwRange;
     [SerializeField] private int price;
+    [SerializeField] private ItemTag itemTag = ItemTag.FishingRod;
 
     public int Id
     {
@@ -46,6 +48,12 @@ public class FishingRod : MonoBehaviour
         set => price = value;
     }
 
+    public ItemTag ItemTag
+    {
+        get => itemTag;
+        set => itemTag = value;
+    }
+
     public FishingRod()
     {
         fishingRodName = "Basic rod";
@@ -62,6 +70,15 @@ public class FishingRod : MonoBehaviour
         throwRange = fishingRodData.throwRange;
         description = fishingRodData.description;
         price = fishingRodData.price;
+    }
+    public static FishingRod SetFishingRod(Game game, int id, string name, string description, int price)
+    {
+        FishingRod fishingRod = game.gameObject.AddComponent<FishingRod>();
+        fishingRod.id = id;
+        fishingRod.fishingRodName = name;
+        fishingRod.Description = description;
+        fishingRod.Price = price;
+        return fishingRod;
     }
 
     public static FishingRod CreateFishingRod(int id, string name, int price, string description)

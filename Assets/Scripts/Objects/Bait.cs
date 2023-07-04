@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using static Game;
 
 [Serializable]
 public class Bait : MonoBehaviour
@@ -10,6 +11,7 @@ public class Bait : MonoBehaviour
     [SerializeField] private int level;
     [SerializeField] private string description;
     [SerializeField] private int price;
+    [SerializeField] private ItemTag itemTag = ItemTag.Bait;
 
     public int Id
     {
@@ -38,6 +40,11 @@ public class Bait : MonoBehaviour
         get => price;
         set => price = value;
     }
+    public ItemTag ItemTag
+    {
+        get => itemTag;
+        set => itemTag = value;
+    }
 
     public Bait()
     {
@@ -53,6 +60,15 @@ public class Bait : MonoBehaviour
         level = baitData.level;
         description = baitData.description;
         price = baitData.price;
+    }
+    public static Bait SetBait(Game game, int id, string name, string description, int price)
+    {
+        Bait bait = game.gameObject.AddComponent<Bait>();
+        bait.id = id;
+        bait.baitName = name;
+        bait.Description = description;
+        bait.Price = price;
+        return bait;
     }
 
     public static Bait CreateBait(int id, string name, int price, string description)

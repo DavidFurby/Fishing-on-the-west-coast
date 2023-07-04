@@ -59,6 +59,34 @@ public class Game : MonoBehaviour
                 break;
         }
     }
+    //Check if item Exists in inventory
+    public bool HasItem(int id)
+    {
+        return FoundFishingRods.Any((rod) => rod.Id == id) ||
+               FoundBaits.Any((bait) => bait.Id == id) ||
+               FoundHats.Any((hat) => hat.Id == id);
+    }
+    public void AddItem(Item item)
+    {
+        switch (item.ItemTag)
+        {
+            case ItemTag.FishingRod:
+                var fishingRod = FishingRod.CreateFishingRod(item.Id, item.Name, item.Price, item.Description);
+                fishingRod.AddFishingRodToInstance();
+                break;
+            case ItemTag.Bait:
+                var bait = Bait.CreateBait(item.Id, item.Name, item.Price, item.Description);
+                bait.AddBaitToInstance();
+                break;
+            case ItemTag.Hat:
+                var hat = new Hat(item.Id, item.Name, item.Price, item.Description);
+                hat.AddHatToInstance();
+                break;
+        }
+    }
+
+
+
     public void SaveGame()
     {
         SaveSystem.SaveGame(this);
@@ -73,36 +101,33 @@ public class Game : MonoBehaviour
         BestDistance = gameData.bestDistance;
         Scene = gameData.scene;
         Catches = gameData.foundCatches.Select(fishData => gameObject.AddComponent<Catch>()).ToArray();
-
         LoadFishingRod(gameData);
-
         LoadBait(gameData);
-
         LoadHats(gameData);
     }
 
     private void LoadHats(GameData gameData)
     {
         FoundHats = gameData.foundHats.Select(hatData =>
-        Hat.CreateHat(hatData.id, hatData.hatName, hatData.price, hatData.description)
-        ).ToArray();
-        EquippedHat = Hat.CreateHat(gameData.equippedHat.id, gameData.equippedHat.hatName, gameData.equippedHat.price, gameData.equippedHat.description);
+         Hat.SetHat(this, hatData.id, hatData.hatName, hatData.description, hatData.price)
+           ).ToArray();
+        EquippedHat = Hat.SetHat(this, gameData.equippedHat.id, gameData.equippedHat.hatName, gameData.equippedHat.description, gameData.equippedHat.price);
     }
 
     private void LoadBait(GameData gameData)
     {
         FoundBaits = gameData.foundBaits.Select(baitData =>
-        Bait.CreateBait(baitData.id, baitData.baitName, baitData.price, baitData.description)
+        Bait.SetBait(this, baitData.id, baitData.baitName, baitData.description, baitData.price)
         ).ToArray();
-        EquippedBait = Bait.CreateBait(gameData.equippedBait.id, gameData.equippedBait.baitName, gameData.equippedBait.price, gameData.equippedBait.description);
+        EquippedBait = Bait.SetBait(this, gameData.equippedBait.id, gameData.equippedBait.baitName, gameData.equippedBait.description, gameData.equippedBait.price);
 
     }
 
     private void LoadFishingRod(GameData gameData)
     {
         FoundFishingRods = gameData.foundFishingRods.Select(fishingRodData =>
-        FishingRod.CreateFishingRod(fishingRodData.id, fishingRodData.fishingRodName, fishingRodData.price, fishingRodData.description)).ToArray();
-        EquippedFishingRod = FishingRod.CreateFishingRod(gameData.equippedFishingRod.id, gameData.equippedFishingRod.fishingRodName, gameData.equippedFishingRod.price, gameData.equippedFishingRod.description);
+        FishingRod.SetFishingRod(this, fishingRodData.id, fishingRodData.fishingRodName, fishingRodData.description, fishingRodData.price)).ToArray();
+        EquippedFishingRod = FishingRod.SetFishingRod(this, gameData.equippedFishingRod.id, gameData.equippedFishingRod.fishingRodName, gameData.equippedFishingRod.description, gameData.equippedFishingRod.price);
 
     }
 

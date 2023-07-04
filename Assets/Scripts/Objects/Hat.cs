@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
+using static Game;
 
 [Serializable]
 public class Hat : MonoBehaviour
@@ -9,6 +11,8 @@ public class Hat : MonoBehaviour
     [SerializeField] private string hatName;
     [SerializeField] private string description;
     [SerializeField] private int price;
+    [SerializeField] private ItemTag itemTag = ItemTag.Bait;
+
     public int Id
     {
         get => id;
@@ -31,7 +35,11 @@ public class Hat : MonoBehaviour
         get => price;
         set => price = value;
     }
-
+    public ItemTag ItemTag
+    {
+        get => itemTag;
+        set => itemTag = value;
+    }
     public Hat()
     {
         id = 0;
@@ -47,15 +55,21 @@ public class Hat : MonoBehaviour
         description = hatData.description;
         price = hatData.price;
     }
-    public static Hat CreateHat(int id, string name, int price, string description)
+    public Hat(int id, string name, int price, string description)
     {
-        var itemGameObject = new GameObject("Hat");
-        var item = itemGameObject.AddComponent<Hat>();
-        item.Id = id;
-        item.HatName = name;
-        item.Price = price;
-        item.Description = description;
-        return item;
+        Id = id;
+        HatName = name;
+        Price = price;
+        Description = description;
+    }
+    public static Hat SetHat(Game game, int id, string name, string description, int price)
+    {
+        Hat hat = game.gameObject.AddComponent<Hat>();
+        hat.id = id;
+        hat.HatName = name;
+        hat.Description = description;
+        hat.Price = price;
+        return hat;
     }
 
     public void AddHatToInstance()
