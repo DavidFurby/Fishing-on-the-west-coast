@@ -702,9 +702,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1079318671}
     - target: {fileID: 6189370015012039862, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: character
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189370015012039862, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: dialogManager
       value: 
       objectReference: {fileID: 1079318671}
+    - target: {fileID: 7437166622731013050, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9999999
+      objectReference: {fileID: 0}
     - target: {fileID: 7437166623380843910, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -767,7 +775,7 @@ PrefabInstance:
       objectReference: {fileID: 1930309284}
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.size
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.data[2]

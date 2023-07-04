@@ -27,7 +27,7 @@ public class ShopHandlers : MonoBehaviour
         dialogManager.AddCommandHandler("setShopItem", () =>
         {
             dialogManager.SetVariableValue("$shopItemName", shopItem.Name);
-            dialogManager.SetVariableValue("$shopItemPrice", shopItem.Price.ToString());
+            dialogManager.SetVariableValue("$shopItemPrice", shopItem.Price);
             dialogManager.SetVariableValue("$shopItemDescription", shopItem.Description);
 
         });
@@ -35,7 +35,7 @@ public class ShopHandlers : MonoBehaviour
     public void SetTokens()
     {
         dialogManager.RemoveHandler("setTokens");
-        dialogManager.AddCommandHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.game.Catches.ToString()));
+        dialogManager.AddCommandHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.game.Catches.Length));
     }
     //lock controls if item has been selected in shop
     public void LockShopControls()

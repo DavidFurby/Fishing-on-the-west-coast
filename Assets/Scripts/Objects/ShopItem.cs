@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShopItem : MonoBehaviour
 {
     [SerializeField] private new string name;
-    [SerializeField] private float price;
+    [SerializeField] private int price;
     [SerializeField] private string description;
 
     public string Name
@@ -13,7 +13,7 @@ public class ShopItem : MonoBehaviour
         get { return name; }
         set { name = value; }
     }
-    public float Price
+    public int Price
     {
         get { return price; }
         set { price = value; }
