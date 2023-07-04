@@ -35,7 +35,7 @@ public class ShopHandlers : MonoBehaviour
     public void SetTokens()
     {
         dialogManager.RemoveHandler("setTokens");
-        dialogManager.AddCommandHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.game.Catches.Length));
+        dialogManager.AddCommandHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.game.TotalCatches));
     }
     //lock controls if item has been selected in shop
     public void LockShopControls()
