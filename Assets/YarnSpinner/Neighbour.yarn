@@ -20,12 +20,6 @@ position: -223,-79
     <<jump DaySix>>
 <<elseif $day is 7>>
     <<jump DaySeven>>
-<<elseif $day is 8>>
-    <<jump DayEight>>
-<<elseif $day is 9>>
-    <<jump DayNine>>
-<<else>>
-    Today is after ninth day of this month.
 <<endif>>
 ===
 
@@ -34,7 +28,12 @@ tags:
 colorID: 0
 position: -223,-79
 ---
-Today is the first day of the month!
+Neighour: Today is the first day of the month!
+Player: Cool!
+Player: Cool!
+Neighbour: NEti!
+-> Okay Cool
+-> Not cool
 ===
 
 title: DayTwo

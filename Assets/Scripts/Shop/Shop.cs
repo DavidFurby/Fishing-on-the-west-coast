@@ -138,17 +138,26 @@ public class Shop : MonoBehaviour
         // Loop through all shop item positions
         for (int i = 0; i < shopItemPositions.Count; i++)
         {
-            // Check if the current shop item is a fishing rod and is already in the player's inventory
-            if (IsFishingRodInInventory(shopItems[i]))
+
+            if (i < shopItems.Length && shopItems[i] != null)
             {
-                // If the fishing rod is already in the player's inventory, spawn an empty spot instead
-                SpawnEmptySpot(i);
+                // Check if the current shop item is a fishing rod and is already in the player's inventory
+                if (IsFishingRodInInventory(shopItems[i]))
+                {
+                    // If the fishing rod is already in the player's inventory, spawn an empty spot instead
+                    SpawnEmptySpot(i);
+                }
+                else
+                {
+                    // Otherwise, spawn the shop item
+                    SpawnShopItem(i);
+                }
             }
             else
             {
-                // Otherwise, spawn the shop item
-                SpawnShopItem(i);
+                SpawnEmptySpot(i);
             }
+
         }
 
         // Set the initial focused shop item

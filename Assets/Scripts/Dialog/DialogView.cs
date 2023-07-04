@@ -55,7 +55,6 @@ public class DialogView : DialogueViewBase
 
     public override void DismissLine(Action onDismissalComplete)
     {
-        ShowDialog(false);
         onDismissalComplete();
     }
 

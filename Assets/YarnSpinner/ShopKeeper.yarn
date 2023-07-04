@@ -6,9 +6,7 @@ position: 288,-188
 <<declare $shopItemPrice = 0 as number>>
 <<declare $shopItemDescription = "" as string>>
 <<declare $currentTokens = 0 as number>>
-
 ShopKeeper: Hiya what can i do for you today?
-ShopKeeper: Testing testing
 <<openShop>>
 ===
 
@@ -33,7 +31,6 @@ position: -285,-135
 ---
 <<lockShopControls>>
 ShopKepper: that will be {$shopItemPrice}
-
 -> Player: Cool ill buy it
     <<lockShopControls>>
     <<if $shopItemPrice <= $currentTokens>>
@@ -51,8 +48,9 @@ tags:
 colorID: 0
 position: -2,38
 ---
- <<buyShopItem>>
- ShopKepper: Aye thanks matey
+<<buyShopItem>>
+ShopKeeper: Aye thanks matey
+<<jump ShopItem>>
 ===
 
 title: DeclineItem
@@ -68,6 +66,6 @@ tags:
 colorID: 0
 position: -2,38
 ---
-Ohh looks like you don't have enough fishes for that one yet.
+ShopKeeper: Ohh looks like you don't have enough fishes for that one yet.
 <<jump ShopItem>>
 ===

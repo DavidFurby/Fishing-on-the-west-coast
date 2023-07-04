@@ -53,7 +53,7 @@ public class ItemMenu : MonoBehaviour
         {
             ScrollBetweenWheels();
 
-            TriggerChangeEquipedItem();
+            TriggerChangeEquippedItem();
 
         }
 
@@ -72,7 +72,7 @@ public class ItemMenu : MonoBehaviour
         SetFocus();
     }
 
-    private void TriggerChangeEquipedItem()
+    private void TriggerChangeEquippedItem()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
