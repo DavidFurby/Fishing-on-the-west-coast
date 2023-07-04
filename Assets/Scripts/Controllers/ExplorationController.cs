@@ -32,7 +32,7 @@ public class ExplorationController : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        if (playerStatus == PlayerStatus.StandBy && Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactible != null)
+        if (playerStatus == PlayerStatus.StandBy)
         {
             if (horizontalInput != 0 || verticalInput != 0)
             {
@@ -43,7 +43,11 @@ public class ExplorationController : MonoBehaviour
                 playerAnimations.SetPlayerWalkAnimation(false);
             }
 
-            ActivateInteractible();
+            if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactible != null)
+            {
+                playerAnimations.SetPlayerWalkAnimation(false);
+                ActivateInteractible();
+            }
         }
     }
 
