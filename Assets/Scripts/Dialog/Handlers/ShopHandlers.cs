@@ -20,7 +20,7 @@ public class ShopHandlers : MonoBehaviour
             StartCoroutine(shop.OpenShop());
         });
     }
-    public void SetShopItemHandler(ShopItem shopItem)
+    public void SetShopItemHandler(Item shopItem)
     {
         dialogManager.RemoveHandler("setShopItem");
         dialogManager.AddCommandHandler("setShopItem", () =>
@@ -46,6 +46,7 @@ public class ShopHandlers : MonoBehaviour
     }
     private void BuyShopItem()
     {
+        dialogManager.RemoveHandler("buyShopItem");
         dialogManager.AddCommandHandler("buyShopItem", () =>
         {
             shop.BuyItem();

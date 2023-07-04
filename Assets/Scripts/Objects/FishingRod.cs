@@ -11,6 +11,7 @@ public class FishingRod : MonoBehaviour
     [SerializeField] private string description;
     [SerializeField] private int strength;
     [SerializeField] private int throwRange;
+    [SerializeField] private int price;
 
     public int Id
     {
@@ -39,6 +40,11 @@ public class FishingRod : MonoBehaviour
         get => throwRange;
         set => throwRange = value;
     }
+    public int Price
+    {
+        get => price;
+        set => price = value;
+    }
 
     public FishingRod()
     {
@@ -46,6 +52,7 @@ public class FishingRod : MonoBehaviour
         strength = 20;
         throwRange = 100;
         description = "A rod for beginners. Made for seas of the kinder sort";
+        price = 0;
     }
 
     public FishingRod(FishingRodData fishingRodData)
@@ -54,6 +61,7 @@ public class FishingRod : MonoBehaviour
         strength = fishingRodData.strength;
         throwRange = fishingRodData.throwRange;
         description = fishingRodData.description;
+        price = fishingRodData.price;
     }
 
     public void AddFishingRodToInstance()

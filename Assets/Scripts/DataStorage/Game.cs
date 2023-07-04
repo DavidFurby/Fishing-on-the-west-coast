@@ -26,19 +26,20 @@ public class Game : MonoBehaviour
         Bait,
         Hat
     }
+
     public Item GetEquipment(ItemTag itemTag)
     {
         Item item = null;
         switch (itemTag)
         {
             case ItemTag.FishingRod:
-                item = new Item(EquippedFishingRod.Id, EquippedFishingRod.FishingRodName, EquippedFishingRod.Description);
+                item = gameObject.AddComponent<Item>();
                 break;
             case ItemTag.Bait:
-                item = new Item(EquippedBait.Id, EquippedBait.BaitName, EquippedBait.Description);
+                item = gameObject.AddComponent<Item>();
                 break;
             case ItemTag.Hat:
-                item = new Item(EquippedHat.Id, EquippedHat.HatName, EquippedHat.Description);
+                item = gameObject.AddComponent<Item>();
                 break;
         }
         return item;
@@ -87,11 +88,13 @@ public class Game : MonoBehaviour
             Hat hat = gameObject.AddComponent<Hat>();
             hat.HatName = hatData.hatName;
             hat.Description = hatData.description;
+            hat.Price = hatData.price;
             return hat;
         }).ToArray();
         EquippedHat = gameObject.AddComponent<Hat>();
         EquippedHat.HatName = gameData.equippedHat.hatName;
         EquippedHat.Description = gameData.equippedHat.description;
+        EquippedBait.Price = gameData.equippedBait.price;
     }
 
     private void LoadBait(GameData gameData)
@@ -102,12 +105,14 @@ public class Game : MonoBehaviour
             bait.BaitName = baitData.baitName;
             bait.Level = baitData.level;
             bait.Description = baitData.description;
+            bait.Price = baitData.price;
             return bait;
         }).ToArray();
         EquippedBait = gameObject.AddComponent<Bait>();
         EquippedBait.BaitName = gameData.equippedBait.baitName;
         EquippedBait.Level = gameData.equippedBait.level;
         EquippedBait.Description = gameData.equippedBait.description;
+        EquippedBait.Price = gameData.equippedBait.price;
     }
 
     private void LoadFishingRod(GameData gameData)
@@ -118,12 +123,14 @@ public class Game : MonoBehaviour
             fishingRod.FishingRodName = fishingRodData.fishingRodName;
             fishingRod.Strength = fishingRodData.strength;
             fishingRod.ThrowRange = fishingRodData.throwRange;
+            fishingRod.Price = fishingRodData.price;
             return fishingRod;
         }).ToArray();
         EquippedFishingRod = gameObject.AddComponent<FishingRod>();
         EquippedFishingRod.FishingRodName = gameData.equippedFishingRod.fishingRodName;
         EquippedFishingRod.Strength = gameData.equippedFishingRod.strength;
         EquippedFishingRod.ThrowRange = gameData.equippedFishingRod.throwRange;
+        EquippedFishingRod.Price = gameData.equippedFishingRod.price;
     }
 
     public void NewGame()
@@ -142,19 +149,6 @@ public class Game : MonoBehaviour
             EquippedBait = FoundBaits[0];
             FoundHats = new Hat[] { gameObject.AddComponent<Hat>() };
             EquippedHat = FoundHats[0];
-        }
-    }
-    public class Item
-    {
-        public int id;
-        public string name;
-        public string description;
-
-        public Item(int id, string name, string description)
-        {
-            this.id = id;
-            this.name = name;
-            this.description = description;
         }
     }
 }

@@ -29,15 +29,15 @@ public class ItemMenu : MonoBehaviour
         {
             if (listOfWheels[i].itemTag == ItemTag.Bait)
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new Item(bait.Id, bait.BaitName, bait.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new Item(bait.Id, bait.BaitName, bait.Price, bait.Description)).ToArray());
             }
             else if (listOfWheels[i].itemTag == ItemTag.FishingRod)
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new Item(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new Item(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Price, fishingRod.Description)).ToArray());
             }
             else if (listOfWheels[i].itemTag == ItemTag.Hat)
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundHats.Select((hat) => new Item(hat.Id, hat.HatName, hat.Description)).ToArray());
+                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundHats.Select((hat) => new Item(hat.Id, hat.HatName, hat.Price, hat.Description)).ToArray());
             }
         }
     }

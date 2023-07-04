@@ -9,6 +9,7 @@ public class Bait : MonoBehaviour
     [SerializeField] private string baitName;
     [SerializeField] private int level;
     [SerializeField] private string description;
+    [SerializeField] private int price;
 
     public int Id
     {
@@ -32,12 +33,18 @@ public class Bait : MonoBehaviour
         get => description;
         set => description = value;
     }
+    public int Price
+    {
+        get => price;
+        set => price = value;
+    }
 
     public Bait()
     {
         baitName = "Basic bait";
         level = 1;
         description = "A basic bait made for basic fishermen";
+        price = 0;
     }
 
     public Bait(BaitData baitData)
@@ -45,6 +52,7 @@ public class Bait : MonoBehaviour
         baitName = baitData.baitName;
         level = baitData.level;
         description = baitData.description;
+        price = baitData.price;
     }
 
     public void AddBaitToInstance()

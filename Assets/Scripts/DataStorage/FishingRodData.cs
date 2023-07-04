@@ -7,6 +7,7 @@ public class FishingRodData
     public string description;
     public int strength;
     public int throwRange;
+    public int price;
 
     public FishingRodData(FishingRod fishingRod)
     {
@@ -14,5 +15,6 @@ public class FishingRodData
         description = fishingRod.Description;
         strength = fishingRod.Strength;
         throwRange = fishingRod.ThrowRange;
+        price = fishingRod.Price;
     }
 }
