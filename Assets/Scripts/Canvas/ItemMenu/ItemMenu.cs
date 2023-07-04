@@ -10,34 +10,31 @@ public class ItemMenu : MonoBehaviour
     private ItemWheel focusedWheel;
     private int focusedWheelIndex;
 
-    // Start is called before the first frame update
     void Start()
     {
         itemMenu.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         HandleInputs();
-
     }
 
     private void PopulateWheels()
     {
-        for (int i = 0; i < listOfWheels.Length; i++)
+        foreach (var wheel in listOfWheels)
         {
-            if (listOfWheels[i].itemTag == ItemTag.Bait)
+            switch (wheel.itemTag)
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new Item(bait.Id, bait.BaitName, bait.Price, bait.Description)).ToArray());
-            }
-            else if (listOfWheels[i].itemTag == ItemTag.FishingRod)
-            {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new Item(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Price, fishingRod.Description)).ToArray());
-            }
-            else if (listOfWheels[i].itemTag == ItemTag.Hat)
-            {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundHats.Select((hat) => new Item(hat.Id, hat.HatName, hat.Price, hat.Description)).ToArray());
+                case ItemTag.Bait:
+                    wheel.SetEquipment(MainManager.Instance.game.FoundBaits.Select(bait => new Item(bait.Id, bait.BaitName, bait.Price, bait.Description)).ToArray());
+                    break;
+                case ItemTag.FishingRod:
+                    wheel.SetEquipment(MainManager.Instance.game.FoundFishingRods.Select(fishingRod => new Item(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Price, fishingRod.Description)).ToArray());
+                    break;
+                case ItemTag.Hat:
+                    wheel.SetEquipment(MainManager.Instance.game.FoundHats.Select(hat => new Item(hat.Id, hat.HatName, hat.Price, hat.Description)).ToArray());
+                    break;
             }
         }
     }
@@ -47,23 +44,21 @@ public class ItemMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             ResetValues();
-            SetMenu();
+            ToggleMenu();
         }
         if (itemMenu.activeSelf)
         {
             ScrollBetweenWheels();
-
             TriggerChangeEquippedItem();
-
         }
-
     }
 
-    private void SetMenu()
+    private void ToggleMenu()
     {
         itemMenu.SetActive(!itemMenu.activeSelf);
         Time.timeScale = itemMenu.activeSelf ? 0 : 1;
     }
+
     private void ResetValues()
     {
         PopulateWheels();
@@ -76,13 +71,14 @@ public class ItemMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            for (int i = 0; i < listOfWheels.Length; i++)
+            foreach (var wheel in listOfWheels)
             {
-                listOfWheels[i].ChangeEquipedItem();
+                wheel.ChangeEquipedItem();
             }
-            SetMenu();
+            ToggleMenu();
         }
     }
+
     private void ScrollBetweenWheels()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
