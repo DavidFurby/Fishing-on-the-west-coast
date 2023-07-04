@@ -127,7 +127,7 @@ public class Shop : MonoBehaviour
                 ScrollBetweenItems(true);
 
             }
-            else if (Input.GetKeyDown(KeyCode.Escape))
+            else if (Input.GetKeyDown(KeyCode.Tab))
             {
                 CloseShop();
             }
