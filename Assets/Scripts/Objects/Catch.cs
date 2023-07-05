@@ -67,4 +67,28 @@ public class Catch : MonoBehaviour
     {
         MainManager.Instance.game.Catches[index] = this;
     }
+
+    public static Catch[] SetAvailableCatches(Game game)
+    {
+
+        Catch basicCatch = game.gameObject.AddComponent<Catch>();
+        basicCatch.Id = 1;
+        basicCatch.CatchName = "Basic Catch";
+        basicCatch.Level = 1;
+        basicCatch.Description = "A basic catch easily caught";
+
+        Catch advancedCatch = game.gameObject.AddComponent<Catch>();
+        advancedCatch.Id = 2;
+        advancedCatch.CatchName = "Advanced Catch";
+        advancedCatch.Level = 2;
+        advancedCatch.Description = "A more advanced catch not as easily caught";
+
+        Catch premiumCatch = game.gameObject.AddComponent<Catch>();
+        premiumCatch.Id = 3;
+        premiumCatch.CatchName = "Premium Catch";
+        premiumCatch.Level = 3;
+        premiumCatch.Description = "A premium catch very rarely caught";
+
+        return new Catch[] { basicCatch, advancedCatch, premiumCatch };
+    }
 }

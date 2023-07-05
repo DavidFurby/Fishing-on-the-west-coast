@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     public int Days { get; set; }
     public int TotalCatches { get; set; }
     public float BestDistance { get; set; }
+    public Catch[] AvailableCatches { get; set; }
     public List<Catch> Catches { get; set; } = new List<Catch>();
     public List<FishingRod> FoundFishingRods { get; set; } = new List<FishingRod>();
     public FishingRod EquippedFishingRod { get; set; }

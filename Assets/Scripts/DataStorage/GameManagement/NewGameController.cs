@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class NewGameController : MonoBehaviour
@@ -9,6 +8,7 @@ public class NewGameController : MonoBehaviour
         bool removed = SaveSystem.NewGame();
         if (removed)
         {
+            game.AvailableCatches = Catch.SetAvailableCatches(game);
             PopulateAvailableItems(game);
             ResetGameState(game);
         }
