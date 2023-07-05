@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -56,11 +57,7 @@ public class FishingRod : MonoBehaviour
 
     public FishingRod()
     {
-        fishingRodName = "Basic rod";
-        strength = 20;
-        throwRange = 100;
-        description = "A rod for beginners. Made for seas of the kinder sort";
-        price = 0;
+
     }
 
     public FishingRod(FishingRodData fishingRodData)
@@ -70,14 +67,18 @@ public class FishingRod : MonoBehaviour
         throwRange = fishingRodData.throwRange;
         description = fishingRodData.description;
         price = fishingRodData.price;
+        strength = fishingRodData.strength;
+        throwRange = fishingRodData.throwRange;
     }
-    public static FishingRod SetFishingRod(Game game, int id, string name, string description, int price)
+    public static FishingRod SetFishingRod(Game game, FishingRodData fishingRodData)
     {
         FishingRod fishingRod = game.gameObject.AddComponent<FishingRod>();
-        fishingRod.id = id;
-        fishingRod.fishingRodName = name;
-        fishingRod.Description = description;
-        fishingRod.Price = price;
+        fishingRod.id = fishingRodData.id;
+        fishingRod.fishingRodName = fishingRodData.fishingRodName;
+        fishingRod.Description = fishingRodData.description;
+        fishingRod.Price = fishingRodData.price;
+        fishingRod.strength = fishingRodData.strength;
+        fishingRod.throwRange = fishingRodData.throwRange;
         return fishingRod;
     }
 
@@ -94,6 +95,34 @@ public class FishingRod : MonoBehaviour
 
     public void AddFishingRodToInstance()
     {
-        MainManager.Instance.game.FoundFishingRods = MainManager.Instance.game.FoundFishingRods.Append(this).ToArray();
+        MainManager.Instance.game.FoundFishingRods = MainManager.Instance.game.FoundFishingRods.Append(this).ToList();
+    }
+    public static FishingRod[] SetAvailableFishingRods(Game game)
+    {
+        FishingRod basicFishingRod = game.gameObject.AddComponent<FishingRod>();
+        basicFishingRod.Id = 1;
+        basicFishingRod.FishingRodName = "Basic Fishing Rod";
+        basicFishingRod.Description = "A basic fishing rod for catching common fish";
+        basicFishingRod.Strength = 10;
+        basicFishingRod.ThrowRange = 100;
+        basicFishingRod.Price = 10;
+
+        FishingRod advancedFishingRod = game.gameObject.AddComponent<FishingRod>();
+        advancedFishingRod.Id = 2;
+        advancedFishingRod.FishingRodName = "Advanced Fishing Rod";
+        advancedFishingRod.Description = "A more advanced fishing rod for catching rarer fish";
+        advancedFishingRod.Strength = 20;
+        advancedFishingRod.ThrowRange = 200;
+        advancedFishingRod.Price = 20;
+
+        FishingRod premiumFishingRod = game.gameObject.AddComponent<FishingRod>();
+        premiumFishingRod.Id = 3;
+        premiumFishingRod.FishingRodName = "Premium Fishing Rod";
+        premiumFishingRod.Description = "A premium fishing rod for catching the rarest fish";
+        premiumFishingRod.Strength = 30;
+        premiumFishingRod.throwRange = 300;
+        premiumFishingRod.price = 30;
+
+        return new FishingRod[] { basicFishingRod, advancedFishingRod, premiumFishingRod };
     }
 }

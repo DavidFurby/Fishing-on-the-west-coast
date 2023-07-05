@@ -39,6 +39,7 @@ public class ShopHandlers : MonoBehaviour
     //lock controls if item has been selected in shop
     public void LockShopControls()
     {
+        dialogManager.RemoveHandler("lockShopControls");
         dialogManager.AddCommandHandler("lockShopControls", () =>
         {
             shop.pauseShoppingControls = !shop.pauseShoppingControls;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static Game;
@@ -45,14 +46,13 @@ public class Bait : MonoBehaviour
         get => itemTag;
         set => itemTag = value;
     }
+    public List<Bait> availableBaits = new();
 
     public Bait()
     {
-        baitName = "Basic bait";
-        level = 1;
-        description = "A basic bait made for basic fishermen";
-        price = 0;
+
     }
+
 
     public Bait(BaitData baitData)
     {
@@ -61,13 +61,14 @@ public class Bait : MonoBehaviour
         description = baitData.description;
         price = baitData.price;
     }
-    public static Bait SetBait(Game game, int id, string name, string description, int price)
+    public static Bait SetBait(Game game, BaitData baitData)
     {
         Bait bait = game.gameObject.AddComponent<Bait>();
-        bait.id = id;
-        bait.baitName = name;
-        bait.Description = description;
-        bait.Price = price;
+        bait.id = baitData.id;
+        bait.baitName = baitData.baitName;
+        bait.Description = baitData.description;
+        bait.Price = baitData.price;
+        bait.level = baitData.level;
         return bait;
     }
 
@@ -84,6 +85,34 @@ public class Bait : MonoBehaviour
 
     public void AddBaitToInstance()
     {
-        MainManager.Instance.game.FoundBaits = MainManager.Instance.game.FoundBaits.Append(this).ToArray();
+        MainManager.Instance.game.FoundBaits = MainManager.Instance.game.FoundBaits.Append(this).ToList();
     }
+
+    public static Bait[] SetAvailableBaits(Game game)
+    {
+
+        Bait basicBait = game.gameObject.AddComponent<Bait>();
+        basicBait.Id = 1;
+        basicBait.BaitName = "Basic Bait";
+        basicBait.Level = 1;
+        basicBait.Description = "A basic bait for catching common fish";
+        basicBait.Price = 10;
+
+        Bait advancedBait = game.gameObject.AddComponent<Bait>();
+        advancedBait.Id = 2;
+        advancedBait.BaitName = "Advanced Bait";
+        advancedBait.Level = 2;
+        advancedBait.Description = "A more advanced bait for catching rarer fish";
+        advancedBait.Price = 20;
+
+        Bait premiumBait = game.gameObject.AddComponent<Bait>();
+        premiumBait.Id = 3;
+        premiumBait.BaitName = "Premium Bait";
+        premiumBait.Level = 3;
+        premiumBait.Description = "A premium bait for catching the rarest fish";
+        premiumBait.Price = 30;
+
+        return new Bait[] { basicBait, advancedBait, premiumBait };
+    }
+
 }

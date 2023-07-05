@@ -87,7 +87,7 @@ public class CatchSummary : MonoBehaviour
         Catch existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.Id == fishData.Id && f.Size < fishData.Size);
         if (existingFish != null)
         {
-            int index = Array.IndexOf(MainManager.Instance.game.Catches, existingFish);
+            int index = Array.IndexOf(MainManager.Instance.game.Catches.ToArray(), existingFish);
             fishData.ReplaceFishInInstance(index);
             return true;
         }

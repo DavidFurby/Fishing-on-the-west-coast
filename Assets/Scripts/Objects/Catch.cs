@@ -60,7 +60,7 @@ public class Catch : MonoBehaviour
 
     public void AddFishToInstance()
     {
-        MainManager.Instance.game.Catches = MainManager.Instance.game.Catches.Append(this).ToArray();
+        MainManager.Instance.game.Catches = MainManager.Instance.game.Catches.Append(this).ToList();
     }
 
     public void ReplaceFishInInstance(int index)

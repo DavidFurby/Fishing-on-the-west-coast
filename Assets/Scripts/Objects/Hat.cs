@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -42,10 +43,7 @@ public class Hat : MonoBehaviour
     }
     public Hat()
     {
-        id = 0;
-        hatName = "Basic hat";
-        description = "Whats a bald old man without a hat";
-        price = 0;
+
     }
 
     public Hat(HatData hatData)
@@ -62,18 +60,42 @@ public class Hat : MonoBehaviour
         Price = price;
         Description = description;
     }
-    public static Hat SetHat(Game game, int id, string name, string description, int price)
+    public static Hat SetHat(Game game, HatData hatData)
     {
         Hat hat = game.gameObject.AddComponent<Hat>();
-        hat.id = id;
-        hat.HatName = name;
-        hat.Description = description;
-        hat.Price = price;
+        hat.id = hatData.id;
+        hat.HatName = hatData.hatName;
+        hat.Description = hatData.description;
+        hat.Price = hatData.price;
         return hat;
     }
 
     public void AddHatToInstance()
     {
-        MainManager.Instance.game.FoundHats = MainManager.Instance.game.FoundHats.Append(this).ToArray();
+        MainManager.Instance.game.FoundHats = MainManager.Instance.game.FoundHats.Append(this).ToList();
     }
+    public static Hat[] SetAvailableHats(Game game)
+    {
+        Hat basicHat = game.gameObject.AddComponent<Hat>();
+        basicHat.Id = 1;
+        basicHat.HatName = "Basic Hat";
+        basicHat.Description = "A basic hat for everyday wear";
+        basicHat.Price = 10;
+
+        Hat fancyHat = game.gameObject.AddComponent<Hat>();
+        fancyHat.Id = 2;
+        fancyHat.HatName = "Fancy Hat";
+        fancyHat.Description = "A fancy hat for special occasions";
+        fancyHat.Price = 20;
+
+        Hat premiumHat = game.gameObject.AddComponent<Hat>();
+        premiumHat.Id = 3;
+        premiumHat.HatName = "Premium Hat";
+        premiumHat.Description = "A premium hat for the most discerning customers";
+        premiumHat.Price = 30;
+
+        return new Hat[] { basicHat, fancyHat, premiumHat };
+    }
+
+
 }
