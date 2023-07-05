@@ -711,8 +711,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab95bfe04cb95e4ea5edbba88061426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  fishName: TempFish
-  size: 10
-  info: Is a real fish
-  level: 1
+  catchTag: 2

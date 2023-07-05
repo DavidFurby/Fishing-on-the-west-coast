@@ -21,7 +21,7 @@ public class NewGameController : MonoBehaviour
     // Populates the available items for the game
     private static void PopulateAvailableItems(Game game)
     {
-        game.AvailableFishingRods = FishingRod.SetAvailableFishingRods(game);
+        game.AvailableFishingRods = FishingRod.SetAvailableRods(game);
         game.AvailableHats = Hat.SetAvailableHats(game);
         game.AvailableBaits = Bait.SetAvailableBaits(game);
     }

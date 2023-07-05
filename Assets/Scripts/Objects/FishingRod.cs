@@ -1,84 +1,122 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using static Game;
 
 [Serializable]
 public class FishingRod : MonoBehaviour
 {
-    [SerializeField] private int id;
-    [SerializeField] private string fishingRodName;
-    [SerializeField] private string description;
-    [SerializeField] private int strength;
-    [SerializeField] private int throwRange;
-    [SerializeField] private int price;
-    [SerializeField] private ItemTag itemTag = ItemTag.FishingRod;
+    [SerializeField] private RodTag rodTag;
 
+    public enum RodTag
+    {
+        BasicRod,
+        AdvancedRod,
+        RareRod
+    }
     public int Id
     {
-        get => id;
-        set => id = value;
+        get;
+        set;
     }
 
     public string FishingRodName
     {
-        get => fishingRodName;
-        set => fishingRodName = value;
+        get;
+        set;
     }
     public string Description
     {
-        get => description;
-        set => description = value;
+        get;
+        set;
     }
     public int Strength
     {
-        get => strength;
-        set => strength = value;
+        get;
+        set;
     }
 
     public int ThrowRange
     {
-        get => throwRange;
-        set => throwRange = value;
+        get;
+        set;
     }
     public int Price
     {
-        get => price;
-        set => price = value;
+        get;
+        set;
     }
 
     public ItemTag ItemTag
     {
-        get => itemTag;
-        set => itemTag = value;
+        get;
+        set;
+    } = ItemTag.FishingRod;
+
+    public FishingRod(RodTag rodTag)
+    {
+        this.rodTag = rodTag;
+        SetRodVariables();
     }
 
+
+    private void Start()
+    {
+        SetRodVariables();
+    }
+    private void SetRodVariables()
+    {
+        switch (rodTag)
+        {
+            case RodTag.BasicRod:
+                Id = 1;
+                FishingRodName = "Basic Rod";
+                Description = "A basic rod given at childbirth";
+                Price = 0;
+                Strength = 20;
+                ThrowRange = 100;
+                break;
+            case RodTag.AdvancedRod:
+                Id = 2;
+                FishingRodName = "Advanced Rod";
+                Description = "A more advanced rod not as easily found";
+                Price = 5;
+                Strength = 50;
+                ThrowRange = 200;
+                break;
+            case RodTag.RareRod:
+                Id = 3;
+                FishingRodName = "Premium Rod";
+                Description = "A premium rod very rarely found";
+                Price = 10;
+                Strength = 100;
+                ThrowRange = 300;
+                break;
+        }
+    }
     public FishingRod()
     {
 
     }
 
+
     public FishingRod(FishingRodData fishingRodData)
     {
-        fishingRodName = fishingRodData.fishingRodName;
-        strength = fishingRodData.strength;
-        throwRange = fishingRodData.throwRange;
-        description = fishingRodData.description;
-        price = fishingRodData.price;
-        strength = fishingRodData.strength;
-        throwRange = fishingRodData.throwRange;
+        FishingRodName = fishingRodData.fishingRodName;
+        Strength = fishingRodData.strength;
+        ThrowRange = fishingRodData.throwRange;
+        Description = fishingRodData.description;
+        Price = fishingRodData.price;
     }
     public static FishingRod SetFishingRod(Game game, FishingRodData fishingRodData)
     {
         FishingRod fishingRod = game.gameObject.AddComponent<FishingRod>();
-        fishingRod.id = fishingRodData.id;
-        fishingRod.fishingRodName = fishingRodData.fishingRodName;
+        fishingRod.Id = fishingRodData.id;
+        fishingRod.FishingRodName = fishingRodData.fishingRodName;
         fishingRod.Description = fishingRodData.description;
         fishingRod.Price = fishingRodData.price;
-        fishingRod.strength = fishingRodData.strength;
-        fishingRod.throwRange = fishingRodData.throwRange;
+        fishingRod.Strength = fishingRodData.strength;
+        fishingRod.ThrowRange = fishingRodData.throwRange;
         return fishingRod;
     }
 
@@ -97,32 +135,19 @@ public class FishingRod : MonoBehaviour
     {
         MainManager.Instance.game.FoundFishingRods = MainManager.Instance.game.FoundFishingRods.Append(this).ToList();
     }
-    public static FishingRod[] SetAvailableFishingRods(Game game)
+    public static FishingRod[] SetAvailableRods(Game game)
     {
-        FishingRod basicFishingRod = game.gameObject.AddComponent<FishingRod>();
-        basicFishingRod.Id = 1;
-        basicFishingRod.FishingRodName = "Basic Fishing Rod";
-        basicFishingRod.Description = "A basic fishing rod for catching common fish";
-        basicFishingRod.Strength = 10;
-        basicFishingRod.ThrowRange = 100;
-        basicFishingRod.Price = 10;
+        FishingRod basicRod = game.gameObject.AddComponent<FishingRod>();
+        basicRod.rodTag = RodTag.BasicRod;
+        basicRod.SetRodVariables();
 
-        FishingRod advancedFishingRod = game.gameObject.AddComponent<FishingRod>();
-        advancedFishingRod.Id = 2;
-        advancedFishingRod.FishingRodName = "Advanced Fishing Rod";
-        advancedFishingRod.Description = "A more advanced fishing rod for catching rarer fish";
-        advancedFishingRod.Strength = 20;
-        advancedFishingRod.ThrowRange = 200;
-        advancedFishingRod.Price = 20;
+        FishingRod advancedRod = game.gameObject.AddComponent<FishingRod>();
+        advancedRod.rodTag = RodTag.AdvancedRod;
+        advancedRod.SetRodVariables();
 
-        FishingRod premiumFishingRod = game.gameObject.AddComponent<FishingRod>();
-        premiumFishingRod.Id = 3;
-        premiumFishingRod.FishingRodName = "Premium Fishing Rod";
-        premiumFishingRod.Description = "A premium fishing rod for catching the rarest fish";
-        premiumFishingRod.Strength = 30;
-        premiumFishingRod.throwRange = 300;
-        premiumFishingRod.price = 30;
-
-        return new FishingRod[] { basicFishingRod, advancedFishingRod, premiumFishingRod };
+        FishingRod rareRod = game.gameObject.AddComponent<FishingRod>();
+        rareRod.rodTag = RodTag.RareRod;
+        rareRod.SetRodVariables();
+        return new FishingRod[] { basicRod, advancedRod, rareRod };
     }
 }

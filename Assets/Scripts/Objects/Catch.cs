@@ -5,52 +5,72 @@ using UnityEngine;
 [Serializable]
 public class Catch : MonoBehaviour
 {
-    [SerializeField] private int id;
-    [SerializeField] private string fishName;
-    [SerializeField] private float size;
-    [SerializeField] private string info;
-    [SerializeField] private int level;
+    [SerializeField] CatchTag baitTag;
 
-    public int Id
+    public enum CatchTag
     {
-        get => id;
-        set => id = value;
+        BasicCatch,
+        AdvanceCatch,
+        RareCatch,
     }
 
-    public string CatchName
-    {
-        get => fishName;
-        set => fishName = value;
-    }
+    public int Id { get; set; }
+    public string CatchName { get; set; }
+    public float Size { get; set; }
+    public string Description { get; set; }
+    public int Level { get; set; }
 
-    public float Size
+    public Catch(CatchTag catchTag)
     {
-        get => size;
-        set => size = value;
-    }
-
-    public string Description
-    {
-        get => info;
-        set => info = value;
-    }
-    public int Level
-    {
-        get => level;
-        set => level = value;
+        this.baitTag = catchTag;
+        SetCatchVariables();
     }
 
     public Catch(FishData fishData)
     {
-        fishName = fishData.fishName;
-        size = fishData.size;
-        info = fishData.info;
-        level = fishData.level;
+        CatchName = fishData.fishName;
+        Size = fishData.size;
+        Description = fishData.info;
+        Level = fishData.level;
     }
 
     private void Start()
     {
-        size = UnityEngine.Random.Range(size, size * 2);
+        SetCatchVariables();
+    }
+
+    private void SetCatchVariables()
+    {
+        switch (baitTag)
+        {
+            case CatchTag.BasicCatch:
+                Id = 1;
+                CatchName = "Basic Catch";
+                Level = 1;
+                Description = "A basic catch easily caught";
+                Size = 2;
+                break;
+            case CatchTag.AdvanceCatch:
+                Id = 2;
+                CatchName = "Advanced Catch";
+                Level = 2;
+                Description = "A more advanced catch not as easily caught";
+                Size = 5;
+                break;
+            case CatchTag.RareCatch:
+                Id = 3;
+                CatchName = "Premium Catch";
+                Level = 3;
+                Description = "A premium catch very rarely caught";
+                Size = 10;
+                break;
+        }
+        Size = UnityEngine.Random.Range(Size, Size * 2);
+    }
+
+    public override string ToString()
+    {
+        return $"Id: {Id}, CatchName: {CatchName}, Size: {Size}, Description: {Description}, Level: {Level}";
     }
 
     public void DestroyFish()
@@ -70,24 +90,17 @@ public class Catch : MonoBehaviour
 
     public static Catch[] SetAvailableCatches(Game game)
     {
-
         Catch basicCatch = game.gameObject.AddComponent<Catch>();
-        basicCatch.Id = 1;
-        basicCatch.CatchName = "Basic Catch";
-        basicCatch.Level = 1;
-        basicCatch.Description = "A basic catch easily caught";
+        basicCatch.baitTag = CatchTag.BasicCatch;
+        basicCatch.SetCatchVariables();
 
         Catch advancedCatch = game.gameObject.AddComponent<Catch>();
-        advancedCatch.Id = 2;
-        advancedCatch.CatchName = "Advanced Catch";
-        advancedCatch.Level = 2;
-        advancedCatch.Description = "A more advanced catch not as easily caught";
+        advancedCatch.baitTag = CatchTag.AdvanceCatch;
+        advancedCatch.SetCatchVariables();
 
         Catch premiumCatch = game.gameObject.AddComponent<Catch>();
-        premiumCatch.Id = 3;
-        premiumCatch.CatchName = "Premium Catch";
-        premiumCatch.Level = 3;
-        premiumCatch.Description = "A premium catch very rarely caught";
+        premiumCatch.baitTag = CatchTag.RareCatch;
+        premiumCatch.SetCatchVariables();
 
         return new Catch[] { basicCatch, advancedCatch, premiumCatch };
     }

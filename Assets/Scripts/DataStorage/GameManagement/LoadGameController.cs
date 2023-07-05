@@ -40,7 +40,7 @@ public class LoadGameController : MonoBehaviour
 
     private static void LoadFishingRod(Game game, GameData gameData)
     {
-        game.AvailableFishingRods = FishingRod.SetAvailableFishingRods(game);
+        game.AvailableFishingRods = FishingRod.SetAvailableRods(game);
         game.FoundFishingRods = gameData.foundFishingRods.Select(rodData =>
             FishingRod.SetFishingRod(game, rodData)).ToList();
         game.EquippedFishingRod = FishingRod.SetFishingRod(game, gameData.equippedFishingRod);
