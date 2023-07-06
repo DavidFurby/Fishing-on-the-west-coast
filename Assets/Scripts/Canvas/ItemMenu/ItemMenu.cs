@@ -1,6 +1,9 @@
+using System.Collections.Generic;
+using System;
 using System.Linq;
 using UnityEngine;
 using static Game;
+using Unity.VisualScripting;
 
 public class ItemMenu : MonoBehaviour
 {
@@ -9,10 +12,15 @@ public class ItemMenu : MonoBehaviour
     [SerializeField] private GameObject ItemFocus;
     private ItemWheel focusedWheel;
     private int focusedWheelIndex;
+    private List<Item> allItems;
+
 
     void Start()
     {
         itemMenu.SetActive(false);
+        allItems = MainManager.Instance.game.FoundBaits.Cast<Item>().ToList();
+        allItems.AddRange(MainManager.Instance.game.FoundFishingRods);
+        allItems.AddRange(MainManager.Instance.game.FoundHats);
     }
 
     void Update()
@@ -22,18 +30,19 @@ public class ItemMenu : MonoBehaviour
 
     private void PopulateWheels()
     {
+
         foreach (var wheel in listOfWheels)
         {
             switch (wheel.itemTag)
             {
                 case ItemTag.Bait:
-                    wheel.SetEquipment(MainManager.Instance.game.FoundBaits.Select(bait => Item.SetItem(gameObject, bait.Id, bait.Name, bait.Description, bait.Price, bait.ItemTag)).ToArray());
+                    wheel.SetEquipment(allItems.OfType<Bait>().ToArray());
                     break;
                 case ItemTag.FishingRod:
-                    wheel.SetEquipment(MainManager.Instance.game.FoundFishingRods.Select(fishingRod => Item.SetItem(gameObject, fishingRod.Id, fishingRod.Name, fishingRod.Description, fishingRod.Price, fishingRod.ItemTag)).ToArray());
+                    wheel.SetEquipment(allItems.OfType<FishingRod>().ToArray());
                     break;
                 case ItemTag.Hat:
-                    wheel.SetEquipment(MainManager.Instance.game.FoundHats.Select(hat => Item.SetItem(gameObject, hat.Id, hat.Name, hat.Description, hat.Price, hat.ItemTag)).ToArray());
+                    wheel.SetEquipment(allItems.OfType<Hat>().ToArray());
                     break;
             }
         }

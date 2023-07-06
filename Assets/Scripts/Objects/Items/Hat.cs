@@ -18,12 +18,7 @@ public class Hat : Item
 
     private void Start()
     {
-        SetHatVariables();
-    }
-
-    public Hat(HatTag hatTag)
-    {
-        this.hatTag = hatTag;
+        Debug.Log(hatTag);
         SetHatVariables();
     }
 
@@ -51,9 +46,6 @@ public class Hat : Item
                 break;
         }
     }
-    public Hat()
-    {
-    }
 
     public Hat(HatData hatData)
     {
@@ -61,14 +53,6 @@ public class Hat : Item
         Name = hatData.name;
         Description = hatData.description;
         Price = hatData.price;
-    }
-
-    public Hat(int id, string name, int price, string description)
-    {
-        Id = id;
-        Name = name;
-        Price = price;
-        Description = description;
     }
 
     public static Hat SetHat(Game game, HatData hatData)

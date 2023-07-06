@@ -17,12 +17,6 @@ public class Bait : Item
 
     public int Level { get; set; }
 
-    public Bait(BaitTag baitTag)
-    {
-        this.baitTag = baitTag;
-        SetBaitVariables();
-    }
-
     private void Start()
     {
         SetBaitVariables();
@@ -54,7 +48,6 @@ public class Bait : Item
                 Price = 10;
                 break;
         }
-        Debug.Log(Name);
     }
 
     public Bait(BaitData baitData)
@@ -75,18 +68,6 @@ public class Bait : Item
         bait.Level = baitData.level;
 
         return bait;
-    }
-
-    public static Bait CreateBait(int id, string name, int price, string description)
-    {
-        var itemGameObject = new GameObject("Bait");
-        var item = itemGameObject.AddComponent<Bait>();
-        item.Id = id;
-        item.Name = name;
-        item.Price = price;
-        item.Description = description;
-
-        return item;
     }
 
     public void AddBaitToInstance()

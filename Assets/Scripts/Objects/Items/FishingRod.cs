@@ -33,11 +33,7 @@ public class FishingRod : Item
     {
         SetRodVariables();
     }
-    public FishingRod(RodTag rodTag)
-    {
-        this.rodTag = rodTag;
-        SetRodVariables();
-    }
+
 
     private void SetRodVariables()
     {
@@ -69,11 +65,6 @@ public class FishingRod : Item
                 break;
         }
     }
-    public FishingRod()
-    {
-
-    }
-
 
     public FishingRod(FishingRodData fishingRodData)
     {
@@ -93,17 +84,6 @@ public class FishingRod : Item
         fishingRod.Strength = fishingRodData.strength;
         fishingRod.ThrowRange = fishingRodData.throwRange;
         return fishingRod;
-    }
-
-    public static FishingRod CreateFishingRod(int id, string name, int price, string description)
-    {
-        var itemGameObject = new GameObject("FishingRod");
-        var item = itemGameObject.AddComponent<FishingRod>();
-        item.Id = id;
-        item.Name = name;
-        item.Price = price;
-        item.Description = description;
-        return item;
     }
 
     public void AddFishingRodToInstance()
