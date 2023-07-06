@@ -12,7 +12,7 @@ public class BaitData
     public BaitData(Bait bait)
     {
         id = bait.Id;
-        baitName = bait.BaitName;
+        baitName = bait.Name;
         level = bait.Level;
         description = bait.Description;
         price = bait.Price;

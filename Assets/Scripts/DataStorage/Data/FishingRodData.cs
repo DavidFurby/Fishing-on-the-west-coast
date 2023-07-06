@@ -4,7 +4,7 @@
 public class FishingRodData
 {
     public int id;
-    public string fishingRodName;
+    public string name;
     public string description;
     public int strength;
     public int throwRange;
@@ -13,7 +13,7 @@ public class FishingRodData
     public FishingRodData(FishingRod fishingRod)
     {
         id = fishingRod.Id;
-        fishingRodName = fishingRod.FishingRodName;
+        name = fishingRod.Name;
         description = fishingRod.Description;
         strength = fishingRod.Strength;
         throwRange = fishingRod.ThrowRange;

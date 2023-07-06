@@ -3,7 +3,7 @@ using System;
 [Serializable]
 public class HatData
 {
-    public string hatName;
+    public string name;
     public string description;
     public int id;
     public int price;
@@ -11,7 +11,7 @@ public class HatData
     public HatData(Hat hat)
     {
         id = hat.Id;
-        hatName = hat.HatName;
+        name = hat.Name;
         description = hat.Description;
         price = hat.Price;
     }

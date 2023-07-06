@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8194179184617993171}
   - component: {fileID: 5205310210804255604}
   - component: {fileID: 98317873238864070}
-  - component: {fileID: 3792797310491721612}
+  - component: {fileID: 902637102566365596}
   m_Layer: 0
   m_Name: Bait
   m_TagString: Untagged
@@ -99,7 +99,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3792797310491721612
+--- !u!114 &902637102566365596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,11 +108,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8662299406853993162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac630ec9f4fb0b149b25a03b1380a222, type: 3}
+  m_Script: {fileID: 11500000, guid: 92e0716c3139ebf4cb2960d79b3630ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
-  name: Bait
-  price: 2
-  description: Bait for attracting fishes
   itemTag: 1
+  baitTag: 0

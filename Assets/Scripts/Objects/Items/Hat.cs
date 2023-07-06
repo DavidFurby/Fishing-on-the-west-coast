@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using UnityEngine;
-using static Game;
 
 [Serializable]
-public class Hat : MonoBehaviour
+public class Hat : Item
 {
+    public const Game.ItemTag hat = Game.ItemTag.Hat;
     [SerializeField] private HatTag hatTag;
 
     public enum HatTag
@@ -15,26 +15,6 @@ public class Hat : MonoBehaviour
         PremiumHat
     }
 
-    public int Id { get; set; }
-
-
-    public string HatName
-    {
-        get; set;
-    }
-
-    public string Description
-    {
-        get; set;
-    }
-    public int Price
-    {
-        get; set;
-    }
-    public ItemTag ItemTag
-    {
-        get; set;
-    } = ItemTag.Hat;
 
     private void Start()
     {
@@ -53,33 +33,32 @@ public class Hat : MonoBehaviour
         {
             case HatTag.BasicHat:
                 Id = 1;
-                HatName = "Basic Bait";
-                Description = "A basic bait given at childbirth";
+                Name = "Basic Hat";
+                Description = "A basic hat given at childbirth";
                 Price = 0;
                 break;
             case HatTag.FancyHat:
                 Id = 2;
-                HatName = "Advanced Bait";
-                Description = "A more advanced bait not as easily found";
+                Name = "Advanced Hat";
+                Description = "A more advanced hat not as easily found";
                 Price = 5;
                 break;
             case HatTag.PremiumHat:
                 Id = 3;
-                HatName = "Premium Bait";
-                Description = "A premium bait very rarely found";
+                Name = "Premium Hat";
+                Description = "A premium hat very rarely found";
                 Price = 10;
                 break;
         }
     }
     public Hat()
     {
-
     }
 
     public Hat(HatData hatData)
     {
         Id = hatData.id;
-        HatName = hatData.hatName;
+        Name = hatData.name;
         Description = hatData.description;
         Price = hatData.price;
     }
@@ -87,7 +66,7 @@ public class Hat : MonoBehaviour
     public Hat(int id, string name, int price, string description)
     {
         Id = id;
-        HatName = name;
+        Name = name;
         Price = price;
         Description = description;
     }
@@ -96,10 +75,9 @@ public class Hat : MonoBehaviour
     {
         Hat hat = game.gameObject.AddComponent<Hat>();
         hat.Id = hatData.id;
-        hat.HatName = hatData.hatName;
+        hat.Name = hatData.name;
         hat.Description = hatData.description;
         hat.Price = hatData.price;
-
         return hat;
     }
 

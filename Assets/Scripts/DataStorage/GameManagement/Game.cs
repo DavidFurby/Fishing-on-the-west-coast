@@ -24,7 +24,8 @@ public class Game : MonoBehaviour
     {
         FishingRod,
         Bait,
-        Hat
+        Hat,
+        None
     }
 
     public Item GetEquipment(ItemTag itemTag)

@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using UnityEngine;
-using static Game;
 
 [Serializable]
-public class Bait : MonoBehaviour
+public class Bait : Item
 {
+    public const Game.ItemTag bait = Game.ItemTag.Bait;
     [SerializeField] private BaitTag baitTag;
 
     public enum BaitTag
@@ -15,13 +15,7 @@ public class Bait : MonoBehaviour
         RareBait,
     }
 
-    public int Id { get; set; }
-    public string BaitName { get; set; }
     public int Level { get; set; }
-    public string Description { get; set; }
-    public int Price { get; set; }
-    public ItemTag ItemTag { get; set; } = ItemTag.Bait;
-
 
     public Bait(BaitTag baitTag)
     {
@@ -40,36 +34,32 @@ public class Bait : MonoBehaviour
         {
             case BaitTag.BasicBait:
                 Id = 1;
-                BaitName = "Basic Bait";
+                Name = "Basic Bait";
                 Level = 1;
                 Description = "A basic bait given at childbirth";
                 Price = 0;
                 break;
             case BaitTag.AdvanceBait:
                 Id = 2;
-                BaitName = "Advanced Bait";
+                Name = "Advanced Bait";
                 Level = 2;
                 Description = "A more advanced bait not as easily found";
                 Price = 5;
                 break;
             case BaitTag.RareBait:
                 Id = 3;
-                BaitName = "Premium Bait";
+                Name = "Premium Bait";
                 Level = 3;
                 Description = "A premium bait very rarely found";
                 Price = 10;
                 break;
         }
-    }
-
-    public Bait()
-    {
-
+        Debug.Log(Name);
     }
 
     public Bait(BaitData baitData)
     {
-        BaitName = baitData.baitName;
+        Name = baitData.baitName;
         Level = baitData.level;
         Description = baitData.description;
         Price = baitData.price;
@@ -79,7 +69,7 @@ public class Bait : MonoBehaviour
     {
         Bait bait = game.gameObject.AddComponent<Bait>();
         bait.Id = baitData.id;
-        bait.BaitName = baitData.baitName;
+        bait.Name = baitData.baitName;
         bait.Description = baitData.description;
         bait.Price = baitData.price;
         bait.Level = baitData.level;
@@ -92,7 +82,7 @@ public class Bait : MonoBehaviour
         var itemGameObject = new GameObject("Bait");
         var item = itemGameObject.AddComponent<Bait>();
         item.Id = id;
-        item.BaitName = name;
+        item.Name = name;
         item.Price = price;
         item.Description = description;
 

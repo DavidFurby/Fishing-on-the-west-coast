@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using UnityEngine;
-using static Game;
 
 [Serializable]
-public class FishingRod : MonoBehaviour
+public class FishingRod : Item
 {
+    public const Game.ItemTag rod = Game.ItemTag.FishingRod;
     [SerializeField] private RodTag rodTag;
 
     public enum RodTag
@@ -14,22 +14,7 @@ public class FishingRod : MonoBehaviour
         AdvancedRod,
         RareRod
     }
-    public int Id
-    {
-        get;
-        set;
-    }
 
-    public string FishingRodName
-    {
-        get;
-        set;
-    }
-    public string Description
-    {
-        get;
-        set;
-    }
     public int Strength
     {
         get;
@@ -41,36 +26,26 @@ public class FishingRod : MonoBehaviour
         get;
         set;
     }
-    public int Price
-    {
-        get;
-        set;
-    }
 
-    public ItemTag ItemTag
-    {
-        get;
-        set;
-    } = ItemTag.FishingRod;
-
-    public FishingRod(RodTag rodTag)
-    {
-        this.rodTag = rodTag;
-        SetRodVariables();
-    }
 
 
     private void Start()
     {
         SetRodVariables();
     }
+    public FishingRod(RodTag rodTag)
+    {
+        this.rodTag = rodTag;
+        SetRodVariables();
+    }
+
     private void SetRodVariables()
     {
         switch (rodTag)
         {
             case RodTag.BasicRod:
                 Id = 1;
-                FishingRodName = "Basic Rod";
+                Name = "Basic Rod";
                 Description = "A basic rod given at childbirth";
                 Price = 0;
                 Strength = 20;
@@ -78,7 +53,7 @@ public class FishingRod : MonoBehaviour
                 break;
             case RodTag.AdvancedRod:
                 Id = 2;
-                FishingRodName = "Advanced Rod";
+                Name = "Advanced Rod";
                 Description = "A more advanced rod not as easily found";
                 Price = 5;
                 Strength = 50;
@@ -86,7 +61,7 @@ public class FishingRod : MonoBehaviour
                 break;
             case RodTag.RareRod:
                 Id = 3;
-                FishingRodName = "Premium Rod";
+                Name = "Premium Rod";
                 Description = "A premium rod very rarely found";
                 Price = 10;
                 Strength = 100;
@@ -102,7 +77,7 @@ public class FishingRod : MonoBehaviour
 
     public FishingRod(FishingRodData fishingRodData)
     {
-        FishingRodName = fishingRodData.fishingRodName;
+        Name = fishingRodData.name;
         Strength = fishingRodData.strength;
         ThrowRange = fishingRodData.throwRange;
         Description = fishingRodData.description;
@@ -112,7 +87,7 @@ public class FishingRod : MonoBehaviour
     {
         FishingRod fishingRod = game.gameObject.AddComponent<FishingRod>();
         fishingRod.Id = fishingRodData.id;
-        fishingRod.FishingRodName = fishingRodData.fishingRodName;
+        fishingRod.Name = fishingRodData.name;
         fishingRod.Description = fishingRodData.description;
         fishingRod.Price = fishingRodData.price;
         fishingRod.Strength = fishingRodData.strength;
@@ -125,7 +100,7 @@ public class FishingRod : MonoBehaviour
         var itemGameObject = new GameObject("FishingRod");
         var item = itemGameObject.AddComponent<FishingRod>();
         item.Id = id;
-        item.FishingRodName = name;
+        item.Name = name;
         item.Price = price;
         item.Description = description;
         return item;
