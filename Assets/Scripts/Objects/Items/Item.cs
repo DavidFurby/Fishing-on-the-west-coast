@@ -4,7 +4,8 @@ using UnityEngine;
 [Serializable]
 public class Item : MonoBehaviour
 {
-    [SerializeField] public ItemTag itemTag = ItemTag.None;
+    public ItemTag itemTag = ItemTag.None;
+
     public int Id
     {
         get;

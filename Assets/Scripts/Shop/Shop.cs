@@ -36,7 +36,6 @@ public class Shop : MonoBehaviour
             }
         }
         SpawnItems();
-        Debug.Log(shopItems[0].Name);
     }
     private void Update()
     {
@@ -175,6 +174,9 @@ public class Shop : MonoBehaviour
     {
         GameObject newObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
         newObject.transform.parent = transform;
+        Item item = newObject.GetComponent<Item>();
+        shopItems[index] = item;
+        Debug.Log(item.Name);
     }
 }
 #endregion

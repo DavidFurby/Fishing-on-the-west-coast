@@ -15,10 +15,9 @@ public class Bait : Item
     }
     public int Level { get; set; }
 
-    private void Start()
+    private void Awake()
     {
         SetBaitVariables();
-        Debug.Log(Name);
     }
 
     private void SetBaitVariables()

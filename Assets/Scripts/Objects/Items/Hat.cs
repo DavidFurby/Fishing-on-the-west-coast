@@ -13,7 +13,7 @@ public class Hat : Item
         FancyHat,
         PremiumHat
     }
-    private void Start()
+    private void Awake()
     {
         SetHatVariables();
     }
