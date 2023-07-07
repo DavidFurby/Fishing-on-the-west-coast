@@ -36,6 +36,7 @@ public class Shop : MonoBehaviour
             }
         }
         SpawnItems();
+        Debug.Log(shopItems[0].Name);
     }
     private void Update()
     {
@@ -142,7 +143,7 @@ public class Shop : MonoBehaviour
             if (i < shopItems.Length && shopItems[i] != null)
             {
                 // Check if the current shop item is a fishing rod and is already in the player's inventory
-                if (MainManager.Instance.game.HasItem(i))
+                if (MainManager.Instance.game.HasItem(shopItems[i].Id, shopItems[i].itemTag))
                 {
                     // If the fishing rod is already in the player's inventory, spawn an empty spot instead
                     SpawnEmptySpot(i);

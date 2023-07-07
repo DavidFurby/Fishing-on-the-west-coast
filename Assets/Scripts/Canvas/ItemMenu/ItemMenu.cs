@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using UnityEngine;
-using static Game;
-using Unity.VisualScripting;
+using static Item;
 
 public class ItemMenu : MonoBehaviour
 {

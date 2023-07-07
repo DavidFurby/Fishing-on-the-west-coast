@@ -5,7 +5,6 @@ using UnityEngine;
 [Serializable]
 public class Bait : Item
 {
-    public const Game.ItemTag bait = Game.ItemTag.Bait;
     [SerializeField] private BaitTag baitTag;
 
     public enum BaitTag
@@ -14,16 +13,17 @@ public class Bait : Item
         AdvanceBait,
         RareBait,
     }
-
     public int Level { get; set; }
 
     private void Start()
     {
         SetBaitVariables();
+        Debug.Log(Name);
     }
 
     private void SetBaitVariables()
     {
+        itemTag = ItemTag.Bait;
         switch (baitTag)
         {
             case BaitTag.BasicBait:
@@ -52,6 +52,7 @@ public class Bait : Item
 
     public Bait(BaitData baitData)
     {
+        Id = baitData.id;
         Name = baitData.baitName;
         Level = baitData.level;
         Description = baitData.description;

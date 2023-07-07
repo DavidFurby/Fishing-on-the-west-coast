@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class Catch : MonoBehaviour
 {
-    [SerializeField] CatchTag baitTag;
+    [SerializeField] CatchTag catchTag;
 
     public enum CatchTag
     {
@@ -15,51 +15,51 @@ public class Catch : MonoBehaviour
     }
 
     public int Id { get; set; }
-    public string CatchName { get; set; }
+    public string Name { get; set; }
     public float Size { get; set; }
     public string Description { get; set; }
     public int Level { get; set; }
 
     public Catch(CatchTag catchTag)
     {
-        this.baitTag = catchTag;
+        this.catchTag = catchTag;
         SetCatchVariables();
     }
 
     public Catch(FishData fishData)
     {
-        CatchName = fishData.fishName;
+        Name = fishData.name;
         Size = fishData.size;
         Description = fishData.info;
         Level = fishData.level;
     }
 
-    private void Start()
+    private void Awake()
     {
         SetCatchVariables();
     }
 
     private void SetCatchVariables()
     {
-        switch (baitTag)
+        switch (catchTag)
         {
             case CatchTag.BasicCatch:
                 Id = 1;
-                CatchName = "Basic Catch";
+                Name = "Basic Catch";
                 Level = 1;
                 Description = "A basic catch easily caught";
                 Size = 2;
                 break;
             case CatchTag.AdvanceCatch:
                 Id = 2;
-                CatchName = "Advanced Catch";
+                Name = "Advanced Catch";
                 Level = 2;
                 Description = "A more advanced catch not as easily caught";
                 Size = 5;
                 break;
             case CatchTag.RareCatch:
                 Id = 3;
-                CatchName = "Premium Catch";
+                Name = "Premium Catch";
                 Level = 3;
                 Description = "A premium catch very rarely caught";
                 Size = 10;
@@ -70,7 +70,7 @@ public class Catch : MonoBehaviour
 
     public override string ToString()
     {
-        return $"Id: {Id}, CatchName: {CatchName}, Size: {Size}, Description: {Description}, Level: {Level}";
+        return $"Id: {Id}, CatchName: {Name}, Size: {Size}, Description: {Description}, Level: {Level}";
     }
 
     public void DestroyFish()
@@ -91,15 +91,15 @@ public class Catch : MonoBehaviour
     public static Catch[] SetAvailableCatches(Game game)
     {
         Catch basicCatch = game.gameObject.AddComponent<Catch>();
-        basicCatch.baitTag = CatchTag.BasicCatch;
+        basicCatch.catchTag = CatchTag.BasicCatch;
         basicCatch.SetCatchVariables();
 
         Catch advancedCatch = game.gameObject.AddComponent<Catch>();
-        advancedCatch.baitTag = CatchTag.AdvanceCatch;
+        advancedCatch.catchTag = CatchTag.AdvanceCatch;
         advancedCatch.SetCatchVariables();
 
         Catch premiumCatch = game.gameObject.AddComponent<Catch>();
-        premiumCatch.baitTag = CatchTag.RareCatch;
+        premiumCatch.catchTag = CatchTag.RareCatch;
         premiumCatch.SetCatchVariables();
 
         return new Catch[] { basicCatch, advancedCatch, premiumCatch };

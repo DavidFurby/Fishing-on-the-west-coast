@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
-using static Game;
 
 [Serializable]
 public class Item : MonoBehaviour
 {
-
+    [SerializeField] public ItemTag itemTag = ItemTag.None;
     public int Id
     {
         get;
@@ -26,46 +25,11 @@ public class Item : MonoBehaviour
         get;
         set;
     }
-    public ItemTag ItemTag
+    public enum ItemTag
     {
-        get;
-        set;
-    }
-    public Item()
-    {
-
-    }
-
-
-    public Item(int id, string name, int price, string description, ItemTag itemTag)
-    {
-        Id = id;
-        Name = name;
-        Price = price;
-        Description = description;
-        ItemTag = itemTag;
-    }
-    public static Item SetItem(GameObject gameObject, int id, string name, string description, int price, ItemTag itemTag)
-    {
-        Item item = gameObject.AddComponent<Item>();
-        item.Id = id;
-        item.Name = name;
-        item.Description = description;
-        item.Price = price;
-        item.ItemTag = itemTag;
-        return item;
-    }
-
-
-    public static Item CreateItem(int id, string name, int price, string description, ItemTag itemTag)
-    {
-        var itemGameObject = new GameObject("Item");
-        var item = itemGameObject.AddComponent<Item>();
-        item.Id = id;
-        item.Name = name;
-        item.Price = price;
-        item.Description = description;
-        item.ItemTag = itemTag;
-        return item;
+        None,
+        FishingRod,
+        Bait,
+        Hat,
     }
 }

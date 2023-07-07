@@ -5,7 +5,6 @@ using UnityEngine;
 [Serializable]
 public class FishingRod : Item
 {
-    public const Game.ItemTag rod = Game.ItemTag.FishingRod;
     [SerializeField] private RodTag rodTag;
 
     public enum RodTag
@@ -14,7 +13,6 @@ public class FishingRod : Item
         AdvancedRod,
         RareRod
     }
-
     public int Strength
     {
         get;
@@ -29,7 +27,7 @@ public class FishingRod : Item
 
 
 
-    private void Start()
+    private void Awake()
     {
         SetRodVariables();
     }
@@ -37,6 +35,7 @@ public class FishingRod : Item
 
     private void SetRodVariables()
     {
+        itemTag = ItemTag.FishingRod;
         switch (rodTag)
         {
             case RodTag.BasicRod:
@@ -68,6 +67,7 @@ public class FishingRod : Item
 
     public FishingRod(FishingRodData fishingRodData)
     {
+        Id = fishingRodData.id;
         Name = fishingRodData.name;
         Strength = fishingRodData.strength;
         ThrowRange = fishingRodData.throwRange;

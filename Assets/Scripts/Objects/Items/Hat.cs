@@ -5,7 +5,6 @@ using UnityEngine;
 [Serializable]
 public class Hat : Item
 {
-    public const Game.ItemTag hat = Game.ItemTag.Hat;
     [SerializeField] private HatTag hatTag;
 
     public enum HatTag
@@ -14,14 +13,24 @@ public class Hat : Item
         FancyHat,
         PremiumHat
     }
-
-
     private void Start()
     {
-        Debug.Log(hatTag);
         SetHatVariables();
     }
 
+    public Hat(HatTag hatTag)
+    {
+        this.hatTag = hatTag;
+        SetHatVariables();
+    }
+
+    public Hat(HatData hatData)
+    {
+        Id = hatData.id;
+        Name = hatData.name;
+        Description = hatData.description;
+        Price = hatData.price;
+    }
     private void SetHatVariables()
     {
         switch (hatTag)
@@ -34,7 +43,7 @@ public class Hat : Item
                 break;
             case HatTag.FancyHat:
                 Id = 2;
-                Name = "Advanced Hat";
+                Name = "Fancy Hat";
                 Description = "A more advanced hat not as easily found";
                 Price = 5;
                 break;
@@ -45,14 +54,7 @@ public class Hat : Item
                 Price = 10;
                 break;
         }
-    }
-
-    public Hat(HatData hatData)
-    {
-        Id = hatData.id;
-        Name = hatData.name;
-        Description = hatData.description;
-        Price = hatData.price;
+        itemTag = ItemTag.Hat;
     }
 
     public static Hat SetHat(Game game, HatData hatData)

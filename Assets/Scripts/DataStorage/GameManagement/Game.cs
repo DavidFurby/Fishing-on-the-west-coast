@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Item;
 
 public class Game : MonoBehaviour
 {
@@ -19,14 +20,6 @@ public class Game : MonoBehaviour
     public Hat EquippedHat { get; set; }
     public Hat[] AvailableHats { get; set; }
     public string Scene { get; set; }
-
-    public enum ItemTag
-    {
-        FishingRod,
-        Bait,
-        Hat,
-        None
-    }
 
     public Item GetEquipment(ItemTag itemTag)
     {
@@ -63,16 +56,24 @@ public class Game : MonoBehaviour
     }
 
     //Check if item Exists in inventory
-    public bool HasItem(int id)
+    public bool HasItem(int id, ItemTag itemTag)
     {
-        return FoundFishingRods.Any((rod) => rod.Id == id) ||
-               FoundBaits.Any((bait) => bait.Id == id) ||
-               FoundHats.Any((hat) => hat.Id == id);
+        switch (itemTag)
+        {
+            case ItemTag.FishingRod:
+                return FoundFishingRods.Any((rod) => rod.Id == id);
+            case ItemTag.Bait:
+                return FoundBaits.Any((bait) => bait.Id == id);
+            case ItemTag.Hat:
+                return FoundHats.Any((hat) => hat.Id == id);
+            default:
+                return false;
+        }
     }
 
     public void AddItem(Item item)
     {
-        switch (item.ItemTag)
+        switch (item.itemTag)
         {
             case ItemTag.FishingRod:
                 FishingRod fishingRod = AvailableFishingRods.First((fishingRod) => fishingRod.Id == item.Id);

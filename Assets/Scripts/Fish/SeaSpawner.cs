@@ -9,7 +9,7 @@ public class SeaSpawner : MonoBehaviour
     private float fishSpawnDirection;
     private Quaternion fishSpawnRotation;
     private Vector3 fishSpawnPosition;
-    [SerializeField] GameObject[] Fishes;
+    [SerializeField] Catch[] catches;
     [SerializeField] int spawnDelay;
     [SerializeField] GameObject bait;
     [SerializeField] FishingController fishingControlls;
@@ -34,12 +34,12 @@ public class SeaSpawner : MonoBehaviour
         if (fishingControlls.fishingStatus != FishingController.FishingStatus.StandBy)
         {
             //Choose random fish from the array
-            int randomFishIndex = Random.Range(0, Fishes.Length);
+            int randomFishIndex = Random.Range(0, catches.Length);
 
             CalculateSpawnPosition();
 
             //Instatiate the fish 
-            GameObject fish = Instantiate(Fishes[randomFishIndex], fishSpawnPosition, fishSpawnRotation);
+            GameObject fish = Instantiate(catches[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
             SetDirection(fish);
         }
     }

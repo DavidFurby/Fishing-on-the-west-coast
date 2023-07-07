@@ -758,6 +758,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: hat
+      value: 
+      objectReference: {fileID: 8296941283461800455, guid: 6f53f40cdb2cb0c40ae5cec24a70188d, type: 3}
+    - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: test
+      value: 
+      objectReference: {fileID: -6178917406647638583, guid: edf9de8729580044c8d37796f9df9ba6, type: 3}
+    - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: catchTest
+      value: 
+      objectReference: {fileID: -6178917406647638583, guid: edf9de8729580044c8d37796f9df9ba6, type: 3}
+    - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: emptySpot
       value: 
       objectReference: {fileID: 9194473876075380186, guid: 683473d9bf376f6428801ce3980cf8d8, type: 3}
@@ -774,9 +786,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1045534766}
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: hat.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1930309284}
+    - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: hat.Array.data[0]
+      value: 
+      objectReference: {fileID: 8296941283461800455, guid: 6f53f40cdb2cb0c40ae5cec24a70188d, type: 3}
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.size
       value: 6
@@ -784,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.data[0]
       value: 
-      objectReference: {fileID: 3352529821166294686, guid: 6f53f40cdb2cb0c40ae5cec24a70188d, type: 3}
+      objectReference: {fileID: 2913341349682127871, guid: 9d5a6337526badf4d87fd842f38774b4, type: 3}
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.data[1]
       value: 
@@ -792,7 +812,7 @@ PrefabInstance:
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.data[2]
       value: 
-      objectReference: {fileID: 902637102566365596, guid: 9d5a6337526badf4d87fd842f38774b4, type: 3}
+      objectReference: {fileID: 2913341349682127871, guid: 9d5a6337526badf4d87fd842f38774b4, type: 3}
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.data[3]
       value: 
@@ -800,15 +820,15 @@ PrefabInstance:
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.data[4]
       value: 
-      objectReference: {fileID: 3352529821166294686, guid: 6f53f40cdb2cb0c40ae5cec24a70188d, type: 3}
+      objectReference: {fileID: 8296941283461800455, guid: 6f53f40cdb2cb0c40ae5cec24a70188d, type: 3}
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.data[5]
       value: 
-      objectReference: {fileID: 902637102566365596, guid: 9d5a6337526badf4d87fd842f38774b4, type: 3}
+      objectReference: {fileID: 2913341349682127871, guid: 9d5a6337526badf4d87fd842f38774b4, type: 3}
     - target: {fileID: 7437166623380843911, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: shopItems.Array.data[6]
       value: 
-      objectReference: {fileID: 3352529821166294686, guid: 6f53f40cdb2cb0c40ae5cec24a70188d, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7437166623380843929, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: m_Name
       value: Shop
