@@ -15,7 +15,7 @@ public class Bait : Item
     }
     public int Level { get; set; }
 
-    private void Awake()
+    private new void Awake()
     {
         SetBaitVariables();
     }

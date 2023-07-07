@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static Hat;
 
 [Serializable]
 public class Item : MonoBehaviour
@@ -32,5 +33,18 @@ public class Item : MonoBehaviour
         FishingRod,
         Bait,
         Hat,
+    }
+    public void Awake()
+    {
+        SetDefaultVariables();
+    }
+
+    private void SetDefaultVariables()
+    {
+        Id = 0;
+        Name = "Empty";
+        Description = "";
+        Price = 0;
+
     }
 }

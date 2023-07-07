@@ -2,6 +2,7 @@
 tags:
 position: 288,-188
 ---
+<<declare $shopItemId = 0 as number>>
 <<declare $shopItemName = "" as string>>
 <<declare $shopItemPrice = 0 as number>>
 <<declare $shopItemDescription = "" as string>>
@@ -17,7 +18,7 @@ position: -193,-302
 ---
 <<setShopItem>>
 <<setTokens>>
-<<if $shopItemName == "Empty spot">>
+<<if $shopItemId == 0>>
 Sold out
 <<else>>
 {$shopItemName}<br>{$shopItemPrice}<br>{$shopItemDescription}

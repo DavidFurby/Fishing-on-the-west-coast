@@ -103,15 +103,15 @@ public class Shop : MonoBehaviour
 
     private void ReplaceItemOnSelf()
     {
-        GameObject replacement = Instantiate(gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
-        replacement.transform.parent = transform.parent;
+        GameObject replacement = Instantiate(emptySpot.gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
+        replacement.transform.parent = focusedShopItem.transform.parent;
+        Destroy(focusedShopItem.gameObject);
         shopItems[focusedShopItemIndex] = replacement.GetComponent<Item>();
-        focusedShopItem = replacement.GetComponent<Item>();
+        focusedShopItem = shopItems[focusedShopItemIndex];
     }
 
     public void UpdateDialog()
     {
-        dialogManager.EndDialog();
         dialogHandlers.SetShopItemHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
     }
@@ -174,9 +174,7 @@ public class Shop : MonoBehaviour
     {
         GameObject newObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
         newObject.transform.parent = transform;
-        Item item = newObject.GetComponent<Item>();
-        shopItems[index] = item;
-        Debug.Log(item.Name);
+        shopItems[index] = newObject.GetComponent<Item>();
     }
 }
 #endregion

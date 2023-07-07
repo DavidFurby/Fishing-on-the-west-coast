@@ -27,7 +27,7 @@ public class FishingRod : Item
 
 
 
-    private void Awake()
+    private new void Awake()
     {
         SetRodVariables();
     }
