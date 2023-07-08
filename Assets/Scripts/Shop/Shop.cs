@@ -11,6 +11,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private ExplorationController playerController;
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private ShopHandlers dialogHandlers;
+    [SerializeField] private ItemDisplay emptySpot;
     private readonly List<Vector3> shopItemPositions = new();
 
     #endregion
