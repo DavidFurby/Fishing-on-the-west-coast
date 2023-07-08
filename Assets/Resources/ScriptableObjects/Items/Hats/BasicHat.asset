@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4b8136d390ad64408e1e6c533592c17, type: 3}
-  m_Name: FishingRod
+  m_Script: {fileID: 11500000, guid: dc13dc5c274ca7044a2b20090d73d7b9, type: 3}
+  m_Name: BasicHat
   m_EditorClassIdentifier: 
-  itemTag: 1
+  itemTag: 3
   id: 1
-  name: Basic Bait
+  name: Basic Hat
   price: 0
-  description: Given at childbirth
-  strength: 20
-  throwRange: 100
+  description: For plebs
