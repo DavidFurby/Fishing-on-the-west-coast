@@ -10,9 +10,9 @@ public class HatData
 
     public HatData(Hat hat)
     {
-        id = hat.Id;
-        name = hat.Name;
-        description = hat.Description;
-        price = hat.Price;
+        id = hat.id;
+        name = hat.name;
+        description = hat.description;
+        price = hat.price;
     }
 }

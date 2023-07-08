@@ -20,29 +20,24 @@ public class LoadGameController : MonoBehaviour
 
     private static void LoadHats(Game game, GameData gameData)
     {
-        game.AvailableHats = Hat.SetAvailableHats(game);
+        game.AvailableHats = Resources.LoadAll<Hat>("Hats");
         game.FoundHats = gameData.foundHats.Select(hatData =>
-            Hat.SetHat(game, hatData)
+            Hat.SetHat(hatData)
             ).ToList();
-        game.EquippedHat = Hat.SetHat(game, gameData.equippedHat);
+        game.EquippedHat = game.FoundHats.First((hat) => hat.id == gameData.equippedHat.id);
     }
 
     private static void LoadBait(Game game, GameData gameData)
     {
-        game.AvailableBaits = Bait.SetAvailableBaits(game);
-        game.FoundBaits = gameData.foundBaits.Select(baitData =>
-            Bait.SetBait(game,
-                baitData
-               )
-            ).ToList();
-        game.EquippedBait = Bait.SetBait(game, gameData.equippedBait);
+        game.AvailableBaits = Resources.LoadAll<Bait>("Baits");
+        game.FoundBaits = gameData.foundBaits.Select(baitData => Bait.SetBait(baitData)).ToList();
+        game.EquippedBait = game.FoundBaits.First((bait) => bait.id == gameData.equippedBait.id);
     }
 
     private static void LoadFishingRod(Game game, GameData gameData)
     {
-        game.AvailableFishingRods = FishingRod.SetAvailableRods(game);
-        game.FoundFishingRods = gameData.foundFishingRods.Select(rodData =>
-            FishingRod.SetFishingRod(game, rodData)).ToList();
-        game.EquippedFishingRod = FishingRod.SetFishingRod(game, gameData.equippedFishingRod);
+        game.AvailableFishingRods = Resources.LoadAll<FishingRod>("FishingRods");
+        game.FoundFishingRods = gameData.foundFishingRods.Select((rodData) => FishingRod.SetFishingRod((rodData))).ToList();
+        game.EquippedFishingRod = game.FoundFishingRods.First((rod) => rod.id == gameData.equippedFishingRod?.id);
     }
 }

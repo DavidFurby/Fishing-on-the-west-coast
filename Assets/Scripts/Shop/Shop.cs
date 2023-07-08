@@ -6,19 +6,18 @@ using static ExplorationController;
 public class Shop : MonoBehaviour
 {
     #region Serialized Fields
-    [SerializeField] private Item[] shopItems;
+    [SerializeField] private ItemDisplay[] shopItems;
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private ExplorationController playerController;
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private ShopHandlers dialogHandlers;
-    [SerializeField] private Item emptySpot;
     private readonly List<Vector3> shopItemPositions = new();
 
     #endregion
 
     #region Private Fields
     [HideInInspector] public bool pauseShoppingControls;
-    [HideInInspector] public Item focusedShopItem;
+    [HideInInspector] public ItemDisplay focusedShopItem;
     private int focusedShopItemIndex = 0;
     #endregion
 
@@ -95,7 +94,7 @@ public class Shop : MonoBehaviour
     {
         if (focusedShopItem != null)
         {
-            MainManager.Instance.game.AddItem(focusedShopItem);
+            MainManager.Instance.game.AddItem(focusedShopItem.item);
             ReplaceItemOnSelf();
             FocusItem();
         }
@@ -106,13 +105,13 @@ public class Shop : MonoBehaviour
         GameObject replacement = Instantiate(emptySpot.gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
         replacement.transform.parent = focusedShopItem.transform.parent;
         Destroy(focusedShopItem.gameObject);
-        shopItems[focusedShopItemIndex] = replacement.GetComponent<Item>();
-        focusedShopItem = shopItems[focusedShopItemIndex];
+        shopItems[focusedShopItemIndex] = replacement.GetComponent<ItemDisplay>();
     }
+
 
     public void UpdateDialog()
     {
-        dialogHandlers.SetShopItemHandler(focusedShopItem);
+        dialogHandlers.SetShopItemHandler(focusedShopItem.item);
         dialogManager.StartDialog("ShopItem");
     }
     private void HandleShoppingInput()
@@ -142,7 +141,7 @@ public class Shop : MonoBehaviour
             if (i < shopItems.Length && shopItems[i] != null)
             {
                 // Check if the current shop item is a fishing rod and is already in the player's inventory
-                if (MainManager.Instance.game.HasItem(shopItems[i].Id, shopItems[i].itemTag))
+                if (MainManager.Instance.game.HasItem(shopItems[i].item.id, shopItems[i].item.itemTag))
                 {
                     // If the fishing rod is already in the player's inventory, spawn an empty spot instead
                     SpawnEmptySpot(i);
@@ -165,7 +164,6 @@ public class Shop : MonoBehaviour
 
     private void SpawnEmptySpot(int index)
     {
-        shopItems[index] = emptySpot;
         GameObject gameObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
         gameObject.transform.parent = transform;
     }
@@ -174,7 +172,7 @@ public class Shop : MonoBehaviour
     {
         GameObject newObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
         newObject.transform.parent = transform;
-        shopItems[index] = newObject.GetComponent<Item>();
+        shopItems[index] = newObject.GetComponent<ItemDisplay>();
     }
 }
 #endregion

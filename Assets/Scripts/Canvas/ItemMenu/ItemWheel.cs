@@ -100,7 +100,7 @@ public class ItemWheel : MonoBehaviour
             {
                 slotImage.color = Random.ColorHSV();
             }
-            newItemSlot.Id = item[i].Id;
+            newItemSlot.Id = item[i].id;
             newItemSlot.ItemTag = item[i].itemTag;
             SetText(i, newItemSlot, item);
             ListOfEquipmentSlots[i] = newItemSlot;
@@ -109,7 +109,7 @@ public class ItemWheel : MonoBehaviour
 
     private void SetText(int i, ItemSlot newItemSlot, Item[] equipment)
     {
-        newItemSlot.SetTextField(equipment[i].Name);
+        newItemSlot.SetTextField(equipment[i].name);
     }
 
     public void SetWheelFocus(bool focus)

@@ -12,11 +12,11 @@ public class FishingRodData
 
     public FishingRodData(FishingRod fishingRod)
     {
-        id = fishingRod.Id;
-        name = fishingRod.Name;
-        description = fishingRod.Description;
-        strength = fishingRod.Strength;
-        throwRange = fishingRod.ThrowRange;
-        price = fishingRod.Price;
+        id = fishingRod.id;
+        name = fishingRod.name;
+        description = fishingRod.description;
+        strength = fishingRod.strength;
+        throwRange = fishingRod.throwRange;
+        price = fishingRod.price;
     }
 }

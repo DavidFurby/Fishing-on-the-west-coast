@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemSlot: {fileID: 1967445459752497753, guid: a3225bb6a847dd5448544a45298b6088, type: 3}
-  itemTag: 2
+  itemTag: 3
 --- !u!1 &7892022864345153700
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemSlot: {fileID: 1967445459752497753, guid: a3225bb6a847dd5448544a45298b6088, type: 3}
-  itemTag: 1
+  itemTag: 2
 --- !u!1 &8150373288748146121
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemSlot: {fileID: 1967445459752497753, guid: a3225bb6a847dd5448544a45298b6088, type: 3}
-  itemTag: 0
+  itemTag: 1
 --- !u!1001 &2519651153089026175
 PrefabInstance:
   m_ObjectHideFlags: 0

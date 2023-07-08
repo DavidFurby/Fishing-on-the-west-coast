@@ -4,17 +4,17 @@
 public class BaitData
 {
     public int id;
-    public string baitName;
+    public string name;
     public int level;
     public string description;
     public int price;
 
     public BaitData(Bait bait)
     {
-        id = bait.Id;
-        baitName = bait.Name;
-        level = bait.Level;
-        description = bait.Description;
-        price = bait.Price;
+        id = bait.id;
+        name = bait.name;
+        level = bait.level;
+        description = bait.description;
+        price = bait.price;
     }
 }

@@ -1,32 +1,14 @@
-using System;
 using UnityEngine;
-using static Hat;
 
-[Serializable]
-public class Item : MonoBehaviour
+[CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/Item", order = 1)]
+public class Item : ScriptableObject
 {
-    public ItemTag itemTag = ItemTag.None;
+    [HideInInspector] public ItemTag itemTag = ItemTag.None;
+    [SerializeField] public int id = 0;
+    [SerializeField] public new string name = "";
+    [SerializeField] public int price = 0;
+    [SerializeField] public string description = "";
 
-    public int Id
-    {
-        get;
-        set;
-    }
-    public string Name
-    {
-        get;
-        set;
-    }
-    public int Price
-    {
-        get;
-        set;
-    }
-    public string Description
-    {
-        get;
-        set;
-    }
     public enum ItemTag
     {
         None,
@@ -34,17 +16,13 @@ public class Item : MonoBehaviour
         Bait,
         Hat,
     }
-    public void Awake()
-    {
-        SetDefaultVariables();
-    }
 
-    private void SetDefaultVariables()
+    public void CopyValuesFrom(Item other)
     {
-        Id = 0;
-        Name = "Empty";
-        Description = "";
-        Price = 0;
-
+        itemTag = other.itemTag;
+        id = other.id;
+        name = other.name;
+        price = other.price;
+        description = other.description;
     }
 }

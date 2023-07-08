@@ -3,106 +3,36 @@ using System.Linq;
 using UnityEngine;
 
 [Serializable]
+[CreateAssetMenu(fileName = "FishingRod", menuName = "ScriptableObjects/FishingRod", order = 1)]
 public class FishingRod : Item
 {
-    [SerializeField] private RodTag rodTag;
+    [SerializeField] public int strength;
+    [SerializeField] public int throwRange;
 
-    public enum RodTag
-    {
-        BasicRod,
-        AdvancedRod,
-        RareRod
-    }
-    public int Strength
-    {
-        get;
-        set;
-    }
-
-    public int ThrowRange
-    {
-        get;
-        set;
-    }
-
-
-
-    private new void Awake()
-    {
-        SetRodVariables();
-    }
-
-
-    private void SetRodVariables()
-    {
-        itemTag = ItemTag.FishingRod;
-        switch (rodTag)
-        {
-            case RodTag.BasicRod:
-                Id = 1;
-                Name = "Basic Rod";
-                Description = "A basic rod given at childbirth";
-                Price = 0;
-                Strength = 20;
-                ThrowRange = 100;
-                break;
-            case RodTag.AdvancedRod:
-                Id = 2;
-                Name = "Advanced Rod";
-                Description = "A more advanced rod not as easily found";
-                Price = 5;
-                Strength = 50;
-                ThrowRange = 200;
-                break;
-            case RodTag.RareRod:
-                Id = 3;
-                Name = "Premium Rod";
-                Description = "A premium rod very rarely found";
-                Price = 10;
-                Strength = 100;
-                ThrowRange = 300;
-                break;
-        }
-    }
 
     public FishingRod(FishingRodData fishingRodData)
     {
-        Id = fishingRodData.id;
-        Name = fishingRodData.name;
-        Strength = fishingRodData.strength;
-        ThrowRange = fishingRodData.throwRange;
-        Description = fishingRodData.description;
-        Price = fishingRodData.price;
-    }
-    public static FishingRod SetFishingRod(Game game, FishingRodData fishingRodData)
-    {
-        FishingRod fishingRod = game.gameObject.AddComponent<FishingRod>();
-        fishingRod.Id = fishingRodData.id;
-        fishingRod.Name = fishingRodData.name;
-        fishingRod.Description = fishingRodData.description;
-        fishingRod.Price = fishingRodData.price;
-        fishingRod.Strength = fishingRodData.strength;
-        fishingRod.ThrowRange = fishingRodData.throwRange;
-        return fishingRod;
+        id = fishingRodData.id;
+        name = fishingRodData.name;
+        strength = fishingRodData.strength;
+        throwRange = fishingRodData.throwRange;
+        description = fishingRodData.description;
+        price = fishingRodData.price;
     }
 
     public void AddFishingRodToInstance()
     {
         MainManager.Instance.game.FoundFishingRods = MainManager.Instance.game.FoundFishingRods.Append(this).ToList();
     }
-    public static FishingRod[] SetAvailableRods(Game game)
+    public static FishingRod SetFishingRod(FishingRodData fishingRodData)
     {
-        FishingRod basicRod = game.gameObject.AddComponent<FishingRod>();
-        basicRod.rodTag = RodTag.BasicRod;
-        basicRod.SetRodVariables();
-
-        FishingRod advancedRod = game.gameObject.AddComponent<FishingRod>();
-        advancedRod.rodTag = RodTag.AdvancedRod;
-        advancedRod.SetRodVariables();
-
-        FishingRod rareRod = game.gameObject.AddComponent<FishingRod>();
-        rareRod.rodTag = RodTag.RareRod;
-        rareRod.SetRodVariables();
-        return new FishingRod[] { basicRod, advancedRod, rareRod };
+        FishingRod fishingRod = CreateInstance<FishingRod>();
+        fishingRod.id = fishingRodData.id;
+        fishingRod.name = fishingRodData.name;
+        fishingRod.description = fishingRodData.description;
+        fishingRod.price = fishingRodData.price;
+        fishingRod.strength = fishingRodData.strength;
+        fishingRod.throwRange = fishingRodData.throwRange;
+        return fishingRod;
     }
 }

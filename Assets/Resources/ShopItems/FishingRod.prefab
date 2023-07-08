@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8194179184617993171}
   - component: {fileID: 5205310210804255604}
   - component: {fileID: 98317873238864070}
-  - component: {fileID: 8883187745918041688}
+  - component: {fileID: 4377491905691358638}
   m_Layer: 0
   m_Name: FishingRod
   m_TagString: Untagged
@@ -99,7 +99,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8883187745918041688
+--- !u!114 &4377491905691358638
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,8 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8662299406853993162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4b8136d390ad64408e1e6c533592c17, type: 3}
+  m_Script: {fileID: 11500000, guid: f68ae2914edc56347b1f0b6596aeff7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTag: 1
-  rodTag: 1
+  item: {fileID: 11400000, guid: 34e4863fa1578ad4bb4f984b17be47dc, type: 2}

@@ -21,36 +21,18 @@ public class Game : MonoBehaviour
     public Hat[] AvailableHats { get; set; }
     public string Scene { get; set; }
 
-    public Item GetEquipment(ItemTag itemTag)
-    {
-        Item item = null;
-        switch (itemTag)
-        {
-            case ItemTag.FishingRod:
-                item = gameObject.AddComponent<Item>();
-                break;
-            case ItemTag.Bait:
-                item = gameObject.AddComponent<Item>();
-                break;
-            case ItemTag.Hat:
-                item = gameObject.AddComponent<Item>();
-                break;
-        }
-        return item;
-    }
-
     public void SetEquipment(int id, ItemTag tag)
     {
         switch (tag)
         {
             case ItemTag.FishingRod:
-                EquippedFishingRod = FoundFishingRods.First((rod) => rod.Id == id);
+                EquippedFishingRod = FoundFishingRods.First((rod) => rod.id == id);
                 break;
             case ItemTag.Bait:
-                EquippedBait = FoundBaits.First((bait) => bait.Id == id);
+                EquippedBait = FoundBaits.First((bait) => bait.id == id);
                 break;
             case ItemTag.Hat:
-                EquippedHat = FoundHats.First((hat) => hat.Id == id);
+                EquippedHat = FoundHats.First((hat) => hat.id == id);
                 break;
         }
     }
@@ -58,17 +40,16 @@ public class Game : MonoBehaviour
     //Check if item Exists in inventory
     public bool HasItem(int id, ItemTag itemTag)
     {
-        switch (itemTag)
+
+        Debug.Log(id + itemTag);
+        return itemTag switch
         {
-            case ItemTag.FishingRod:
-                return FoundFishingRods.Any((rod) => rod.Id == id);
-            case ItemTag.Bait:
-                return FoundBaits.Any((bait) => bait.Id == id);
-            case ItemTag.Hat:
-                return FoundHats.Any((hat) => hat.Id == id);
-            default:
-                return false;
-        }
+            ItemTag.FishingRod => FoundFishingRods.Any((rod) => rod.id == id),
+            ItemTag.Bait => FoundBaits.Any((bait) => bait.id == id),
+            ItemTag.Hat => FoundHats.Any((hat) => hat.id == id),
+            ItemTag.None => false,
+            _ => false,
+        };
     }
 
     public void AddItem(Item item)
@@ -76,14 +57,14 @@ public class Game : MonoBehaviour
         switch (item.itemTag)
         {
             case ItemTag.FishingRod:
-                FishingRod fishingRod = AvailableFishingRods.First((fishingRod) => fishingRod.Id == item.Id);
+                FishingRod fishingRod = AvailableFishingRods.First((fishingRod) => fishingRod.id == item.id);
                 break;
             case ItemTag.Bait:
-                Bait bait = AvailableBaits.First((bait) => bait.Id == item.Id);
+                Bait bait = AvailableBaits.First((bait) => bait.id == item.id);
                 bait.AddBaitToInstance();
                 break;
             case ItemTag.Hat:
-                Hat hat = AvailableHats.First((hat) => hat.Id == item.Id);
+                Hat hat = AvailableHats.First((hat) => hat.id == item.id);
                 hat.AddHatToInstance();
                 break;
         }

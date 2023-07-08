@@ -25,10 +25,10 @@ public class ShopHandlers : MonoBehaviour
         dialogManager.RemoveHandler("setShopItem");
         dialogManager.AddCommandHandler("setShopItem", () =>
         {
-            dialogManager.SetVariableValue("$shopItemId", shopItem.Id);
-            dialogManager.SetVariableValue("$shopItemName", shopItem.Name);
-            dialogManager.SetVariableValue("$shopItemPrice", shopItem.Price);
-            dialogManager.SetVariableValue("$shopItemDescription", shopItem.Description);
+            dialogManager.SetVariableValue("$shopItemId", shopItem.id);
+            dialogManager.SetVariableValue("$shopItemName", shopItem.name);
+            dialogManager.SetVariableValue("$shopItemPrice", shopItem.price);
+            dialogManager.SetVariableValue("$shopItemDescription", shopItem.description);
 
         });
     }
