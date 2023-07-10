@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: 1
   id: 1
-  name: Basic Bait
+  name: Basic FishingRod
   price: 0
   description: Given at childbirth
   strength: 20

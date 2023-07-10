@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: 1
   id: 2
-  name: Advance bait
+  name: Advance Rod
   price: 5
   description: Ad
   strength: 30
