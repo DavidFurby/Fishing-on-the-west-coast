@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3476212163773659500}
   - component: {fileID: -3783395524345797868}
   - component: {fileID: -6938276844859040309}
-  - component: {fileID: -6178917406647638583}
+  - component: {fileID: -5186224769883492300}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Fish
@@ -569,7 +569,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 190
+  m_VersionIndex: 193
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -699,7 +699,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1126049, y: 3.1492212, z: 1.8619559}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6178917406647638583
+--- !u!114 &-5186224769883492300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -708,7 +708,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7521382160921142941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cab95bfe04cb95e4ea5edbba88061426, type: 3}
+  m_Script: {fileID: 11500000, guid: 4760e16c4599df94cbfd896af74f40a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catchTag: 0
+  fish: {fileID: 11400000, guid: 7b96cd946b1dabb4888a632fd4909b4e, type: 2}

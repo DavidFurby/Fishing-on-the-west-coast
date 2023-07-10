@@ -9,7 +9,7 @@ public class FishingMiniGame : MonoBehaviour
     [SerializeField] private FishingController fishingControlls;
     [SerializeField] private MusicController musicController;
     [SerializeField] private Scrollbar castingPowerBalance;
-    private List<Catch> fishesOnHook;
+    private List<FishDisplay> fishesOnHook;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
@@ -52,7 +52,7 @@ public class FishingMiniGame : MonoBehaviour
 
             for (int i = 0; i < fishesOnHook.Count; i++)
             {
-                weight += fishesOnHook[i].Size;
+                weight += fishesOnHook[i].fish.size;
             }
             float targetValue;
             if (Random.value < 0.5)
@@ -121,7 +121,7 @@ public class FishingMiniGame : MonoBehaviour
 
     #endregion
 
-    public void StartBalanceMiniGame(List<Catch> fishes)
+    public void StartBalanceMiniGame(List<FishDisplay> fishes)
     {
         reelingBalance.gameObject.SetActive(true);
         fishesOnHook = fishes;

@@ -11,8 +11,8 @@ public class LoadGameController : MonoBehaviour
         game.TotalCatches = gameData.TotalCatches;
         game.BestDistance = gameData.bestDistance;
         game.Scene = gameData.scene;
-        game.AvailableCatches = Catch.SetAvailableCatches(game);
-        game.Catches = gameData.foundCatches.Select(fishData => game.gameObject.AddComponent<Catch>()).ToList();
+        game.AvailableFishes = Resources.LoadAll<Fish>("Catches");
+        game.CaughtFishes = gameData.foundCatches.Select(fishData => Fish.SetFish(fishData)).ToList();
         LoadFishingRod(game, gameData);
         LoadBait(game, gameData);
         LoadHats(game, gameData);

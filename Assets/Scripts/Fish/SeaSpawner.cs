@@ -9,7 +9,7 @@ public class SeaSpawner : MonoBehaviour
     private float fishSpawnDirection;
     private Quaternion fishSpawnRotation;
     private Vector3 fishSpawnPosition;
-    [SerializeField] Catch[] fishes;
+    [SerializeField] FishDisplay[] fishes;
     [SerializeField] int spawnDelay;
     [SerializeField] GameObject bait;
     [SerializeField] FishingController fishingControlls;
@@ -40,8 +40,6 @@ public class SeaSpawner : MonoBehaviour
 
             //Instatiate the fish 
             GameObject fish = Instantiate(fishes[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
-            Catch item = fish.GetComponent<Catch>();
-            fishes[randomFishIndex] = item;
             SetDirection(fish);
         }
     }

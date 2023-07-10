@@ -3,16 +3,18 @@ using System;
 [Serializable]
 public class FishData
 {
+    public int id;
     public string name;
     public float size;
-    public string info;
+    public string description;
     public int level;
 
-    public FishData(Catch fish)
+    public FishData(Fish fish)
     {
-        name = fish.Name;
-        size = fish.Size;
-        info = fish.Description;
-        level = fish.Level;
+        id = fish.id;
+        name = fish.name;
+        size = fish.size;
+        description = fish.description;
+        level = fish.level;
     }
 }

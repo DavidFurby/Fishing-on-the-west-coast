@@ -22,7 +22,7 @@ public class GameData
         TotalCatches = game.TotalCatches;
         bestDistance = game.BestDistance;
         scene = game.Scene.ToString();
-        foundCatches = game.Catches.Select(fish => new FishData(fish)).ToArray();
+        foundCatches = game.CaughtFishes.Select(fish => new FishData(fish)).ToArray();
         foundFishingRods = game.FoundFishingRods.Select(fishingRod => new FishingRodData(fishingRod)).ToArray();
         equippedFishingRod = new FishingRodData(game.EquippedFishingRod);
         foundBaits = game.FoundBaits.Select(bait => new BaitData(bait)).ToArray();

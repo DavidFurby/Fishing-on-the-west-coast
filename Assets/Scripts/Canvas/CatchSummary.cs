@@ -14,8 +14,8 @@ public class CatchSummary : MonoBehaviour
 
     [SerializeField] private FishingController fishingControls;
     [SerializeField] private CatchSummaryHandlers handlers;
-    private List<Catch> caughtFishes;
-    private Catch currentlyPresentedFish;
+    private List<FishDisplay> caughtFishes;
+    private FishDisplay currentlyPresentedFish;
     private int fishIndex;
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class CatchSummary : MonoBehaviour
     /// Initialize the catch summary with a list of caught fishes.
     /// </summary>
     /// <param name="fishes">The list of caught fishes.</param>
-    public void InitiateCatchSummary(List<Catch> fishes)
+    public void InitiateCatchSummary(List<FishDisplay> fishes)
     {
         if (fishes.Count == 0)
         {
@@ -76,7 +76,7 @@ public class CatchSummary : MonoBehaviour
     }
 
     // Check if fish is larger than the saved fish of the same name
-    private bool CheckSizeDifference(Catch fishData)
+    private bool CheckSizeDifference(FishDisplay fishData)
     {
         if (fishData == null)
         {
@@ -84,11 +84,11 @@ public class CatchSummary : MonoBehaviour
             return false;
         }
 
-        Catch existingFish = MainManager.Instance.game.Catches.FirstOrDefault(f => f.Id == fishData.Id && f.Size < fishData.Size);
+        Fish existingFish = MainManager.Instance.game.CaughtFishes.FirstOrDefault(f => f.id == fishData.fish.id && f.size < fishData.fish.size);
         if (existingFish != null)
         {
-            int index = Array.IndexOf(MainManager.Instance.game.Catches.ToArray(), existingFish);
-            fishData.ReplaceFishInInstance(index);
+            int index = Array.IndexOf(MainManager.Instance.game.CaughtFishes.ToArray(), existingFish);
+            fishData.fish.ReplaceFishInInstance(index);
             return true;
         }
 
@@ -96,16 +96,16 @@ public class CatchSummary : MonoBehaviour
     }
 
     // Check if fish hasn't been caught before
-    private bool CheckIfNew(Catch catchData)
+    private bool CheckIfNew(FishDisplay catchData)
     {
         if (catchData == null)
         {
             Debug.LogError("Fish data is null");
             return false;
         }
-        if (!MainManager.Instance.game.Catches.Any(f => f.Id == catchData.Id))
+        if (!MainManager.Instance.game.CaughtFishes.Any(f => f.id == catchData.fish.id))
         {
-            catchData.AddFishToInstance();
+            catchData.fish.AddFishToInstance();
             return true;
         }
 

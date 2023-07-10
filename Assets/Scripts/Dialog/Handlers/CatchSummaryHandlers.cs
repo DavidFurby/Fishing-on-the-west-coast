@@ -6,24 +6,24 @@ public class CatchSummaryHandlers : MonoBehaviour
 {
     [SerializeField] private DialogManager dialogManager;
 
-    public void StartSummar(Catch catchResult)
+    public void StartSummar(FishDisplay catchResult)
     {
         if (dialogManager != null)
         {
             dialogManager.EndDialog();
-            SetCatchSummaryHandler(catchResult);
+            SetCatchSummaryHandler(catchResult.fish);
             dialogManager.StartDialog("CatchSummary");
         }
     }
 
-    public void SetCatchSummaryHandler(Catch catchResult)
+    public void SetCatchSummaryHandler(Fish catchResult)
     {
         dialogManager.RemoveHandler("setCatchSummary");
         dialogManager.AddCommandHandler("setCatchSummary", () =>
         {
-            dialogManager.SetVariableValue("$catchName", catchResult.Name);
-            dialogManager.SetVariableValue("$catchSize", $"Size: {catchResult.Size:F2} cm");
-            dialogManager.SetVariableValue("$catchDescription", catchResult.Description);
+            dialogManager.SetVariableValue("$catchName", catchResult.name);
+            dialogManager.SetVariableValue("$catchSize", $"Size: {catchResult.size:F2} cm");
+            dialogManager.SetVariableValue("$catchDescription", catchResult.description);
 
         });
     }

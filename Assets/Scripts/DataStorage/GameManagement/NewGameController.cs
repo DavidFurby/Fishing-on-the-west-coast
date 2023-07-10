@@ -11,7 +11,7 @@ public class NewGameController : MonoBehaviour
         bool removed = SaveSystem.NewGame();
         if (removed)
         {
-            game.AvailableCatches = Catch.SetAvailableCatches(game);
+            game.AvailableFishes = Resources.LoadAll<Fish>("ScriptableObjects/Fishe").OrderBy(c => c.id).ToArray();
             PopulateAvailableItems(game);
             ResetGameState(game);
         }
@@ -36,7 +36,7 @@ public class NewGameController : MonoBehaviour
         game.TotalCatches = 0;
         game.BestDistance = 0;
         game.Scene = "Boat";
-        game.Catches.Clear();
+        game.CaughtFishes.Clear();
         game.FoundFishingRods.Clear();
         game.FoundFishingRods.Add(game.AvailableFishingRods[0]);
         game.EquippedFishingRod = game.FoundFishingRods.First((rod) => rod.id == 1);
