@@ -11,7 +11,7 @@ public class NewGameController : MonoBehaviour
         bool removed = SaveSystem.NewGame();
         if (removed)
         {
-            game.AvailableFishes = Resources.LoadAll<Fish>("ScriptableObjects/Fishe").OrderBy(c => c.id).ToArray();
+            game.AvailableFishes = Resources.LoadAll<Fish>("ScriptableObjects/Fishes").OrderBy(c => c.id).ToArray();
             PopulateAvailableItems(game);
             ResetGameState(game);
         }

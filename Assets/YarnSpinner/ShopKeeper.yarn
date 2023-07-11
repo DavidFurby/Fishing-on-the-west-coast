@@ -51,6 +51,7 @@ position: -2,38
 ---
 <<buyShopItem>>
 ShopKeeper: Aye thanks matey
+<<jump ShopItem>>
 ===
 
 title: DeclineItem

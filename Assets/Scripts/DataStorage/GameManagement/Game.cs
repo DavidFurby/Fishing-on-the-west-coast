@@ -38,33 +38,38 @@ public class Game : MonoBehaviour
     }
 
     //Check if item Exists in inventory
-    public bool HasItem(int id, ItemTag itemTag)
+    public bool HasItem(Item item)
     {
 
-        Debug.Log(id + itemTag);
-        return itemTag switch
+        switch (item.itemTag)
         {
-            ItemTag.FishingRod => FoundFishingRods.Any((rod) => rod.id == id),
-            ItemTag.Bait => FoundBaits.Any((bait) => bait.id == id),
-            ItemTag.Hat => FoundHats.Any((hat) => hat.id == id),
-            ItemTag.None => false,
-            _ => false,
-        };
+            case ItemTag.FishingRod:
+                return FoundFishingRods.Any((rod) => rod.id == item.id);
+            case ItemTag.Bait:
+                return FoundBaits.Any((bait) => bait.id == item.id);
+            case ItemTag.Hat:
+                return FoundHats.Any((hat) => hat.id == item.id);
+            default:
+                return false;
+        }
     }
+
 
     public void AddItem(Item item)
     {
         switch (item.itemTag)
         {
             case ItemTag.FishingRod:
-                FishingRod fishingRod = AvailableFishingRods.First((fishingRod) => fishingRod.id == item.id);
+                Debug.Log(AvailableFishingRods.Length);
+                FishingRod fishingRod = AvailableFishingRods.FirstOrDefault((fishingRod) => fishingRod.id == item.id);
+                fishingRod.AddFishingRodToInstance();
                 break;
             case ItemTag.Bait:
-                Bait bait = AvailableBaits.First((bait) => bait.id == item.id);
+                Bait bait = AvailableBaits.FirstOrDefault((bait) => bait.id == item.id);
                 bait.AddBaitToInstance();
                 break;
             case ItemTag.Hat:
-                Hat hat = AvailableHats.First((hat) => hat.id == item.id);
+                Hat hat = AvailableHats.FirstOrDefault((hat) => hat.id == item.id);
                 hat.AddHatToInstance();
                 break;
         }

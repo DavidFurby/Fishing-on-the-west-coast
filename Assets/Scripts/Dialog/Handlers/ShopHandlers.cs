@@ -48,7 +48,6 @@ public class ShopHandlers : MonoBehaviour
     }
     private void BuyShopItem()
     {
-        dialogManager.RemoveHandler("buyShopItem");
         dialogManager.AddCommandHandler("buyShopItem", () =>
         {
             shop.BuyItem();

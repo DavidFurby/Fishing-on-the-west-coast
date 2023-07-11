@@ -104,8 +104,8 @@ public class Shop : MonoBehaviour
     private void ReplaceItemOnSelf()
     {
         GameObject replacement = Instantiate(emptySpot.gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
-        replacement.transform.parent = focusedShopItem.transform.parent;
-        Destroy(focusedShopItem.gameObject);
+        replacement.transform.parent = transform;
+        DestroyImmediate(focusedShopItem.gameObject);
         shopItems[focusedShopItemIndex] = replacement.GetComponent<ItemDisplay>();
     }
 
@@ -136,20 +136,17 @@ public class Shop : MonoBehaviour
     }
     private void SpawnItems()
     {
-        // Loop through all shop item positions
         for (int i = 0; i < shopItemPositions.Count; i++)
         {
             if (i < shopItems.Length && shopItems[i] != null)
             {
-                // Check if the current shop item is a fishing rod and is already in the player's inventory
-                if (MainManager.Instance.game.HasItem(shopItems[i].item.id, shopItems[i].item.itemTag))
+                if (MainManager.Instance.game.HasItem(shopItems[i].item))
                 {
-                    // If the fishing rod is already in the player's inventory, spawn an empty spot instead
+                    Debug.Log(MainManager.Instance.game.HasItem(shopItems[i].item));
                     SpawnEmptySpot(i);
                 }
                 else
                 {
-                    // Otherwise, spawn the shop item
                     SpawnShopItem(i);
                 }
             }
@@ -159,16 +156,14 @@ public class Shop : MonoBehaviour
             }
         }
 
-        // Set the initial focused shop item
         focusedShopItem = shopItems[focusedShopItemIndex];
     }
 
     private void SpawnEmptySpot(int index)
     {
-        GameObject gameObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
+        GameObject gameObject = Instantiate(emptySpot.gameObject, shopItemPositions[index], Quaternion.identity);
         gameObject.transform.parent = transform;
     }
-
     private void SpawnShopItem(int index)
     {
         GameObject newObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
