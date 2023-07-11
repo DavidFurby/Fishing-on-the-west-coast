@@ -1,5 +1,4 @@
 using UnityEngine;
-using Yarn.Unity;
 
 public class ShopHandlers : MonoBehaviour
 {
@@ -21,25 +20,27 @@ public class ShopHandlers : MonoBehaviour
             StartCoroutine(shop.OpenShop());
         });
     }
-    public void SetShopItemHandler(ShopItem shopItem)
+    public void SetShopItemHandler(Item shopItem)
     {
         dialogManager.RemoveHandler("setShopItem");
         dialogManager.AddCommandHandler("setShopItem", () =>
         {
-            dialogManager.SetVariableValue("$shopItemName", shopItem.Name);
-            dialogManager.SetVariableValue("$shopItemPrice", shopItem.Price.ToString());
-            dialogManager.SetVariableValue("$shopItemDescription", shopItem.Description);
+            dialogManager.SetVariableValue("$shopItemId", shopItem.id);
+            dialogManager.SetVariableValue("$shopItemName", shopItem.name);
+            dialogManager.SetVariableValue("$shopItemPrice", shopItem.price);
+            dialogManager.SetVariableValue("$shopItemDescription", shopItem.description);
 
         });
     }
     public void SetTokens()
     {
         dialogManager.RemoveHandler("setTokens");
-        dialogManager.AddCommandHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.game.Catches.ToString()));
+        dialogManager.AddCommandHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.game.TotalCatches));
     }
     //lock controls if item has been selected in shop
     public void LockShopControls()
     {
+        dialogManager.RemoveHandler("lockShopControls");
         dialogManager.AddCommandHandler("lockShopControls", () =>
         {
             shop.pauseShoppingControls = !shop.pauseShoppingControls;
@@ -47,6 +48,7 @@ public class ShopHandlers : MonoBehaviour
     }
     private void BuyShopItem()
     {
+        dialogManager.RemoveHandler("buyShopItem");
         dialogManager.AddCommandHandler("buyShopItem", () =>
         {
             shop.BuyItem();

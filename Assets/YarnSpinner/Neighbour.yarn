@@ -20,12 +20,6 @@ position: -223,-79
     <<jump DaySix>>
 <<elseif $day is 7>>
     <<jump DaySeven>>
-<<elseif $day is 8>>
-    <<jump DayEight>>
-<<elseif $day is 9>>
-    <<jump DayNine>>
-<<else>>
-    Today is after ninth day of this month.
 <<endif>>
 ===
 
@@ -34,7 +28,20 @@ tags:
 colorID: 0
 position: -223,-79
 ---
-Today is the first day of the month!
+Companion: Hi there! What do you feel like doing today?
+
+-> Player: I want to go swimming.
+    Companion: Okay, let's go swimming.
+    Companion: Where do you want to swim?
+    -> Player: The lake!
+        Companion: Nice! It's a great day for it.
+    -> Player: The swimming pool!
+        Companion: Oh, awesome! I heard they installed a new slide.
+-> Player: I'd prefer to go hiking.
+    Companion: Cool, we'll go hiking then.
+    
+Player: Sounds good!
+    
 ===
 
 title: DayTwo

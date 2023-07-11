@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static Game;
+using static Item;
 
 public class ItemMenu : MonoBehaviour
 {
@@ -9,61 +10,63 @@ public class ItemMenu : MonoBehaviour
     [SerializeField] private GameObject ItemFocus;
     private ItemWheel focusedWheel;
     private int focusedWheelIndex;
+    private List<Item> allItems;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         itemMenu.SetActive(false);
+        allItems = MainManager.Instance.game.FoundBaits.Cast<Item>().ToList();
+        allItems.AddRange(MainManager.Instance.game.FoundFishingRods);
+        allItems.AddRange(MainManager.Instance.game.FoundHats);
     }
 
-    // Update is called once per frame
     void Update()
     {
         HandleInputs();
-
     }
 
     private void PopulateWheels()
     {
-        for (int i = 0; i < listOfWheels.Length; i++)
+
+        foreach (var wheel in listOfWheels)
         {
-            if (listOfWheels[i].itemTag == ItemTag.Bait)
+            switch (wheel.itemTag)
             {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundBaits.Select((bait) => new Item(bait.Id, bait.BaitName, bait.Description)).ToArray());
-            }
-            else if (listOfWheels[i].itemTag == ItemTag.FishingRod)
-            {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundFishingRods.Select((fishingRod) => new Item(fishingRod.Id, fishingRod.FishingRodName, fishingRod.Description)).ToArray());
-            }
-            else if (listOfWheels[i].itemTag == ItemTag.Hat)
-            {
-                listOfWheels[i].SetEquipment(MainManager.Instance.game.FoundHats.Select((hat) => new Item(hat.Id, hat.HatName, hat.Description)).ToArray());
+                case ItemTag.Bait:
+                    wheel.SetEquipment(allItems.OfType<Bait>().ToArray());
+                    break;
+                case ItemTag.FishingRod:
+                    wheel.SetEquipment(allItems.OfType<FishingRod>().ToArray());
+                    break;
+                case ItemTag.Hat:
+                    wheel.SetEquipment(allItems.OfType<Hat>().ToArray());
+                    break;
             }
         }
     }
+
 
     private void HandleInputs()
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
             ResetValues();
-            SetMenu();
+            ToggleMenu();
         }
         if (itemMenu.activeSelf)
         {
             ScrollBetweenWheels();
-
-            TriggerChangeEquipedItem();
-
+            TriggerChangeEquippedItem();
         }
-
     }
 
-    private void SetMenu()
+    private void ToggleMenu()
     {
         itemMenu.SetActive(!itemMenu.activeSelf);
         Time.timeScale = itemMenu.activeSelf ? 0 : 1;
     }
+
     private void ResetValues()
     {
         PopulateWheels();
@@ -72,17 +75,18 @@ public class ItemMenu : MonoBehaviour
         SetFocus();
     }
 
-    private void TriggerChangeEquipedItem()
+    private void TriggerChangeEquippedItem()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            for (int i = 0; i < listOfWheels.Length; i++)
+            foreach (var wheel in listOfWheels)
             {
-                listOfWheels[i].ChangeEquipedItem();
+                wheel.ChangeEquipedItem();
             }
-            SetMenu();
+            ToggleMenu();
         }
     }
+
     private void ScrollBetweenWheels()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))

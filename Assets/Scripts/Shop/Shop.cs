@@ -1,25 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using static ExplorationController;
 
 public class Shop : MonoBehaviour
 {
     #region Serialized Fields
-    [SerializeField] private ShopItem[] shopItems;
+    [SerializeField] private ItemDisplay[] shopItems;
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private ExplorationController playerController;
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private ShopHandlers dialogHandlers;
-    [SerializeField] ShopItem emptySpot;
+    [SerializeField] private ItemDisplay emptySpot;
     private readonly List<Vector3> shopItemPositions = new();
-    [HideInInspector] public bool pauseShoppingControls;
 
     #endregion
 
     #region Private Fields
-    [HideInInspector] public ShopItem focusedShopItem;
+    [HideInInspector] public bool pauseShoppingControls;
+    [HideInInspector] public ItemDisplay focusedShopItem;
     private int focusedShopItemIndex = 0;
     #endregion
 
@@ -96,22 +95,24 @@ public class Shop : MonoBehaviour
     {
         if (focusedShopItem != null)
         {
-            if (!IsFishingRodInInventory(focusedShopItem))
-            {
-                FishingRod fishingRod = focusedShopItem.gameObject.GetComponent<FishingRod>();
-                fishingRod.AddFishingRodToInstance();
-            }
-            GameObject replacement = Instantiate(gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
-            replacement.transform.parent = transform.parent;
-            shopItems[focusedShopItemIndex] = replacement.GetComponent<ShopItem>();
-            focusedShopItem = replacement.GetComponent<ShopItem>();
+            MainManager.Instance.game.AddItem(focusedShopItem.item);
+            ReplaceItemOnSelf();
             FocusItem();
         }
     }
+
+    private void ReplaceItemOnSelf()
+    {
+        GameObject replacement = Instantiate(emptySpot.gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
+        replacement.transform.parent = focusedShopItem.transform.parent;
+        Destroy(focusedShopItem.gameObject);
+        shopItems[focusedShopItemIndex] = replacement.GetComponent<ItemDisplay>();
+    }
+
+
     public void UpdateDialog()
     {
-        dialogManager.EndDialog();
-        dialogHandlers.SetShopItemHandler(focusedShopItem);
+        dialogHandlers.SetShopItemHandler(focusedShopItem.item);
         dialogManager.StartDialog("ShopItem");
     }
     private void HandleShoppingInput()
@@ -127,7 +128,7 @@ public class Shop : MonoBehaviour
                 ScrollBetweenItems(true);
 
             }
-            else if (Input.GetKeyDown(KeyCode.Escape))
+            else if (Input.GetKeyDown(KeyCode.Tab))
             {
                 CloseShop();
             }
@@ -138,16 +139,23 @@ public class Shop : MonoBehaviour
         // Loop through all shop item positions
         for (int i = 0; i < shopItemPositions.Count; i++)
         {
-            // Check if the current shop item is a fishing rod and is already in the player's inventory
-            if (IsFishingRodInInventory(shopItems[i]))
+            if (i < shopItems.Length && shopItems[i] != null)
             {
-                // If the fishing rod is already in the player's inventory, spawn an empty spot instead
-                SpawnEmptySpot(i);
+                // Check if the current shop item is a fishing rod and is already in the player's inventory
+                if (MainManager.Instance.game.HasItem(shopItems[i].item.id, shopItems[i].item.itemTag))
+                {
+                    // If the fishing rod is already in the player's inventory, spawn an empty spot instead
+                    SpawnEmptySpot(i);
+                }
+                else
+                {
+                    // Otherwise, spawn the shop item
+                    SpawnShopItem(i);
+                }
             }
             else
             {
-                // Otherwise, spawn the shop item
-                SpawnShopItem(i);
+                SpawnEmptySpot(i);
             }
         }
 
@@ -155,22 +163,8 @@ public class Shop : MonoBehaviour
         focusedShopItem = shopItems[focusedShopItemIndex];
     }
 
-    private bool IsFishingRodInInventory(ShopItem shopItem)
-    {
-        if (shopItem.gameObject.TryGetComponent<FishingRod>(out var fishingRod))
-        {
-            return MainManager.Instance.game.FoundFishingRods.Any(f => f.Id == fishingRod.Id);
-        }
-        else
-        {
-            return false;
-        }
-
-    }
-
     private void SpawnEmptySpot(int index)
     {
-        shopItems[index] = emptySpot;
         GameObject gameObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
         gameObject.transform.parent = transform;
     }
@@ -179,6 +173,7 @@ public class Shop : MonoBehaviour
     {
         GameObject newObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
         newObject.transform.parent = transform;
+        shopItems[index] = newObject.GetComponent<ItemDisplay>();
     }
 }
 #endregion

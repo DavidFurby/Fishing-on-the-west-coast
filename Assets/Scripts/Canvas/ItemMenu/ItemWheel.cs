@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static Game;
+using static Item;
 
 public class ItemWheel : MonoBehaviour
 {
@@ -35,7 +35,7 @@ public class ItemWheel : MonoBehaviour
         {
             if (i == middleIndex)
             {
-                MainManager.Instance.game.SetEquipment(ListOfEquipmentSlots[i].ItemId, itemTag);
+                MainManager.Instance.game.SetEquipment(ListOfEquipmentSlots[i].Id, itemTag);
             }
         }
     }
@@ -72,7 +72,7 @@ public class ItemWheel : MonoBehaviour
         }
     }
 
-    public void SetEquipment(Item[] equipment)
+    public void SetEquipment(Item[] item)
     {
         // Destroy any existing equipment slots
         if (ListOfEquipmentSlots != null)
@@ -86,11 +86,11 @@ public class ItemWheel : MonoBehaviour
         slotHeight = ItemSlot.GetComponent<RectTransform>().rect.height;
         spacing = (parentHeight - 3 * slotHeight) / 2;
 
-        middleIndex = equipment.Length / 2;
+        middleIndex = item.Length / 2;
 
         // Create new equipment slots
-        ListOfEquipmentSlots = new ItemSlot[equipment.Length];
-        for (int i = 0; i < equipment.Length; i++)
+        ListOfEquipmentSlots = new ItemSlot[item.Length];
+        for (int i = 0; i < item.Length; i++)
         {
             float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing) + middleIndex * (slotHeight + spacing);
             var newItemSlot = Instantiate(ItemSlot, transform);
@@ -100,8 +100,9 @@ public class ItemWheel : MonoBehaviour
             {
                 slotImage.color = Random.ColorHSV();
             }
-            newItemSlot.ItemId = equipment[i].id;
-            SetText(i, newItemSlot, equipment);
+            newItemSlot.Id = item[i].id;
+            newItemSlot.ItemTag = item[i].itemTag;
+            SetText(i, newItemSlot, item);
             ListOfEquipmentSlots[i] = newItemSlot;
         }
     }

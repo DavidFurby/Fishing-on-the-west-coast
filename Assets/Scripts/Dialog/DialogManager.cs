@@ -58,4 +58,9 @@ public class DialogManager : MonoBehaviour
         dialogueRunner.VariableStorage.SetValue(variableName, value);
     }
 
+    public void SetVariableValue(string variableName, int value)
+    {
+        dialogueRunner.VariableStorage.SetValue(variableName, value);
+    }
+
 }

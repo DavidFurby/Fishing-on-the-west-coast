@@ -59,7 +59,7 @@ public class FishingRodLogic : MonoBehaviour
     public void ChargeCasting(System.Action setChargingThrowSpeed)
     {
         fishingRodAnimations.PlaySwingAnimation();
-        if (castingPower < currentFishingRod.ThrowRange)
+        if (castingPower < currentFishingRod.throwRange)
         {
             castingPower++;
             setChargingThrowSpeed();
