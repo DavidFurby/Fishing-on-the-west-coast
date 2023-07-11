@@ -36,6 +36,21 @@ public class Game : MonoBehaviour
                 break;
         }
     }
+    public Item GetEquipment(ItemTag itemTag)
+    {
+        Debug.Log(itemTag);
+        switch (itemTag)
+        {
+            case ItemTag.FishingRod:
+                return EquippedFishingRod;
+            case ItemTag.Bait:
+                return EquippedBait;
+            case ItemTag.Hat:
+                return EquippedHat;
+            default: return null;
+        }
+
+    }
 
     //Check if item Exists in inventory
     public bool HasItem(Item item)

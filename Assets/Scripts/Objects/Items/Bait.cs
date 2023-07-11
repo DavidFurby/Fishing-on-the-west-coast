@@ -6,6 +6,11 @@ public class Bait : Item
 {
     [SerializeField] public int level;
 
+    public Bait() : base()
+    {
+        itemTag = ItemTag.Bait;
+    }
+
     public void AddBaitToInstance()
     {
         MainManager.Instance.game.FoundBaits =

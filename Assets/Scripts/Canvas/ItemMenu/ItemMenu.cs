@@ -15,10 +15,12 @@ public class ItemMenu : MonoBehaviour
 
     void Start()
     {
+
         itemMenu.SetActive(false);
         allItems = MainManager.Instance.game.FoundBaits.Cast<Item>().ToList();
         allItems.AddRange(MainManager.Instance.game.FoundFishingRods);
         allItems.AddRange(MainManager.Instance.game.FoundHats);
+        Debug.Log(MainManager.Instance.game.FoundFishingRods[0].itemTag);
     }
 
     void Update()
@@ -34,13 +36,14 @@ public class ItemMenu : MonoBehaviour
             switch (wheel.itemTag)
             {
                 case ItemTag.Bait:
-                    wheel.SetEquipment(allItems.OfType<Bait>().ToArray());
+                    wheel.SetItems(allItems.OfType<Bait>().ToArray());
                     break;
                 case ItemTag.FishingRod:
-                    wheel.SetEquipment(allItems.OfType<FishingRod>().ToArray());
+                    Debug.Log(allItems.OfType<FishingRod>().ToArray()[0].itemTag);
+                    wheel.SetItems(allItems.OfType<FishingRod>().ToArray());
                     break;
                 case ItemTag.Hat:
-                    wheel.SetEquipment(allItems.OfType<Hat>().ToArray());
+                    wheel.SetItems(allItems.OfType<Hat>().ToArray());
                     break;
             }
         }
@@ -81,7 +84,7 @@ public class ItemMenu : MonoBehaviour
         {
             foreach (var wheel in listOfWheels)
             {
-                wheel.ChangeEquipedItem();
+                wheel.ChangeEquippedItem();
             }
             ToggleMenu();
         }

@@ -6,6 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Hat", menuName = "ScriptableObjects/Hat", order = 1)]
 public class Hat : Item
 {
+
+    public Hat() : base()
+    {
+        itemTag = ItemTag.Hat;
+    }
     public Hat(HatData hatData)
     {
         id = hatData.id;

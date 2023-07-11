@@ -142,7 +142,6 @@ public class Shop : MonoBehaviour
             {
                 if (MainManager.Instance.game.HasItem(shopItems[i].item))
                 {
-                    Debug.Log(MainManager.Instance.game.HasItem(shopItems[i].item));
                     SpawnEmptySpot(i);
                 }
                 else
