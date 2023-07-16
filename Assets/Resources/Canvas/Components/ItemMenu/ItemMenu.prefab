@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff0c78362fd17849b37fc334aaf8a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemSlot: {fileID: 1967445459752497753, guid: a3225bb6a847dd5448544a45298b6088, type: 3}
+  ItemSlot: {fileID: 4060055819387510097, guid: a3225bb6a847dd5448544a45298b6088, type: 3}
   itemTag: 3
 --- !u!1 &7892022864345153700
 GameObject:
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff0c78362fd17849b37fc334aaf8a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemSlot: {fileID: 1967445459752497753, guid: a3225bb6a847dd5448544a45298b6088, type: 3}
+  ItemSlot: {fileID: 4060055819387510097, guid: a3225bb6a847dd5448544a45298b6088, type: 3}
   itemTag: 2
 --- !u!1 &8150373288748146121
 GameObject:
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff0c78362fd17849b37fc334aaf8a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemSlot: {fileID: 1967445459752497753, guid: a3225bb6a847dd5448544a45298b6088, type: 3}
+  ItemSlot: {fileID: 4060055819387510097, guid: a3225bb6a847dd5448544a45298b6088, type: 3}
   itemTag: 1
 --- !u!1001 &2519651153089026175
 PrefabInstance:
