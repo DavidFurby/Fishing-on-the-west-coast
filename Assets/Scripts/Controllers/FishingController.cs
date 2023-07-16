@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// This class handles the fishing controls for the player.
@@ -7,12 +8,10 @@ public class FishingController : MonoBehaviour
 {
     #region Serialized Fields
     [SerializeField] private CatchArea catchArea;
-    [SerializeField] private AudioSource castSound;
     [SerializeField] private BaitCamera baitCamera;
     [SerializeField] private CatchSummary catchSummary;
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private FishingRodLogic fishingRodLogic;
-    [SerializeField] private PlayerAnimations playerAnimations;
     #endregion
 
     #region Public Fields
@@ -31,6 +30,11 @@ public class FishingController : MonoBehaviour
         InspectFish,
     }
     #endregion
+    public UnityEvent onCatchFish;
+    public UnityEvent onCharge;
+    public UnityEvent onChargeRelease;
+    public UnityEvent onLoseCatch;
+    public UnityEvent onInspectFish;
 
     #region Unity Methods
     private void Start()
@@ -57,9 +61,8 @@ public class FishingController : MonoBehaviour
             if (catchArea.IsInCatchArea && catchArea.fish != null)
             {
                 StartCoroutine(CatchAlert());
-                catchArea.CatchFish();
                 fishingMiniGame.StartBalanceMiniGame(catchArea.totalCatches);
-                fishingRodLogic.CalculateReelInSpeed();
+                onCatchFish.Invoke();
                 SetFishingStatus(FishingStatus.ReelingFish);
             }
             else
@@ -89,16 +92,12 @@ public class FishingController : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 SetFishingStatus(FishingStatus.Charging);
-                playerAnimations.SetChargingThrowAnimation(true);
-                fishingRodLogic.ChargeCasting(playerAnimations.SetChargingThrowSpeed);
+                onCharge.Invoke();
 
             }
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                fishingMiniGame.SetChargingBalance(false);
-                playerAnimations.SetChargingThrowAnimation(false);
-                fishingRodLogic.PlayerReverseSwingAnimation();
-                castSound.Play();
+                onChargeRelease.Invoke();
                 WaitForSwingAnimation();
             }
         }
@@ -118,8 +117,7 @@ public class FishingController : MonoBehaviour
         if (catchArea.totalCatches.Count > 0 && fishingStatus == FishingStatus.StandBy)
         {
             SetFishingStatus(FishingStatus.InspectFish);
-            fishingMiniGame.EndBalanceMiniGame();
-            catchSummary.InitiateCatchSummary(catchArea.totalCatches);
+            onInspectFish.Invoke();
         }
     }
 
@@ -129,8 +127,7 @@ public class FishingController : MonoBehaviour
     {
         if (fishingStatus == FishingStatus.ReelingFish)
         {
-            fishingMiniGame.EndBalanceMiniGame();
-            catchArea.RemoveCatch();
+            onLoseCatch.Invoke();
             SetFishingStatus(FishingStatus.Reeling);
         }
 

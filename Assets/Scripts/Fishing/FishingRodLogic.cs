@@ -7,6 +7,7 @@ public class FishingRodLogic : MonoBehaviour
     [SerializeField] private CatchArea catchArea;
     [SerializeField] private FishingRodAnimations fishingRodAnimations;
     [SerializeField] private FishingMiniGame gameMiniGame;
+    [SerializeField] private PlayerAnimations playerAnimations;
     [HideInInspector] public float reelInSpeed;
     [HideInInspector] public float castingPower;
     private FishingRod currentFishingRod;
@@ -56,13 +57,13 @@ public class FishingRodLogic : MonoBehaviour
     /// Charges the casting power while the space key is held down.
     /// </summary>
     /// <param name="setChargingThrowSpeed">The action to perform while charging the casting power.</param>
-    public void ChargeCasting(System.Action setChargingThrowSpeed)
+    public void ChargeCasting()
     {
         fishingRodAnimations.PlaySwingAnimation();
         if (castingPower < currentFishingRod.throwRange)
         {
             castingPower++;
-            setChargingThrowSpeed();
+            playerAnimations.SetChargingThrowSpeed();
         }
     }
 

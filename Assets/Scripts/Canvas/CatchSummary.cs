@@ -14,6 +14,7 @@ public class CatchSummary : MonoBehaviour
 
     [SerializeField] private FishingController fishingControls;
     [SerializeField] private CatchSummaryHandlers handlers;
+    [SerializeField] private CatchArea catchArea;
     private List<FishDisplay> caughtFishes;
     private FishDisplay currentlyPresentedFish;
     private int fishIndex;
@@ -31,15 +32,15 @@ public class CatchSummary : MonoBehaviour
     /// Initialize the catch summary with a list of caught fishes.
     /// </summary>
     /// <param name="fishes">The list of caught fishes.</param>
-    public void InitiateCatchSummary(List<FishDisplay> fishes)
+    public void InitiateCatchSummary()
     {
-        if (fishes.Count == 0)
+        if (catchArea.totalCatches.Count == 0)
         {
             Debug.LogError("Fish list is empty");
             return;
         }
-        caughtFishes = fishes;
-        currentlyPresentedFish = fishes[0];
+        caughtFishes = catchArea.totalCatches;
+        currentlyPresentedFish = catchArea.totalCatches[0];
         UpdateDataValues();
         handlers.StartSummar(currentlyPresentedFish);
     }
