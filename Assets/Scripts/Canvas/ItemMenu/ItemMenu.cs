@@ -20,7 +20,6 @@ public class ItemMenu : MonoBehaviour
         allItems = MainManager.Instance.game.FoundBaits.Cast<Item>().ToList();
         allItems.AddRange(MainManager.Instance.game.FoundFishingRods);
         allItems.AddRange(MainManager.Instance.game.FoundHats);
-        Debug.Log(MainManager.Instance.game.FoundFishingRods[0].itemTag);
     }
 
     void Update()

@@ -14,8 +14,8 @@ public class BaitLogic : MonoBehaviour
     [SerializeField] private GameObject distanceRecordMarker;
     [SerializeField] private FishingRodLogic fishingRodLogic;
     [HideInInspector] public Bait currentBait;
-
     [HideInInspector] public bool inWater = false;
+
     private GameObject currentDistanceRecordMarker;
     private float distance;
     private float waterLevel;
@@ -48,7 +48,7 @@ public class BaitLogic : MonoBehaviour
 
     public void Cast()
     {
-        if (fishingControlls.fishingStatus == FishingController.FishingStatus.Casting)
+        if (fishingControlls.stateMachine.GetCurrentState() is Casting)
         {
             rigidBody.isKinematic = false;
             rigidBody.AddForceAtPosition(forceFactor * fishingRodLogic.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
@@ -60,7 +60,7 @@ public class BaitLogic : MonoBehaviour
     }
     public void ReelIn()
     {
-        if (fishingControlls.fishingStatus == FishingController.FishingStatus.Reeling || fishingControlls.fishingStatus == FishingController.FishingStatus.ReelingFish)
+        if (fishingControlls.stateMachine.GetCurrentState() is Reeling || fishingControlls.stateMachine.GetCurrentState() is ReelingFish)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
             if (IsCloseToTarget(targetPosition))
@@ -99,7 +99,7 @@ public class BaitLogic : MonoBehaviour
     //Calculate distance cast
     private void CalculateDistance()
     {
-        bool isStandBy = fishingControlls.fishingStatus == FishingController.FishingStatus.StandBy;
+        bool isStandBy = fishingControlls.stateMachine.GetCurrentState() is StandBy;
         distanceTextUI.gameObject.SetActive(!isStandBy);
         if (!isStandBy)
         {
@@ -137,8 +137,6 @@ public class BaitLogic : MonoBehaviour
         rigidBody.isKinematic = true;
         transform.position = targetPosition;
         ResetValues();
-        fishingControlls.SetFishingStatus(FishingController.FishingStatus.StandBy);
-
     }
 
     private void ResetValues()

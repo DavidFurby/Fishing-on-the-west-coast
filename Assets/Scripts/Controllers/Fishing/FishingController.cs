@@ -13,23 +13,8 @@ public class FishingController : MonoBehaviour
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private FishingRodLogic fishingRodLogic;
     #endregion
+    public FishingStateMachine stateMachine = new();
 
-    #region Public Fields
-    [HideInInspector] public FishingStatus fishingStatus;
-    #endregion
-
-    #region Enums
-    public enum FishingStatus
-    {
-        StandBy,
-        Charging,
-        Casting,
-        Fishing,
-        Reeling,
-        ReelingFish,
-        InspectFish,
-    }
-    #endregion
     public UnityEvent onCatchFish;
     public UnityEvent onCharge;
     public UnityEvent onChargeRelease;
@@ -39,7 +24,8 @@ public class FishingController : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
-        fishingStatus = FishingStatus.StandBy;
+        stateMachine.SetState(new StandBy());
+
     }
 
     // Update is called once per frame
@@ -56,21 +42,20 @@ public class FishingController : MonoBehaviour
     /// </summary>
     private void ReelInBait()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && fishingStatus == FishingStatus.Fishing)
+        if (Input.GetKeyDown(KeyCode.Space) && stateMachine.GetCurrentState() is Fishing)
         {
             if (catchArea.IsInCatchArea && catchArea.fish != null)
             {
                 StartCoroutine(CatchAlert());
-                fishingMiniGame.StartBalanceMiniGame(catchArea.totalCatches);
+                fishingMiniGame.StartBalanceMiniGame(stateMachine.GetCurrentState().totalFishes);
                 onCatchFish.Invoke();
-                SetFishingStatus(FishingStatus.ReelingFish);
+                stateMachine.SetState(new ReelingFish());
             }
             else
             {
                 fishingRodLogic.ReelInSpeed();
-                SetFishingStatus(FishingStatus.Reeling);
+                stateMachine.SetState(new Reeling());
             }
-
         }
     }
 
@@ -87,13 +72,12 @@ public class FishingController : MonoBehaviour
     /// </summary>
     private void StartFishing()
     {
-        if (fishingStatus == FishingStatus.StandBy || fishingStatus == FishingStatus.Charging)
+        if (stateMachine.GetCurrentState() is StandBy || stateMachine.GetCurrentState() is Charging)
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                SetFishingStatus(FishingStatus.Charging);
+                stateMachine.SetState(new Charging());
                 onCharge.Invoke();
-
             }
             if (Input.GetKeyUp(KeyCode.Space))
             {
@@ -108,34 +92,27 @@ public class FishingController : MonoBehaviour
     /// </summary>
     void WaitForSwingAnimation()
     {
-        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower, SetFishingStatus));
+        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower, stateMachine.SetState));
     }
 
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
-        if (catchArea.totalCatches.Count > 0 && fishingStatus == FishingStatus.StandBy)
+        if (stateMachine.GetCurrentState().totalFishes.Count > 0)
         {
-            SetFishingStatus(FishingStatus.InspectFish);
+            stateMachine.SetState(new InspectFish());
             onInspectFish.Invoke();
         }
     }
 
-
     //Drop the fish if you fail the minigame
     public void LoseCatch()
     {
-        if (fishingStatus == FishingStatus.ReelingFish)
+        if (stateMachine.GetCurrentState() is ReelingFish)
         {
             onLoseCatch.Invoke();
-            SetFishingStatus(FishingStatus.Reeling);
+            stateMachine.SetState(new Reeling());
         }
-
     }
-
-    public void SetFishingStatus(FishingStatus fishingStatus)
-    {
-        this.fishingStatus = fishingStatus;
-    }
-    #endregion
 }
+#endregion

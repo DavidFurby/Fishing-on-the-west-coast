@@ -6,7 +6,7 @@ public class CatchSummaryHandlers : MonoBehaviour
 {
     [SerializeField] private DialogManager dialogManager;
 
-    public void StartSummar(FishDisplay catchResult)
+    public void StartSummary(FishDisplay catchResult)
     {
         if (dialogManager != null)
         {

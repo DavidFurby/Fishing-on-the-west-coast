@@ -56,7 +56,7 @@ public class ExplorationController : MonoBehaviour
     {
         if (playerStatus == PlayerStatus.StandBy)
         {
-            Vector3 movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+            Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
             MovePlayer(movementDirection);
             RotatePlayer(movementDirection);
         }

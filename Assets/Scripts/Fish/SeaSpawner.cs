@@ -3,74 +3,83 @@ using UnityEngine;
 
 public class SeaSpawner : MonoBehaviour
 {
+    // Serialized fields
+    [SerializeField] private FishDisplay[] fishPrefabs;
+    [SerializeField] private int spawnDelay;
+    [SerializeField] private GameObject bait;
+    [SerializeField] private FishingController fishingController;
 
-    new Renderer renderer;
+    // Private fields
+    private Renderer seaRenderer;
     private Vector3 seaPosition;
     private float fishSpawnDirection;
     private Quaternion fishSpawnRotation;
     private Vector3 fishSpawnPosition;
-    [SerializeField] FishDisplay[] fishes;
-    [SerializeField] int spawnDelay;
-    [SerializeField] GameObject bait;
-    [SerializeField] FishingController fishingControlls;
 
     private void Start()
     {
-        //Get the size and center of the sea object
+        // Get the size and center of the sea object
         seaPosition = transform.position;
-        renderer = GetComponent<Renderer>();
+        seaRenderer = GetComponent<Renderer>();
         InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
     }
+
     private void Update()
     {
-        if (fishingControlls.fishingStatus == FishingController.FishingStatus.StandBy)
+        // Remove all fishes if the current state is StandBy
+        if (fishingController.stateMachine.GetCurrentState() is StandBy)
         {
             RemoveAllFishes();
         }
     }
 
+    // Spawn a fish at a random position
     private void SpawnFish()
     {
-        if (fishingControlls.fishingStatus != FishingController.FishingStatus.StandBy)
+        // Spawn a fish if the current state is not StandBy
+        if (fishingController.stateMachine.GetCurrentState() is not StandBy)
         {
-            //Choose random fish from the array
-            int randomFishIndex = Random.Range(0, fishes.Length);
+            // Choose a random fish from the array
+            int randomFishIndex = Random.Range(0, fishPrefabs.Length);
 
             CalculateSpawnPosition();
 
-            //Instatiate the fish 
-            GameObject fish = Instantiate(fishes[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
+            // Instantiate the fish
+            GameObject fish = Instantiate(fishPrefabs[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
             SetDirection(fish);
         }
     }
 
-    //Get the fishmovement component and set the direction based on horizontal positon
+    // Set the direction of the fish based on its horizontal position
     private void SetDirection(GameObject fish)
     {
         FishMovement fishMovement = fish.GetComponent<FishMovement>();
         fishMovement.direction = fishSpawnDirection == seaPosition.x ? Vector3.right : Vector3.left;
     }
 
+    // Calculate the spawn position of the fish
     private void CalculateSpawnPosition()
     {
-        if (fishingControlls.fishingStatus != FishingController.FishingStatus.StandBy)
+        if (fishingController.stateMachine.GetCurrentState() is not StandBy)
         {
-            //Calculate horizontal and vertical spawn position
+            // Calculate horizontal and vertical spawn position
             fishSpawnDirection = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;
-            float spawnVertical = Random.Range(seaPosition.y, seaPosition.y + renderer.bounds.extents.y);
+            float spawnVertical = Random.Range(seaPosition.y, seaPosition.y + seaRenderer.bounds.extents.y);
 
-            //Calculate spawn rotation based on horizontal position
+            // Calculate spawn rotation based on horizontal position
             fishSpawnRotation = fishSpawnDirection == seaPosition.x ? Quaternion.Euler(0, 0, -90) : Quaternion.Euler(0, 0, 90);
 
-            //Calculate spawn position
+            // Calculate spawn position
             fishSpawnPosition = new Vector3(fishSpawnDirection, spawnVertical, bait.transform.position.z);
         }
     }
+
+    // Destroy the fish if it exits the trigger area
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Fish"))
         {
-            if (other.transform.position.y > seaPosition.y + renderer.bounds.extents.y)
+            if (other.transform.position.y > seaPosition.y + seaRenderer.bounds.extents.y)
             {
                 other.attachedRigidbody.AddForce(Vector3.down * 2, ForceMode.Impulse);
             }
@@ -80,6 +89,8 @@ public class SeaSpawner : MonoBehaviour
             }
         }
     }
+
+    // Remove all fishes from the scene
     public void RemoveAllFishes()
     {
         GameObject[] fishes = GameObject.FindGameObjectsWithTag("Fish");
@@ -90,8 +101,5 @@ public class SeaSpawner : MonoBehaviour
                 Destroy(fish);
             }
         }
-
     }
 }
-
-

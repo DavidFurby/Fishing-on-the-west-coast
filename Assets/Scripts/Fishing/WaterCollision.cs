@@ -12,11 +12,10 @@ public class WaterCollision : MonoBehaviour
     {
         if (other.gameObject == sea)
         {
-
-            if (fishingControlls.fishingStatus != FishingController.FishingStatus.Reeling && fishingControlls.fishingStatus != FishingController.FishingStatus.ReelingFish)
+            if (fishingControlls.stateMachine.GetCurrentState() is not Reeling && fishingControlls.stateMachine.GetCurrentState() is not ReelingFish)
             {
                 bait.UpdateDistanceRecord();
-                fishingControlls.SetFishingStatus(FishingController.FishingStatus.Fishing);
+                fishingControlls.stateMachine.SetState(new Fishing());
             }
             splashSound.Play();
             bait.inWater = true;
@@ -30,6 +29,4 @@ public class WaterCollision : MonoBehaviour
             bait.inWater = false;
         }
     }
-
-
 }

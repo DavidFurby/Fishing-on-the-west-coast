@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class CatchSummary : MonoBehaviour
 {
-    [SerializeField] private RectTransform catchSummary;
     [SerializeField] private TextMeshProUGUI catchName;
     [SerializeField] private TextMeshProUGUI sizeText;
     [SerializeField] private TextMeshProUGUI isNew;
@@ -15,14 +14,14 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private FishingController fishingControls;
     [SerializeField] private CatchSummaryHandlers handlers;
     [SerializeField] private CatchArea catchArea;
-    private List<FishDisplay> caughtFishes;
-    private FishDisplay currentlyPresentedFish;
+    private List<FishDisplay> caughtFishes = new();
+    private FishDisplay currentlyInspectedFish;
     private int fishIndex;
 
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && fishingControls.fishingStatus == FishingController.FishingStatus.InspectFish)
+        if (Input.GetKeyDown(KeyCode.Space) && fishingControls.stateMachine.GetCurrentState() is InspectFish)
         {
             NextSummary();
         }
@@ -31,18 +30,17 @@ public class CatchSummary : MonoBehaviour
     /// <summary>
     /// Initialize the catch summary with a list of caught fishes.
     /// </summary>
-    /// <param name="fishes">The list of caught fishes.</param>
     public void InitiateCatchSummary()
     {
-        if (catchArea.totalCatches.Count == 0)
+        if (fishingControls.stateMachine.GetCurrentState().totalFishes.Count <= 0)
         {
             Debug.LogError("Fish list is empty");
             return;
         }
-        caughtFishes = catchArea.totalCatches;
-        currentlyPresentedFish = catchArea.totalCatches[0];
+        caughtFishes = fishingControls.stateMachine.GetCurrentState().totalFishes;
+        currentlyInspectedFish = fishingControls.stateMachine.GetCurrentState().totalFishes[0];
         UpdateDataValues();
-        handlers.StartSummar(currentlyPresentedFish);
+        handlers.StartSummary(currentlyInspectedFish);
     }
 
     /// <summary>
@@ -54,7 +52,7 @@ public class CatchSummary : MonoBehaviour
         {
             IncrementFishIndex();
             UpdateDataValues();
-            handlers.StartSummar(currentlyPresentedFish);
+            handlers.StartSummary(currentlyInspectedFish);
         }
         else
         {
@@ -64,8 +62,8 @@ public class CatchSummary : MonoBehaviour
 
     private void UpdateDataValues()
     {
-        newRecord.gameObject.SetActive(CheckSizeDifference(currentlyPresentedFish));
-        isNew.gameObject.SetActive(CheckIfNew(currentlyPresentedFish));
+        newRecord.gameObject.SetActive(CheckSizeDifference(currentlyInspectedFish));
+        isNew.gameObject.SetActive(CheckIfNew(currentlyInspectedFish));
         MainManager.Instance.game.TotalCatches++;
     }
 
@@ -73,7 +71,7 @@ public class CatchSummary : MonoBehaviour
     private void IncrementFishIndex()
     {
         fishIndex++;
-        currentlyPresentedFish = caughtFishes[fishIndex];
+        currentlyInspectedFish = caughtFishes[fishIndex];
     }
 
     // Check if fish is larger than the saved fish of the same name
@@ -120,15 +118,14 @@ public class CatchSummary : MonoBehaviour
     {
         ResetValues();
         handlers.EndSummary();
-        fishingControls.SetFishingStatus(FishingController.FishingStatus.StandBy);
-        Debug.Log(fishingControls.fishingStatus);
+        fishingControls.stateMachine.SetState(new StandBy());
     }
 
     // Reset values
     private void ResetValues()
     {
         caughtFishes.Clear();
-        currentlyPresentedFish = null;
+        currentlyInspectedFish = null;
         fishIndex = 0;
     }
 }
