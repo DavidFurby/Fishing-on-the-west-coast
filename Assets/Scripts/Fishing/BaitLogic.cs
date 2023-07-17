@@ -48,7 +48,7 @@ public class BaitLogic : MonoBehaviour
 
     public void Cast()
     {
-        if (fishingControlls.stateMachine.GetCurrentState() is Casting)
+        if (fishingControlls.GetCurrentState() is Casting)
         {
             rigidBody.isKinematic = false;
             rigidBody.AddForceAtPosition(forceFactor * fishingRodLogic.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
@@ -60,7 +60,7 @@ public class BaitLogic : MonoBehaviour
     }
     public void ReelIn()
     {
-        if (fishingControlls.stateMachine.GetCurrentState() is Reeling || fishingControlls.stateMachine.GetCurrentState() is ReelingFish)
+        if (fishingControlls.GetCurrentState() is Reeling || fishingControlls.GetCurrentState() is ReelingFish)
         {
             Vector3 targetPosition = fishingRodTop.transform.position;
             if (IsCloseToTarget(targetPosition))
@@ -99,7 +99,7 @@ public class BaitLogic : MonoBehaviour
     //Calculate distance cast
     private void CalculateDistance()
     {
-        bool isStandBy = fishingControlls.stateMachine.GetCurrentState() is StandBy;
+        bool isStandBy = fishingControlls.GetCurrentState() is Idle;
         distanceTextUI.gameObject.SetActive(!isStandBy);
         if (!isStandBy)
         {

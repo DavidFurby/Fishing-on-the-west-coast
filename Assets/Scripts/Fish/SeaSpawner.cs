@@ -27,7 +27,7 @@ public class SeaSpawner : MonoBehaviour
     private void Update()
     {
         // Remove all fishes if the current state is StandBy
-        if (fishingController.stateMachine.GetCurrentState() is StandBy)
+        if (fishingController.GetCurrentState() is Idle)
         {
             RemoveAllFishes();
         }
@@ -37,7 +37,7 @@ public class SeaSpawner : MonoBehaviour
     private void SpawnFish()
     {
         // Spawn a fish if the current state is not StandBy
-        if (fishingController.stateMachine.GetCurrentState() is not StandBy)
+        if (fishingController.GetCurrentState() is not Idle)
         {
             // Choose a random fish from the array
             int randomFishIndex = Random.Range(0, fishPrefabs.Length);
@@ -60,7 +60,7 @@ public class SeaSpawner : MonoBehaviour
     // Calculate the spawn position of the fish
     private void CalculateSpawnPosition()
     {
-        if (fishingController.stateMachine.GetCurrentState() is not StandBy)
+        if (fishingController.GetCurrentState() is not Idle)
         {
             // Calculate horizontal and vertical spawn position
             fishSpawnDirection = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;

@@ -21,7 +21,7 @@ public class CatchSummary : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && fishingControls.stateMachine.GetCurrentState() is InspectFish)
+        if (Input.GetKeyDown(KeyCode.Space) && fishingControls.GetCurrentState() is InspectFish)
         {
             NextSummary();
         }
@@ -32,13 +32,13 @@ public class CatchSummary : MonoBehaviour
     /// </summary>
     public void InitiateCatchSummary()
     {
-        if (fishingControls.stateMachine.GetCurrentState().totalFishes.Count <= 0)
+        if (fishingControls.GetCurrentState().totalFishes.Count <= 0)
         {
             Debug.LogError("Fish list is empty");
             return;
         }
-        caughtFishes = fishingControls.stateMachine.GetCurrentState().totalFishes;
-        currentlyInspectedFish = fishingControls.stateMachine.GetCurrentState().totalFishes[0];
+        caughtFishes = fishingControls.GetCurrentState().totalFishes;
+        currentlyInspectedFish = fishingControls.GetCurrentState().totalFishes[0];
         UpdateDataValues();
         handlers.StartSummary(currentlyInspectedFish);
     }
@@ -118,7 +118,7 @@ public class CatchSummary : MonoBehaviour
     {
         ResetValues();
         handlers.EndSummary();
-        fishingControls.stateMachine.SetState(new StandBy());
+        fishingControls.SetState(new Idle(fishingControls));
     }
 
     // Reset values

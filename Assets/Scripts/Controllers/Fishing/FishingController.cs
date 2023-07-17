@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 /// <summary>
 /// This class handles the fishing controls for the player.
-public class FishingController : MonoBehaviour
+public class FishingController : FishingStateMachine
 {
     #region Serialized Fields
     [SerializeField] private CatchArea catchArea;
@@ -13,48 +13,38 @@ public class FishingController : MonoBehaviour
     [SerializeField] private FishingMiniGame fishingMiniGame;
     [SerializeField] private FishingRodLogic fishingRodLogic;
     #endregion
-    public FishingStateMachine stateMachine = new();
-
     public UnityEvent onCatchFish;
     public UnityEvent onCharge;
     public UnityEvent onChargeRelease;
     public UnityEvent onLoseCatch;
     public UnityEvent onInspectFish;
 
-    #region Unity Methods
     private void Start()
     {
-        stateMachine.SetState(new StandBy());
-
+        SetState(new Idle(this));
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        ReelInBait();
-        StartFishing();
-    }
+    #region Unity Methods
     #endregion
 
     #region Private Methods
     /// <summary>
     /// Reels in the bait if the space key is pressed.
     /// </summary>
-    private void ReelInBait()
+    public void StartReeling()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && stateMachine.GetCurrentState() is Fishing)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (catchArea.IsInCatchArea && catchArea.fish != null)
             {
                 StartCoroutine(CatchAlert());
-                fishingMiniGame.StartBalanceMiniGame(stateMachine.GetCurrentState().totalFishes);
+                fishingMiniGame.StartBalanceMiniGame(GetCurrentState().totalFishes);
                 onCatchFish.Invoke();
-                stateMachine.SetState(new ReelingFish());
+                SetState(new ReelingFish(this));
             }
             else
             {
                 fishingRodLogic.ReelInSpeed();
-                stateMachine.SetState(new Reeling());
+                SetState(new Reeling(this));
             }
         }
     }
@@ -70,48 +60,45 @@ public class FishingController : MonoBehaviour
     /// <summary>
     /// Starts fishing if the space key is held down.
     /// </summary>
-    private void StartFishing()
+    public void StartFishing()
     {
-        if (stateMachine.GetCurrentState() is StandBy || stateMachine.GetCurrentState() is Charging)
+        if (Input.GetKey(KeyCode.Space))
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                stateMachine.SetState(new Charging());
-                onCharge.Invoke();
-            }
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                onChargeRelease.Invoke();
-                WaitForSwingAnimation();
-            }
+            SetState(new Charging(this));
+            onCharge.Invoke();
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            onChargeRelease.Invoke();
+            WaitForSwingAnimation();
         }
     }
 
     /// <summary>
     /// Waits for the swing animation to finish before changing the fishing status.
     /// </summary>
-    void WaitForSwingAnimation()
+    public void WaitForSwingAnimation()
     {
-        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower, stateMachine.SetState));
+        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower, SetState));
     }
 
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
-        if (stateMachine.GetCurrentState().totalFishes.Count > 0)
+        if (GetCurrentState().totalFishes.Count > 0)
         {
-            stateMachine.SetState(new InspectFish());
             onInspectFish.Invoke();
+            SetState(new InspectFish(this));
         }
     }
 
     //Drop the fish if you fail the minigame
     public void LoseCatch()
     {
-        if (stateMachine.GetCurrentState() is ReelingFish)
+        if (GetCurrentState() is ReelingFish)
         {
             onLoseCatch.Invoke();
-            stateMachine.SetState(new Reeling());
+            SetState(new Reeling(this));
         }
     }
 }

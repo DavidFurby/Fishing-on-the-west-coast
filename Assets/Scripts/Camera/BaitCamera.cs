@@ -16,7 +16,7 @@ public class BaitCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (fishingControlls.stateMachine.GetCurrentState() is Casting)
+        if (fishingControlls.GetCurrentState() is Casting)
         {
             UpdateCameraPosition();
             if (cameraDistance < bait.transform.position.z - 2)
@@ -24,7 +24,7 @@ public class BaitCamera : MonoBehaviour
                 cameraDistance += 0.1f;
             }
         }
-        else if (fishingControlls.stateMachine.GetCurrentState() is Fishing)
+        else if (fishingControlls.GetCurrentState() is Fishing)
         {
             UpdateCameraPosition();
             if (cameraDistance > originalCameraDistance)
@@ -32,7 +32,7 @@ public class BaitCamera : MonoBehaviour
                 cameraDistance -= 0.01f;
             }
         }
-        else if (fishingControlls.stateMachine.GetCurrentState() is ReelingFish)
+        else if (fishingControlls.GetCurrentState() is ReelingFish)
         {
             UpdateCameraPosition();
             if (cameraDistance < bait.transform.position.z - 2)

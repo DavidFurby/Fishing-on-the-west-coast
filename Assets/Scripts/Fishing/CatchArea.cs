@@ -28,7 +28,7 @@ public class CatchArea : MonoBehaviour
             }
 
         }
-        else if (fishingControlls != null && fishingControlls.stateMachine.GetCurrentState() is ReelingFish && other.CompareTag("Fish") && fish != null)
+        else if (fishingControlls.GetCurrentState() is ReelingFish && other.CompareTag("Fish") && fish != null)
         {
             CatchFishWhileReeling(other);
         }
@@ -50,15 +50,15 @@ public class CatchArea : MonoBehaviour
         if (other.TryGetComponent(out FishMovement newFishMovement))
         {
             // Modified to use the totalFishes variable in the FishingState class
-            if (fishingControlls.stateMachine.GetCurrentState().totalFishes.Count > 0)
+            if (fishingControlls.GetCurrentState().totalFishes.Count > 0)
             {
-                newFishMovement.GetBaited(fishingControlls.stateMachine.GetCurrentState().totalFishes[^1].gameObject);
+                newFishMovement.GetBaited(fishingControlls.GetCurrentState().totalFishes[^1].gameObject);
             }
             newFishMovement.SetFishState(FishMovement.FishState.Hooked);
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {
                 // Modified to use the totalFishes variable in the FishingState class
-                fishingControlls.stateMachine.GetCurrentState().AddFish(newFishComponent);
+                fishingControlls.GetCurrentState().AddFish(newFishComponent);
             }
             FishingRodLogic.CalculateReelInSpeed();
         }
@@ -72,7 +72,7 @@ public class CatchArea : MonoBehaviour
         {
             fish.GetComponent<FishMovement>().SetFishState(FishMovement.FishState.Hooked);
             // Modified to use the totalFishes variable in the FishingState class
-            fishingControlls.stateMachine.GetCurrentState().totalFishes.Add(fish.GetComponent<FishDisplay>());
+            fishingControlls.GetCurrentState().totalFishes.Add(fish.GetComponent<FishDisplay>());
         }
     }
 
@@ -84,6 +84,6 @@ public class CatchArea : MonoBehaviour
         fish = null;
         IsInCatchArea = false;
         // Modified to use the totalFishes variable in the FishingState class
-        fishingControlls.stateMachine.GetCurrentState().totalFishes.Clear();
+        fishingControlls.GetCurrentState().totalFishes.Clear();
     }
 }
