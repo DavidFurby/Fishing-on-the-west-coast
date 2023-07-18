@@ -13,6 +13,11 @@ public class Swimming : FishState
     public Swimming(FishMovement fishMovement) : base(fishMovement)
     {
     }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        fishMovement.SwimAround();
+    }
 }
 public class Baited : FishState
 {
@@ -24,6 +29,7 @@ public class Baited : FishState
     {
         base.FixedUpdate();
         fishMovement.RotateTowardsBait();
+        fishMovement.SwimTowards();
     }
 }
 
@@ -35,7 +41,8 @@ public class Hooked : FishState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.HookTooBait();
+        fishMovement.HookToTarget();
+        fishMovement.MunchOn();
 
     }
 }

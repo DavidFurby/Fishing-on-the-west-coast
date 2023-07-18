@@ -52,17 +52,7 @@ public class SeaSpawner : MonoBehaviour
 
         // Instantiate the fish
         GameObject fish = Instantiate(fishPrefabs[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
-        SetDirection(fish);
-
     }
-
-    // Set the direction of the fish based on its horizontal position
-    private void SetDirection(GameObject fish)
-    {
-        FishMovement fishMovement = fish.GetComponent<FishMovement>();
-        fishMovement.direction = fishSpawnDirection == seaPosition.x ? Vector3.right : Vector3.left;
-    }
-
     // Calculate the spawn position of the fish
     private void CalculateSpawnPosition()
     {
@@ -73,7 +63,7 @@ public class SeaSpawner : MonoBehaviour
             float spawnVertical = Random.Range(seaPosition.y, seaPosition.y + seaRenderer.bounds.extents.y);
 
             // Calculate spawn rotation based on horizontal position
-            fishSpawnRotation = fishSpawnDirection == seaPosition.x ? Quaternion.Euler(0, 0, -90) : Quaternion.Euler(0, 0, 90);
+            fishSpawnRotation = fishSpawnDirection < bait.transform.position.x ? Quaternion.Euler(0, 90, 0) : Quaternion.Euler(0, -90, 0);
 
             // Calculate spawn position
             fishSpawnPosition = new Vector3(fishSpawnDirection, spawnVertical, bait.transform.position.z);

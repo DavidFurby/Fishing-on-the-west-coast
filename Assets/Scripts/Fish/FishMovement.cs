@@ -3,27 +3,27 @@ using System.Collections.Generic;
 
 public class FishMovement : FishStateMachine
 {
-    [SerializeField] private GameObject _target;
+    [HideInInspector] public GameObject target;
     private Transform[] _bones;
     [SerializeField] private float _speed = 0.3f;
     [SerializeField] private float _rotateSpeed = 2;
     private Transform _tastyPart;
-
     [SerializeField] private float _offsetAmount = 0.4f;
     private Vector3 _offset;
-
     private Rigidbody _rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        SetState(new Swimming(this));
 
+        _rb = GetComponent<Rigidbody>();
+    }
     // Rotate towards the bait if baited
     public void RotateTowardsBait()
     {
-        if (currentBait != null)
-        _offset.y = _offsetAmount;
+        if (target != null)
+            _offset.y = _offsetAmount;
 
         //Gets an Array of Armatures's children aka all the bones, in order Head -> Tail
         _bones = transform.Find("Armature").GetChild(0).GetComponentsInChildren<Transform>();
@@ -42,85 +42,54 @@ public class FishMovement : FishStateMachine
 
             //sets tasty part to tail area (last in array) as default
             //(not setting to tail directly as to not get unwanted interactions on tail animations)
-            SetTastyPartPosition(_bones[_bones.Length - 1]);
+            SetTastyPartPosition(_bones[^1]);
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (_target)
-        {
-
-            switch (state)
-            {
-                case FishState.Swimming:
-                    SwimAround();
-                    break;
-
-                case FishState.Baited:
-                    SwimTowards(_target);
-                    break;
-
-                case FishState.Hooked:
-                    MunchOn(_target);
-                    break;
-
-                default:
-                    SwimAround();
-                    break;
-            }
-        }
-        else
-        {
-            SwimAround();
-        }
-    }
-
-    private void SwimAround()
+    public void SwimAround()
     {
         _rb.velocity = transform.forward * _speed;
     }
 
-    private void SwimTowards(GameObject target)
+    public void SwimTowards()
     {
         _rb.velocity = transform.forward * _speed;
-        RotateTowards(target.transform.position);
+        RotateTowards();
     }
 
-    public void MunchOn(GameObject target)
+    public void MunchOn()
     {
         //sets pos to target pos. Pivot point is always center so need offset to look good.
         //Also using rotate to make sure the rotation is correct
         transform.position = target.transform.position + target.transform.rotation * _offset;
-        RotateTowards(target.transform.position);
+        RotateTowards();
     }
 
-    private void RotateTowards(Vector3 target)
+    private void RotateTowards()
     {
 
-        Quaternion _lookRotation = Quaternion.LookRotation((target - transform.position).normalized);
+        Quaternion _lookRotation = Quaternion.LookRotation((target.transform.position - transform.position).normalized);
 
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _rotateSpeed);
     }
 
     public void SetTastyPartPosition(Transform obj)
     {
-        _tastyPart.position = obj.position;
 
         //Because of how the armature is imported i need to rotate this :^)
-        _tastyPart.rotation = Quaternion.Euler(-89.98f, 0f, 0f);
+        _tastyPart.SetPositionAndRotation(obj.position, Quaternion.Euler(-89.98f, 0f, 0f));
     }
 
 
-    public void GetBaited(GameObject bait)
+    public void GetBaited(GameObject target)
     {
-        currentBait = bait;
+        this.target = target;
         SetState(new Baited(this));
     }
     //Set the position of the fish to the bait if hooked
-    public void HookTooBait()
+    public void HookToTarget()
     {
-        if (currentBait != null)
+        if (target != null)
         {
             _rotateSpeed = 10;
         }
