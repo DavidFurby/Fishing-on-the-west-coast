@@ -22,10 +22,28 @@ public abstract class StateMachine : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-        currentState.FixedUpdate();
+        currentState?.FixedUpdate();
     }
     protected virtual void LateUpdate()
     {
-        currentState.LateUpdate();
+        currentState?.LateUpdate();
+    }
+}
+
+
+public class FishStateMachine : StateMachine
+{
+
+    public void SetState(FishState state)
+    {
+        base.SetState(state);
+    }
+}
+
+public abstract class FishingStateMachine : StateMachine
+{
+    public void SetState(FishingState state)
+    {
+        base.SetState(state);
     }
 }

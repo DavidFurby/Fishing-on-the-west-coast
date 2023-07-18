@@ -1,21 +1,11 @@
 using UnityEngine;
 
-public class FishMovement : MonoBehaviour
+public class FishMovement : FishStateMachine
 {
     [SerializeField] private float swimSpeed;
     public Vector3 direction;
     private Rigidbody rb;
     private GameObject currentBait;
-
-    public enum FishState
-    {
-        Swimming,
-        Baited,
-        Hooked,
-    }
-
-    public FishState state;
-
 
     // Start is called before the first frame update
     void Start()
@@ -24,16 +14,10 @@ public class FishMovement : MonoBehaviour
         InvokeRepeating(nameof(Swim), 1, 5);
     }
 
-    void FixedUpdate()
-    {
-        RotateTowardsBait();
-        FollowBait();
-    }
-
     // Rotate towards the bait if baited
-    void RotateTowardsBait()
+    public void RotateTowardsBait()
     {
-        if (state == FishState.Baited && currentBait != null)
+        if (currentBait != null)
         {
             direction = (currentBait.transform.position - transform.position).normalized;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -55,17 +39,12 @@ public class FishMovement : MonoBehaviour
     public void GetBaited(GameObject bait)
     {
         currentBait = bait;
-        SetFishState(FishState.Baited);
-    }
-
-    public void SetFishState(FishState fishState)
-    {
-        state = fishState;
+        SetState(new Baited(this));
     }
     //Set the position of the fish to the bait if hooked
-    private void FollowBait()
+    public void HookTooBait()
     {
-        if (state == FishState.Hooked && currentBait != null)
+        if (currentBait != null)
         {
             transform.position = currentBait.transform.position;
         }

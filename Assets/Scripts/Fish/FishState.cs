@@ -1,18 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class FishState : MonoBehaviour
+public class FishState : State
 {
-    // Start is called before the first frame update
-    void Start()
+    protected FishMovement fishMovement;
+    public FishState(FishMovement fishMovement)
     {
-        
+        this.fishMovement = fishMovement;
     }
+}
 
-    // Update is called once per frame
-    void Update()
+public class Swimming : FishState
+{
+    public Swimming(FishMovement fishMovement) : base(fishMovement)
     {
-        
+    }
+}
+public class Baited : FishState
+{
+    public Baited(FishMovement fishMovement) : base(fishMovement)
+    {
+
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        fishMovement.RotateTowardsBait();
+    }
+}
+
+public class Hooked : FishState
+{
+    public Hooked(FishMovement fishMovement) : base(fishMovement)
+    {
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        fishMovement.HookTooBait();
+
+    }
+}
+public class Inspected : FishState
+{
+    public Inspected(FishMovement fishMovement) : base(fishMovement)
+    {
     }
 }

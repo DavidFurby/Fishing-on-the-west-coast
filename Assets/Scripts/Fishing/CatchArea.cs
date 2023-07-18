@@ -1,35 +1,35 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Represents an area where fish can be caught.
-/// </summary>
 public class CatchArea : MonoBehaviour
 {
-    /// <summary>
-    /// Gets a value indicating whether a fish is in the catch area.
-    /// </summary>
     public bool IsInCatchArea { get; private set; }
     [HideInInspector] public FishDisplay fish;
     [SerializeField] private FishingSystem fishingSystem;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Fish") && fish == null)
+        if (other.CompareTag("Fish"))
         {
-            IsInCatchArea = true;
-            if (other.GetComponent<FishMovement>().state == FishMovement.FishState.Baited)
+            if (fish == null)
             {
-                if (other.TryGetComponent(out FishDisplay fish))
-                {
-                    this.fish = fish;
-                }
+                HandleFishEnter(other);
             }
-
+            else if (fishingSystem.GetCurrentState() is ReelingFish)
+            {
+                CatchFishWhileReeling(other);
+            }
         }
-        else if (fishingSystem.GetCurrentState() is ReelingFish && other.CompareTag("Fish") && fish != null)
+    }
+
+    private void HandleFishEnter(Collider other)
+    {
+        IsInCatchArea = true;
+        if (other.GetComponent<FishMovement>().GetCurrentState() is Baited)
         {
-            CatchFishWhileReeling(other);
+            if (other.TryGetComponent(out FishDisplay fish))
+            {
+                this.fish = fish;
+            }
         }
     }
 
@@ -42,47 +42,35 @@ public class CatchArea : MonoBehaviour
         }
     }
 
-    //Automatically catch another fish if it collides while reeling another fish
     private void CatchFishWhileReeling(Collider other)
     {
         StartCoroutine(fishingSystem?.baitCamera.CatchAlert());
         if (other.TryGetComponent(out FishMovement newFishMovement))
         {
-            // Modified to use the totalFishes variable in the FishingState class
-            if (fishingSystem.totalFishes.Count > 0)
-            {
-                newFishMovement.GetBaited(fishingSystem.totalFishes[^1].gameObject);
-            }
-            newFishMovement.SetFishState(FishMovement.FishState.Hooked);
+            newFishMovement.GetBaited(fishingSystem.totalFishes[^1].gameObject);
+            newFishMovement.SetState(new Hooked(newFishMovement));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {
-                // Modified to use the totalFishes variable in the FishingState class
                 fishingSystem.AddFish(newFishComponent);
             }
             fishingSystem.fishingRodLogic.CalculateReelInSpeed();
         }
     }
 
-
-    //Catch fish while fishing
     public void CatchFish()
     {
         if (fish != null)
         {
-            fish.GetComponent<FishMovement>().SetFishState(FishMovement.FishState.Hooked);
-            // Modified to use the totalFishes variable in the FishingState class
+            Debug.Log(fish);
+            fish.GetComponent<FishMovement>().SetState(new Hooked(fish.GetComponent<FishMovement>()));
             fishingSystem.AddFish(fish);
-
         }
     }
 
-    //Reset the values if the catch is lost
     public void RemoveCatch()
     {
-
         fish?.DestroyFish();
         fish = null;
         IsInCatchArea = false;
-        // Modified to use the totalFishes variable in the FishingState class
     }
 }

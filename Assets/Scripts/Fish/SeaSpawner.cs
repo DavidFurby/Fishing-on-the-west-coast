@@ -22,6 +22,21 @@ public class SeaSpawner : MonoBehaviour
         seaRenderer = GetComponent<Renderer>();
     }
 
+    // Destroy the fish if it exits the trigger area
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fish"))
+        {
+            if (other.transform.position.y > seaPosition.y + seaRenderer.bounds.extents.y)
+            {
+                other.attachedRigidbody.AddForce(Vector3.down * 2, ForceMode.Impulse);
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+        }
+    }
     public void InvokeSpawnFish()
     {
         InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
@@ -65,21 +80,6 @@ public class SeaSpawner : MonoBehaviour
         }
     }
 
-    // Destroy the fish if it exits the trigger area
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Fish"))
-        {
-            if (other.transform.position.y > seaPosition.y + seaRenderer.bounds.extents.y)
-            {
-                other.attachedRigidbody.AddForce(Vector3.down * 2, ForceMode.Impulse);
-            }
-            else
-            {
-                Destroy(other.gameObject);
-            }
-        }
-    }
 
     // Remove all fishes from the scene
     public void RemoveAllFishes()
