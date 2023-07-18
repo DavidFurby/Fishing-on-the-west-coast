@@ -3,35 +3,30 @@ using UnityEngine;
 
 public abstract class FishingState
 {
-    public readonly List<FishDisplay> totalFishes = new();
-    public Bait bait;
-    public FishingRod fishingRod;
-    protected FishingController controller;
+    protected FishingSystem system;
 
-    public FishingState(FishingController controller)
+    public FishingState(FishingSystem system)
     {
-        this.controller = controller;
+        this.system = system;
     }
 
     public virtual void OnEnter()
     {
-        bait = MainManager.Instance.game.EquippedBait;
-        fishingRod = MainManager.Instance.game.EquippedFishingRod;
     }
 
     public virtual void OnExit() { }
 
     public virtual void Update() { }
 
-    public void AddFish(FishDisplay fish)
+    public virtual void FixedUpdate()
     {
-        totalFishes.Add(fish);
+
     }
 }
 
 public class Idle : FishingState
 {
-    public Idle(FishingController controller) : base(controller)
+    public Idle(FishingSystem system) : base(system)
     {
     }
 
@@ -39,55 +34,66 @@ public class Idle : FishingState
     {
 
         base.OnEnter();
-        totalFishes.Clear();
+        system.seaSpawner.RemoveAllFishes();
+
     }
     public override void Update()
     {
         base.Update();
-        controller.StartFishing();
+        system.StartFishing();
     }
 }
 
 public class Charging : FishingState
 {
-    public Charging(FishingController controller) : base(controller)
+    public Charging(FishingSystem system) : base(system)
     {
     }
 
     public override void Update()
     {
         base.Update();
-        controller.StartFishing();
+        system.StartFishing();
+        system.fishingMiniGame.ChargingBalance();
     }
 }
 
 public class Casting : FishingState
 {
-    public Casting(FishingController controller) : base(controller)
+    public Casting(FishingSystem system) : base(system)
     {
+
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        system.baitLogic.Cast();
     }
 }
 
 public class Fishing : FishingState
 {
-    public Fishing(FishingController controller) : base(controller)
+    public Fishing(FishingSystem system) : base(system)
     {
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
+        system.seaSpawner.InvokeSpawnFish();
+
     }
     public override void Update()
     {
         base.Update();
-        controller.StartReeling();
+        system.StartReeling();
+        system.baitLogic.Shake();
     }
 }
 
 public class Reeling : FishingState
 {
-    public Reeling(FishingController controller) : base(controller)
+    public Reeling(FishingSystem controller) : base(controller)
     {
     }
 
@@ -95,16 +101,17 @@ public class Reeling : FishingState
     {
         base.OnEnter();
     }
-    public override void Update()
+    public override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
+        system.baitLogic.ReelIn();
     }
 
 }
 
 public class ReelingFish : FishingState
 {
-    public ReelingFish(FishingController controller) : base(controller)
+    public ReelingFish(FishingSystem controller) : base(controller)
     {
     }
 
@@ -115,18 +122,39 @@ public class ReelingFish : FishingState
     public override void Update()
     {
         base.Update();
+        system.fishingMiniGame.CalculateBalance();
+        system.fishingMiniGame.BalanceLost();
+        system.fishingMiniGame.BalanceControls();
+        system.fishingMiniGame.HandleBalanceColor();
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        system.baitLogic.ReelIn();
     }
 }
 
 public class InspectFish : FishingState
 {
-    public InspectFish(FishingController controller) : base(controller)
+    public InspectFish(FishingSystem controller) : base(controller)
     {
+
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
+        system.catchSummary.InitiateCatchSummary();
+    }
+    public override void Update()
+    {
+        base.Update();
+        system.catchSummary.NextSummary();
+    }
+    public override void OnExit()
+    {
+        base.OnExit();
+        system.catchSummary.EndSummary();
     }
 }
 
@@ -144,11 +172,14 @@ public abstract class FishingStateMachine : MonoBehaviour
 
         currentState = state;
         currentState.OnEnter();
-        Debug.Log(currentState);
     }
 
     void Update()
     {
         currentState?.Update();
+    }
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdate();
     }
 }

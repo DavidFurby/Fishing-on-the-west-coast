@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using static FishingController;
+using static FishingSystem;
 
 public class FishingRodLogic : MonoBehaviour
 {
@@ -8,7 +8,7 @@ public class FishingRodLogic : MonoBehaviour
     [SerializeField] private FishingRodAnimations fishingRodAnimations;
     [SerializeField] private FishingMiniGame gameMiniGame;
     [SerializeField] private PlayerAnimations playerAnimations;
-    [SerializeField] private FishingController fishingController;
+    [SerializeField] private FishingSystem fishingSystem;
     [HideInInspector] public float reelInSpeed;
     [HideInInspector] public float castingPower;
     private FishingRod currentFishingRod;
@@ -35,7 +35,7 @@ public class FishingRodLogic : MonoBehaviour
     // Calculate the reel in speed based on the size of the caught fishes
     public void CalculateReelInSpeed()
     {
-        foreach (FishDisplay @catch in fishingController.GetCurrentState().totalFishes)
+        foreach (FishDisplay @catch in fishingSystem.totalFishes)
         {
             reelInSpeed = initialReelInSpeed - (@catch.fish.size / 10);
         }
@@ -69,7 +69,7 @@ public class FishingRodLogic : MonoBehaviour
     }
 
     // Play the swing animation and wait for it to finish
-    public IEnumerator SwingAnimation(float castPower, System.Action<FishingState> setFishingStatus)
+    public IEnumerator SwingAnimation(float castPower)
     {
         castingPower *= castPower;
         while (!fishingRodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
@@ -80,7 +80,7 @@ public class FishingRodLogic : MonoBehaviour
         {
             yield return null;
         }
-        setFishingStatus(new Casting(fishingController));
+        fishingSystem.SetState(new Casting(fishingSystem));
 
     }
 

@@ -1,32 +1,39 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// This class handles the fishing controls for the player.
-public class FishingController : FishingStateMachine
+public class FishingSystem : FishingStateMachine
 {
     #region Serialized Fields
-    [SerializeField] private CatchArea catchArea;
-    [SerializeField] private BaitCamera baitCamera;
-    [SerializeField] private CatchSummary catchSummary;
-    [SerializeField] private FishingMiniGame fishingMiniGame;
-    [SerializeField] private FishingRodLogic fishingRodLogic;
+    public CatchArea catchArea;
+    public BaitCamera baitCamera;
+    public CatchSummary catchSummary;
+    public FishingMiniGame fishingMiniGame;
+    public FishingRodLogic fishingRodLogic;
+    public BaitLogic baitLogic;
+    public SeaSpawner seaSpawner;
     #endregion
+
+    #region Events
     public UnityEvent onCatchFish;
     public UnityEvent onCharge;
     public UnityEvent onChargeRelease;
     public UnityEvent onLoseCatch;
     public UnityEvent onInspectFish;
+    #endregion
+
+    [HideInInspector] public List<FishDisplay> totalFishes = new();
+    [HideInInspector] public Bait bait;
+    [HideInInspector] public FishingRod fishingRod;
 
     private void Start()
     {
         SetState(new Idle(this));
+        bait = MainManager.Instance.game.EquippedBait;
+        fishingRod = MainManager.Instance.game.EquippedFishingRod;
     }
-    #region Unity Methods
-    #endregion
 
-    #region Private Methods
+    #region Public Methods
     /// <summary>
     /// Reels in the bait if the space key is pressed.
     /// </summary>
@@ -36,8 +43,8 @@ public class FishingController : FishingStateMachine
         {
             if (catchArea.IsInCatchArea && catchArea.fish != null)
             {
-                StartCoroutine(CatchAlert());
-                fishingMiniGame.StartBalanceMiniGame(GetCurrentState().totalFishes);
+                StartCoroutine(baitCamera.CatchAlert());
+                fishingMiniGame.StartBalanceMiniGame(totalFishes);
                 onCatchFish.Invoke();
                 SetState(new ReelingFish(this));
             }
@@ -47,14 +54,6 @@ public class FishingController : FishingStateMachine
                 SetState(new Reeling(this));
             }
         }
-    }
-
-    public IEnumerator CatchAlert()
-    {
-        baitCamera.CatchAlertSound();
-        Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(1);
-        Time.timeScale = 1;
     }
 
     /// <summary>
@@ -74,18 +73,10 @@ public class FishingController : FishingStateMachine
         }
     }
 
-    /// <summary>
-    /// Waits for the swing animation to finish before changing the fishing status.
-    /// </summary>
-    public void WaitForSwingAnimation()
-    {
-        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower, SetState));
-    }
-
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
-        if (GetCurrentState().totalFishes.Count > 0)
+        if (totalFishes.Count > 0)
         {
             onInspectFish.Invoke();
             SetState(new InspectFish(this));
@@ -95,11 +86,26 @@ public class FishingController : FishingStateMachine
     //Drop the fish if you fail the minigame
     public void LoseCatch()
     {
-        if (GetCurrentState() is ReelingFish)
-        {
-            onLoseCatch.Invoke();
-            SetState(new Reeling(this));
-        }
+        onLoseCatch.Invoke();
+        SetState(new Reeling(this));
     }
+
+    //Add fish to totalFishes list
+    public void AddFish(FishDisplay fish)
+    {
+        totalFishes.Add(fish);
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    /// <summary>
+    /// Waits for the swing animation to finish before changing the fishing status.
+    /// </summary>
+    private void WaitForSwingAnimation()
+    {
+        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower));
+    }
+    #endregion
 }
-#endregion

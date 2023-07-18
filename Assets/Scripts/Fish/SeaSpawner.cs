@@ -1,4 +1,3 @@
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class SeaSpawner : MonoBehaviour
@@ -7,7 +6,7 @@ public class SeaSpawner : MonoBehaviour
     [SerializeField] private FishDisplay[] fishPrefabs;
     [SerializeField] private int spawnDelay;
     [SerializeField] private GameObject bait;
-    [SerializeField] private FishingController fishingController;
+    [SerializeField] private FishingSystem fishingSystem;
 
     // Private fields
     private Renderer seaRenderer;
@@ -21,33 +20,25 @@ public class SeaSpawner : MonoBehaviour
         // Get the size and center of the sea object
         seaPosition = transform.position;
         seaRenderer = GetComponent<Renderer>();
-        InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
     }
 
-    private void Update()
+    public void InvokeSpawnFish()
     {
-        // Remove all fishes if the current state is StandBy
-        if (fishingController.GetCurrentState() is Idle)
-        {
-            RemoveAllFishes();
-        }
+        InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
     }
 
     // Spawn a fish at a random position
     private void SpawnFish()
     {
-        // Spawn a fish if the current state is not StandBy
-        if (fishingController.GetCurrentState() is not Idle)
-        {
-            // Choose a random fish from the array
-            int randomFishIndex = Random.Range(0, fishPrefabs.Length);
+        // Choose a random fish from the array
+        int randomFishIndex = Random.Range(0, fishPrefabs.Length);
 
-            CalculateSpawnPosition();
+        CalculateSpawnPosition();
 
-            // Instantiate the fish
-            GameObject fish = Instantiate(fishPrefabs[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
-            SetDirection(fish);
-        }
+        // Instantiate the fish
+        GameObject fish = Instantiate(fishPrefabs[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
+        SetDirection(fish);
+
     }
 
     // Set the direction of the fish based on its horizontal position
@@ -60,7 +51,7 @@ public class SeaSpawner : MonoBehaviour
     // Calculate the spawn position of the fish
     private void CalculateSpawnPosition()
     {
-        if (fishingController.GetCurrentState() is not Idle)
+        if (fishingSystem.GetCurrentState() is not Idle)
         {
             // Calculate horizontal and vertical spawn position
             fishSpawnDirection = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;

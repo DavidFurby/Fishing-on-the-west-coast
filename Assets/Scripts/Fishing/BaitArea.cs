@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class BaitArea : MonoBehaviour
 {
-    [SerializeField] BaitLogic baitLogic;
+    [SerializeField] FishingSystem system;
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("Fish"))
         {
             FishMovement fishMovement = collider.gameObject.GetComponent<FishMovement>();
             FishDisplay fish = collider.gameObject.GetComponent<FishDisplay>();
-            float probabilty = GetProbability(fish.fish.level, baitLogic.currentBait.level);
+            float probabilty = GetProbability(fish.fish.level, system.bait.level);
             if (Random.Range(0f, 1f) < probabilty)
             {
-                fishMovement.GetBaited(baitLogic.gameObject);
+                fishMovement.GetBaited(system.baitLogic.gameObject);
             }
 
         }

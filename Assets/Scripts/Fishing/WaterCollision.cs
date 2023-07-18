@@ -4,7 +4,7 @@ public class WaterCollision : MonoBehaviour
 {
     [SerializeField] GameObject sea;
     [SerializeField] BaitLogic bait;
-    [SerializeField] FishingController fishingControlls;
+    [SerializeField] FishingSystem fishingControlls;
     [SerializeField] AudioSource splashSound;
     [SerializeField] SeaSpawner seaSpawner;
 

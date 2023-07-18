@@ -11,34 +11,24 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI isNew;
     [SerializeField] private TextMeshProUGUI newRecord;
 
-    [SerializeField] private FishingController fishingControls;
+    [SerializeField] private FishingSystem fishingControls;
     [SerializeField] private CatchSummaryHandlers handlers;
-    [SerializeField] private CatchArea catchArea;
     private List<FishDisplay> caughtFishes = new();
     private FishDisplay currentlyInspectedFish;
     private int fishIndex;
-
-    // Update is called once per frame
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && fishingControls.GetCurrentState() is InspectFish)
-        {
-            NextSummary();
-        }
-    }
 
     /// <summary>
     /// Initialize the catch summary with a list of caught fishes.
     /// </summary>
     public void InitiateCatchSummary()
     {
-        if (fishingControls.GetCurrentState().totalFishes.Count <= 0)
+        if (fishingControls.totalFishes.Count <= 0)
         {
             Debug.LogError("Fish list is empty");
             return;
         }
-        caughtFishes = fishingControls.GetCurrentState().totalFishes;
-        currentlyInspectedFish = fishingControls.GetCurrentState().totalFishes[0];
+        caughtFishes = fishingControls.totalFishes;
+        currentlyInspectedFish = fishingControls.totalFishes[0];
         UpdateDataValues();
         handlers.StartSummary(currentlyInspectedFish);
     }
@@ -48,15 +38,18 @@ public class CatchSummary : MonoBehaviour
     /// </summary>
     public void NextSummary()
     {
-        if (fishIndex < caughtFishes.Count - 1)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            IncrementFishIndex();
-            UpdateDataValues();
-            handlers.StartSummary(currentlyInspectedFish);
-        }
-        else
-        {
-            EndSummary();
+            if (fishIndex < caughtFishes.Count - 1)
+            {
+                IncrementFishIndex();
+                UpdateDataValues();
+                handlers.StartSummary(currentlyInspectedFish);
+            }
+            else
+            {
+                fishingControls.SetState(new Idle(fishingControls));
+            }
         }
     }
 
@@ -118,7 +111,6 @@ public class CatchSummary : MonoBehaviour
     {
         ResetValues();
         handlers.EndSummary();
-        fishingControls.SetState(new Idle(fishingControls));
     }
 
     // Reset values

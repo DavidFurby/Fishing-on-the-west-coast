@@ -6,16 +6,13 @@ public class BaitLogic : MonoBehaviour
 {
     [SerializeField] private GameObject sea;
     [SerializeField] private GameObject fishingRodTop;
-    [SerializeField] private FishingController fishingControlls;
+    [SerializeField] private FishingSystem system;
     [SerializeField] private Scrollbar balance;
-    [SerializeField] private CatchArea catchArea;
     [SerializeField] private AudioSource splashSound;
     [SerializeField] private TextMeshProUGUI distanceTextUI;
     [SerializeField] private GameObject distanceRecordMarker;
-    [SerializeField] private FishingRodLogic fishingRodLogic;
-    [HideInInspector] public Bait currentBait;
-    [HideInInspector] public bool inWater = false;
 
+    [HideInInspector] public bool inWater = false;
     private GameObject currentDistanceRecordMarker;
     private float distance;
     private float waterLevel;
@@ -28,7 +25,6 @@ public class BaitLogic : MonoBehaviour
 
     private void Start()
     {
-        currentBait = MainManager.Instance.game.EquippedBait;
         distanceTextUI.gameObject.SetActive(false);
         rigidBody = GetComponent<Rigidbody>();
         targetPosition = fishingRodTop.transform.position;
@@ -40,39 +36,38 @@ public class BaitLogic : MonoBehaviour
     private void FixedUpdate()
     {
         Float();
-        ReelIn();
-        Shake();
-        Cast();
         CalculateDistance();
     }
 
     public void Cast()
     {
-        if (fishingControlls.GetCurrentState() is Casting)
+        rigidBody.isKinematic = false;
+        rigidBody.AddForceAtPosition(forceFactor * system.fishingRodLogic.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
+        if (forceFactor > 0)
         {
-            rigidBody.isKinematic = false;
-            rigidBody.AddForceAtPosition(forceFactor * fishingRodLogic.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
-            if (forceFactor > 0)
-            {
-                forceFactor -= 0.1f;
-            }
+            forceFactor -= 0.1f;
         }
     }
     public void ReelIn()
     {
-        if (fishingControlls.GetCurrentState() is Reeling || fishingControlls.GetCurrentState() is ReelingFish)
+        Vector3 targetPosition = fishingRodTop.transform.position;
+        if (IsCloseToTarget(targetPosition))
         {
-            Vector3 targetPosition = fishingRodTop.transform.position;
-            if (IsCloseToTarget(targetPosition))
+            AttachBait();
+            if (system.totalFishes.Count > 0)
             {
-                AttachBait();
-                fishingControlls.HandleCatch();
+                system.HandleCatch();
             }
             else
             {
-                MoveTowardsTarget(targetPosition);
+                system.SetState(new Idle(system));
             }
         }
+        else
+        {
+            MoveTowardsTarget(targetPosition);
+        }
+
     }
     public void UpdateDistanceRecord()
     {
@@ -99,7 +94,7 @@ public class BaitLogic : MonoBehaviour
     //Calculate distance cast
     private void CalculateDistance()
     {
-        bool isStandBy = fishingControlls.GetCurrentState() is Idle;
+        bool isStandBy = system.GetCurrentState() is Idle;
         distanceTextUI.gameObject.SetActive(!isStandBy);
         if (!isStandBy)
         {
@@ -117,15 +112,15 @@ public class BaitLogic : MonoBehaviour
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
         transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
-        transform.Translate(fishingRodLogic.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+        transform.Translate(system.fishingRodLogic.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
     }
 
 
 
 
-    private void Shake()
+    public void Shake()
     {
-        if (catchArea.IsInCatchArea)
+        if (system.catchArea.IsInCatchArea)
         {
             splashSound.Play();
             transform.position = new Vector3(transform.position.x + Mathf.Sin(Time.time * 20) * 0.01f, transform.position.y, transform.position.z);
@@ -141,7 +136,7 @@ public class BaitLogic : MonoBehaviour
 
     private void ResetValues()
     {
-        fishingRodLogic.SetInitialValues();
+        system.fishingRodLogic.SetInitialValues();
         forceFactor = 1f;
     }
     private void Float()

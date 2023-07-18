@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class BaitCamera : MonoBehaviour
 {
-    [SerializeField] FishingController fishingControlls;
+    [SerializeField] FishingSystem fishingControlls;
     [SerializeField] GameObject bait;
     private float cameraDistance;
     private float originalCameraDistance;
@@ -50,5 +51,12 @@ public class BaitCamera : MonoBehaviour
     public void CatchAlertSound()
     {
         audioSource.Play();
+    }
+    public IEnumerator CatchAlert()
+    {
+        CatchAlertSound();
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(1);
+        Time.timeScale = 1;
     }
 }

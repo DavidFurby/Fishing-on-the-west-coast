@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FishingMiniGame : MonoBehaviour
 {
     [SerializeField] private Scrollbar reelingBalance;
-    [SerializeField] private FishingController fishingControlls;
+    [SerializeField] private FishingSystem fishingSystem;
     [SerializeField] private MusicController musicController;
     [SerializeField] private Scrollbar castingPowerBalance;
     private List<FishDisplay> fishesOnHook;
@@ -25,26 +25,10 @@ public class FishingMiniGame : MonoBehaviour
         castingPowerBalance.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (fishingControlls.GetCurrentState() is ReelingFish)
-        {
-            CalculateBalance();
-            BalanceLost();
-            BalanceControls();
-            HandleBalanceColor();
-        }
-        else if (fishingControlls.GetCurrentState() is Charging)
-        {
-            ChargingBalance();
-        }
-    }
-
     #region Balance
 
     //Change balance value based on fishSize
-    private void CalculateBalance()
+    public void CalculateBalance()
     {
         if (fishesOnHook != null)
         {
@@ -90,14 +74,14 @@ public class FishingMiniGame : MonoBehaviour
     }
 
     //Change the color of the scrollbar based on its value
-    private void HandleBalanceColor()
+    public void HandleBalanceColor()
     {
         float colorValue = Mathf.Abs(reelingBalance.value - 0.5f) * 2;
         reelingBalance.GetComponent<Image>().color = Color.Lerp(Color.blue, Color.red, colorValue);
     }
 
     //Control balance by pressing the keys
-    private void BalanceControls()
+    public void BalanceControls()
     {
         if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -110,12 +94,12 @@ public class FishingMiniGame : MonoBehaviour
     }
 
     // Check if balance is lost and therefore lose the catch
-    private void BalanceLost()
+    public void BalanceLost()
     {
         if (reelingBalance.value <= 0f || reelingBalance.value >= 1f)
         {
             EndBalanceMiniGame();
-            fishingControlls.LoseCatch();
+            fishingSystem.LoseCatch();
         }
     }
 
@@ -142,7 +126,7 @@ public class FishingMiniGame : MonoBehaviour
         castingPowerBalance.gameObject.SetActive(active);
     }
 
-    private void ChargingBalance()
+    public void ChargingBalance()
     {
         if (castingPowerBalance.gameObject.activeSelf)
         {
