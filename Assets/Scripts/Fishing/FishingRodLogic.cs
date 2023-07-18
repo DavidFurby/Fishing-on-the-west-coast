@@ -4,22 +4,18 @@ using static FishingSystem;
 
 public class FishingRodLogic : MonoBehaviour
 {
-    [SerializeField] private CatchArea catchArea;
     [SerializeField] private FishingRodAnimations fishingRodAnimations;
-    [SerializeField] private FishingMiniGame gameMiniGame;
     [SerializeField] private PlayerAnimations playerAnimations;
     [SerializeField] private FishingSystem fishingSystem;
     [HideInInspector] public float reelInSpeed;
     [HideInInspector] public float castingPower;
-    private FishingRod currentFishingRod;
     private readonly float initialCastingPower = 20;
     private readonly float initialReelInSpeed = 15f;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentFishingRod = MainManager.Instance.game.EquippedFishingRod;
-        if (currentFishingRod == null)
+        if (fishingSystem.fishingRod == null)
         {
             Debug.LogError("Current fishing rod is null");
             return;
@@ -29,7 +25,7 @@ public class FishingRodLogic : MonoBehaviour
 
     public void TriggerSetChargingBalance()
     {
-        gameMiniGame.SetChargingBalance(true);
+        fishingSystem.fishingMiniGame.SetChargingBalance(true);
     }
 
     // Calculate the reel in speed based on the size of the caught fishes
@@ -61,7 +57,7 @@ public class FishingRodLogic : MonoBehaviour
     public void ChargeCasting()
     {
         fishingRodAnimations.PlaySwingAnimation();
-        if (castingPower < currentFishingRod.throwRange)
+        if (castingPower < fishingSystem.fishingRod.throwRange)
         {
             castingPower++;
             playerAnimations.SetChargingThrowSpeed();

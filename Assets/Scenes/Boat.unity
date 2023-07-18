@@ -756,6 +756,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: musicController
       value: 
       objectReference: {fileID: 970918385}
@@ -1259,6 +1263,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 681066786}
     - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: baitLogic
       value: 
       objectReference: {fileID: 1759076623}
@@ -1436,7 +1444,7 @@ PrefabInstance:
       objectReference: {fileID: 109290014}
     - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_VersionIndex
-      value: 1089
+      value: 1095
       objectReference: {fileID: 0}
     - target: {fileID: 5360848329395529453, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
@@ -3446,6 +3454,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3265502879924337428, guid: 0003c4360754f224ea7cd6de940cbd7e, type: 3}
+      propertyPath: toScene
+      value: 
+      objectReference: {fileID: 102900000, guid: 9b6cfda5a034a214596f1e387703d397, type: 3}
+    - target: {fileID: 3265502879924337428, guid: 0003c4360754f224ea7cd6de940cbd7e, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 502981710}
@@ -3599,6 +3611,10 @@ PrefabInstance:
       propertyPath: bait
       value: 
       objectReference: {fileID: 7448718}
+    - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: audioSource
       value: 

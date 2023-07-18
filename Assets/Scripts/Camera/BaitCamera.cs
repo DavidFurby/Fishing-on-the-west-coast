@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class BaitCamera : MonoBehaviour
 {
-    [SerializeField] FishingSystem fishingControlls;
-    [SerializeField] GameObject bait;
+    [SerializeField] private FishingSystem system;
+    [SerializeField] private AudioSource audioSource;
+
     private float cameraDistance;
     private float originalCameraDistance;
-    [SerializeField] private AudioSource audioSource;
 
     private void Start()
     {
@@ -15,43 +15,32 @@ public class BaitCamera : MonoBehaviour
         originalCameraDistance = cameraDistance;
     }
 
-    void LateUpdate()
+    public void UpdateCameraPosition()
     {
-        if (fishingControlls.GetCurrentState() is Casting)
+        transform.position = new Vector3(system.baitLogic.transform.position.x, system.baitLogic.transform.position.y, cameraDistance);
+    }
+
+    public void MoveCameraCloserToBait(float speed = 0.1f)
+    {
+        if (cameraDistance < system.baitLogic.transform.position.z - 2)
         {
-            UpdateCameraPosition();
-            if (cameraDistance < bait.transform.position.z - 2)
-            {
-                cameraDistance += 0.1f;
-            }
-        }
-        else if (fishingControlls.GetCurrentState() is Fishing)
-        {
-            UpdateCameraPosition();
-            if (cameraDistance > originalCameraDistance)
-            {
-                cameraDistance -= 0.01f;
-            }
-        }
-        else if (fishingControlls.GetCurrentState() is ReelingFish)
-        {
-            UpdateCameraPosition();
-            if (cameraDistance < bait.transform.position.z - 2)
-            {
-                cameraDistance += 0.2f;
-            }
+            cameraDistance += speed;
         }
     }
 
-    private void UpdateCameraPosition()
+    public void MoveCameraAwayFromBait(float speed = 0.01f)
     {
-        transform.position = new Vector3(bait.transform.position.x, bait.transform.position.y, cameraDistance);
+        if (cameraDistance > originalCameraDistance)
+        {
+            cameraDistance -= speed;
+        }
     }
 
     public void CatchAlertSound()
     {
         audioSource.Play();
     }
+
     public IEnumerator CatchAlert()
     {
         CatchAlertSound();

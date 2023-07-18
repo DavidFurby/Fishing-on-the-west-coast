@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab95bfe04cb95e4ea5edbba88061426, type: 3}
   m_Name: Herring
   m_EditorClassIdentifier: 
-  id: 0
-  name: 
-  size: 0
-  description: 
-  level: 0
+  id: 1
+  name: Herring
+  size: 10
+  description: "Herring j\xE4vlar"
+  level: 1

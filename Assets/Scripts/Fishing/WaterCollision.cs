@@ -3,22 +3,20 @@ using UnityEngine;
 public class WaterCollision : MonoBehaviour
 {
     [SerializeField] GameObject sea;
-    [SerializeField] BaitLogic bait;
-    [SerializeField] FishingSystem fishingControlls;
+    [SerializeField] FishingSystem system;
     [SerializeField] AudioSource splashSound;
-    [SerializeField] SeaSpawner seaSpawner;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == sea)
         {
-            if (fishingControlls.GetCurrentState() is not Reeling && fishingControlls.GetCurrentState() is not ReelingFish)
+            if (system.GetCurrentState() is not Reeling && system.GetCurrentState() is not ReelingFish)
             {
-                bait.UpdateDistanceRecord();
-                fishingControlls.SetState(new Fishing(fishingControlls));
+                system.baitLogic.UpdateDistanceRecord();
+                system.SetState(new Fishing(system));
             }
             splashSound.Play();
-            bait.inWater = true;
+            system.baitLogic.inWater = true;
         }
     }
 
@@ -26,7 +24,7 @@ public class WaterCollision : MonoBehaviour
     {
         if (other.gameObject == sea)
         {
-            bait.inWater = false;
+            system.baitLogic.inWater = false;
         }
     }
 }

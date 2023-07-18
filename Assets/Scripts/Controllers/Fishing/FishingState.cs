@@ -1,26 +1,10 @@
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class FishingState
+public abstract class FishingState : State
 {
     protected FishingSystem system;
 
     public FishingState(FishingSystem system)
     {
         this.system = system;
-    }
-
-    public virtual void OnEnter()
-    {
-    }
-
-    public virtual void OnExit() { }
-
-    public virtual void Update() { }
-
-    public virtual void FixedUpdate()
-    {
-
     }
 }
 
@@ -69,6 +53,12 @@ public class Casting : FishingState
         base.FixedUpdate();
         system.baitLogic.Cast();
     }
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
+        system.baitCamera.UpdateCameraPosition();
+        system.baitCamera.MoveCameraCloserToBait();
+    }
 }
 
 public class Fishing : FishingState
@@ -89,6 +79,17 @@ public class Fishing : FishingState
         system.StartReeling();
         system.baitLogic.Shake();
     }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        system.baitLogic.Float();
+    }
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
+        system.baitCamera.UpdateCameraPosition();
+        system.baitCamera.MoveCameraAwayFromBait();
+    }
 }
 
 public class Reeling : FishingState
@@ -105,6 +106,7 @@ public class Reeling : FishingState
     {
         base.FixedUpdate();
         system.baitLogic.ReelIn();
+        system.baitLogic.Float();
     }
 
 }
@@ -131,8 +133,16 @@ public class ReelingFish : FishingState
     {
         base.FixedUpdate();
         system.baitLogic.ReelIn();
+        system.baitLogic.Float();
+    }
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
+        system.baitCamera.UpdateCameraPosition();
+        system.baitCamera.MoveCameraCloserToBait(0.2f);
     }
 }
+
 
 public class InspectFish : FishingState
 {
@@ -155,31 +165,5 @@ public class InspectFish : FishingState
     {
         base.OnExit();
         system.catchSummary.EndSummary();
-    }
-}
-
-public abstract class FishingStateMachine : MonoBehaviour
-{
-    private FishingState currentState;
-    public FishingState GetCurrentState()
-    {
-        return currentState;
-    }
-
-    public void SetState(FishingState state)
-    {
-        currentState?.OnExit();
-
-        currentState = state;
-        currentState.OnEnter();
-    }
-
-    void Update()
-    {
-        currentState?.Update();
-    }
-    private void FixedUpdate()
-    {
-        currentState.FixedUpdate();
     }
 }

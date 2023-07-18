@@ -35,7 +35,6 @@ public class BaitLogic : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Float();
         CalculateDistance();
     }
 
@@ -139,7 +138,7 @@ public class BaitLogic : MonoBehaviour
         system.fishingRodLogic.SetInitialValues();
         forceFactor = 1f;
     }
-    private void Float()
+    public void Float()
     {
         if (inWater)
         {
