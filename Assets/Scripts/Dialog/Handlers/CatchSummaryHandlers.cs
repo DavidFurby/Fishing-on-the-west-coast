@@ -6,12 +6,12 @@ public class CatchSummaryHandlers : MonoBehaviour
 {
     [SerializeField] private DialogManager dialogManager;
 
-    public void StartSummary(FishDisplay catchResult)
+    public void StartSummary(Fish fish)
     {
         if (dialogManager != null)
         {
             dialogManager.EndDialog();
-            SetCatchSummaryHandler(catchResult.fish);
+            SetCatchSummaryHandler(fish);
             dialogManager.StartDialog("CatchSummary");
         }
     }

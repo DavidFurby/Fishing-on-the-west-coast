@@ -72,7 +72,6 @@ public class CatchArea : MonoBehaviour
             fish.GetComponent<FishMovement>().SetFishState(FishMovement.FishState.Hooked);
             // Modified to use the totalFishes variable in the FishingState class
             fishingSystem.AddFish(fish);
-            Debug.Log(fishingSystem.totalFishes.Count);
 
         }
     }

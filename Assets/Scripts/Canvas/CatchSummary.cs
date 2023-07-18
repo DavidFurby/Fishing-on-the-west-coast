@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -11,10 +10,9 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI isNew;
     [SerializeField] private TextMeshProUGUI newRecord;
 
-    [SerializeField] private FishingSystem fishingControls;
-    [SerializeField] private CatchSummaryHandlers handlers;
-    private List<FishDisplay> caughtFishes = new();
-    private FishDisplay currentlyInspectedFish;
+    [SerializeField] private FishingSystem system;
+    [SerializeField] private CatchSummaryHandlers dialogHandlers;
+    private Fish currentlyInspectedFish;
     private int fishIndex;
 
     /// <summary>
@@ -22,15 +20,14 @@ public class CatchSummary : MonoBehaviour
     /// </summary>
     public void InitiateCatchSummary()
     {
-        if (fishingControls.totalFishes.Count <= 0)
+        if (system.totalFishes.Count <= 0)
         {
             Debug.LogError("Fish list is empty");
             return;
         }
-        caughtFishes = fishingControls.totalFishes;
-        currentlyInspectedFish = fishingControls.totalFishes[0];
+        currentlyInspectedFish = system.totalFishes[0].fish;
         UpdateDataValues();
-        handlers.StartSummary(currentlyInspectedFish);
+        dialogHandlers.StartSummary(currentlyInspectedFish);
     }
 
     /// <summary>
@@ -40,15 +37,15 @@ public class CatchSummary : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (fishIndex < caughtFishes.Count - 1)
+            if (fishIndex < system.totalFishes.Count - 1)
             {
                 IncrementFishIndex();
                 UpdateDataValues();
-                handlers.StartSummary(currentlyInspectedFish);
+                dialogHandlers.StartSummary(currentlyInspectedFish);
             }
             else
             {
-                fishingControls.SetState(new Idle(fishingControls));
+                system.SetState(new Idle(system));
             }
         }
     }
@@ -64,23 +61,23 @@ public class CatchSummary : MonoBehaviour
     private void IncrementFishIndex()
     {
         fishIndex++;
-        currentlyInspectedFish = caughtFishes[fishIndex];
+        currentlyInspectedFish = system.totalFishes[fishIndex].fish;
     }
 
     // Check if fish is larger than the saved fish of the same name
-    private bool CheckSizeDifference(FishDisplay fishData)
+    private bool CheckSizeDifference(Fish fish)
     {
-        if (fishData == null)
+        if (fish == null)
         {
             Debug.LogError("Fish data is null");
             return false;
         }
 
-        Fish existingFish = MainManager.Instance.game.CaughtFishes.FirstOrDefault(f => f.id == fishData.fish.id && f.size < fishData.fish.size);
+        Fish existingFish = MainManager.Instance.game.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size);
         if (existingFish != null)
         {
             int index = Array.IndexOf(MainManager.Instance.game.CaughtFishes.ToArray(), existingFish);
-            fishData.fish.ReplaceFishInInstance(index);
+            fish.ReplaceFishInInstance(index);
             return true;
         }
 
@@ -88,16 +85,16 @@ public class CatchSummary : MonoBehaviour
     }
 
     // Check if fish hasn't been caught before
-    private bool CheckIfNew(FishDisplay catchData)
+    private bool CheckIfNew(Fish fishData)
     {
-        if (catchData == null)
+        if (fishData == null)
         {
             Debug.LogError("Fish data is null");
             return false;
         }
-        if (!MainManager.Instance.game.CaughtFishes.Any(f => f.id == catchData.fish.id))
+        if (!MainManager.Instance.game.CaughtFishes.Any(f => f.id == fishData.id))
         {
-            catchData.fish.AddFishToInstance();
+            fishData.AddFishToInstance();
             return true;
         }
 
@@ -110,13 +107,13 @@ public class CatchSummary : MonoBehaviour
     public void EndSummary()
     {
         ResetValues();
-        handlers.EndSummary();
+        dialogHandlers.EndSummary();
     }
 
     // Reset values
     private void ResetValues()
     {
-        caughtFishes.Clear();
+        system.totalFishes.Clear();
         currentlyInspectedFish = null;
         fishIndex = 0;
     }

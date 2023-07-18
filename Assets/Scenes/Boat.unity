@@ -1004,6 +1004,10 @@ PrefabInstance:
       value: FishingCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: handlers
       value: 
       objectReference: {fileID: 1989589368}
@@ -1011,6 +1015,10 @@ PrefabInstance:
       propertyPath: catchArea
       value: 
       objectReference: {fileID: 822062796}
+    - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: dialogHandlers
+      value: 
+      objectReference: {fileID: 1989589368}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: fishingControls
       value: 
@@ -1610,6 +1618,10 @@ PrefabInstance:
       propertyPath: gameMiniGame
       value: 
       objectReference: {fileID: 1275887656}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 568067434}
     - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: playerAnimations
       value: 
