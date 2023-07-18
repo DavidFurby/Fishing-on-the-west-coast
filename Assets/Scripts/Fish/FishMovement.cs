@@ -1,41 +1,117 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class FishMovement : FishStateMachine
 {
-    [SerializeField] private float swimSpeed;
-    public Vector3 direction;
-    private Rigidbody rb;
-    private GameObject currentBait;
+    [SerializeField] private GameObject _target;
+    private Transform[] _bones;
+    [SerializeField] private float _speed = 0.3f;
+    [SerializeField] private float _rotateSpeed = 2;
+    private Transform _tastyPart;
+
+    [SerializeField] private float _offsetAmount = 0.4f;
+    private Vector3 _offset;
+
+    private Rigidbody _rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        InvokeRepeating(nameof(Swim), 1, 5);
-    }
+        _rb = GetComponent<Rigidbody>();
 
     // Rotate towards the bait if baited
     public void RotateTowardsBait()
     {
         if (currentBait != null)
+        _offset.y = _offsetAmount;
+
+        //Gets an Array of Armatures's children aka all the bones, in order Head -> Tail
+        _bones = transform.Find("Armature").GetChild(0).GetComponentsInChildren<Transform>();
+
+        //If TastyPart Object already exists, then it's location is probably
+        //manually decided, so no need to set the position. If it doesn't exist
+        //then we create it and set the pos to the tail.
+        if (transform.Find("TastyPart"))
         {
-            direction = (currentBait.transform.position - transform.position).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            float angle = Quaternion.Angle(transform.rotation, targetRotation);
-            float timeToComplete = angle / 180;
-            float donePercentage = Mathf.Min(1f, Time.fixedDeltaTime / timeToComplete);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, donePercentage);
+            _tastyPart = transform.Find("TastyPart");
+        }
+        else
+        {
+            _tastyPart = new GameObject("TastyPart").GetComponent<Transform>();
+            _tastyPart.SetParent(gameObject.transform);
+
+            //sets tasty part to tail area (last in array) as default
+            //(not setting to tail directly as to not get unwanted interactions on tail animations)
+            SetTastyPartPosition(_bones[_bones.Length - 1]);
         }
     }
 
-    // Coroutine to add force to fish's rigidbody
-    void Swim()
+    private void FixedUpdate()
     {
-        rb.AddForce((swimSpeed) * Time.fixedDeltaTime * direction, ForceMode.Impulse);
-        rb.velocity = Vector3.zero;
+        if (_target)
+        {
+
+            switch (state)
+            {
+                case FishState.Swimming:
+                    SwimAround();
+                    break;
+
+                case FishState.Baited:
+                    SwimTowards(_target);
+                    break;
+
+                case FishState.Hooked:
+                    MunchOn(_target);
+                    break;
+
+                default:
+                    SwimAround();
+                    break;
+            }
+        }
+        else
+        {
+            SwimAround();
+        }
     }
 
-    // Move towards bait if triggered
+    private void SwimAround()
+    {
+        _rb.velocity = transform.forward * _speed;
+    }
+
+    private void SwimTowards(GameObject target)
+    {
+        _rb.velocity = transform.forward * _speed;
+        RotateTowards(target.transform.position);
+    }
+
+    public void MunchOn(GameObject target)
+    {
+        //sets pos to target pos. Pivot point is always center so need offset to look good.
+        //Also using rotate to make sure the rotation is correct
+        transform.position = target.transform.position + target.transform.rotation * _offset;
+        RotateTowards(target.transform.position);
+    }
+
+    private void RotateTowards(Vector3 target)
+    {
+
+        Quaternion _lookRotation = Quaternion.LookRotation((target - transform.position).normalized);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _rotateSpeed);
+    }
+
+    public void SetTastyPartPosition(Transform obj)
+    {
+        _tastyPart.position = obj.position;
+
+        //Because of how the armature is imported i need to rotate this :^)
+        _tastyPart.rotation = Quaternion.Euler(-89.98f, 0f, 0f);
+    }
+
+
     public void GetBaited(GameObject bait)
     {
         currentBait = bait;
@@ -46,7 +122,11 @@ public class FishMovement : FishStateMachine
     {
         if (currentBait != null)
         {
-            transform.position = currentBait.transform.position;
+            _rotateSpeed = 10;
+        }
+        else
+        {
+            _rotateSpeed = 2;
         }
     }
 }
