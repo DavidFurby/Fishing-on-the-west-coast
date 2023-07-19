@@ -43,9 +43,9 @@ public class CatchArea : MonoBehaviour
 
     private void CatchFishWhileReeling(Collider other)
     {
-        StartCoroutine(fishingSystem?.fishingCamera.CatchAlert());
         if (other.TryGetComponent(out FishMovement newFishMovement))
         {
+            StartCoroutine(fishingSystem?.fishingCamera.CatchAlert());
             newFishMovement.GetBaited(fishingSystem.totalFishes[^1].gameObject);
             newFishMovement.SetState(new Hooked(newFishMovement));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
