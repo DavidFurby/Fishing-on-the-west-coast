@@ -3,12 +3,12 @@ using UnityEngine;
 public class SeaSpawner : MonoBehaviour
 {
     // Serialized fields
-    [SerializeField] private FishDisplay[] fishPrefabs;
     [SerializeField] private int spawnDelay;
     [SerializeField] private GameObject bait;
     [SerializeField] private FishingSystem fishingSystem;
 
     // Private fields
+    private FishDisplay[] fishPrefabs;
     private Renderer seaRenderer;
     private Vector3 seaPosition;
     private float fishSpawnDirection;
@@ -20,6 +20,7 @@ public class SeaSpawner : MonoBehaviour
         // Get the size and center of the sea object
         seaPosition = transform.position;
         seaRenderer = GetComponent<Renderer>();
+        fishPrefabs = Resources.LoadAll<FishDisplay>("SpawnableFishes");
     }
 
     // Destroy the fish if it exits the trigger area
