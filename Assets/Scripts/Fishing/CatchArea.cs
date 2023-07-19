@@ -37,8 +37,7 @@ public class CatchArea : MonoBehaviour
     {
         if (other.CompareTag("Fish") && fish == other.gameObject)
         {
-            IsInCatchArea = false;
-            fish = null;
+            ResetValues();
         }
     }
 
@@ -67,7 +66,7 @@ public class CatchArea : MonoBehaviour
         }
     }
 
-    public void RemoveCatch()
+    public void ResetValues()
     {
         fish?.DestroyFish();
         fish = null;

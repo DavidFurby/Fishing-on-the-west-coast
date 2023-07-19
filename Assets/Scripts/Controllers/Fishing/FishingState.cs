@@ -20,6 +20,7 @@ public class Idle : FishingState
         base.OnEnter();
         system.seaSpawner.RemoveAllFishes();
         system.seaSpawner.StopSpawnFish();
+        system.catchArea.ResetValues();
 
     }
     public override void Update()
