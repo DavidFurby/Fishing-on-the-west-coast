@@ -5,7 +5,6 @@ public class BaitArea : MonoBehaviour
     [SerializeField] FishingSystem system;
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("test");
         if (collider.gameObject.CompareTag("Fish"))
         {
             FishMovement fishMovement = collider.gameObject.GetComponent<FishMovement>();

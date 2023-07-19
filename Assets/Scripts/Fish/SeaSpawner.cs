@@ -33,7 +33,7 @@ public class SeaSpawner : MonoBehaviour
             }
             else
             {
-                Destroy(other.gameObject);
+                ObjectPool.Instance.ReturnToPool(other.gameObject);
             }
         }
     }
@@ -55,7 +55,10 @@ public class SeaSpawner : MonoBehaviour
         CalculateSpawnPosition();
 
         // Instantiate the fish
-        Instantiate(fishPrefabs[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
+        GameObject fish = ObjectPool.Instance.GetFromPool(fishPrefabs[randomFishIndex].gameObject);
+        fish.transform.position = fishSpawnPosition;
+        fish.transform.rotation = fishSpawnRotation;
+        fish.SetActive(true);
     }
     // Calculate the spawn position of the fish
     private void CalculateSpawnPosition()
@@ -83,7 +86,7 @@ public class SeaSpawner : MonoBehaviour
         {
             foreach (GameObject fish in fishes)
             {
-                Destroy(fish);
+                ObjectPool.Instance.ReturnToPool(fish);
             }
         }
     }
