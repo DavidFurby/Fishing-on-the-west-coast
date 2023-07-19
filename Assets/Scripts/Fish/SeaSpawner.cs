@@ -41,6 +41,10 @@ public class SeaSpawner : MonoBehaviour
     {
         InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
     }
+    public void StopSpawnFish()
+    {
+        CancelInvoke(nameof(SpawnFish));
+    }
 
     // Spawn a fish at a random position
     private void SpawnFish()
@@ -51,7 +55,7 @@ public class SeaSpawner : MonoBehaviour
         CalculateSpawnPosition();
 
         // Instantiate the fish
-        GameObject fish = Instantiate(fishPrefabs[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
+        Instantiate(fishPrefabs[randomFishIndex].gameObject, fishSpawnPosition, fishSpawnRotation);
     }
     // Calculate the spawn position of the fish
     private void CalculateSpawnPosition()
