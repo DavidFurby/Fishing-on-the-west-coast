@@ -43,7 +43,7 @@ public class CatchArea : MonoBehaviour
 
     private void CatchFishWhileReeling(Collider other)
     {
-        StartCoroutine(fishingSystem?.baitCamera.CatchAlert());
+        StartCoroutine(fishingSystem?.fishingCamera.CatchAlert());
         if (other.TryGetComponent(out FishMovement newFishMovement))
         {
             newFishMovement.GetBaited(fishingSystem.totalFishes[^1].gameObject);
@@ -60,7 +60,6 @@ public class CatchArea : MonoBehaviour
     {
         if (fish != null)
         {
-            Debug.Log(fish);
             fish.GetComponent<FishMovement>().SetState(new Hooked(fish.GetComponent<FishMovement>()));
             fishingSystem.AddFish(fish);
         }
@@ -68,7 +67,6 @@ public class CatchArea : MonoBehaviour
 
     public void ResetValues()
     {
-        fish?.DestroyFish();
         fish = null;
         IsInCatchArea = false;
     }

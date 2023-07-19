@@ -38,7 +38,6 @@ public class Game : MonoBehaviour
     }
     public Item GetEquipment(ItemTag itemTag)
     {
-        Debug.Log(itemTag);
         switch (itemTag)
         {
             case ItemTag.FishingRod:

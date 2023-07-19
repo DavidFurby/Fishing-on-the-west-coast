@@ -12,7 +12,7 @@ public class CatchSummary : MonoBehaviour
 
     [SerializeField] private FishingSystem system;
     [SerializeField] private CatchSummaryHandlers dialogHandlers;
-    private Fish currentlyInspectedFish;
+    public FishDisplay currentlyInspectedFish;
     private int fishIndex;
 
     /// <summary>
@@ -25,9 +25,10 @@ public class CatchSummary : MonoBehaviour
             Debug.LogError("Fish list is empty");
             return;
         }
-        currentlyInspectedFish = system.totalFishes[0].fish;
+        currentlyInspectedFish = system.totalFishes[0];
+        system.fishingCamera.MoveCameraCloserToFish(system.totalFishes[0]);
         UpdateDataValues();
-        dialogHandlers.StartSummary(currentlyInspectedFish);
+        dialogHandlers.StartSummary(currentlyInspectedFish.fish);
     }
 
     /// <summary>
@@ -41,7 +42,7 @@ public class CatchSummary : MonoBehaviour
             {
                 IncrementFishIndex();
                 UpdateDataValues();
-                dialogHandlers.StartSummary(currentlyInspectedFish);
+                dialogHandlers.StartSummary(currentlyInspectedFish.fish);
             }
             else
             {
@@ -52,8 +53,8 @@ public class CatchSummary : MonoBehaviour
 
     private void UpdateDataValues()
     {
-        newRecord.gameObject.SetActive(CheckSizeDifference(currentlyInspectedFish));
-        isNew.gameObject.SetActive(CheckIfNew(currentlyInspectedFish));
+        newRecord.gameObject.SetActive(CheckSizeDifference(currentlyInspectedFish.fish));
+        isNew.gameObject.SetActive(CheckIfNew(currentlyInspectedFish.fish));
         MainManager.Instance.game.TotalCatches++;
     }
 
@@ -61,7 +62,7 @@ public class CatchSummary : MonoBehaviour
     private void IncrementFishIndex()
     {
         fishIndex++;
-        currentlyInspectedFish = system.totalFishes[fishIndex].fish;
+        currentlyInspectedFish = system.totalFishes[fishIndex];
     }
 
     // Check if fish is larger than the saved fish of the same name
@@ -108,6 +109,7 @@ public class CatchSummary : MonoBehaviour
     {
         ResetValues();
         dialogHandlers.EndSummary();
+        system.fishingCamera.MoveCameraToOriginal();
     }
 
     // Reset values

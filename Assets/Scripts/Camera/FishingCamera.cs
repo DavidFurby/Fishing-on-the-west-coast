@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class BaitCamera : MonoBehaviour
+public class FishingCamera : MonoBehaviour
 {
     [SerializeField] private FishingSystem system;
     [SerializeField] private AudioSource audioSource;
@@ -28,11 +30,18 @@ public class BaitCamera : MonoBehaviour
         }
     }
 
-    public void MoveCameraAwayFromBait(float speed = 0.01f)
+    public void MoveCameraToOriginal(float speed = 0.01f)
     {
         if (cameraDistance > originalCameraDistance)
         {
             cameraDistance -= speed;
+        }
+    }
+    public void MoveCameraCloserToFish(FishDisplay fish, float speed = 0.1f)
+    {
+        if (cameraDistance < fish.transform.position.z)
+        {
+            cameraDistance += speed;
         }
     }
 

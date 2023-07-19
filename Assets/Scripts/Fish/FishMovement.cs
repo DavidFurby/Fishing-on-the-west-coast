@@ -7,7 +7,7 @@ public class FishMovement : FishStateMachine
     private Transform[] _bones;
     [SerializeField] private float _speed = 0.3f;
     [SerializeField] private float _rotateSpeed = 2;
-    private Transform _tastyPart;
+    public Transform tastyPart;
     [SerializeField] private float _offsetAmount = 0.4f;
     private Vector3 _offset;
     private Rigidbody _rb;
@@ -33,12 +33,12 @@ public class FishMovement : FishStateMachine
         //then we create it and set the pos to the tail.
         if (transform.Find("TastyPart"))
         {
-            _tastyPart = transform.Find("TastyPart");
+            tastyPart = transform.Find("TastyPart");
         }
         else
         {
-            _tastyPart = new GameObject("TastyPart").GetComponent<Transform>();
-            _tastyPart.SetParent(gameObject.transform);
+            tastyPart = new GameObject("TastyPart").GetComponent<Transform>();
+            tastyPart.SetParent(gameObject.transform);
 
             //sets tasty part to tail area (last in array) as default
             //(not setting to tail directly as to not get unwanted interactions on tail animations)
@@ -61,23 +61,39 @@ public class FishMovement : FishStateMachine
     {
         //sets pos to target pos. Pivot point is always center so need offset to look good.
         //Also using rotate to make sure the rotation is correct
-        transform.position = target.transform.position + target.transform.rotation * _offset;
+
+        //If target is Fish set the position to tastyPart
+        if (target.TryGetComponent<FishMovement>(out var fishMovement))
+        {
+            transform.position = fishMovement.tastyPart.position;
+        }
+        else
+        {
+            transform.position = target.transform.position + target.transform.rotation * _offset;
+
+        }
         RotateTowards();
     }
 
     private void RotateTowards()
     {
-
-        Quaternion _lookRotation = Quaternion.LookRotation((target.transform.position - transform.position).normalized);
-
+        Vector3 direction = target.transform.position - transform.position;
+        if (direction == Vector3.zero)
+        {
+            //avoid direction viewing vector being zero
+            direction = new Vector3(0, 0, 0.01f);
+        }
+        Quaternion _lookRotation = Quaternion.LookRotation(direction.normalized);
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _rotateSpeed);
     }
+
+
 
     public void SetTastyPartPosition(Transform obj)
     {
 
         //Because of how the armature is imported i need to rotate this :^)
-        _tastyPart.SetPositionAndRotation(obj.position, Quaternion.Euler(-89.98f, 0f, 0f));
+        tastyPart.SetPositionAndRotation(obj.position, Quaternion.Euler(-89.98f, 0f, 0f));
     }
 
 

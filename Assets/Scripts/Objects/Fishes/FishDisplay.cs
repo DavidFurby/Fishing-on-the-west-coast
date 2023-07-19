@@ -1,11 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FishDisplay : MonoBehaviour
 {
     public Fish fish;
 
-    public void DestroyFish()
+    public void ReturnToPool()
     {
-        Destroy(gameObject);
+        ObjectPool.Instance.ReturnToPool(this.gameObject);
     }
 }

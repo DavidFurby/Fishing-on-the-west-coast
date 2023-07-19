@@ -6,7 +6,7 @@ public class FishingSystem : FishingStateMachine
 {
     #region Serialized Fields
     public CatchArea catchArea;
-    public BaitCamera baitCamera;
+    public FishingCamera fishingCamera;
     public CatchSummary catchSummary;
     public FishingMiniGame fishingMiniGame;
     public FishingRodLogic fishingRodLogic;
@@ -43,7 +43,7 @@ public class FishingSystem : FishingStateMachine
         {
             if (catchArea.IsInCatchArea && catchArea.fish != null)
             {
-                StartCoroutine(baitCamera.CatchAlert());
+                StartCoroutine(fishingCamera.CatchAlert());
                 fishingMiniGame.StartBalanceMiniGame(totalFishes);
                 onCatchFish.Invoke();
                 SetState(new ReelingFish(this));

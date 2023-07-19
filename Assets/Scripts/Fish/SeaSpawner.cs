@@ -56,8 +56,7 @@ public class SeaSpawner : MonoBehaviour
 
         // Instantiate the fish
         GameObject fish = ObjectPool.Instance.GetFromPool(fishPrefabs[randomFishIndex].gameObject);
-        fish.transform.position = fishSpawnPosition;
-        fish.transform.rotation = fishSpawnRotation;
+        fish.transform.SetPositionAndRotation(fishSpawnPosition, fishSpawnRotation);
         fish.SetActive(true);
     }
     // Calculate the spawn position of the fish
