@@ -135,7 +135,6 @@ public class BaitLogic : MonoBehaviour
 
     private void ResetValues()
     {
-        system.fishingRodLogic.SetInitialValues();
         forceFactor = 1f;
     }
     public void Float()

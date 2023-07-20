@@ -20,7 +20,6 @@ public class FishingRodLogic : MonoBehaviour
             Debug.LogError("Current fishing rod is null");
             return;
         }
-        SetInitialValues();
     }
 
     public void TriggerSetChargingBalance()
@@ -38,10 +37,11 @@ public class FishingRodLogic : MonoBehaviour
     }
 
     // Set the initial values for the reel in speed and casting power
-    public void SetInitialValues()
+    public void ResetValues()
     {
         reelInSpeed = initialReelInSpeed;
         castingPower = initialCastingPower;
+        playerAnimations.ResetChargingThrowSpeed();
     }
 
     // Set the reel in speed to a fixed value

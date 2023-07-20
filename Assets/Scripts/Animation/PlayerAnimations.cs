@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    private Animator playerAnimator;
+    [SerializeField] private Animator playerAnimator;
+    private float originalChargingThrowSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerAnimator = GetComponent<Animator>();
+        originalChargingThrowSpeed = playerAnimator.GetFloat("chargingThrowSpeed");
     }
 
     public void SetChargingThrowAnimation(bool active)
@@ -17,9 +18,16 @@ public class PlayerAnimations : MonoBehaviour
             playerAnimator.SetBool("chargingThrow", active);
         }
     }
+
     public void SetChargingThrowSpeed()
     {
-        playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.01f);
+        playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.02f);
+        Debug.Log(playerAnimator.GetFloat("chargingThrowSpeed"));
+    }
+
+    public void ResetChargingThrowSpeed()
+    {
+        playerAnimator.SetFloat("chargingThrowSpeed", originalChargingThrowSpeed);
     }
 
     public void SetPlayerWalkAnimation(bool active)
