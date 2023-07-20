@@ -29,7 +29,7 @@ public class Baited : FishState
     {
         base.FixedUpdate();
         fishMovement.RotateTowardsBait();
-        fishMovement.SwimTowards();
+        fishMovement.SwimTowardsTarget();
     }
 }
 
