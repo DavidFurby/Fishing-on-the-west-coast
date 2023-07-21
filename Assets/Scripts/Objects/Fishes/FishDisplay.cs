@@ -12,10 +12,10 @@ public class FishDisplay : MonoBehaviour
 
     private void SetFishSize()
     {
-        if (fish.size == 0)
-        {
-            fish.size = Random.Range(fish.averageSize / 2, fish.averageSize * 2);
-        }
+
+        fish.size = Random.Range(fish.averageSize / 2, fish.averageSize * 2);
+        Debug.Log(fish.size);
+
     }
 
     public void ReturnToPool()

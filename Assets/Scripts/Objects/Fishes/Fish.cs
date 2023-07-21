@@ -11,7 +11,7 @@ public class Fish : ScriptableObject
     public float averageSize;
     public string description;
     public int level;
-    [HideInInspector] public float size;
+    [HideInInspector] public float size = 0;
 
     public enum CatchTag
     {

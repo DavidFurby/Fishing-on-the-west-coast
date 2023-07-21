@@ -77,6 +77,7 @@ public class CatchSummary : MonoBehaviour
         Fish existingFish = MainManager.Instance.game.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size);
         if (existingFish != null)
         {
+            Debug.Log(existingFish.size + " Existing");
             int index = Array.IndexOf(MainManager.Instance.game.CaughtFishes.ToArray(), existingFish);
             fish.ReplaceFishInInstance(index);
             return true;
@@ -86,16 +87,16 @@ public class CatchSummary : MonoBehaviour
     }
 
     // Check if fish hasn't been caught before
-    private bool CheckIfNew(Fish fishData)
+    private bool CheckIfNew(Fish fish)
     {
-        if (fishData == null)
+        if (fish == null)
         {
             Debug.LogError("Fish data is null");
             return false;
         }
-        if (!MainManager.Instance.game.CaughtFishes.Any(f => f.id == fishData.id))
+        if (!MainManager.Instance.game.CaughtFishes.Any(f => f.id == fish.id))
         {
-            fishData.AddFishToInstance();
+            fish.AddFishToInstance();
             return true;
         }
 

@@ -23,9 +23,9 @@ public class CatchArea : MonoBehaviour
 
     private void HandleFishEnter(Collider other)
     {
-        IsInCatchArea = true;
         if (other.GetComponent<FishMovement>().GetCurrentState() is Baited)
         {
+            IsInCatchArea = true;
             if (other.TryGetComponent(out FishDisplay fish))
             {
                 this.fish = fish;
