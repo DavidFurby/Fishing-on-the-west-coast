@@ -14,7 +14,6 @@ public class FishDisplay : MonoBehaviour
     {
 
         fish.size = Random.Range(fish.averageSize / 2, fish.averageSize * 2);
-        Debug.Log(fish.size);
 
     }
 

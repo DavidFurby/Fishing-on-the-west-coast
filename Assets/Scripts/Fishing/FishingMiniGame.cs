@@ -98,7 +98,6 @@ public class FishingMiniGame : MonoBehaviour
     {
         if (reelingBalance.value <= 0f || reelingBalance.value >= 1f)
         {
-            EndBalanceMiniGame();
             fishingSystem.LoseCatch();
         }
     }

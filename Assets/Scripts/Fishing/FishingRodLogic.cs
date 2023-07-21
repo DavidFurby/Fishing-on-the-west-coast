@@ -30,7 +30,7 @@ public class FishingRodLogic : MonoBehaviour
     // Calculate the reel in speed based on the size of the caught fishes
     public void CalculateReelInSpeed()
     {
-        foreach (FishDisplay @catch in fishingSystem.totalFishes)
+        foreach (FishDisplay @catch in fishingSystem.caughtFishes)
         {
             reelInSpeed = initialReelInSpeed - (@catch.fish.size / 10);
         }

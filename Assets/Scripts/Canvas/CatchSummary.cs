@@ -20,13 +20,13 @@ public class CatchSummary : MonoBehaviour
     /// </summary>
     public void InitiateCatchSummary()
     {
-        if (system.totalFishes.Count <= 0)
+        if (system.caughtFishes.Count <= 0)
         {
             Debug.LogError("Fish list is empty");
             return;
         }
-        currentlyInspectedFish = system.totalFishes[0];
-        system.fishingCamera.MoveCameraCloserToFish(system.totalFishes[0]);
+        currentlyInspectedFish = system.caughtFishes[0];
+        system.fishingCamera.MoveCameraCloserToFish(system.caughtFishes[0]);
         UpdateDataValues();
         dialogHandlers.StartSummary(currentlyInspectedFish.fish);
     }
@@ -38,7 +38,7 @@ public class CatchSummary : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (fishIndex < system.totalFishes.Count - 1)
+            if (fishIndex < system.caughtFishes.Count - 1)
             {
                 IncrementFishIndex();
                 UpdateDataValues();
@@ -62,7 +62,7 @@ public class CatchSummary : MonoBehaviour
     private void IncrementFishIndex()
     {
         fishIndex++;
-        currentlyInspectedFish = system.totalFishes[fishIndex];
+        currentlyInspectedFish = system.caughtFishes[fishIndex];
     }
 
     // Check if fish is larger than the saved fish of the same name
@@ -116,7 +116,7 @@ public class CatchSummary : MonoBehaviour
     // Reset values
     private void ResetValues()
     {
-        system.totalFishes.Clear();
+        system.ClearCaughtFishes();
         currentlyInspectedFish = null;
         fishIndex = 0;
     }

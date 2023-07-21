@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public abstract class FishingState : State
 {
     protected FishingSystem system;
@@ -22,7 +24,6 @@ public class Idle : FishingState
         system.seaSpawner.StopSpawnFish();
         system.catchArea.ResetValues();
         system.fishingRodLogic.ResetValues();
-
     }
     public override void Update()
     {
@@ -143,6 +144,11 @@ public class ReelingFish : FishingState
         base.LateUpdate();
         system.fishingCamera.UpdateCameraPosition();
         system.fishingCamera.MoveCameraCloserToBait(0.2f);
+    }
+    public override void OnExit()
+    {
+        base.OnExit();
+        system.fishingMiniGame.EndBalanceMiniGame();
     }
 }
 

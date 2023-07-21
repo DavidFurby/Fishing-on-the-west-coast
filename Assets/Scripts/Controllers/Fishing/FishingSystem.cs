@@ -18,11 +18,9 @@ public class FishingSystem : FishingStateMachine
     public UnityEvent onCatchFish;
     public UnityEvent onCharge;
     public UnityEvent onChargeRelease;
-    public UnityEvent onLoseCatch;
-    public UnityEvent onInspectFish;
     #endregion
 
-    [HideInInspector] public List<FishDisplay> totalFishes = new();
+    [HideInInspector] public List<FishDisplay> caughtFishes = new();
     [HideInInspector] public Bait bait;
     [HideInInspector] public FishingRod fishingRod;
 
@@ -44,7 +42,7 @@ public class FishingSystem : FishingStateMachine
             if (catchArea.IsInCatchArea && catchArea.fish != null)
             {
                 StartCoroutine(fishingCamera.CatchAlert());
-                fishingMiniGame.StartBalanceMiniGame(totalFishes);
+                fishingMiniGame.StartBalanceMiniGame(caughtFishes);
                 onCatchFish.Invoke();
                 SetState(new ReelingFish(this));
             }
@@ -76,9 +74,8 @@ public class FishingSystem : FishingStateMachine
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
-        if (totalFishes.Count > 0)
+        if (caughtFishes.Count > 0)
         {
-            onInspectFish.Invoke();
             SetState(new InspectFish(this));
         }
     }
@@ -86,14 +83,23 @@ public class FishingSystem : FishingStateMachine
     //Drop the fish if you fail the minigame
     public void LoseCatch()
     {
-        onLoseCatch.Invoke();
+        catchArea.ResetValues();
+        ClearCaughtFishes();
         SetState(new Reeling(this));
     }
 
     //Add fish to totalFishes list
     public void AddFish(FishDisplay fish)
     {
-        totalFishes.Add(fish);
+        caughtFishes.Add(fish);
+    }
+    public void ClearCaughtFishes()
+    {
+        for (int i = 0; i < caughtFishes.Count; i++)
+        {
+            caughtFishes[i].ReturnToPool();
+        }
+        caughtFishes.Clear();
     }
 
     #endregion

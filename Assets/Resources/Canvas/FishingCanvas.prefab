@@ -150,13 +150,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ab26a0ea4114c45bb86c5a5715308f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catchSummary: {fileID: 7271141382788062479}
   catchName: {fileID: 6325068662099578218}
   sizeText: {fileID: 2183249405359975386}
   isNew: {fileID: 6593741001342054128}
   newRecord: {fileID: 4614909520830116077}
-  fishingControls: {fileID: 0}
-  handlers: {fileID: 0}
+  system: {fileID: 0}
+  dialogHandlers: {fileID: 5748939074532554492}
+  currentlyInspectedFish: {fileID: 0}
 --- !u!114 &5748939074532554492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,6 +786,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8690102946955983174}
     m_Modifications:
+    - target: {fileID: 266568541390610403, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 808846734424407668, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
       propertyPath: m_Name
       value: Dialog
@@ -794,9 +798,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1120107369555508573, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2308330358438935481, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308330358438935481, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 932
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308330358438935481, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 89.77998
       objectReference: {fileID: 0}
     - target: {fileID: 2661813740593801919, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1069,11 +1085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &7271141382788062479 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8867706024651151886, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
-  m_PrefabInstance: {fileID: 2303629920801507073}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5702738925882110576
 PrefabInstance:
   m_ObjectHideFlags: 0
