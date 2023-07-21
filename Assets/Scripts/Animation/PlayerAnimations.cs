@@ -22,7 +22,6 @@ public class PlayerAnimations : MonoBehaviour
     public void SetChargingThrowSpeed()
     {
         playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.02f);
-        Debug.Log(playerAnimator.GetFloat("chargingThrowSpeed"));
     }
 
     public void ResetChargingThrowSpeed()

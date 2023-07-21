@@ -12,7 +12,7 @@ public class CatchSummary : MonoBehaviour
 
     [SerializeField] private FishingSystem system;
     [SerializeField] private CatchSummaryHandlers dialogHandlers;
-    public FishDisplay currentlyInspectedFish;
+    [HideInInspector] public FishDisplay currentlyInspectedFish;
     private int fishIndex;
 
     /// <summary>

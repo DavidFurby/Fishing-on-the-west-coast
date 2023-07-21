@@ -1,18 +1,17 @@
 using System;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Fish", menuName = "ScriptableObjects/Fish", order = 1)]
-
 [Serializable]
 public class Fish : ScriptableObject
 {
     public int id;
     public new string name;
-    public float size;
+    public float averageSize;
     public string description;
     public int level;
+    [HideInInspector] public float size;
 
     public enum CatchTag
     {
@@ -20,9 +19,6 @@ public class Fish : ScriptableObject
         AdvanceCatch,
         RareCatch,
     }
-
-
-
 
     public void AddFishToInstance()
     {
