@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class BaitLogic : MonoBehaviour
 {
     [SerializeField] private GameObject sea;
+    [SerializeField] private SeaLogic seaLogic;
     [SerializeField] private GameObject fishingRodTop;
     [SerializeField] private FishingSystem system;
     [SerializeField] private Scrollbar balance;
@@ -15,8 +16,7 @@ public class BaitLogic : MonoBehaviour
     [HideInInspector] public bool inWater = false;
     private GameObject currentDistanceRecordMarker;
     private float distance;
-    private float waterLevel;
-    private const float FloatHeight = 2f;
+    private const float FloatHeight = 100f;
     private const float BounceDamp = 0.5f;
     private float forceFactor = 1f;
     private Vector3 targetPosition;
@@ -28,7 +28,6 @@ public class BaitLogic : MonoBehaviour
         distanceTextUI.gameObject.SetActive(false);
         rigidBody = GetComponent<Rigidbody>();
         targetPosition = fishingRodTop.transform.position;
-        waterLevel = sea.transform.position.y + 1f;
         AttachBait();
         SpawnDistanceRecordMarker();
     }
@@ -36,6 +35,7 @@ public class BaitLogic : MonoBehaviour
     private void FixedUpdate()
     {
         CalculateDistance();
+        seaLogic.Float(rigidBody, inWater, FloatHeight, BounceDamp);
     }
 
     public void Cast()
@@ -136,23 +136,5 @@ public class BaitLogic : MonoBehaviour
     private void ResetValues()
     {
         forceFactor = 1f;
-    }
-    public void Float()
-    {
-        if (inWater)
-        {
-            rigidBody.drag = 2f;
-            Vector3 actionPoint = transform.position + transform.TransformDirection(Vector3.down);
-            float forceFactor = 1f - ((actionPoint.y - waterLevel) / FloatHeight);
-            if (forceFactor > 0f)
-            {
-                Vector3 uplift = -Physics.gravity * (forceFactor - rigidBody.velocity.y * BounceDamp);
-                rigidBody.AddForceAtPosition(uplift, actionPoint);
-            }
-        }
-        else
-        {
-            rigidBody.drag = 0f;
-        }
     }
 }

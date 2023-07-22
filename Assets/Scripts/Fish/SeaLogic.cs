@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SeaSpawner : MonoBehaviour
+public class SeaLogic : MonoBehaviour
 {
     // Serialized fields
     [SerializeField] private int spawnDelay;
@@ -14,6 +14,8 @@ public class SeaSpawner : MonoBehaviour
     private float fishSpawnDirection;
     private Quaternion fishSpawnRotation;
     private Vector3 fishSpawnPosition;
+    private readonly float waterLevel;
+
 
     private void Start()
     {
@@ -23,21 +25,6 @@ public class SeaSpawner : MonoBehaviour
         fishPrefabs = Resources.LoadAll<FishDisplay>("SpawnableFishes");
     }
 
-    // Destroy the fish if it exits the trigger area
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Fish"))
-        {
-            if (other.transform.position.y > seaPosition.y + seaRenderer.bounds.extents.y)
-            {
-                other.attachedRigidbody.AddForce(Vector3.down * 2, ForceMode.Impulse);
-            }
-            else
-            {
-                ObjectPool.Instance.ReturnToPool(other.gameObject);
-            }
-        }
-    }
     public void InvokeSpawnFish()
     {
         InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
@@ -88,6 +75,24 @@ public class SeaSpawner : MonoBehaviour
             {
                 ObjectPool.Instance.ReturnToPool(fish);
             }
+        }
+    }
+    public void Float(Rigidbody rigidBody, bool inWater, float FloatHeight, float BounceDamp)
+    {
+        if (inWater)
+        {
+            rigidBody.drag = 2f;
+            Vector3 actionPoint = transform.position + transform.TransformDirection(Vector3.down);
+            float forceFactor = 1f - ((actionPoint.y - waterLevel) / FloatHeight);
+            if (forceFactor > 0f)
+            {
+                Vector3 uplift = -Physics.gravity * (forceFactor - rigidBody.velocity.y * BounceDamp);
+                rigidBody.AddForceAtPosition(uplift, actionPoint);
+            }
+        }
+        else
+        {
+            rigidBody.drag = 0f;
         }
     }
 }

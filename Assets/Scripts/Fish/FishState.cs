@@ -6,6 +6,10 @@ public class FishState : State
     {
         this.fishMovement = fishMovement;
     }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
 }
 
 public class Swimming : FishState
@@ -38,12 +42,16 @@ public class Hooked : FishState
     public Hooked(FishMovement fishMovement) : base(fishMovement)
     {
     }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+
+    }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
         fishMovement.HookToTarget();
         fishMovement.MunchOn();
-
     }
 }
 public class Inspected : FishState

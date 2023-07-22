@@ -59,6 +59,7 @@ public class FishMovement : FishStateMachine
     public void SwimAround()
     {
         _rigidBody.velocity = transform.forward * _speed;
+        UpwardsForce();
     }
 
     // Makes the fish swim towards its target
@@ -66,6 +67,14 @@ public class FishMovement : FishStateMachine
     {
         _rigidBody.velocity = transform.forward * _speed;
         RotateTowards();
+        UpwardsForce();
+    }
+
+    //Keep the fish from shinking while swimming
+    private void UpwardsForce()
+    {
+        float upwardForce = Mathf.Abs(Physics.gravity.y) * _rigidBody.mass;
+        _rigidBody.AddForce(Vector3.up * upwardForce);
     }
 
     // Makes the fish munch on its target

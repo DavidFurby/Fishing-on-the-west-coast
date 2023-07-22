@@ -12,7 +12,7 @@ public class FishingSystem : FishingStateMachine
     public FishingRodLogic fishingRodLogic;
     public BaitLogic baitLogic;
     public ItemMenu itemMenu;
-    public SeaSpawner seaSpawner;
+    public SeaLogic seaSpawner;
     #endregion
 
     #region Events

@@ -10,7 +10,7 @@ public class WaterCollision : MonoBehaviour
     {
         if (other.gameObject == sea)
         {
-            if (system.GetCurrentState() is not Reeling && system.GetCurrentState() is not ReelingFish)
+            if (system.GetCurrentState() is Casting)
             {
                 system.baitLogic.UpdateDistanceRecord();
                 system.SetState(new Fishing(system));

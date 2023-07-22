@@ -87,7 +87,6 @@ public class Fishing : FishingState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        system.baitLogic.Float();
     }
     public override void LateUpdate()
     {
@@ -111,7 +110,6 @@ public class Reeling : FishingState
     {
         base.FixedUpdate();
         system.baitLogic.ReelIn();
-        system.baitLogic.Float();
     }
 
 }
@@ -138,7 +136,6 @@ public class ReelingFish : FishingState
     {
         base.FixedUpdate();
         system.baitLogic.ReelIn();
-        system.baitLogic.Float();
     }
     public override void LateUpdate()
     {
