@@ -22,11 +22,6 @@ public class ItemMenu : MonoBehaviour
         allItems.AddRange(MainManager.Instance.game.FoundHats);
     }
 
-    void Update()
-    {
-        HandleInputs();
-    }
-
     private void PopulateWheels()
     {
 
@@ -49,7 +44,7 @@ public class ItemMenu : MonoBehaviour
     }
 
 
-    private void HandleInputs()
+    public void HandleInputs()
     {
         if (Input.GetKeyDown(KeyCode.V))
         {

@@ -11,6 +11,7 @@ public class FishingSystem : FishingStateMachine
     public FishingMiniGame fishingMiniGame;
     public FishingRodLogic fishingRodLogic;
     public BaitLogic baitLogic;
+    public ItemMenu itemMenu;
     public SeaSpawner seaSpawner;
     #endregion
 

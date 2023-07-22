@@ -29,6 +29,7 @@ public class Idle : FishingState
     {
         base.Update();
         system.StartFishing();
+        system.itemMenu.HandleInputs();
     }
 }
 
