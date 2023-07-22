@@ -4,11 +4,12 @@ using System.Collections.Generic;
 public class FishMovement : FishStateMachine
 {
     [HideInInspector] public GameObject target;
+    [HideInInspector] public Transform tastyPart;
     private Transform[] _bones;
     [SerializeField] private float _speed = 0.3f;
     [SerializeField] private float _rotateSpeed = 2;
-    public Transform tastyPart;
     [SerializeField] private float _tastyPartOffset = 0.4f;
+    private HingeJoint _hingeJoint;
     private Vector3 _offset;
     private Rigidbody _rigidBody;
 
@@ -17,6 +18,7 @@ public class FishMovement : FishStateMachine
     {
         SetState(new Swimming(this));
         _rigidBody = GetComponent<Rigidbody>();
+        _rigidBody.solverIterations = 100;
         SetBones();
     }
 
@@ -80,6 +82,7 @@ public class FishMovement : FishStateMachine
     // Makes the fish munch on its target
     public void MunchOn()
     {
+        _hingeJoint = gameObject.AddComponent<HingeJoint>();
         //sets pos to target pos. Pivot point is always center so need offset to look good.
         //Also using rotate to make sure the rotation is correct
 
@@ -93,7 +96,7 @@ public class FishMovement : FishStateMachine
         }
         else
         {
-            transform.position = target.transform.position + target.transform.rotation * _offset;
+            _hingeJoint.connectedBody = target.GetComponent<Rigidbody>();
 
         }
         RotateTowards();

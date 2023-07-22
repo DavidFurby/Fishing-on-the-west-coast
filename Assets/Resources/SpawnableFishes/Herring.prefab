@@ -143,12 +143,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  head: {fileID: 0}
   tastyPart: {fileID: 0}
-  _rigidBody: {fileID: 0}
   _speed: 0.3
   _rotateSpeed: 2
   _tastyPartOffset: 0.4
+  _hingeJoint: {fileID: 0}
 --- !u!114 &6650865527275564235
 MonoBehaviour:
   m_ObjectHideFlags: 0
