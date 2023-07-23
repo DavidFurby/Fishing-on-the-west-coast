@@ -131,8 +131,10 @@ MonoBehaviour:
   target: {fileID: 0}
   tastyPart: {fileID: 0}
   _speed: 0.3
+  _baitedSpeed: 0.5
+  _retreatSpeed: 0.5
   _rotateSpeed: 2
-  _tastyPartOffset: 0.4
+  _rigidBody: {fileID: 7641610401833151026}
 --- !u!114 &6650865527275564235
 MonoBehaviour:
   m_ObjectHideFlags: 0

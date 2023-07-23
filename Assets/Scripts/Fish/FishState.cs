@@ -46,7 +46,6 @@ public class Retreat : FishState
     public override void OnEnter()
     {
         base.OnEnter();
-        fishMovement.Retreat();
         fishMovement.StartCoroutine(fishMovement.Retreat());
     }
     public override void FixedUpdate()
@@ -68,8 +67,8 @@ public class Hooked : FishState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.HookToTarget();
-        fishMovement.MunchOn();
+        fishMovement.SetRotationSpeed();
+        fishMovement.AttachToTarget();
         fishMovement.RotateTowards();
     }
 }
