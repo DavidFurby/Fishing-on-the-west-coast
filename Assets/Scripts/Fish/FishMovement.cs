@@ -8,7 +8,7 @@ public class FishMovement : FishStateMachine
     private Transform[] _bones;
     [SerializeField] private float _speed = 0.3f;
     [SerializeField] private float _baitedSpeed = 0.5f;
-    [SerializeField] private float _retreatSpeed = 0.8f;
+    [SerializeField] private float _retreatSpeed = 0.5f;
     [SerializeField] private float _rotateSpeed = 2;
     private Vector3 _offset;
     private Rigidbody _rigidBody;
@@ -61,7 +61,7 @@ public class FishMovement : FishStateMachine
     public void SwimTowardsTarget()
     {
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance < 0.2)
+        if (distance < 0)
         {
             SetState(new Retreat(this));
         }
@@ -77,7 +77,6 @@ public class FishMovement : FishStateMachine
     {
         Debug.Log("retreat");
         Vector3 direction = transform.position - target.transform.position;
-        direction.z = 0;
         _rigidBody.AddForce(direction.normalized * _retreatSpeed, ForceMode.Impulse);
         yield return new WaitForSeconds(Random.Range(1, 3));
         SetState(new Baited(this));
