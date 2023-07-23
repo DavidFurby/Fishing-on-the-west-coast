@@ -29,14 +29,32 @@ public class Baited : FishState
     {
 
     }
+
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.RotateTowardsBait();
         fishMovement.SwimTowardsTarget();
+        fishMovement.RotateTowards();
     }
 }
+public class Retreat : FishState
+{
+    public Retreat(FishMovement fishMovement) : base(fishMovement)
+    {
 
+    }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        fishMovement.Retreat();
+        fishMovement.StartCoroutine(fishMovement.Retreat());
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        fishMovement.RotateTowards();
+    }
+}
 public class Hooked : FishState
 {
     public Hooked(FishMovement fishMovement) : base(fishMovement)
@@ -52,6 +70,7 @@ public class Hooked : FishState
         base.FixedUpdate();
         fishMovement.HookToTarget();
         fishMovement.MunchOn();
+        fishMovement.RotateTowards();
     }
 }
 public class Inspected : FishState

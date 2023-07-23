@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 
 public class FishMovement : FishStateMachine
 {
@@ -7,8 +7,9 @@ public class FishMovement : FishStateMachine
     [HideInInspector] public Transform tastyPart;
     private Transform[] _bones;
     [SerializeField] private float _speed = 0.3f;
+    [SerializeField] private float _baitedSpeed = 0.5f;
+    [SerializeField] private float _retreatSpeed = 0.8f;
     [SerializeField] private float _rotateSpeed = 2;
-    [SerializeField] private float _tastyPartOffset = 0.4f;
     private Vector3 _offset;
     private Rigidbody _rigidBody;
 
@@ -19,13 +20,6 @@ public class FishMovement : FishStateMachine
         _rigidBody = GetComponent<Rigidbody>();
         _rigidBody.solverIterations = 100;
         SetBones();
-    }
-
-    // Rotate towards the bait if baited
-    public void RotateTowardsBait()
-    {
-        if (target != null)
-            _offset.y = _tastyPartOffset;
     }
 
     private void SetBones()
@@ -66,9 +60,27 @@ public class FishMovement : FishStateMachine
     // Makes the fish swim towards its target
     public void SwimTowardsTarget()
     {
-        _rigidBody.velocity = transform.forward * _speed;
-        RotateTowards();
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        if (distance < 0.2)
+        {
+            SetState(new Retreat(this));
+        }
+        else
+        {
+            _rigidBody.velocity = transform.forward * _baitedSpeed;
+        }
         UpwardsForce();
+    }
+
+    //Retreat if too close too target
+    public IEnumerator Retreat()
+    {
+        Debug.Log("retreat");
+        Vector3 direction = transform.position - target.transform.position;
+        direction.z = 0;
+        _rigidBody.AddForce(direction.normalized * _retreatSpeed, ForceMode.Impulse);
+        yield return new WaitForSeconds(Random.Range(1, 3));
+        SetState(new Baited(this));
     }
 
     //Keep the fish from shinking while swimming
@@ -78,7 +90,6 @@ public class FishMovement : FishStateMachine
         _rigidBody.AddForce(Vector3.up * upwardForce);
     }
 
-    // Makes the fish munch on its target
     // Makes the fish munch on its target
     public void MunchOn()
     {
@@ -101,7 +112,7 @@ public class FishMovement : FishStateMachine
     }
 
     // Rotates the fish towards its target
-    private void RotateTowards()
+    public void RotateTowards()
     {
         Vector3 direction = target.transform.position - transform.position;
         direction.z = 0; // Set the z-component to zero
