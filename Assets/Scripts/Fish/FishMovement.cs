@@ -9,7 +9,6 @@ public class FishMovement : FishStateMachine
     [SerializeField] private float _speed = 0.3f;
     [SerializeField] private float _rotateSpeed = 2;
     [SerializeField] private float _tastyPartOffset = 0.4f;
-    private HingeJoint _hingeJoint;
     private Vector3 _offset;
     private Rigidbody _rigidBody;
 
@@ -80,9 +79,9 @@ public class FishMovement : FishStateMachine
     }
 
     // Makes the fish munch on its target
+    // Makes the fish munch on its target
     public void MunchOn()
     {
-        _hingeJoint = gameObject.AddComponent<HingeJoint>();
         //sets pos to target pos. Pivot point is always center so need offset to look good.
         //Also using rotate to make sure the rotation is correct
 
@@ -96,8 +95,7 @@ public class FishMovement : FishStateMachine
         }
         else
         {
-            _hingeJoint.connectedBody = target.GetComponent<Rigidbody>();
-
+            transform.position = target.transform.position + target.transform.rotation * _offset;
         }
         RotateTowards();
     }
@@ -106,6 +104,7 @@ public class FishMovement : FishStateMachine
     private void RotateTowards()
     {
         Vector3 direction = target.transform.position - transform.position;
+        direction.z = 0; // Set the z-component to zero
         if (direction == Vector3.zero)
         {
             //avoid direction viewing vector being zero

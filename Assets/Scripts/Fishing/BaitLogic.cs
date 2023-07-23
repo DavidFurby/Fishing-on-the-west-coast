@@ -16,8 +16,8 @@ public class BaitLogic : MonoBehaviour
     [HideInInspector] public bool inWater = false;
     private GameObject currentDistanceRecordMarker;
     private float distance;
-    private const float FloatHeight = 100f;
-    private const float BounceDamp = 0.5f;
+    private const float FloatHeight = 150f;
+    private const float BounceDamp = 1f;
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
