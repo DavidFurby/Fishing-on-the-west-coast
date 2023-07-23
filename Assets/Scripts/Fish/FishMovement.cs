@@ -8,9 +8,8 @@ public class FishMovement : FishStateMachine
     private Transform[] _bones;
     [SerializeField] private float _speed = 0.3f;
     [SerializeField] private float _baitedSpeed = 0.5f;
-    [SerializeField] private float _retreatSpeed = 0.5f;
+    [SerializeField] private float _retreatSpeed = 5f;
     [SerializeField] private float _rotateSpeed = 2;
-    private Vector3 _offset;
     private Rigidbody _rigidBody;
 
     // Start is called before the first frame update
@@ -61,7 +60,7 @@ public class FishMovement : FishStateMachine
     public void SwimTowardsTarget()
     {
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance < 0)
+        if (distance < 0.1)
         {
             SetState(new Retreat(this));
         }
@@ -104,9 +103,8 @@ public class FishMovement : FishStateMachine
         }
         else
         {
-            transform.position = target.transform.position + target.transform.rotation * _offset;
+      transform.position = target.transform.position + target.transform.rotation * Vector3.zero;
         }
-        RotateTowards();
     }
 
     // Rotates the fish towards its target

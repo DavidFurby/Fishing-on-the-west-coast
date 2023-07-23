@@ -13,13 +13,17 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private FishingSystem system;
     [SerializeField] private CatchSummaryHandlers dialogHandlers;
     [HideInInspector] public FishDisplay currentlyInspectedFish;
-    private int fishIndex;
+    private int currentFishIndex;
 
-    /// <summary>
-    /// Initialize the catch summary with a list of caught fishes.
-    /// </summary>
+    // Initialize the catch summary with a list of caught fishes.
     public void InitiateCatchSummary()
     {
+        if (system == null || dialogHandlers == null)
+        {
+            Debug.LogError("Missing references");
+            return;
+        }
+
         if (system.caughtFishes.Count <= 0)
         {
             Debug.LogError("Fish list is empty");
@@ -31,42 +35,42 @@ public class CatchSummary : MonoBehaviour
         dialogHandlers.StartSummary(currentlyInspectedFish.fish);
     }
 
-    /// <summary>
-    /// If there are more fishes, switch summary. Otherwise, end the summary.
-    /// </summary>
+
+    // If there are more fishes, switch summary. Otherwise, end the summary.
     public void NextSummary()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space)) {
+        if (currentFishIndex < system.caughtFishes.Count - 1)
         {
-            if (fishIndex < system.caughtFishes.Count - 1)
-            {
-                IncrementFishIndex();
-                UpdateDataValues();
-                dialogHandlers.StartSummary(currentlyInspectedFish.fish);
-            }
-            else
-            {
-                system.SetState(new Idle(system));
-            }
+            IncrementFishIndex();
+            UpdateDataValues();
+            dialogHandlers.StartSummary(currentlyInspectedFish.fish);
         }
+        else
+        {
+            system.SetState(new Idle(system));
+        }
+        }
+
     }
 
+    // Update the UI values and the game data
     private void UpdateDataValues()
     {
-        newRecord.gameObject.SetActive(CheckSizeDifference(currentlyInspectedFish.fish));
-        isNew.gameObject.SetActive(CheckIfNew(currentlyInspectedFish.fish));
+        newRecord.gameObject.SetActive(IsNewRecord(currentlyInspectedFish.fish));
+        isNew.gameObject.SetActive(IsNewCatch(currentlyInspectedFish.fish));
         MainManager.Instance.game.TotalCatches++;
     }
 
     // Increment the fish index and update the currently presented fish
     private void IncrementFishIndex()
     {
-        fishIndex++;
-        currentlyInspectedFish = system.caughtFishes[fishIndex];
+        currentFishIndex++;
+        currentlyInspectedFish = system.caughtFishes[currentFishIndex];
     }
 
-    // Check if fish is larger than the saved fish of the same name
-    private bool CheckSizeDifference(Fish fish)
+    // Check if fish is larger than the saved fish of the same name and return true or false
+    private bool IsNewRecord(Fish fish)
     {
         if (fish == null)
         {
@@ -77,7 +81,6 @@ public class CatchSummary : MonoBehaviour
         Fish existingFish = MainManager.Instance.game.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size);
         if (existingFish != null)
         {
-            Debug.Log(existingFish.size + " Existing");
             int index = Array.IndexOf(MainManager.Instance.game.CaughtFishes.ToArray(), existingFish);
             fish.ReplaceFishInInstance(index);
             return true;
@@ -86,14 +89,15 @@ public class CatchSummary : MonoBehaviour
         return false;
     }
 
-    // Check if fish hasn't been caught before
-    private bool CheckIfNew(Fish fish)
+    // Check if fish hasn't been caught before and return true or false
+    private bool IsNewCatch(Fish fish)
     {
         if (fish == null)
         {
             Debug.LogError("Fish data is null");
             return false;
         }
+        
         if (!MainManager.Instance.game.CaughtFishes.Any(f => f.id == fish.id))
         {
             fish.AddFishToInstance();
@@ -103,9 +107,7 @@ public class CatchSummary : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// Reset data and set fishingStatus to Standby to end summary.
-    /// </summary>
+    // Reset data and set fishingStatus to Standby to end summary.
     public void EndSummary()
     {
         ResetValues();
@@ -113,11 +115,10 @@ public class CatchSummary : MonoBehaviour
         system.fishingCamera.MoveCameraToOriginal();
     }
 
-    // Reset values
-    private void ResetValues()
-    {
-        system.ClearCaughtFishes();
-        currentlyInspectedFish = null;
-        fishIndex = 0;
-    }
+     // Reset values
+     private void ResetValues()
+     {
+         currentlyInspectedFish = null;
+         currentFishIndex = 0;
+     }
 }

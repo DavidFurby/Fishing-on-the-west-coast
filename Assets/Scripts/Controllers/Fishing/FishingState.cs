@@ -24,6 +24,7 @@ public class Idle : FishingState
         system.seaSpawner.StopSpawnFish();
         system.catchArea.ResetValues();
         system.fishingRodLogic.ResetValues();
+        system.ClearCaughtFishes();
     }
     public override void Update()
     {
