@@ -1,20 +1,21 @@
 using UnityEngine;
+using System;
 
 public class BaitArea : MonoBehaviour
 {
     [SerializeField] private FishingSystem system;
-    [HideInInspector] public FishDisplay fish;
+    [HideInInspector] public bool isInBaitArea = false;
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("Fish") && fish == null)
+        if (collider.gameObject.CompareTag("Fish") && !isInBaitArea)
         {
             FishMovement fishMovement = collider.gameObject.GetComponent<FishMovement>();
             FishDisplay fish = collider.gameObject.GetComponent<FishDisplay>();
             float probability = GetProbability(fish.fish.level, system.bait.level);
-            if (Random.Range(0f, 1f) < probability)
+            if (UnityEngine.Random.Range(0f, 1f) < probability)
             {
-                this.fish = fish;
+                isInBaitArea = true;
                 fishMovement.GetBaited(system.baitLogic.gameObject);
             }
         }
@@ -22,10 +23,10 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fish == other.gameObject)
+        if (other.CompareTag("Fish") && isInBaitArea)
         {
-            Debug.Log("exit");
-            fish = null;
+            isInBaitArea = false;
+            FishDisplay fish = other.gameObject.GetComponent<FishDisplay>();
         }
     }
 
@@ -33,5 +34,10 @@ public class BaitArea : MonoBehaviour
     {
         int difference = Mathf.Abs(fishLevel - baitLevel);
         return 1f / (1f + difference);
+    }
+
+    public void ResetBaitArea()
+    {
+        isInBaitArea = false;
     }
 }
