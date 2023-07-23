@@ -53,7 +53,6 @@ public class FishMovement : FishStateMachine
     public void SwimAround()
     {
         _rigidBody.velocity = transform.forward * _speed;
-        UpwardsForce();
     }
 
     // Makes the fish swim towards its target
@@ -68,7 +67,6 @@ public class FishMovement : FishStateMachine
         {
             _rigidBody.velocity = transform.forward * _baitedSpeed;
         }
-        UpwardsForce();
     }
 
     //Retreat if too close too target
@@ -79,14 +77,6 @@ public class FishMovement : FishStateMachine
         yield return new WaitForSeconds(Random.Range(1, 3));
         SetState(new Baited(this));
     }
-
-    //Keep the fish from shinking while swimming
-    private void UpwardsForce()
-    {
-        float upwardForce = Mathf.Abs(Physics.gravity.y) * _rigidBody.mass;
-        _rigidBody.AddForce(Vector3.up * upwardForce);
-    }
-
     // Makes the fish munch on its target
     public void AttachToTarget()
     {
@@ -98,7 +88,7 @@ public class FishMovement : FishStateMachine
         {
             if (fishMovement.tastyPart != null)
             {
-                transform.position = fishMovement.tastyPart.position;
+                transform.position = fishMovement.tastyPart.position + fishMovement.tastyPart.rotation * Vector3.zero;
             }
         }
         else
