@@ -62,7 +62,7 @@ public class Casting : FishingState
     public override void LateUpdate()
     {
         base.LateUpdate();
-        system.fishingCamera.UpdateCameraPosition();
+        system.fishingCamera.SetCameraToBait();
         system.fishingCamera.MoveCameraCloserToBait();
     }
 }
@@ -92,7 +92,7 @@ public class Fishing : FishingState
     public override void LateUpdate()
     {
         base.LateUpdate();
-        system.fishingCamera.UpdateCameraPosition();
+        system.fishingCamera.SetCameraToBait();
         system.fishingCamera.MoveCameraToOriginal();
     }
 }
@@ -141,7 +141,7 @@ public class ReelingFish : FishingState
     public override void LateUpdate()
     {
         base.LateUpdate();
-        system.fishingCamera.UpdateCameraPosition();
+        system.fishingCamera.SetCameraToBait();
         system.fishingCamera.MoveCameraCloserToBait(0.2f);
     }
     public override void OnExit()

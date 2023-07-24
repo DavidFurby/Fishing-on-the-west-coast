@@ -15,9 +15,14 @@ public class FishingCamera : MonoBehaviour
         originalCameraDistance = cameraDistance;
     }
 
-    public void UpdateCameraPosition()
+    public void SetCameraToBait()
     {
         transform.position = new Vector3(system.baitLogic.transform.position.x, system.baitLogic.transform.position.y, cameraDistance);
+    }
+
+        public void SetCameraToFish(FishDisplay fish)
+    {
+        transform.position = new Vector3(fish.transform.position.x, fish.transform.position.y, cameraDistance);
     }
 
     public void MoveCameraCloserToBait(float speed = 0.1f)
