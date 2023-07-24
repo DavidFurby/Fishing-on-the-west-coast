@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class BaitArea : MonoBehaviour
 {
@@ -7,6 +8,33 @@ public class BaitArea : MonoBehaviour
     [HideInInspector] public bool fishInBaitArea = false;
 
     private void OnTriggerEnter(Collider collider)
+    {
+        TryBaitingFish(collider);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        StartCoroutine(BaitManually(other));
+    }
+
+    private IEnumerator BaitManually(Collider other)
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            system.baitLogic.Shake();
+            TryBaitingFish(other);
+            yield return new WaitForSeconds(2);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fish") && fishInBaitArea)
+        {
+            fishInBaitArea = false;
+        }
+    }
+    private void TryBaitingFish(Collider collider)
     {
         if (collider.gameObject.CompareTag("Fish") && !fishInBaitArea)
         {
@@ -18,14 +46,6 @@ public class BaitArea : MonoBehaviour
                 fishInBaitArea = true;
                 fishMovement.GetBaited(system.baitLogic.gameObject);
             }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Fish") && fishInBaitArea)
-        {
-            fishInBaitArea = false;
         }
     }
 
