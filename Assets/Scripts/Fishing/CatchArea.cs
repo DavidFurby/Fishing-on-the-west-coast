@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CatchArea : MonoBehaviour
 {
-    public bool IsInCatchArea { get; private set; }
+    public bool IsInCatchArea { get; set; }
     [HideInInspector] public FishDisplay fish;
     [SerializeField] private FishingSystem fishingSystem;
 
@@ -10,13 +10,13 @@ public class CatchArea : MonoBehaviour
     {
         if (other.CompareTag("Fish"))
         {
-            if (fish == null)
-            {
-                HandleFishEnter(other);
-            }
-            else if (fishingSystem.GetCurrentState() is ReelingFish)
+            if (fishingSystem.GetCurrentState() is ReelingFish)
             {
                 CatchFishWhileReeling(other);
+            }
+            else
+            {
+                HandleFishEnter(other);
             }
         }
     }
@@ -58,7 +58,7 @@ public class CatchArea : MonoBehaviour
 
     public void CatchFish()
     {
-        if (fish != null)
+        if (fishingSystem.GetCurrentState() is Fishing)
         {
             fish.GetComponent<FishMovement>().SetState(new Hooked(fish.GetComponent<FishMovement>()));
             fishingSystem.AddFish(fish);
