@@ -26,7 +26,6 @@ public class BaitArea : MonoBehaviour
         if (other.CompareTag("Fish") && fishInBaitArea)
         {
             fishInBaitArea = false;
-            FishDisplay fish = other.gameObject.GetComponent<FishDisplay>();
         }
     }
 
@@ -34,10 +33,5 @@ public class BaitArea : MonoBehaviour
     {
         int difference = Mathf.Abs(fishLevel - baitLevel);
         return 1f / (1f + difference);
-    }
-
-    public void ResetBaitArea()
-    {
-        fishInBaitArea = false;
     }
 }

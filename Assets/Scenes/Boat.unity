@@ -1184,6 +1184,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 822062796}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: isNewText
+      value: 
+      objectReference: {fileID: 986318744}
+    - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: newRecordText
+      value: 
+      objectReference: {fileID: 1900469579}
+    - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: dialogHandlers
       value: 
       objectReference: {fileID: 1989589368}
@@ -1191,6 +1203,10 @@ PrefabInstance:
       propertyPath: fishingControls
       value: 
       objectReference: {fileID: 568067434}
+    - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: summaryDialogHandlers
+      value: 
+      objectReference: {fileID: 1989589368}
     - target: {fileID: 9026283299946631790, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1976,7 +1992,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-46564
+  m_Name: pb_Mesh-1808
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2134,6 +2150,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &986318744 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6593741001342054128, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+  m_PrefabInstance: {fileID: 229474582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1088169641 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4253579225698434387, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
@@ -2473,6 +2500,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b1100e54c45314459e18955886d8321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1900469579 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4614909520830116077, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+  m_PrefabInstance: {fileID: 229474582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1915495999
@@ -2880,6 +2918,10 @@ PrefabInstance:
       propertyPath: bait
       value: 
       objectReference: {fileID: 7448718}
+    - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: spawnDelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: fishingSystem
       value: 
