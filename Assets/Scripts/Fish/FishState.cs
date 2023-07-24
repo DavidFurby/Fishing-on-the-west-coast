@@ -21,7 +21,6 @@ public class Swimming : FishState
     {
         base.FixedUpdate();
         fishMovement.SwimAround();
-        fishMovement.UpwardsForce();
     }
 }
 public class Baited : FishState
@@ -36,7 +35,6 @@ public class Baited : FishState
         base.FixedUpdate();
         fishMovement.SwimTowardsTarget();
         fishMovement.RotateTowards();
-        fishMovement.UpwardsForce();
     }
 }
 public class Retreat : FishState
@@ -54,7 +52,6 @@ public class Retreat : FishState
     {
         base.FixedUpdate();
         fishMovement.RotateTowards();
-        fishMovement.UpwardsForce();
     }
 }
 public class Hooked : FishState

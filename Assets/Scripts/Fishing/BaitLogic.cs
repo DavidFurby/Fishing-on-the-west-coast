@@ -13,11 +13,8 @@ public class BaitLogic : MonoBehaviour
     [SerializeField] private TextMeshProUGUI distanceTextUI;
     [SerializeField] private GameObject distanceRecordMarker;
 
-    [HideInInspector] public bool inWater = false;
     private GameObject currentDistanceRecordMarker;
     private float distance;
-    private const float FloatHeight = 150f;
-    private const float BounceDamp = 1f;
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
@@ -35,7 +32,6 @@ public class BaitLogic : MonoBehaviour
     private void FixedUpdate()
     {
         CalculateDistance();
-        seaLogic.Float(rigidBody, inWater, FloatHeight, BounceDamp);
     }
 
     public void Cast()

@@ -9,7 +9,6 @@ public class SeaLogic : MonoBehaviour
     private FishDisplay[] fishPrefabs;
     private Renderer seaRenderer;
     private Vector3 seaPosition;
-    private readonly float waterLevel;
 
     private void Start()
     {
@@ -66,25 +65,6 @@ public class SeaLogic : MonoBehaviour
             {
                 ObjectPool.Instance.ReturnToPool(fish);
             }
-        }
-    }
-
-    public void Float(Rigidbody rigidBody, bool inWater, float FloatHeight, float BounceDamp)
-    {
-        if (inWater)
-        {
-            rigidBody.drag = 2f;
-            Vector3 actionPoint = transform.position + transform.TransformDirection(Vector3.down);
-            float forceFactor = 1f - ((actionPoint.y - waterLevel) / FloatHeight);
-            if (forceFactor > 0f)
-            {
-                Vector3 uplift = -Physics.gravity * (forceFactor - rigidBody.velocity.y * BounceDamp);
-                rigidBody.AddForceAtPosition(uplift, actionPoint);
-            }
-        }
-        else
-        {
-            rigidBody.drag = 0f;
         }
     }
 }
