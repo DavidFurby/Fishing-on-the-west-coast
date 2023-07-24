@@ -1,36 +1,36 @@
 using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 
 public class FishMovement : FishStateMachine
 {
     [HideInInspector] public GameObject target;
-    [HideInInspector] public Transform tastyPart;
     private Transform[] _bones;
     [SerializeField] private float _speed = 0.3f;
     [SerializeField] private float _baitedSpeed = 0.5f;
-    [SerializeField] private float _retreatSpeed = 5f;
+
     [SerializeField] private float _rotateSpeed = 2;
+    public Transform tastyPart;
+    [SerializeField] private float _offsetAmount = 0.4f;
+    private Vector3 _offset;
     private Rigidbody _rigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
         SetState(new Swimming(this));
-        _rigidBody = GetComponent<Rigidbody>();
-        _rigidBody.solverIterations = 100;
-        SetBones();
-    }
 
-    private void SetBones()
+        _rigidBody = GetComponent<Rigidbody>();
+    }
+    // Rotate towards the bait if baited
+    public void RotateTowardsBait()
     {
+        if (target != null)
+            _offset.y = _offsetAmount;
+
         //Gets an Array of Armatures's children aka all the bones, in order Head -> Tail
         _bones = transform.Find("Armature").GetChild(0).GetComponentsInChildren<Transform>();
-        SetTastyPart();
-    }
 
-    // Sets the position of the tasty part of the fish
-    private void SetTastyPart()
-    {
         //If TastyPart Object already exists, then it's location is probably
         //manually decided, so no need to set the position. If it doesn't exist
         //then we create it and set the pos to the tail.
@@ -41,7 +41,7 @@ public class FishMovement : FishStateMachine
         else
         {
             tastyPart = new GameObject("TastyPart").GetComponent<Transform>();
-            tastyPart.SetParent(transform);
+            tastyPart.SetParent(gameObject.transform);
 
             //sets tasty part to tail area (last in array) as default
             //(not setting to tail directly as to not get unwanted interactions on tail animations)
@@ -49,36 +49,25 @@ public class FishMovement : FishStateMachine
         }
     }
 
-    // Makes the fish swim around
     public void SwimAround()
     {
         _rigidBody.velocity = transform.forward * _speed;
     }
 
-    // Makes the fish swim towards its target
     public void SwimTowardsTarget()
     {
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance < 0.1)
-        {
-            SetState(new Retreat(this));
-        }
-        else
-        {
-            _rigidBody.velocity = transform.forward * _baitedSpeed;
-        }
+        _rigidBody.velocity = transform.forward * _baitedSpeed;
     }
-
     //Retreat if too close too target
     public IEnumerator Retreat()
     {
         Vector3 direction = transform.position - target.transform.position;
-        _rigidBody.AddForce(direction.normalized * _retreatSpeed, ForceMode.Impulse);
+        _rigidBody.AddForce(direction.normalized * 0.5f, ForceMode.Impulse);
         yield return new WaitForSeconds(Random.Range(1, 3));
         SetState(new Baited(this));
     }
-    // Makes the fish munch on its target
-    public void AttachToTarget()
+
+    public void MunchOn()
     {
         //sets pos to target pos. Pivot point is always center so need offset to look good.
         //Also using rotate to make sure the rotation is correct
@@ -86,32 +75,29 @@ public class FishMovement : FishStateMachine
         //If target is Fish set the position to tastyPart
         if (target.TryGetComponent<FishMovement>(out var fishMovement))
         {
-            if (fishMovement.tastyPart != null)
-            {
-                transform.position = fishMovement.tastyPart.position + fishMovement.tastyPart.rotation * Vector3.zero;
-            }
+            transform.position = fishMovement.tastyPart.position;
         }
         else
         {
-      transform.position = target.transform.position + target.transform.rotation * Vector3.zero;
+            transform.position = target.transform.position + target.transform.rotation * _offset;
+
         }
     }
 
-    // Rotates the fish towards its target
     public void RotateTowards()
     {
         Vector3 direction = target.transform.position - transform.position;
-        direction.z = 0; // Set the z-component to zero
         if (direction == Vector3.zero)
         {
             //avoid direction viewing vector being zero
-            direction = Vector3.up * 0.01f;
+            direction = new Vector3(0, 0, 0.01f);
         }
         Quaternion _lookRotation = Quaternion.LookRotation(direction.normalized);
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _rotateSpeed);
     }
 
-    // Sets the position of the tasty part of the fish
+
+
     public void SetTastyPartPosition(Transform obj)
     {
 
@@ -119,15 +105,14 @@ public class FishMovement : FishStateMachine
         tastyPart.SetPositionAndRotation(obj.position, Quaternion.Euler(-89.98f, 0f, 0f));
     }
 
-    // Sets the state of the fish to baited and sets its target
+
     public void GetBaited(GameObject target)
     {
         this.target = target;
         SetState(new Baited(this));
     }
-
-    //Set the position of the fish to the target if hooked
-    public void SetRotationSpeed()
+    //Set the position of the fish to the bait if hooked
+    public void HookToTarget()
     {
         if (target != null)
         {

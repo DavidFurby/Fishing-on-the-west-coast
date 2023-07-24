@@ -67,7 +67,7 @@ public class Hooked : FishState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.AttachToTarget();
+        fishMovement.MunchOn();
         fishMovement.RotateTowards();
     }
 }
