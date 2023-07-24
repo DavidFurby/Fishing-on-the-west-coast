@@ -82,21 +82,27 @@ public class FishMovement : FishStateMachine
         yield return new WaitForSeconds(Random.Range(2, 4));
         SetState(new Baited(this));
     }
-
     public void MunchOn()
     {
-        //sets pos to target pos. Pivot point is always center so need offset to look good.
-        //Also using rotate to make sure the rotation is correct
 
-        //If target is Fish set the position to tastyPart
+        // Set the connectedBody property of the hinge joint to the target's Rigidbody
         if (target.TryGetComponent<FishMovement>(out var fishMovement))
         {
             transform.position = fishMovement.tastyPart.position;
+
         }
         else
         {
-            transform.position = target.transform.position + target.transform.rotation * _offset;
+            // Add a HingeJoint component to the fish game object
+            HingeJoint hinge = gameObject.AddComponent<HingeJoint>();
+
+            hinge.connectedBody = target.GetComponent<Rigidbody>();
+
+            // Set other properties of the hinge joint as desired
+            hinge.anchor = Vector3.zero;
+            hinge.axis = Vector3.right;
         }
+
     }
 
 
