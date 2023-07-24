@@ -9,6 +9,9 @@ public class FishMovement : FishStateMachine
     [SerializeField] private float _speed = 0.3f;
     [SerializeField] private float _baitedSpeed = 0.5f;
 
+    [SerializeField] private float _retreatSpeed = 5f;
+
+
     [SerializeField] private float _rotateSpeed = 2;
     public Transform tastyPart;
     [SerializeField] private float _offsetAmount = 0.4f;
@@ -34,11 +37,8 @@ public class FishMovement : FishStateMachine
         //If TastyPart Object already exists, then it's location is probably
         //manually decided, so no need to set the position. If it doesn't exist
         //then we create it and set the pos to the tail.
-        if (transform.Find("TastyPart"))
-        {
-            tastyPart = transform.Find("TastyPart");
-        }
-        else
+        tastyPart = transform.Find("TastyPart");
+        if (tastyPart == null)
         {
             tastyPart = new GameObject("TastyPart").GetComponent<Transform>();
             tastyPart.SetParent(gameObject.transform);
@@ -49,6 +49,7 @@ public class FishMovement : FishStateMachine
         }
     }
 
+
     public void SwimAround()
     {
         _rigidBody.velocity = transform.forward * _speed;
@@ -56,16 +57,34 @@ public class FishMovement : FishStateMachine
 
     public void SwimTowardsTarget()
     {
-        _rigidBody.velocity = transform.forward * _baitedSpeed;
+        Debug.Log("SwimTowardsTarget");
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        if (distance < 0.1)
+        {
+            SetState(new Retreat(this));
+        }
+        else
+        {
+            _rigidBody.velocity = transform.forward * _baitedSpeed;
+        }
     }
     //Retreat if too close too target
     public IEnumerator Retreat()
     {
+        Debug.Log("Retreat");
         Vector3 direction = transform.position - target.transform.position;
-        _rigidBody.AddForce(direction.normalized * 0.5f, ForceMode.Impulse);
-        yield return new WaitForSeconds(Random.Range(1, 3));
+        _rigidBody.AddForce(direction.normalized * _retreatSpeed, ForceMode.Impulse);
+        yield return new WaitForSeconds(Random.Range(2, 4));
         SetState(new Baited(this));
     }
+    
+    //Keep the fish from sinking while swimming
+    public void UpwardsForce()
+    {
+        float upwardForce = Mathf.Abs(Physics.gravity.y * Random.Range(-2, 2)) * _rigidBody.mass;
+        _rigidBody.AddForce(Vector3.up * upwardForce);
+    }
+
 
     public void MunchOn()
     {
@@ -80,9 +99,9 @@ public class FishMovement : FishStateMachine
         else
         {
             transform.position = target.transform.position + target.transform.rotation * _offset;
-
         }
     }
+
 
     public void RotateTowards()
     {
