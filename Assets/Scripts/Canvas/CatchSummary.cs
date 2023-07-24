@@ -42,7 +42,6 @@ public class CatchSummary : MonoBehaviour
             {
                 IncrementFishIndex();
                 UpdateDataValues();
-                Debug.Log(currentlyDisplayedFish.fish.size);
                 summaryDialogHandlers.StartSummary(currentlyDisplayedFish.fish);
             }
             else
