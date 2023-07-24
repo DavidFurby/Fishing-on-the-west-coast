@@ -13,8 +13,8 @@ public class Bait : Item
 
     public void AddBaitToInstance()
     {
-        MainManager.Instance.game.FoundBaits =
-            MainManager.Instance.game.FoundBaits.Append(this).ToList();
+        MainManager.Instance.game.Inventory.FoundBaits =
+            MainManager.Instance.game.Inventory.FoundBaits.Append(this).ToList();
     }
 
     public static Bait SetBait(BaitData baitData)

@@ -9,6 +9,8 @@ public class FishData
     public string description;
     public int level;
 
+    public int experience;
+
     public FishData(Fish fish)
     {
         id = fish.id;
@@ -16,5 +18,6 @@ public class FishData
         size = fish.size;
         description = fish.description;
         level = fish.level;
+        experience = fish.experience;
     }
 }

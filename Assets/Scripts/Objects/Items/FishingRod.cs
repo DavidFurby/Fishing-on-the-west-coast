@@ -27,7 +27,7 @@ public class FishingRod : Item
 
     public void AddFishingRodToInstance()
     {
-        MainManager.Instance.game.FoundFishingRods = MainManager.Instance.game.FoundFishingRods.Append(this).ToList();
+        MainManager.Instance.game.Inventory.FoundFishingRods = MainManager.Instance.game.Inventory.FoundFishingRods.Append(this).ToList();
     }
     public static FishingRod SetFishingRod(FishingRodData fishingRodData)
     {

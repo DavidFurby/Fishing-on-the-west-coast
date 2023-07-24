@@ -20,8 +20,8 @@ public class Hat : Item
     }
     public void AddHatToInstance()
     {
-        MainManager.Instance.game.FoundHats =
-            MainManager.Instance.game.FoundHats.Append(this).ToList();
+        MainManager.Instance.game.Inventory.FoundHats =
+            MainManager.Instance.game.Inventory.FoundHats.Append(this).ToList();
     }
     public static Hat SetHat(HatData hatData)
     {

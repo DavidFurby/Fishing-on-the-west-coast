@@ -24,9 +24,9 @@ public class NewGameController : MonoBehaviour
     // Populates the available items for the game
     private static void PopulateAvailableItems(Game game)
     {
-        game.AvailableFishingRods = Resources.LoadAll<FishingRod>(ItemsPath + "FishingRods").OrderBy(r => r.id).ToArray();
-        game.AvailableHats = Resources.LoadAll<Hat>(ItemsPath + "Hats").OrderBy(h => h.id).ToArray();
-        game.AvailableBaits = Resources.LoadAll<Bait>(ItemsPath + "Baits").OrderBy(b => b.id).ToArray();
+        game.Inventory.AvailableFishingRods = Resources.LoadAll<FishingRod>(ItemsPath + "FishingRods").OrderBy(r => r.id).ToArray();
+        game.Inventory.AvailableHats = Resources.LoadAll<Hat>(ItemsPath + "Hats").OrderBy(h => h.id).ToArray();
+        game.Inventory.AvailableBaits = Resources.LoadAll<Bait>(ItemsPath + "Baits").OrderBy(b => b.id).ToArray();
     }
 
     // Resets the game state to its initial values
@@ -36,15 +36,17 @@ public class NewGameController : MonoBehaviour
         game.TotalCatches = 0;
         game.BestDistance = 0;
         game.Scene = "Boat";
+        game.Level = 0;
+        game.Experience = 0;
         game.CaughtFishes.Clear();
-        game.FoundFishingRods.Clear();
-        game.FoundFishingRods.Add(game.AvailableFishingRods[0]);
-        game.EquippedFishingRod = game.FoundFishingRods.First((rod) => rod.id == 1);
-        game.FoundBaits.Clear();
-        game.FoundBaits.Add(game.AvailableBaits[0]);
-        game.EquippedBait = game.FoundBaits.First((bait) => bait.id == 1);
-        game.FoundHats.Clear();
-        game.FoundHats.Add(game.AvailableHats[0]);
-        game.EquippedHat = game.FoundHats.First((hat) => hat.id == 1);
+        game.Inventory.FoundFishingRods.Clear();
+        game.Inventory.FoundFishingRods.Add(game.Inventory.AvailableFishingRods[0]);
+        game.Inventory.EquippedFishingRod = game.Inventory.FoundFishingRods.First((rod) => rod.id == 1);
+        game.Inventory.FoundBaits.Clear();
+        game.Inventory.FoundBaits.Add(game.Inventory.AvailableBaits[0]);
+        game.Inventory.EquippedBait = game.Inventory.FoundBaits.First((bait) => bait.id == 1);
+        game.Inventory.FoundHats.Clear();
+        game.Inventory.FoundHats.Add(game.Inventory.AvailableHats[0]);
+        game.Inventory.EquippedHat = game.Inventory.FoundHats.First((hat) => hat.id == 1);
     }
 }

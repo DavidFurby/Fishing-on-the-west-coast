@@ -17,9 +17,9 @@ public class ItemMenu : MonoBehaviour
     {
 
         itemMenu.SetActive(false);
-        allItems = MainManager.Instance.game.FoundBaits.Cast<Item>().ToList();
-        allItems.AddRange(MainManager.Instance.game.FoundFishingRods);
-        allItems.AddRange(MainManager.Instance.game.FoundHats);
+        allItems = MainManager.Instance.game.Inventory.FoundBaits.Cast<Item>().ToList();
+        allItems.AddRange(MainManager.Instance.game.Inventory.FoundFishingRods);
+        allItems.AddRange(MainManager.Instance.game.Inventory.FoundHats);
     }
 
     private void PopulateWheels()

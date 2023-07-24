@@ -36,7 +36,7 @@ public class ItemWheel : MonoBehaviour
         {
             if (i == middleIndex)
             {
-                MainManager.Instance.game.SetEquipment(_listOfItemSlots[i].Id, itemTag);
+                MainManager.Instance.game.Inventory.SetEquipment(_listOfItemSlots[i].Id, itemTag);
             }
         }
     }
@@ -89,7 +89,7 @@ public class ItemWheel : MonoBehaviour
         spacing = (parentHeight - 3 * slotHeight) / 2;
 
         // Find the index of the equipped item
-        middleIndex = Array.FindIndex(items, item => item.id == MainManager.Instance.game.GetEquipment(item.itemTag).id);
+        middleIndex = Array.FindIndex(items, item => item.id == MainManager.Instance.game.Inventory.GetEquipment(item.itemTag).id);
         // Create new equipment slots
         _listOfItemSlots = new ItemSlot[items.Length];
         for (int i = 0; i < items.Length; i++)

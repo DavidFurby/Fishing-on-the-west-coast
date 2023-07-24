@@ -28,8 +28,8 @@ public class FishingSystem : FishingStateMachine
     private void Awake()
     {
         SetState(new Idle(this));
-        bait = MainManager.Instance.game.EquippedBait;
-        fishingRod = MainManager.Instance.game.EquippedFishingRod;
+        bait = MainManager.Instance.game.Inventory.EquippedBait;
+        fishingRod = MainManager.Instance.game.Inventory.EquippedFishingRod;
     }
 
     #region Public Methods
