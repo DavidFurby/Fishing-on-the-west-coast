@@ -148,3 +148,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fish: {fileID: 11400000, guid: e9b5916dba8d9434d8a96a51a90a85c1, type: 2}
+--- !u!114 &7136184536284613082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757828987218130099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28ddcc55ea236d4bb84808cedf3b3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightSideThreshold: 500
+  leftSideThreshold: 1000

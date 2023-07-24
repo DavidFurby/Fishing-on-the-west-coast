@@ -43,6 +43,7 @@ public class ObjectPool : MonoBehaviour
     {
         // Deactivate the game object and add it back to the pool
         obj.SetActive(false);
+        obj.GetComponent<IPoolable>().Reset();
         poolDictionary[obj.GetComponent<IPoolable>().Prefab].Enqueue(obj);
     }
 
@@ -78,10 +79,18 @@ public class ObjectPool : MonoBehaviour
 public interface IPoolable
 {
     GameObject Prefab { get; set; }
+    void Reset();
+
 }
 
 // Class that implements the IPoolable interface
 public class Poolable : MonoBehaviour, IPoolable
 {
     public GameObject Prefab { get; set; }
+
+    public void Reset()
+    {
+        // Reset the position of the game object here
+        transform.position = Vector3.zero;
+    }
 }
