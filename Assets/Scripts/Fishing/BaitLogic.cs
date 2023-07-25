@@ -11,6 +11,7 @@ public class BaitLogic : MonoBehaviour
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
+    [SerializeField] private Scrollbar balance;
 
 
     private void Start()
@@ -58,10 +59,9 @@ public class BaitLogic : MonoBehaviour
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
-        rigidBody.velocity = direction * system.fishingRodLogic.reelInSpeed;
+        transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
+        transform.Translate(system.fishingRodLogic.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
     }
-
-
 
     public void Shake()
     {
