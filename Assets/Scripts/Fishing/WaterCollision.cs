@@ -5,9 +5,11 @@ public class WaterCollision : MonoBehaviour
     [SerializeField] private GameObject bait;
     [SerializeField] private FishingSystem system;
     [SerializeField] private AudioSource splashSound;
+    [SerializeField] DistanceRecord distanceRecord;
     private float waterLevel;
     private const float FloatHeight = 150f;
     private const float BounceDamp = 1f;
+    
 
     void Start()
     {
@@ -20,7 +22,7 @@ public class WaterCollision : MonoBehaviour
         {
             if (system.GetCurrentState() is Casting)
             {
-                system.baitLogic.UpdateDistanceRecord();
+                distanceRecord.UpdateDistanceRecord();
                 system.SetState(new Fishing(system));
             }
             splashSound.Play();

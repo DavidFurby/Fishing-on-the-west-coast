@@ -4,35 +4,20 @@ using UnityEngine.UI;
 
 public class BaitLogic : MonoBehaviour
 {
-    [SerializeField] private GameObject sea;
     [SerializeField] private SeaLogic seaLogic;
     [SerializeField] private GameObject fishingRodTop;
     [SerializeField] private FishingSystem system;
-    [SerializeField] private Scrollbar balance;
     [SerializeField] private AudioSource splashSound;
-    [SerializeField] private TextMeshProUGUI distanceTextUI;
-    [SerializeField] private GameObject distanceRecordMarker;
-
-    private GameObject currentDistanceRecordMarker;
-    private float distance;
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
-    public FishDisplay AttachedFish { get; private set; }
 
 
     private void Start()
     {
-        distanceTextUI.gameObject.SetActive(false);
         rigidBody = GetComponent<Rigidbody>();
         targetPosition = fishingRodTop.transform.position;
         AttachBait();
-        SpawnDistanceRecordMarker();
-    }
-
-    private void FixedUpdate()
-    {
-        CalculateDistance();
     }
 
     public void Cast()
@@ -65,40 +50,6 @@ public class BaitLogic : MonoBehaviour
         }
 
     }
-    public void UpdateDistanceRecord()
-    {
-        if (MainManager.Instance.game.BestDistance < distance)
-        {
-            MainManager.Instance.game.BestDistance = distance;
-            SpawnDistanceRecordMarker();
-        }
-    }
-    public void SpawnDistanceRecordMarker()
-    {
-        if (MainManager.Instance.game.BestDistance != 0)
-        {
-            if (currentDistanceRecordMarker != null)
-            {
-                Destroy(currentDistanceRecordMarker);
-            }
-            Vector3 position = new(fishingRodTop.transform.position.x + MainManager.Instance.game.BestDistance, sea.transform.position.y + sea.GetComponent<Renderer>().bounds.extents.y, transform.position.z);
-            currentDistanceRecordMarker = Instantiate(distanceRecordMarker, position, Quaternion.identity);
-
-        }
-
-    }
-    //Calculate distance cast
-    private void CalculateDistance()
-    {
-        bool isStandBy = system.GetCurrentState() is Idle;
-        distanceTextUI.gameObject.SetActive(!isStandBy);
-        if (!isStandBy)
-        {
-            distance = Vector3.Distance(fishingRodTop.transform.position, transform.position);
-            distanceTextUI.text = $"Distance: {distance:F2} meter";
-        }
-    }
-
     private bool IsCloseToTarget(Vector3 targetPosition)
     {
         return Vector3.Distance(transform.position, targetPosition) < 1f;
@@ -107,10 +58,8 @@ public class BaitLogic : MonoBehaviour
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
-        transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
-        transform.Translate(system.fishingRodLogic.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+        rigidBody.velocity = direction * system.fishingRodLogic.reelInSpeed;
     }
-
 
 
 
