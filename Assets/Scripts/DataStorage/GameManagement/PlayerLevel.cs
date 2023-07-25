@@ -17,17 +17,23 @@ public class PlayerLevel
     {
         requiredExp = level * baseExp;
     }
-    public void AddExp(int exp) {
+    public void AddExp(int exp)
+    {
         Exp += exp;
-        if(Exp >= requiredExp)  {
-        LevelChanged();
+        if (Exp >= requiredExp)
+        {
+            LevelChanged();
         }
     }
-
     public void LevelChanged()
     {
         Level++;
         Exp = 0;
         CalculateExpRequired(Level);
+    }
+
+    public float ThrowRangeModifier()
+    {
+        return 1 + (float)Level / 100;
     }
 }

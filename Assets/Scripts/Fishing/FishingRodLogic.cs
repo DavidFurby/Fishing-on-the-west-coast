@@ -68,7 +68,7 @@ public class FishingRodLogic : MonoBehaviour
     public IEnumerator SwingAnimation(float castPower)
     {
         fishingSystem.SetState(new Casting(fishingSystem));
-        castingPower *= castPower;
+        castingPower *= castPower * MainManager.Instance.game.pLayerLevel.ThrowRangeModifier();
         while (!fishingRodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
             yield return null;
