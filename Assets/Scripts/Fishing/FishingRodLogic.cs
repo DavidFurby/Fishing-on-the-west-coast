@@ -67,7 +67,6 @@ public class FishingRodLogic : MonoBehaviour
     // Play the swing animation and wait for it to finish
     private IEnumerator SwingAnimation()
     {
-        fishingSystem.SetState(new Casting(fishingSystem));
         castingPower *= fishingSystem.fishingMiniGame.castPower * MainManager.Instance.game.pLayerLevel.ThrowRangeModifier();
         while (!fishingRodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
@@ -77,7 +76,7 @@ public class FishingRodLogic : MonoBehaviour
         {
             yield return null;
         }
-
+        fishingSystem.SetState(new Casting(fishingSystem));
     }
 
     // Play the reverse swing animation
