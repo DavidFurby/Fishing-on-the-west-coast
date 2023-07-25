@@ -11,7 +11,7 @@ public class Fish : ScriptableObject
     public float averageSize;
     public string description;
     public int level;
-    public int experience;
+    public int exp;
     [HideInInspector] public float size = 0;
 
     public enum CatchTag
@@ -39,6 +39,7 @@ public class Fish : ScriptableObject
         fish.description = fishData.description;
         fish.size = fishData.size;
         fish.level = fishData.level;
+        fish.exp = fishData.exp;
         return fish;
     }
 }

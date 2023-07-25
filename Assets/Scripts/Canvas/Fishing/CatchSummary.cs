@@ -57,6 +57,7 @@ public class CatchSummary : MonoBehaviour
         newRecordText.gameObject.SetActive(IsNewRecord(currentlyDisplayedFish.fish));
         isNewText.gameObject.SetActive(IsNewCatch(currentlyDisplayedFish.fish));
         MainManager.Instance.game.TotalCatches++;
+        MainManager.Instance.game.pLayerLevel.AddExp(currentlyDisplayedFish.fish.exp);
     }
 
     // Increment the fish index and update the currently presented fish

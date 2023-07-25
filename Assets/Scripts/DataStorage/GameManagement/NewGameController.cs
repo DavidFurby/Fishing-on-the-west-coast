@@ -36,8 +36,7 @@ public class NewGameController : MonoBehaviour
         game.TotalCatches = 0;
         game.BestDistance = 0;
         game.Scene = "Boat";
-        game.Level = 0;
-        game.Experience = 0;
+        game.pLayerLevel.SetPlayerLevel(1, 0);
         game.CaughtFishes.Clear();
         game.Inventory.FoundFishingRods.Clear();
         game.Inventory.FoundFishingRods.Add(game.Inventory.AvailableFishingRods[0]);
