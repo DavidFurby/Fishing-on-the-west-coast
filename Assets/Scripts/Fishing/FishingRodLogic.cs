@@ -32,7 +32,7 @@ public class FishingRodLogic : MonoBehaviour
     {
         foreach (FishDisplay @catch in fishingSystem.caughtFishes)
         {
-            reelInSpeed = initialReelInSpeed - (@catch.fish.size / 10);
+            reelInSpeed = (initialReelInSpeed * MainManager.Instance.game.pLayerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
         }
     }
 

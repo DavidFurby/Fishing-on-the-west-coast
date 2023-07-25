@@ -18,6 +18,7 @@ public class BaitLogic : MonoBehaviour
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
+    public FishDisplay AttachedFish { get; private set; }
 
 
     private void Start()

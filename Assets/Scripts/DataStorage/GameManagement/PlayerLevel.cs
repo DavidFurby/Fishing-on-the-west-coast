@@ -36,4 +36,9 @@ public class PlayerLevel
     {
         return 1 + (float)Level / 100;
     }
+
+    public float ReelingSpeedModifier()
+    {
+        return 1 + (float)Level * 2 / 100;
+    }
 }

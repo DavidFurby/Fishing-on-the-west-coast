@@ -3,16 +3,16 @@ using UnityEngine;
 public class CatchArea : MonoBehaviour
 {
     public bool IsInCatchArea { get; set; }
-    [HideInInspector] public FishDisplay fish;
-    [SerializeField] private FishingSystem fishingSystem;
+    [HideInInspector] public FishDisplay Fish { get; set; }
+    [SerializeField] private FishingSystem fishingGameSystem;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Fish"))
         {
-            if (fishingSystem.GetCurrentState() is ReelingFish)
+            if (fishingGameSystem.GetCurrentState() is ReelingFish)
             {
-                CatchFishWhileReeling(other);
+                CatchFishDuringReelingState(other);
             }
             else
             {
@@ -20,13 +20,15 @@ public class CatchArea : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fish == other.gameObject.GetComponent<FishDisplay>())
+        if (other.CompareTag("Fish") && Fish == other.GetComponent<FishDisplay>())
         {
             ResetValues();
         }
     }
+
     private void HandleFishEnter(Collider other)
     {
         if (other.GetComponent<FishMovement>().GetCurrentState() is Baited)
@@ -34,40 +36,37 @@ public class CatchArea : MonoBehaviour
             IsInCatchArea = true;
             if (other.TryGetComponent(out FishDisplay fish))
             {
-                this.fish = fish;
+                Fish = fish;
             }
         }
     }
 
-
-
-    private void CatchFishWhileReeling(Collider other)
+    private void CatchFishDuringReelingState(Collider other)
     {
-        if (other.TryGetComponent(out FishMovement newFishMovement))
+        if (other.TryGetComponent(out FishMovement newFishMovement) && newFishMovement.GetCurrentState() is Baited)
         {
-            StartCoroutine(fishingSystem?.fishingCamera.CatchAlert());
-            newFishMovement.GetBaited(fishingSystem.caughtFishes[^1].gameObject);
+            StartCoroutine(fishingGameSystem?.fishingCamera.CatchAlert());
             newFishMovement.SetState(new HookedToFish(newFishMovement));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {
-                fishingSystem.AddFish(newFishComponent);
+                fishingGameSystem.AddFish(newFishComponent);
             }
-            fishingSystem.fishingRodLogic.CalculateReelInSpeed();
+            fishingGameSystem.fishingRodLogic.CalculateReelInSpeed();
         }
     }
 
     public void CatchFish()
     {
-        if (fishingSystem.GetCurrentState() is Fishing)
+        if (fishingGameSystem.GetCurrentState() is Fishing)
         {
-            fish.GetComponent<FishMovement>().SetState(new Hooked(fish.GetComponent<FishMovement>()));
-            fishingSystem.AddFish(fish);
+            Fish.GetComponent<FishMovement>().SetState(new Hooked(Fish.GetComponent<FishMovement>()));
+            fishingGameSystem.AddFish(Fish);
         }
     }
 
     public void ResetValues()
     {
-        fish = null;
+        Fish = null;
         IsInCatchArea = false;
     }
 }

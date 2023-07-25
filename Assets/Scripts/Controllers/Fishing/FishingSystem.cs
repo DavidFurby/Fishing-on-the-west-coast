@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class FishingSystem : FishingStateMachine
 {
     #region Serialized Fields
+    [Header("Fishing Components")]
     public CatchArea catchArea;
     public FishingCamera fishingCamera;
     public CatchSummary catchSummary;
@@ -16,6 +17,7 @@ public class FishingSystem : FishingStateMachine
     #endregion
 
     #region Events
+    [Header("Fishing Events")]
     public UnityEvent onCatchFish;
     public UnityEvent onCharge;
     public UnityEvent onChargeRelease;
@@ -40,7 +42,7 @@ public class FishingSystem : FishingStateMachine
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (catchArea.IsInCatchArea && catchArea.fish != null)
+            if (catchArea.IsInCatchArea && catchArea.Fish != null)
             {
                 StartCoroutine(fishingCamera.CatchAlert());
                 fishingMiniGame.StartBalanceMiniGame(caughtFishes);
@@ -94,25 +96,27 @@ public class FishingSystem : FishingStateMachine
     {
         caughtFishes.Add(fish);
     }
-    public void ClearCaughtFishes()
-    {
-        for (int i = 0; i < caughtFishes.Count; i++)
-        {
-            caughtFishes[i].ReturnToPool();
-        }
-        caughtFishes.Clear();
-    }
+    
+public void ClearCaughtFishes()
+{
+foreach (var fish in caughtFishes)
+{
+fish.ReturnToPool();
+}
+caughtFishes.Clear();
+}
 
-    #endregion
+#endregion
 
-    #region Private Methods
+#region Private Methods
 
-    /// <summary>
-    /// Waits for the swing animation to finish before changing the fishing status.
-    /// </summary>
-    private void WaitForSwingAnimation()
-    {
-        StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower));
-    }
-    #endregion
+/// <summary>
+/// Waits for the swing animation to finish before changing the fishing status.
+/// </summary>
+private void WaitForSwingAnimation()
+{
+StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower));
+}
+
+#endregion
 }
