@@ -78,33 +78,40 @@ public class FishMovement : FishStateMachine
     public IEnumerator Retreat()
     {
         Vector3 direction = transform.position - target.transform.position;
-        _rigidBody.velocity = direction.normalized * _retreatSpeed;
+        _rigidBody.velocity = direction.normalized * Random.Range(_retreatSpeed / 2, _retreatSpeed * 2);
         yield return new WaitForSeconds(Random.Range(2, 4));
         SetState(new Baited(this));
     }
     public void MunchOn()
     {
-
         // Set the connectedBody property of the hinge joint to the target's Rigidbody
         if (target.TryGetComponent<FishMovement>(out var fishMovement))
         {
-            transform.position = fishMovement.tastyPart.position;
-
+            MunchOnFish(fishMovement);
         }
         else
         {
-            // Add a HingeJoint component to the fish game object
-            HingeJoint hinge = gameObject.AddComponent<HingeJoint>();
-
-            hinge.connectedBody = target.GetComponent<Rigidbody>();
-
-            // Set other properties of the hinge joint as desired
-            hinge.anchor = Vector3.zero;
-            hinge.axis = Vector3.right;
+            MunchOnBait();
         }
 
     }
 
+    private void MunchOnFish(FishMovement fishMovement)
+    {
+        transform.position = fishMovement.tastyPart.position;
+    }
+
+    private void MunchOnBait()
+    {
+        // Add a HingeJoint component to the fish game object
+        HingeJoint hinge = gameObject.AddComponent<HingeJoint>();
+
+        hinge.connectedBody = target.GetComponent<Rigidbody>();
+
+        // Set other properties of the hinge joint as desired
+        hinge.anchor = Vector3.zero;
+        hinge.axis = Vector3.right;
+    }
 
     public void RotateTowards()
     {

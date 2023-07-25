@@ -11,6 +11,7 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private FishingSystem fishingSystem;
     [SerializeField] private CatchSummaryHandlers summaryDialogHandlers;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
+    [SerializeField] private LevelSlider levelSlider;
     private int currentFishIndex = 0;
 
     // Initialize the catch summary with a list of caught fishes.
@@ -58,6 +59,7 @@ public class CatchSummary : MonoBehaviour
         isNewText.gameObject.SetActive(IsNewCatch(currentlyDisplayedFish.fish));
         MainManager.Instance.game.TotalCatches++;
         MainManager.Instance.game.pLayerLevel.AddExp(currentlyDisplayedFish.fish.exp);
+        levelSlider.SetLevel();
     }
 
     // Increment the fish index and update the currently presented fish

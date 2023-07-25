@@ -31,7 +31,15 @@ public class BaitArea : MonoBehaviour
     {
         if (other.CompareTag("Fish") && fishInBaitArea)
         {
-            fishInBaitArea = false;
+
+            FishMovement fishMovement = other.gameObject.GetComponent<FishMovement>();
+            if (fishMovement.GetCurrentState() is Baited)
+            {
+                fishInBaitArea = false;
+                fishMovement.SetState(new Swimming(fishMovement));
+                Debug.Log(fishMovement.GetCurrentState());
+            }
+
         }
     }
     private void TryBaitingFish(Collider collider)

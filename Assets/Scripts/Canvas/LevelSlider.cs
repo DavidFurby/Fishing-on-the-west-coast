@@ -16,10 +16,8 @@ public class LevelSlider : MonoBehaviour
     }
 
     public void SetLevel() {
-        levelSlider.minValue = 0;
         levelSlider.maxValue = MainManager.Instance.game.pLayerLevel.requiredExp;
         levelSlider.value = MainManager.Instance.game.pLayerLevel.Exp;
         levelText.text = MainManager.Instance.game.pLayerLevel.Level.ToString();
-        Debug.Log(MainManager.Instance.game.pLayerLevel.Exp);
     }
 }
