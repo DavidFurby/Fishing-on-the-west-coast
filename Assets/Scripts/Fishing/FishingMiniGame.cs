@@ -9,7 +9,6 @@ public class FishingMiniGame : MonoBehaviour
     [SerializeField] private FishingSystem fishingSystem;
     [SerializeField] private MusicController musicController;
     [SerializeField] private Scrollbar castingPowerBalance;
-    private List<FishDisplay> fishesOnHook;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
@@ -27,31 +26,27 @@ public class FishingMiniGame : MonoBehaviour
 
     #region Balance
 
-    //Change balance value based on fishSize
+    // Change balance value based on fishSize
     public void CalculateBalance()
     {
-        if (fishesOnHook != null)
+        if (fishingSystem.fishesOnHook != null)
         {
             float weight = 0f;
 
-            for (int i = 0; i < fishesOnHook.Count; i++)
+            // Use a foreach loop to iterate over the fishesOnHook list
+            foreach (var fish in fishingSystem.fishesOnHook)
             {
-                weight += fishesOnHook[i].fish.size;
+                weight += fish.fish.size;
             }
-            float targetValue;
-            if (Random.value < 0.5)
-            {
-                targetValue = reelingBalance.value - Random.Range(0, weight * downwardForce);
-            }
-            else
-            {
-                targetValue = reelingBalance.value + Random.Range(0, weight * upwardForce);
-            }
+
+            // Use a ternary operator to simplify the conditional assignment of targetValue
+            float targetValue = Random.value < 0.5 ? reelingBalance.value - Random.Range(0, weight * downwardForce) : reelingBalance.value + Random.Range(0, weight * upwardForce);
 
             targetValue = Mathf.Clamp(targetValue, 0f, 1f);
             reelingBalance.value = Mathf.Lerp(reelingBalance.value, targetValue, Time.deltaTime * 1000f);
         }
     }
+
     //Add weight towards the direction the bait moving towards
     private void AddForce()
     {
@@ -104,10 +99,9 @@ public class FishingMiniGame : MonoBehaviour
 
     #endregion
 
-    public void StartBalanceMiniGame(List<FishDisplay> fishes)
+    public void StartBalanceMiniGame()
     {
         reelingBalance.gameObject.SetActive(true);
-        fishesOnHook = fishes;
         InvokeRepeating(nameof(AddForce), 2, 2);
         musicController.PlayMiniGameMusic();
     }
@@ -115,7 +109,6 @@ public class FishingMiniGame : MonoBehaviour
     public void EndBalanceMiniGame()
     {
         reelingBalance.value = 0.5f;
-        fishesOnHook = null;
         reelingBalance.gameObject.SetActive(false);
         musicController.StopFishingMiniGameMusic();
     }

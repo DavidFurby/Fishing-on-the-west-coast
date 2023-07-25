@@ -24,7 +24,7 @@ public class FishingSystem : FishingStateMachine
     #endregion
 
     [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
-    [HideInInspector] public List<FishDisplay> caughtFishes = new();
+    [HideInInspector] public List<FishDisplay> fishesOnHook = new();
 
     [HideInInspector] public bool IsInCatchArea { get; set; }
 
@@ -51,7 +51,7 @@ public class FishingSystem : FishingStateMachine
             if (IsInCatchArea && FishAttachedToBait != null)
             {
                 StartCoroutine(fishingCamera.CatchAlert());
-                fishingMiniGame.StartBalanceMiniGame(caughtFishes);
+                fishingMiniGame.StartBalanceMiniGame();
                 onCatchFish.Invoke();
                 SetState(new ReelingFish(this));
             }
@@ -90,7 +90,7 @@ public class FishingSystem : FishingStateMachine
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
-        if (caughtFishes.Count > 0)
+        if (fishesOnHook.Count > 0)
         {
             SetState(new InspectFish(this));
         }
@@ -106,16 +106,16 @@ public class FishingSystem : FishingStateMachine
     //Add fish to totalFishes list
     public void AddFish(FishDisplay fish)
     {
-        caughtFishes.Add(fish);
+        fishesOnHook.Add(fish);
     }
 
     public void ClearCaughtFishes()
     {
-        foreach (var fish in caughtFishes)
+        foreach (var fish in fishesOnHook)
         {
             fish.ReturnToPool();
         }
-        caughtFishes.Clear();
+        fishesOnHook.Clear();
     }
     public void ResetValues() {
         ClearCaughtFishes();
