@@ -21,9 +21,8 @@ public class Idle : FishingState
         base.OnEnter();
         system.seaSpawner.RemoveAllFishes();
         system.seaSpawner.StopSpawnFish();
-        system.catchArea.ResetValues();
         system.fishingRodLogic.ResetValues();
-        system.ClearCaughtFishes();
+        system.ResetValues();
     }
     public override void Update()
     {
@@ -82,7 +81,7 @@ public class Fishing : FishingState
     {
         base.Update();
         system.StartReeling();
-        if (system.catchArea.IsInCatchArea)
+        if (system.IsInCatchArea)
         {
             system.baitLogic.Shake();
         }

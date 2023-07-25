@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CatchArea : MonoBehaviour
 {
-    public bool IsInCatchArea { get; set; }
-    [HideInInspector] public FishDisplay Fish { get; set; }
     [SerializeField] private FishingSystem fishingGameSystem;
 
     private void OnTriggerEnter(Collider other)
@@ -23,9 +21,9 @@ public class CatchArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && Fish == other.GetComponent<FishDisplay>())
+        if (other.CompareTag("Fish") && fishingGameSystem.FishAttachedToBait == other.GetComponent<FishDisplay>())
         {
-            ResetValues();
+            fishingGameSystem.IsInCatchArea = true;
         }
     }
 
@@ -33,10 +31,10 @@ public class CatchArea : MonoBehaviour
     {
         if (other.GetComponent<FishMovement>().GetCurrentState() is Baited)
         {
-            IsInCatchArea = true;
+            fishingGameSystem.IsInCatchArea = true;
             if (other.TryGetComponent(out FishDisplay fish))
             {
-                Fish = fish;
+                fishingGameSystem.FishAttachedToBait = fish;
             }
         }
     }
@@ -53,20 +51,5 @@ public class CatchArea : MonoBehaviour
             }
             fishingGameSystem.fishingRodLogic.CalculateReelInSpeed();
         }
-    }
-
-    public void CatchFish()
-    {
-        if (fishingGameSystem.GetCurrentState() is Fishing)
-        {
-            Fish.GetComponent<FishMovement>().SetState(new Hooked(Fish.GetComponent<FishMovement>()));
-            fishingGameSystem.AddFish(Fish);
-        }
-    }
-
-    public void ResetValues()
-    {
-        Fish = null;
-        IsInCatchArea = false;
     }
 }

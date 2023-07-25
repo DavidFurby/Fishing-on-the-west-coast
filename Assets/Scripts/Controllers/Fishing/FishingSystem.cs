@@ -23,7 +23,13 @@ public class FishingSystem : FishingStateMachine
     public UnityEvent onChargeRelease;
     #endregion
 
+    [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
     [HideInInspector] public List<FishDisplay> caughtFishes = new();
+
+    [HideInInspector] public bool IsInCatchArea { get; set; }
+
+    [HideInInspector] public bool IsInBaitArea { get; set; }
+
     [HideInInspector] public Bait bait;
     [HideInInspector] public FishingRod fishingRod;
 
@@ -42,7 +48,7 @@ public class FishingSystem : FishingStateMachine
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (catchArea.IsInCatchArea && catchArea.Fish != null)
+            if (IsInCatchArea && FishAttachedToBait != null)
             {
                 StartCoroutine(fishingCamera.CatchAlert());
                 fishingMiniGame.StartBalanceMiniGame(caughtFishes);
@@ -73,7 +79,14 @@ public class FishingSystem : FishingStateMachine
             fishingRodLogic.WaitForSwingAnimation();
         }
     }
-
+    public void CatchFish()
+    {
+        if (GetCurrentState() is Fishing)
+        {
+            FishAttachedToBait.GetComponent<FishMovement>().SetState(new Hooked(FishAttachedToBait.GetComponent<FishMovement>()));
+            AddFish(FishAttachedToBait);
+        }
+    }
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
@@ -86,8 +99,7 @@ public class FishingSystem : FishingStateMachine
     //Drop the fish if you fail the minigame
     public void LoseCatch()
     {
-        catchArea.ResetValues();
-        ClearCaughtFishes();
+        ResetValues();
         SetState(new Reeling(this));
     }
 
@@ -96,15 +108,21 @@ public class FishingSystem : FishingStateMachine
     {
         caughtFishes.Add(fish);
     }
-    
-public void ClearCaughtFishes()
-{
-foreach (var fish in caughtFishes)
-{
-fish.ReturnToPool();
-}
-caughtFishes.Clear();
-}
+
+    public void ClearCaughtFishes()
+    {
+        foreach (var fish in caughtFishes)
+        {
+            fish.ReturnToPool();
+        }
+        caughtFishes.Clear();
+    }
+    public void ResetValues() {
+        ClearCaughtFishes();
+        FishAttachedToBait = null;
+        IsInCatchArea = false;
+        IsInBaitArea = false;
+    }
 }
 #endregion
 

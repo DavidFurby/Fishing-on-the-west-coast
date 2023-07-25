@@ -4,13 +4,11 @@ using System.Collections;
 public class BaitArea : MonoBehaviour
 {
     [SerializeField] private FishingSystem fishingSystem;
-    [HideInInspector] public bool fishBaited = false;
     private const float baitShakeDelay = 2f;
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log(fishBaited);
-        if (collider.CompareTag("Fish") && !fishBaited)
+        if (collider.CompareTag("Fish") && !fishingSystem.IsInBaitArea)
         {
             TryBaitingFish(collider);
         }
@@ -26,7 +24,7 @@ public class BaitArea : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             fishingSystem.baitLogic.Shake();
-            if (collider.CompareTag("Fish") && !fishBaited)
+            if (collider.CompareTag("Fish") && !fishingSystem.IsInBaitArea)
             {
                 TryBaitingFish(collider);
             }
@@ -36,14 +34,13 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fishBaited)
+        if (other.CompareTag("Fish") && fishingSystem.IsInBaitArea)
         {
             FishMovement fishMovement = other.GetComponent<FishMovement>();
             if (fishMovement.GetCurrentState() is Baited)
             {
-                fishBaited = false;
+                fishingSystem.IsInBaitArea = false;
                 fishMovement.SetState(new Swimming(fishMovement));
-                Debug.Log(fishMovement.GetCurrentState());
             }
         }
     }
@@ -56,7 +53,7 @@ public class BaitArea : MonoBehaviour
         if (UnityEngine.Random.Range(0f, 1f) < probability)
         {
             fishMovement.GetBaited(fishingSystem.baitLogic.gameObject);
-            fishBaited = true;
+            fishingSystem.IsInBaitArea = true;
         }
     }
 
