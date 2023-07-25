@@ -70,7 +70,7 @@ public class FishingSystem : FishingStateMachine
         if (Input.GetKeyUp(KeyCode.Space))
         {
             onChargeRelease.Invoke();
-            WaitForSwingAnimation();
+            fishingRodLogic.WaitForSwingAnimation();
         }
     }
 
@@ -105,18 +105,6 @@ fish.ReturnToPool();
 }
 caughtFishes.Clear();
 }
-
+}
 #endregion
 
-#region Private Methods
-
-/// <summary>
-/// Waits for the swing animation to finish before changing the fishing status.
-/// </summary>
-private void WaitForSwingAnimation()
-{
-StartCoroutine(fishingRodLogic.SwingAnimation(fishingMiniGame.castPower));
-}
-
-#endregion
-}

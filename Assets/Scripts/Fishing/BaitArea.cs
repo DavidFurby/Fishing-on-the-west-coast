@@ -4,15 +4,15 @@ using System.Collections;
 public class BaitArea : MonoBehaviour
 {
     [SerializeField] private FishingSystem fishingSystem;
-    [HideInInspector] public bool fishInBaitArea = false;
+    [HideInInspector] public bool fishBaited = false;
     private const float baitShakeDelay = 2f;
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Fish") && !fishInBaitArea)
+        Debug.Log(fishBaited);
+        if (collider.CompareTag("Fish") && !fishBaited)
         {
             TryBaitingFish(collider);
-            fishInBaitArea = true;
         }
     }
 
@@ -26,10 +26,9 @@ public class BaitArea : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             fishingSystem.baitLogic.Shake();
-            if (collider.CompareTag("Fish") && !fishInBaitArea)
+            if (collider.CompareTag("Fish") && !fishBaited)
             {
                 TryBaitingFish(collider);
-                fishInBaitArea = true;
             }
             yield return new WaitForSeconds(baitShakeDelay);
         }
@@ -37,12 +36,12 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fishInBaitArea)
+        if (other.CompareTag("Fish") && fishBaited)
         {
             FishMovement fishMovement = other.GetComponent<FishMovement>();
             if (fishMovement.GetCurrentState() is Baited)
             {
-                fishInBaitArea = false;
+                fishBaited = false;
                 fishMovement.SetState(new Swimming(fishMovement));
                 Debug.Log(fishMovement.GetCurrentState());
             }
@@ -52,11 +51,12 @@ public class BaitArea : MonoBehaviour
     private void TryBaitingFish(Collider collider)
     {
         FishMovement fishMovement = collider.GetComponent<FishMovement>();
-        Fish fish = collider.GetComponent<Fish>();
-        float probability = GetProbability(fish.level, fishingSystem.bait.level);
+        FishDisplay fish = collider.GetComponent<FishDisplay>();
+        float probability = GetProbability(fish.fish.level, fishingSystem.bait.level);
         if (UnityEngine.Random.Range(0f, 1f) < probability)
         {
             fishMovement.GetBaited(fishingSystem.baitLogic.gameObject);
+            fishBaited = true;
         }
     }
 
