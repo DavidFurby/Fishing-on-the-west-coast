@@ -20,7 +20,13 @@ public class CatchArea : MonoBehaviour
             }
         }
     }
-
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fish") && fish == other.gameObject.GetComponent<FishDisplay>())
+        {
+            ResetValues();
+        }
+    }
     private void HandleFishEnter(Collider other)
     {
         if (other.GetComponent<FishMovement>().GetCurrentState() is Baited)
@@ -33,13 +39,7 @@ public class CatchArea : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Fish") && fish == other.gameObject)
-        {
-            ResetValues();
-        }
-    }
+
 
     private void CatchFishWhileReeling(Collider other)
     {
@@ -47,7 +47,7 @@ public class CatchArea : MonoBehaviour
         {
             StartCoroutine(fishingSystem?.fishingCamera.CatchAlert());
             newFishMovement.GetBaited(fishingSystem.caughtFishes[^1].gameObject);
-            newFishMovement.SetState(new Hooked(newFishMovement));
+            newFishMovement.SetState(new HookedToFish(newFishMovement));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {
                 fishingSystem.AddFish(newFishComponent);

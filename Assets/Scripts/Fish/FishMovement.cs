@@ -82,26 +82,15 @@ public class FishMovement : FishStateMachine
         yield return new WaitForSeconds(Random.Range(2, 4));
         SetState(new Baited(this));
     }
-    public void MunchOn()
+    public void MunchOnFish()
     {
-        // Set the connectedBody property of the hinge joint to the target's Rigidbody
         if (target.TryGetComponent<FishMovement>(out var fishMovement))
         {
-            MunchOnFish(fishMovement);
+            transform.position = fishMovement.tastyPart.position;
         }
-        else
-        {
-            MunchOnBait();
-        }
-
     }
 
-    private void MunchOnFish(FishMovement fishMovement)
-    {
-        transform.position = fishMovement.tastyPart.position;
-    }
-
-    private void MunchOnBait()
+    public void MunchOnBait()
     {
         // Add a HingeJoint component to the fish game object
         HingeJoint hinge = gameObject.AddComponent<HingeJoint>();

@@ -62,15 +62,33 @@ public class Hooked : FishState
     public override void OnEnter()
     {
         base.OnEnter();
+        fishMovement.MunchOnBait();
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        fishMovement.RotateTowards();
+    }
+}
+
+public class HookedToFish : FishState
+{
+    public HookedToFish(FishMovement fishMovement) : base(fishMovement)
+    {
+    }
+    public override void OnEnter()
+    {
+        base.OnEnter();
 
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.MunchOn();
         fishMovement.RotateTowards();
+        fishMovement.MunchOnFish();
     }
 }
+
 public class Inspected : FishState
 {
     public Inspected(FishMovement fishMovement) : base(fishMovement)
