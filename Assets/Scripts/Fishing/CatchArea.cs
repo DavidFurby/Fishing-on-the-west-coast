@@ -29,7 +29,8 @@ public class CatchArea : MonoBehaviour
 
     private void HandleFishEnter(Collider other)
     {
-        if (other.GetComponent<FishMovement>().GetCurrentState() is Baited)
+        var fishMovement = other.GetComponent<FishMovement>();
+        if (fishMovement.GetCurrentState() is Baited)
         {
             fishingGameSystem.IsInCatchArea = true;
             if (other.TryGetComponent(out FishDisplay fish))
@@ -41,10 +42,12 @@ public class CatchArea : MonoBehaviour
 
     private void CatchFishDuringReelingState(Collider other)
     {
-        if (other.TryGetComponent(out FishMovement newFishMovement) && newFishMovement.GetCurrentState() is Baited)
+        var fishMovement = other.GetComponent<FishMovement>();
+        fishingGameSystem.baitArea.TryBaitingFish(other, fishingGameSystem.fishesOnHook[^1].gameObject);
+        if (fishMovement.GetCurrentState() is Baited)
         {
             StartCoroutine(fishingGameSystem?.fishingCamera.CatchAlert());
-            newFishMovement.SetState(new HookedToFish(newFishMovement));
+            fishMovement.SetState(new HookedToFish(fishMovement));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {
                 fishingGameSystem.AddFish(newFishComponent);

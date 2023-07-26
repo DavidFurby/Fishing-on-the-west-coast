@@ -8,9 +8,9 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Fish") && !fishingSystem.IsInBaitArea)
+        if (collider.CompareTag("Fish") && !fishingSystem.fishIsBaited)
         {
-            TryBaitingFish(collider);
+            TryBaitingFish(collider, fishingSystem.baitLogic.gameObject);
         }
     }
 
@@ -24,36 +24,37 @@ public class BaitArea : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             fishingSystem.baitLogic.Shake();
-            if (collider.CompareTag("Fish") && !fishingSystem.IsInBaitArea)
+            if (collider.CompareTag("Fish") && !fishingSystem.fishIsBaited)
             {
-                TryBaitingFish(collider);
+                TryBaitingFish(collider, fishingSystem.baitLogic.gameObject);
             }
+
             yield return new WaitForSeconds(baitShakeDelay);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fishingSystem.IsInBaitArea)
+        if (other.CompareTag("Fish") && fishingSystem.fishIsBaited)
         {
             FishMovement fishMovement = other.GetComponent<FishMovement>();
             if (fishMovement.GetCurrentState() is Baited)
             {
-                fishingSystem.IsInBaitArea = false;
+                fishingSystem.fishIsBaited = false;
                 fishMovement.SetState(new Swimming(fishMovement));
             }
         }
     }
 
-    private void TryBaitingFish(Collider collider)
+    public void TryBaitingFish(Collider collider, GameObject target)
     {
         FishMovement fishMovement = collider.GetComponent<FishMovement>();
         FishDisplay fish = collider.GetComponent<FishDisplay>();
         float probability = GetProbability(fish.fish.level, fishingSystem.bait.level);
         if (UnityEngine.Random.Range(0f, 1f) < probability)
         {
-            fishMovement.GetBaited(fishingSystem.baitLogic.gameObject);
-            fishingSystem.IsInBaitArea = true;
+            fishMovement.GetBaited(target);
+            fishingSystem.fishIsBaited = true;
         }
     }
 

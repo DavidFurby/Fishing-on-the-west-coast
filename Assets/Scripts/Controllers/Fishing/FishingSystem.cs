@@ -6,7 +6,6 @@ public class FishingSystem : FishingStateMachine
 {
     #region Serialized Fields
     [Header("Fishing Components")]
-    public CatchArea catchArea;
     public FishingCamera fishingCamera;
     public CatchSummary catchSummary;
     public FishingMiniGame fishingMiniGame;
@@ -14,6 +13,7 @@ public class FishingSystem : FishingStateMachine
     public BaitLogic baitLogic;
     public ItemMenu itemMenu;
     public SeaLogic seaSpawner;
+    public BaitArea baitArea;
     #endregion
 
     #region Events
@@ -28,7 +28,7 @@ public class FishingSystem : FishingStateMachine
 
     [HideInInspector] public bool IsInCatchArea { get; set; }
 
-    [HideInInspector] public bool IsInBaitArea { get; set; }
+    [HideInInspector] public bool fishIsBaited { get; set; }
 
     [HideInInspector] public Bait bait;
     [HideInInspector] public FishingRod fishingRod;
@@ -128,7 +128,7 @@ public class FishingSystem : FishingStateMachine
         ClearCaughtFishes();
         FishAttachedToBait = null;
         IsInCatchArea = false;
-        IsInBaitArea = false;
+        fishIsBaited = false;
     }
 }
 #endregion
