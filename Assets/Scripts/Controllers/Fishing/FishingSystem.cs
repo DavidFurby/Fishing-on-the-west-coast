@@ -83,8 +83,6 @@ public class FishingSystem : FishingStateMachine
         if (Input.GetKeyUp(KeyCode.Space))
         {
             SetState(new Swinging(this));
-            onChargeRelease.Invoke();
-            fishingRodLogic.WaitForSwingAnimation();
         }
     }
     public void CatchFish()

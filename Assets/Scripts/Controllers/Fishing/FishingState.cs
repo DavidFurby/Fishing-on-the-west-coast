@@ -51,6 +51,12 @@ public class Swinging : FishingState
     public Swinging (FishingSystem system) : base(system) {
 
     }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        system.onChargeRelease.Invoke();
+        system.fishingRodLogic.WaitForSwingAnimation();
+    }
     
 }
 
@@ -111,11 +117,6 @@ public class Reeling : FishingState
     public Reeling(FishingSystem controller) : base(controller)
     {
     }
-
-    public override void OnEnter()
-    {
-        base.OnEnter();
-    }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
@@ -128,11 +129,6 @@ public class ReelingFish : FishingState
 {
     public ReelingFish(FishingSystem controller) : base(controller)
     {
-    }
-
-    public override void OnEnter()
-    {
-        base.OnEnter();
     }
     public override void Update()
     {
