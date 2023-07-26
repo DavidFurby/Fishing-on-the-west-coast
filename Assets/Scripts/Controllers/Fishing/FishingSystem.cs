@@ -19,7 +19,7 @@ public class FishingSystem : FishingStateMachine
     #region Events
     [Header("Fishing Events")]
     public UnityEvent onCatchFish;
-    public UnityEvent onCharge;
+    public UnityEvent onStartCharging;
     public UnityEvent onChargeRelease;
     #endregion
 
@@ -66,15 +66,23 @@ public class FishingSystem : FishingStateMachine
     /// <summary>
     /// Starts fishing if the space key is held down.
     /// </summary>
-    public void StartFishing()
+    public void StartCharging()
     {
         if (Input.GetKey(KeyCode.Space))
         {
+            onStartCharging.Invoke();
             SetState(new Charging(this));
-            onCharge.Invoke();
         }
+    }
+    public void Charge()
+    {
+        fishingRodLogic.ChargeCasting();
+    }
+    public void Release()
+    {
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            SetState(new Swinging(this));
             onChargeRelease.Invoke();
             fishingRodLogic.WaitForSwingAnimation();
         }
@@ -117,7 +125,8 @@ public class FishingSystem : FishingStateMachine
         }
         fishesOnHook.Clear();
     }
-    public void ResetValues() {
+    public void ResetValues()
+    {
         ClearCaughtFishes();
         FishAttachedToBait = null;
         IsInCatchArea = false;

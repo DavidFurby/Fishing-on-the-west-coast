@@ -27,7 +27,7 @@ public class Idle : FishingState
     public override void Update()
     {
         base.Update();
-        system.StartFishing();
+        system.StartCharging();
         system.itemMenu.HandleInputs();
     }
 }
@@ -41,9 +41,17 @@ public class Charging : FishingState
     public override void Update()
     {
         base.Update();
-        system.StartFishing();
+        system.Charge();
+        system.Release();
         system.fishingMiniGame.ChargingBalance();
     }
+}
+public class Swinging : FishingState
+{
+    public Swinging (FishingSystem system) : base(system) {
+
+    }
+    
 }
 
 public class Casting : FishingState
