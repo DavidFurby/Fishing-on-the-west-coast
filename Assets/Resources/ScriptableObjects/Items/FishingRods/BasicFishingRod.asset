@@ -17,5 +17,6 @@ MonoBehaviour:
   name: Basic FishingRod
   price: 0
   description: Given at childbirth
+  model: {fileID: 8662299406853993162, guid: f0c0ab7ffd30b704da76ad89dbc34415, type: 3}
   strength: 20
   throwRange: 100

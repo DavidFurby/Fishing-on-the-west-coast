@@ -12,15 +12,6 @@ public class FishingRodLogic : MonoBehaviour
     private readonly float initialCastingPower = 20;
     private readonly float initialReelInSpeed = 15f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (fishingSystem.fishingRod == null)
-        {
-            Debug.LogError("Current fishing rod is null");
-            return;
-        }
-    }
 
     public void TriggerSetChargingBalance()
     {
@@ -57,7 +48,7 @@ public class FishingRodLogic : MonoBehaviour
     public void ChargeCasting()
     {
         fishingRodAnimations.PlaySwingAnimation();
-        if (castingPower < fishingSystem.fishingRod.throwRange)
+        if (castingPower < MainManager.Instance.game.Inventory.EquippedFishingRod.throwRange)
         {
             castingPower++;
             playerAnimations.SetChargingThrowSpeed();

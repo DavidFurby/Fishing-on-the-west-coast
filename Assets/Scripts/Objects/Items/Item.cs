@@ -8,6 +8,7 @@ public class Item : ScriptableObject
     [SerializeField] public new string name = "";
     [SerializeField] public int price = 0;
     [SerializeField] public string description = "";
+    [SerializeField] public GameObject model;
 
     public enum ItemTag
     {
