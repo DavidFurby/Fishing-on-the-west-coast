@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &7448718 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2130861395229521769, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &103603468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -638,11 +633,11 @@ PrefabInstance:
     - target: {fileID: 5528743975601182668, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: bait
       value: 
-      objectReference: {fileID: 7448718}
+      objectReference: {fileID: 0}
     - target: {fileID: 5528743975601182668, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: fishingRodTop
       value: 
-      objectReference: {fileID: 1182136880}
+      objectReference: {fileID: 0}
     - target: {fileID: 5723804570757268514, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -1038,7 +1033,7 @@ PrefabInstance:
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: catchArea
       value: 
-      objectReference: {fileID: 822062796}
+      objectReference: {fileID: 0}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: isNewText
       value: 
@@ -1191,17 +1186,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4414b36c312814aa9272096431fea3, type: 3}
---- !u!114 &346188749 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5389967051482507429, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee2d101fa9f9eb945885fa7d1e49e195, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &445041124 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5248011865133586714, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
@@ -1240,674 +1224,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e2669d04061e54f990f9000de1e1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &674621320
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -26.461473
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.1427345
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 7.025793
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 31725166093142126, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: m_Name
-      value: SceneController
-      objectReference: {fileID: 0}
-    - target: {fileID: 2597288279396530612, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
-      propertyPath: theMusic
-      value: 
-      objectReference: {fileID: 970918386}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
---- !u!1 &681066786 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 461191177775057915, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
-  m_PrefabInstance: {fileID: 461191178146340792}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &722546679
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1005341015933393222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingSystem
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 1005341015933393222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: playerAnimations
-      value: 
-      objectReference: {fileID: 2026150468}
-    - target: {fileID: 1297674820447602628, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: sea
-      value: 
-      objectReference: {fileID: 681066786}
-    - target: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingRodTop
-      value: 
-      objectReference: {fileID: 1182136880}
-    - target: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: distanceTextUI
-      value: 
-      objectReference: {fileID: 176468540}
-    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: sea
-      value: 
-      objectReference: {fileID: 681066786}
-    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: bait
-      value: 
-      objectReference: {fileID: 7448718}
-    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: system
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: baitLogic
-      value: 
-      objectReference: {fileID: 1759076623}
-    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: seaSpawner
-      value: 
-      objectReference: {fileID: 1440346365}
-    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 1759076622}
-    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: splashSound
-      value: 
-      objectReference: {fileID: 1759076622}
-    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: distanceRecord
-      value: 
-      objectReference: {fileID: 1759076628}
-    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingControlls
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.472
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.403
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861395229521767, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: WaterVolumeHelper
-      value: 
-      objectReference: {fileID: 1440346363}
-    - target: {fileID: 2130861395229521771, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861395229521771, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: bait
-      value: 
-      objectReference: {fileID: 7448718}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: wowSound
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: rythmGame
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: catchSummary
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingCanvas
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingSystem
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: FishingRodLogic
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingControls
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: musicController
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingControlls
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingGameSystem
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 2130861396537784917, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2803401897840054680, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.508
-      objectReference: {fileID: 0}
-    - target: {fileID: 2803401897840054680, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 3885311052125488497, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1554969848}
-    - target: {fileID: 3885311052125488497, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_VersionIndex
-      value: 965
-      objectReference: {fileID: 0}
-    - target: {fileID: 4198201513770464269, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1554969848}
-    - target: {fileID: 4462659233269025057, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1554969848}
-    - target: {fileID: 4505936457974327505, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800051008443789343, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: system
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: baitLogic
-      value: 
-      objectReference: {fileID: 1759076623}
-    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingSystem
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingControlls
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932162, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 109290014}
-    - target: {fileID: 5059312361471932163, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Name
-      value: Fishing Rod
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.10000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.10000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.189
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.645
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -12.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5059312361471932221, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 109290014}
-    - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 109290014}
-    - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_VersionIndex
-      value: 1239
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360848329395529453, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: bait
-      value: 
-      objectReference: {fileID: 7448718}
-    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: system
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: splashSound
-      value: 
-      objectReference: {fileID: 1759076622}
-    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: distanceRecord
-      value: 
-      objectReference: {fileID: 1759076628}
-    - target: {fileID: 5389967051482507429, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingSystem
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 5885603088304069593, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6072487882926126782, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6072487882926126782, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 6307458372637309379, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6441864076676628872, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: bait
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: ropeLength
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: whatIsHangingFromTheRope
-      value: 
-      objectReference: {fileID: 1759076611}
-    - target: {fileID: 7180908797847769848, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Name
-      value: Fishing Line
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: sea
-      value: 
-      objectReference: {fileID: 681066786}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: system
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: balance
-      value: 
-      objectReference: {fileID: 1493859758}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: distance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: seaLogic
-      value: 
-      objectReference: {fileID: 1440346365}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: catchArea
-      value: 
-      objectReference: {fileID: 822062796}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: reelSound
-      value: 
-      objectReference: {fileID: 1182136882}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: rigidBody
-      value: 
-      objectReference: {fileID: 1759076617}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: splashSound
-      value: 
-      objectReference: {fileID: 1759076622}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingRodTop
-      value: 
-      objectReference: {fileID: 1182136880}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: distanceTextUI
-      value: 
-      objectReference: {fileID: 176468540}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingRodLogic
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingControlls
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: distanceRecordMarker
-      value: 
-      objectReference: {fileID: 4654798063134710352, guid: 650ed65096bddb2419513abc5108751b, type: 3}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1759076623}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1759076623}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1759076623}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Float
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Float
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Float
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: BaitLogic, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: BaitLogic, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: BaitLogic, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: gameMiniGame
-      value: 
-      objectReference: {fileID: 1275887656}
-    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingSystem
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: playerAnimations
-      value: 
-      objectReference: {fileID: 2026150468}
-    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingController
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 7671095890555715121, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: bait
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: armature
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: fishingRod
-      value: 
-      objectReference: {fileID: 1745764221}
-    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: bonesAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8094264068216798896, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Constraints
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 8169266479616045285, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1927109712}
-    - target: {fileID: 8571087251999591881, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1927109712}
-    - target: {fileID: 9148912340842332569, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1927109712}
-    - target: {fileID: 9148912340842332569, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-      propertyPath: m_VersionIndex
-      value: 803
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
---- !u!850595691 &736891878
-LightingSettings:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 4
-  m_GIWorkflowMode: 0
-  m_EnableBakedLightmaps: 1
-  m_EnableRealtimeLightmaps: 0
-  m_RealtimeEnvironmentLighting: 1
-  m_BounceScale: 1
-  m_AlbedoBoost: 1
-  m_IndirectOutputScale: 1
-  m_UsingShadowmask: 1
-  m_BakeBackend: 1
-  m_LightmapMaxSize: 1024
-  m_BakeResolution: 40
-  m_Padding: 2
-  m_LightmapCompression: 3
-  m_AO: 0
-  m_AOMaxDistance: 1
-  m_CompAOExponent: 1
-  m_CompAOExponentDirect: 0
-  m_ExtractAO: 0
-  m_MixedBakeMode: 2
-  m_LightmapsBakeMode: 1
-  m_FilterMode: 1
-  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
-  m_ExportTrainingData: 0
-  m_TrainingDataDestination: TrainingData
-  m_RealtimeResolution: 2
-  m_ForceWhiteAlbedo: 0
-  m_ForceUpdates: 0
-  m_FinalGather: 0
-  m_FinalGatherRayCount: 256
-  m_FinalGatherFiltering: 1
-  m_PVRCulling: 1
-  m_PVRSampling: 1
-  m_PVRDirectSampleCount: 32
-  m_PVRSampleCount: 512
-  m_PVREnvironmentSampleCount: 256
-  m_PVREnvironmentReferencePointCount: 2048
-  m_LightProbeSampleCountMultiplier: 4
-  m_PVRBounces: 2
-  m_PVRMinBounces: 1
-  m_PVREnvironmentMIS: 1
-  m_PVRFilteringMode: 1
-  m_PVRDenoiserTypeDirect: 1
-  m_PVRDenoiserTypeIndirect: 1
-  m_PVRDenoiserTypeAO: 1
-  m_PVRFilterTypeDirect: 0
-  m_PVRFilterTypeIndirect: 0
-  m_PVRFilterTypeAO: 0
-  m_PVRFilteringGaussRadiusDirect: 1
-  m_PVRFilteringGaussRadiusIndirect: 5
-  m_PVRFilteringGaussRadiusAO: 2
-  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
-  m_PVRFilteringAtrousPositionSigmaIndirect: 2
-  m_PVRFilteringAtrousPositionSigmaAO: 1
-  m_PVRTiledBaking: 0
---- !u!43 &792773323
+--- !u!43 &572804849
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterVolume-50572
+  m_Name: WaterVolume-51560
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2065,6 +1388,715 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &674621320
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -26.461473
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.1427345
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.025793
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142124, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31725166093142126, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: m_Name
+      value: SceneController
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597288279396530612, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+      propertyPath: theMusic
+      value: 
+      objectReference: {fileID: 970918386}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 64187545d4108ce4aa01b05912419d55, type: 3}
+--- !u!1 &681066786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 461191177775057915, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+  m_PrefabInstance: {fileID: 461191178146340792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &722546679
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 892785279748922732, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005341015933393222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 1005341015933393222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: playerAnimations
+      value: 
+      objectReference: {fileID: 2026150468}
+    - target: {fileID: 1297674820447602628, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 681066786}
+    - target: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodTop
+      value: 
+      objectReference: {fileID: 1334023909}
+    - target: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 176468540}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 681066786}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: seaSpawner
+      value: 
+      objectReference: {fileID: 1440346365}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: splashSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceRecord
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.472
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.403
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861395229521767, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: WaterVolumeHelper
+      value: 
+      objectReference: {fileID: 1440346363}
+    - target: {fileID: 2130861395229521771, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861395229521771, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: wowSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: rythmGame
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: catchSummary
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingCanvas
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: FishingRodLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControls
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: musicController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingGameSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 2130861396537784917, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784705904286262279, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: WaterVolumeHelper
+      value: 
+      objectReference: {fileID: 1440346363}
+    - target: {fileID: 2784705904286262283, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784705904286262283, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784705905461029172, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingGameSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 2803401897840054680, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.508
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803401897840054680, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221210956709920603, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 681066786}
+    - target: {fileID: 3221210956709920603, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 176468540}
+    - target: {fileID: 3885311052125488497, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1554969848}
+    - target: {fileID: 3885311052125488497, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_VersionIndex
+      value: 1073
+      objectReference: {fileID: 0}
+    - target: {fileID: 4198201513770464269, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1554969848}
+    - target: {fileID: 4462659233269025057, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1554969848}
+    - target: {fileID: 4505936457974327505, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800051008443789343, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932162, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 109290014}
+    - target: {fileID: 5059312361471932163, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Name
+      value: Fishing Rod
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.10000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.10000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.189
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.645
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932221, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 109290014}
+    - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 109290014}
+    - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_VersionIndex
+      value: 1239
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360848329395529453, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: splashSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceRecord
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389967051482507429, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 5885603088304069593, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072487882926126782, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072487882926126782, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307458372637309379, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441864076676628872, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: ropeLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: whatIsHangingFromTheRope
+      value: 
+      objectReference: {fileID: 2016382901}
+    - target: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: balance
+      value: 
+      objectReference: {fileID: 1493859758}
+    - target: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: seaLogic
+      value: 
+      objectReference: {fileID: 1440346365}
+    - target: {fileID: 7180908797847769848, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Name
+      value: Fishing Line
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 681066786}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: balance
+      value: 
+      objectReference: {fileID: 1493859758}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: seaLogic
+      value: 
+      objectReference: {fileID: 1440346365}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: catchArea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: reelSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: rigidBody
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: splashSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodTop
+      value: 
+      objectReference: {fileID: 1334023909}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 176468540}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceRecordMarker
+      value: 
+      objectReference: {fileID: 4654798063134710352, guid: 650ed65096bddb2419513abc5108751b, type: 3}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Float
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Float
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Float
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaitLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaitLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaitLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: gameMiniGame
+      value: 
+      objectReference: {fileID: 1275887656}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: playerAnimations
+      value: 
+      objectReference: {fileID: 2026150468}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingController
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 7671095890555715121, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: armature
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRod
+      value: 
+      objectReference: {fileID: 1745764221}
+    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bonesAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094264068216798896, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Constraints
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169266479616045285, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1927109712}
+    - target: {fileID: 8184525937521587643, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 8212901179885714373, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 8571087251999591881, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1927109712}
+    - target: {fileID: 9148912340842332569, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1927109712}
+    - target: {fileID: 9148912340842332569, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_VersionIndex
+      value: 803
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+--- !u!850595691 &736891878
+LightingSettings:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 4
+  m_GIWorkflowMode: 0
+  m_EnableBakedLightmaps: 1
+  m_EnableRealtimeLightmaps: 0
+  m_RealtimeEnvironmentLighting: 1
+  m_BounceScale: 1
+  m_AlbedoBoost: 1
+  m_IndirectOutputScale: 1
+  m_UsingShadowmask: 1
+  m_BakeBackend: 1
+  m_LightmapMaxSize: 1024
+  m_BakeResolution: 40
+  m_Padding: 2
+  m_LightmapCompression: 3
+  m_AO: 0
+  m_AOMaxDistance: 1
+  m_CompAOExponent: 1
+  m_CompAOExponentDirect: 0
+  m_ExtractAO: 0
+  m_MixedBakeMode: 2
+  m_LightmapsBakeMode: 1
+  m_FilterMode: 1
+  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
+  m_ExportTrainingData: 0
+  m_TrainingDataDestination: TrainingData
+  m_RealtimeResolution: 2
+  m_ForceWhiteAlbedo: 0
+  m_ForceUpdates: 0
+  m_FinalGather: 0
+  m_FinalGatherRayCount: 256
+  m_FinalGatherFiltering: 1
+  m_PVRCulling: 1
+  m_PVRSampling: 1
+  m_PVRDirectSampleCount: 32
+  m_PVRSampleCount: 512
+  m_PVREnvironmentSampleCount: 256
+  m_PVREnvironmentReferencePointCount: 2048
+  m_LightProbeSampleCountMultiplier: 4
+  m_PVRBounces: 2
+  m_PVRMinBounces: 1
+  m_PVREnvironmentMIS: 1
+  m_PVRFilteringMode: 1
+  m_PVRDenoiserTypeDirect: 1
+  m_PVRDenoiserTypeIndirect: 1
+  m_PVRDenoiserTypeAO: 1
+  m_PVRFilterTypeDirect: 0
+  m_PVRFilterTypeIndirect: 0
+  m_PVRFilterTypeAO: 0
+  m_PVRFilteringGaussRadiusDirect: 1
+  m_PVRFilteringGaussRadiusIndirect: 5
+  m_PVRFilteringGaussRadiusAO: 2
+  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+  m_PVRFilteringAtrousPositionSigmaIndirect: 2
+  m_PVRFilteringAtrousPositionSigmaAO: 1
+  m_PVRTiledBaking: 0
 --- !u!114 &798635894 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2541802518774182699, guid: df4414b36c312814aa9272096431fea3, type: 3}
@@ -2076,17 +2108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd2db47b685ac949984b57c9ec5763e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &822062796 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c8165d89629e9d49aded1f97f854248, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &848043306 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2102203830714495206, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
@@ -2096,6 +2117,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd77f4cef5c5e045934b630ceb3dc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &876367117 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8212901179885714373, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2d101fa9f9eb945885fa7d1e49e195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &970918385 stripped
@@ -2120,7 +2152,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-39846
+  m_Name: pb_Mesh-99826
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2305,16 +2337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f647148571a8f4dbe98d2b20fcce6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1182136880 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3288064664290165419, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &1182136882 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4407086476177749063, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1275887656 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
@@ -2326,6 +2348,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c6b7fe427a2d641be07b3a90878018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1334023909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 702639683358294300, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1334023911
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334023909}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1440346363 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 461191177775057904, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
@@ -2348,22 +2391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac495199f0570d45a3dedc12608a764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1440346371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681066786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb26da4d20179f43ad8d6f45aed9ec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bait: {fileID: 7448718}
-  system: {fileID: 568067434}
-  splashSound: {fileID: 1759076622}
-  distanceRecord: {fileID: 1759076628}
 --- !u!114 &1465610770 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
@@ -2392,7 +2419,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-39646
+  m_Name: pb_Mesh-22332
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2571,43 +2598,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5059312361471932163, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
   m_PrefabInstance: {fileID: 722546679}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1759076611 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1759076617 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &1759076622 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 5333513377954726186, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1759076623 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7448718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1759076628 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7448718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0ceb6772e595e498088c45b4a0f9a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1881676126 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7194481759871860316, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
@@ -2941,7 +2931,7 @@ PrefabInstance:
     - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
       propertyPath: catchArea
       value: 
-      objectReference: {fileID: 822062796}
+      objectReference: {fileID: 0}
     - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
       propertyPath: baitCamera
       value: 
@@ -2995,6 +2985,43 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 8025716213410296502, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
   m_PrefabInstance: {fileID: 8025716212718796967}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2016382900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2784705904286262281, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2016382901 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2784705904286262276, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2016382902 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3221210956709920603, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016382900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0ceb6772e595e498088c45b4a0f9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &2016382903 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8156975820747625034, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2016382905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016382900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2026150468 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3146058961067761133, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
@@ -3190,7 +3217,7 @@ PrefabInstance:
     - target: {fileID: 461191177775057919, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 792773323}
+      objectReference: {fileID: 572804849}
     - target: {fileID: 626775376293174244, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: m_LocalScale.y
       value: 10
@@ -3198,7 +3225,7 @@ PrefabInstance:
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: bait
       value: 
-      objectReference: {fileID: 7448718}
+      objectReference: {fileID: 2016382900}
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: spawnDelay
       value: 2
@@ -3235,6 +3262,22 @@ PrefabInstance:
       propertyPath: fishPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 6650865527275564235, guid: ad3dddc71e6300a4881d2abe5603aa99, type: 3}
+    - target: {fileID: 7095222782123616272, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 2016382900}
+    - target: {fileID: 7095222782123616272, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 7095222782123616272, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: splashSound
+      value: 
+      objectReference: {fileID: 2016382903}
+    - target: {fileID: 7095222782123616272, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: distanceRecord
+      value: 
+      objectReference: {fileID: 2016382902}
     m_RemovedComponents:
     - {fileID: 2613624702870127253, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
@@ -3296,7 +3339,7 @@ PrefabInstance:
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: baitArea
       value: 
-      objectReference: {fileID: 346188749}
+      objectReference: {fileID: 876367117}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: itemMenu
       value: 
@@ -3304,7 +3347,7 @@ PrefabInstance:
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: baitLogic
       value: 
-      objectReference: {fileID: 1759076623}
+      objectReference: {fileID: 2016382905}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: castSound
       value: 
@@ -3312,7 +3355,7 @@ PrefabInstance:
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: catchArea
       value: 
-      objectReference: {fileID: 822062796}
+      objectReference: {fileID: 0}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: pauseMenu
       value: 
@@ -3448,7 +3491,7 @@ PrefabInstance:
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2016382905}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -3480,7 +3523,7 @@ PrefabInstance:
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 822062796}
+      objectReference: {fileID: 0}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: reelingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -3496,7 +3539,7 @@ PrefabInstance:
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: fishingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1759076623}
+      objectReference: {fileID: 0}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
@@ -3532,7 +3575,7 @@ PrefabInstance:
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: reelingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1759076623}
+      objectReference: {fileID: 0}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -3559,7 +3602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CalculateReelInSpeed
+      value: ReelIn
       objectReference: {fileID: 0}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -3691,7 +3734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: FishingRodLogic, Assembly-CSharp
+      value: BaitLogic, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -4031,7 +4074,7 @@ PrefabInstance:
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: bait
       value: 
-      objectReference: {fileID: 7448718}
+      objectReference: {fileID: 0}
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: system
       value: 

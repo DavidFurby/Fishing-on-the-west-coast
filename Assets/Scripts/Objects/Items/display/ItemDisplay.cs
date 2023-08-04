@@ -6,16 +6,19 @@ public class ItemDisplay : MonoBehaviour
 {
     [SerializeField] public Item item;
 
-    protected void DisplayModel(GameObject modelPrefab)
-    {
-        Destroy(gameObject);
+protected void DisplayModel(GameObject modelPrefab)
+{
+    // Store the scale of the previous instance
+    Vector3 previousScale = transform.localScale;
 
-        // Instantiate the new model
-        GameObject model = Instantiate(modelPrefab);
-        // Set the position and rotation of the new model
-        model.transform.position = transform.position;
-        model.transform.rotation = transform.rotation;
-        // Set the parent of the new model to be this game object
-        model.transform.SetParent(transform);
-    }
+    // Instantiate the new model
+    GameObject model = Instantiate(modelPrefab);
+    // Set the position, rotation, and scale of the new model
+    model.transform.position = transform.position;
+    model.transform.rotation = transform.rotation;
+    model.transform.localScale = previousScale;
+    // Set the parent of the new model to be this game object
+    model.transform.SetParent(transform);
+}
+
 }

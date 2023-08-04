@@ -159,10 +159,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2502478587843863448}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2502478587843863446
 MonoBehaviour:
@@ -189,7 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seaLogic: {fileID: 0}
   fishingRodTop: {fileID: 0}
   system: {fileID: 0}
   splashSound: {fileID: 8443319161182148059}
@@ -367,7 +366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2d101fa9f9eb945885fa7d1e49e195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingSystem: {fileID: 0}
 --- !u!135 &8300366621096501246
 SphereCollider:
   m_ObjectHideFlags: 0

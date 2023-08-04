@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BaitArea : MonoBehaviour
 {
-    [SerializeField] private FishingSystem fishingSystem;
+    [SerializeField] private readonly FishingSystem fishingSystem;
     private const float baitShakeDelay = 2f;
 
     private void OnTriggerEnter(Collider collider)

@@ -37,17 +37,28 @@ public class Rope : MonoBehaviour
 
     void Update()
     {
-        //Display the rope with the line renderer
-        DisplayRope();
+        // Calculate the distance between whatTheRopeIsConnectedTo and whatIsHangingFromTheRope
+        float distance = Vector3.Distance(whatTheRopeIsConnectedTo.position, whatIsHangingFromTheRope.position);
 
-        //Move what is hanging from the rope to the end of the rope
-        RopeSection endRope = allRopeSections[0];
-        endRope.pos = whatIsHangingFromTheRope.position;
-        allRopeSections[0] = endRope;
+        // Check if the distance is greater than a certain threshold
+        if (distance > 5)
+        {
+            lineRenderer.enabled = true;
+            // Display the rope with the line renderer
+            DisplayRope();
+            // Move what is hanging from the rope to the end of the rope
+            RopeSection endRope = allRopeSections[0];
+            endRope.pos = whatIsHangingFromTheRope.position;
+            allRopeSections[0] = endRope;
 
-        //Make what's hanging from the rope look at the next to last rope position to make it rotate with the rope
-        whatIsHangingFromTheRope.LookAt(allRopeSections[1].pos);
+            // Make what's hanging from the rope look at the next to last rope position to make it rotate with the rope
+            whatIsHangingFromTheRope.LookAt(allRopeSections[1].pos);
+        } else {
+            lineRenderer.enabled = false;
+        }
+
     }
+
     //
     //Create the rope
     //

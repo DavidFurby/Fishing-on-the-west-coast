@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class BaitLogic : MonoBehaviour
 {
-    [SerializeField] private SeaLogic seaLogic;
     [SerializeField] private GameObject fishingRodTop;
     [SerializeField] private FishingSystem system;
     [SerializeField] private AudioSource splashSound;
@@ -12,18 +11,37 @@ public class BaitLogic : MonoBehaviour
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
     [SerializeField] private Scrollbar balance;
+    private FixedJoint fixedJoint;
 
 
-    private void Start()
+    public void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        targetPosition = fishingRodTop.transform.position;
         AttachBait();
+    }
+
+    private void AttachBait()
+    {
+        gameObject.transform.position = fishingRodTop.transform.position;
+        // Create a FixedJoint component and attach it to the bait
+        fixedJoint = gameObject.AddComponent<FixedJoint>();
+
+        // Set the connected body of the FixedJoint to be the fishingRodTop
+        fixedJoint.connectedBody = fishingRodTop.GetComponent<Rigidbody>();
+
+        // Reset other values
+        ResetValues();
+    }
+
+    private void DetachBait()
+    {
+        // Destroy the FixedJoint component to detach the bait from the fishingRodTop
+        Destroy(fixedJoint);
     }
 
     public void Cast()
     {
-        rigidBody.isKinematic = false;
+        DetachBait();
         rigidBody.AddForceAtPosition(forceFactor * system.fishingRodLogic.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
         if (forceFactor > 0)
         {
@@ -32,7 +50,7 @@ public class BaitLogic : MonoBehaviour
     }
     public void ReelIn()
     {
-        Vector3 targetPosition = fishingRodTop.transform.position;
+        targetPosition = fishingRodTop.transform.position;
         if (IsCloseToTarget(targetPosition))
         {
             AttachBait();
@@ -53,7 +71,7 @@ public class BaitLogic : MonoBehaviour
     }
     private bool IsCloseToTarget(Vector3 targetPosition)
     {
-        return Vector3.Distance(transform.position, targetPosition) < 1f;
+        return Vector3.Distance(transform.position, targetPosition) < 0.5f;
     }
 
     private void MoveTowardsTarget(Vector3 targetPosition)
@@ -66,13 +84,6 @@ public class BaitLogic : MonoBehaviour
     public void Shake()
     {
         splashSound.Play();
-    }
-
-    private void AttachBait()
-    {
-        rigidBody.isKinematic = true;
-        transform.position = targetPosition;
-        ResetValues();
     }
 
     private void ResetValues()

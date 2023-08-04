@@ -7,7 +7,6 @@ public class RodDisplay : ItemDisplay
     private GameObject[] rods;
     private void Start()
     {
-        SelectRod();
     }
 
     public void SelectRod()

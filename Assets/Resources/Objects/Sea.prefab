@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 461191177775057904}
   - component: {fileID: 1440346369}
   - component: {fileID: 5824225006748754863}
+  - component: {fileID: 7095222782123616272}
   m_Layer: 0
   m_Name: Sea
   m_TagString: Untagged
@@ -174,8 +175,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac495199f0570d45a3dedc12608a764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishes:
-  - {fileID: 6650865527275564235, guid: ad3dddc71e6300a4881d2abe5603aa99, type: 3}
   spawnDelay: 5
   bait: {fileID: 0}
-  fishingControlls: {fileID: 0}
+  fishingSystem: {fileID: 0}
+--- !u!114 &7095222782123616272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461191177775057915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb26da4d20179f43ad8d6f45aed9ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bait: {fileID: 0}
+  system: {fileID: 0}
+  splashSound: {fileID: 0}
+  distanceRecord: {fileID: 0}
