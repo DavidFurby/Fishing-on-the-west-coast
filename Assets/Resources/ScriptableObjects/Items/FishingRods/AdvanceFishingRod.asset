@@ -17,5 +17,6 @@ MonoBehaviour:
   name: Advance Rod
   price: 5
   description: Ad
+  model: {fileID: 5076685828461310335, guid: d0c27d96c29be3e4db4b1932404d4f91, type: 3}
   strength: 30
   throwRange: 200

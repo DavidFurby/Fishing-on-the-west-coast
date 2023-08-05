@@ -4,24 +4,22 @@ using UnityEngine;
 public class RodDisplay : ItemDisplay
 {
     private const string ItemsPath = "Objects/ItemResources/FishingRods";
-    private GameObject[] rods;
+
     private void Start()
     {
+        if (item == null)
+        {
+            SelectRod();
+        }
     }
-
     public void SelectRod()
     {
-        rods = Resources.LoadAll<GameObject>(ItemsPath);
-        item = MainManager.Instance.game.Inventory.EquippedFishingRod;
+        Debug.Log("Selecting Rod");
+        var rodPrefabs = Resources.LoadAll<GameObject>(ItemsPath);
+        var equippedRod = rodPrefabs.FirstOrDefault(r => r.GetComponent<RodDisplay>() != null && MainManager.Instance.game.Inventory.EquippedFishingRod.id == r.GetComponent<RodDisplay>().item.id);
 
-        for (int i = 0; i < rods.Length; i++)
-        {
-            if (rods[i].GetComponent<RodDisplay>() != null && item.id == rods[i].GetComponent<RodDisplay>().item.id)
-            {
-                DisplayModel(rods[i]); // Call the DisplayModel method from the base class
-
-                break;
-            }
-        }
+        DisplayModel(equippedRod);
+        // Get the item component of the instantiated game object    
+        item = equippedRod.GetComponent<RodDisplay>().item;
     }
 }

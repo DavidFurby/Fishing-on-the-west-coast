@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BaitArea : MonoBehaviour
 {
-    [SerializeField] private readonly FishingSystem fishingSystem;
+    [SerializeField] private FishingSystem fishingSystem;
     private const float baitShakeDelay = 2f;
 
     private void OnTriggerEnter(Collider collider)
@@ -35,7 +35,7 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //if (other.CompareTag("Fish") && fishingSystem.fishIsBaited)
+        if (other.CompareTag("Fish") && fishingSystem.fishIsBaited)
         {
             FishMovement fishMovement = other.GetComponent<FishMovement>();
             if (fishMovement.GetCurrentState() is Baited)
