@@ -12,7 +12,6 @@ public class FishingRodLogic : MonoBehaviour
     private readonly float initialCastingPower = 20;
     private readonly float initialReelInSpeed = 15f;
 
-
     public void TriggerSetChargingBalance()
     {
         fishingSystem.fishingMiniGame.SetChargingBalance(true);

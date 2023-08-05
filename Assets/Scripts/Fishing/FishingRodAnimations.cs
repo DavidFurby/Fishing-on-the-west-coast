@@ -11,7 +11,6 @@ public class FishingRodAnimations : MonoBehaviour
     public void PlaySwingAnimation()
     {
         fishingRodAnimator.Play("Swing");
-        Debug.Log("Fishing Rod Swinging");
     }
     public void PlayReversSwingAnimation()
     {

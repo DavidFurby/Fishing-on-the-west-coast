@@ -7,10 +7,10 @@ public class BaitLogic : MonoBehaviour
     [SerializeField] private GameObject fishingRodTop;
     [SerializeField] private FishingSystem system;
     [SerializeField] private AudioSource splashSound;
+    [SerializeField] private Scrollbar balance;
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
-    [SerializeField] private Scrollbar balance;
     private FixedJoint fixedJoint;
 
 

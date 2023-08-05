@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 291158620227579610, guid: 6aca13b31043c004fbcad326c1e5f18a, type: 3}
@@ -20,10 +21,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1531123165173240576, guid: 6aca13b31043c004fbcad326c1e5f18a, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1916215334190752380, guid: 6aca13b31043c004fbcad326c1e5f18a, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
@@ -80,4 +77,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 16515587627d67e4885a2abcd554f8bb, type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aca13b31043c004fbcad326c1e5f18a, type: 3}
