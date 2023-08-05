@@ -51,5 +51,6 @@
     "temp/": true,
     "Temp/": true
   },
-  "cSpell.words": ["Rigidbody"]
+  "cSpell.words": ["Rigidbody"],
+  "dotnet.defaultSolution": "Fisherman.sln"
 }
