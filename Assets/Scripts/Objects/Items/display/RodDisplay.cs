@@ -17,8 +17,6 @@ public class RodDisplay : ItemDisplay
         Debug.Log("Selecting Rod");
         var rodPrefabs = Resources.LoadAll<GameObject>(ItemsPath);
         var equippedRod = rodPrefabs.FirstOrDefault(r => r.GetComponent<RodDisplay>() != null && MainManager.Instance.game.Inventory.EquippedFishingRod.id == r.GetComponent<RodDisplay>().item.id);
-
-        DisplayModel(equippedRod);
         // Get the item component of the instantiated game object    
         item = equippedRod.GetComponent<RodDisplay>().item;
     }
