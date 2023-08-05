@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6511546496752996532}
   - component: {fileID: 2114072563461534117}
   - component: {fileID: 334661640516819046}
+  - component: {fileID: 1061623482519195666}
   m_Layer: 0
   m_Name: Fishing Rod
   m_TagString: Untagged
@@ -184,6 +185,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1061623482519195666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5059312361471932163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0ceb6772e595e498088c45b4a0f9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceRecordMarker: {fileID: 4654798063134710352, guid: 650ed65096bddb2419513abc5108751b, type: 3}
+  distanceTextUI: {fileID: 0}
+  sea: {fileID: 0}
+  fishingRodTop: {fileID: 702639683358294300}
+  bait: {fileID: 0}
 --- !u!1001 &297189472890390417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -494,7 +512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1916215334190752380, guid: 6aca13b31043c004fbcad326c1e5f18a, type: 3}
       propertyPath: m_VersionIndex
-      value: 806
+      value: 809
       objectReference: {fileID: 0}
     - target: {fileID: 2063928995414107180, guid: 6aca13b31043c004fbcad326c1e5f18a, type: 3}
       propertyPath: m_RootOrder

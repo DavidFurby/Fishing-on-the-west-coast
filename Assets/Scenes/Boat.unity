@@ -1822,6 +1822,18 @@ PrefabInstance:
       propertyPath: playerAnimations
       value: 
       objectReference: {fileID: 2026150468}
+    - target: {fileID: 1061623482519195666, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 681066786}
+    - target: {fileID: 1061623482519195666, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 2016382900}
+    - target: {fileID: 1061623482519195666, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 176468540}
     - target: {fileID: 1297674820447602628, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -2048,7 +2060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.15
+      value: -12.43
       objectReference: {fileID: 0}
     - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2394,6 +2406,10 @@ PrefabInstance:
       propertyPath: system
       value: 
       objectReference: {fileID: 568067434}
+    - target: {fileID: 8184525937521587643, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceRecord
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8212901179885714373, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
@@ -2880,6 +2896,17 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 334661640516819046, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
   m_PrefabInstance: {fileID: 722546679}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1745764228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1061623482519195666, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745764221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0ceb6772e595e498088c45b4a0f9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1881676126 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7194481759871860316, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
@@ -3286,17 +3313,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2784705904286262276, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
   m_PrefabInstance: {fileID: 722546679}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2016382902 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3221210956709920603, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016382900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0ceb6772e595e498088c45b4a0f9a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &2016382903 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8156975820747625034, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
@@ -3566,7 +3582,7 @@ PrefabInstance:
     - target: {fileID: 7095222782123616272, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: distanceRecord
       value: 
-      objectReference: {fileID: 2016382902}
+      objectReference: {fileID: 1745764228}
     m_RemovedComponents:
     - {fileID: 2613624702870127253, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
     m_RemovedGameObjects: []
