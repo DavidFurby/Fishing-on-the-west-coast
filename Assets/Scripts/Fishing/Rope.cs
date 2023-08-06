@@ -41,7 +41,7 @@ public class Rope : MonoBehaviour
         float distance = Vector3.Distance(whatTheRopeIsConnectedTo.position, whatIsHangingFromTheRope.position);
 
         // Check if the distance is greater than a certain threshold
-        if (distance > 2)
+        if (distance > 0.5)
         {
             lineRenderer.enabled = true;
             // Display the rope with the line renderer

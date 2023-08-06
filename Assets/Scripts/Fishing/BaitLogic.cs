@@ -55,7 +55,6 @@ public class BaitLogic : MonoBehaviour
         if (IsCloseToTarget(targetPosition))
         {
             AttachBait();
-            Debug.Log(system.fishesOnHook.Count);
             if (system.fishesOnHook.Count > 0)
             {
                 system.HandleCatch();
