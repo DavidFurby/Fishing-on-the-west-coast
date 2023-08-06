@@ -18,7 +18,6 @@ public class FishingSystem : FishingStateMachine
 
     #region Events
     [Header("Fishing Events")]
-    public UnityEvent onCatchFish;
     public UnityEvent onStartCharging;
     public UnityEvent onChargeRelease;
     #endregion
@@ -52,7 +51,8 @@ public class FishingSystem : FishingStateMachine
             {
                 StartCoroutine(fishingCamera.CatchAlert());
                 fishingMiniGame.StartBalanceMiniGame();
-                onCatchFish.Invoke();
+                CatchFish();
+                baitLogic.ReelIn();
                 SetState(new ReelingFish(this));
             }
             else
