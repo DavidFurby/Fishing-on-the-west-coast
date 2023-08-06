@@ -8,6 +8,7 @@ public class BaitLogic : MonoBehaviour
     [SerializeField] private FishingSystem system;
     [SerializeField] private AudioSource splashSound;
     [SerializeField] private Scrollbar balance;
+    [SerializeField] public GameObject bait;
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
@@ -16,15 +17,15 @@ public class BaitLogic : MonoBehaviour
 
     public void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
+        rigidBody = bait.GetComponent<Rigidbody>();
         AttachBait();
     }
 
     private void AttachBait()
     {
-        gameObject.transform.position = fishingRodTop.transform.position;
+        bait.transform.position = fishingRodTop.transform.position;
         // Create a FixedJoint component and attach it to the bait
-        fixedJoint = gameObject.AddComponent<FixedJoint>();
+        fixedJoint = bait.gameObject.AddComponent<FixedJoint>();
 
         // Set the connected body of the FixedJoint to be the fishingRodTop
         fixedJoint.connectedBody = fishingRodTop.GetComponent<Rigidbody>();
@@ -54,6 +55,7 @@ public class BaitLogic : MonoBehaviour
         if (IsCloseToTarget(targetPosition))
         {
             AttachBait();
+            Debug.Log(system.fishesOnHook.Count);
             if (system.fishesOnHook.Count > 0)
             {
                 system.HandleCatch();
@@ -71,14 +73,14 @@ public class BaitLogic : MonoBehaviour
     }
     private bool IsCloseToTarget(Vector3 targetPosition)
     {
-        return Vector3.Distance(transform.position, targetPosition) < 0.5f;
+        return Vector3.Distance(bait.transform.position, targetPosition) < 0.5f;
     }
 
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
-        Vector3 direction = (targetPosition - transform.position).normalized;
-        transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
-        transform.Translate(system.fishingRodLogic.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+        Vector3 direction = (targetPosition - bait.transform.position).normalized;
+        bait.transform.position = new Vector3(bait.transform.position.x, (bait.transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), bait.transform.position.z);
+        bait.transform.Translate(system.fishingRodLogic.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
     }
 
     public void Shake()

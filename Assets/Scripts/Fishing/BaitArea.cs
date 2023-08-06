@@ -10,7 +10,7 @@ public class BaitArea : MonoBehaviour
     {
         if (collider.CompareTag("Fish") && !fishingSystem.fishIsBaited)
         {
-            TryBaitingFish(collider, fishingSystem.baitLogic.gameObject);
+            TryBaitingFish(collider, fishingSystem.baitLogic.bait.gameObject);
         }
     }
 
@@ -26,7 +26,7 @@ public class BaitArea : MonoBehaviour
             fishingSystem.baitLogic.Shake();
             if (collider.CompareTag("Fish") && !fishingSystem.fishIsBaited)
             {
-                TryBaitingFish(collider, fishingSystem.baitLogic.gameObject);
+                TryBaitingFish(collider, fishingSystem.baitLogic.bait.gameObject);
             }
 
             yield return new WaitForSeconds(baitShakeDelay);

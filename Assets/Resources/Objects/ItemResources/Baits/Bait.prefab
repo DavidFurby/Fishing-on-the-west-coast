@@ -79,7 +79,6 @@ GameObject:
   - component: {fileID: 2502478587843863444}
   - component: {fileID: 2502478587843863451}
   - component: {fileID: 2502478587843863450}
-  - component: {fileID: 6628656085392508277}
   - component: {fileID: 5764047666048106582}
   - component: {fileID: 8443319161182148059}
   m_Layer: 0
@@ -104,7 +103,6 @@ Transform:
   m_Children:
   - {fileID: 2502478586803515051}
   - {fileID: 628380356897053995}
-  - {fileID: 8120690022316645525}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2502478587843863444
@@ -178,22 +176,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6628656085392508277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2502478587843863448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishingRodTop: {fileID: 0}
-  system: {fileID: 0}
-  splashSound: {fileID: 8443319161182148059}
-  balance: {fileID: 0}
 --- !u!54 &5764047666048106582
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -384,73 +366,3 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &4278291355919691076
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8120690022316645525}
-  - component: {fileID: 611393590014237437}
-  - component: {fileID: 8469743378034061866}
-  m_Layer: 0
-  m_Name: Water Collision
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8120690022316645525
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4278291355919691076}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2502478587843863445}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &611393590014237437
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4278291355919691076}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8469743378034061866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4278291355919691076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb26da4d20179f43ad8d6f45aed9ec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bait: {fileID: 2502478587843863448}
-  system: {fileID: 0}
-  splashSound: {fileID: 8443319161182148059}
-  distanceRecord: {fileID: 0}

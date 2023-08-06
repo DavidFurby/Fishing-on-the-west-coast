@@ -1978,6 +1978,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.49
       objectReference: {fileID: 0}
+    - target: {fileID: 3213731998605817912, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 2016382900}
+    - target: {fileID: 3213731998605817912, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 568067434}
+    - target: {fileID: 3213731998605817912, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: balance
+      value: 
+      objectReference: {fileID: 1493859758}
     - target: {fileID: 3221210956709920603, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: sea
       value: 
@@ -2130,6 +2142,10 @@ PrefabInstance:
       propertyPath: fishingSystem
       value: 
       objectReference: {fileID: 568067434}
+    - target: {fileID: 5467887338206627783, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Constraints
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5594425843559058059, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -2427,7 +2443,8 @@ PrefabInstance:
       value: 803
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4557747355451501269, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3131903176190151127, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
@@ -2437,17 +2454,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1334023911}
   m_SourcePrefab: {fileID: 100100000, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
---- !u!114 &722546680 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
-  m_PrefabInstance: {fileID: 722546679}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016382900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!850595691 &736891878
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -2905,6 +2911,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec0ceb6772e595e498088c45b4a0f9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1745764229 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3213731998605817912, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 722546679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745764221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1881676126 stripped
@@ -3533,7 +3550,7 @@ PrefabInstance:
       objectReference: {fileID: 2016382900}
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: spawnDelay
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: fishingSystem
@@ -3656,7 +3673,7 @@ PrefabInstance:
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: baitLogic
       value: 
-      objectReference: {fileID: 722546680}
+      objectReference: {fileID: 1745764229}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: castSound
       value: 
@@ -3800,7 +3817,7 @@ PrefabInstance:
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 722546680}
+      objectReference: {fileID: 1745764229}
     - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
       propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
