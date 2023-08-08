@@ -18,7 +18,6 @@ public class RodDisplay : ItemDisplay
         FishingRod equippedRod = rodPrefabs.FirstOrDefault(r => MainManager.Instance.game.Inventory.EquippedFishingRod.id == r.id);
         // Get the item component of the instantiated game object  
         SetNewItemModel(equippedRod);
-        Debug.Log(item);
 
     }
 }
