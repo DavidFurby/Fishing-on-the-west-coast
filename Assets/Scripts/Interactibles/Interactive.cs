@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public class Interactible : MonoBehaviour
+public class Interactive : MonoBehaviour
 {
-    [SerializeField] GameObject interactibleIcon;
+    [SerializeField] GameObject InteractiveIcon;
 
     public void CheckActivated()
     {
         Component[] components = GetComponents<Component>();
         foreach (Component component in components)
         {
-            if (component is IInteractible)
+            if (component is IInteractive)
             {
-                (component as IInteractible).Interact();
+                (component as IInteractive).Interact();
                 break;
             }
         }
@@ -20,14 +20,14 @@ public class Interactible : MonoBehaviour
     //Shows icon when player enters the trigger
     private void OnTriggerEnter(Collider other)
     {
-        interactibleIcon.SetActive(other.CompareTag("Player"));
+        InteractiveIcon.SetActive(other.CompareTag("Player"));
     }
     //Hides the icon when player exits the trigger
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            interactibleIcon.SetActive(false);
+            InteractiveIcon.SetActive(false);
         }
     }
 }

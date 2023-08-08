@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yarn.Unity;
 
-public class Conversation : MonoBehaviour, IInteractible
+public class Conversation : MonoBehaviour, IInteractive
 {
     // Start is called before the first frame update
     [SerializeField] private GameCharacters character;

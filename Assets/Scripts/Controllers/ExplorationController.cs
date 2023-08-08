@@ -7,7 +7,7 @@ public class ExplorationController : MonoBehaviour
     [SerializeField] private PlayerAnimations playerAnimations;
 
     private bool isWithinTriggerArea;
-    private Interactible interactible;
+    private Interactive interactive;
     public PlayerStatus playerStatus;
 
     public enum PlayerStatus
@@ -43,10 +43,10 @@ public class ExplorationController : MonoBehaviour
                 playerAnimations.SetPlayerWalkAnimation(false);
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactible != null)
+            if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactive != null)
             {
                 playerAnimations.SetPlayerWalkAnimation(false);
-                ActivateInteractible();
+                ActivateInteractive();
             }
         }
     }
@@ -80,28 +80,28 @@ public class ExplorationController : MonoBehaviour
     //Called when player enters trigger
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactible"))
+        if (other.CompareTag("Interactive"))
         {
             isWithinTriggerArea = true;
-            interactible = other.GetComponent<Interactible>();
+            interactive = other.GetComponent<Interactive>();
         }
     }
 
     //Called when player exists trigger
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Interactible"))
+        if (other.CompareTag("Interactive"))
         {
             isWithinTriggerArea = false;
-            interactible = null;
+            interactive = null;
         }
     }
 
-    //Activates interactible object if player is within trigger area and button is pressed
-    private void ActivateInteractible()
+    //Activates interactive object if player is within trigger area and button is pressed
+    private void ActivateInteractive()
     {
         SetPlayerStatus(PlayerStatus.Interacting);
-        interactible.CheckActivated();
+        interactive.CheckActivated();
     }
 
     public void SetPlayerStatus(PlayerStatus playerStatus)

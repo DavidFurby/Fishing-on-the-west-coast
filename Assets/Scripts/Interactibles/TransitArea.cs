@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TransitArea : MonoBehaviour, IInteractible
+public class TransitArea : MonoBehaviour, IInteractive
 {
     public SceneAsset toScene;
     public Animator animator;

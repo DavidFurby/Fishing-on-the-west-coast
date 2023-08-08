@@ -9,10 +9,10 @@ TagManager:
   - Character
   - TransitionArea
   - Fish
-  - FishingLine
   - Sea
   - Key
   - PlayerModel
+  - Interactive
   layers:
   - Default
   - TransparentFX
