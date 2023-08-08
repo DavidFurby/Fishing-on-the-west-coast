@@ -1998,6 +1998,18 @@ PrefabInstance:
       propertyPath: distanceTextUI
       value: 
       objectReference: {fileID: 176468540}
+    - target: {fileID: 3735782194292392737, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735782194292392737, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735782194292392737, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.61
+      objectReference: {fileID: 0}
     - target: {fileID: 3885311052125488497, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_Mesh
       value: 

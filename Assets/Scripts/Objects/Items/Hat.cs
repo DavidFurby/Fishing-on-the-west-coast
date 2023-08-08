@@ -4,7 +4,7 @@ using UnityEngine;
 
 [Serializable]
 [CreateAssetMenu(fileName = "Hat", menuName = "ScriptableObjects/Hat", order = 1)]
-public class Hat : Item
+    public class Hat : Item
 {
 
     public Hat() : base()
