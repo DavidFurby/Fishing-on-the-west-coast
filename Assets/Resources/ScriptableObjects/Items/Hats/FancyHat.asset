@@ -17,3 +17,4 @@ MonoBehaviour:
   name: Fancy hat
   price: 2
   description: Very fancy indeed
+  model: {fileID: 8524232125385298991, guid: bf2845a5b6fdb8a4ea461d4a8af2a874, type: 3}

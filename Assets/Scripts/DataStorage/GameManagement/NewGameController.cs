@@ -40,12 +40,12 @@ public class NewGameController : MonoBehaviour
         game.CaughtFishes.Clear();
         game.Inventory.FoundFishingRods.Clear();
         game.Inventory.FoundFishingRods.Add(game.Inventory.AvailableFishingRods[0]);
-        game.Inventory.EquippedFishingRod = game.Inventory.FoundFishingRods.First((rod) => rod.id == 1);
+        game.Inventory.EquippedFishingRod = game.Inventory.FoundFishingRods[0];
         game.Inventory.FoundBaits.Clear();
         game.Inventory.FoundBaits.Add(game.Inventory.AvailableBaits[0]);
-        game.Inventory.EquippedBait = game.Inventory.FoundBaits.First((bait) => bait.id == 1);
+        game.Inventory.EquippedBait = game.Inventory.FoundBaits[0];
         game.Inventory.FoundHats.Clear();
         game.Inventory.FoundHats.Add(game.Inventory.AvailableHats[0]);
-        game.Inventory.EquippedHat = game.Inventory.FoundHats.First((hat) => hat.id == 1);
+        game.Inventory.EquippedHat = game.Inventory.FoundHats[0];
     }
 }
