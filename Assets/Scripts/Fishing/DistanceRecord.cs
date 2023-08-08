@@ -9,7 +9,6 @@ public class DistanceRecord : MonoBehaviour
     [SerializeField] private TextMeshProUGUI distanceTextUI;
     [SerializeField] private GameObject sea;
     [SerializeField] private GameObject fishingRodTop;
-    [SerializeField] private GameObject bait;
 
     private float distance;
 
@@ -41,7 +40,7 @@ public class DistanceRecord : MonoBehaviour
             {
                 Destroy(currentDistanceRecordMarker);
             }
-            Vector3 position = new(fishingRodTop.transform.position.x + MainManager.Instance.game.BestDistance, sea.transform.position.y + sea.GetComponent<Renderer>().bounds.extents.y, bait.transform.position.z);
+            Vector3 position = new(fishingRodTop.transform.position.x + MainManager.Instance.game.BestDistance, sea.transform.position.y + sea.GetComponent<Renderer>().bounds.extents.y, transform.position.z);
             currentDistanceRecordMarker = Instantiate(distanceRecordMarker, position, Quaternion.identity);
 
         }
@@ -50,7 +49,7 @@ public class DistanceRecord : MonoBehaviour
     //Calculate distance cast
     private void CalculateDistance()
     {
-        distance = Vector3.Distance(fishingRodTop.transform.position, bait.transform.position);
+        distance = Vector3.Distance(fishingRodTop.transform.position, transform.position);
         distanceTextUI.text = $"Distance: {distance:F2} meter";
     }
 }

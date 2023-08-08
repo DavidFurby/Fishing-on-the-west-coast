@@ -174,10 +174,10 @@ public class Rope : MonoBehaviour
 
             //Heuns method
             //vel = vel + (acc + accFromForwardEuler) * 0.5 * t
-            thisRopeSection.vel = allRopeSections[i].vel + (accelerations[i] + accelerationFromEuler[i]) * 0.5f * timeStep;
+            thisRopeSection.vel = allRopeSections[i].vel + 0.5f * timeStep * (accelerations[i] + accelerationFromEuler[i]);
 
             //pos = pos + (vel + velFromForwardEuler) * 0.5f * t
-            thisRopeSection.pos = allRopeSections[i].pos + (allRopeSections[i].vel + nextPosVelForwardEuler[i].vel) * 0.5f * timeStep;
+            thisRopeSection.pos = allRopeSections[i].pos + 0.5f * timeStep * (allRopeSections[i].vel + nextPosVelForwardEuler[i].vel);
 
             //Save the new data in a temporarily list
             nextPosVelHeunsMethod.Add(thisRopeSection);

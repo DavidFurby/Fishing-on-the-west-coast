@@ -28,8 +28,7 @@ public class WaterCollision : MonoBehaviour
             splashSound.Play();
         }
         
-        var rigidBody = other.GetComponent<Rigidbody>();
-        if (rigidBody != null)
+        if (other.TryGetComponent<Rigidbody>(out var rigidBody))
         {
             rigidBody.drag += 2;
         }
@@ -37,8 +36,7 @@ public class WaterCollision : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        var rigidBody = other.GetComponent<Rigidbody>();
-        if (rigidBody != null)
+        if (other.TryGetComponent<Rigidbody>(out var rigidBody))
         {
             ApplyBuoyancy(rigidBody);
         }
@@ -46,8 +44,7 @@ public class WaterCollision : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        var rigidBody = other.GetComponent<Rigidbody>();
-        if (rigidBody != null)
+        if (other.TryGetComponent<Rigidbody>(out var rigidBody))
         {
             rigidBody.drag -= 2;
         }
