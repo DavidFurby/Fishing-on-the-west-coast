@@ -5,6 +5,7 @@ public class ExplorationController : MonoBehaviour
     [SerializeField] private int movementSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private PlayerAnimations playerAnimations;
+    [SerializeField] private GameObject player;
 
     private bool isWithinTriggerArea;
     private Interactive interactive;
@@ -65,7 +66,7 @@ public class ExplorationController : MonoBehaviour
     //Move player in specified direction
     private void MovePlayer(Vector3 movementDirection)
     {
-        transform.Translate(movementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
+        player.transform.Translate(movementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
     }
 
     //Rotate the player to face the specified direction
@@ -73,7 +74,7 @@ public class ExplorationController : MonoBehaviour
     {
         if (movementDirection != Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(movementDirection);
+            player.transform.rotation = Quaternion.LookRotation(movementDirection);
         }
     }
 

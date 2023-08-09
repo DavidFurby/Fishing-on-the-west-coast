@@ -6,37 +6,42 @@ using static ExplorationController;
 public class Shop : MonoBehaviour
 {
     #region Serialized Fields
-    [SerializeField] private ItemDisplay[] shopItems;
+    [SerializeField] private Item[] shopItems;
     [SerializeField] private PlayerCamera playerCamera;
     [SerializeField] private ExplorationController playerController;
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private ShopHandlers dialogHandlers;
-    [SerializeField] private ItemDisplay emptySpot;
-    private readonly List<Vector3> shopItemPositions = new();
+    [SerializeField] private Item emptySpot;
+    private readonly List<GameObject> shopItemPositions = new();
 
     #endregion
 
     #region Private Fields
     [HideInInspector] public bool pauseShoppingControls;
-    [HideInInspector] public ItemDisplay focusedShopItem;
+    [HideInInspector] public Item focusedShopItem;
     private int focusedShopItemIndex = 0;
     #endregion
 
     #region MonoBehaviour Methods
-    private void Start()
+private void Start()
+{
+    Transform shopPositions = transform.Find("ShopPositions");
+    if (shopPositions != null)
     {
-        for (int positionIndex = 1; positionIndex <= 6; positionIndex++)
+        for (int positionIndex = 0; positionIndex < shopPositions.childCount; positionIndex++)
         {
-            string positionName = "Position " + positionIndex;
-            Transform childTransform = transform.Find(positionName);
+            Transform childTransform = shopPositions.GetChild(positionIndex);
             if (childTransform != null)
             {
-                Vector3 childPosition = childTransform.position;
+                GameObject childPosition = childTransform.gameObject;
                 shopItemPositions.Add(childPosition);
             }
         }
-        SpawnItems();
     }
+    SpawnItems();
+}
+
+
     private void Update()
     {
         HandleShoppingInput();
@@ -53,7 +58,7 @@ public class Shop : MonoBehaviour
     public void FocusItem()
     {
         playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.ShoppingItem);
-        playerCamera.SetShopItem(shopItemPositions[focusedShopItemIndex]);
+        playerCamera.SetShopItem(shopItemPositions[focusedShopItemIndex].transform.position);
     }
 
     /// <summary>
@@ -95,7 +100,7 @@ public class Shop : MonoBehaviour
     {
         if (focusedShopItem != null)
         {
-            MainManager.Instance.game.Inventory.AddItem(focusedShopItem.item);
+            MainManager.Instance.game.Inventory.AddItem(focusedShopItem);
             ReplaceItemOnSelf();
             FocusItem();
         }
@@ -103,16 +108,16 @@ public class Shop : MonoBehaviour
 
     private void ReplaceItemOnSelf()
     {
-        GameObject replacement = Instantiate(emptySpot.gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
+        GameObject replacement = Instantiate(emptySpot.model, shopItemPositions[focusedShopItemIndex].transform.position, focusedShopItem.model.transform.rotation);
         replacement.transform.parent = transform;
-        DestroyImmediate(focusedShopItem.gameObject);
-        shopItems[focusedShopItemIndex] = replacement.GetComponent<ItemDisplay>();
+        DestroyImmediate(focusedShopItem.model);
+        shopItems[focusedShopItemIndex] = emptySpot;
     }
 
 
     public void UpdateDialog()
     {
-        dialogHandlers.SetShopItemHandler(focusedShopItem.item);
+        dialogHandlers.SetShopItemHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
     }
     private void HandleShoppingInput()
@@ -140,7 +145,7 @@ public class Shop : MonoBehaviour
         {
             if (i < shopItems.Length && shopItems[i] != null)
             {
-                if (MainManager.Instance.game.Inventory.HasItem(shopItems[i].item))
+                if (MainManager.Instance.game.Inventory.HasItem(shopItems[i]))
                 {
                     SpawnEmptySpot(i);
                 }
@@ -158,16 +163,19 @@ public class Shop : MonoBehaviour
         focusedShopItem = shopItems[focusedShopItemIndex];
     }
 
+
     private void SpawnEmptySpot(int index)
     {
-        GameObject gameObject = Instantiate(emptySpot.gameObject, shopItemPositions[index], Quaternion.identity);
-        gameObject.transform.parent = transform;
+        GameObject newEmptySpot = Instantiate(emptySpot.model, shopItemPositions[index].transform.position, Quaternion.identity);
+        newEmptySpot.transform.SetParent(shopItemPositions[index].transform, false);
+        newEmptySpot.transform.position = shopItemPositions[index].transform.position;
     }
     private void SpawnShopItem(int index)
     {
-        GameObject newObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
-        newObject.transform.parent = transform;
-        shopItems[index] = newObject.GetComponent<ItemDisplay>();
+        GameObject newObject = Instantiate(shopItems[index].model, shopItemPositions[index].transform.position, Quaternion.identity);
+        newObject.transform.SetParent(shopItemPositions[index].transform, false);
+        newObject.transform.position = shopItemPositions[index].transform.position;
+
     }
 }
 #endregion

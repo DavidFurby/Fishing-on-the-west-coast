@@ -17,3 +17,4 @@ MonoBehaviour:
   name: Empty
   price: 0
   description: Empty Spot
+  model: {fileID: 3073080230388463268, guid: 408ab45bebddb8444b6238e6a884bdf4, type: 3}
