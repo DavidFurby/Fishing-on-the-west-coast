@@ -5,7 +5,6 @@ public class ExplorationController : MonoBehaviour
     [SerializeField] private int movementSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private PlayerAnimations playerAnimations;
-    [SerializeField] private GameObject player;
 
     private bool isWithinTriggerArea;
     private Interactive interactive;
@@ -43,7 +42,8 @@ public class ExplorationController : MonoBehaviour
             {
                 playerAnimations.SetPlayerWalkAnimation(false);
             }
-
+            Debug.Log(isWithinTriggerArea);
+            Debug.Log(interactive != null);
             if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactive != null)
             {
                 playerAnimations.SetPlayerWalkAnimation(false);
@@ -66,7 +66,7 @@ public class ExplorationController : MonoBehaviour
     //Move player in specified direction
     private void MovePlayer(Vector3 movementDirection)
     {
-        player.transform.Translate(movementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
+        transform.Translate(movementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
     }
 
     //Rotate the player to face the specified direction
@@ -74,13 +74,15 @@ public class ExplorationController : MonoBehaviour
     {
         if (movementDirection != Vector3.zero)
         {
-            player.transform.rotation = Quaternion.LookRotation(movementDirection);
+            transform.rotation = Quaternion.LookRotation(movementDirection);
         }
     }
 
     //Called when player enters trigger
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other);
+
         if (other.CompareTag("Interactive"))
         {
             isWithinTriggerArea = true;
