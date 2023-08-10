@@ -779,7 +779,7 @@ PrefabInstance:
     - target: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: musicController
       value: 
@@ -787,7 +787,7 @@ PrefabInstance:
     - target: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: fishingControlls
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 7029546651083312520, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_Name
       value: ItemMenu
@@ -1031,7 +1031,7 @@ PrefabInstance:
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: handlers
       value: 
@@ -1047,7 +1047,7 @@ PrefabInstance:
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: newRecordText
       value: 
@@ -1059,7 +1059,7 @@ PrefabInstance:
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: fishingControls
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: summaryDialogHandlers
       value: 
@@ -1529,33 +1529,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &445041124 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5248011865133586714, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
-  m_PrefabInstance: {fileID: 229474582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024a6186b0d63204c8dfe81e89a4f8b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &502981710 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8690102948342108883, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
   m_PrefabInstance: {fileID: 229474582}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &568067434 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-  m_PrefabInstance: {fileID: 1061346672923818140}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf8bb8993b353dc4cbe0d439e434f3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &674621320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1649,11 +1627,11 @@ PrefabInstance:
     - target: {fileID: 1005341015933393222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 1005341015933393222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: playerAnimations
       value: 
-      objectReference: {fileID: 2026150468}
+      objectReference: {fileID: 3146058959776838478}
     - target: {fileID: 1060150932210229058, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1689,7 +1667,7 @@ PrefabInstance:
     - target: {fileID: 1935338518330161674, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingGameSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 2474057495629896584}
     - target: {fileID: 2071196134472936568, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: sea
       value: 
@@ -1713,7 +1691,7 @@ PrefabInstance:
     - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: baitLogic
       value: 
@@ -1737,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingControlls
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.472
@@ -1781,7 +1759,7 @@ PrefabInstance:
     - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: FishingRodLogic
       value: 
@@ -1797,11 +1775,11 @@ PrefabInstance:
     - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingControlls
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingGameSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 2130861396537784917, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_Radius
       value: 1
@@ -1813,7 +1791,7 @@ PrefabInstance:
     - target: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 2474057495629896584}
     - target: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: balance
       value: 
@@ -1845,7 +1823,7 @@ PrefabInstance:
     - target: {fileID: 2784705905461029172, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingGameSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 2803401897840054680, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.508
@@ -1861,7 +1839,7 @@ PrefabInstance:
     - target: {fileID: 3213731998605817912, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 3213731998605817912, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: balance
       value: 
@@ -1949,11 +1927,11 @@ PrefabInstance:
     - target: {fileID: 4847019202594342798, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 2474057495629896584}
     - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: baitLogic
       value: 
@@ -1961,7 +1939,7 @@ PrefabInstance:
     - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingControlls
       value: 
@@ -2000,7 +1978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.97
+      value: -13.13
       objectReference: {fileID: 0}
     - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2057,7 +2035,7 @@ PrefabInstance:
     - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: splashSound
       value: 
@@ -2069,7 +2047,7 @@ PrefabInstance:
     - target: {fileID: 5389967051482507429, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 5467887338206627783, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_Constraints
       value: 120
@@ -2145,11 +2123,11 @@ PrefabInstance:
     - target: {fileID: 6808306851535928029, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 6808306851535928029, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: playerAnimations
       value: 
-      objectReference: {fileID: 2026150468}
+      objectReference: {fileID: 3146058959776838478}
     - target: {fileID: 6808306851535928029, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingRodAnimations
       value: 
@@ -2157,7 +2135,7 @@ PrefabInstance:
     - target: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: balance
       value: 
@@ -2177,7 +2155,7 @@ PrefabInstance:
     - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: balance
       value: 
@@ -2221,7 +2199,7 @@ PrefabInstance:
     - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingControlls
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: distanceRecordMarker
       value: 
@@ -2325,15 +2303,15 @@ PrefabInstance:
     - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: playerAnimations
       value: 
-      objectReference: {fileID: 2026150468}
+      objectReference: {fileID: 3146058959776838478}
     - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingController
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 7671095890555715121, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -2341,11 +2319,11 @@ PrefabInstance:
     - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 2474057495629896584}
     - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: playerAnimations
       value: 
-      objectReference: {fileID: 2026150468}
+      objectReference: {fileID: 3146058959776838478}
     - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingRodAnimations
       value: 
@@ -2397,7 +2375,7 @@ PrefabInstance:
     - target: {fileID: 8184525937521587643, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 8184525937521587643, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: distanceRecord
       value: 
@@ -2405,7 +2383,7 @@ PrefabInstance:
     - target: {fileID: 8212901179885714373, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 8571087251999591881, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2716,11 +2694,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1088169641 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -4253579225698434387, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
-  m_PrefabInstance: {fileID: 229474582}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1126317913 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8657830570072915182, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
@@ -2867,13 +2840,13 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5059312361471932163, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
   m_PrefabInstance: {fileID: 722546679}
   m_PrefabAsset: {fileID: 0}
---- !u!43 &1877393757
+--- !u!43 &1772849320
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterVolume-50690
+  m_Name: WaterVolume-66356
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -3280,133 +3253,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1001 &1930309283
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2474057496485410084, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496485410085, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.3128005
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -12.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710499770, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2474057496710730138, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3146058961067761133, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: playerAnimator
-      value: 
-      objectReference: {fileID: 2026150469}
-    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: castSound
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: catchArea
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: baitCamera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: catchSummary
-      value: 
-      objectReference: {fileID: 1989589369}
-    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: playerAnimator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: fishingMiniGame
-      value: 
-      objectReference: {fileID: 1275887656}
-    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: fishingRodLogic
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096876498458437041, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-      propertyPath: playerAnimations
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
 --- !u!114 &1989589368 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5748939074532554492, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
   m_PrefabInstance: {fileID: 229474582}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088169641}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91b529546ea095d42973a4b6585b6352, type: 3}
@@ -3417,7 +3269,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
   m_PrefabInstance: {fileID: 229474582}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088169641}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6ab26a0ea4114c45bb86c5a5715308f, type: 3}
@@ -3427,22 +3279,6 @@ MonoBehaviour:
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8025716213410296502, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
   m_PrefabInstance: {fileID: 8025716212718796967}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2026150468 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3146058961067761133, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-  m_PrefabInstance: {fileID: 1930309283}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b358b2dec8b6042a3566eac568f337, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &2026150469 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7749939959796266060, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-  m_PrefabInstance: {fileID: 1930309283}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2052816422
 GameObject:
@@ -3642,7 +3478,7 @@ PrefabInstance:
     - target: {fileID: 461191177775057919, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1877393757}
+      objectReference: {fileID: 1772849320}
     - target: {fileID: 626775376293174244, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: m_LocalScale.y
       value: 10
@@ -3658,11 +3494,11 @@ PrefabInstance:
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 2474057495629896584}
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: fishingControlls
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: fishes.Array.size
       value: 1
@@ -3670,7 +3506,7 @@ PrefabInstance:
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: fishingController
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: Fishes.Array.data[0]
       value: 
@@ -3694,7 +3530,7 @@ PrefabInstance:
     - target: {fileID: 7095222782123616272, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 2474057495629896584}
     - target: {fileID: 7095222782123616272, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: splashSound
       value: 
@@ -3709,623 +3545,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
---- !u!1001 &1061346672923818140
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 660
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 540
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540720, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540725, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: m_Name
-      value: FishingController
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: baitArea
-      value: 
-      objectReference: {fileID: 1152927637}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: itemMenu
-      value: 
-      objectReference: {fileID: 1126317913}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: baitLogic
-      value: 
-      objectReference: {fileID: 1252646151}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: castSound
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: catchArea
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: pauseMenu
-      value: 
-      objectReference: {fileID: 445041124}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: baitCamera
-      value: 
-      objectReference: {fileID: 1465610770}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: seaSpawner
-      value: 
-      objectReference: {fileID: 1440346365}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: catchSummary
-      value: 
-      objectReference: {fileID: 1989589369}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: fishingCamera
-      value: 
-      objectReference: {fileID: 1465610770}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: fishingMiniGame
-      value: 
-      objectReference: {fileID: 1275887656}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: fishingRodLogic
-      value: 
-      objectReference: {fileID: 1345264695}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: playerAnimations
-      value: 
-      objectReference: {fileID: 2026150468}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: reelingEvents.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1275887656}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1088169641}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2026150468}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 11500000, guid: c5b358b2dec8b6042a3566eac568f337, type: 3}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EndBalanceMiniGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 4140443586582024942, guid: 8f01ad6b2874882468814fb9190a3e19, type: 3}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1275887656}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: reelingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetChargingThrowAnimation
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: fishingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1989589369}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1275887656}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 568067434}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: reelingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CatchFish
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ReelIn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1275887656}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2026150468}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 1345264695}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[3].m_Target
-      value: 
-      objectReference: {fileID: 1345264696}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EndBalanceMiniGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ResetValues
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2026150468}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: reelingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: InitiateCatchSummary
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: EndBalanceMiniGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: reelingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReelIn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetChargingBalance
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetChargingThrowAnimation
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: PlayerReverseSwingAnimation
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetChargingThrowAnimation
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: PlaySwingAnimation
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FishingMiniGame, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: FishingMiniGame, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerAnimations, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: FishingRodLogic, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FishingSystem, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: BaitLogic, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: CatchArea, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FishingMiniGame, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: CatchArea, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CatchSummary, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: FishingMiniGame, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: CatchSummary, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: reelingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: BaitLogic, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FishingMiniGame, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PlayerAnimations, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: FishingRodLogic, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
-      value: UnityEngine.AudioSource, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerAnimations, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: FishingRodAnimations, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatch.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCharge.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onCatchFish.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onLoseCatch.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onInspectFish.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: reelingEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540726, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: onStartCharging.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540727, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: movementSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540727, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: rotationSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1061346672383540727, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
-      propertyPath: playerAnimations
-      value: 
-      objectReference: {fileID: 2026150468}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4fabf9bfc13a0fe4b9e02c9f1d3caf39, type: 3}
+--- !u!114 &2474057495629896584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+  m_PrefabInstance: {fileID: 6658241432179175108}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8bb8993b353dc4cbe0d439e434f3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3146058959776838478 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 851659421165835670, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+  m_PrefabInstance: {fileID: 6658241432179175108}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b358b2dec8b6042a3566eac568f337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3265502879806292721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4484,6 +3725,107 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
+--- !u!1001 &6658241432179175108
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: baitArea
+      value: 
+      objectReference: {fileID: 1152927637}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: itemMenu
+      value: 
+      objectReference: {fileID: 1126317913}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: baitLogic
+      value: 
+      objectReference: {fileID: 1252646151}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: seaSpawner
+      value: 
+      objectReference: {fileID: 1440346365}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: catchSummary
+      value: 
+      objectReference: {fileID: 1989589369}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingCamera
+      value: 
+      objectReference: {fileID: 1465610770}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingMiniGame
+      value: 
+      objectReference: {fileID: 1275887656}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingRodLogic
+      value: 
+      objectReference: {fileID: 1345264695}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1275887656}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1345264695}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1345264696}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661169753038949569, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_Name
+      value: PlayerFishing
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
 --- !u!1001 &8025716212718796967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4547,7 +3889,7 @@ PrefabInstance:
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 2474057495629896584}
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: audioSource
       value: 
@@ -4555,7 +3897,7 @@ PrefabInstance:
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: fishingControlls
       value: 
-      objectReference: {fileID: 568067434}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4566,7 +3908,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 8025716212718796967}
-  - {fileID: 1930309283}
+  - {fileID: 6658241432179175108}
   - {fileID: 4232111197888523286}
   - {fileID: 722546679}
   - {fileID: 3265502879806292721}
@@ -4577,4 +3919,3 @@ SceneRoots:
   - {fileID: 229474582}
   - {fileID: 1915495999}
   - {fileID: 292963828}
-  - {fileID: 1061346672923818140}

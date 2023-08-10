@@ -10,8 +10,8 @@ public class Conversation : MonoBehaviour, IInteractive
     public enum GameCharacters
     {
         Player,
-        Neighbour,
-        NeigborsWife,
+        Neighbor,
+        NeighborsWife,
         Fisherman,
         Dog,
         ShopKeeper

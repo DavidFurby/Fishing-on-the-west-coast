@@ -29,7 +29,7 @@ public class FishingMiniGame : MonoBehaviour
     // Change balance value based on fishSize
     public void CalculateBalance()
     {
-        if (fishingSystem.fishesOnHook != null)
+        if (fishingSystem.fishesOnHook.Count > 0)
         {
             float weight = 0f;
 
