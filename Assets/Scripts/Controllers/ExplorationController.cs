@@ -42,8 +42,7 @@ public class ExplorationController : MonoBehaviour
             {
                 playerAnimations.SetPlayerWalkAnimation(false);
             }
-            Debug.Log(isWithinTriggerArea);
-            Debug.Log(interactive != null);
+
             if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactive != null)
             {
                 playerAnimations.SetPlayerWalkAnimation(false);
