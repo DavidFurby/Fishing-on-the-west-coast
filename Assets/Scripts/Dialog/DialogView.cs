@@ -3,17 +3,20 @@ using Yarn.Unity;
 using System;
 using TMPro;
 using System.Collections;
+using UnityEngine.Events;
 
 public class DialogView : DialogueViewBase
 {
     [SerializeField] RectTransform container;
     [SerializeField] TextMeshProUGUI speakerGUI;
     [SerializeField] TextMeshProUGUI textGUI;
-    [SerializeField] ExplorationController playerController;
     [SerializeField] DialogManager dialogManager;
     Action advanceHandler;
     private string dialogueLine;
     private Coroutine textRevealCoroutine;
+
+    public UnityEvent onDialogEnd;
+
 
     private void Start()
     {
@@ -75,10 +78,7 @@ public class DialogView : DialogueViewBase
 
     private void ActivateControls()
     {
-        if (playerController.playerStatus == ExplorationController.PlayerStatus.Interacting)
-        {
-            playerController.SetPlayerStatus(ExplorationController.PlayerStatus.StandBy);
-        }
+        onDialogEnd.Invoke();
     }
 
     public void ShowDialog(bool active)
