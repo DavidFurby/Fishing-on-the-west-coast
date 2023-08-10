@@ -12,6 +12,7 @@ TagManager:
   - Key
   - PlayerModel
   - Interactive
+  - Interactible
   layers:
   - Default
   - TransparentFX

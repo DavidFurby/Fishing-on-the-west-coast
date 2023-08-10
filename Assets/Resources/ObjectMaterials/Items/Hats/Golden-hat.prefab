@@ -51,15 +51,15 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b8ffd9bc4d44a8347ae9a9911c6b5143, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a0124ac4622544a438eee905c90fd22b, type: 2}
+      objectReference: {fileID: 2100000, guid: 2a7f98d96e5401e4a97a6d62e84dbe52, type: 2}
     - target: {fileID: -7511558181221131132, guid: b8ffd9bc4d44a8347ae9a9911c6b5143, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: a0124ac4622544a438eee905c90fd22b, type: 2}
+      objectReference: {fileID: 2100000, guid: 2a7f98d96e5401e4a97a6d62e84dbe52, type: 2}
     - target: {fileID: -7511558181221131132, guid: b8ffd9bc4d44a8347ae9a9911c6b5143, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: a0124ac4622544a438eee905c90fd22b, type: 2}
+      objectReference: {fileID: 2100000, guid: 2a7f98d96e5401e4a97a6d62e84dbe52, type: 2}
     - target: {fileID: 919132149155446097, guid: b8ffd9bc4d44a8347ae9a9911c6b5143, type: 3}
       propertyPath: m_Name
       value: Golden-hat
