@@ -17,4 +17,5 @@ MonoBehaviour:
   name: Basic Bait
   price: 0
   description: Basic bait given at childbirth
+  model: {fileID: 4914880736227982372, guid: f8fcaaa72c2f22d46a5310ffd76a26d7, type: 3}
   level: 1

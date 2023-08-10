@@ -18,7 +18,6 @@ public class FishingSystem : FishingStateMachine
 
     #region Events
     [Header("Fishing Events")]
-    public UnityEvent onCatchFish;
     public UnityEvent onStartCharging;
     public UnityEvent onChargeRelease;
     #endregion
@@ -28,7 +27,7 @@ public class FishingSystem : FishingStateMachine
 
     [HideInInspector] public bool IsInCatchArea { get; set; }
 
-    [HideInInspector] public bool fishIsBaited { get; set; }
+    [HideInInspector] public bool FishIsBaited { get; set; }
 
     [HideInInspector] public Bait bait;
     [HideInInspector] public FishingRod fishingRod;
@@ -52,7 +51,8 @@ public class FishingSystem : FishingStateMachine
             {
                 StartCoroutine(fishingCamera.CatchAlert());
                 fishingMiniGame.StartBalanceMiniGame();
-                onCatchFish.Invoke();
+                CatchFish();
+                baitLogic.ReelIn();
                 SetState(new ReelingFish(this));
             }
             else
@@ -102,7 +102,7 @@ public class FishingSystem : FishingStateMachine
         }
     }
 
-    //Drop the fish if you fail the minigame
+    //Drop the fish if you fail the mini game
     public void LoseCatch()
     {
         ResetValues();
@@ -128,7 +128,7 @@ public class FishingSystem : FishingStateMachine
         ClearCaughtFishes();
         FishAttachedToBait = null;
         IsInCatchArea = false;
-        fishIsBaited = false;
+        FishIsBaited = false;
     }
 }
 #endregion

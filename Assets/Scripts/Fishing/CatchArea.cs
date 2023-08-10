@@ -46,7 +46,7 @@ public class CatchArea : MonoBehaviour
         fishingGameSystem.baitArea.TryBaitingFish(other, fishingGameSystem.fishesOnHook[^1].gameObject);
         if (fishMovement.GetCurrentState() is Baited)
         {
-            StartCoroutine(fishingGameSystem?.fishingCamera.CatchAlert());
+            StartCoroutine(fishingGameSystem.fishingCamera.CatchAlert());
             fishMovement.SetState(new HookedToFish(fishMovement));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {

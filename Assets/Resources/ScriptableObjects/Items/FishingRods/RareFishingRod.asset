@@ -17,5 +17,6 @@ MonoBehaviour:
   name: Rare Rod
   price: 20
   description: Super rare
+  model: {fileID: 143842397030981815, guid: fe8b751336031bd4898d0a22ae3ba0cb, type: 3}
   strength: 40
   throwRange: 300

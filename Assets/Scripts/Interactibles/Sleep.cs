@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sleep : MonoBehaviour, IInteractible
+public class Sleep : MonoBehaviour, IInteractive
 {
     public void Interact()
     {

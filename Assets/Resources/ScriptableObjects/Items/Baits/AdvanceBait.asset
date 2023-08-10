@@ -17,4 +17,5 @@ MonoBehaviour:
   name: Advance Bait
   price: 10
   description: A more advanced bait
+  model: {fileID: 1903607795261860847, guid: b7db0e9844093d34583ef6957b933b9e, type: 3}
   level: 2

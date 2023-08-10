@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -28,7 +28,7 @@ public class PlayerCamera : MonoBehaviour
     {
         if (cameraStatus == CameraStatus.Player && player != null)
         {
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2, cameraDistance);
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2, cameraDistance - 2);
             if (cameraDistance != originalCameraDistance)
             {
                 cameraDistance = originalCameraDistance;

@@ -14,7 +14,7 @@ public class SeaLogic : MonoBehaviour
     {
         seaPosition = transform.position;
         seaRenderer = GetComponent<Renderer>();
-        fishPrefabs = Resources.LoadAll<FishDisplay>("SpawnableFishes");
+        fishPrefabs = Resources.LoadAll<FishDisplay>("GameObjects/Fishes");
     }
 
     public void InvokeSpawnFish()

@@ -5,14 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Interactible
   - Character
   - TransitionArea
   - Fish
-  - FishingLine
   - Sea
   - Key
   - PlayerModel
+  - Interactive
+  - Interactible
   layers:
   - Default
   - TransparentFX

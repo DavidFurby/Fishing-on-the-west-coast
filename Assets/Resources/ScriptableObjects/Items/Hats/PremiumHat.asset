@@ -17,3 +17,4 @@ MonoBehaviour:
   name: Premium hat
   price: 10
   description: Desc
+  model: {fileID: 3092470733926639002, guid: d61dab2e98dda0945aba3d3189b69702, type: 3}

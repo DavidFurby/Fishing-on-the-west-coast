@@ -9,6 +9,8 @@ public class FishingRod : Item
     [SerializeField] public int strength;
     [SerializeField] public int throwRange;
 
+    
+
     public FishingRod() : base()
     {
         itemTag = ItemTag.FishingRod;

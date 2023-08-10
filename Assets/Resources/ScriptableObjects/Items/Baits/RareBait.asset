@@ -17,4 +17,5 @@ MonoBehaviour:
   name: Rare Bait
   price: 20
   description: Rarest of baits
+  model: {fileID: 6062419474202388115, guid: f188f73a03d53f04e9a6bba69d13d476, type: 3}
   level: 3

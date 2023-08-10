@@ -8,7 +8,7 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Fish") && !fishingSystem.fishIsBaited)
+        if (collider.CompareTag("Fish") && !fishingSystem.FishIsBaited)
         {
             TryBaitingFish(collider, fishingSystem.baitLogic.gameObject);
         }
@@ -24,7 +24,7 @@ public class BaitArea : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             fishingSystem.baitLogic.Shake();
-            if (collider.CompareTag("Fish") && !fishingSystem.fishIsBaited)
+            if (collider.CompareTag("Fish") && !fishingSystem.FishIsBaited)
             {
                 TryBaitingFish(collider, fishingSystem.baitLogic.gameObject);
             }
@@ -35,12 +35,12 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fishingSystem.fishIsBaited)
+        if (other.CompareTag("Fish") && fishingSystem.FishIsBaited)
         {
             FishMovement fishMovement = other.GetComponent<FishMovement>();
             if (fishMovement.GetCurrentState() is Baited)
             {
-                fishingSystem.fishIsBaited = false;
+                fishingSystem.FishIsBaited = false;
                 fishMovement.SetState(new Swimming(fishMovement));
             }
         }
@@ -54,7 +54,7 @@ public class BaitArea : MonoBehaviour
         if (UnityEngine.Random.Range(0f, 1f) < probability)
         {
             fishMovement.GetBaited(target);
-            fishingSystem.fishIsBaited = true;
+            fishingSystem.FishIsBaited = true;
         }
     }
 
