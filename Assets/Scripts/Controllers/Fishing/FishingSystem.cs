@@ -91,6 +91,7 @@ public class FishingSystem : FishingStateMachine
         {
             FishAttachedToBait.GetComponent<FishMovement>().SetState(new Hooked(FishAttachedToBait.GetComponent<FishMovement>()));
             AddFish(FishAttachedToBait);
+            Debug.Log(fishesOnHook.Count);
         }
     }
     //Trigger methods when fish has been reeled in to inspect fishes

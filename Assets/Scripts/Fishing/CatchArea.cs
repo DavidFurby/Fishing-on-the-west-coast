@@ -50,7 +50,6 @@ public class CatchArea : MonoBehaviour
             fishMovement.SetState(new HookedToFish(fishMovement));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {
-                Debug.Log("Fish");
                 fishingGameSystem.AddFish(newFishComponent);
             }
             fishingGameSystem.fishingRodLogic.CalculateReelInSpeed();
