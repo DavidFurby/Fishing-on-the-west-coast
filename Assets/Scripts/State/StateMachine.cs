@@ -30,6 +30,13 @@ public abstract class StateMachine : MonoBehaviour
     }
 }
 
+public class ExplorationStateMachine : StateMachine
+{
+    public void SetState(ExplorationState state)
+    {
+        base.SetState(state);
+    }
+}
 
 public class FishStateMachine : StateMachine
 {

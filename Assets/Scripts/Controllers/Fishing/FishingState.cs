@@ -10,9 +10,9 @@ public abstract class FishingState : State
     }
 }
 
-public class Idle : FishingState
+public class FishingIdle : FishingState
 {
-    public Idle(FishingSystem system) : base(system)
+    public FishingIdle(FishingSystem system) : base(system)
     {
     }
 

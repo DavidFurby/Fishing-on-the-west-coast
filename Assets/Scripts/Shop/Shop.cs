@@ -23,28 +23,22 @@ public class Shop : MonoBehaviour
     #endregion
 
     #region MonoBehaviour Methods
-private void Start()
-{
-    Transform shopPositions = transform.Find("ShopPositions");
-    if (shopPositions != null)
+    private void Start()
     {
-        for (int positionIndex = 0; positionIndex < shopPositions.childCount; positionIndex++)
+        Transform shopPositions = transform.Find("ShopPositions");
+        if (shopPositions != null)
         {
-            Transform childTransform = shopPositions.GetChild(positionIndex);
-            if (childTransform != null)
+            for (int positionIndex = 0; positionIndex < shopPositions.childCount; positionIndex++)
             {
-                GameObject childPosition = childTransform.gameObject;
-                shopItemPositions.Add(childPosition);
+                Transform childTransform = shopPositions.GetChild(positionIndex);
+                if (childTransform != null)
+                {
+                    GameObject childPosition = childTransform.gameObject;
+                    shopItemPositions.Add(childPosition);
+                }
             }
         }
-    }
-    SpawnItems();
-}
-
-
-    private void Update()
-    {
-        HandleShoppingInput();
+        SpawnItems();
     }
     #endregion
 
@@ -67,8 +61,7 @@ private void Start()
     public IEnumerator OpenShop()
     {
         yield return new WaitForSeconds(0.5f);
-        playerController.SetPlayerStatus(PlayerStatus.Shopping);
-        playerController.gameObject.SetActive(false);
+        playerController.SetState(new Shopping(playerController));
         FocusItem();
         UpdateDialog();
     }
@@ -79,9 +72,8 @@ private void Start()
     public void CloseShop()
     {
         dialogManager.EndDialog();
-        playerController.SetPlayerStatus(PlayerStatus.StandBy);
+        playerController.SetState(new ExplorationIdle(playerController));
         playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.Player);
-        playerController.gameObject.SetActive(true);
         focusedShopItemIndex = 0;
     }
 
@@ -119,25 +111,6 @@ private void Start()
     {
         dialogHandlers.SetShopItemHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
-    }
-    private void HandleShoppingInput()
-    {
-        if (playerController.playerStatus == PlayerStatus.Shopping && !pauseShoppingControls)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                ScrollBetweenItems(false);
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                ScrollBetweenItems(true);
-
-            }
-            else if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                CloseShop();
-            }
-        }
     }
     private void SpawnItems()
     {
