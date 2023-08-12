@@ -1,8 +1,8 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ExplorationController : ExplorationStateMachine
 {
-    public Shop shop;
     [SerializeField] private int movementSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private PlayerAnimations playerAnimations;
@@ -10,6 +10,10 @@ public class ExplorationController : ExplorationStateMachine
 
     private bool isWithinTriggerArea;
     private Interactive interactive;
+
+    public UnityEvent scrollLeft;
+    public UnityEvent scrollRight;
+    public UnityEvent closeShop;
 
 
 
@@ -56,16 +60,16 @@ public class ExplorationController : ExplorationStateMachine
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            shop.ScrollBetweenItems(false);
+            scrollLeft.Invoke();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            shop.ScrollBetweenItems(true);
+            scrollRight.Invoke();
 
         }
         else if (Input.GetKeyDown(KeyCode.Tab))
         {
-            shop.CloseShop();
+            closeShop.Invoke();
         }
 
     }
