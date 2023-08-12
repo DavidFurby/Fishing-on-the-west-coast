@@ -25,6 +25,8 @@ public class ExplorationIdle : ExplorationState
     public override void Update()
     {
         controller.HandleInput();
+        controller.RaiseOpenItemMenuEvent();
+
     }
     public override void FixedUpdate()
     {
@@ -48,6 +50,6 @@ public class Shopping : ExplorationState
     }
     public override void Update()
     {
-        controller.HandleShoppingInput();
+        controller.RaiseNavigateShopEvent();
     }
 }

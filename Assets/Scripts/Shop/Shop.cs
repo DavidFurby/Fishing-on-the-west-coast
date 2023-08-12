@@ -39,6 +39,7 @@ public class Shop : MonoBehaviour
             }
         }
         SpawnItems();
+        ExplorationController.NavigateShop += HandleShoppingInput;
     }
     #endregion
 
@@ -87,6 +88,23 @@ public class Shop : MonoBehaviour
         focusedShopItem = shopItems[focusedShopItemIndex];
         FocusItem();
         UpdateDialog();
+    }
+    public void HandleShoppingInput()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            ScrollBetweenItems(false);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            ScrollBetweenItems(true);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            CloseShop();
+        }
+
     }
     public void BuyItem()
     {

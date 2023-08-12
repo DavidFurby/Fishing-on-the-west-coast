@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 public class ExplorationController : ExplorationStateMachine
 {
@@ -11,9 +11,8 @@ public class ExplorationController : ExplorationStateMachine
     private bool isWithinTriggerArea;
     private Interactive interactive;
 
-    public UnityEvent scrollLeft;
-    public UnityEvent scrollRight;
-    public UnityEvent closeShop;
+    public static event Action NavigateShop;
+    public static event Action OpenItemMenu;
 
 
 
@@ -56,23 +55,6 @@ public class ExplorationController : ExplorationStateMachine
 
     }
 
-    public void HandleShoppingInput()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            scrollLeft.Invoke();
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            scrollRight.Invoke();
-
-        }
-        else if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            closeShop.Invoke();
-        }
-
-    }
     //Move player in specified direction
     private void MovePlayer(Vector3 movementDirection)
     {
@@ -106,6 +88,14 @@ public class ExplorationController : ExplorationStateMachine
             isWithinTriggerArea = false;
             interactive = null;
         }
+    }
+    public void RaiseOpenItemMenuEvent()
+    {
+        OpenItemMenu?.Invoke();
+    }
+    public void RaiseNavigateShopEvent()
+    {
+        NavigateShop?.Invoke();
     }
 
     //Activates interactive object if player is within trigger area and button is pressed

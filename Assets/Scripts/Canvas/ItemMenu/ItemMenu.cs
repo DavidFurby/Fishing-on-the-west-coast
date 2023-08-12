@@ -13,31 +13,36 @@ public class ItemMenu : MonoBehaviour
     private List<Item> allItems;
 
 
+
     void Start()
     {
         itemMenu.SetActive(false);
         allItems = MainManager.Instance.game.Inventory.FoundBaits.Cast<Item>().ToList();
         allItems.AddRange(MainManager.Instance.game.Inventory.FoundFishingRods);
         allItems.AddRange(MainManager.Instance.game.Inventory.FoundHats);
+        ExplorationController.OpenItemMenu += HandleInputs;
     }
 
     private void PopulateWheels()
     {
-        foreach (var wheel in listOfWheels)
+        foreach (ItemWheel wheel in listOfWheels)
         {
-            switch (wheel.itemTag)
+            if (wheel != null)
             {
-                case ItemTag.Bait:
-                    wheel.SetItems(allItems.OfType<Bait>().ToArray());
-                    break;
-                case ItemTag.FishingRod:
-                    Debug.Log(allItems.OfType<FishingRod>().ToArray()[0].itemTag);
-                    wheel.SetItems(allItems.OfType<FishingRod>().ToArray());
-                    break;
-                case ItemTag.Hat:
-                    wheel.SetItems(allItems.OfType<Hat>().ToArray());
-                    break;
+                switch (wheel.itemTag)
+                {
+                    case ItemTag.Bait:
+                        wheel.SetItems(allItems.OfType<Bait>().ToArray());
+                        break;
+                    case ItemTag.FishingRod:
+                        wheel.SetItems(allItems.OfType<FishingRod>().ToArray());
+                        break;
+                    case ItemTag.Hat:
+                        wheel.SetItems(allItems.OfType<Hat>().ToArray());
+                        break;
+                }
             }
+
         }
     }
 
@@ -46,8 +51,8 @@ public class ItemMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            ResetValues();
             ToggleMenu();
+            ResetValues();
         }
         if (itemMenu.activeSelf)
         {
@@ -64,11 +69,14 @@ public class ItemMenu : MonoBehaviour
 
     private void ResetValues()
     {
+        Debug.Log(listOfWheels.Length);
         PopulateWheels();
         focusedWheel = listOfWheels[0];
         focusedWheelIndex = 0;
+        Debug.Log(focusedWheel);
         SetFocus();
     }
+
 
     private void TriggerChangeEquippedItem()
     {
@@ -98,11 +106,15 @@ public class ItemMenu : MonoBehaviour
 
     private void SetFocus()
     {
-        ItemFocus.transform.SetParent(focusedWheel.transform);
-        ItemFocus.transform.position = focusedWheel.transform.position;
-        for (int i = 0; i < listOfWheels.Length; i++)
+        if (focusedWheel != null)
         {
-            listOfWheels[i].SetWheelFocus(i == focusedWheelIndex);
+            ItemFocus.transform.SetParent(focusedWheel.transform);
+            ItemFocus.transform.position = focusedWheel.transform.position;
+            for (int i = 0; i < listOfWheels.Length; i++)
+            {
+                listOfWheels[i].SetWheelFocus(i == focusedWheelIndex);
+            }
         }
+
     }
 }
