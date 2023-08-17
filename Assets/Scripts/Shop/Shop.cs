@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static ExplorationController;
 
 public class Shop : MonoBehaviour
 {
@@ -84,6 +83,7 @@ public class Shop : MonoBehaviour
     /// <param name="forward">If set to <c>true</c> forward.</param>
     public void ScrollBetweenItems(bool forward)
     {
+        
         focusedShopItemIndex = (focusedShopItemIndex + (forward ? 1 : -1) + shopItems.Length) % shopItems.Length;
         focusedShopItem = shopItems[focusedShopItemIndex];
         FocusItem();

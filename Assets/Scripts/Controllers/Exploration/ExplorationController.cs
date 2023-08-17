@@ -7,19 +7,16 @@ public class ExplorationController : ExplorationStateMachine
     [SerializeField] private float rotationSpeed;
     [SerializeField] private PlayerAnimations playerAnimations;
 
-
     private bool isWithinTriggerArea;
     private Interactive interactive;
 
     public static event Action NavigateShop;
     public static event Action OpenItemMenu;
 
-
-
     void Start()
     {
         SetState(new ExplorationIdle(this));
-
+        DialogView.EndDialog += RaiseEndDialog;
     }
 
     //Handle player input
@@ -28,22 +25,13 @@ public class ExplorationController : ExplorationStateMachine
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        if (horizontalInput != 0 || verticalInput != 0)
-        {
-            playerAnimations.SetPlayerWalkAnimation(true);
-        }
-        else
-        {
-            playerAnimations.SetPlayerWalkAnimation(false);
-        }
+        playerAnimations.SetPlayerWalkAnimation(horizontalInput != 0 || verticalInput != 0);
 
         if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactive != null)
         {
-
             playerAnimations.SetPlayerWalkAnimation(false);
             ActivateInteractive();
         }
-
     }
 
     //Handle player movement and rotation
@@ -52,7 +40,6 @@ public class ExplorationController : ExplorationStateMachine
         Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         MovePlayer(movementDirection);
         RotatePlayer(movementDirection);
-
     }
 
     //Move player in specified direction
@@ -65,9 +52,7 @@ public class ExplorationController : ExplorationStateMachine
     private void RotatePlayer(Vector3 movementDirection)
     {
         if (movementDirection != Vector3.zero)
-        {
             transform.rotation = Quaternion.LookRotation(movementDirection);
-        }
     }
 
     //Called when player enters trigger
@@ -89,14 +74,12 @@ public class ExplorationController : ExplorationStateMachine
             interactive = null;
         }
     }
-    public void RaiseOpenItemMenuEvent()
-    {
-        OpenItemMenu?.Invoke();
-    }
-    public void RaiseNavigateShopEvent()
-    {
-        NavigateShop?.Invoke();
-    }
+
+    public void RaiseOpenItemMenuEvent() => OpenItemMenu?.Invoke();
+    
+    public void RaiseNavigateShopEvent() => NavigateShop?.Invoke();
+    
+    public void RaiseEndDialog() => SetState(new ExplorationIdle(this));
 
     //Activates interactive object if player is within trigger area and button is pressed
     private void ActivateInteractive()

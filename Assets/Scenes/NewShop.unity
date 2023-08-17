@@ -926,7 +926,7 @@ PrefabInstance:
       objectReference: {fileID: 1079318671}
     - target: {fileID: 6189370015012039862, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: character
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6189370015012039862, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: dialogManager

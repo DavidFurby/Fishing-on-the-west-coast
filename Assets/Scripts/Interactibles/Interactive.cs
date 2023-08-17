@@ -9,7 +9,6 @@ public class Interactive : MonoBehaviour
         Component[] components = GetComponents<Component>();
         foreach (Component component in components)
         {
-        Debug.Log("interact");
             if (component is IInteractive)
             {
                 (component as IInteractive).Interact();
