@@ -6,13 +6,12 @@ using static Item;
 public class ItemMenu : MonoBehaviour
 {
     [SerializeField] private GameObject itemMenu;
-    [SerializeField] private ItemWheel[] listOfWheels;
     [SerializeField] private GameObject ItemFocus;
+    [SerializeField] private ItemWheel[] listOfWheels;
+
     private ItemWheel focusedWheel;
     private int focusedWheelIndex;
     private List<Item> allItems;
-
-
 
     void Start()
     {
@@ -54,7 +53,7 @@ public class ItemMenu : MonoBehaviour
             ToggleMenu();
             ResetValues();
         }
-        if (itemMenu.activeSelf)
+        if (itemMenu != null && itemMenu.activeSelf == true)
         {
             ScrollBetweenWheels();
             TriggerChangeEquippedItem();
@@ -69,7 +68,7 @@ public class ItemMenu : MonoBehaviour
 
     private void ResetValues()
     {
-        Debug.Log(listOfWheels.Length);
+        Debug.Log(listOfWheels[0]);
         PopulateWheels();
         focusedWheel = listOfWheels[0];
         focusedWheelIndex = 0;
