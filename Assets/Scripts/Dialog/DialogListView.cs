@@ -19,7 +19,7 @@ namespace Yarn.Unity
         [SerializeField] bool showUnavailableOptions = false;
 
         // A cached pool of OptionView objects so that we can reuse them
-        List<OptionView> optionViews = new();
+        readonly List<OptionView> optionViews = new();
 
         // The method we should call when an option has been selected.
         Action<int> OnOptionSelected;
