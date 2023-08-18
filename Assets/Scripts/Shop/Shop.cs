@@ -83,7 +83,6 @@ public class Shop : MonoBehaviour
     /// <param name="forward">If set to <c>true</c> forward.</param>
     public void ScrollBetweenItems(bool forward)
     {
-        
         focusedShopItemIndex = (focusedShopItemIndex + (forward ? 1 : -1) + shopItems.Length) % shopItems.Length;
         focusedShopItem = shopItems[focusedShopItemIndex];
         FocusItem();
@@ -91,20 +90,23 @@ public class Shop : MonoBehaviour
     }
     public void HandleShoppingInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (!pauseShoppingControls)
         {
-            ScrollBetweenItems(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            ScrollBetweenItems(true);
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                ScrollBetweenItems(false);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                ScrollBetweenItems(true);
+
+            }
+            else if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                CloseShop();
+            }
 
         }
-        else if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            CloseShop();
-        }
-
     }
     public void BuyItem()
     {
