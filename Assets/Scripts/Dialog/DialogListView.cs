@@ -17,6 +17,7 @@ namespace Yarn.Unity
         [SerializeField] float fadeTime = 0.1f;
 
         [SerializeField] bool showUnavailableOptions = false;
+        [SerializeField] GameObject dialogView;
 
         // A cached pool of OptionView objects so that we can reuse them
         readonly List<OptionView> optionViews = new();
@@ -50,6 +51,8 @@ namespace Yarn.Unity
 
         public override void RunOptions(DialogueOption[] dialogueOptions, Action<int> onOptionSelected)
         {
+            dialogView.SetActive(false);
+
             // Hide all existing option views
             foreach (var optionView in optionViews)
             {
