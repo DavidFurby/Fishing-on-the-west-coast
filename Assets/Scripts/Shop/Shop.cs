@@ -11,7 +11,6 @@ public class Shop : MonoBehaviour
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private ShopHandlers dialogHandlers;
     [SerializeField] private Item emptySpot;
-    private readonly List<GameObject> shopItemPositions = new();
 
     #endregion
 
@@ -19,6 +18,8 @@ public class Shop : MonoBehaviour
     [HideInInspector] public bool pauseShoppingControls;
     [HideInInspector] public Item focusedShopItem;
     private int focusedShopItemIndex = 0;
+    private readonly List<GameObject> shopItemPositions = new();
+
     #endregion
 
     #region MonoBehaviour Methods

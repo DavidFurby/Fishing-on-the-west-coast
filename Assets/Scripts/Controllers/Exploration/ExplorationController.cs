@@ -9,8 +9,6 @@ public class ExplorationController : ExplorationStateMachine
     private bool isWithinTriggerArea;
     private Interactive interactive;
     private readonly int movementSpeed = 10;
-    private readonly float rotationSpeed = 5;
-
     public static event Action NavigateShop;
     public static event Action OpenItemMenu;
 
