@@ -3,12 +3,13 @@ using System;
 
 public class ExplorationController : ExplorationStateMachine
 {
-    [SerializeField] private int movementSpeed;
-    [SerializeField] private float rotationSpeed;
+
     [SerializeField] private PlayerAnimations playerAnimations;
 
     private bool isWithinTriggerArea;
     private Interactive interactive;
+    private readonly int movementSpeed = 10;
+    private readonly float rotationSpeed = 5;
 
     public static event Action NavigateShop;
     public static event Action OpenItemMenu;
@@ -76,9 +77,9 @@ public class ExplorationController : ExplorationStateMachine
     }
 
     public void RaiseOpenItemMenuEvent() => OpenItemMenu?.Invoke();
-    
+
     public void RaiseNavigateShopEvent() => NavigateShop?.Invoke();
-    
+
     public void RaiseEndDialog() => SetState(new ExplorationIdle(this));
 
     //Activates interactive object if player is within trigger area and button is pressed
