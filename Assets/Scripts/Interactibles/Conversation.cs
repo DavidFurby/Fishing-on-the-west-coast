@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -16,6 +17,8 @@ public class Conversation : MonoBehaviour, IInteractive
         Dog,
         ShopKeeper
     }
+        public static event Action StartConversation;
+
     public void Interact()
     {
         StartDialog();
