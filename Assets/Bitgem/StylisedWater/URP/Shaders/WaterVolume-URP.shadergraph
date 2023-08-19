@@ -8611,9 +8611,9 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 0.14035244286060334,
-        "g": 0.16532884538173676,
-        "b": 0.35849058628082278,
+        "r": 0.3389818072319031,
+        "g": 0.39668458700180056,
+        "b": 0.8679245114326477,
         "a": 0.0
     },
     "isMainColor": false,
@@ -17904,7 +17904,7 @@
     "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
-    "m_AlphaMode": 2,
+    "m_AlphaMode": 3,
     "m_RenderFace": 2,
     "m_AlphaClip": true,
     "m_CastShadows": true,

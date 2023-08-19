@@ -2047,6 +2047,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 461191177775057916, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461191177775057916, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461191177775057916, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 461191177775057917, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: m_RootOrder
       value: 5
