@@ -43,7 +43,7 @@ public class SeaLogic : MonoBehaviour
         Vector3 fishSpawnPosition = Vector3.zero;
         Quaternion fishSpawnRotation = Quaternion.identity;
 
-        if (fishingSystem.GetCurrentState() is not Idle)
+        if (fishingSystem.GetCurrentState() is not FishingIdle)
         {
             float fishSpawnX = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;
             float spawnVertical = Random.Range(seaPosition.y, seaPosition.y + seaRenderer.bounds.extents.y);

@@ -29,13 +29,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4232111198103392871}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 2, y: 2, z: -2}
   m_LocalScale: {x: 1, y: 3.0908, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3439514011822100366}
+  - {fileID: 2264049486550200113}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &4232111198103392865
 MonoBehaviour:
@@ -661,9 +663,17 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4232111198103392871}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 4
+  serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
@@ -680,3 +690,1024 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaterVolumeHelper: {fileID: 0}
+--- !u!1001 &5235225198940998229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4232111198103392878}
+    m_Modifications:
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: baitArea
+      value: 
+      objectReference: {fileID: 3083206818567454521}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: itemMenu
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: baitLogic
+      value: 
+      objectReference: {fileID: 5209954801212179595}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: seaSpawner
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: catchSummary
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingCamera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingMiniGame
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingRodLogic
+      value: 
+      objectReference: {fileID: 209479922779202174}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 209479922779202174}
+    - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 6351849797195173911}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4247445
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3800003
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3526597
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661169753038949569, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_Name
+      value: PlayerFishing
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+--- !u!4 &2264049486550200113 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6326647731678324068, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+  m_PrefabInstance: {fileID: 5235225198940998229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7605966297563953335
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4232111198103392878}
+    m_Modifications:
+    - target: {fileID: 80517778853719614, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 376646502519403454, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 552375764124478131, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 892785279748922732, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005341015933393222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005341015933393222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: playerAnimations
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060150932210229058, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061623482519195666, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061623482519195666, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061623482519195666, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1297674820447602628, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodTop
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694231068839750715, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935338518330161674, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingGameSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2071196134472936568, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2071196134472936568, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodTop
+      value: 
+      objectReference: {fileID: 660345872705325451}
+    - target: {fileID: 2071196134472936568, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: seaSpawner
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: splashSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceRecord
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2122917548862222536, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.472
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861395229521764, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.403
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861395229521767, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: WaterVolumeHelper
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861395229521771, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861395229521771, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: wowSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: rythmGame
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: catchSummary
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingCanvas
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: FishingRodLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControls
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: musicController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784916, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingGameSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130861396537784917, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2187538411930802088, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: balance
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: splashSound
+      value: 
+      objectReference: {fileID: 5705066314999301261}
+    - target: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodTop
+      value: 
+      objectReference: {fileID: 660345872705325451}
+    - target: {fileID: 2783688128193428538, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784705904286262279, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: WaterVolumeHelper
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784705904286262283, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784705904286262283, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784705905461029172, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingGameSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803401897840054680, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.508
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803401897840054680, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213731998605817912, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213731998605817912, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213731998605817912, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: balance
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214824157491522763, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214824157491522763, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214824157491522763, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221210956709920603, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221210956709920603, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230594414535825567, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230594414535825567, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230594414535825567, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230594414535825567, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230594414535825567, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230594414535825567, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432460108155787793, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_ImplicitCom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432460108155787793, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_ImplicitTensor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735782194292392737, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735782194292392737, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735782194292392737, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885311052125488497, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885311052125488497, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_VersionIndex
+      value: 1076
+      objectReference: {fileID: 0}
+    - target: {fileID: 4198201513770464269, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462659233269025057, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505936457974327505, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800051008443789343, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847019202594342798, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932162, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932163, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Name
+      value: Fishing Rod
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.03235407
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.09999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6050002
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2915104
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.6300001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932221, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059312361471932222, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_VersionIndex
+      value: 1239
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360848329395529453, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: splashSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377951718562866907, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceRecord
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5389967051482507429, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467887338206627783, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Constraints
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594425843559058059, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835927431046366625, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885603088304069593, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072487882926126782, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072487882926126782, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154171461467691955, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154171461467691955, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_ImplicitCom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154171461467691955, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154171461467691955, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_ImplicitTensor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307458372637309379, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341207773094220798, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: proBuilderMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441864076676628872, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: ropeLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: whatIsHangingFromTheRope
+      value: 
+      objectReference: {fileID: 5833527896925342933}
+    - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: whatTheRopeIsConnectedTo
+      value: 
+      objectReference: {fileID: 6444198282096263914}
+    - target: {fileID: 6511546496752996532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRod
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808306851535928029, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808306851535928029, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: playerAnimations
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808306851535928029, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodAnimations
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: balance
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6909194552042799844, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: seaLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180908797847769848, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Name
+      value: Fishing Line
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: sea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: balance
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: seaLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: catchArea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: reelSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: rigidBody
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: splashSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodTop
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceTextUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodLogic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingControlls
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceRecordMarker
+      value: 
+      objectReference: {fileID: 4654798063134710352, guid: 650ed65096bddb2419513abc5108751b, type: 3}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Float
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Float
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Float
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaitLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaitLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BaitLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: baitEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265845191129862532, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: floatEvents.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463358445064385851, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510679469768836167, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: gameMiniGame
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: playerAnimations
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523756534232179830, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7671095890555715121, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: playerAnimations
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRodAnimations
+      value: 
+      objectReference: {fileID: 5539882703739607870}
+    - target: {fileID: 7774205338782900508, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: armature
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingRod
+      value: 
+      objectReference: {fileID: 3439514011822100404}
+    - target: {fileID: 7938909925749327713, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: bonesAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094264068216798896, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130900523067659431, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Constraints
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169266479616045285, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8184525937521587643, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: system
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8184525937521587643, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: distanceRecord
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212901179885714373, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571087251999591881, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610591980380077521, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708867433470933099, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 198cd934f17d7c041b93eb122d65ede6, type: 2}
+    - target: {fileID: 9148912340842332569, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148912340842332569, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_VersionIndex
+      value: 803
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 4557747355451501269, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+    - {fileID: 2784705904286262281, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+    - {fileID: 1871098671892518849, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+    - {fileID: 3131903176190151127, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+    - {fileID: 6057457976398626858, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+    - {fileID: 8549784440615307489, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+    - {fileID: 552375764124478142, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+--- !u!114 &209479922779202174 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397a58daf2c0ec34d9c6f78895f9df77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &660345872705325451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6964771873550463292, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3083206818567454521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4847019202594342798, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2d101fa9f9eb945885fa7d1e49e195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &3439514011822100366 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5059312361471932217, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3439514011822100404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5059312361471932163, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5209954801212179595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5539882703739607870 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2696618216450335625, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88d0e5ea8c00164481f3c07e95fe7d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &5705066314999301261 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2783688128193428538, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5833527896925342933 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4141350934422058082, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6351849797195173911 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3579129907265988768, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6444198282096263914 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3522859708545481309, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+  m_PrefabInstance: {fileID: 7605966297563953335}
+  m_PrefabAsset: {fileID: 0}

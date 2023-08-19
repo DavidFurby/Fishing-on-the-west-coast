@@ -98,7 +98,15 @@ MonoBehaviour:
   movementSpeed: 10
   rotationSpeed: 5
   playerAnimations: {fileID: 3146058961067761133}
-  playerStatus: 0
+  scrollLeft:
+    m_PersistentCalls:
+      m_Calls: []
+  scrollRight:
+    m_PersistentCalls:
+      m_Calls: []
+  closeShop:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &4393164685794489119
 PrefabInstance:
   m_ObjectHideFlags: 0

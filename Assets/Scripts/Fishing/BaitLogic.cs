@@ -60,7 +60,7 @@ public class BaitLogic : MonoBehaviour
             }
             else
             {
-                system.SetState(new Idle(system));
+                system.SetState(new FishingIdle(system));
             }
         }
         else

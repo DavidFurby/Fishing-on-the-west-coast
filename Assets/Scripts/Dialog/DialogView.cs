@@ -3,7 +3,6 @@ using Yarn.Unity;
 using System;
 using TMPro;
 using System.Collections;
-using UnityEngine.Events;
 
 public class DialogView : DialogueViewBase
 {
@@ -14,8 +13,7 @@ public class DialogView : DialogueViewBase
     Action advanceHandler;
     private string dialogueLine;
     private Coroutine textRevealCoroutine;
-
-    public UnityEvent onDialogEnd;
+    public static event Action EndDialog;
 
 
     private void Start()
@@ -78,7 +76,7 @@ public class DialogView : DialogueViewBase
 
     private void ActivateControls()
     {
-        onDialogEnd.Invoke();
+        EndDialog?.Invoke();
     }
 
     public void ShowDialog(bool active)

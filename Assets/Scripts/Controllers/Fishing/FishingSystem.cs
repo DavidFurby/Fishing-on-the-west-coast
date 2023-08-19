@@ -32,9 +32,9 @@ public class FishingSystem : FishingStateMachine
     [HideInInspector] public Bait bait;
     [HideInInspector] public FishingRod fishingRod;
 
-    private void Awake()
+    private void Start()
     {
-        SetState(new Idle(this));
+        SetState(new FishingIdle(this));
         bait = MainManager.Instance.game.Inventory.EquippedBait;
         fishingRod = MainManager.Instance.game.Inventory.EquippedFishingRod;
     }

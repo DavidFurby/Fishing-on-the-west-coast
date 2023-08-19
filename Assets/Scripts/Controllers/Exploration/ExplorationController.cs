@@ -1,65 +1,44 @@
 using UnityEngine;
+using System;
 
-public class ExplorationController : MonoBehaviour
+public class ExplorationController : ExplorationStateMachine
 {
-    [SerializeField] private int movementSpeed;
-    [SerializeField] private float rotationSpeed;
+
     [SerializeField] private PlayerAnimations playerAnimations;
 
     private bool isWithinTriggerArea;
     private Interactive interactive;
-    public PlayerStatus playerStatus;
+    private readonly int movementSpeed = 10;
+    public static event Action NavigateShop;
+    public static event Action OpenItemMenu;
 
-    public enum PlayerStatus
+    void Start()
     {
-        StandBy,
-        Interacting,
-        Shopping
-    }
-
-    void Update()
-    {
-        HandleInput();
-    }
-
-    private void FixedUpdate()
-    {
-        HandleMovement();
+        SetState(new ExplorationIdle(this));
+        DialogView.EndDialog += RaiseEndDialog;
     }
 
     //Handle player input
-    private void HandleInput()
+    public void HandleInput()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        if (playerStatus == PlayerStatus.StandBy)
-        {
-            if (horizontalInput != 0 || verticalInput != 0)
-            {
-                playerAnimations.SetPlayerWalkAnimation(true);
-            }
-            else
-            {
-                playerAnimations.SetPlayerWalkAnimation(false);
-            }
 
-            if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactive != null)
-            {
-                playerAnimations.SetPlayerWalkAnimation(false);
-                ActivateInteractive();
-            }
+        playerAnimations.SetPlayerWalkAnimation(horizontalInput != 0 || verticalInput != 0);
+
+        if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactive != null)
+        {
+            playerAnimations.SetPlayerWalkAnimation(false);
+            ActivateInteractive();
         }
     }
 
     //Handle player movement and rotation
-    private void HandleMovement()
+    public void HandleMovement()
     {
-        if (playerStatus == PlayerStatus.StandBy)
-        {
-            Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-            MovePlayer(movementDirection);
-            RotatePlayer(movementDirection);
-        }
+        Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        MovePlayer(movementDirection);
+        RotatePlayer(movementDirection);
     }
 
     //Move player in specified direction
@@ -72,16 +51,12 @@ public class ExplorationController : MonoBehaviour
     private void RotatePlayer(Vector3 movementDirection)
     {
         if (movementDirection != Vector3.zero)
-        {
             transform.rotation = Quaternion.LookRotation(movementDirection);
-        }
     }
 
     //Called when player enters trigger
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other);
-
         if (other.CompareTag("Interactive"))
         {
             isWithinTriggerArea = true;
@@ -99,15 +74,16 @@ public class ExplorationController : MonoBehaviour
         }
     }
 
+    public void RaiseOpenItemMenuEvent() => OpenItemMenu?.Invoke();
+
+    public void RaiseNavigateShopEvent() => NavigateShop?.Invoke();
+
+    public void RaiseEndDialog() => SetState(new ExplorationIdle(this));
+
     //Activates interactive object if player is within trigger area and button is pressed
     private void ActivateInteractive()
     {
-        SetPlayerStatus(PlayerStatus.Interacting);
+        SetState(new Interacting(this));
         interactive.CheckActivated();
-    }
-
-    public void SetPlayerStatus(PlayerStatus playerStatus)
-    {
-        this.playerStatus = playerStatus;
     }
 }

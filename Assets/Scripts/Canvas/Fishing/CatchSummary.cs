@@ -47,7 +47,7 @@ public class CatchSummary : MonoBehaviour
             }
             else
             {
-                fishingSystem.SetState(new Idle(fishingSystem));
+                fishingSystem.SetState(new FishingIdle(fishingSystem));
             }
         }
     }

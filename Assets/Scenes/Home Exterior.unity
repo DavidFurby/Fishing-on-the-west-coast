@@ -183,7 +183,7 @@ PrefabInstance:
     - target: {fileID: 5454712656789688771, guid: 0c905927ecde2cf4599224899ed99e36, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1514824440}
+      objectReference: {fileID: 1896884492}
     - target: {fileID: 5454712656789688775, guid: 0c905927ecde2cf4599224899ed99e36, type: 3}
       propertyPath: m_Name
       value: ExplorationCamera
@@ -193,17 +193,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c905927ecde2cf4599224899ed99e36, type: 3}
---- !u!114 &331447139 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3146058961067761133, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-  m_PrefabInstance: {fileID: 1958055255}
+--- !u!4 &313276282 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 26c47aec50f432b46bd9772c0d85e1fd, type: 3}
+  m_PrefabInstance: {fileID: 1865807980}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b358b2dec8b6042a3566eac568f337, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &515395860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -780,10 +774,10 @@ PrefabInstance:
       addedObject: {fileID: 1151374636}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26c47aec50f432b46bd9772c0d85e1fd, type: 3}
---- !u!1 &1514824440 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2474057496710730138, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
-  m_PrefabInstance: {fileID: 1958055255}
+--- !u!4 &1422033549 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 26c47aec50f432b46bd9772c0d85e1fd, type: 3}
+  m_PrefabInstance: {fileID: 1977156239}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1517453935
 PrefabInstance:
@@ -2056,6 +2050,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1100e54c45314459e18955886d8321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1896884492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2474057496710730138, guid: 5e20bf37e95630c45bb9be77189e0419, type: 3}
+  m_PrefabInstance: {fileID: 654103913}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1897239843 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4750084909923351845, guid: 0adf165c906db2444a6eb94ce45bb541, type: 3}
