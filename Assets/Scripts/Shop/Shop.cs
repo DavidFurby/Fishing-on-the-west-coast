@@ -18,7 +18,7 @@ public class Shop : MonoBehaviour
     [HideInInspector] public bool pauseShoppingControls;
     [HideInInspector] public Item focusedShopItem;
     private int focusedShopItemIndex = 0;
-    private readonly List<GameObject> shopItemPositions = new();
+    private List<GameObject> shopItemPositions = new();
 
     #endregion
 
@@ -52,6 +52,7 @@ public class Shop : MonoBehaviour
 
     public void FocusItem()
     {
+        Debug.Log(shopItemPositions[focusedShopItemIndex].transform.position);
         playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.ShoppingItem);
         playerCamera.SetShopItem(shopItemPositions[focusedShopItemIndex].transform.position);
     }
