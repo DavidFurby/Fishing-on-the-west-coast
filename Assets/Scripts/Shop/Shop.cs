@@ -52,7 +52,6 @@ public class Shop : MonoBehaviour
 
     public void FocusItem()
     {
-        Debug.Log(shopItemPositions[focusedShopItemIndex].transform.position);
         playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.ShoppingItem);
         playerCamera.SetShopItem(shopItemPositions[focusedShopItemIndex].transform.position);
     }
@@ -92,24 +91,22 @@ public class Shop : MonoBehaviour
     }
     public void HandleShoppingInput()
     {
-        if (!pauseShoppingControls)
+        if (pauseShoppingControls) return;
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                ScrollBetweenItems(false);
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                ScrollBetweenItems(true);
-
-            }
-            else if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                CloseShop();
-            }
-
+            ScrollBetweenItems(false);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            ScrollBetweenItems(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            CloseShop();
         }
     }
+
     public void BuyItem()
     {
         if (focusedShopItem != null)
@@ -138,16 +135,9 @@ public class Shop : MonoBehaviour
     {
         for (int i = 0; i < shopItemPositions.Count; i++)
         {
-            if (i < shopItems.Length && shopItems[i] != null)
+            if (i < shopItems.Length && shopItems[i] != null && !MainManager.Instance.game.Inventory.HasItem(shopItems[i]))
             {
-                if (MainManager.Instance.game.Inventory.HasItem(shopItems[i]))
-                {
-                    SpawnEmptySpot(i);
-                }
-                else
-                {
-                    SpawnShopItem(i);
-                }
+                SpawnShopItem(i);
             }
             else
             {
@@ -159,9 +149,12 @@ public class Shop : MonoBehaviour
     }
 
 
+
     private void SpawnEmptySpot(int index)
     {
-        GameObject newEmptySpot = Instantiate(emptySpot.model, shopItemPositions[index].transform.position, Quaternion.identity);
+        
+        shopItems[index] = emptySpot;
+        GameObject newEmptySpot = Instantiate(shopItems[index].model, shopItemPositions[index].transform.position, Quaternion.identity);
         newEmptySpot.transform.SetParent(shopItemPositions[index].transform, false);
         newEmptySpot.transform.position = shopItemPositions[index].transform.position;
     }

@@ -19,7 +19,7 @@ position: -193,-302
 <<setShopItem>>
 <<setTokens>>
 <<if $shopItemId == 0>>
-Sold out
+<<jump SoldOut>>
 <<else>>
 {$shopItemName}<br>{$shopItemPrice}<br>{$shopItemDescription}
 <<jump ShopItemOptions>>
@@ -42,6 +42,16 @@ ShopKepper: that will be {$shopItemPrice}
 -> Player: Think ill skip
     <<lockShopControls>>
     <<jump DeclineItem>>
+===
+
+
+title: SoldOut
+tags:
+colorID: 0
+position: -2,38
+---
+Sold out
+<<jump ShopItem>>
 ===
 
 title: BuyItem
