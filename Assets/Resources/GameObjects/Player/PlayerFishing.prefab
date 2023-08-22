@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7821062118129322843}
   - component: {fileID: 3784535631446491242}
   - component: {fileID: 2196328919354006432}
+  - component: {fileID: 6127810784131251554}
   m_Layer: 0
   m_Name: PlayerFishing
   m_TagString: Player
@@ -172,6 +173,19 @@ MonoBehaviour:
   fishesOnHook: []
   bait: {fileID: 0}
   fishingRod: {fileID: 0}
+--- !u!114 &6127810784131251554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7661169753038949569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e2669d04061e54f990f9000de1e1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnimations: {fileID: 0}
 --- !u!1001 &4554226739643981622
 PrefabInstance:
   m_ObjectHideFlags: 0

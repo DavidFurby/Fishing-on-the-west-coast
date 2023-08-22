@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class ExplorationState : State
 {
     protected ExplorationController controller;
@@ -19,9 +15,7 @@ public class ExplorationIdle : ExplorationState
     {
 
     }
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
+
     public override void Update()
     {
         controller.HandleInput();

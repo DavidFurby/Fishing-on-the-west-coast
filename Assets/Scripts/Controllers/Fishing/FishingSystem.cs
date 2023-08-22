@@ -28,15 +28,9 @@ public class FishingSystem : FishingStateMachine
     [HideInInspector] public bool IsInCatchArea { get; set; }
 
     [HideInInspector] public bool FishIsBaited { get; set; }
-
-    [HideInInspector] public Bait bait;
-    [HideInInspector] public FishingRod fishingRod;
-
     private void Start()
     {
         SetState(new FishingIdle(this));
-        bait = MainManager.Instance.game.Inventory.EquippedBait;
-        fishingRod = MainManager.Instance.game.Inventory.EquippedFishingRod;
     }
 
     #region Public Methods

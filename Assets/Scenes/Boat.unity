@@ -2305,6 +2305,10 @@ PrefabInstance:
       propertyPath: playerAnimations
       value: 
       objectReference: {fileID: 3146058959776838478}
+    - target: {fileID: 2138394971890136887, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
+      propertyPath: playerAnimations
+      value: 
+      objectReference: {fileID: 3146058959776838478}
     - target: {fileID: 2230167771260765542, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
       propertyPath: m_Mesh
       value: 
