@@ -41,22 +41,22 @@ public class ItemMenu : MonoBehaviour
                         break;
                 }
             }
-
         }
     }
-
 
     public void HandleInputs()
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
             ToggleMenu();
-            ResetValues();
         }
-        if (itemMenu != null && itemMenu.activeSelf == true)
+        if (itemMenu.activeSelf)
         {
             ScrollBetweenWheels();
-            TriggerChangeEquippedItem();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                TriggerChangeEquippedItem();
+            }
         }
     }
 
@@ -64,29 +64,27 @@ public class ItemMenu : MonoBehaviour
     {
         itemMenu.SetActive(!itemMenu.activeSelf);
         Time.timeScale = itemMenu.activeSelf ? 0 : 1;
+        if (itemMenu.activeSelf)
+        {
+            ResetValues();
+        }
     }
 
     private void ResetValues()
     {
-        Debug.Log(listOfWheels[0]);
         PopulateWheels();
         focusedWheel = listOfWheels[0];
         focusedWheelIndex = 0;
-        Debug.Log(focusedWheel);
         SetFocus();
     }
 
-
     private void TriggerChangeEquippedItem()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        foreach (ItemWheel wheel in listOfWheels)
         {
-            foreach (var wheel in listOfWheels)
-            {
-                wheel.ChangeEquippedItem();
-            }
-            ToggleMenu();
+            wheel.ChangeEquippedItem();
         }
+        ToggleMenu();
     }
 
     private void ScrollBetweenWheels()
@@ -114,6 +112,5 @@ public class ItemMenu : MonoBehaviour
                 listOfWheels[i].SetWheelFocus(i == focusedWheelIndex);
             }
         }
-
     }
 }

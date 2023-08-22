@@ -4,6 +4,7 @@ using UnityEngine.ProBuilder;
 public class ItemDisplay : MonoBehaviour
 {
     public Item item;
+    
 
     protected void SetNewItemModel(Item newItem)
     {
@@ -14,13 +15,16 @@ public class ItemDisplay : MonoBehaviour
         {
             Transform oldModelTransform = transform.GetChild(0);
             Vector3 oldModelLocalPosition = oldModelTransform.localPosition;
+            Quaternion oldModelLocalRotation = oldModelTransform.localRotation;
+            Vector3 oldModelLocalScale = oldModelTransform.localScale;
+
             Destroy(oldModelTransform.gameObject);
 
-            // Instantiate the new model and set its local position to be equal to the old model's local position
+            // Instantiate the new model and set its local position, rotation, and scale to be equal to the old model's local position, rotation, and scale
             GameObject newModel = Instantiate(item.model);
             newModel.transform.SetParent(transform, false);
-            newModel.transform.SetLocalPositionAndRotation(oldModelLocalPosition, oldModelTransform.localRotation);
-            newModel.transform.localScale = oldModelTransform.localScale;
+            newModel.transform.SetLocalPositionAndRotation(oldModelLocalPosition, oldModelLocalRotation);
+            newModel.transform.localScale = oldModelLocalScale;
         }
         else
         {

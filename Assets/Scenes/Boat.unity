@@ -1571,6 +1571,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f647148571a8f4dbe98d2b20fcce6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1212296399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3298427263977526115, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
+  m_PrefabInstance: {fileID: 4232111197888523286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1252646145 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6096544931502257929, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
@@ -1647,13 +1652,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!43 &1525917238
+--- !u!43 &1567465287
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterVolume-94026
+  m_Name: WaterVolume-150800
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2126,7 +2131,7 @@ PrefabInstance:
     - target: {fileID: 461191177775057919, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1525917238}
+      objectReference: {fileID: 1567465287}
     - target: {fileID: 626775376293174244, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: m_LocalScale.y
       value: 10
@@ -2448,6 +2453,10 @@ PrefabInstance:
       propertyPath: distanceTextUI
       value: 
       objectReference: {fileID: 176468540}
+    - target: {fileID: 8986888934355030175, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
+      propertyPath: bait
+      value: 
+      objectReference: {fileID: 1212296399}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

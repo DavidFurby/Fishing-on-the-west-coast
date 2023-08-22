@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static Item;
@@ -14,6 +15,9 @@ public class Inventory
     public Hat EquippedHat { get; set; }
     public Hat[] AvailableHats { get; set; }
 
+    public static event Action EquipmentChanged;
+
+
     public void SetEquipment(int id, ItemTag tag)
     {
         switch (tag)
@@ -28,34 +32,28 @@ public class Inventory
                 EquippedHat = FoundHats.First((hat) => hat.id == id);
                 break;
         }
+        EquipmentChanged?.Invoke();
     }
     public Item GetEquipment(ItemTag itemTag)
     {
-        switch (itemTag)
+        return itemTag switch
         {
-            case ItemTag.FishingRod:
-                return EquippedFishingRod;
-            case ItemTag.Bait:
-                return EquippedBait;
-            case ItemTag.Hat:
-                return EquippedHat;
-            default: return null;
-        }
+            ItemTag.FishingRod => EquippedFishingRod,
+            ItemTag.Bait => EquippedBait,
+            ItemTag.Hat => EquippedHat,
+            _ => null,
+        };
     }
     //Check if item Exists in inventory
     public bool HasItem(Item item)
     {
-        switch (item.itemTag)
+        return item.itemTag switch
         {
-            case ItemTag.FishingRod:
-                return FoundFishingRods.Any((rod) => rod.id == item.id);
-            case ItemTag.Bait:
-                return FoundBaits.Any((bait) => bait.id == item.id);
-            case ItemTag.Hat:
-                return FoundHats.Any((hat) => hat.id == item.id);
-            default:
-                return false;
-        }
+            ItemTag.FishingRod => FoundFishingRods.Any((rod) => rod.id == item.id),
+            ItemTag.Bait => FoundBaits.Any((bait) => bait.id == item.id),
+            ItemTag.Hat => FoundHats.Any((hat) => hat.id == item.id),
+            _ => false,
+        };
     }
     public void AddItem(Item item)
     {

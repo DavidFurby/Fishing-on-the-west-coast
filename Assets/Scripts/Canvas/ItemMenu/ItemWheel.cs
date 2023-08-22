@@ -1,19 +1,18 @@
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using static Item;
 
 public class ItemWheel : MonoBehaviour
 {
     [SerializeField] private ItemSlot ItemSlot;
-    [SerializeField] public ItemTag itemTag;
+    public ItemTag itemTag;
     private ItemSlot[] _listOfItemSlots;
     private bool _wheelIsFocused;
     float parentHeight;
     float slotHeight;
     float spacing;
     int middleIndex;
+
 
     private void Update()
     {
@@ -36,6 +35,7 @@ public class ItemWheel : MonoBehaviour
         {
             if (i == middleIndex)
             {
+                Debug.Log(_listOfItemSlots[i].Id);
                 MainManager.Instance.game.Inventory.SetEquipment(_listOfItemSlots[i].Id, itemTag);
             }
         }
@@ -46,7 +46,7 @@ public class ItemWheel : MonoBehaviour
         // Rotate the order of the equipment slots in the array
         if (direction == 1)
         {
-            var firstSlot = _listOfItemSlots[0];
+            ItemSlot firstSlot = _listOfItemSlots[0];
             for (int i = 0; i < _listOfItemSlots.Length - 1; i++)
             {
                 _listOfItemSlots[i] = _listOfItemSlots[i + 1];
@@ -55,7 +55,7 @@ public class ItemWheel : MonoBehaviour
         }
         else if (direction == -1)
         {
-            var lastSlot = _listOfItemSlots[^1];
+            ItemSlot lastSlot = _listOfItemSlots[^1];
             for (int i = _listOfItemSlots.Length - 1; i > 0; i--)
             {
                 _listOfItemSlots[i] = _listOfItemSlots[i - 1];
@@ -76,9 +76,9 @@ public class ItemWheel : MonoBehaviour
     public void SetItems(Item[] items)
     {
         // Destroy any existing equipment slots
-        if (_listOfItemSlots != null)
+        if (_listOfItemSlots != null && _listOfItemSlots.Length > 0)
         {
-            foreach (var slot in _listOfItemSlots)
+            foreach (ItemSlot slot in _listOfItemSlots)
             {
                 DestroyImmediate(slot);
             }
@@ -95,7 +95,7 @@ public class ItemWheel : MonoBehaviour
         for (int i = 0; i < items.Length; i++)
         {
             float yPosition = parentHeight / 2 - spacing - slotHeight / 2 - i * (slotHeight + spacing) + middleIndex * (slotHeight + spacing);
-            var newItemSlot = Instantiate(ItemSlot, transform);
+            ItemSlot newItemSlot = Instantiate(ItemSlot, transform);
             newItemSlot.transform.localScale = new Vector2(0.5f, 0.5f);
             newItemSlot.transform.localPosition = new Vector2 { x = 0, y = yPosition };
             newItemSlot.Id = items[i].id;
