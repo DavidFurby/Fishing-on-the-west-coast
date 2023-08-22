@@ -1212,6 +1212,74 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8690102948342108883, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
   m_PrefabInstance: {fileID: 229474582}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &642423688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 642423690}
+  - component: {fileID: 642423689}
+  - component: {fileID: 642423691}
+  m_Layer: 0
+  m_Name: FishingSpot
+  m_TagString: Interactive
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &642423689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642423688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79f67b1c2c032649aeb4cf89e0e571d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractiveIcon: {fileID: 2472687266873945648, guid: c2d2ae80d0e1f86488aa2cc03588f4ba, type: 3}
+  iconOffset: 2
+--- !u!4 &642423690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642423688}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5445988, y: 2.415, z: -11.996506}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &642423691
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642423688}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &674621320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2414,6 +2482,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1126317913}
     - target: {fileID: 6259348273074409973, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259348273074409973, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
       propertyPath: seaSpawner
       value: 
       objectReference: {fileID: 1440346365}
@@ -2557,3 +2629,4 @@ SceneRoots:
   - {fileID: 229474582}
   - {fileID: 1915495999}
   - {fileID: 292963828}
+  - {fileID: 642423690}

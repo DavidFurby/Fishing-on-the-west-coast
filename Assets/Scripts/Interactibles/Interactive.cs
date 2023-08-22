@@ -2,7 +2,24 @@ using UnityEngine;
 
 public class Interactive : MonoBehaviour
 {
-    [SerializeField] private GameObject InteractiveIcon;
+    private GameObject InteractiveIcon;
+    private GameObject iconInstance;
+    public float iconOffset = 2f;
+    private const string ItemsPath = "GameObjects/";
+
+    private void Start()
+    {
+        InteractiveIcon = Resources.Load<GameObject>(ItemsPath +  "InteractiveIcon");
+
+        if (InteractiveIcon != null)
+        {
+            iconInstance = Instantiate(InteractiveIcon, transform.position + Vector3.up * iconOffset, Quaternion.identity);
+            iconInstance.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            iconInstance.transform.SetParent(transform);
+            iconInstance.AddComponent<IconAnimator>();
+            iconInstance.SetActive(false);
+        }
+    }
 
     public void CheckActivated()
     {
@@ -37,17 +54,17 @@ public class Interactive : MonoBehaviour
 
     public void ShowIcon()
     {
-        if (InteractiveIcon != null)
+        if (iconInstance != null)
         {
-            InteractiveIcon.SetActive(true);
+            iconInstance.SetActive(true);
         }
     }
 
     public void HideIcon()
     {
-        if (InteractiveIcon != null)
+        if (iconInstance != null)
         {
-            InteractiveIcon.SetActive(false);
+            iconInstance.SetActive(false);
         }
     }
 }
