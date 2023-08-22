@@ -16,6 +16,7 @@ public class ExplorationController : ExplorationStateMachine
     {
         SetState(new ExplorationIdle(this));
         DialogView.EndDialog += RaiseEndDialog;
+        FishingSpot.StartFishing += RaiseStartFishing;
     }
 
     //Handle player input
@@ -79,6 +80,8 @@ public class ExplorationController : ExplorationStateMachine
     public void RaiseNavigateShopEvent() => NavigateShop?.Invoke();
 
     public void RaiseEndDialog() => SetState(new ExplorationIdle(this));
+
+    public void RaiseStartFishing() => SetState(new StartFishing(this));
 
     //Activates interactive object if player is within trigger area and button is pressed
     private void ActivateInteractive()

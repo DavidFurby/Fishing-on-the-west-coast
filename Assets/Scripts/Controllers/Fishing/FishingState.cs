@@ -9,6 +9,10 @@ public abstract class FishingState : State
         this.system = system;
     }
 }
+public class NotFishing : FishingState
+{
+    public NotFishing(FishingSystem system) : base(system) { }
+}
 
 public class FishingIdle : FishingState
 {
@@ -48,7 +52,8 @@ public class Charging : FishingState
 }
 public class Swinging : FishingState
 {
-    public Swinging (FishingSystem system) : base(system) {
+    public Swinging(FishingSystem system) : base(system)
+    {
 
     }
     public override void OnEnter()
@@ -57,7 +62,7 @@ public class Swinging : FishingState
         system.onChargeRelease.Invoke();
         system.fishingRodLogic.WaitForSwingAnimation();
     }
-    
+
 }
 
 public class Casting : FishingState

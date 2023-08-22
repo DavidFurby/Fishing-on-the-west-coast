@@ -47,3 +47,11 @@ public class Shopping : ExplorationState
         controller.RaiseNavigateShopEvent();
     }
 }
+
+public class StartFishing : ExplorationState
+{
+    public StartFishing(ExplorationController controller) : base(controller)
+    {
+   
+    }
+}

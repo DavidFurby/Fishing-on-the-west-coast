@@ -50,7 +50,7 @@ public class ItemMenu : MonoBehaviour
         {
             ToggleMenu();
         }
-        if (itemMenu.activeSelf)
+        if (itemMenu != null && itemMenu.activeSelf)
         {
             ScrollBetweenWheels();
             if (Input.GetKeyDown(KeyCode.Space))

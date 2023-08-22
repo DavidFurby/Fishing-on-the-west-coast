@@ -9,7 +9,7 @@ public class Interactive : MonoBehaviour
 
     private void Start()
     {
-        InteractiveIcon = Resources.Load<GameObject>(ItemsPath +  "InteractiveIcon");
+        InteractiveIcon = Resources.Load<GameObject>(ItemsPath + "InteractiveIcon");
 
         if (InteractiveIcon != null)
         {
@@ -23,11 +23,13 @@ public class Interactive : MonoBehaviour
 
     public void CheckActivated()
     {
+
         Component[] components = GetComponents<Component>();
         foreach (Component component in components)
         {
             if (component is IInteractive)
             {
+                Debug.Log("" + component.gameObject);
                 (component as IInteractive).Interact();
                 break;
             }

@@ -28,9 +28,11 @@ public class FishingSystem : FishingStateMachine
     [HideInInspector] public bool IsInCatchArea { get; set; }
 
     [HideInInspector] public bool FishIsBaited { get; set; }
+
     private void Start()
     {
-        SetState(new FishingIdle(this));
+        SetState(new NotFishing(this));
+        FishingSpot.StartFishing += RaiseStartFishing;
     }
 
     #region Public Methods
@@ -123,6 +125,11 @@ public class FishingSystem : FishingStateMachine
         FishAttachedToBait = null;
         IsInCatchArea = false;
         FishIsBaited = false;
+    }
+    private void RaiseStartFishing()
+    {
+        Debug.Log("raise");
+        SetState(new FishingIdle(this));
     }
 }
 #endregion

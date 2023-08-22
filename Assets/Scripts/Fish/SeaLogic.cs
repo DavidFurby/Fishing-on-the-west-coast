@@ -24,6 +24,7 @@ public class SeaLogic : MonoBehaviour
 
     public void StopSpawnFish()
     {
+        Debug.Log("SpawnFish");
         CancelInvoke(nameof(SpawnFish));
     }
 
