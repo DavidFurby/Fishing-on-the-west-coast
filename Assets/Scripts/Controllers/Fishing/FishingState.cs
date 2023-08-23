@@ -23,8 +23,7 @@ public class FishingIdle : FishingState
     public override void OnEnter()
     {
         base.OnEnter();
-        system.seaSpawner.RemoveAllFishes();
-        system.seaSpawner.StopSpawnFish();
+        system.RaiseRemoveFishes();
         system.fishingRodLogic.ResetValues();
         system.ResetValues();
     }
@@ -59,7 +58,7 @@ public class Swinging : FishingState
     public override void OnEnter()
     {
         base.OnEnter();
-        system.onChargeRelease.Invoke();
+        system.RaiseChargeRelease();
         system.fishingRodLogic.WaitForSwingAnimation();
     }
 
@@ -93,7 +92,7 @@ public class Fishing : FishingState
     public override void OnEnter()
     {
         base.OnEnter();
-        system.seaSpawner.InvokeSpawnFish();
+        system.RaiseSpawnFishes();
 
     }
     public override void Update()

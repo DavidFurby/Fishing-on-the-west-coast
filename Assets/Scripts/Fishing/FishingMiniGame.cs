@@ -22,6 +22,7 @@ public class FishingMiniGame : MonoBehaviour
     {
         reelingBalance.gameObject.SetActive(false);
         castingPowerBalance.gameObject.SetActive(false);
+        FishingSystem.OnChargeRelease += SetChargingBalance;
     }
 
     #region Balance
@@ -108,9 +109,12 @@ public class FishingMiniGame : MonoBehaviour
 
     public void EndBalanceMiniGame()
     {
-        reelingBalance.value = 0.5f;
-        reelingBalance.gameObject.SetActive(false);
-        musicController.StopFishingMiniGameMusic();
+        if (reelingBalance != null)
+        {
+            reelingBalance.value = 0.5f;
+            reelingBalance.gameObject.SetActive(false);
+            musicController.StopFishingMiniGameMusic();
+        }
     }
 
     public void SetChargingBalance(bool active)

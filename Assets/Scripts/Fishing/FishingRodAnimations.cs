@@ -7,6 +7,7 @@ public class FishingRodAnimations : MonoBehaviour
     private void Start()
     {
         fishingRodAnimator = GetComponent<Animator>();
+        FishingSystem.OnChargeRelease += (value) => PlayReversSwingAnimation(); 
     }
     public void PlaySwingAnimation()
     {

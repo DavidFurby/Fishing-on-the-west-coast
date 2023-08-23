@@ -17,6 +17,8 @@ public class BaitLogic : MonoBehaviour
     public void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        FishingSystem.OnChargeRelease += (value) => Cast();
+
         AttachBait();
     }
 

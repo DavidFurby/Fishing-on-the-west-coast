@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,14 +13,14 @@ public class FishingSystem : FishingStateMachine
     public FishingRodLogic fishingRodLogic;
     public BaitLogic baitLogic;
     public ItemMenu itemMenu;
-    public SeaLogic seaSpawner;
     public BaitArea baitArea;
     #endregion
 
     #region Events
-    [Header("Fishing Events")]
-    public UnityEvent onStartCharging;
-    public UnityEvent onChargeRelease;
+    public static event Action<bool> OnChargeRelease;
+    public static event Action<bool> OnStartCharging;
+    public static event Action OnRemoveFishes;
+    public static event Action OnStartFishing;
     #endregion
 
     [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
@@ -66,7 +67,7 @@ public class FishingSystem : FishingStateMachine
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            onStartCharging.Invoke();
+            OnStartCharging.Invoke(true);
             SetState(new Charging(this));
         }
     }
@@ -128,8 +129,19 @@ public class FishingSystem : FishingStateMachine
     }
     private void RaiseStartFishing()
     {
-        Debug.Log("raise");
         SetState(new FishingIdle(this));
+    }
+    public void RaiseRemoveFishes()
+    {
+        OnRemoveFishes.Invoke();
+    }
+    public void RaiseSpawnFishes()
+    {
+        OnStartFishing.Invoke();
+    }
+    public void RaiseChargeRelease()
+    {
+        OnChargeRelease.Invoke(false);
     }
 }
 #endregion

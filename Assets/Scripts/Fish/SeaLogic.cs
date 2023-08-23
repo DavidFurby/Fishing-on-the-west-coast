@@ -15,6 +15,9 @@ public class SeaLogic : MonoBehaviour
         seaPosition = transform.position;
         seaRenderer = GetComponent<Renderer>();
         fishPrefabs = Resources.LoadAll<FishDisplay>("GameObjects/Fishes");
+        FishingSystem.OnRemoveFishes += StopSpawnFish;
+        FishingSystem.OnRemoveFishes += RemoveAllFishes;
+        FishingSystem.OnStartFishing += SpawnFish;
     }
 
     public void InvokeSpawnFish()
@@ -24,8 +27,11 @@ public class SeaLogic : MonoBehaviour
 
     public void StopSpawnFish()
     {
-        Debug.Log("SpawnFish");
-        CancelInvoke(nameof(SpawnFish));
+        if (this != null)
+        {
+            CancelInvoke(nameof(SpawnFish));
+
+        }
     }
 
     private void SpawnFish()

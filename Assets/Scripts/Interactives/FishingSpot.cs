@@ -8,7 +8,6 @@ public class FishingSpot : MonoBehaviour, IInteractive
 
     public void Interact()
     {
-        Debug.Log("Start Fishing");
         StartFishing.Invoke();
 
     }
