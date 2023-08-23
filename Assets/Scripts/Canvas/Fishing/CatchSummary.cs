@@ -14,6 +14,13 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private LevelSlider levelSlider;
     private int currentFishIndex = 0;
 
+
+    void Start()
+    {
+        FishingSystem.OnStartInspecting += InitiateCatchSummary;
+        FishingSystem.OnNextSummary += NextSummary;
+        FishingSystem.OnEndSummary += EndSummary;
+    }
     // Initialize the catch summary with a list of caught fishes.
     public void InitiateCatchSummary()
     {

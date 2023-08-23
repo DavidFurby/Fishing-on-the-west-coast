@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class CatchArea : MonoBehaviour
 {
     [SerializeField] private FishingSystem fishingGameSystem;
+    public static event Action<Collider, GameObject> BaitFish;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,7 +46,7 @@ public class CatchArea : MonoBehaviour
     private void CatchFishDuringReelingState(Collider other)
     {
         var fishMovement = other.GetComponent<FishMovement>();
-        fishingGameSystem.baitArea.TryBaitingFish(other, fishingGameSystem.fishesOnHook[^1].gameObject);
+        BaitFish.Invoke(other, fishingGameSystem.fishesOnHook[^1].gameObject);
         if (fishMovement.GetCurrentState() is Baited)
         {
             StartCoroutine(fishingGameSystem.fishingCamera.CatchAlert());

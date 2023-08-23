@@ -6,6 +6,11 @@ public class BaitArea : MonoBehaviour
     [SerializeField] private FishingSystem fishingSystem;
     private const float baitShakeDelay = 2f;
 
+
+    void Start()
+    {
+        CatchArea.BaitFish += TryBaitingFish;
+    }
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Fish") && !fishingSystem.FishIsBaited)

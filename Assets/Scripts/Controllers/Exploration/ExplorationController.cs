@@ -5,7 +5,6 @@ public class ExplorationController : ExplorationStateMachine
 {
 
     [SerializeField] private PlayerAnimations playerAnimations;
-
     private bool isWithinTriggerArea;
     private Interactive interactive;
     private readonly int movementSpeed = 10;

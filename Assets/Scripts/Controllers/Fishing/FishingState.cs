@@ -31,7 +31,6 @@ public class FishingIdle : FishingState
     {
         base.Update();
         system.StartCharging();
-        system.itemMenu.HandleInputs();
     }
 }
 
@@ -171,16 +170,16 @@ public class InspectFish : FishingState
     public override void OnEnter()
     {
         base.OnEnter();
-        system.catchSummary.InitiateCatchSummary();
+        system.RaiseNextSummary();
     }
     public override void Update()
     {
         base.Update();
-        system.catchSummary.NextSummary();
+        system.RaiseNextSummary();
     }
     public override void OnExit()
     {
         base.OnExit();
-        system.catchSummary.EndSummary();
+        system.RaiseEndSummary();
     }
 }

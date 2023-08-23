@@ -52,6 +52,11 @@ public class StartFishing : ExplorationState
 {
     public StartFishing(ExplorationController controller) : base(controller)
     {
-   
+
+    }
+    public override void Update()
+    {
+        base.Update();
+
     }
 }

@@ -8,12 +8,9 @@ public class FishingSystem : FishingStateMachine
     #region Serialized Fields
     [Header("Fishing Components")]
     public FishingCamera fishingCamera;
-    public CatchSummary catchSummary;
     public FishingMiniGame fishingMiniGame;
     public FishingRodLogic fishingRodLogic;
     public BaitLogic baitLogic;
-    public ItemMenu itemMenu;
-    public BaitArea baitArea;
     #endregion
 
     #region Events
@@ -21,6 +18,11 @@ public class FishingSystem : FishingStateMachine
     public static event Action<bool> OnStartCharging;
     public static event Action OnRemoveFishes;
     public static event Action OnStartFishing;
+    public static event Action OnStartInspecting;
+    public static event Action OnNextSummary;
+    public static event Action OnEndSummary;
+
+
     #endregion
 
     [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
@@ -142,6 +144,18 @@ public class FishingSystem : FishingStateMachine
     public void RaiseChargeRelease()
     {
         OnChargeRelease.Invoke(false);
+    }
+    public void RaiseInitiateCatchSummary()
+    {
+        OnStartInspecting.Invoke();
+    }
+    public void RaiseNextSummary()
+    {
+        OnNextSummary.Invoke();
+    }
+    public void RaiseEndSummary()
+    {
+        OnEndSummary.Invoke();
     }
 }
 #endregion
