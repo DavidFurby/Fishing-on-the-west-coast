@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FishingMiniGame : MonoBehaviour
 {
     [SerializeField] private Scrollbar reelingBalance;
-    [SerializeField] private FishingSystem fishingSystem;
+    [SerializeField] private FishingController fishingSystem;
     [SerializeField] private MusicController musicController;
     [SerializeField] private Scrollbar castingPowerBalance;
     private const float DEFAULT_FORCE = 0.0005f;
@@ -22,7 +22,7 @@ public class FishingMiniGame : MonoBehaviour
     {
         reelingBalance.gameObject.SetActive(false);
         castingPowerBalance.gameObject.SetActive(false);
-        FishingSystem.OnChargeRelease += SetChargingBalance;
+        FishingController.OnChargeRelease += SetChargingBalance;
     }
 
     #region Balance

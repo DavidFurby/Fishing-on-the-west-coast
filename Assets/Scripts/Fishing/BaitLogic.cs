@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BaitLogic : MonoBehaviour
 {
     [SerializeField] private GameObject fishingRodTop;
-    [SerializeField] private FishingSystem system;
+    [SerializeField] private FishingController system;
     [SerializeField] private AudioSource splashSound;
     [SerializeField] private Scrollbar balance;
     private float forceFactor = 1f;
@@ -17,7 +17,7 @@ public class BaitLogic : MonoBehaviour
     public void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        FishingSystem.OnChargeRelease += (value) => Cast();
+        FishingController.OnChargeRelease += (value) => Cast();
 
         AttachBait();
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class FishingSystem : FishingStateMachine
+public class FishingController : FishingStateMachine
 {
     #region Serialized Fields
     [Header("Fishing Components")]

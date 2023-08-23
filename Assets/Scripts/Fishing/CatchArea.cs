@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CatchArea : MonoBehaviour
 {
-    [SerializeField] private FishingSystem fishingGameSystem;
+    [SerializeField] private FishingController fishingGameSystem;
     public static event Action<Collider, GameObject> BaitFish;
 
 

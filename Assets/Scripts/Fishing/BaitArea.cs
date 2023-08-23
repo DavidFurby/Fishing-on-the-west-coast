@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BaitArea : MonoBehaviour
 {
-    [SerializeField] private FishingSystem fishingSystem;
+    [SerializeField] private FishingController fishingSystem;
     private const float baitShakeDelay = 2f;
 
 

@@ -8,7 +8,7 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI isNewText;
     [SerializeField] private TextMeshProUGUI newRecordText;
 
-    [SerializeField] private FishingSystem fishingSystem;
+    [SerializeField] private FishingController fishingSystem;
     [SerializeField] private CatchSummaryHandlers summaryDialogHandlers;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
     [SerializeField] private LevelSlider levelSlider;
@@ -17,9 +17,9 @@ public class CatchSummary : MonoBehaviour
 
     void Start()
     {
-        FishingSystem.OnStartInspecting += InitiateCatchSummary;
-        FishingSystem.OnNextSummary += NextSummary;
-        FishingSystem.OnEndSummary += EndSummary;
+        FishingController.OnStartInspecting += InitiateCatchSummary;
+        FishingController.OnNextSummary += NextSummary;
+        FishingController.OnEndSummary += EndSummary;
     }
     // Initialize the catch summary with a list of caught fishes.
     public void InitiateCatchSummary()

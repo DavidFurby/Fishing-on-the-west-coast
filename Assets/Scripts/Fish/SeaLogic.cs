@@ -4,7 +4,7 @@ public class SeaLogic : MonoBehaviour
 {
     [SerializeField] private int spawnDelay;
     [SerializeField] private GameObject bait;
-    [SerializeField] private FishingSystem fishingSystem;
+    [SerializeField] private FishingController fishingSystem;
 
     private FishDisplay[] fishPrefabs;
     private Renderer seaRenderer;
@@ -15,9 +15,9 @@ public class SeaLogic : MonoBehaviour
         seaPosition = transform.position;
         seaRenderer = GetComponent<Renderer>();
         fishPrefabs = Resources.LoadAll<FishDisplay>("GameObjects/Fishes");
-        FishingSystem.OnRemoveFishes += StopSpawnFish;
-        FishingSystem.OnRemoveFishes += RemoveAllFishes;
-        FishingSystem.OnStartFishing += SpawnFish;
+        FishingController.OnRemoveFishes += StopSpawnFish;
+        FishingController.OnRemoveFishes += RemoveAllFishes;
+        FishingController.OnStartFishing += SpawnFish;
     }
 
     public void InvokeSpawnFish()

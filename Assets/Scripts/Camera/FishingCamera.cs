@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FishingCamera : MonoBehaviour
 {
-    [SerializeField] private FishingSystem system;
+    [SerializeField] private FishingController system;
     [SerializeField] private AudioSource audioSource;
 
     private float cameraDistance;

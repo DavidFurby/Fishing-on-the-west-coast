@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using static FishingSystem;
+using static FishingController;
 
 public class FishingRodLogic : MonoBehaviour
 {
     [SerializeField] private FishingRodAnimations fishingRodAnimations;
     [SerializeField] private PlayerAnimations playerAnimations;
-    [SerializeField] private FishingSystem fishingSystem;
+    [SerializeField] private FishingController fishingSystem;
     [HideInInspector] public float reelInSpeed;
     [HideInInspector] public float castingPower;
     private readonly float initialCastingPower = 20;
