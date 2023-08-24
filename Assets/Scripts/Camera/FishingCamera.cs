@@ -13,44 +13,79 @@ public class FishingCamera : MonoBehaviour
     {
         cameraDistance = transform.position.z;
         originalCameraDistance = cameraDistance;
+        SubscribeToEvents();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
+        FishingController.OnCastingCamera += SetCameraToBait;
+        FishingController.OnCastingCamera += () => MoveCameraCloserToBait();
+        FishingController.OnFishingCamera += SetCameraToBait;
+        FishingController.OnFishingCamera += () => MoveCameraToOriginal();
+        FishingController.OnEndSummary += () => MoveCameraToOriginal();
+        FishingController.OnReelingCamera += SetCameraToBait;
+        FishingController.OnReelingCamera += () => MoveCameraCloserToBait();
+        FishingController.OnStartReeling += () => StartCoroutine(CatchAlert());
+        CatchArea.OnCatchWhileReeling += () => StartCoroutine(CatchAlert());
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        FishingController.OnCastingCamera -= SetCameraToBait;
+        FishingController.OnCastingCamera -= () => MoveCameraCloserToBait();
+        FishingController.OnFishingCamera -= SetCameraToBait;
+        FishingController.OnFishingCamera -= () => MoveCameraToOriginal();
+        FishingController.OnEndSummary -= () => MoveCameraToOriginal();
+        FishingController.OnReelingCamera -= SetCameraToBait;
+        FishingController.OnReelingCamera -= () => MoveCameraCloserToBait();
+        FishingController.OnStartReeling -= () => StartCoroutine(CatchAlert());
+        CatchArea.OnCatchWhileReeling -= () => StartCoroutine(CatchAlert());
     }
 
     public void SetCameraToBait()
     {
-        transform.position = new Vector3(system.baitLogic.transform.position.x, system.baitLogic.transform.position.y, cameraDistance);
+        if (gameObject != null && system.baitLogic != null)
+            gameObject.transform.position = new Vector3(system.baitLogic.transform.position.x, system.baitLogic.transform.position.y, cameraDistance);
     }
 
-        public void SetCameraToFish(FishDisplay fish)
+    public void SetCameraToFish(FishDisplay fish)
     {
-        transform.position = new Vector3(fish.transform.position.x, fish.transform.position.y, cameraDistance);
+        if (fish != null)
+            transform.position = new Vector3(fish.transform.position.x, fish.transform.position.y, cameraDistance);
     }
 
     public void MoveCameraCloserToBait(float speed = 0.1f)
     {
-        if (cameraDistance < system.baitLogic.transform.position.z - 2)
-        {
-            cameraDistance += speed;
-        }
+        if (system.baitLogic != null && cameraDistance < system.baitLogic.transform.position.z - 2)
+            cameraDistance = Mathf.MoveTowards(cameraDistance, system.baitLogic.transform.position.z - 2, speed);
     }
 
     public void MoveCameraToOriginal(float speed = 0.01f)
     {
         if (cameraDistance > originalCameraDistance)
-        {
-            cameraDistance -= speed;
-        }
+            cameraDistance = Mathf.MoveTowards(cameraDistance, originalCameraDistance, speed);
     }
+
     public void MoveCameraCloserToFish(FishDisplay fish, float speed = 0.1f)
     {
-        if (cameraDistance < fish.transform.position.z)
-        {
-            cameraDistance += speed;
-        }
+        if (fish != null && cameraDistance < fish.transform.position.z)
+            cameraDistance = Mathf.MoveTowards(cameraDistance, fish.transform.position.z, speed);
     }
 
     public void CatchAlertSound()
     {
-        audioSource.Play();
+        if (audioSource != null)
+            audioSource.Play();
     }
 
     public IEnumerator CatchAlert()

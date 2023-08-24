@@ -8,8 +8,8 @@ public class PlayerAnimations : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FishingController.OnStartCharging += SetChargingThrowAnimation;
-        FishingController.OnChargeRelease += SetChargingThrowAnimation;
+        FishingController.OnStartCharging += () => SetChargingThrowAnimation(true);
+        FishingController.OnChargeRelease += () => SetChargingThrowAnimation(false);
         originalChargingThrowSpeed = playerAnimator.GetFloat("chargingThrowSpeed");
     }
 

@@ -9,7 +9,7 @@ public class BaitArea : MonoBehaviour
 
     void Start()
     {
-        CatchArea.BaitFish += TryBaitingFish;
+        CatchArea.OnBaitFish += TryBaitingFish;
     }
     private void OnTriggerEnter(Collider collider)
     {

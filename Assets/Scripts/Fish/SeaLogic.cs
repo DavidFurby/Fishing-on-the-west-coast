@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SeaLogic : MonoBehaviour
@@ -13,12 +14,33 @@ public class SeaLogic : MonoBehaviour
     private void Start()
     {
         seaPosition = transform.position;
-        seaRenderer = GetComponent<Renderer>();
+        TryGetComponent<Renderer>(out seaRenderer);
         fishPrefabs = Resources.LoadAll<FishDisplay>("GameObjects/Fishes");
+        SubscribeToEvents();
+    }
+
+    void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+     void OnDisable()
+    {
+        UnsubscribeFromEvents();
+    }
+    private void SubscribeToEvents()
+    {
         FishingController.OnRemoveFishes += StopSpawnFish;
         FishingController.OnRemoveFishes += RemoveAllFishes;
-        FishingController.OnStartFishing += SpawnFish;
+        FishingController.OnStartFishing += InvokeSpawnFish;
     }
+
+    private void UnsubscribeFromEvents()
+    {
+        FishingController.OnRemoveFishes -= StopSpawnFish;
+        FishingController.OnRemoveFishes -= RemoveAllFishes;
+        FishingController.OnStartFishing -= InvokeSpawnFish;
+    }
+
 
     public void InvokeSpawnFish()
     {
@@ -28,10 +50,7 @@ public class SeaLogic : MonoBehaviour
     public void StopSpawnFish()
     {
         if (this != null)
-        {
             CancelInvoke(nameof(SpawnFish));
-
-        }
     }
 
     private void SpawnFish()
@@ -67,11 +86,8 @@ public class SeaLogic : MonoBehaviour
     {
         GameObject[] fishes = GameObject.FindGameObjectsWithTag("Fish");
         if (fishes.Length != 0)
-        {
             foreach (GameObject fish in fishes)
-            {
                 ObjectPool.Instance.ReturnToPool(fish);
-            }
-        }
+        
     }
 }

@@ -21,7 +21,15 @@ public class ItemMenu : MonoBehaviour
         allItems.AddRange(MainManager.Instance.game.Inventory.FoundHats);
         ExplorationController.OpenItemMenu += HandleInputs;
     }
+    void OnDestroy()
+    {
+        ExplorationController.OpenItemMenu -= HandleInputs;
 
+    }
+    void OnDisable()
+    {
+        ExplorationController.OpenItemMenu -= HandleInputs;
+    }
     private void PopulateWheels()
     {
         foreach (ItemWheel wheel in listOfWheels)

@@ -119,7 +119,6 @@ public class CatchSummary : MonoBehaviour
     {
         ResetValues();
         summaryDialogHandlers.EndSummary();
-        fishingSystem.fishingCamera.MoveCameraToOriginal();
     }
 
     // Reset values

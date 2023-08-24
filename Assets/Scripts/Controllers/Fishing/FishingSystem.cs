@@ -1,28 +1,29 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class FishingController : FishingStateMachine
 {
     #region Serialized Fields
     [Header("Fishing Components")]
-    public FishingCamera fishingCamera;
     public FishingMiniGame fishingMiniGame;
     public FishingRodLogic fishingRodLogic;
     public BaitLogic baitLogic;
     #endregion
 
     #region Events
-    public static event Action<bool> OnChargeRelease;
-    public static event Action<bool> OnStartCharging;
+    public static event Action OnChargeRelease;
+    public static event Action OnStartCharging;
     public static event Action OnRemoveFishes;
     public static event Action OnStartFishing;
+    public static event Action OnReelingFish;
     public static event Action OnStartInspecting;
     public static event Action OnNextSummary;
     public static event Action OnEndSummary;
-
-
+    public static event Action OnCastingCamera;
+    public static event Action OnFishingCamera;
+    public static event Action OnReelingCamera;
+    public static event Action OnStartReeling;
     #endregion
 
     [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
@@ -35,7 +36,9 @@ public class FishingController : FishingStateMachine
     private void Start()
     {
         SetState(new NotFishing(this));
-        FishingSpot.StartFishing += RaiseStartFishing;
+        FishingSpot.StartFishing += () => SetState(new FishingIdle(this));
+        OnStartReeling += CatchFish;
+        OnStartReeling += () => SetState(new ReelingFish(this));
     }
 
     #region Public Methods
@@ -48,11 +51,7 @@ public class FishingController : FishingStateMachine
         {
             if (IsInCatchArea && FishAttachedToBait != null)
             {
-                StartCoroutine(fishingCamera.CatchAlert());
-                fishingMiniGame.StartBalanceMiniGame();
-                CatchFish();
-                baitLogic.ReelIn();
-                SetState(new ReelingFish(this));
+                OnStartReeling.Invoke();
             }
             else
             {
@@ -69,7 +68,7 @@ public class FishingController : FishingStateMachine
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            OnStartCharging.Invoke(true);
+            OnStartCharging.Invoke();
             SetState(new Charging(this));
         }
     }
@@ -129,33 +128,41 @@ public class FishingController : FishingStateMachine
         IsInCatchArea = false;
         FishIsBaited = false;
     }
-    private void RaiseStartFishing()
-    {
-        SetState(new FishingIdle(this));
-    }
     public void RaiseRemoveFishes()
     {
-        OnRemoveFishes.Invoke();
+        OnRemoveFishes?.Invoke();
     }
     public void RaiseSpawnFishes()
     {
-        OnStartFishing.Invoke();
+        OnStartFishing?.Invoke();
     }
     public void RaiseChargeRelease()
     {
-        OnChargeRelease.Invoke(false);
+        OnChargeRelease?.Invoke();
     }
     public void RaiseInitiateCatchSummary()
     {
-        OnStartInspecting.Invoke();
+        OnStartInspecting?.Invoke();
     }
     public void RaiseNextSummary()
     {
-        OnNextSummary.Invoke();
+        OnNextSummary?.Invoke();
     }
     public void RaiseEndSummary()
     {
-        OnEndSummary.Invoke();
+        OnEndSummary?.Invoke();
+    }
+    public void RaiseCastingCamera()
+    {
+        OnCastingCamera?.Invoke();
+    }
+    public void RaiseFishingCamera()
+    {
+        OnFishingCamera?.Invoke();
+    }
+    public void RaiseReelingCamera()
+    {
+        OnReelingCamera?.Invoke();
     }
 }
 #endregion

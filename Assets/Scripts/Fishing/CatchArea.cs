@@ -4,7 +4,9 @@ using UnityEngine;
 public class CatchArea : MonoBehaviour
 {
     [SerializeField] private FishingController fishingGameSystem;
-    public static event Action<Collider, GameObject> BaitFish;
+    public static event Action<Collider, GameObject> OnBaitFish;
+    public static event Action OnCatchWhileReeling;
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -45,11 +47,11 @@ public class CatchArea : MonoBehaviour
 
     private void CatchFishDuringReelingState(Collider other)
     {
-        var fishMovement = other.GetComponent<FishMovement>();
-        BaitFish.Invoke(other, fishingGameSystem.fishesOnHook[^1].gameObject);
+        FishMovement fishMovement = other.GetComponent<FishMovement>();
+        OnBaitFish.Invoke(other, fishingGameSystem.fishesOnHook[^1].gameObject);
         if (fishMovement.GetCurrentState() is Baited)
         {
-            StartCoroutine(fishingGameSystem.fishingCamera.CatchAlert());
+            OnCatchWhileReeling.Invoke();
             fishMovement.SetState(new HookedToFish(fishMovement));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {

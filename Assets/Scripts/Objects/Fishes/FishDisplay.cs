@@ -19,6 +19,10 @@ public class FishDisplay : MonoBehaviour
 
     public void ReturnToPool()
     {
-        ObjectPool.Instance.ReturnToPool(this.gameObject);
+        if (gameObject != null)
+        {
+            ObjectPool.Instance.ReturnToPool(gameObject);
+
+        }
     }
 }
