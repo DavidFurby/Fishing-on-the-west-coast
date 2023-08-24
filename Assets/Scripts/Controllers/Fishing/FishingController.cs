@@ -164,6 +164,9 @@ public class FishingController : FishingStateMachine
     {
         OnReelingCamera?.Invoke();
     }
+    public void RaiseReelingFish() {
+        OnReelingFish?.Invoke();
+    }
 }
 #endregion
 
