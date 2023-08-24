@@ -779,7 +779,7 @@ PrefabInstance:
     - target: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 248628953}
+      objectReference: {fileID: 0}
     - target: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: musicController
       value: 
@@ -1055,7 +1055,7 @@ PrefabInstance:
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 248628953}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: newRecordText
       value: 
@@ -1130,17 +1130,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
---- !u!114 &248628953 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
-  m_PrefabInstance: {fileID: 1764026361}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf8bb8993b353dc4cbe0d439e434f3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &292963828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1781,11 +1770,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6592811363448250335, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: baitLogic
+      value: 
+      objectReference: {fileID: 2085529218}
+    - target: {fileID: 6592811363448250335, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingMiniGame
+      value: 
+      objectReference: {fileID: 1275887656}
+    - target: {fileID: 6592811363448250335, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingRodLogic
+      value: 
+      objectReference: {fileID: 1860531746}
     - target: {fileID: 7661169753038949569, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: m_Name
       value: PlayerFishing
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8827973627027963925, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: baitLogic
+      value: 
+      objectReference: {fileID: 2085529218}
+    - target: {fileID: 8827973627027963925, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingMiniGame
+      value: 
+      objectReference: {fileID: 1275887656}
+    - target: {fileID: 8827973627027963925, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: fishingRodLogic
+      value: 
+      objectReference: {fileID: 1860531746}
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1868,7 +1882,7 @@ PrefabInstance:
     - target: {fileID: 1935338518330161674, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingGameSystem
       value: 
-      objectReference: {fileID: 248628953}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 2071196134472936568, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: sea
       value: 
@@ -1992,7 +2006,7 @@ PrefabInstance:
     - target: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 248628953}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: balance
       value: 
@@ -2136,7 +2150,7 @@ PrefabInstance:
     - target: {fileID: 4847019202594342798, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 248628953}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: system
       value: 
@@ -2532,7 +2546,7 @@ PrefabInstance:
     - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 248628953}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: playerAnimations
       value: 
@@ -2747,6 +2761,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367672ab0c2a7414ebcdde881610a4f1, type: 3}
+--- !u!114 &1917359914 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8827973627027963925, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+  m_PrefabInstance: {fileID: 1764026361}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd82f752f07dcf4ca72d9bf97182909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1989589368 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5748939074532554492, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
@@ -3181,7 +3206,7 @@ PrefabInstance:
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 248628953}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: fishingControlls
       value: 
@@ -3217,7 +3242,7 @@ PrefabInstance:
     - target: {fileID: 7095222782123616272, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 248628953}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 7095222782123616272, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: splashSound
       value: 
@@ -3547,7 +3572,7 @@ PrefabInstance:
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: system
       value: 
-      objectReference: {fileID: 248628953}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: audioSource
       value: 

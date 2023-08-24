@@ -9,23 +9,50 @@ public class FishingMiniGame : MonoBehaviour
     [SerializeField] private FishingController fishingSystem;
     [SerializeField] private MusicController musicController;
     [SerializeField] private Scrollbar castingPowerBalance;
+    [HideInInspector] public float castPower = 1;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
     private bool castingPowerDirection = true;
-    [HideInInspector] public float castPower = 1;
-
-
-
     // Start is called before the first frame update
     void Start()
     {
         reelingBalance.gameObject.SetActive(false);
         castingPowerBalance.gameObject.SetActive(false);
+        FishingController.OnWhileCharging += ChargingBalance;
         FishingController.OnChargeRelease += () => SetChargingBalance(false);
-        FishingController.OnStartReeling += StartBalanceMiniGame;
+        FishingController.OnStartReelingFish += StartBalanceMiniGame;
+        FishingController.OnReelingFish += MiniGameHandler;
+        FishingController.OnExitReelingFish += EndBalanceMiniGame;
     }
 
+    void OnDestroy()
+    {
+        UnsubscribeEvents();
+    }
+    void OnDisable()
+    {
+        UnsubscribeEvents();
+    }
+
+    private void UnsubscribeEvents()
+    {
+        FishingController.OnChargeRelease -= () => SetChargingBalance(false);
+        FishingController.OnStartReelingFish -= StartBalanceMiniGame;
+        FishingController.OnReelingFish -= MiniGameHandler;
+        FishingController.OnWhileCharging -= ChargingBalance;
+        FishingController.OnExitReelingFish -= EndBalanceMiniGame;
+
+
+    }
+
+    public void MiniGameHandler()
+    {
+        CalculateBalance();
+        BalanceLost();
+        BalanceControls();
+        HandleBalanceColor();
+    }
     #region Balance
 
     // Change balance value based on fishSize
@@ -76,7 +103,6 @@ public class FishingMiniGame : MonoBehaviour
         float colorValue = Mathf.Abs(reelingBalance.value - 0.5f) * 2;
         reelingBalance.GetComponent<Image>().color = Color.Lerp(Color.blue, Color.red, colorValue);
     }
-
     //Control balance by pressing the keys
     public void BalanceControls()
     {
@@ -89,7 +115,6 @@ public class FishingMiniGame : MonoBehaviour
             reelingBalance.value += 0.005f;
         }
     }
-
     // Check if balance is lost and therefore lose the catch
     public void BalanceLost()
     {
@@ -98,9 +123,7 @@ public class FishingMiniGame : MonoBehaviour
             fishingSystem.LoseCatch();
         }
     }
-
     #endregion
-
     public void StartBalanceMiniGame()
     {
         reelingBalance.gameObject.SetActive(true);
@@ -117,7 +140,6 @@ public class FishingMiniGame : MonoBehaviour
             musicController.StopFishingMiniGameMusic();
         }
     }
-
     public void SetChargingBalance(bool active)
     {
         if (castingPowerBalance != null)
@@ -125,7 +147,6 @@ public class FishingMiniGame : MonoBehaviour
             castingPowerBalance.gameObject.SetActive(active);
         }
     }
-
     public void ChargingBalance()
     {
         if (castingPowerBalance.gameObject.activeSelf)

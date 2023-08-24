@@ -35,7 +35,7 @@ public class FishingCamera : MonoBehaviour
         FishingController.OnEndSummary += () => MoveCameraToOriginal();
         FishingController.OnReelingCamera += SetCameraToBait;
         FishingController.OnReelingCamera += () => MoveCameraCloserToBait();
-        FishingController.OnStartReeling += () => StartCoroutine(CatchAlert());
+        FishingController.OnStartReelingFish += () => StartCoroutine(CatchAlert());
         CatchArea.OnCatchWhileReeling += () => StartCoroutine(CatchAlert());
     }
 
@@ -48,7 +48,7 @@ public class FishingCamera : MonoBehaviour
         FishingController.OnEndSummary -= () => MoveCameraToOriginal();
         FishingController.OnReelingCamera -= SetCameraToBait;
         FishingController.OnReelingCamera -= () => MoveCameraCloserToBait();
-        FishingController.OnStartReeling -= () => StartCoroutine(CatchAlert());
+        FishingController.OnStartReelingFish -= () => StartCoroutine(CatchAlert());
         CatchArea.OnCatchWhileReeling -= () => StartCoroutine(CatchAlert());
     }
 

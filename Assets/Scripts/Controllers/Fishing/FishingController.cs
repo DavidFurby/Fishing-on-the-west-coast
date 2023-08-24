@@ -2,28 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishingController : FishingStateMachine
+public class FishingController : FishingEventController
 {
     #region Serialized Fields
     [Header("Fishing Components")]
     public FishingMiniGame fishingMiniGame;
     public FishingRodLogic fishingRodLogic;
     public BaitLogic baitLogic;
-    #endregion
-
-    #region Events
-    public static event Action OnChargeRelease;
-    public static event Action OnStartCharging;
-    public static event Action OnRemoveFishes;
-    public static event Action OnStartFishing;
-    public static event Action OnReelingFish;
-    public static event Action OnStartInspecting;
-    public static event Action OnNextSummary;
-    public static event Action OnEndSummary;
-    public static event Action OnCastingCamera;
-    public static event Action OnFishingCamera;
-    public static event Action OnReelingCamera;
-    public static event Action OnStartReeling;
     #endregion
 
     [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
@@ -37,9 +22,10 @@ public class FishingController : FishingStateMachine
     {
         SetState(new NotFishing(this));
         FishingSpot.StartFishing += () => SetState(new FishingIdle(this));
-        OnStartReeling += CatchFish;
-        OnStartReeling += () => SetState(new ReelingFish(this));
+        OnStartReelingFish += CatchFish;
+        OnStartReelingFish += () => SetState(new ReelingFish(this));
     }
+    
 
     #region Public Methods
     /// <summary>
@@ -51,7 +37,7 @@ public class FishingController : FishingStateMachine
         {
             if (IsInCatchArea && FishAttachedToBait != null)
             {
-                OnStartReeling.Invoke();
+                RaiseStartReelingFish();
             }
             else
             {
@@ -68,14 +54,16 @@ public class FishingController : FishingStateMachine
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            OnStartCharging.Invoke();
+            RaiseStartCharging();
             SetState(new Charging(this));
         }
     }
+    
     public void Charge()
     {
         fishingRodLogic.ChargeCasting();
     }
+    
     public void Release()
     {
         if (Input.GetKeyUp(KeyCode.Space))
@@ -83,6 +71,7 @@ public class FishingController : FishingStateMachine
             SetState(new Swinging(this));
         }
     }
+    
     public void CatchFish()
     {
         if (GetCurrentState() is Fishing)
@@ -91,6 +80,7 @@ public class FishingController : FishingStateMachine
             AddFish(FishAttachedToBait);
         }
     }
+    
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
@@ -113,60 +103,22 @@ public class FishingController : FishingStateMachine
         fishesOnHook.Add(fish);
     }
 
-    public void ClearCaughtFishes()
-    {
-        foreach (var fish in fishesOnHook)
-        {
-            fish.ReturnToPool();
-        }
-        fishesOnHook.Clear();
-    }
-    public void ResetValues()
-    {
-        ClearCaughtFishes();
-        FishAttachedToBait = null;
-        IsInCatchArea = false;
-        FishIsBaited = false;
-    }
-    public void RaiseRemoveFishes()
-    {
-        OnRemoveFishes?.Invoke();
-    }
-    public void RaiseSpawnFishes()
-    {
-        OnStartFishing?.Invoke();
-    }
-    public void RaiseChargeRelease()
-    {
-        OnChargeRelease?.Invoke();
-    }
-    public void RaiseInitiateCatchSummary()
-    {
-        OnStartInspecting?.Invoke();
-    }
-    public void RaiseNextSummary()
-    {
-        OnNextSummary?.Invoke();
-    }
-    public void RaiseEndSummary()
-    {
-        OnEndSummary?.Invoke();
-    }
-    public void RaiseCastingCamera()
-    {
-        OnCastingCamera?.Invoke();
-    }
-    public void RaiseFishingCamera()
-    {
-        OnFishingCamera?.Invoke();
-    }
-    public void RaiseReelingCamera()
-    {
-        OnReelingCamera?.Invoke();
-    }
-    public void RaiseReelingFish() {
-        OnReelingFish?.Invoke();
-    }
+    
+     public void ClearCaughtFishes()
+     {
+         foreach (var fish in fishesOnHook)
+         {
+             fish.ReturnToPool();
+         }
+         fishesOnHook.Clear();
+     }
+     
+     public void ResetValues()
+     {
+         ClearCaughtFishes();
+         FishAttachedToBait = null;
+         IsInCatchArea = false;
+         FishIsBaited = false;
+     }
 }
 #endregion
-

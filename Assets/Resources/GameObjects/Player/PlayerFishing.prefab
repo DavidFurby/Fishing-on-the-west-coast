@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6326647731678324068}
   - component: {fileID: 7821062118129322843}
   - component: {fileID: 3784535631446491242}
-  - component: {fileID: 2196328919354006432}
   - component: {fileID: 6127810784131251554}
+  - component: {fileID: 8827973627027963925}
   m_Layer: 0
   m_Name: PlayerFishing
   m_TagString: Player
@@ -84,95 +84,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9, y: 1.5, z: 0.9}
   m_Center: {x: 0, y: 0.75, z: 0}
---- !u!114 &2196328919354006432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7661169753038949569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf8bb8993b353dc4cbe0d439e434f3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishingCamera: {fileID: 0}
-  catchSummary: {fileID: 0}
-  fishingMiniGame: {fileID: 0}
-  fishingRodLogic: {fileID: 0}
-  baitLogic: {fileID: 0}
-  itemMenu: {fileID: 0}
-  seaSpawner: {fileID: 0}
-  baitArea: {fileID: 0}
-  onStartCharging:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 851659421165835670}
-        m_TargetAssemblyTypeName: PlayerAnimations, Assembly-CSharp
-        m_MethodName: SetChargingThrowAnimation
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  onChargeRelease:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FishingMiniGame, Assembly-CSharp
-        m_MethodName: SetChargingBalance
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 851659421165835670}
-        m_TargetAssemblyTypeName: PlayerAnimations, Assembly-CSharp
-        m_MethodName: SetChargingThrowAnimation
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FishingRodLogic, Assembly-CSharp
-        m_MethodName: PlayerReverseSwingAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  fishesOnHook: []
-  bait: {fileID: 0}
-  fishingRod: {fileID: 0}
 --- !u!114 &6127810784131251554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +97,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimations: {fileID: 0}
+--- !u!114 &8827973627027963925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7661169753038949569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd82f752f07dcf4ca72d9bf97182909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishingMiniGame: {fileID: 0}
+  fishingRodLogic: {fileID: 0}
+  baitLogic: {fileID: 0}
+  fishesOnHook: []
 --- !u!1001 &4554226739643981622
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -45,7 +45,7 @@ public class Charging : FishingState
         base.Update();
         system.Charge();
         system.Release();
-        system.fishingMiniGame.ChargingBalance();
+        system.RaiseWhileCharging();
     }
 }
 public class Swinging : FishingState
@@ -58,7 +58,6 @@ public class Swinging : FishingState
     {
         base.OnEnter();
         system.RaiseChargeRelease();
-        system.fishingRodLogic.WaitForSwingAnimation();
     }
 
 }
@@ -134,10 +133,7 @@ public class ReelingFish : FishingState
     public override void Update()
     {
         base.Update();
-        system.fishingMiniGame.CalculateBalance();
-        system.fishingMiniGame.BalanceLost();
-        system.fishingMiniGame.BalanceControls();
-        system.fishingMiniGame.HandleBalanceColor();
+        system.RaiseReelingFish();
     }
     public override void FixedUpdate()
     {
@@ -152,7 +148,7 @@ public class ReelingFish : FishingState
     public override void OnExit()
     {
         base.OnExit();
-        system.fishingMiniGame.EndBalanceMiniGame();
+        system.RaiseOnExitReelingFish();
     }
 }
 

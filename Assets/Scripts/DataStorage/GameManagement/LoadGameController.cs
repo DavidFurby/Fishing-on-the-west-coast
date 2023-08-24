@@ -15,7 +15,7 @@ public class LoadGameController : MonoBehaviour
         game.Scene = gameData.scene;
         game.AvailableFishes = Resources.LoadAll<Fish>("ScriptableObjects/Fishes");
         game.CaughtFishes = gameData.foundCatches.Select(fishData => Fish.SetFish(fishData)).ToList();
-        game.pLayerLevel.SetPlayerLevel(gameData.level, gameData.experience);
+        game.playerLevel.SetPlayerLevel(gameData.level, gameData.experience);
         LoadFishingRod(game, gameData);
         LoadBait(game, gameData);
         LoadHats(game, gameData);

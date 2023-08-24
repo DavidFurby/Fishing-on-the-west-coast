@@ -18,9 +18,20 @@ public class BaitLogic : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         FishingController.OnChargeRelease += Cast;
-        FishingController.OnStartReeling += ReelIn;
+        FishingController.OnStartReelingFish += ReelIn;
 
         AttachBait();
+    }
+
+    void OnDestroy()
+    {
+        FishingController.OnChargeRelease -= Cast;
+        FishingController.OnStartReelingFish -= ReelIn;
+    }
+    void OnDisable()
+    {
+        FishingController.OnChargeRelease -= Cast;
+        FishingController.OnStartReelingFish -= ReelIn;
     }
 
     private void AttachBait()
