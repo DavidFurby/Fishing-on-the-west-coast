@@ -25,18 +25,18 @@ public abstract class FishingEventController : FishingStateMachine
 
     #endregion
 
-    public void RaiseWhileCasting() {
+    internal void RaiseWhileCasting() {
         OnWhileCasting.Invoke();
     }
-    public void RaiseReelInBait()
+    internal void RaiseReelInBait()
     {
         OnReelInBait?.Invoke();
     }
-    public void RaiseWhileFishing()
+    internal void RaiseWhileFishing()
     {
         OnWhileFishing?.Invoke();
     }
-    public void RaiseStartReelingFish()
+    internal void RaiseStartReelingFish()
     {
         OnStartReelingFish?.Invoke();
     }
