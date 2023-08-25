@@ -15,7 +15,7 @@ public class FishingRodData
         id = fishingRod.id;
         name = fishingRod.name;
         description = fishingRod.description;
-        strength = fishingRod.strength;
+        strength = fishingRod.reelInSpeed;
         throwRange = fishingRod.throwRange;
         price = fishingRod.price;
     }

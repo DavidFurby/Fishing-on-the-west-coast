@@ -1894,6 +1894,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1935338518330161674, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishController
+      value: 
+      objectReference: {fileID: 1917359914}
+    - target: {fileID: 1935338518330161674, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingGameSystem
       value: 
       objectReference: {fileID: 1917359914}
@@ -2163,6 +2167,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4847019202594342798, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 1917359914}
+    - target: {fileID: 4847019202594342798, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: fishingController
       value: 
       objectReference: {fileID: 1917359914}
     - target: {fileID: 4985490656934131748, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
@@ -3586,7 +3594,7 @@ PrefabInstance:
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: bait
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 941286920}
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: system
       value: 

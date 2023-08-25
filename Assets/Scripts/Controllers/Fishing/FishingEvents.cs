@@ -4,10 +4,10 @@ using UnityEngine;
 public abstract class FishingEventController : FishingStateMachine
 {
     #region Events
-    public static event Action OnChargeRelease;
     public static event Action OnStartCharging;
+    public static event Action OnChargeRelease;
     public static event Action OnEnterIdle;
-    public static event Action OnStartFishing;
+    public static event Action OnEnterFishing;
     public static event Action OnReelingFish;
     public static event Action OnReeling;
     public static event Action OnStartInspecting;
@@ -19,14 +19,33 @@ public abstract class FishingEventController : FishingStateMachine
     public static event Action OnStartReelingFish;
     public static event Action OnWhileCharging;
     public static event Action OnExitReelingFish;
+    public static event Action OnWhileFishing;
+    public static event Action OnWhileCasting;
+    public static event Action OnReelInBait;
 
     #endregion
 
+    public void RaiseWhileCasting() {
+        OnWhileCasting.Invoke();
+    }
+    public void RaiseReelInBait()
+    {
+        OnReelInBait?.Invoke();
+    }
+    public void RaiseWhileFishing()
+    {
+        OnWhileFishing?.Invoke();
+    }
     public void RaiseStartReelingFish()
     {
         OnStartReelingFish?.Invoke();
     }
-    
+
+    internal void RaiseReelingFish()
+    {
+        OnReelingFish?.Invoke();
+    }
+
     public void RaiseStartReeling()
     {
         OnReeling?.Invoke();
@@ -35,9 +54,9 @@ public abstract class FishingEventController : FishingStateMachine
     {
         OnEnterIdle?.Invoke();
     }
-    public void RaiseSpawnFishes()
+    public void RaiseOnEnterFishing()
     {
-        OnStartFishing?.Invoke();
+        OnEnterFishing?.Invoke();
     }
     internal void RaiseChargeRelease()
     {
@@ -51,12 +70,7 @@ public abstract class FishingEventController : FishingStateMachine
 
     internal void RaiseStartFishing()
     {
-        OnStartFishing?.Invoke();
-    }
-
-    internal void RaiseReelingFish()
-    {
-        OnReelingFish?.Invoke();
+        OnEnterFishing?.Invoke();
     }
 
     internal void RaiseStartInspecting()

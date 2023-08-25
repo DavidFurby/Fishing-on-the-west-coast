@@ -6,10 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FishingRod", menuName = "ScriptableObjects/FishingRod", order = 1)]
 public class FishingRod : Item
 {
-    [SerializeField] public int strength;
-    [SerializeField] public int throwRange;
+    public int reelInSpeed;
+    public int throwRange;
 
-    
+
 
     public FishingRod() : base()
     {
@@ -21,7 +21,7 @@ public class FishingRod : Item
     {
         id = fishingRodData.id;
         name = fishingRodData.name;
-        strength = fishingRodData.strength;
+        reelInSpeed = fishingRodData.strength;
         throwRange = fishingRodData.throwRange;
         description = fishingRodData.description;
         price = fishingRodData.price;
@@ -38,7 +38,7 @@ public class FishingRod : Item
         fishingRod.name = fishingRodData.name;
         fishingRod.description = fishingRodData.description;
         fishingRod.price = fishingRodData.price;
-        fishingRod.strength = fishingRodData.strength;
+        fishingRod.reelInSpeed = fishingRodData.strength;
         fishingRod.throwRange = fishingRodData.throwRange;
         return fishingRod;
     }

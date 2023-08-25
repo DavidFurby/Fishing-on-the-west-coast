@@ -4,7 +4,7 @@ using UnityEngine;
 public class FishingCamera : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private FishingController controller;
+    [SerializeField] private GameObject bait;
     private float cameraDistance;
     private float originalCameraDistance;
 
@@ -42,19 +42,22 @@ public class FishingCamera : MonoBehaviour
         }
     }
 
-    public void CastingCamera() {
-        SetCameraToTarget(controller.baitLogic.transform);
-        MoveCameraCloserToTarget(controller.baitLogic.transform);
+    public void CastingCamera()
+    {
+        SetCameraToTarget(bait.transform);
+        MoveCameraCloserToTarget(bait.transform);
     }
-    
-    public void FishCamera() {
-        SetCameraToTarget(controller.baitLogic.transform);
+
+    public void FishCamera()
+    {
+        SetCameraToTarget(bait.transform);
         MoveCameraToOriginal();
     }
-    
-    public void ReelingCamera() {
-        SetCameraToTarget(controller.baitLogic.transform);
-        MoveCameraCloserToTarget(controller.baitLogic.transform);
+
+    public void ReelingCamera()
+    {
+        SetCameraToTarget(bait.transform);
+        MoveCameraCloserToTarget(bait.transform);
     }
 
     public void SetCameraToTarget(Transform target)

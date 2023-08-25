@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class FishingController : FishingEventController
 {
-    #region Serialized Fields
-    [Header("Fishing Components")]
-    public FishingRodLogic fishingRodLogic;
-    public BaitLogic baitLogic;
-    #endregion
 
     [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
     [HideInInspector] public List<FishDisplay> fishesOnHook = new();
-    [HideInInspector] public float castPower;
-    public float reelInSpeed;
-    public float castingPower;
-    public float initialCastingPower = 20;
-    public float initialReelInSpeed = 15f;
+    [HideInInspector] public float chargeLevel = 1;
+    [HideInInspector] public float reelInSpeed;
+    [HideInInspector] public float castingPower;
+    [HideInInspector] public float initialCastingPower = 20;
+    [HideInInspector] public float initialReelInSpeed = 15f;
 
     [HideInInspector] public bool IsInCatchArea { get; set; }
 
@@ -44,6 +39,7 @@ public class FishingController : FishingEventController
         OnStartReelingFish += () => SetState(new ReelingFish(this));
         OnEnterIdle += ResetValues;
         OnWhileCharging += Release;
+        OnWhileFishing += StartReeling;
 
     }
 
@@ -54,6 +50,7 @@ public class FishingController : FishingEventController
         OnStartReelingFish -= () => SetState(new ReelingFish(this));
         OnEnterIdle -= ResetValues;
         OnWhileCharging -= Release;
+        OnWhileFishing -= StartReeling;
     }
 
     #region Public Methods
@@ -149,8 +146,8 @@ public class FishingController : FishingEventController
         FishAttachedToBait = null;
         IsInCatchArea = false;
         FishIsBaited = false;
-        reelInSpeed = 20;
-        castingPower = 15;
+        reelInSpeed = initialReelInSpeed;
+        castingPower = initialCastingPower;
     }
 }
 #endregion

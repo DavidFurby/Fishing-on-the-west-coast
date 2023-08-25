@@ -57,7 +57,6 @@ public class CatchArea : MonoBehaviour
             {
                 fishController.AddFish(newFishComponent);
             }
-            fishController.fishingRodLogic.CalculateReelInSpeed();
         }
     }
 }

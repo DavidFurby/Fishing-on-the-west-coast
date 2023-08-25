@@ -31,14 +31,14 @@ public class SeaLogic : MonoBehaviour
     {
         FishingController.OnEnterIdle += StopSpawnFish;
         FishingController.OnEnterIdle += RemoveAllFishes;
-        FishingController.OnStartFishing += InvokeSpawnFish;
+        FishingController.OnEnterFishing += InvokeSpawnFish;
     }
 
     private void UnsubscribeFromEvents()
     {
         FishingController.OnEnterIdle -= StopSpawnFish;
         FishingController.OnEnterIdle -= RemoveAllFishes;
-        FishingController.OnStartFishing -= InvokeSpawnFish;
+        FishingController.OnEnterFishing -= InvokeSpawnFish;
     }
 
 

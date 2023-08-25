@@ -67,7 +67,7 @@ public class Casting : FishingState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        system.baitLogic.Cast();
+        system.RaiseWhileCasting();
     }
     public override void LateUpdate()
     {
@@ -85,17 +85,13 @@ public class Fishing : FishingState
     public override void OnEnter()
     {
         base.OnEnter();
-        system.RaiseSpawnFishes();
+        system.RaiseOnEnterFishing();
 
     }
     public override void Update()
     {
         base.Update();
-        system.StartReeling();
-        if (system.IsInCatchArea)
-        {
-            system.baitLogic.Shake();
-        }
+        system.RaiseWhileFishing();
     }
     public override void FixedUpdate()
     {
@@ -116,7 +112,7 @@ public class Reeling : FishingState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        system.baitLogic.ReelIn();
+        system.RaiseReelInBait();
     }
 
 }
@@ -134,7 +130,7 @@ public class ReelingFish : FishingState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        system.baitLogic.ReelIn();
+        system.RaiseReelInBait();
     }
     public override void LateUpdate()
     {

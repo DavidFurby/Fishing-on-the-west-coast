@@ -47,7 +47,7 @@ public class ChargeCast : MonoBehaviour
     {
         if (castingPowerBalance.gameObject.activeSelf)
         {
-            controller.castPower = Mathf.Min(castingPowerBalance.value, 1 - castingPowerBalance.value) + 1f;
+            controller.chargeLevel = Mathf.Min(castingPowerBalance.value, 1 - castingPowerBalance.value) + 1f;
             castingPowerBalance.value += castingPowerDirection ? 0.05f : -0.05f;
             if (castingPowerBalance.value >= 1)
             {

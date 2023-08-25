@@ -20,6 +20,7 @@ public class FishingRodLogic : MonoBehaviour
         FishingController.OnEnterIdle += ResetValues;
         FishingController.OnReeling += ReelInSpeed;
         FishingController.OnWhileCharging += ChargeCasting;
+        CatchArea.OnCatchWhileReeling += CalculateReelInSpeed;
     }
 
     void OnDisable()
@@ -28,6 +29,7 @@ public class FishingRodLogic : MonoBehaviour
         FishingController.OnEnterIdle -= ResetValues;
         FishingController.OnReeling -= ReelInSpeed;
         FishingController.OnWhileCharging -= ChargeCasting;
+        CatchArea.OnCatchWhileReeling -= CalculateReelInSpeed;
         OnTriggerSetChargingBalance = null;
 
     }
@@ -75,7 +77,7 @@ public class FishingRodLogic : MonoBehaviour
     // Play the swing animation and wait for it to finish
     private IEnumerator SwingAnimation()
     {
-        controller.castingPower *= controller.castPower * MainManager.Instance.game.playerLevel.ThrowRangeModifier();
+        controller.castingPower *= controller.chargeLevel * MainManager.Instance.game.playerLevel.ThrowRangeModifier();
         while (!fishingRodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
             yield return null;

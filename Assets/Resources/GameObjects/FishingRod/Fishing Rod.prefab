@@ -283,9 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishingRodAnimations: {fileID: 2696618216450335625}
   playerAnimations: {fileID: 0}
-  fishingSystem: {fileID: 0}
-  reelInSpeed: 0
-  castingPower: 20
+  controller: {fileID: 0}
 --- !u!114 &2696618216450335625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8165d89629e9d49aded1f97f854248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingGameSystem: {fileID: 0}
+  fishController: {fileID: 0}
 --- !u!135 &5979957840728314634
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -622,7 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2d101fa9f9eb945885fa7d1e49e195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingSystem: {fileID: 0}
+  fishingController: {fileID: 0}
+  baitLogic: {fileID: 2432128814930967612}
 --- !u!135 &5260980467124115617
 SphereCollider:
   m_ObjectHideFlags: 0
