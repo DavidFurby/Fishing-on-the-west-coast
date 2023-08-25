@@ -5,33 +5,21 @@ using UnityEngine;
 public class FishingRodLogic : MonoBehaviour
 {
     [SerializeField] private FishingRodAnimations fishingRodAnimations;
-    [SerializeField] private PlayerAnimations playerAnimations;
     [SerializeField] private FishingController controller;
     public static event Action OnTriggerSetChargingBalance;
-    public static event Action TriggerSetChargingBalanceEvent
-    {
-        add { OnTriggerSetChargingBalance += value; }
-        remove { OnTriggerSetChargingBalance -= value; }
-    }
 
     void OnEnable()
     {
         FishingController.OnChargeRelease += WaitForSwingAnimation;
-        FishingController.OnEnterIdle += ResetValues;
         FishingController.OnReeling += ReelInSpeed;
-        FishingController.OnWhileCharging += ChargeCasting;
         CatchArea.OnCatchWhileReeling += CalculateReelInSpeed;
     }
 
     void OnDisable()
     {
         FishingController.OnChargeRelease -= WaitForSwingAnimation;
-        FishingController.OnEnterIdle -= ResetValues;
         FishingController.OnReeling -= ReelInSpeed;
-        FishingController.OnWhileCharging -= ChargeCasting;
         CatchArea.OnCatchWhileReeling -= CalculateReelInSpeed;
-        OnTriggerSetChargingBalance = null;
-
     }
 
     public void TriggerSetChargingBalance()
@@ -48,31 +36,13 @@ public class FishingRodLogic : MonoBehaviour
         }
     }
 
-    // Set the initial values for the reel in speed and casting power
-    public void ResetValues()
-    {
-        playerAnimations.ResetChargingThrowSpeed();
-    }
-
     // Set the reel in speed to a fixed value
     public void ReelInSpeed()
     {
         controller.reelInSpeed = 50;
     }
 
-    /// <summary>
-    /// Charges the casting power while the space key is held down.
-    /// </summary>
-    /// <param name="setChargingThrowSpeed">The action to perform while charging the casting power.</param>
-    public void ChargeCasting()
-    {
-        fishingRodAnimations.PlaySwingAnimation();
-        if (controller.castingPower < MainManager.Instance.game.Inventory.EquippedFishingRod.throwRange)
-        {
-            controller.castingPower++;
-            playerAnimations.SetChargingThrowSpeed();
-        }
-    }
+
 
     // Play the swing animation and wait for it to finish
     private IEnumerator SwingAnimation()

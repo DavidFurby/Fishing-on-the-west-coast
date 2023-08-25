@@ -8,9 +8,27 @@ public class PlayerAnimations : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FishingController.OnStartCharging += () => SetChargingThrowAnimation(true);
-        FishingController.OnChargeRelease += () => SetChargingThrowAnimation(false);
+        FishingController.OnStartCharging += OnStartCharging;
+        FishingController.OnChargeRelease += OnChargeRelease;
+        FishingController.OnEnterIdle += ResetChargingThrowSpeed;
         originalChargingThrowSpeed = playerAnimator.GetFloat("chargingThrowSpeed");
+    }
+
+    void OnDisable()
+    {
+        FishingController.OnStartCharging -= OnStartCharging;
+        FishingController.OnChargeRelease -= OnChargeRelease;
+        FishingController.OnEnterIdle -= ResetChargingThrowSpeed;
+    }
+
+    private void OnStartCharging()
+    {
+        SetChargingThrowAnimation(true);
+    }
+
+    private void OnChargeRelease()
+    {
+        SetChargingThrowAnimation(false);
     }
 
     public void SetChargingThrowAnimation(bool active)
@@ -21,18 +39,27 @@ public class PlayerAnimations : MonoBehaviour
         }
     }
 
-    public void SetChargingThrowSpeed()
+    public void IncreaseChargingThrowSpeed()
     {
-        playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.02f);
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.02f);
+        }
     }
 
     public void ResetChargingThrowSpeed()
     {
-        playerAnimator.SetFloat("chargingThrowSpeed", originalChargingThrowSpeed);
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetFloat("chargingThrowSpeed", originalChargingThrowSpeed);
+        }
     }
 
     public void SetPlayerWalkAnimation(bool active)
     {
-        playerAnimator.SetBool("walking", active);
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool("walking", active);
+        }
     }
 }

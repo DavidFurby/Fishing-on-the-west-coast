@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FishingController : FishingEventController
 {
-
     [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
     [HideInInspector] public List<FishDisplay> fishesOnHook = new();
     [HideInInspector] public float chargeLevel = 1;
@@ -40,6 +39,8 @@ public class FishingController : FishingEventController
         OnEnterIdle += ResetValues;
         OnWhileCharging += Release;
         OnWhileFishing += StartReeling;
+        OnWhileCharging += ChargeCasting;
+
     }
 
     private void UnsubscribeFromEvents()
@@ -50,6 +51,8 @@ public class FishingController : FishingEventController
         OnEnterIdle -= ResetValues;
         OnWhileCharging -= Release;
         OnWhileFishing -= StartReeling;
+        OnWhileCharging -= ChargeCasting;
+
     }
 
     #region Public Methods
@@ -120,7 +123,17 @@ public class FishingController : FishingEventController
         fishesOnHook.Add(fish);
     }
 
-
+    /// <summary>
+    /// Charges the casting power while the space key is held down.
+    /// </summary>
+    /// <param name="setChargingThrowSpeed">The action to perform while charging the casting power.</param>
+    public void ChargeCasting()
+    {
+        if (castingPower < MainManager.Instance.game.Inventory.EquippedFishingRod.throwRange)
+        {
+            castingPower++;
+        }
+    }
     public void ClearCaughtFishes()
     {
         foreach (FishDisplay fish in fishesOnHook)

@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingRodTop: {fileID: 0}
+  fishingRodTop: {fileID: 6964771873550463292}
   system: {fileID: 0}
   splashSound: {fileID: 2783688128193428538}
   balance: {fileID: 0}
@@ -215,7 +215,7 @@ MonoBehaviour:
   distanceRecordMarker: {fileID: 4654798063134710352, guid: 650ed65096bddb2419513abc5108751b, type: 3}
   distanceTextUI: {fileID: 0}
   sea: {fileID: 0}
-  fishingRodTop: {fileID: 0}
+  fishingRodTop: {fileID: 6964771873550463292}
 --- !u!114 &1529541429993056296
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class ChargeCast : MonoBehaviour
     }
     private void SubscribeEvents()
     {
-        FishingController.OnWhileCharging += ChargeCasting;
+        FishingController.OnWhileCharging += ChargeMiniGame;
         FishingController.OnChargeRelease += StopCharging;
         FishingRodLogic.OnTriggerSetChargingBalance += StartCharging;
     }
@@ -31,7 +31,7 @@ public class ChargeCast : MonoBehaviour
     private void UnsubscribeEvents()
     {
         FishingController.OnChargeRelease -= StopCharging;
-        FishingController.OnWhileCharging -= ChargeCasting;
+        FishingController.OnWhileCharging -= ChargeMiniGame;
         FishingRodLogic.OnTriggerSetChargingBalance -= StartCharging;
     }
 
@@ -43,7 +43,7 @@ public class ChargeCast : MonoBehaviour
     {
         castingPowerBalance.gameObject.SetActive(false);
     }
-    private void ChargeCasting()
+    private void ChargeMiniGame()
     {
         if (castingPowerBalance.gameObject.activeSelf)
         {
