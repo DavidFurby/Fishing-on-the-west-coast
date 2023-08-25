@@ -56,7 +56,7 @@ public class BaitLogic : MonoBehaviour
     public void Cast()
     {
         DetachBait();
-        rigidBody.AddForceAtPosition(forceFactor * system.fishingRodLogic.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
+        rigidBody.AddForceAtPosition(forceFactor * system.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
         if (forceFactor > 0)
         {
             forceFactor -= 0.1f;
@@ -92,7 +92,7 @@ public class BaitLogic : MonoBehaviour
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
         transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
-        transform.Translate(system.fishingRodLogic.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+        transform.Translate(system.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
     }
 
     public void Shake()

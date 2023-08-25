@@ -1,60 +1,61 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using static FishingController;
 
 public class FishingRodLogic : MonoBehaviour
 {
     [SerializeField] private FishingRodAnimations fishingRodAnimations;
     [SerializeField] private PlayerAnimations playerAnimations;
-    [SerializeField] private FishingController fishingSystem;
-    [HideInInspector] public float reelInSpeed;
-    [HideInInspector] public float castingPower;
-    private readonly float initialCastingPower = 20;
-    private readonly float initialReelInSpeed = 15f;
+    [SerializeField] private FishingController controller;
     public static event Action OnTriggerSetChargingBalance;
+    public static event Action TriggerSetChargingBalanceEvent
+    {
+        add { OnTriggerSetChargingBalance += value; }
+        remove { OnTriggerSetChargingBalance -= value; }
+    }
 
-
-    void Start()
+    void OnEnable()
     {
         FishingController.OnChargeRelease += WaitForSwingAnimation;
+        FishingController.OnEnterIdle += ResetValues;
+        FishingController.OnReeling += ReelInSpeed;
+        FishingController.OnWhileCharging += ChargeCasting;
     }
 
-    void OnDestroy()
-    {
-        FishingController.OnChargeRelease -= WaitForSwingAnimation;
-
-    }
     void OnDisable()
     {
         FishingController.OnChargeRelease -= WaitForSwingAnimation;
+        FishingController.OnEnterIdle -= ResetValues;
+        FishingController.OnReeling -= ReelInSpeed;
+        FishingController.OnWhileCharging -= ChargeCasting;
+        OnTriggerSetChargingBalance = null;
+
     }
+
     public void TriggerSetChargingBalance()
     {
-        OnTriggerSetChargingBalance.Invoke();
-        fishingSystem.fishingMiniGame.SetChargingBalance(true);
+        OnTriggerSetChargingBalance?.Invoke();
     }
+
     // Calculate the reel in speed based on the size of the caught fishes
     public void CalculateReelInSpeed()
     {
-        foreach (FishDisplay @catch in fishingSystem.fishesOnHook)
+        foreach (FishDisplay @catch in controller.fishesOnHook)
         {
-            reelInSpeed = (initialReelInSpeed * MainManager.Instance.game.playerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
+            controller.reelInSpeed = (controller.initialReelInSpeed * MainManager.Instance.game.playerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
         }
     }
 
     // Set the initial values for the reel in speed and casting power
     public void ResetValues()
     {
-        reelInSpeed = initialReelInSpeed;
-        castingPower = initialCastingPower;
         playerAnimations.ResetChargingThrowSpeed();
     }
 
     // Set the reel in speed to a fixed value
     public void ReelInSpeed()
     {
-        reelInSpeed = 50;
+        controller.reelInSpeed = 50;
     }
 
     /// <summary>
@@ -64,9 +65,9 @@ public class FishingRodLogic : MonoBehaviour
     public void ChargeCasting()
     {
         fishingRodAnimations.PlaySwingAnimation();
-        if (castingPower < MainManager.Instance.game.Inventory.EquippedFishingRod.throwRange)
+        if (controller.castingPower < MainManager.Instance.game.Inventory.EquippedFishingRod.throwRange)
         {
-            castingPower++;
+            controller.castingPower++;
             playerAnimations.SetChargingThrowSpeed();
         }
     }
@@ -74,7 +75,7 @@ public class FishingRodLogic : MonoBehaviour
     // Play the swing animation and wait for it to finish
     private IEnumerator SwingAnimation()
     {
-        castingPower *= fishingSystem.fishingMiniGame.castPower * MainManager.Instance.game.playerLevel.ThrowRangeModifier();
+        controller.castingPower *= controller.castPower * MainManager.Instance.game.playerLevel.ThrowRangeModifier();
         while (!fishingRodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
             yield return null;
@@ -83,7 +84,7 @@ public class FishingRodLogic : MonoBehaviour
         {
             yield return null;
         }
-        fishingSystem.SetState(new Casting(fishingSystem));
+        controller.SetState(new Casting(controller));
     }
 
     // Play the reverse swing animation
@@ -96,5 +97,4 @@ public class FishingRodLogic : MonoBehaviour
     {
         StartCoroutine(SwingAnimation());
     }
-
 }

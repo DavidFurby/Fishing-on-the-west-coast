@@ -29,7 +29,6 @@ public class Interactive : MonoBehaviour
         {
             if (component is IInteractive)
             {
-                Debug.Log("" + component.gameObject);
                 (component as IInteractive).Interact();
                 break;
             }

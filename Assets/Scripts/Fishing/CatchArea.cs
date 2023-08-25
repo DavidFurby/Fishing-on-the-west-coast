@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CatchArea : MonoBehaviour
 {
-    [SerializeField] private FishingController fishingGameSystem;
+    [SerializeField] private FishingController fishController;
     public static event Action<Collider, GameObject> OnBaitFish;
     public static event Action OnCatchWhileReeling;
 
@@ -13,7 +13,7 @@ public class CatchArea : MonoBehaviour
     {
         if (other.CompareTag("Fish"))
         {
-            if (fishingGameSystem.GetCurrentState() is ReelingFish)
+            if (fishController.GetCurrentState() is ReelingFish)
             {
                 CatchFishDuringReelingState(other);
             }
@@ -26,9 +26,9 @@ public class CatchArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fishingGameSystem.FishAttachedToBait == other.GetComponent<FishDisplay>())
+        if (other.CompareTag("Fish") && fishController.FishAttachedToBait == other.GetComponent<FishDisplay>())
         {
-            fishingGameSystem.IsInCatchArea = true;
+            fishController.IsInCatchArea = true;
         }
     }
 
@@ -37,10 +37,10 @@ public class CatchArea : MonoBehaviour
         var fishMovement = other.GetComponent<FishMovement>();
         if (fishMovement.GetCurrentState() is Baited)
         {
-            fishingGameSystem.IsInCatchArea = true;
+            fishController.IsInCatchArea = true;
             if (other.TryGetComponent(out FishDisplay fish))
             {
-                fishingGameSystem.FishAttachedToBait = fish;
+                fishController.FishAttachedToBait = fish;
             }
         }
     }
@@ -48,16 +48,16 @@ public class CatchArea : MonoBehaviour
     private void CatchFishDuringReelingState(Collider other)
     {
         FishMovement fishMovement = other.GetComponent<FishMovement>();
-        OnBaitFish.Invoke(other, fishingGameSystem.fishesOnHook[^1].gameObject);
+        OnBaitFish.Invoke(other, fishController.fishesOnHook[^1].gameObject);
         if (fishMovement.GetCurrentState() is Baited)
         {
             OnCatchWhileReeling.Invoke();
             fishMovement.SetState(new HookedToFish(fishMovement));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {
-                fishingGameSystem.AddFish(newFishComponent);
+                fishController.AddFish(newFishComponent);
             }
-            fishingGameSystem.fishingRodLogic.CalculateReelInSpeed();
+            fishController.fishingRodLogic.CalculateReelInSpeed();
         }
     }
 }

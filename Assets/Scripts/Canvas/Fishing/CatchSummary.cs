@@ -8,7 +8,7 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI isNewText;
     [SerializeField] private TextMeshProUGUI newRecordText;
 
-    [SerializeField] private FishingController fishingSystem;
+    [SerializeField] private FishingController fishingController;
     [SerializeField] private CatchSummaryHandlers summaryDialogHandlers;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
     [SerializeField] private LevelSlider levelSlider;
@@ -24,18 +24,18 @@ public class CatchSummary : MonoBehaviour
     // Initialize the catch summary with a list of caught fishes.
     public void InitiateCatchSummary()
     {
-        if (fishingSystem == null || summaryDialogHandlers == null)
+        if (fishingController == null || summaryDialogHandlers == null)
         {
             Debug.LogError("Missing references");
             return;
         }
 
-        if (fishingSystem.fishesOnHook.Count <= 0)
+        if (fishingController.fishesOnHook.Count <= 0)
         {
             Debug.LogError("Fish list is empty");
             return;
         }
-        currentlyDisplayedFish = fishingSystem.fishesOnHook[currentFishIndex];
+        currentlyDisplayedFish = fishingController.fishesOnHook[currentFishIndex];
         UpdateDataValues();
         summaryDialogHandlers.StartSummary(currentlyDisplayedFish.fish);
     }
@@ -46,7 +46,7 @@ public class CatchSummary : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (currentFishIndex < fishingSystem.fishesOnHook.Count - 1)
+            if (currentFishIndex < fishingController.fishesOnHook.Count - 1)
             {
                 IncrementFishIndex();
                 UpdateDataValues();
@@ -54,7 +54,7 @@ public class CatchSummary : MonoBehaviour
             }
             else
             {
-                fishingSystem.SetState(new FishingIdle(fishingSystem));
+                fishingController.SetState(new FishingIdle(fishingController));
             }
         }
     }
@@ -73,7 +73,7 @@ public class CatchSummary : MonoBehaviour
     private void IncrementFishIndex()
     {
         currentFishIndex++;
-        currentlyDisplayedFish = fishingSystem.fishesOnHook[currentFishIndex];
+        currentlyDisplayedFish = fishingController.fishesOnHook[currentFishIndex];
     }
 
     // Check if fish is larger than the saved fish of the same name and return true or false

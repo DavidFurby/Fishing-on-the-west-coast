@@ -6,13 +6,17 @@ public class FishingController : FishingEventController
 {
     #region Serialized Fields
     [Header("Fishing Components")]
-    public FishingMiniGame fishingMiniGame;
     public FishingRodLogic fishingRodLogic;
     public BaitLogic baitLogic;
     #endregion
 
     [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
     [HideInInspector] public List<FishDisplay> fishesOnHook = new();
+    [HideInInspector] public float castPower;
+    public float reelInSpeed;
+    public float castingPower;
+    public float initialCastingPower = 20;
+    public float initialReelInSpeed = 15f;
 
     [HideInInspector] public bool IsInCatchArea { get; set; }
 
@@ -21,11 +25,36 @@ public class FishingController : FishingEventController
     private void Start()
     {
         SetState(new NotFishing(this));
+    }
+
+    void OnEnable()
+    {
+        SubscribeToEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
         FishingSpot.StartFishing += () => SetState(new FishingIdle(this));
         OnStartReelingFish += CatchFish;
         OnStartReelingFish += () => SetState(new ReelingFish(this));
+        OnEnterIdle += ResetValues;
+        OnWhileCharging += Release;
+
     }
-    
+
+    private void UnsubscribeFromEvents()
+    {
+        FishingSpot.StartFishing -= () => SetState(new FishingIdle(this));
+        OnStartReelingFish -= CatchFish;
+        OnStartReelingFish -= () => SetState(new ReelingFish(this));
+        OnEnterIdle -= ResetValues;
+        OnWhileCharging -= Release;
+    }
 
     #region Public Methods
     /// <summary>
@@ -41,7 +70,7 @@ public class FishingController : FishingEventController
             }
             else
             {
-                fishingRodLogic.ReelInSpeed();
+                RaiseStartReeling();
                 SetState(new Reeling(this));
             }
         }
@@ -58,12 +87,10 @@ public class FishingController : FishingEventController
             SetState(new Charging(this));
         }
     }
-    
-    public void Charge()
-    {
-        fishingRodLogic.ChargeCasting();
-    }
-    
+
+    /// <summary>
+    /// Releases the fishing line when the space key is released.
+    /// </summary>
     public void Release()
     {
         if (Input.GetKeyUp(KeyCode.Space))
@@ -71,7 +98,10 @@ public class FishingController : FishingEventController
             SetState(new Swinging(this));
         }
     }
-    
+
+    /// <summary>
+    /// Catches a fish if it is attached to the bait.
+    /// </summary>
     public void CatchFish()
     {
         if (GetCurrentState() is Fishing)
@@ -80,7 +110,7 @@ public class FishingController : FishingEventController
             AddFish(FishAttachedToBait);
         }
     }
-    
+
     //Trigger methods when fish has been reeled in to inspect fishes
     public void HandleCatch()
     {
@@ -103,22 +133,24 @@ public class FishingController : FishingEventController
         fishesOnHook.Add(fish);
     }
 
-    
-     public void ClearCaughtFishes()
-     {
-         foreach (var fish in fishesOnHook)
-         {
-             fish.ReturnToPool();
-         }
-         fishesOnHook.Clear();
-     }
-     
-     public void ResetValues()
-     {
-         ClearCaughtFishes();
-         FishAttachedToBait = null;
-         IsInCatchArea = false;
-         FishIsBaited = false;
-     }
+
+    public void ClearCaughtFishes()
+    {
+        foreach (FishDisplay fish in fishesOnHook)
+        {
+            fish.ReturnToPool();
+        }
+        fishesOnHook.Clear();
+    }
+
+    public void ResetValues()
+    {
+        ClearCaughtFishes();
+        FishAttachedToBait = null;
+        IsInCatchArea = false;
+        FishIsBaited = false;
+        reelInSpeed = 20;
+        castingPower = 15;
+    }
 }
 #endregion

@@ -480,6 +480,18 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2836304724608885465, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1917359914}
+    - target: {fileID: 2836304724608885465, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: reelingBalance
+      value: 
+      objectReference: {fileID: 1493859758}
+    - target: {fileID: 2836304724608885465, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: musicController
+      value: 
+      objectReference: {fileID: 970918385}
     - target: {fileID: 2979831197425782169, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -548,6 +560,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4446127831834354493, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 4607451860022164664, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -779,7 +795,7 @@ PrefabInstance:
     - target: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: fishingSystem
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: musicController
       value: 
@@ -1036,6 +1052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishingCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8942074247667619960, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: system
       value: 
@@ -1068,6 +1088,10 @@ PrefabInstance:
       propertyPath: fishingControls
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: fishingController
+      value: 
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 8990243547161278336, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: summaryDialogHandlers
       value: 
@@ -1126,6 +1150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5528743975601182668, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+    - {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1576,17 +1601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f647148571a8f4dbe98d2b20fcce6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1275887656 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6730810522263340225, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
-  m_PrefabInstance: {fileID: 229474582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c6b7fe427a2d641be07b3a90878018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1436443802 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4847019202594342798, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
@@ -1677,7 +1691,7 @@ PrefabInstance:
     - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: fishingMiniGame
       value: 
-      objectReference: {fileID: 1275887656}
+      objectReference: {fileID: 0}
     - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: fishingRodLogic
       value: 
@@ -1685,7 +1699,7 @@ PrefabInstance:
     - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1275887656}
+      objectReference: {fileID: 0}
     - target: {fileID: 2196328919354006432, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -1777,7 +1791,7 @@ PrefabInstance:
     - target: {fileID: 6592811363448250335, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: fishingMiniGame
       value: 
-      objectReference: {fileID: 1275887656}
+      objectReference: {fileID: 0}
     - target: {fileID: 6592811363448250335, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: fishingRodLogic
       value: 
@@ -1793,7 +1807,7 @@ PrefabInstance:
     - target: {fileID: 8827973627027963925, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: fishingMiniGame
       value: 
-      objectReference: {fileID: 1275887656}
+      objectReference: {fileID: 0}
     - target: {fileID: 8827973627027963925, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: fishingRodLogic
       value: 
@@ -1850,7 +1864,7 @@ PrefabInstance:
     - target: {fileID: 1060150932210229058, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2007043668}
     - target: {fileID: 1061623482519195666, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: sea
       value: 
@@ -2544,6 +2558,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1917359914}
+    - target: {fileID: 7738849842280061641, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: fishingSystem
       value: 
       objectReference: {fileID: 1917359914}
@@ -2618,7 +2636,7 @@ PrefabInstance:
     - target: {fileID: 8610591980380077521, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2007043668}
     - target: {fileID: 8708867433470933099, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: m_Controller
       value: 
@@ -3218,7 +3236,7 @@ PrefabInstance:
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: fishingController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1917359914}
     - target: {fileID: 5824225006748754863, guid: 63d30f69d677bd94d96a962e0c91901e, type: 3}
       propertyPath: Fishes.Array.data[0]
       value: 
@@ -3469,11 +3487,11 @@ PrefabInstance:
     - target: {fileID: 6259348273074409973, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
       propertyPath: fishingMiniGame
       value: 
-      objectReference: {fileID: 1275887656}
+      objectReference: {fileID: 0}
     - target: {fileID: 6259348273074409973, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
       propertyPath: onChargeRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1275887656}
+      objectReference: {fileID: 0}
     - target: {fileID: 7438745553742391285, guid: 71df1464eac71c64b8bced09009a17cf, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3571,6 +3589,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
       propertyPath: system
+      value: 
+      objectReference: {fileID: 1917359914}
+    - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}
+      propertyPath: controller
       value: 
       objectReference: {fileID: 1917359914}
     - target: {fileID: 8025716213410296501, guid: 3a58ec4b70f192743b9b3f718779cd59, type: 3}

@@ -23,9 +23,7 @@ public class FishingIdle : FishingState
     public override void OnEnter()
     {
         base.OnEnter();
-        system.RaiseRemoveFishes();
-        system.fishingRodLogic.ResetValues();
-        system.ResetValues();
+        system.RaiseEnterIdle();
     }
     public override void Update()
     {
@@ -43,8 +41,6 @@ public class Charging : FishingState
     public override void Update()
     {
         base.Update();
-        system.Charge();
-        system.Release();
         system.RaiseWhileCharging();
     }
 }

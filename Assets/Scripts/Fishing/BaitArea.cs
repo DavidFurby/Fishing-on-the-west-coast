@@ -3,19 +3,25 @@ using System.Collections;
 
 public class BaitArea : MonoBehaviour
 {
-    [SerializeField] private FishingController fishingSystem;
+    [SerializeField] private FishingController fishingController;
     private const float baitShakeDelay = 2f;
+    private bool isShaking = false;
 
-
-    void Start()
+    void OnEnable()
     {
         CatchArea.OnBaitFish += TryBaitingFish;
     }
+
+    void OnDisable()
+    {
+        CatchArea.OnBaitFish -= TryBaitingFish;
+    }
+
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Fish") && !fishingSystem.FishIsBaited)
+        if (fishingController != null && collider.CompareTag("Fish") && !fishingController.FishIsBaited)
         {
-            TryBaitingFish(collider, fishingSystem.baitLogic.gameObject);
+            TryBaitingFish(collider, fishingController.baitLogic.gameObject);
         }
     }
 
@@ -26,26 +32,28 @@ public class BaitArea : MonoBehaviour
 
     private IEnumerator ShakeBaitOnKeyPress(Collider collider)
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (!isShaking && Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            fishingSystem.baitLogic.Shake();
-            if (collider.CompareTag("Fish") && !fishingSystem.FishIsBaited)
+            isShaking = true;
+            fishingController.baitLogic.Shake();
+            if (collider.CompareTag("Fish") && !fishingController.FishIsBaited)
             {
-                TryBaitingFish(collider, fishingSystem.baitLogic.gameObject);
+                TryBaitingFish(collider, fishingController.baitLogic.gameObject);
             }
 
             yield return new WaitForSeconds(baitShakeDelay);
+            isShaking = false;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fishingSystem.FishIsBaited)
+        if (other.CompareTag("Fish") && fishingController.FishIsBaited)
         {
             FishMovement fishMovement = other.GetComponent<FishMovement>();
-            if (fishMovement.GetCurrentState() is Baited)
+            if (fishMovement != null && fishMovement.GetCurrentState() is Baited)
             {
-                fishingSystem.FishIsBaited = false;
+                fishingController.FishIsBaited = false;
                 fishMovement.SetState(new Swimming(fishMovement));
             }
         }
@@ -59,7 +67,7 @@ public class BaitArea : MonoBehaviour
         if (UnityEngine.Random.Range(0f, 1f) < probability)
         {
             fishMovement.GetBaited(target);
-            fishingSystem.FishIsBaited = true;
+            fishingController.FishIsBaited = true;
         }
     }
 

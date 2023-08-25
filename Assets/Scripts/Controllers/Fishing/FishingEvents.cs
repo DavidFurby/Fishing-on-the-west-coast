@@ -6,9 +6,10 @@ public abstract class FishingEventController : FishingStateMachine
     #region Events
     public static event Action OnChargeRelease;
     public static event Action OnStartCharging;
-    public static event Action OnRemoveFishes;
+    public static event Action OnEnterIdle;
     public static event Action OnStartFishing;
     public static event Action OnReelingFish;
+    public static event Action OnReeling;
     public static event Action OnStartInspecting;
     public static event Action OnNextSummary;
     public static event Action OnEndSummary;
@@ -21,12 +22,18 @@ public abstract class FishingEventController : FishingStateMachine
 
     #endregion
 
-    public void RaiseStartReelingFish() {
+    public void RaiseStartReelingFish()
+    {
         OnStartReelingFish?.Invoke();
     }
-   public void RaiseRemoveFishes()
+    
+    public void RaiseStartReeling()
     {
-        OnRemoveFishes?.Invoke();
+        OnReeling?.Invoke();
+    }
+    public void RaiseEnterIdle()
+    {
+        OnEnterIdle?.Invoke();
     }
     public void RaiseSpawnFishes()
     {

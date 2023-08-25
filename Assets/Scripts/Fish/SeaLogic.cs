@@ -5,7 +5,7 @@ public class SeaLogic : MonoBehaviour
 {
     [SerializeField] private int spawnDelay;
     [SerializeField] private GameObject bait;
-    [SerializeField] private FishingController fishingSystem;
+    [SerializeField] private FishingController fishingController;
 
     private FishDisplay[] fishPrefabs;
     private Renderer seaRenderer;
@@ -29,15 +29,15 @@ public class SeaLogic : MonoBehaviour
     }
     private void SubscribeToEvents()
     {
-        FishingController.OnRemoveFishes += StopSpawnFish;
-        FishingController.OnRemoveFishes += RemoveAllFishes;
+        FishingController.OnEnterIdle += StopSpawnFish;
+        FishingController.OnEnterIdle += RemoveAllFishes;
         FishingController.OnStartFishing += InvokeSpawnFish;
     }
 
     private void UnsubscribeFromEvents()
     {
-        FishingController.OnRemoveFishes -= StopSpawnFish;
-        FishingController.OnRemoveFishes -= RemoveAllFishes;
+        FishingController.OnEnterIdle -= StopSpawnFish;
+        FishingController.OnEnterIdle -= RemoveAllFishes;
         FishingController.OnStartFishing -= InvokeSpawnFish;
     }
 
@@ -69,7 +69,7 @@ public class SeaLogic : MonoBehaviour
         Vector3 fishSpawnPosition = Vector3.zero;
         Quaternion fishSpawnRotation = Quaternion.identity;
 
-        if (fishingSystem.GetCurrentState() is not FishingIdle)
+        if (fishingController.GetCurrentState() is not FishingIdle)
         {
             float fishSpawnX = Random.value < 0.5 ? bait.transform.position.x - 5 : bait.transform.position.x + 5;
             float spawnVertical = Random.Range(seaPosition.y, seaPosition.y + seaRenderer.bounds.extents.y);
