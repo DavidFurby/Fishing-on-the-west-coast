@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CatchSummary : MonoBehaviour
 {
+    #region Serialized Fields
     [SerializeField] private TextMeshProUGUI isNewText;
     [SerializeField] private TextMeshProUGUI newRecordText;
 
@@ -12,27 +13,36 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private CatchSummaryHandlers summaryDialogHandlers;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
     [SerializeField] private LevelSlider levelSlider;
+    #endregion
+
+    #region Private Fields
     private int currentFishIndex = 0;
+    #endregion
 
-
-    void Start()
+    #region Unity Methods
+    void OnEnable()
     {
         FishingController.OnStartInspecting += InitiateCatchSummary;
         FishingController.OnNextSummary += NextSummary;
         FishingController.OnEndSummary += EndSummary;
     }
-    // Initialize the catch summary with a list of caught fishes.
+    void OnDisable()
+    {
+        FishingController.OnStartInspecting -= InitiateCatchSummary;
+        FishingController.OnNextSummary -= NextSummary;
+        FishingController.OnEndSummary -= EndSummary;
+    }
+    #endregion
+
+    #region Public Methods
+    /// <summary>
+    /// Initialize the catch summary with a list of caught fishes.
+    /// </summary>
     public void InitiateCatchSummary()
     {
-        if (fishingController == null || summaryDialogHandlers == null)
+        if (fishingController?.fishesOnHook.Count <= 0)
         {
-            Debug.LogError("Missing references");
-            return;
-        }
-
-        if (fishingController.fishesOnHook.Count <= 0)
-        {
-            Debug.LogError("Fish list is empty");
+            Debug.LogError($"{nameof(fishingController.fishesOnHook)} is empty");
             return;
         }
         currentlyDisplayedFish = fishingController.fishesOnHook[currentFishIndex];
@@ -40,8 +50,9 @@ public class CatchSummary : MonoBehaviour
         summaryDialogHandlers.StartSummary(currentlyDisplayedFish.fish);
     }
 
-
-    // If there are more fishes, switch summary. Otherwise, end the summary.
+    /// <summary>
+    /// If there are more fishes, switch summary. Otherwise, end the summary.
+    /// </summary>
     public void NextSummary()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -59,6 +70,17 @@ public class CatchSummary : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reset data and set fishingStatus to Standby to end summary.
+    /// </summary>
+    public void EndSummary()
+    {
+        ResetValues();
+        summaryDialogHandlers.EndSummary();
+    }
+    #endregion
+
+    #region Private Methods
     // Update the UI values and the game data
     private void UpdateDataValues()
     {
@@ -79,14 +101,7 @@ public class CatchSummary : MonoBehaviour
     // Check if fish is larger than the saved fish of the same name and return true or false
     private bool IsNewRecord(Fish fish)
     {
-        if (fish == null)
-        {
-            Debug.LogError("Fish data is null");
-            return false;
-        }
-
-        Fish existingFish = MainManager.Instance.game.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size);
-        if (existingFish != null)
+        if (MainManager.Instance.game.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size) is Fish existingFish)
         {
             int index = Array.IndexOf(MainManager.Instance.game.CaughtFishes.ToArray(), existingFish);
             fish.ReplaceFishInInstance(index);
@@ -99,13 +114,7 @@ public class CatchSummary : MonoBehaviour
     // Check if fish hasn't been caught before and return true or false
     private bool IsNewCatch(Fish fish)
     {
-        if (fish == null)
-        {
-            Debug.LogError("Fish data is null");
-            return false;
-        }
-
-        if (!MainManager.Instance.game.CaughtFishes.Any(f => f.id == fish.id))
+        if (MainManager.Instance.game.CaughtFishes.All(f => f.id != fish.id))
         {
             fish.AddFishToInstance();
             return true;
@@ -114,17 +123,11 @@ public class CatchSummary : MonoBehaviour
         return false;
     }
 
-    // Reset data and set fishingStatus to Standby to end summary.
-    public void EndSummary()
-    {
-        ResetValues();
-        summaryDialogHandlers.EndSummary();
-    }
-
     // Reset values
     private void ResetValues()
     {
         currentlyDisplayedFish = null;
         currentFishIndex = 0;
     }
+    #endregion
 }
