@@ -40,7 +40,6 @@ public class FishingController : FishingEventController
         OnEnterIdle += ResetValues;
         OnWhileCharging += Release;
         OnWhileFishing += StartReeling;
-
     }
 
     private void UnsubscribeFromEvents()
@@ -105,15 +104,6 @@ public class FishingController : FishingEventController
         {
             FishAttachedToBait.GetComponent<FishMovement>().SetState(new Hooked(FishAttachedToBait.GetComponent<FishMovement>()));
             AddFish(FishAttachedToBait);
-        }
-    }
-
-    //Trigger methods when fish has been reeled in to inspect fishes
-    public void HandleCatch()
-    {
-        if (fishesOnHook.Count > 0)
-        {
-            SetState(new InspectFish(this));
         }
     }
 

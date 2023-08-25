@@ -71,7 +71,7 @@ public class BaitLogic : MonoBehaviour
             AttachBait();
             if (system.fishesOnHook.Count > 0)
             {
-                system.HandleCatch();
+                system.SetState(new InspectFish(system));
             }
             else
             {

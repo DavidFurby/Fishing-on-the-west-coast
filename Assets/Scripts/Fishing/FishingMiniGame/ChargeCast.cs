@@ -32,7 +32,7 @@ public class ChargeCast : MonoBehaviour
     {
         FishingController.OnChargeRelease -= StopCharging;
         FishingController.OnWhileCharging -= ChargeCasting;
-        FishingRodLogic.OnTriggerSetChargingBalance += StartCharging;
+        FishingRodLogic.OnTriggerSetChargingBalance -= StartCharging;
     }
 
     private void StartCharging()

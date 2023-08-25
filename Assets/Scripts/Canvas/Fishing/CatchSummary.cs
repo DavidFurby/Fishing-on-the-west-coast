@@ -8,7 +8,6 @@ public class CatchSummary : MonoBehaviour
     #region Serialized Fields
     [SerializeField] private TextMeshProUGUI isNewText;
     [SerializeField] private TextMeshProUGUI newRecordText;
-
     [SerializeField] private FishingController fishingController;
     [SerializeField] private CatchSummaryHandlers summaryDialogHandlers;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;

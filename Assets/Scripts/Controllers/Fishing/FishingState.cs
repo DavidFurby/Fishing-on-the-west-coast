@@ -155,7 +155,7 @@ public class InspectFish : FishingState
     public override void OnEnter()
     {
         base.OnEnter();
-        system.RaiseNextSummary();
+        system.RaiseStartInspecting();
     }
     public override void Update()
     {
