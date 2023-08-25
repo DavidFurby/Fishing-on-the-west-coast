@@ -12,7 +12,7 @@ public class FishingRodLogic : MonoBehaviour
     [HideInInspector] public float castingPower;
     private readonly float initialCastingPower = 20;
     private readonly float initialReelInSpeed = 15f;
-
+    public static event Action OnTriggerSetChargingBalance;
 
 
     void Start()
@@ -29,7 +29,11 @@ public class FishingRodLogic : MonoBehaviour
     {
         FishingController.OnChargeRelease -= WaitForSwingAnimation;
     }
-
+    public void TriggerSetChargingBalance()
+    {
+        OnTriggerSetChargingBalance.Invoke();
+        fishingSystem.fishingMiniGame.SetChargingBalance(true);
+    }
     // Calculate the reel in speed based on the size of the caught fishes
     public void CalculateReelInSpeed()
     {
