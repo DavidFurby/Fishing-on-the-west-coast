@@ -4,7 +4,7 @@ public class Interactive : MonoBehaviour
 {
     private GameObject InteractiveIcon;
     private GameObject iconInstance;
-    public float iconOffset = 2f;
+   [HideInInspector] public float iconOffset = 2f;
     private const string ItemsPath = "GameObjects/";
 
     private void Start()
@@ -29,6 +29,7 @@ public class Interactive : MonoBehaviour
         {
             if (component is IInteractive)
             {
+                HideIcon();
                 (component as IInteractive).Interact();
                 break;
             }
