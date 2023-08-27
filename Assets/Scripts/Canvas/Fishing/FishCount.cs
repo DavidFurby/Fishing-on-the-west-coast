@@ -8,7 +8,7 @@ public class FishCount : MonoBehaviour
 
     private void Start()
     {
-        fishText = GetComponent<TextMeshProUGUI>();
+        fishText = transform.Find("Counter").GetComponent<TextMeshProUGUI>();
     }
 
     void Update()

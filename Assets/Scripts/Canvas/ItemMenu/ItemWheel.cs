@@ -4,7 +4,9 @@ using static Item;
 
 public class ItemWheel : MonoBehaviour
 {
-    [SerializeField] private ItemSlot ItemSlot;
+    private const string SlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
+
+    private ItemSlot ItemSlot;
     public ItemTag itemTag;
     private ItemSlot[] _listOfItemSlots;
     private bool _wheelIsFocused;
@@ -13,6 +15,11 @@ public class ItemWheel : MonoBehaviour
     float spacing;
     int middleIndex;
 
+    void OnEnable()
+    {
+        ItemSlot = Resources.Load<ItemSlot>(SlotPath);
+      
+    }
 
     private void Update()
     {

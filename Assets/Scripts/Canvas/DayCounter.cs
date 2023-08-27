@@ -8,7 +8,7 @@ public class DayCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CounterText = GetComponent<TextMeshProUGUI>();
+        CounterText = transform.Find("Counter").GetComponent<TextMeshProUGUI>();
         if (MainManager.Instance != null)
         {
             dayCount = MainManager.Instance.Days;

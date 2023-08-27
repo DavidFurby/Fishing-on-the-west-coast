@@ -6,18 +6,21 @@ using TMPro;
 
 public class LevelSlider : MonoBehaviour
 {
-    [SerializeField] private Slider levelSlider;
-    [SerializeField] private TextMeshProUGUI levelText;
+    private Slider levelSlider;
+    private TextMeshProUGUI currentLevelText;
     // Start is called before the first frame update
     void Start()
     {
+        currentLevelText = transform.Find("CurrentLevel").GetComponent<TextMeshProUGUI>();
+        levelSlider = transform.Find("LevelSlider").GetComponent<Slider>();
         levelSlider.gameObject.SetActive(true);
         SetLevel();
     }
 
-    public void SetLevel() {
+    public void SetLevel()
+    {
         levelSlider.maxValue = MainManager.Instance.playerLevel.requiredExp;
         levelSlider.value = MainManager.Instance.playerLevel.Exp;
-        levelText.text = MainManager.Instance.playerLevel.Level.ToString();
+        currentLevelText.text = MainManager.Instance.playerLevel.Level.ToString();
     }
 }

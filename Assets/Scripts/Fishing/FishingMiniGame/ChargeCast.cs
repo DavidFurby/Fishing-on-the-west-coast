@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class ChargeCast : MonoBehaviour
 {
     [SerializeField] private Scrollbar castingPowerBalance;
-    [SerializeField] private FishingController controller;
     private bool castingPowerDirection = true;
 
     void Start()
@@ -47,7 +46,7 @@ public class ChargeCast : MonoBehaviour
     {
         if (castingPowerBalance.gameObject.activeSelf)
         {
-            controller.chargeLevel = Mathf.Min(castingPowerBalance.value, 1 - castingPowerBalance.value) + 1f;
+            FishingController.Instance.chargeLevel = Mathf.Min(castingPowerBalance.value, 1 - castingPowerBalance.value) + 1f;
             castingPowerBalance.value += castingPowerDirection ? 0.05f : -0.05f;
             if (castingPowerBalance.value >= 1)
             {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FishingController : FishingEventController
 {
+    public static FishingController Instance { get; private set; }
     [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
     [HideInInspector] public List<FishDisplay> fishesOnHook = new();
     [HideInInspector] public float chargeLevel = 1;
@@ -16,6 +17,21 @@ public class FishingController : FishingEventController
 
     [HideInInspector] public bool FishIsBaited { get; set; }
 
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         SetState(new NotFishing(this));
