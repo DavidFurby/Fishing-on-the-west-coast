@@ -119,11 +119,9 @@ public class BaitLogic : MonoBehaviour
         // Execute the original method logic
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Debug.Log("Timer");
             IsPulling = true;
             Vector3 direction = (fishingRodTop.transform.position - transform.position).normalized;
             rigidBody.AddForce(direction * 10f, ForceMode.Impulse);
-            PlaySplashSound();
             IsPulling = false;
         }
 
