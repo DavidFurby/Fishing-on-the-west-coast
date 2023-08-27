@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class BaitLogic : MonoBehaviour
 {
+    public bool IsPulling { get; private set; }
+
     #region Serialized Fields
     [SerializeField] private GameObject fishingRodTop;
     [SerializeField] private Scrollbar balance;
@@ -45,6 +47,7 @@ public class BaitLogic : MonoBehaviour
     void Update()
     {
         UpdatePosition.Invoke(transform.position);
+
     }
 
     private void AttachBait()
@@ -112,13 +115,19 @@ public class BaitLogic : MonoBehaviour
 
     public void PullBaitTowardsTarget()
     {
+
+        // Execute the original method logic
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            Debug.Log("Timer");
+            IsPulling = true;
             Vector3 direction = (fishingRodTop.transform.position - transform.position).normalized;
             rigidBody.AddForce(direction * 10f, ForceMode.Impulse);
+            PlaySplashSound();
+            IsPulling = false;
         }
-    }
 
+    }
     public void PlaySplashSound()
     {
         splashSound.Play();

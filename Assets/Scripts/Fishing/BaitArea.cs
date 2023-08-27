@@ -4,8 +4,6 @@ using System.Collections;
 public class BaitArea : MonoBehaviour
 {
     [SerializeField] private BaitLogic baitLogic;
-    private const float baitShakeDelay = 2f;
-    private bool isShaking = false;
 
     void OnEnable()
     {
@@ -24,25 +22,13 @@ public class BaitArea : MonoBehaviour
             TryBaitingFish(collider, baitLogic.gameObject);
         }
     }
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider collider)
     {
-        StartCoroutine(ShakeBaitOnKeyPress(other));
-    }
-
-    private IEnumerator ShakeBaitOnKeyPress(Collider collider)
-    {
-        if (!isShaking && Input.GetKeyDown(KeyCode.LeftArrow))
+        // Check if the bait is being pulled and if the collider is a fish
+        if (baitLogic.IsPulling && FishingController.Instance != null && collider.CompareTag("Fish") && !FishingController.Instance.FishIsBaited)
         {
-            isShaking = true;
-            baitLogic.PlaySplashSound();
-            if (collider.CompareTag("Fish") && !FishingController.Instance.FishIsBaited)
-            {
-                TryBaitingFish(collider, baitLogic.gameObject);
-            }
-
-            yield return new WaitForSeconds(baitShakeDelay);
-            isShaking = false;
+            // Call the TryBaitingFish method
+            TryBaitingFish(collider, baitLogic.gameObject);
         }
     }
 
