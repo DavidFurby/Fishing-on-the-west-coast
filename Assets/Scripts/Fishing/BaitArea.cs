@@ -36,7 +36,7 @@ public class BaitArea : MonoBehaviour
         if (!isShaking && Input.GetKeyDown(KeyCode.LeftArrow))
         {
             isShaking = true;
-            baitLogic.Shake();
+            baitLogic.PlaySplashSound();
             if (collider.CompareTag("Fish") && !fishingController.FishIsBaited)
             {
                 TryBaitingFish(collider, baitLogic.gameObject);

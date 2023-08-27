@@ -54,7 +54,7 @@ public abstract class FishingEventController : FishingStateMachine
     {
         OnEnterIdle?.Invoke();
     }
-    public void RaiseOnEnterFishing()
+    public void RaiseEnterFishing()
     {
         OnEnterFishing?.Invoke();
     }
@@ -66,11 +66,6 @@ public abstract class FishingEventController : FishingStateMachine
     internal void RaiseStartCharging()
     {
         OnStartCharging?.Invoke();
-    }
-
-    internal void RaiseStartFishing()
-    {
-        OnEnterFishing?.Invoke();
     }
 
     internal void RaiseStartInspecting()

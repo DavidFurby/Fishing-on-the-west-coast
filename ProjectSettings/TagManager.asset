@@ -12,6 +12,7 @@ TagManager:
   - Key
   - PlayerModel
   - Interactive
+  - Bait
   layers:
   - Default
   - TransparentFX

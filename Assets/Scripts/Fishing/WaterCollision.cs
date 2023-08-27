@@ -1,15 +1,16 @@
+using System;
 using UnityEngine;
 
 public class WaterCollision : MonoBehaviour
 {
-    [SerializeField] private GameObject bait;
-    [SerializeField] private FishingController system;
     [SerializeField] private AudioSource splashSound;
-    [SerializeField] DistanceRecord distanceRecord;
     private float waterLevel;
     private const float FloatHeight = 150f;
     private const float BounceDamp = 1f;
-    
+
+    public static event Action OnEnterSea;
+
+
 
     void Start()
     {
@@ -18,16 +19,12 @@ public class WaterCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == bait && system != null)
+        if (other.CompareTag("Bait"))
         {
-            if (system.GetCurrentState() is Casting)
-            {
-                distanceRecord.UpdateDistanceRecord();
-                system.SetState(new Fishing(system));
-            }
+            OnEnterSea.Invoke();
             splashSound.Play();
         }
-        
+
         if (other.TryGetComponent<Rigidbody>(out var rigidBody))
         {
             rigidBody.drag += 2;
@@ -49,7 +46,7 @@ public class WaterCollision : MonoBehaviour
             rigidBody.drag -= 2;
         }
     }
-    
+
     public void ApplyBuoyancy(Rigidbody rigidBody)
     {
         Vector3 actionPoint = transform.position + transform.TransformDirection(Vector3.down);

@@ -19,6 +19,7 @@ public class BaitLogic : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         FishingController.OnReelInBait += ReelIn;
         FishingController.OnWhileCasting += Cast;
+        WaterCollision.OnEnterSea += PlaySplashSound;
         AttachBait();
     }
 
@@ -96,7 +97,7 @@ public class BaitLogic : MonoBehaviour
         transform.Translate(system.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
     }
 
-    public void Shake()
+    public void PlaySplashSound()
     {
         splashSound.Play();
     }

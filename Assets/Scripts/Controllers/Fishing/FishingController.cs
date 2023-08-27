@@ -33,6 +33,7 @@ public class FishingController : FishingEventController
 
     private void SubscribeToEvents()
     {
+        WaterCollision.OnEnterSea += EnterSea;
         FishingSpot.StartFishing += () => SetState(new FishingIdle(this));
         OnStartReelingFish += CatchFish;
         OnStartReelingFish += () => SetState(new ReelingFish(this));
@@ -45,6 +46,7 @@ public class FishingController : FishingEventController
 
     private void UnsubscribeFromEvents()
     {
+        WaterCollision.OnEnterSea -= EnterSea;
         FishingSpot.StartFishing -= () => SetState(new FishingIdle(this));
         OnStartReelingFish -= CatchFish;
         OnStartReelingFish -= () => SetState(new ReelingFish(this));
@@ -95,6 +97,13 @@ public class FishingController : FishingEventController
         if (Input.GetKeyUp(KeyCode.Space))
         {
             SetState(new Swinging(this));
+        }
+    }
+    public void EnterSea()
+    {
+        if (GetCurrentState() is Casting)
+        {
+            SetState(new Fishing(this));
         }
     }
 

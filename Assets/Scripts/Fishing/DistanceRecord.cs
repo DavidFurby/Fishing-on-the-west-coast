@@ -12,12 +12,20 @@ public class DistanceRecord : MonoBehaviour
 
     private float distance;
 
-
+    void OnEnable()
+    {
+        FishingController.OnEnterFishing += UpdateDistanceRecord;
+    }
     private void Start()
     {
         distanceTextUI.gameObject.SetActive(true);
         SpawnDistanceRecordMarker();
 
+    }
+
+    void OnDisable()
+    {
+        FishingController.OnEnterFishing -= UpdateDistanceRecord;
     }
     void FixedUpdate()
     {

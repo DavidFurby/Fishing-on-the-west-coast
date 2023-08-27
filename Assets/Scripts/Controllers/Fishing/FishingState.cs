@@ -85,7 +85,7 @@ public class Fishing : FishingState
     public override void OnEnter()
     {
         base.OnEnter();
-        system.RaiseOnEnterFishing();
+        system.RaiseEnterFishing();
 
     }
     public override void Update()
