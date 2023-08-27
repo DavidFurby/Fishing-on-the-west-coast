@@ -26,12 +26,16 @@ public class BaitLogic : MonoBehaviour
     {
         FishingController.OnReelInBait -= ReelIn;
         FishingController.OnWhileCasting -= Cast;
+        WaterCollision.OnEnterSea -= PlaySplashSound;
+
 
     }
     void OnDisable()
     {
         FishingController.OnReelInBait -= ReelIn;
         FishingController.OnWhileCasting -= Cast;
+        WaterCollision.OnEnterSea -= PlaySplashSound;
+
 
     }
 
@@ -44,8 +48,7 @@ public class BaitLogic : MonoBehaviour
         // Set the connected body of the FixedJoint to be the fishingRodTop
         fixedJoint.connectedBody = fishingRodTop.GetComponent<Rigidbody>();
 
-        // Reset other values
-        ResetValues();
+        forceFactor = 1f;
     }
 
     private void DetachBait()
@@ -99,10 +102,5 @@ public class BaitLogic : MonoBehaviour
     public void PlaySplashSound()
     {
         splashSound.Play();
-    }
-
-    private void ResetValues()
-    {
-        forceFactor = 1f;
     }
 }

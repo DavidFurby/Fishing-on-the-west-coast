@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8990243547161278336}
   - component: {fileID: 5748939074532554492}
   m_Layer: 5
-  m_Name: FishingCanvas
+  m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isNewText: {fileID: 6593741001342054128}
   newRecordText: {fileID: 4614909520830116077}
-  fishingController: {fileID: 0}
   summaryDialogHandlers: {fileID: 5748939074532554492}
   currentlyDisplayedFish: {fileID: 0}
   levelSlider: {fileID: 4055327629952208563}

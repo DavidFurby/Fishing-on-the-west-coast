@@ -121,7 +121,7 @@ public class Shop : MonoBehaviour
     {
         GameObject replacement = Instantiate(emptySpot.model, shopItemPositions[focusedShopItemIndex].transform.position, focusedShopItem.model.transform.rotation);
         replacement.transform.parent = transform;
-        DestroyImmediate(focusedShopItem.model);
+        Destroy(focusedShopItem.model);
         shopItems[focusedShopItemIndex] = emptySpot;
     }
 

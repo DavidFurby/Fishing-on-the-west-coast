@@ -1642,7 +1642,7 @@ PrefabInstance:
       objectReference: {fileID: 1860531746}
     - target: {fileID: 7661169753038949569, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: m_Name
-      value: PlayerFishing
+      value: PlayerController
       objectReference: {fileID: 0}
     - target: {fileID: 8827973627027963925, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
       propertyPath: baitLogic
