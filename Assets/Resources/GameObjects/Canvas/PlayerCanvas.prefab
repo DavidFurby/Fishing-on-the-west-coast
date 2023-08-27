@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 7019834432213953185}
   - component: {fileID: 4522761802943311337}
   - component: {fileID: 1604509529445302945}
+  - component: {fileID: 7180147358191297976}
   m_Layer: 5
   m_Name: Distance
   m_TagString: Untagged
@@ -276,6 +277,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7180147358191297976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2685610880479966111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0ceb6772e595e498088c45b4a0f9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceTextUI: {fileID: 1604509529445302945}
+  sea: {fileID: 0}
+  fishingRodTop: {fileID: 0}
 --- !u!1 &5653709540176170942
 GameObject:
   m_ObjectHideFlags: 0

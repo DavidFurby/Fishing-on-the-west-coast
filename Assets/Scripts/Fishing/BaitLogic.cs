@@ -1,50 +1,61 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BaitLogic : MonoBehaviour
 {
+    #region Serialized Fields
     [SerializeField] private GameObject fishingRodTop;
-    [SerializeField] private AudioSource splashSound;
     [SerializeField] private Scrollbar balance;
+    #endregion
+
+    #region Private Fields
+    private AudioSource splashSound;
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
     private FixedJoint fixedJoint;
+
+    #endregion
+
+    #region Events
     public static event Action<Vector3> UpdatePosition;
-
-
+    #endregion
 
     public void Start()
     {
+        splashSound = GetComponent<AudioSource>();
         rigidBody = GetComponent<Rigidbody>();
         FishingController.OnReelInBait += ReelIn;
         FishingController.OnWhileCasting += Cast;
         WaterCollision.OnEnterSea += PlaySplashSound;
+        FishingController.OnWhileFishing += PullBaitTowardsTarget;
         AttachBait();
     }
+
     void OnDisable()
     {
         FishingController.OnReelInBait -= ReelIn;
         FishingController.OnWhileCasting -= Cast;
         WaterCollision.OnEnterSea -= PlaySplashSound;
+        FishingController.OnWhileFishing -= PullBaitTowardsTarget;
+
     }
 
     void Update()
     {
         UpdatePosition.Invoke(transform.position);
     }
+
     private void AttachBait()
     {
         transform.position = fishingRodTop.transform.position;
+
         // Create a FixedJoint component and attach it to the bait
         fixedJoint = gameObject.AddComponent<FixedJoint>();
 
         // Set the connected body of the FixedJoint to be the fishingRodTop
         fixedJoint.connectedBody = fishingRodTop.GetComponent<Rigidbody>();
-
-        forceFactor = 1f;
     }
 
     private void DetachBait()
@@ -62,12 +73,15 @@ public class BaitLogic : MonoBehaviour
             forceFactor -= 0.1f;
         }
     }
+
     public void ReelIn()
     {
         targetPosition = fishingRodTop.transform.position;
+
         if (IsCloseToTarget(targetPosition))
         {
             AttachBait();
+
             if (FishingController.Instance.fishesOnHook.Count > 0)
             {
                 FishingController.Instance.SetState(new InspectFish(FishingController.Instance));
@@ -81,8 +95,8 @@ public class BaitLogic : MonoBehaviour
         {
             MoveTowardsTarget(targetPosition);
         }
-
     }
+
     private bool IsCloseToTarget(Vector3 targetPosition)
     {
         return Vector3.Distance(transform.position, targetPosition) < 0.5f;
@@ -90,9 +104,19 @@ public class BaitLogic : MonoBehaviour
 
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
-        Vector3 direction = (targetPosition - transform.position).normalized;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, FishingController.Instance.reelInSpeed * Time.fixedDeltaTime);
+
         transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
-        transform.Translate(FishingController.Instance.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+
+    }
+
+    public void PullBaitTowardsTarget()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Vector3 direction = (fishingRodTop.transform.position - transform.position).normalized;
+            rigidBody.AddForce(direction * 10f, ForceMode.Impulse);
+        }
     }
 
     public void PlaySplashSound()

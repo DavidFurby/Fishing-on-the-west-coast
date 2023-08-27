@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 public class SeaLogic : MonoBehaviour
 {
     [SerializeField] private int spawnDelay;
-    private Vector3 baitPosition;
+    private Vector3 targetPosition;
     private FishDisplay[] fishPrefabs;
     private Renderer seaRenderer;
 
@@ -30,7 +30,7 @@ public class SeaLogic : MonoBehaviour
         FishingController.OnEnterIdle += StopSpawnFish;
         FishingController.OnEnterIdle += RemoveAllFishes;
         FishingController.OnEnterFishing += InvokeSpawnFish;
-        BaitLogic.UpdatePosition += SetBaitPosition;
+        BaitLogic.UpdatePosition += SetTargetPosition;
 
     }
 
@@ -39,7 +39,7 @@ public class SeaLogic : MonoBehaviour
         FishingController.OnEnterIdle -= StopSpawnFish;
         FishingController.OnEnterIdle -= RemoveAllFishes;
         FishingController.OnEnterFishing -= InvokeSpawnFish;
-        BaitLogic.UpdatePosition -= SetBaitPosition;
+        BaitLogic.UpdatePosition -= SetTargetPosition;
 
     }
 
@@ -54,9 +54,9 @@ public class SeaLogic : MonoBehaviour
         if (this != null)
             CancelInvoke(nameof(SpawnFish));
     }
-    public void SetBaitPosition(Vector3 position)
+    public void SetTargetPosition(Vector3 position)
     {
-        baitPosition = position;
+        targetPosition = position;
     }
 
     private void SpawnFish()
@@ -72,12 +72,12 @@ public class SeaLogic : MonoBehaviour
 
     private (Vector3, Quaternion) CalculateSpawnPosition()
     {
-        float fishSpawnX = Random.value < 0.5 ? baitPosition.x - 5 : baitPosition.x + 5;
+        float fishSpawnX = Random.value < 0.5 ? targetPosition.x - 5 : targetPosition.x + 5;
         float spawnVertical = Random.Range(transform.position.y, transform.position.y + seaRenderer.bounds.extents.y);
 
-        Quaternion fishSpawnRotation = fishSpawnX < baitPosition.x ? Quaternion.Euler(0, 90, 0) : Quaternion.Euler(0, -90, 0);
+        Quaternion fishSpawnRotation = fishSpawnX < targetPosition.x ? Quaternion.Euler(0, 90, 0) : Quaternion.Euler(0, -90, 0);
 
-        Vector3 fishSpawnPosition = new(fishSpawnX, spawnVertical, baitPosition.z);
+        Vector3 fishSpawnPosition = new(fishSpawnX, spawnVertical, targetPosition.z);
 
 
         return (fishSpawnPosition, fishSpawnRotation);
