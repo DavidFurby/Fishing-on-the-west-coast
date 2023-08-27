@@ -8,7 +8,6 @@ public class CatchSummary : MonoBehaviour
     #region Serialized Fields
     [SerializeField] private TextMeshProUGUI isNewText;
     [SerializeField] private TextMeshProUGUI newRecordText;
-    [SerializeField] private FishingController fishingController;
     [SerializeField] private CatchSummaryHandlers summaryDialogHandlers;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
     [SerializeField] private LevelSlider levelSlider;
@@ -39,12 +38,12 @@ public class CatchSummary : MonoBehaviour
     /// </summary>
     public void InitiateCatchSummary()
     {
-        if (fishingController?.fishesOnHook.Count <= 0)
+        if (FishingController.Instance?.fishesOnHook.Count <= 0)
         {
-            Debug.LogError($"{nameof(fishingController.fishesOnHook)} is empty");
+            Debug.LogError($"{nameof(FishingController.Instance.fishesOnHook)} is empty");
             return;
         }
-        currentlyDisplayedFish = fishingController.fishesOnHook[currentFishIndex];
+        currentlyDisplayedFish = FishingController.Instance.fishesOnHook[currentFishIndex];
         UpdateDataValues();
         summaryDialogHandlers.StartSummary(currentlyDisplayedFish.fish);
     }
@@ -56,7 +55,7 @@ public class CatchSummary : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (currentFishIndex < fishingController.fishesOnHook.Count - 1)
+            if (currentFishIndex < FishingController.Instance.fishesOnHook.Count - 1)
             {
                 IncrementFishIndex();
                 UpdateDataValues();
@@ -64,7 +63,7 @@ public class CatchSummary : MonoBehaviour
             }
             else
             {
-                fishingController.SetState(new FishingIdle(fishingController));
+                FishingController.Instance.SetState(new FishingIdle(FishingController.Instance));
             }
         }
     }
@@ -94,7 +93,7 @@ public class CatchSummary : MonoBehaviour
     private void IncrementFishIndex()
     {
         currentFishIndex++;
-        currentlyDisplayedFish = fishingController.fishesOnHook[currentFishIndex];
+        currentlyDisplayedFish = FishingController.Instance.fishesOnHook[currentFishIndex];
     }
 
     // Check if fish is larger than the saved fish of the same name and return true or false
