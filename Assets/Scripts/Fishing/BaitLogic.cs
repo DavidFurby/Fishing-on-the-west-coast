@@ -59,6 +59,16 @@ public class BaitLogic : MonoBehaviour
 
         // Set the connected body of the FixedJoint to be the fishingRodTop
         fixedJoint.connectedBody = fishingRodTop.GetComponent<Rigidbody>();
+
+        if (FishingController.Instance.fishesOnHook.Count > 0)
+        {
+            FishingController.Instance.SetState(new InspectFish(FishingController.Instance));
+        }
+        else
+        {
+            FishingController.Instance.SetState(new FishingIdle(FishingController.Instance));
+        }
+        forceFactor = 1;
     }
 
     private void DetachBait()
@@ -81,18 +91,9 @@ public class BaitLogic : MonoBehaviour
     {
         targetPosition = fishingRodTop.transform.position;
 
-        if (IsCloseToTarget(targetPosition))
+        if (IsCloseToTarget(targetPosition, 2))
         {
             AttachBait();
-
-            if (FishingController.Instance.fishesOnHook.Count > 0)
-            {
-                FishingController.Instance.SetState(new InspectFish(FishingController.Instance));
-            }
-            else
-            {
-                FishingController.Instance.SetState(new FishingIdle(FishingController.Instance));
-            }
         }
         else
         {
@@ -100,9 +101,9 @@ public class BaitLogic : MonoBehaviour
         }
     }
 
-    private bool IsCloseToTarget(Vector3 targetPosition)
+    private bool IsCloseToTarget(Vector3 targetPosition, float distance)
     {
-        return Vector3.Distance(transform.position, targetPosition) < 0.5f;
+        return Vector3.Distance(transform.position, targetPosition) < distance;
     }
 
     private void MoveTowardsTarget(Vector3 targetPosition)
@@ -115,7 +116,6 @@ public class BaitLogic : MonoBehaviour
 
     public void PullBaitTowardsTarget()
     {
-
         // Execute the original method logic
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -123,8 +123,11 @@ public class BaitLogic : MonoBehaviour
             Vector3 direction = (fishingRodTop.transform.position - transform.position).normalized;
             rigidBody.AddForce(direction * 10f, ForceMode.Impulse);
             IsPulling = false;
+            if (IsCloseToTarget(targetPosition, 10))
+            {
+                FishingController.Instance.SetState(new Reeling(FishingController.Instance));
+            }
         }
-
     }
     public void PlaySplashSound()
     {

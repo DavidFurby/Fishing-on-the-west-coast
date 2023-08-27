@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FishingRodLogic : MonoBehaviour
 {
-    [SerializeField] private FishingRodAnimations fishingRodAnimations;
+    private FishingRodAnimations fishingRodAnimations;
     public static event Action OnTriggerSetChargingBalance;
 
     void OnEnable()
@@ -12,6 +12,10 @@ public class FishingRodLogic : MonoBehaviour
         FishingController.OnChargeRelease += WaitForSwingAnimation;
         FishingController.OnReeling += ReelInSpeed;
         CatchArea.OnCatchWhileReeling += CalculateReelInSpeed;
+    }
+    void Start()
+    {
+        fishingRodAnimations = GetComponent<FishingRodAnimations>();
     }
 
     void OnDisable()
