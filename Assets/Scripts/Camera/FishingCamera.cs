@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class FishingCamera : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource alertSound;
     [SerializeField] private GameObject bait;
     private float cameraDistance;
     private float originalCameraDistance;
 
     private void Start()
     {
+        alertSound = GetComponent<AudioSource>();
         cameraDistance = transform.position.z;
         originalCameraDistance = cameraDistance;
         SubscribeToEvents(true);
@@ -80,8 +81,8 @@ public class FishingCamera : MonoBehaviour
 
     private void CatchAlertSound()
     {
-        if (audioSource != null)
-            audioSource.Play();
+        if (alertSound != null)
+            alertSound.Play();
     }
 
     public IEnumerator PlayCatchAlertSoundAndPauseGame()

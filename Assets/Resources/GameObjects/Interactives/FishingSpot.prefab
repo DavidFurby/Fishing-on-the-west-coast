@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4893665037600408012}
-  - component: {fileID: 8370442656895171199}
   - component: {fileID: 8409458114923343714}
+  - component: {fileID: 8370442656895171199}
   - component: {fileID: 1378462398196905299}
   m_Layer: 0
   m_Name: FishingSpot
@@ -34,19 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8370442656895171199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3726747553638998623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79f67b1c2c032649aeb4cf89e0e571d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconOffset: 2
 --- !u!65 &8409458114923343714
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68,6 +55,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8370442656895171199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3726747553638998623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79f67b1c2c032649aeb4cf89e0e571d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconOffset: 2
 --- !u!114 &1378462398196905299
 MonoBehaviour:
   m_ObjectHideFlags: 0

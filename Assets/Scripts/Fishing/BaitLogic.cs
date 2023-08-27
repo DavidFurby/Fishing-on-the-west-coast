@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public class BaitLogic : MonoBehaviour
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
     private FixedJoint fixedJoint;
+    public static event Action<Vector3> UpdatePosition;
+
 
 
     public void Start()
@@ -21,24 +24,17 @@ public class BaitLogic : MonoBehaviour
         WaterCollision.OnEnterSea += PlaySplashSound;
         AttachBait();
     }
-
-    void OnDestroy()
-    {
-        FishingController.OnReelInBait -= ReelIn;
-        FishingController.OnWhileCasting -= Cast;
-        WaterCollision.OnEnterSea -= PlaySplashSound;
-
-
-    }
     void OnDisable()
     {
         FishingController.OnReelInBait -= ReelIn;
         FishingController.OnWhileCasting -= Cast;
         WaterCollision.OnEnterSea -= PlaySplashSound;
-
-
     }
 
+    void Update()
+    {
+        UpdatePosition.Invoke(transform.position);
+    }
     private void AttachBait()
     {
         transform.position = fishingRodTop.transform.position;
