@@ -4,7 +4,7 @@ using System;
 public class ExplorationController : ExplorationStateMachine
 {
 
-    [SerializeField] private PlayerAnimations playerAnimations;
+    private PlayerAnimations playerAnimations;
     private bool isWithinTriggerArea;
     private Interactive interactive;
     private readonly int movementSpeed = 10;
@@ -13,6 +13,7 @@ public class ExplorationController : ExplorationStateMachine
 
     void Start()
     {
+        playerAnimations = GetComponentInChildren<PlayerAnimations>();
         SetState(new ExplorationIdle(this));
         DialogView.EndDialog += RaiseEndDialog;
         FishingSpot.StartFishing += RaiseStartFishing;
