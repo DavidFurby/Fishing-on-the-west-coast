@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class Balance : MonoBehaviour
 {
     [SerializeField] private Scrollbar reelingBalance;
-    [SerializeField] private FishingController controller;
     [SerializeField] private MusicController musicController;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
@@ -48,11 +47,11 @@ public class Balance : MonoBehaviour
     #region Balance
     private void CalculateBalance()
     {
-        if (controller.fishesOnHook.Count > 0)
+        if (FishingController.Instance.fishesOnHook.Count > 0)
         {
             float weight = 0f;
 
-            foreach (var fish in controller.fishesOnHook)
+            foreach (var fish in FishingController.Instance.fishesOnHook)
             {
                 weight += fish.fish.size;
             }
@@ -95,7 +94,7 @@ public class Balance : MonoBehaviour
     {
         if (reelingBalance.value <= 0f || reelingBalance.value >= 1f)
         {
-            controller.LoseCatch();
+            FishingController.Instance.LoseCatch();
         }
     }
     #endregion

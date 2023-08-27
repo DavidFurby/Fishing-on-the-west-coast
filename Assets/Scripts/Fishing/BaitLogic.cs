@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class BaitLogic : MonoBehaviour
 {
     [SerializeField] private GameObject fishingRodTop;
-    [SerializeField] private FishingController system;
     [SerializeField] private AudioSource splashSound;
     [SerializeField] private Scrollbar balance;
     private float forceFactor = 1f;
@@ -58,7 +57,7 @@ public class BaitLogic : MonoBehaviour
     public void Cast()
     {
         DetachBait();
-        rigidBody.AddForceAtPosition(forceFactor * system.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
+        rigidBody.AddForceAtPosition(forceFactor * FishingController.Instance.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
         if (forceFactor > 0)
         {
             forceFactor -= 0.1f;
@@ -70,13 +69,13 @@ public class BaitLogic : MonoBehaviour
         if (IsCloseToTarget(targetPosition))
         {
             AttachBait();
-            if (system.fishesOnHook.Count > 0)
+            if (FishingController.Instance.fishesOnHook.Count > 0)
             {
-                system.SetState(new InspectFish(system));
+                FishingController.Instance.SetState(new InspectFish(FishingController.Instance));
             }
             else
             {
-                system.SetState(new FishingIdle(system));
+                FishingController.Instance.SetState(new FishingIdle(FishingController.Instance));
             }
         }
         else
@@ -94,7 +93,7 @@ public class BaitLogic : MonoBehaviour
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
         transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
-        transform.Translate(system.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
+        transform.Translate(FishingController.Instance.reelInSpeed * Time.fixedDeltaTime * direction, Space.World);
     }
 
     public void PlaySplashSound()

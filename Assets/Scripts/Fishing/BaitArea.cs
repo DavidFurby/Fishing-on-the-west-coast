@@ -3,7 +3,6 @@ using System.Collections;
 
 public class BaitArea : MonoBehaviour
 {
-    [SerializeField] private FishingController fishingController;
     [SerializeField] private BaitLogic baitLogic;
     private const float baitShakeDelay = 2f;
     private bool isShaking = false;
@@ -20,7 +19,7 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (fishingController != null && collider.CompareTag("Fish") && !fishingController.FishIsBaited)
+        if (FishingController.Instance != null && collider.CompareTag("Fish") && !FishingController.Instance.FishIsBaited)
         {
             TryBaitingFish(collider, baitLogic.gameObject);
         }
@@ -37,7 +36,7 @@ public class BaitArea : MonoBehaviour
         {
             isShaking = true;
             baitLogic.PlaySplashSound();
-            if (collider.CompareTag("Fish") && !fishingController.FishIsBaited)
+            if (collider.CompareTag("Fish") && !FishingController.Instance.FishIsBaited)
             {
                 TryBaitingFish(collider, baitLogic.gameObject);
             }
@@ -49,12 +48,12 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fishingController.FishIsBaited)
+        if (other.CompareTag("Fish") && FishingController.Instance.FishIsBaited)
         {
             FishMovement fishMovement = other.GetComponent<FishMovement>();
             if (fishMovement != null && fishMovement.GetCurrentState() is Baited)
             {
-                fishingController.FishIsBaited = false;
+                FishingController.Instance.FishIsBaited = false;
                 fishMovement.SetState(new Swimming(fishMovement));
             }
         }
@@ -68,7 +67,7 @@ public class BaitArea : MonoBehaviour
         if (UnityEngine.Random.Range(0f, 1f) < probability)
         {
             fishMovement.GetBaited(target);
-            fishingController.FishIsBaited = true;
+            FishingController.Instance.FishIsBaited = true;
         }
     }
 

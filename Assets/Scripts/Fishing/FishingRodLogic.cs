@@ -5,7 +5,6 @@ using UnityEngine;
 public class FishingRodLogic : MonoBehaviour
 {
     [SerializeField] private FishingRodAnimations fishingRodAnimations;
-    [SerializeField] private FishingController controller;
     public static event Action OnTriggerSetChargingBalance;
 
     void OnEnable()
@@ -30,16 +29,16 @@ public class FishingRodLogic : MonoBehaviour
     // Calculate the reel in speed based on the size of the caught fishes
     public void CalculateReelInSpeed()
     {
-        foreach (FishDisplay @catch in controller.fishesOnHook)
+        foreach (FishDisplay @catch in FishingController.Instance.fishesOnHook)
         {
-            controller.reelInSpeed = (controller.initialReelInSpeed * MainManager.Instance.playerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
+            FishingController.Instance.reelInSpeed = (FishingController.Instance.initialReelInSpeed * MainManager.Instance.playerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
         }
     }
 
     // Set the reel in speed to a fixed value
     public void ReelInSpeed()
     {
-        controller.reelInSpeed = 50;
+        FishingController.Instance.reelInSpeed = 50;
     }
 
 
@@ -47,7 +46,7 @@ public class FishingRodLogic : MonoBehaviour
     // Play the swing animation and wait for it to finish
     private IEnumerator SwingAnimation()
     {
-        controller.castingPower *= controller.chargeLevel * MainManager.Instance.playerLevel.ThrowRangeModifier();
+        FishingController.Instance.castingPower *= FishingController.Instance.chargeLevel * MainManager.Instance.playerLevel.ThrowRangeModifier();
         while (!fishingRodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
             yield return null;
@@ -56,7 +55,7 @@ public class FishingRodLogic : MonoBehaviour
         {
             yield return null;
         }
-        controller.SetState(new Casting(controller));
+        FishingController.Instance.SetState(new Casting(FishingController.Instance));
     }
 
     // Play the reverse swing animation

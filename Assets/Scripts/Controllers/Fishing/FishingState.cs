@@ -4,19 +4,19 @@ public abstract class FishingState : State
 {
     protected FishingController system;
 
-    public FishingState(FishingController system)
+    public FishingState()
     {
-        this.system = system;
+        this.system = FishingController.Instance;
     }
 }
 public class NotFishing : FishingState
 {
-    public NotFishing(FishingController system) : base(system) { }
+    public NotFishing(FishingController system) : base() { }
 }
 
 public class FishingIdle : FishingState
 {
-    public FishingIdle(FishingController system) : base(system)
+    public FishingIdle(FishingController system) : base()
     {
     }
 
@@ -34,7 +34,7 @@ public class FishingIdle : FishingState
 
 public class Charging : FishingState
 {
-    public Charging(FishingController system) : base(system)
+    public Charging(FishingController system) : base()
     {
     }
 
@@ -46,7 +46,7 @@ public class Charging : FishingState
 }
 public class Swinging : FishingState
 {
-    public Swinging(FishingController system) : base(system)
+    public Swinging(FishingController system) : base()
     {
 
     }
@@ -60,7 +60,7 @@ public class Swinging : FishingState
 
 public class Casting : FishingState
 {
-    public Casting(FishingController system) : base(system)
+    public Casting(FishingController system) : base()
     {
 
     }
@@ -78,7 +78,7 @@ public class Casting : FishingState
 
 public class Fishing : FishingState
 {
-    public Fishing(FishingController system) : base(system)
+    public Fishing(FishingController system) : base()
     {
     }
 
@@ -106,7 +106,7 @@ public class Fishing : FishingState
 
 public class Reeling : FishingState
 {
-    public Reeling(FishingController controller) : base(controller)
+    public Reeling(FishingController controller) : base()
     {
     }
     public override void FixedUpdate()
@@ -119,7 +119,7 @@ public class Reeling : FishingState
 
 public class ReelingFish : FishingState
 {
-    public ReelingFish(FishingController controller) : base(controller)
+    public ReelingFish(FishingController controller) : base()
     {
     }
     public override void Update()
@@ -147,7 +147,7 @@ public class ReelingFish : FishingState
 
 public class InspectFish : FishingState
 {
-    public InspectFish(FishingController controller) : base(controller)
+    public InspectFish(FishingController controller) : base()
     {
 
     }
