@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool Instance;
 
     // The size of the pool for each prefab
-    [SerializeField] private int poolSize = 10;
+    [HideInInspector] private readonly int poolSize = 10;
 
     // Dictionary to store a queue of game objects for each prefab
     private Dictionary<GameObject, Queue<GameObject>> poolDictionary;

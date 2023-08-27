@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8690102946955983177}
   - component: {fileID: 8690102946955983176}
   - component: {fileID: 8690102946955983179}
-  - component: {fileID: 443215475787368267}
   - component: {fileID: 6565557488972089579}
   - component: {fileID: 8990243547161278336}
   - component: {fileID: 5748939074532554492}
@@ -45,7 +44,6 @@ RectTransform:
   - {fileID: 5226652968336262817}
   - {fileID: 1760062702667566845}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -69,7 +67,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -113,19 +113,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &443215475787368267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: -4253579225698434387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 566e0fa216cf47745a4e5701e2a9cffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishText: {fileID: 761456660329301000}
 --- !u!114 &6565557488972089579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isNewText: {fileID: 6593741001342054128}
   newRecordText: {fileID: 4614909520830116077}
-  fishingSystem: {fileID: 0}
+  fishingController: {fileID: 0}
   summaryDialogHandlers: {fileID: 5748939074532554492}
   currentlyDisplayedFish: {fileID: 0}
   levelSlider: {fileID: 4055327629952208563}
@@ -202,7 +189,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8690102946955983174}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -353,7 +339,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8690102946955983174}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -489,7 +474,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8690102946955983174}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -566,6 +550,7 @@ GameObject:
   - component: {fileID: 1488068778355437997}
   - component: {fileID: 5302304661454696975}
   - component: {fileID: 761456660329301000}
+  - component: {fileID: 2462566902608625904}
   m_Layer: 5
   m_Name: Fishes
   m_TagString: Untagged
@@ -586,7 +571,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8690102946955983174}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -690,11 +674,25 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2462566902608625904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942074247667619960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566e0fa216cf47745a4e5701e2a9cffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishText: {fileID: 761456660329301000}
 --- !u!1001 &42240886810588690
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8690102946955983174}
     m_Modifications:
     - target: {fileID: 2429653178063262203, guid: a5d9ba3684ee46a4db9bccc53ad9f29d, type: 3}
@@ -790,6 +788,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5d9ba3684ee46a4db9bccc53ad9f29d, type: 3}
 --- !u!224 &6399860484628325572 stripped
 RectTransform:
@@ -801,6 +802,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8690102946955983174}
     m_Modifications:
     - target: {fileID: 266568541390610403, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
@@ -1052,6 +1054,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08fb7d80802f3ba4192da772fc1954b6, type: 3}
 --- !u!224 &3009862441713691223 stripped
 RectTransform:
@@ -1085,6 +1090,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8690102946955983174}
     m_Modifications:
     - target: {fileID: 291656273887643555, guid: 8f01ad6b2874882468814fb9190a3e19, type: 3}
@@ -1160,6 +1166,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f01ad6b2874882468814fb9190a3e19, type: 3}
 --- !u!4 &5900179628325486072 stripped
 Transform:
@@ -1171,6 +1180,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8690102946955983174}
     m_Modifications:
     - target: {fileID: 5741046946790795410, guid: 53e5a27f86e1fed4280dc2294936c854, type: 3}
@@ -1230,6 +1240,9 @@ PrefabInstance:
       value: Level
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53e5a27f86e1fed4280dc2294936c854, type: 3}
 --- !u!4 &1760062702667566845 stripped
 Transform:
@@ -1252,6 +1265,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8690102946955983174}
     m_Modifications:
     - target: {fileID: 1535998990397528071, guid: d579dc3031e05fa429b287ab646155eb, type: 3}
@@ -1303,6 +1317,9 @@ PrefabInstance:
       value: Pause Menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d579dc3031e05fa429b287ab646155eb, type: 3}
 --- !u!4 &5226652968336262817 stripped
 Transform:
