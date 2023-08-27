@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class WaterCollision : MonoBehaviour
 {
-    [SerializeField] private AudioSource splashSound;
     private float waterLevel;
     private const float FloatHeight = 150f;
     private const float BounceDamp = 1f;
@@ -22,7 +21,6 @@ public class WaterCollision : MonoBehaviour
         if (other.CompareTag("Bait"))
         {
             OnEnterSea.Invoke();
-            splashSound.Play();
         }
 
         if (other.TryGetComponent<Rigidbody>(out var rigidBody))
