@@ -85,8 +85,8 @@ public class CatchSummary : MonoBehaviour
     {
         newRecordText.gameObject.SetActive(IsNewRecord(currentlyDisplayedFish.fish));
         isNewText.gameObject.SetActive(IsNewCatch(currentlyDisplayedFish.fish));
-        MainManager.Instance.game.TotalCatches++;
-        MainManager.Instance.game.playerLevel.AddExp(currentlyDisplayedFish.fish.exp);
+        MainManager.Instance.TotalCatches++;
+        MainManager.Instance.playerLevel.AddExp(currentlyDisplayedFish.fish.exp);
         levelSlider.SetLevel();
     }
 
@@ -100,9 +100,9 @@ public class CatchSummary : MonoBehaviour
     // Check if fish is larger than the saved fish of the same name and return true or false
     private bool IsNewRecord(Fish fish)
     {
-        if (MainManager.Instance.game.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size) is Fish existingFish)
+        if (MainManager.Instance.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size) is Fish existingFish)
         {
-            int index = Array.IndexOf(MainManager.Instance.game.CaughtFishes.ToArray(), existingFish);
+            int index = Array.IndexOf(MainManager.Instance.CaughtFishes.ToArray(), existingFish);
             fish.ReplaceFishInInstance(index);
             return true;
         }
@@ -113,7 +113,7 @@ public class CatchSummary : MonoBehaviour
     // Check if fish hasn't been caught before and return true or false
     private bool IsNewCatch(Fish fish)
     {
-        if (MainManager.Instance.game.CaughtFishes.All(f => f.id != fish.id))
+        if (MainManager.Instance.CaughtFishes.All(f => f.id != fish.id))
         {
             fish.AddFishToInstance();
             return true;

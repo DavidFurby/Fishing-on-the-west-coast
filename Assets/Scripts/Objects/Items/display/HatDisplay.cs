@@ -15,7 +15,7 @@ public class HatDisplay : ItemDisplay
     public void SelectHat()
     {
         Hat[] hatPrefabs = Resources.LoadAll<Hat>(ItemsPath);
-        Hat equippedHat = hatPrefabs.FirstOrDefault(r => MainManager.Instance.game.Inventory.EquippedHat.id == r.id);
+        Hat equippedHat = hatPrefabs.FirstOrDefault(r => MainManager.Instance.Inventory.EquippedHat.id == r.id);
         // Get the item component of the instantiated game object  
         SetNewItemModel(equippedHat);
     }

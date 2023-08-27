@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using static Item;
 
-public class Game : MonoBehaviour
+public  abstract class Game : MonoBehaviour
 {
     public int Days { get; set; }
     public int TotalCatches { get; set; }

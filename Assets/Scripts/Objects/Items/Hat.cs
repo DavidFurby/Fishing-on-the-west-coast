@@ -20,8 +20,8 @@ using UnityEngine;
     }
     public void AddHatToInstance()
     {
-        MainManager.Instance.game.Inventory.FoundHats =
-            MainManager.Instance.game.Inventory.FoundHats.Append(this).ToList();
+        MainManager.Instance.Inventory.FoundHats =
+            MainManager.Instance.Inventory.FoundHats.Append(this).ToList();
     }
     public static Hat SetHat(HatData hatData)
     {

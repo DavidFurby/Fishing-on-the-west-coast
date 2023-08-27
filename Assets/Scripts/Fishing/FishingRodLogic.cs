@@ -32,7 +32,7 @@ public class FishingRodLogic : MonoBehaviour
     {
         foreach (FishDisplay @catch in controller.fishesOnHook)
         {
-            controller.reelInSpeed = (controller.initialReelInSpeed * MainManager.Instance.game.playerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
+            controller.reelInSpeed = (controller.initialReelInSpeed * MainManager.Instance.playerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
         }
     }
 
@@ -47,7 +47,7 @@ public class FishingRodLogic : MonoBehaviour
     // Play the swing animation and wait for it to finish
     private IEnumerator SwingAnimation()
     {
-        controller.castingPower *= controller.chargeLevel * MainManager.Instance.game.playerLevel.ThrowRangeModifier();
+        controller.castingPower *= controller.chargeLevel * MainManager.Instance.playerLevel.ThrowRangeModifier();
         while (!fishingRodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
             yield return null;

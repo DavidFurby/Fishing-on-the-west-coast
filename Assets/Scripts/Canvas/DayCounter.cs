@@ -10,7 +10,7 @@ public class DayCounter : MonoBehaviour
     {
         if (MainManager.Instance != null)
         {
-            dayCount = MainManager.Instance.game.Days;
+            dayCount = MainManager.Instance.Days;
         }
         counter.text = "Days:" + dayCount;
     }

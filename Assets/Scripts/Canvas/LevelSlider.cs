@@ -16,8 +16,8 @@ public class LevelSlider : MonoBehaviour
     }
 
     public void SetLevel() {
-        levelSlider.maxValue = MainManager.Instance.game.playerLevel.requiredExp;
-        levelSlider.value = MainManager.Instance.game.playerLevel.Exp;
-        levelText.text = MainManager.Instance.game.playerLevel.Level.ToString();
+        levelSlider.maxValue = MainManager.Instance.playerLevel.requiredExp;
+        levelSlider.value = MainManager.Instance.playerLevel.Exp;
+        levelText.text = MainManager.Instance.playerLevel.Level.ToString();
     }
 }

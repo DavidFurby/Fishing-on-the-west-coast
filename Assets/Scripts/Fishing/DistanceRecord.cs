@@ -34,21 +34,21 @@ public class DistanceRecord : MonoBehaviour
     }
     public void UpdateDistanceRecord()
     {
-        if (MainManager.Instance.game.BestDistance < distance)
+        if (MainManager.Instance.BestDistance < distance)
         {
-            MainManager.Instance.game.BestDistance = distance;
+            MainManager.Instance.BestDistance = distance;
             SpawnDistanceRecordMarker();
         }
     }
     public void SpawnDistanceRecordMarker()
     {
-        if (MainManager.Instance.game.BestDistance != 0)
+        if (MainManager.Instance.BestDistance != 0)
         {
             if (currentDistanceRecordMarker != null)
             {
                 Destroy(currentDistanceRecordMarker);
             }
-            Vector3 position = new(fishingRodTop.transform.position.x + MainManager.Instance.game.BestDistance, sea.transform.position.y + sea.GetComponent<Renderer>().bounds.extents.y, transform.position.z);
+            Vector3 position = new(fishingRodTop.transform.position.x + MainManager.Instance.BestDistance, sea.transform.position.y + sea.GetComponent<Renderer>().bounds.extents.y, transform.position.z);
             currentDistanceRecordMarker = Instantiate(distanceRecordMarker, position, Quaternion.identity);
 
         }

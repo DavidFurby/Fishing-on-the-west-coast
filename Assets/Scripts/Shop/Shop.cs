@@ -111,7 +111,7 @@ public class Shop : MonoBehaviour
     {
         if (focusedShopItem != null)
         {
-            MainManager.Instance.game.Inventory.AddItem(focusedShopItem);
+            MainManager.Instance.Inventory.AddItem(focusedShopItem);
             ReplaceItemOnSelf();
             FocusItem();
         }
@@ -135,7 +135,7 @@ public class Shop : MonoBehaviour
     {
         for (int i = 0; i < shopItemPositions.Count; i++)
         {
-            if (i < shopItems.Length && shopItems[i] != null && !MainManager.Instance.game.Inventory.HasItem(shopItems[i]))
+            if (i < shopItems.Length && shopItems[i] != null && !MainManager.Instance.Inventory.HasItem(shopItems[i]))
             {
                 SpawnShopItem(i);
             }

@@ -15,7 +15,7 @@ public class SceneController : MonoBehaviour
     {
         if (MainManager.Instance != null)
         {
-            MainManager.Instance.game.Scene = scene.name;
+            MainManager.Instance.Scene = scene.name;
         }
     }
 

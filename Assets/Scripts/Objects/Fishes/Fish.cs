@@ -23,12 +23,12 @@ public class Fish : ScriptableObject
 
     public void AddFishToInstance()
     {
-        MainManager.Instance.game.CaughtFishes = MainManager.Instance.game.CaughtFishes.Append(this).ToList();
+        MainManager.Instance.CaughtFishes = MainManager.Instance.CaughtFishes.Append(this).ToList();
     }
 
     public void ReplaceFishInInstance(int index)
     {
-        MainManager.Instance.game.CaughtFishes[index] = this;
+        MainManager.Instance.CaughtFishes[index] = this;
     }
 
     public static Fish SetFish(FishData fishData)

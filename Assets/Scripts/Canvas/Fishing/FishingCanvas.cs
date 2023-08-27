@@ -18,6 +18,6 @@ public class FishingCanvas : MonoBehaviour
     }
     void Update()
     {
-        fishText.text = "Total Fishes:" + MainManager.Instance.game.TotalCatches;
+        fishText.text = "Total Fishes:" + MainManager.Instance.TotalCatches;
     }
 }

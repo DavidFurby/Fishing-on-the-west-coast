@@ -64,7 +64,7 @@ public class BaitArea : MonoBehaviour
     {
         FishMovement fishMovement = collider.GetComponent<FishMovement>();
         FishDisplay fish = collider.GetComponent<FishDisplay>();
-        float probability = GetProbability(fish.fish.level, MainManager.Instance.game.Inventory.EquippedBait.level);
+        float probability = GetProbability(fish.fish.level, MainManager.Instance.Inventory.EquippedBait.level);
         if (UnityEngine.Random.Range(0f, 1f) < probability)
         {
             fishMovement.GetBaited(target);

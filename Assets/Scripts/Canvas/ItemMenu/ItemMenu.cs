@@ -16,9 +16,9 @@ public class ItemMenu : MonoBehaviour
     void Start()
     {
         itemMenu.SetActive(false);
-        allItems = MainManager.Instance.game.Inventory.FoundBaits.Cast<Item>().ToList();
-        allItems.AddRange(MainManager.Instance.game.Inventory.FoundFishingRods);
-        allItems.AddRange(MainManager.Instance.game.Inventory.FoundHats);
+        allItems = MainManager.Instance.Inventory.FoundBaits.Cast<Item>().ToList();
+        allItems.AddRange(MainManager.Instance.Inventory.FoundFishingRods);
+        allItems.AddRange(MainManager.Instance.Inventory.FoundHats);
         ExplorationController.OpenItemMenu += HandleInputs;
     }
     void OnDestroy()

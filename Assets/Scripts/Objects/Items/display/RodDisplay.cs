@@ -15,7 +15,7 @@ public class RodDisplay : ItemDisplay
     public void SelectRod()
     {
         FishingRod[] rodPrefabs = Resources.LoadAll<FishingRod>(ItemsPath);
-        FishingRod equippedRod = rodPrefabs.FirstOrDefault(r => MainManager.Instance.game.Inventory.EquippedFishingRod.id == r.id);
+        FishingRod equippedRod = rodPrefabs.FirstOrDefault(r => MainManager.Instance.Inventory.EquippedFishingRod.id == r.id);
         // Get the item component of the instantiated game object  
         SetNewItemModel(equippedRod);
 
