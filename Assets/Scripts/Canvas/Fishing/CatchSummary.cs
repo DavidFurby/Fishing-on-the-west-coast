@@ -8,12 +8,14 @@ public class CatchSummary : MonoBehaviour
     #region Serialized Fields
     [SerializeField] private TextMeshProUGUI isNewText;
     [SerializeField] private TextMeshProUGUI newRecordText;
-    [SerializeField] private CatchSummaryHandlers summaryDialogHandlers;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
     [SerializeField] private LevelSlider levelSlider;
+
     #endregion
 
     #region Private Fields
+    private CatchSummaryHandlers summaryDialogHandlers;
+
     private int currentFishIndex = 0;
     #endregion
 
@@ -23,6 +25,10 @@ public class CatchSummary : MonoBehaviour
         FishingController.OnStartInspecting += InitiateCatchSummary;
         FishingController.OnNextSummary += NextSummary;
         FishingController.OnEndSummary += EndSummary;
+    }
+    void Start()
+    {
+        summaryDialogHandlers = GetComponent<CatchSummaryHandlers>();
     }
     void OnDisable()
     {

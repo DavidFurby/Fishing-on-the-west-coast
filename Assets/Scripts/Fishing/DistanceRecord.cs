@@ -21,17 +21,20 @@ public class DistanceRecord : MonoBehaviour
         distanceTextUI = GetComponent<TextMeshProUGUI>();
         distanceRecordMarker = Resources.Load<GameObject>(markerPath);
         FishingController.OnEnterFishing += UpdateDistanceRecord;
+        FishingController.OnEnterIdle += SpawnDistanceRecordMarker;
+        FishingController.OnEnterIdle += () => SetActive(true);
     }
 
     private void Start()
     {
-        distanceTextUI.gameObject.SetActive(true);
-        SpawnDistanceRecordMarker();
+        distanceTextUI.gameObject.SetActive(false);
     }
 
     void OnDisable()
     {
         FishingController.OnEnterFishing -= UpdateDistanceRecord;
+        FishingController.OnEnterIdle -= SpawnDistanceRecordMarker;
+        FishingController.OnEnterIdle -= () => SetActive(false);
     }
 
     void FixedUpdate()
@@ -41,7 +44,7 @@ public class DistanceRecord : MonoBehaviour
     #endregion
 
     #region Public Methods
-    public void UpdateDistanceRecord()
+    private void UpdateDistanceRecord()
     {
         if (MainManager.Instance.BestDistance < distance)
         {
@@ -50,7 +53,7 @@ public class DistanceRecord : MonoBehaviour
         }
     }
 
-    public void SpawnDistanceRecordMarker()
+    private void SpawnDistanceRecordMarker()
     {
         if (MainManager.Instance.BestDistance != 0)
         {
@@ -73,5 +76,10 @@ public class DistanceRecord : MonoBehaviour
         int roundedDistance = Mathf.RoundToInt(distance);
         distanceTextUI.text = string.Format("Distance: {0} meter", roundedDistance);
     }
+    private void SetActive(bool active)
+    {
+        distanceTextUI.gameObject.SetActive(active);
+    }
+
     #endregion
 }
