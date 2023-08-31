@@ -950,6 +950,14 @@ PrefabInstance:
       propertyPath: musicController
       value: 
       objectReference: {fileID: 2096369983}
+    - target: {fileID: 3795001679056012851, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: dialogManager
+      value: 
+      objectReference: {fileID: 1079318671}
+    - target: {fileID: 3905336867864833289, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: levelSlider
+      value: 
+      objectReference: {fileID: 1876577705}
     - target: {fileID: 4131518119856495809, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -977,6 +985,22 @@ PrefabInstance:
     - target: {fileID: 4253801905749044670, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607451860022164664, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 280
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607451860022164664, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -352
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614909520830116077, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614909520830116077, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5333125302390635481, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1037,6 +1061,22 @@ PrefabInstance:
     - target: {fileID: 5950362676746690892, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593741001342054128, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593741001342054128, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105842088823852932, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 335
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105842088823852932, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -429
       objectReference: {fileID: 0}
     - target: {fileID: 7194481759871860316, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
       propertyPath: dialogManager
@@ -1230,6 +1270,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 768137972}
   m_SourcePrefab: {fileID: 100100000, guid: 1c8d56ce187f44e4c9a2c62fee65388a, type: 3}
+--- !u!114 &1876577705 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4055327629952208563, guid: f237d2095fe8e5e489e7f752e5092408, type: 3}
+  m_PrefabInstance: {fileID: 1543908511}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16afdd413546fb54a80f58a0f7f3d1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2096369982
 PrefabInstance:
   m_ObjectHideFlags: 0

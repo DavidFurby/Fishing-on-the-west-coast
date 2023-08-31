@@ -60,6 +60,11 @@ public class BaitLogic : MonoBehaviour
         // Set the connected body of the FixedJoint to be the fishingRodTop
         fixedJoint.connectedBody = fishingRodTop.GetComponent<Rigidbody>();
 
+        forceFactor = 1;
+    }
+
+    private static void SetState()
+    {
         if (FishingController.Instance.fishesOnHook.Count > 0)
         {
             FishingController.Instance.SetState(new InspectFish(FishingController.Instance));
@@ -68,7 +73,6 @@ public class BaitLogic : MonoBehaviour
         {
             FishingController.Instance.SetState(new FishingIdle(FishingController.Instance));
         }
-        forceFactor = 1;
     }
 
     private void DetachBait()
@@ -94,6 +98,7 @@ public class BaitLogic : MonoBehaviour
         if (IsCloseToTarget(targetPosition, 2))
         {
             AttachBait();
+            SetState();
         }
         else
         {

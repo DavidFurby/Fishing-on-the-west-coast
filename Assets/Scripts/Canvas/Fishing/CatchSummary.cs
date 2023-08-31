@@ -10,9 +10,7 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI newRecordText;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
     [SerializeField] private LevelSlider levelSlider;
-
     #endregion
-
     #region Private Fields
     private CatchSummaryHandlers summaryDialogHandlers;
 
@@ -29,6 +27,8 @@ public class CatchSummary : MonoBehaviour
     void Start()
     {
         summaryDialogHandlers = GetComponent<CatchSummaryHandlers>();
+        isNewText.gameObject.SetActive(false);
+        newRecordText.gameObject.SetActive(false);
     }
     void OnDisable()
     {
@@ -44,7 +44,7 @@ public class CatchSummary : MonoBehaviour
     /// </summary>
     public void InitiateCatchSummary()
     {
-        if (FishingController.Instance?.fishesOnHook.Count <= 0)
+        if (FishingController.Instance.fishesOnHook.Count <= 0)
         {
             Debug.LogError($"{nameof(FishingController.Instance.fishesOnHook)} is empty");
             return;
@@ -74,9 +74,6 @@ public class CatchSummary : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Reset data and set fishingStatus to Standby to end summary.
-    /// </summary>
     public void EndSummary()
     {
         ResetValues();
