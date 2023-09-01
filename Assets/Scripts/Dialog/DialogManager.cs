@@ -5,7 +5,6 @@ using Yarn.Unity;
 public class DialogManager : MonoBehaviour
 {
     [SerializeField] private DialogueRunner dialogueRunner;
-    [SerializeField] private DialogView view;
     // Start is called before the first frame update
 
     //Nodes that should present text instantly
@@ -16,6 +15,7 @@ public class DialogManager : MonoBehaviour
 
     void Start()
     {
+        Conversation.StartConversation += StartDialog;
         SetDayHandler();
     }
 
@@ -42,7 +42,6 @@ public class DialogManager : MonoBehaviour
     }
     public void EndDialog()
     {
-        view.ShowDialog(false);
         dialogueRunner.Stop();
     }
     public bool CurrentNodeShouldShowTextDirectly()
