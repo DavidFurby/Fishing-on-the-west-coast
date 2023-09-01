@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -6,7 +7,6 @@ public class Conversation : MonoBehaviour, IInteractive
 {
     // Start is called before the first frame update
     [SerializeField] private GameCharacters character;
-    [SerializeField] private DialogManager dialogManager;
 
     public enum GameCharacters
     {
@@ -17,7 +17,7 @@ public class Conversation : MonoBehaviour, IInteractive
         Dog,
         ShopKeeper
     }
-        public static event Action StartConversation;
+    public static event Action<String> StartConversation;
 
     public void Interact()
     {
@@ -25,7 +25,6 @@ public class Conversation : MonoBehaviour, IInteractive
     }
     public void StartDialog()
     {
-        dialogManager.StartDialog(character.ToString());
-
+        StartConversation.Invoke(character.ToString());
     }
 }
