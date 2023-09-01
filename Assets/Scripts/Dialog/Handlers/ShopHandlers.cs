@@ -44,7 +44,6 @@ public class ShopHandlers : MonoBehaviour
         dialogManager.AddCommandHandler("lockShopControls", () =>
         {
             shop.pauseShoppingControls = !shop.pauseShoppingControls;
-            Debug.Log(shop.pauseShoppingControls);
         });
     }
     private void BuyShopItem()

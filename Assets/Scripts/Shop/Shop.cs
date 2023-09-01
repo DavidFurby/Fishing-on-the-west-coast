@@ -15,7 +15,7 @@ public class Shop : MonoBehaviour
     [HideInInspector] public bool pauseShoppingControls;
     [HideInInspector] public Item focusedShopItem;
     private int focusedShopItemIndex = 0;
-    private List<GameObject> shopItemPositions = new();
+    private readonly List<GameObject> shopItemPositions = new();
 
     private PlayerCamera playerCamera;
     private ExplorationController playerController;
