@@ -6,9 +6,6 @@ public class Shop : MonoBehaviour
 {
     #region Serialized Fields
     [SerializeField] private Item[] shopItems;
-    [SerializeField] private PlayerCamera playerCamera;
-    [SerializeField] private ExplorationController playerController;
-    [SerializeField] private DialogManager dialogManager;
     [SerializeField] private ShopHandlers dialogHandlers;
     [SerializeField] private Item emptySpot;
 
@@ -20,11 +17,23 @@ public class Shop : MonoBehaviour
     private int focusedShopItemIndex = 0;
     private List<GameObject> shopItemPositions = new();
 
+    private PlayerCamera playerCamera;
+    private ExplorationController playerController;
+    private DialogManager dialogManager;
+
     #endregion
 
+
+    void OnEnable()
+    {
+        ExplorationController.NavigateShop += HandleShoppingInput;
+    }
     #region MonoBehaviour Methods
     private void Start()
     {
+        playerCamera = FindObjectOfType<PlayerCamera>();
+        playerController = FindObjectOfType<ExplorationController>();
+        dialogManager = FindObjectOfType<DialogManager>();
         Transform shopPositions = transform.Find("ShopPositions");
         if (shopPositions != null)
         {
@@ -39,16 +48,15 @@ public class Shop : MonoBehaviour
             }
         }
         SpawnItems();
-        ExplorationController.NavigateShop += HandleShoppingInput;
+    }
+
+    void OnDisable()
+    {
+        ExplorationController.NavigateShop -= HandleShoppingInput;
     }
     #endregion
 
     #region Public Methods
-
-    /// <summary>
-    /// Focuses on an item in the shop.
-    /// </summary>
-    /// 
 
     public void FocusItem()
     {
@@ -152,7 +160,7 @@ public class Shop : MonoBehaviour
 
     private void SpawnEmptySpot(int index)
     {
-        
+
         shopItems[index] = emptySpot;
         GameObject newEmptySpot = Instantiate(shopItems[index].model, shopItemPositions[index].transform.position, Quaternion.identity);
         newEmptySpot.transform.SetParent(shopItemPositions[index].transform, false);
