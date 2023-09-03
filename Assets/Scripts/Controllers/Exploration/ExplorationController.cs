@@ -15,10 +15,15 @@ public class ExplorationController : ExplorationStateMachine
     {
         playerAnimations = GetComponentInChildren<PlayerAnimations>();
         SetState(new ExplorationIdle(this));
-        DialogView.EndDialog += RaiseEndDialog;
+        DialogManager.OnEndDialog += RaiseEndDialog;
         FishingSpot.StartFishing += RaiseStartFishing;
     }
 
+    private void OnDisable()
+    {
+        DialogManager.OnEndDialog -= RaiseEndDialog;
+        FishingSpot.StartFishing -= RaiseStartFishing;
+    }
     //Handle player input
     public void HandleInput()
     {

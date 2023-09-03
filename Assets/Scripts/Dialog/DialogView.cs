@@ -13,26 +13,41 @@ public class DialogView : DialogueViewBase
     Action advanceHandler;
     private string dialogueLine;
     private Coroutine textRevealCoroutine;
-    public static event Action EndDialog;
 
+    private void OnEnable()
+    {
+
+        DialogManager.OnEndDialog += () => ShowDialog(false);
+
+    }
 
     private void Start()
     {
         ShowDialog(false);
     }
 
+    private void OnDisable()
+    {
+
+        DialogManager.OnEndDialog -= () => ShowDialog(true);
+
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && container.gameObject.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Space) && container != null && container.gameObject.activeSelf)
         {
-            if (textGUI.text.Length == dialogueLine.Length)
+            if (textGUI != null && textGUI.text.Length == dialogueLine.Length)
             {
                 UserRequestedViewAdvancement();
             }
             else
             {
                 StopCoroutine(textRevealCoroutine);
-                textGUI.text = dialogueLine;
+                if (textGUI != null)
+                {
+                    textGUI.text = dialogueLine;
+                }
             }
         }
     }
@@ -41,16 +56,22 @@ public class DialogView : DialogueViewBase
     {
         ShowDialog(true);
         this.dialogueLine = dialogueLine.TextWithoutCharacterName.Text;
-        speakerGUI.text = dialogueLine.CharacterName;
+        if (speakerGUI != null)
+        {
+            speakerGUI.text = dialogueLine.CharacterName;
+        }
         advanceHandler = requestInterrupt;
 
-        if (!dialogManager.CurrentNodeShouldShowTextDirectly())
+        if (dialogManager != null && !dialogManager.CurrentNodeShouldShowTextDirectly())
         {
             textRevealCoroutine = StartCoroutine(RevealText(this.dialogueLine));
         }
         else
         {
-            textGUI.text = this.dialogueLine;
+            if (textGUI != null)
+            {
+                textGUI.text = this.dialogueLine;
+            }
         }
     }
 
@@ -61,7 +82,7 @@ public class DialogView : DialogueViewBase
 
     public override void UserRequestedViewAdvancement()
     {
-        if (container.gameObject.activeSelf)
+        if (container != null && container.gameObject.activeSelf)
         {
             advanceHandler?.Invoke();
         }
@@ -69,19 +90,16 @@ public class DialogView : DialogueViewBase
 
     public override void DialogueComplete()
     {
-        ShowDialog(false);
-        Invoke(nameof(ActivateControls), 0.5f);
+        StartCoroutine(EndDialogAfterDelay(0.5f));
         base.DialogueComplete();
-    }
-
-    private void ActivateControls()
-    {
-        EndDialog?.Invoke();
     }
 
     public void ShowDialog(bool active)
     {
-        container.gameObject.SetActive(active);
+        if (container != null)
+        {
+            container.gameObject.SetActive(active);
+        }
     }
 
     #region Private Methods
@@ -90,8 +108,21 @@ public class DialogView : DialogueViewBase
     {
         for (int i = 0; i <= fullText.Length; i++)
         {
-            textGUI.text = fullText[..i];
+            if (textGUI != null)
+            {
+                textGUI.text = fullText[..i];
+            }
             yield return new WaitForSeconds(0.05f);
+        }
+    }
+
+    private IEnumerator EndDialogAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (dialogManager != null)
+        {
+            dialogManager.EndDialog();
         }
     }
 
