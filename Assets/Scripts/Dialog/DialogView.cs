@@ -9,7 +9,7 @@ public class DialogView : DialogueViewBase
     [SerializeField] RectTransform container;
     [SerializeField] TextMeshProUGUI speakerGUI;
     [SerializeField] TextMeshProUGUI textGUI;
-    [SerializeField] DialogManager dialogManager;
+    private DialogManager dialogManager;
     Action advanceHandler;
     private string dialogueLine;
     private Coroutine textRevealCoroutine;
@@ -23,6 +23,7 @@ public class DialogView : DialogueViewBase
 
     private void Start()
     {
+        dialogManager = FindObjectOfType<DialogManager>();
         ShowDialog(false);
     }
 

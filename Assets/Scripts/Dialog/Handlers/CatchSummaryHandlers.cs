@@ -4,8 +4,11 @@ using UnityEngine;
 public class CatchSummaryHandlers : MonoBehaviour
 
 {
-    [SerializeField] private DialogManager dialogManager;
-
+     private DialogManager dialogManager;
+     void Start()
+     {
+        dialogManager = FindAnyObjectByType<DialogManager>();
+     }
     public void StartSummary(Fish fish)
     {
         if (dialogManager != null)

@@ -1,9 +1,9 @@
-    using UnityEngine;
+using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    public CameraStatus cameraStatus;
+    [HideInInspector] public CameraStatus cameraStatus;
     private Vector3 shopItemPosition;
     private float cameraDistance;
     private float originalCameraDistance;

@@ -5,12 +5,13 @@ using UnityEngine.UI;
 public class Balance : MonoBehaviour
 {
     [SerializeField] private Scrollbar reelingBalance;
-    [SerializeField] private MusicController musicController;
+    private MusicController musicController;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
     void Start()
     {
+        musicController = FindAnyObjectByType<MusicController>();
         reelingBalance.gameObject.SetActive(false);
     }
     void OnEnable()
