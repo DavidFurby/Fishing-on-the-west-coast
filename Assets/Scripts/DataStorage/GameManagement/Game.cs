@@ -12,7 +12,7 @@ public  abstract class Game : MonoBehaviour
     public List<Fish> CaughtFishes { get; set; } = new List<Fish>();
     public string Scene { get; set; }
     public Inventory Inventory { get; set; } = new Inventory();
-    public PlayerLevel playerLevel { get; set; } = new PlayerLevel();
+    public PlayerLevel PlayerLevel { get; set; } = new PlayerLevel();
 
     public void SaveGame()
     {

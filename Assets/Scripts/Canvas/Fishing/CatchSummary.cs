@@ -9,7 +9,6 @@ public class CatchSummary : MonoBehaviour
     [SerializeField] private TextMeshProUGUI isNewText;
     [SerializeField] private TextMeshProUGUI newRecordText;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
-    [SerializeField] private LevelSlider levelSlider;
     #endregion
     #region Private Fields
     private CatchSummaryHandlers summaryDialogHandlers;
@@ -82,24 +81,20 @@ public class CatchSummary : MonoBehaviour
     #endregion
 
     #region Private Methods
-    // Update the UI values and the game data
     private void UpdateDataValues()
     {
         newRecordText.gameObject.SetActive(IsNewRecord(currentlyDisplayedFish.fish));
         isNewText.gameObject.SetActive(IsNewCatch(currentlyDisplayedFish.fish));
         MainManager.Instance.TotalCatches++;
-        MainManager.Instance.playerLevel.AddExp(currentlyDisplayedFish.fish.exp);
-        levelSlider.SetLevel();
+        MainManager.Instance.PlayerLevel.AddExp(currentlyDisplayedFish.fish.exp);
     }
 
-    // Increment the fish index and update the currently presented fish
     private void IncrementFishIndex()
     {
         currentFishIndex++;
         currentlyDisplayedFish = FishingController.Instance.fishesOnHook[currentFishIndex];
     }
 
-    // Check if fish is larger than the saved fish of the same name and return true or false
     private bool IsNewRecord(Fish fish)
     {
         if (MainManager.Instance.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size) is Fish existingFish)
@@ -111,8 +106,6 @@ public class CatchSummary : MonoBehaviour
 
         return false;
     }
-
-    // Check if fish hasn't been caught before and return true or false
     private bool IsNewCatch(Fish fish)
     {
         if (MainManager.Instance.CaughtFishes.All(f => f.id != fish.id))
@@ -124,7 +117,6 @@ public class CatchSummary : MonoBehaviour
         return false;
     }
 
-    // Reset values
     private void ResetValues()
     {
         currentlyDisplayedFish = null;

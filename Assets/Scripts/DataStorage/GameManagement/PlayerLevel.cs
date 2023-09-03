@@ -1,3 +1,5 @@
+using System;
+
 public class PlayerLevel
 {
     public int Level { get; set; }
@@ -6,6 +8,9 @@ public class PlayerLevel
     public int baseExp = 100;
 
     public int requiredExp = 0;
+
+        public static event Action OnLevelUp;
+
 
     public void SetPlayerLevel(int level, int exp)
     {
@@ -22,14 +27,15 @@ public class PlayerLevel
         Exp += exp;
         if (Exp >= requiredExp)
         {
-            LevelChanged();
+            LevelUp();
         }
     }
-    public void LevelChanged()
+    public void LevelUp()
     {
         Level++;
         Exp = 0;
         CalculateExpRequired(Level);
+        OnLevelUp.Invoke();
     }
 
     public float ThrowRangeModifier()

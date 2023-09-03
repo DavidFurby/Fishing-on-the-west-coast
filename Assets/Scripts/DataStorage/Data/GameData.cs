@@ -23,8 +23,8 @@ public class GameData
         daysCount = game.Days;
         TotalCatches = game.TotalCatches;
         bestDistance = game.BestDistance;
-        level = game.playerLevel.Level;
-        experience = game.playerLevel.Exp;
+        level = game.PlayerLevel.Level;
+        experience = game.PlayerLevel.Exp;
         scene = game.Scene.ToString();
         foundCatches = game.CaughtFishes.Select(fish => new FishData(fish)).ToArray();
         foundFishingRods = game.Inventory.FoundFishingRods.Select(fishingRod => new FishingRodData(fishingRod)).ToArray();
