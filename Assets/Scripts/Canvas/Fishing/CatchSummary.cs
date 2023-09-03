@@ -5,42 +5,28 @@ using UnityEngine;
 
 public class CatchSummary : MonoBehaviour
 {
-    #region Serialized Fields
     [SerializeField] private TextMeshProUGUI isNewText;
     [SerializeField] private TextMeshProUGUI newRecordText;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
-    #endregion
-    #region Private Fields
+
     private CatchSummaryHandlers summaryDialogHandlers;
-
     private int currentFishIndex = 0;
-    #endregion
 
-    #region Unity Methods
     void OnEnable()
     {
-        FishingController.OnStartInspecting += InitiateCatchSummary;
-        FishingController.OnNextSummary += NextSummary;
-        FishingController.OnEndSummary += EndSummary;
+        SubscribeToEvents();
     }
+
     void Start()
     {
-        summaryDialogHandlers = GetComponent<CatchSummaryHandlers>();
-        isNewText.gameObject.SetActive(false);
-        newRecordText.gameObject.SetActive(false);
+        Initialize();
     }
+
     void OnDisable()
     {
-        FishingController.OnStartInspecting -= InitiateCatchSummary;
-        FishingController.OnNextSummary -= NextSummary;
-        FishingController.OnEndSummary -= EndSummary;
+        UnsubscribeFromEvents();
     }
-    #endregion
 
-    #region Public Methods
-    /// <summary>
-    /// Initialize the catch summary with a list of caught fishes.
-    /// </summary>
     public void InitiateCatchSummary()
     {
         if (FishingController.Instance.fishesOnHook.Count <= 0)
@@ -48,21 +34,19 @@ public class CatchSummary : MonoBehaviour
             Debug.LogError($"{nameof(FishingController.Instance.fishesOnHook)} is empty");
             return;
         }
-        currentlyDisplayedFish = FishingController.Instance.fishesOnHook[currentFishIndex];
+        SetCurrentlyDisplayedFish();
         UpdateDataValues();
         summaryDialogHandlers.StartSummary(currentlyDisplayedFish.fish);
     }
 
-    /// <summary>
-    /// If there are more fishes, switch summary. Otherwise, end the summary.
-    /// </summary>
     public void NextSummary()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (currentFishIndex < FishingController.Instance.fishesOnHook.Count - 1)
+            if (HasMoreFishes())
             {
                 IncrementFishIndex();
+                SetCurrentlyDisplayedFish();
                 UpdateDataValues();
                 summaryDialogHandlers.StartSummary(currentlyDisplayedFish.fish);
             }
@@ -78,9 +62,33 @@ public class CatchSummary : MonoBehaviour
         ResetValues();
         summaryDialogHandlers.EndSummary();
     }
-    #endregion
 
-    #region Private Methods
+    private void SubscribeToEvents()
+    {
+        FishingController.OnStartInspecting += InitiateCatchSummary;
+        FishingController.OnNextSummary += NextSummary;
+        FishingController.OnEndSummary += EndSummary;
+    }
+
+    private void Initialize()
+    {
+        summaryDialogHandlers = GetComponent<CatchSummaryHandlers>();
+        isNewText.gameObject.SetActive(false);
+        newRecordText.gameObject.SetActive(false);
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        FishingController.OnStartInspecting -= InitiateCatchSummary;
+        FishingController.OnNextSummary -= NextSummary;
+        FishingController.OnEndSummary -= EndSummary;
+    }
+
+    private void SetCurrentlyDisplayedFish()
+    {
+        currentlyDisplayedFish = FishingController.Instance.fishesOnHook[currentFishIndex];
+    }
+
     private void UpdateDataValues()
     {
         newRecordText.gameObject.SetActive(IsNewRecord(currentlyDisplayedFish.fish));
@@ -92,10 +100,14 @@ public class CatchSummary : MonoBehaviour
     private void IncrementFishIndex()
     {
         currentFishIndex++;
-        currentlyDisplayedFish = FishingController.Instance.fishesOnHook[currentFishIndex];
     }
 
-    private bool IsNewRecord(Fish fish)
+    private bool HasMoreFishes()
+    {
+        return currentFishIndex < FishingController.Instance.fishesOnHook.Count - 1;
+    }
+
+     private bool IsNewRecord(Fish fish)
     {
         if (MainManager.Instance.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size) is Fish existingFish)
         {
@@ -103,7 +115,6 @@ public class CatchSummary : MonoBehaviour
             fish.ReplaceFishInInstance(index);
             return true;
         }
-
         return false;
     }
     private bool IsNewCatch(Fish fish)
@@ -113,7 +124,6 @@ public class CatchSummary : MonoBehaviour
             fish.AddFishToInstance();
             return true;
         }
-
         return false;
     }
 
@@ -122,5 +132,4 @@ public class CatchSummary : MonoBehaviour
         currentlyDisplayedFish = null;
         currentFishIndex = 0;
     }
-    #endregion
 }
