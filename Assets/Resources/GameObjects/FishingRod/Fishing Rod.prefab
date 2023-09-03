@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1529541429993056296}
   m_Layer: 0
   m_Name: Bait
-  m_TagString: Untagged
+  m_TagString: Bait
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,7 +262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397a58daf2c0ec34d9c6f78895f9df77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingRodAnimations: {fileID: 2696618216450335625}
 --- !u!114 &2696618216450335625
 MonoBehaviour:
   m_ObjectHideFlags: 0
