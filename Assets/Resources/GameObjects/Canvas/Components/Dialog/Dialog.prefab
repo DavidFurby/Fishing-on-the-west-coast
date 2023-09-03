@@ -188,7 +188,6 @@ MonoBehaviour:
   container: {fileID: 8867706024651151886}
   speakerGUI: {fileID: 5205892179518769771}
   textGUI: {fileID: 122818685043059931}
-  dialogManager: {fileID: 0}
 --- !u!1 &1005244104030969221
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +298,6 @@ MonoBehaviour:
   lastLineText: {fileID: 8294356083562948831}
   fadeTime: 0.1
   showUnavailableOptions: 0
-  dialogView: {fileID: 0}
 --- !u!1 &1120107369555508573
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b529546ea095d42973a4b6585b6352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogManager: {fileID: 0}
 --- !u!1 &4631928765401645072
 GameObject:
   m_ObjectHideFlags: 0
