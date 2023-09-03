@@ -64,15 +64,13 @@ public class Casting : FishingState
     {
 
     }
+    public override void OnEnter() {
+        system.RaiseOnEnterCasting();
+    }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
         system.RaiseWhileCasting();
-    }
-    public override void LateUpdate()
-    {
-        base.LateUpdate();
-        system.RaiseCastingCamera();
     }
 }
 
@@ -96,11 +94,6 @@ public class Fishing : FishingState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-    }
-    public override void LateUpdate()
-    {
-        base.LateUpdate();
-        system.RaiseFishingCamera();
     }
 }
 
@@ -135,7 +128,6 @@ public class ReelingFish : FishingState
     public override void LateUpdate()
     {
         base.LateUpdate();
-        system.RaiseReelingCamera();
     }
     public override void OnExit()
     {

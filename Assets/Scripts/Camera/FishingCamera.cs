@@ -1,65 +1,70 @@
 using System.Collections;
 using UnityEngine;
+using static CameraState;
 
 public class FishingCamera : MonoBehaviour
 {
     private AudioSource alertSound;
-    [SerializeField] private GameObject bait;
+    private BaitLogic bait;
     private float cameraDistance;
     private float originalCameraDistance;
 
+    // This method is called when the script instance is being loaded.
     private void Start()
     {
+        bait = FindAnyObjectByType<BaitLogic>();
         alertSound = GetComponent<AudioSource>();
         cameraDistance = transform.position.z;
         originalCameraDistance = cameraDistance;
         SubscribeToEvents(true);
     }
 
+    // This function is called when the MonoBehaviour will be destroyed.
     private void OnDestroy()
     {
         SubscribeToEvents(false);
     }
 
+    // This method subscribes or unsubscribes to events based on the passed boolean value.
     private void SubscribeToEvents(bool subscribe)
     {
         if (subscribe)
         {
-            FishingController.OnCastingCamera += CastingCamera;
-            FishingController.OnFishingCamera += FishCamera;
+           
+
             FishingController.OnEndSummary += OnEndSummary;
-            FishingController.OnReelingCamera += ReelingCamera;
-            FishingController.OnStartReelingFish += OnStartReelingFish;
+            FishingController.OnEnterReelingFish += OnEnterReelingFish;
             CatchArea.OnCatchWhileReeling += OnCatchWhileReeling;
         }
         else
         {
-            FishingController.OnCastingCamera -= CastingCamera;
-            FishingController.OnFishingCamera -= FishCamera;
+         
+
             FishingController.OnEndSummary -= OnEndSummary;
-            FishingController.OnReelingCamera -= ReelingCamera;
-            FishingController.OnStartReelingFish -= OnStartReelingFish;
+            FishingController.OnEnterReelingFish -= OnEnterReelingFish;
             CatchArea.OnCatchWhileReeling -= OnCatchWhileReeling;
         }
     }
 
-    public void CastingCamera()
+    // These methods update the camera during different actions.
+    internal void UpdateCameraDuringCasting()
     {
         SetCameraToTarget(bait.transform);
         MoveCameraCloserToTarget(bait.transform);
     }
 
-    public void FishCamera()
+    internal void UpdateCameraDuringFishing()
     {
         SetCameraToTarget(bait.transform);
         MoveCameraToOriginal();
     }
 
-    public void ReelingCamera()
+    internal void UpdateCameraDuringReeling()
     {
         SetCameraToTarget(bait.transform);
         MoveCameraCloserToTarget(bait.transform);
     }
+
 
     public void SetCameraToTarget(Transform target)
     {
@@ -93,12 +98,13 @@ public class FishingCamera : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    // These methods update the camera during different actions.
     private void OnEndSummary()
     {
         MoveCameraToOriginal();
     }
 
-    private void OnStartReelingFish()
+    private void OnEnterReelingFish()
     {
         StartCoroutine(PlayCatchAlertSoundAndPauseGame());
     }

@@ -8,29 +8,30 @@ public abstract class FishingEventController : FishingStateMachine
     public static event Action OnChargeRelease;
     public static event Action OnEnterIdle;
     public static event Action OnEnterFishing;
+    public static event Action OnEnterCasting;
     public static event Action OnReelingFish;
     public static event Action OnReeling;
     public static event Action OnStartInspecting;
     public static event Action OnNextSummary;
     public static event Action OnEndSummary;
-    public static event Action OnCastingCamera;
-    public static event Action OnFishingCamera;
-    public static event Action OnReelingCamera;
-    public static event Action OnStartReelingFish;
+    public static event Action OnEnterReelingFish;
     public static event Action OnWhileCharging;
     public static event Action OnExitReelingFish;
     public static event Action OnWhileFishing;
     public static event Action OnWhileCasting;
-    public static event Action OnReelInBait;
+    public static event Action OnWhileReelingBait;
 
     #endregion
-
-    internal void RaiseWhileCasting() {
+    internal void RaiseOnEnterCasting() {
+        OnEnterCasting.Invoke();
+    }
+    internal void RaiseWhileCasting()
+    {
         OnWhileCasting.Invoke();
     }
     internal void RaiseReelInBait()
     {
-        OnReelInBait?.Invoke();
+        OnWhileReelingBait?.Invoke();
     }
     internal void RaiseWhileFishing()
     {
@@ -38,7 +39,7 @@ public abstract class FishingEventController : FishingStateMachine
     }
     internal void RaiseStartReelingFish()
     {
-        OnStartReelingFish?.Invoke();
+        OnEnterReelingFish?.Invoke();
     }
 
     internal void RaiseReelingFish()
@@ -81,21 +82,6 @@ public abstract class FishingEventController : FishingStateMachine
     internal void RaiseEndSummary()
     {
         OnEndSummary?.Invoke();
-    }
-
-    internal void RaiseCastingCamera()
-    {
-        OnCastingCamera?.Invoke();
-    }
-
-    internal void RaiseFishingCamera()
-    {
-        OnFishingCamera?.Invoke();
-    }
-
-    internal void RaiseReelingCamera()
-    {
-        OnReelingCamera?.Invoke();
     }
     internal void RaiseWhileCharging()
     {

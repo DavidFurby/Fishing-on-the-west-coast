@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class PlayerCamera : CameraStateMachine
+public class ExplorationCamera : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    ExplorationController player;
     private Vector3 shopItemPosition;
     private float cameraDistance;
     private float originalCameraDistance;
 
     private void Start()
     {
-        SetState(new CameraState.Player(this));
+        player = FindAnyObjectByType<ExplorationController>();
         originalCameraDistance = 0;
         cameraDistance = originalCameraDistance;
     }

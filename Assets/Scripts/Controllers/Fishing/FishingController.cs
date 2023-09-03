@@ -51,8 +51,8 @@ public class FishingController : FishingEventController
     {
         WaterCollision.OnEnterSea += EnterSea;
         FishingSpot.StartFishing += () => SetState(new FishingIdle(this));
-        OnStartReelingFish += CatchFish;
-        OnStartReelingFish += () => SetState(new ReelingFish(this));
+        OnEnterReelingFish += CatchFish;
+        OnEnterReelingFish += () => SetState(new ReelingFish(this));
         OnEnterIdle += ResetValues;
         OnWhileCharging += Release;
         OnWhileFishing += StartReeling;
@@ -64,8 +64,8 @@ public class FishingController : FishingEventController
     {
         WaterCollision.OnEnterSea -= EnterSea;
         FishingSpot.StartFishing -= () => SetState(new FishingIdle(this));
-        OnStartReelingFish -= CatchFish;
-        OnStartReelingFish -= () => SetState(new ReelingFish(this));
+        OnEnterReelingFish -= CatchFish;
+        OnEnterReelingFish -= () => SetState(new ReelingFish(this));
         OnEnterIdle -= ResetValues;
         OnWhileCharging -= Release;
         OnWhileFishing -= StartReeling;

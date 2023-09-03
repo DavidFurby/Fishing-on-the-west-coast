@@ -1,36 +1,69 @@
-public abstract class CameraState : State
+public class CameraState : State
 {
-    protected PlayerCamera system;
-    public CameraState(PlayerCamera playerCamera)
+    protected CameraController controller;
+    public CameraState(CameraController controller)
     {
-        this.system = playerCamera;
+        this.controller = controller;
     }
+}
 
-    public class Player : CameraState
-    {
-        public Player(PlayerCamera camera) : base(camera) { }
+public class PlayerCamera : CameraState
+{
+    public PlayerCamera(CameraController controller) : base(controller) { }
 
-        public override void LateUpdate()
-        {
-            base.Update();
-            system.FollowPlayer();
-        }
+    public override void LateUpdate()
+    {
+        base.Update();
+        controller.explorationCamera.FollowPlayer();
     }
+}
 
-    public class ShopItem : CameraState
-    {
-        public ShopItem(PlayerCamera camera) : base(camera) { }
-    }
-    public override void LateUpdate() {
-        system.FollowShopItem();
-    }
-    public class Bait : CameraState
-    {
-        public Bait(PlayerCamera camera) : base(camera) { }
-    }
+public class ShopItemCamera : CameraState
+{
+    public ShopItemCamera(CameraController controller) : base(controller) { }
 
-    public class Fish : CameraState
+    public override void LateUpdate()
     {
-        public Fish(PlayerCamera camera) : base(camera) { }
+        base.LateUpdate();
+        controller.explorationCamera.FollowShopItem();
+
     }
+}
+
+public class CastingBaitCamera : CameraState
+{
+    public CastingBaitCamera(CameraController controller) : base(controller) { }
+
+
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
+        controller.fishingCamera.UpdateCameraDuringCasting();
+    }
+}
+
+public class FishingBaitCamera : CameraState
+{
+    public FishingBaitCamera(CameraController controller) : base(controller) { }
+
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
+        controller.fishingCamera.UpdateCameraDuringFishing();
+    }
+}
+public class ReelingBaitCamera : CameraState
+{
+    public ReelingBaitCamera(CameraController controller) : base(controller) { }
+
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
+        controller.fishingCamera.UpdateCameraDuringReeling();
+    }
+}
+
+public class FishCamera : CameraState
+{
+    public FishCamera(CameraController controller) : base(controller) { }
 }

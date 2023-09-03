@@ -28,7 +28,7 @@ public class BaitLogic : MonoBehaviour
     {
         splashSound = GetComponent<AudioSource>();
         rigidBody = GetComponent<Rigidbody>();
-        FishingController.OnReelInBait += ReelIn;
+        FishingController.OnWhileReelingBait += ReelIn;
         FishingController.OnWhileCasting += Cast;
         WaterCollision.OnEnterSea += PlaySplashSound;
         FishingController.OnWhileFishing += PullBaitTowardsTarget;
@@ -37,7 +37,7 @@ public class BaitLogic : MonoBehaviour
 
     void OnDisable()
     {
-        FishingController.OnReelInBait -= ReelIn;
+        FishingController.OnWhileReelingBait -= ReelIn;
         FishingController.OnWhileCasting -= Cast;
         WaterCollision.OnEnterSea -= PlaySplashSound;
         FishingController.OnWhileFishing -= PullBaitTowardsTarget;

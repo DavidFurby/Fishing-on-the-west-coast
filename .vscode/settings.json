@@ -51,6 +51,6 @@
     "temp/": true,
     "Temp/": true
   },
-  "cSpell.words": ["Dont", "Rigidbody", "Scriptable", "UGUI"],
+  "cSpell.words": ["Dont", "Mathf", "Rigidbody", "Scriptable", "UGUI"],
   "dotnet.defaultSolution": "Fisherman.sln"
 }

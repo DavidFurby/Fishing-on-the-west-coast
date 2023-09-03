@@ -17,7 +17,7 @@ public class Shop : MonoBehaviour
     private int focusedShopItemIndex = 0;
     private readonly List<GameObject> shopItemPositions = new();
 
-    private PlayerCamera playerCamera;
+    private CameraController cameraController;
     private ExplorationController playerController;
     private DialogManager dialogManager;
 
@@ -31,7 +31,7 @@ public class Shop : MonoBehaviour
     #region MonoBehaviour Methods
     private void Start()
     {
-        playerCamera = FindObjectOfType<PlayerCamera>();
+        cameraController = FindObjectOfType<CameraController>();
         playerController = FindObjectOfType<ExplorationController>();
         dialogManager = FindObjectOfType<DialogManager>();
         Transform shopPositions = transform.Find("ShopPositions");
@@ -60,8 +60,8 @@ public class Shop : MonoBehaviour
 
     public void FocusItem()
     {
-        playerCamera.SetState(new CameraState.ShopItem(playerCamera));
-        playerCamera.SetShopItem(shopItemPositions[focusedShopItemIndex].transform.position);
+        cameraController.SetState(new ShopItemCamera(cameraController));
+        cameraController.explorationCamera.SetShopItem(shopItemPositions[focusedShopItemIndex].transform.position);
     }
 
     /// <summary>
@@ -82,7 +82,7 @@ public class Shop : MonoBehaviour
     {
         dialogManager.EndDialog();
         playerController.SetState(new ExplorationIdle(playerController));
-        playerCamera.SetState(new CameraState.Player(playerCamera));
+        cameraController.SetState(new PlayerCamera(cameraController));
         focusedShopItemIndex = 0;
     }
 

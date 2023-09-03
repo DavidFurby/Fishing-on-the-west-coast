@@ -26,14 +26,14 @@ public class Balance : MonoBehaviour
     private void SubscribeEvents()
     {
 
-        FishingController.OnStartReelingFish += StartBalanceMiniGame;
+        FishingController.OnEnterReelingFish += StartBalanceMiniGame;
         FishingController.OnReelingFish += MiniGameHandler;
         FishingController.OnExitReelingFish += EndBalanceMiniGame;
     }
 
     private void UnsubscribeEvents()
     {
-        FishingController.OnStartReelingFish -= StartBalanceMiniGame;
+        FishingController.OnEnterReelingFish -= StartBalanceMiniGame;
         FishingController.OnReelingFish -= MiniGameHandler;
         FishingController.OnExitReelingFish -= EndBalanceMiniGame;
     }
