@@ -11,12 +11,16 @@ public class ExplorationController : ExplorationStateMachine
     public static event Action NavigateShop;
     public static event Action OpenItemMenu;
 
+    private void OnEnable()
+    {
+        DialogManager.OnEndDialog += RaiseEndDialog;
+        FishingSpot.StartFishing += RaiseStartFishing;
+    }
     void Start()
     {
         playerAnimations = GetComponentInChildren<PlayerAnimations>();
         SetState(new ExplorationIdle(this));
-        DialogManager.OnEndDialog += RaiseEndDialog;
-        FishingSpot.StartFishing += RaiseStartFishing;
+
     }
 
     private void OnDisable()

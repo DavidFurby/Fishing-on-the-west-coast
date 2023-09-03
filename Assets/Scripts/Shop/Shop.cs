@@ -60,7 +60,7 @@ public class Shop : MonoBehaviour
 
     public void FocusItem()
     {
-        playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.ShoppingItem);
+        playerCamera.SetState(new CameraState.ShopItem(playerCamera));
         playerCamera.SetShopItem(shopItemPositions[focusedShopItemIndex].transform.position);
     }
 
@@ -82,7 +82,7 @@ public class Shop : MonoBehaviour
     {
         dialogManager.EndDialog();
         playerController.SetState(new ExplorationIdle(playerController));
-        playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.Player);
+        playerCamera.SetState(new CameraState.Player(playerCamera));
         focusedShopItemIndex = 0;
     }
 

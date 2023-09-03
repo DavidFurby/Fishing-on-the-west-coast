@@ -1,3 +1,4 @@
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public abstract class StateMachine : MonoBehaviour
@@ -50,6 +51,14 @@ public class FishStateMachine : StateMachine
 public abstract class FishingStateMachine : StateMachine
 {
     public void SetState(FishingState state)
+    {
+        base.SetState(state);
+    }
+}
+
+public abstract class CameraStateMachine : StateMachine
+{
+    public void SetState(CameraState state)
     {
         base.SetState(state);
     }
