@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 819292401}
     - target: {fileID: 5454712656789688775, guid: 0c905927ecde2cf4599224899ed99e36, type: 3}
       propertyPath: m_Name
-      value: Exploration Camera
+      value: Camera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

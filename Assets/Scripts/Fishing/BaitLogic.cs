@@ -46,8 +46,7 @@ public class BaitLogic : MonoBehaviour
 
     void Update()
     {
-        UpdatePosition.Invoke(transform.position);
-
+        UpdatePosition?.Invoke(transform.position);
     }
 
     private void AttachBait()
