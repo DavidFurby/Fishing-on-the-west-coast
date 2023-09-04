@@ -2,13 +2,31 @@ using UnityEngine;
 
 public class EveningTimer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] TransitArea transitArea;
+    TransitArea transitArea;
+    Animator sunAnimator;
 
+    void OnEnable()
+    {
+        FishingController.OnEnterIdle += StartSunTimer;
+    }
+    void Start()
+    {
+        transitArea = GetComponent<TransitArea>();
+        sunAnimator = GetComponent<Animator>();
+    }
+
+    void OnDisable()
+    {
+        FishingController.OnEnterIdle -= StartSunTimer;
+    }
     public void EndDay()
     {
-        Debug.Log("End day");
         MainManager.Instance.Days++;
         transitArea.Transition();
+    }
+    public void StartSunTimer()
+    {
+        Debug.Log("StartSunTimer");
+        sunAnimator.Play("Evening Light");
     }
 }

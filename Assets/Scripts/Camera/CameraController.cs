@@ -21,7 +21,6 @@ public class CameraController : CameraStateMachine
         {
             // If not, add it at runtime
             fishingCamera = this.gameObject.AddComponent<FishingCamera>();
-            Debug.Log(fishingCamera);
         }
 
         // Check if the ExplorationCamera script is already attached
