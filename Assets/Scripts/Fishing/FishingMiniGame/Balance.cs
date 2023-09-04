@@ -121,4 +121,7 @@ public class Balance : MonoBehaviour
         downwardForce = DEFAULT_FORCE;
         upwardForce = DEFAULT_FORCE;
     }
+    public float GetBalanceValue() {
+        return reelingBalance.value;
+    }
 }

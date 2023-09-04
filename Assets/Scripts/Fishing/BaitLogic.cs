@@ -8,7 +8,7 @@ public class BaitLogic : MonoBehaviour
 
     #region Serialized Fields
     [SerializeField] private GameObject fishingRodTop;
-    [SerializeField] private Scrollbar balance;
+    [SerializeField] private Balance balance;
     #endregion
 
     #region Private Fields
@@ -114,7 +114,7 @@ public class BaitLogic : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, FishingController.Instance.reelInSpeed * Time.fixedDeltaTime);
 
-        transform.position = new Vector3(transform.position.x, (transform.position.y + balance.value * Time.deltaTime * (balance.value >= 0.5 ? 1 : -1) * 10), transform.position.z);
+        transform.position = new Vector3(transform.position.x, (transform.position.y + balance.GetBalanceValue() * Time.deltaTime * (balance.GetBalanceValue() >= 0.5 ? 1 : -1) * 10), transform.position.z);
 
     }
 
