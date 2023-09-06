@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class FishingRodLogic : MonoBehaviour
+public class RodLogic : MonoBehaviour
 {
-    private FishingRodAnimations fishingRodAnimations;
+    private RodAnimations rodAnimations;
     public static event Action OnTriggerSetChargingBalance;
 
     void OnEnable()
@@ -15,7 +15,7 @@ public class FishingRodLogic : MonoBehaviour
     }
     void Start()
     {
-        fishingRodAnimations = GetComponent<FishingRodAnimations>();
+        rodAnimations = GetComponent<RodAnimations>();
     }
 
     void OnDisable()
@@ -51,11 +51,11 @@ public class FishingRodLogic : MonoBehaviour
     private IEnumerator SwingAnimation()
     {
         FishingController.Instance.castingPower *= FishingController.Instance.chargeLevel * MainManager.Instance.PlayerLevel.ThrowRangeModifier();
-        while (!fishingRodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
+        while (!rodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
             yield return null;
         }
-        while (fishingRodAnimations.GetCurrentAnimationState().normalizedTime < 1.0f)
+        while (rodAnimations.GetCurrentAnimationState().normalizedTime < 1.0f)
         {
             yield return null;
         }
@@ -65,7 +65,7 @@ public class FishingRodLogic : MonoBehaviour
     // Play the reverse swing animation
     public void PlayerReverseSwingAnimation()
     {
-        fishingRodAnimations.PlayReversSwingAnimation();
+        rodAnimations.PlayReversSwingAnimation();
     }
 
     public void WaitForSwingAnimation()

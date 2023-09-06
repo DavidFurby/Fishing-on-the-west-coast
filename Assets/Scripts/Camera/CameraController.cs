@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(FishingCamera))]
+[RequireComponent(typeof(ExplorationCamera))]
 public class CameraController : CameraStateMachine
 {
     internal FishingCamera fishingCamera;
@@ -16,19 +18,8 @@ public class CameraController : CameraStateMachine
     {
         SetState(new PlayerCamera(this));
 
-        // Check if the FishingCamera script is already attached
-        if (!TryGetComponent<FishingCamera>(out fishingCamera))
-        {
-            // If not, add it at runtime
-            fishingCamera = this.gameObject.AddComponent<FishingCamera>();
-        }
-
-        // Check if the ExplorationCamera script is already attached
-        if (!TryGetComponent<ExplorationCamera>(out explorationCamera))
-        {
-            // If not, add it at runtime
-            explorationCamera = this.gameObject.AddComponent<ExplorationCamera>();
-        }
+        fishingCamera = GetComponent<FishingCamera>();
+        explorationCamera = GetComponent<ExplorationCamera>();
     }
 
     void OnDisable()

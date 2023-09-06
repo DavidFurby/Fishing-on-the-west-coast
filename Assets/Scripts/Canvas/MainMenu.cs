@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
         }
         mainMenu.SetActive(false);
 
-        SceneManager.LoadScene("Boat");
+        SceneManager.LoadScene("Exploration Template");
     }
 
     public void Continue()

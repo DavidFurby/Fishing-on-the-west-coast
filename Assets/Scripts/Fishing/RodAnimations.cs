@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class FishingRodAnimations : MonoBehaviour
+public class RodAnimations : MonoBehaviour
 {
-    private Animator fishingRodAnimator;
+    private Animator rodAnimator;
 
     private void Start()
     {
-        fishingRodAnimator = GetComponent<Animator>();
+        rodAnimator = GetComponent<Animator>();
 
     }
     void OnEnable()
@@ -21,14 +21,14 @@ public class FishingRodAnimations : MonoBehaviour
     }
     public void PlaySwingAnimation()
     {
-        fishingRodAnimator.Play("Swing");
+        rodAnimator.Play("Swing");
     }
     public void PlayReversSwingAnimation()
     {
-        fishingRodAnimator.Play("Reverse Swing");
+        rodAnimator.Play("Reverse Swing");
     }
     public AnimatorStateInfo GetCurrentAnimationState()
     {
-        return fishingRodAnimator.GetCurrentAnimatorStateInfo(0);
+        return rodAnimator.GetCurrentAnimatorStateInfo(0);
     }
 }

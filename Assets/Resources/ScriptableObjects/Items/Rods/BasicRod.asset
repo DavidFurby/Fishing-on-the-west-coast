@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4b8136d390ad64408e1e6c533592c17, type: 3}
-  m_Name: RareFishingRod
+  m_Script: {fileID: 11500000, guid: 846bd8f5c68d2d64584660f0095bb136, type: 3}
+  m_Name: BasicRod
   m_EditorClassIdentifier: 
   itemTag: 1
-  id: 3
-  name: Rare Rod
-  price: 20
-  description: Super rare
-  model: {fileID: 143842397030981815, guid: fe8b751336031bd4898d0a22ae3ba0cb, type: 3}
-  strength: 40
-  throwRange: 300
+  id: 1
+  name: Basic Rod
+  price: 0
+  description: The most basic Rod
+  model: {fileID: 5800666673709144979, guid: 91c31fa3c3233f74ab91c02e298a7276, type: 3}
+  reelInSpeed: 1
+  throwRange: 1

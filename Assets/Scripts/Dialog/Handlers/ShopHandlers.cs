@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class ShopHandlers : MonoBehaviour
 {
-    [SerializeField] private DialogManager dialogManager;
-    [SerializeField] private Shop shop;
+    private DialogManager dialogManager;
+    private Shop shop;
 
     private void Start()
     {
+        shop = GetComponent<Shop>();
+        dialogManager = FindObjectOfType<DialogManager>();
         OpenShopHandler();
         SetTokens();
         LockShopControls();

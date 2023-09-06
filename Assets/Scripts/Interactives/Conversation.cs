@@ -5,10 +5,9 @@ using Yarn.Unity;
 
 public class Conversation : MonoBehaviour, IInteractive
 {
-    // Start is called before the first frame update
     [SerializeField] private GameCharacters character;
 
-    public enum GameCharacters
+    private enum GameCharacters
     {
         Player,
         Neighbor,

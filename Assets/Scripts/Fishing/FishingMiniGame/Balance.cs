@@ -4,13 +4,14 @@ using UnityEngine.UI;
 
 public class Balance : MonoBehaviour
 {
-    [SerializeField] private Scrollbar reelingBalance;
+    private Scrollbar reelingBalance;
     private MusicController musicController;
     private const float DEFAULT_FORCE = 0.0005f;
     private float downwardForce = DEFAULT_FORCE;
     private float upwardForce = DEFAULT_FORCE;
     void Start()
     {
+        reelingBalance = GetComponentInChildren<Scrollbar>();
         musicController = FindAnyObjectByType<MusicController>();
         reelingBalance.gameObject.SetActive(false);
     }
@@ -121,7 +122,8 @@ public class Balance : MonoBehaviour
         downwardForce = DEFAULT_FORCE;
         upwardForce = DEFAULT_FORCE;
     }
-    public float GetBalanceValue() {
+    public float GetBalanceValue()
+    {
         return reelingBalance.value;
     }
 }

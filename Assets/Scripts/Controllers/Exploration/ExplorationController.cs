@@ -64,13 +64,14 @@ public class ExplorationController : ExplorationStateMachine
             transform.rotation = Quaternion.LookRotation(movementDirection);
     }
 
-    //Called when player enters trigger
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Interactive"))
         {
             isWithinTriggerArea = true;
             interactive = other.GetComponent<Interactive>();
+            Debug.Log(isWithinTriggerArea);
+            Debug.Log(interactive);
         }
     }
 
@@ -95,7 +96,8 @@ public class ExplorationController : ExplorationStateMachine
     //Activates interactive object if player is within trigger area and button is pressed
     private void ActivateInteractive()
     {
+        Debug.Log("Activating");
         SetState(new Interacting(this));
-        interactive.CheckActivated();
+        interactive.StartInteraction();
     }
 }

@@ -7,8 +7,8 @@ public class BaitLogic : MonoBehaviour
     public bool IsPulling { get; private set; }
 
     #region Serialized Fields
-    [SerializeField] private GameObject fishingRodTop;
-    [SerializeField] private Balance balance;
+    private GameObject rodTop;
+    private Balance balance;
     #endregion
 
     #region Private Fields
@@ -26,8 +26,10 @@ public class BaitLogic : MonoBehaviour
 
     public void Start()
     {
+        balance = FindObjectOfType<Balance>();
         splashSound = GetComponent<AudioSource>();
         rigidBody = GetComponent<Rigidbody>();
+        rodTop = GameObject.FindGameObjectWithTag("RodTop");
         FishingController.OnWhileReelingBait += ReelIn;
         FishingController.OnWhileCasting += Cast;
         WaterCollision.OnEnterSea += PlaySplashSound;
@@ -51,13 +53,13 @@ public class BaitLogic : MonoBehaviour
 
     private void AttachBait()
     {
-        transform.position = fishingRodTop.transform.position;
+        transform.position = rodTop.transform.position;
 
         // Create a FixedJoint component and attach it to the bait
         fixedJoint = gameObject.AddComponent<FixedJoint>();
 
-        // Set the connected body of the FixedJoint to be the fishingRodTop
-        fixedJoint.connectedBody = fishingRodTop.GetComponent<Rigidbody>();
+        // Set the connected body of the FixedJoint to be the rodTop
+        fixedJoint.connectedBody = rodTop.GetComponent<Rigidbody>();
 
         forceFactor = 1;
     }
@@ -76,7 +78,7 @@ public class BaitLogic : MonoBehaviour
 
     private void DetachBait()
     {
-        // Destroy the FixedJoint component to detach the bait from the fishingRodTop
+        // Destroy the FixedJoint component to detach the bait from the rodTop
         Destroy(fixedJoint);
     }
 
@@ -92,7 +94,7 @@ public class BaitLogic : MonoBehaviour
 
     public void ReelIn()
     {
-        targetPosition = fishingRodTop.transform.position;
+        targetPosition = rodTop.transform.position;
 
         if (IsCloseToTarget(targetPosition, 2))
         {
@@ -124,7 +126,7 @@ public class BaitLogic : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             IsPulling = true;
-            Vector3 direction = (fishingRodTop.transform.position - transform.position).normalized;
+            Vector3 direction = (rodTop.transform.position - transform.position).normalized;
             rigidBody.AddForce(direction * 10f, ForceMode.Impulse);
             IsPulling = false;
             if (IsCloseToTarget(targetPosition, 10))

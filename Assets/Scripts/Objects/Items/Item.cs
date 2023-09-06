@@ -13,7 +13,7 @@ public class Item : ScriptableObject
     public enum ItemTag
     {
         None,
-        FishingRod,
+        Rod,
         Bait,
         Hat,
     }

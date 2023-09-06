@@ -195,7 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f45076a6a3b494458b996018ada6e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingRodTop: {fileID: 6964771873550463292}
   balance: {fileID: 0}
 --- !u!114 &1529541429993056296
 MonoBehaviour:
@@ -219,13 +218,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3230594414535825567}
-  - component: {fileID: 7738849842280061641}
-  - component: {fileID: 2696618216450335625}
   - component: {fileID: 3579129907265988768}
   - component: {fileID: 3198756141745438509}
   - component: {fileID: 1991511019274908567}
   - component: {fileID: 8708867433470933099}
   - component: {fileID: 7038035470058643650}
+  - component: {fileID: 892196177009958477}
   m_Layer: 0
   m_Name: Rod
   m_TagString: Untagged
@@ -250,30 +248,6 @@ Transform:
   - {fileID: 3522859708545481309}
   m_Father: {fileID: 5059312361471932217}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7738849842280061641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4772169527661973778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397a58daf2c0ec34d9c6f78895f9df77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2696618216450335625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4772169527661973778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d88d0e5ea8c00164481f3c07e95fe7d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &3579129907265988768
 AudioSource:
   m_ObjectHideFlags: 0
@@ -452,6 +426,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
+--- !u!114 &892196177009958477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4772169527661973778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e124a87cd6f84e4cbf96f0e7de228fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5059312361471932163
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +617,7 @@ GameObject:
   - component: {fileID: 3432460108155787793}
   m_Layer: 0
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: RodTop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -823,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 5191685753249907667, guid: 20597bb47e64fcd4785f8cd2ff7112ad, type: 3}
       propertyPath: whatTheRopeIsConnectedTo
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3522859708545481309}
     - target: {fileID: 8182107377545696820, guid: 20597bb47e64fcd4785f8cd2ff7112ad, type: 3}
       propertyPath: m_Name
       value: Line

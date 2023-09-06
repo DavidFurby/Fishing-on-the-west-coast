@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 public class ChargeCast : MonoBehaviour
 {
-    [SerializeField] private Scrollbar castingPowerBalance;
+    private Scrollbar castingPowerBalance;
     private bool castingPowerDirection = true;
 
     void Start()
     {
+        castingPowerBalance = GetComponentInChildren<Scrollbar>();
         castingPowerBalance.gameObject.SetActive(false);
     }
     void OnEnable()
@@ -24,14 +25,14 @@ public class ChargeCast : MonoBehaviour
     {
         FishingController.OnWhileCharging += ChargeMiniGame;
         FishingController.OnChargeRelease += StopCharging;
-        FishingRodLogic.OnTriggerSetChargingBalance += StartCharging;
+        RodLogic.OnTriggerSetChargingBalance += StartCharging;
     }
 
     private void UnsubscribeEvents()
     {
         FishingController.OnChargeRelease -= StopCharging;
         FishingController.OnWhileCharging -= ChargeMiniGame;
-        FishingRodLogic.OnTriggerSetChargingBalance -= StartCharging;
+        RodLogic.OnTriggerSetChargingBalance -= StartCharging;
     }
 
     private void StartCharging()

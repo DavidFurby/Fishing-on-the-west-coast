@@ -11,13 +11,6 @@ using UnityEngine;
     {
         itemTag = ItemTag.Hat;
     }
-    public Hat(HatData hatData)
-    {
-        id = hatData.id;
-        name = hatData.name;
-        description = hatData.description;
-        price = hatData.price;
-    }
     public void AddHatToInstance()
     {
         MainManager.Instance.Inventory.FoundHats =

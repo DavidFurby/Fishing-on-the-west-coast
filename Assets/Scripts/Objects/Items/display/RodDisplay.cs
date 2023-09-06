@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RodDisplay : ItemDisplay
 {
-    private const string ItemsPath = "ScriptableObjects/Items/FishingRods";
+    private const string ItemsPath = "ScriptableObjects/Items/Rods";
 
     private void Start()
     {
@@ -14,8 +14,8 @@ public class RodDisplay : ItemDisplay
     }
     public void SelectRod()
     {
-        FishingRod[] rodPrefabs = Resources.LoadAll<FishingRod>(ItemsPath);
-        FishingRod equippedRod = rodPrefabs.FirstOrDefault(r => MainManager.Instance.Inventory.EquippedFishingRod.id == r.id);
+        Rod[] rodPrefabs = Resources.LoadAll<Rod>(ItemsPath);
+        Rod equippedRod = rodPrefabs.FirstOrDefault(r => MainManager.Instance.Inventory.EquippedRod.id == r.id);
         // Get the item component of the instantiated game object  
         SetNewItemModel(equippedRod);
 

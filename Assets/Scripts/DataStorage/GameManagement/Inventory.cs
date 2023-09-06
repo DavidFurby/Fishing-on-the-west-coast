@@ -5,9 +5,9 @@ using static Item;
 
 public class Inventory
 {
-    public List<FishingRod> FoundFishingRods { get; set; } = new List<FishingRod>();
-    public FishingRod EquippedFishingRod { get; set; }
-    public FishingRod[] AvailableFishingRods { get; set; }
+    public List<Rod> FoundRods { get; set; } = new List<Rod>();
+    public Rod EquippedRod { get; set; }
+    public Rod[] AvailableRods { get; set; }
     public List<Bait> FoundBaits { get; set; } = new List<Bait>();
     public Bait EquippedBait { get; set; }
     public Bait[] AvailableBaits { get; set; }
@@ -22,8 +22,8 @@ public class Inventory
     {
         switch (tag)
         {
-            case ItemTag.FishingRod:
-                EquippedFishingRod = FoundFishingRods.First((rod) => rod.id == id);
+            case ItemTag.Rod:
+                EquippedRod = FoundRods.First((rod) => rod.id == id);
                 break;
             case ItemTag.Bait:
                 EquippedBait = FoundBaits.First((bait) => bait.id == id);
@@ -38,7 +38,7 @@ public class Inventory
     {
         return itemTag switch
         {
-            ItemTag.FishingRod => EquippedFishingRod,
+            ItemTag.Rod => EquippedRod,
             ItemTag.Bait => EquippedBait,
             ItemTag.Hat => EquippedHat,
             _ => null,
@@ -49,7 +49,7 @@ public class Inventory
     {
         return item.itemTag switch
         {
-            ItemTag.FishingRod => FoundFishingRods.Any((rod) => rod.id == item.id),
+            ItemTag.Rod => FoundRods.Any((rod) => rod.id == item.id),
             ItemTag.Bait => FoundBaits.Any((bait) => bait.id == item.id),
             ItemTag.Hat => FoundHats.Any((hat) => hat.id == item.id),
             _ => false,
@@ -59,9 +59,9 @@ public class Inventory
     {
         switch (item.itemTag)
         {
-            case ItemTag.FishingRod:
-                FishingRod fishingRod = AvailableFishingRods.FirstOrDefault((fishingRod) => fishingRod.id == item.id);
-                fishingRod.AddFishingRodToInstance();
+            case ItemTag.Rod:
+                Rod rod = AvailableRods.FirstOrDefault((rod) => rod.id == item.id);
+                rod.AddRodToInstance();
                 break;
             case ItemTag.Bait:
                 Bait bait = AvailableBaits.FirstOrDefault((bait) => bait.id == item.id);

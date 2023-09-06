@@ -21,7 +21,7 @@ public class Interactive : MonoBehaviour
         }
     }
 
-    public void CheckActivated()
+    public void StartInteraction()
     {
 
         Component[] components = GetComponents<Component>();
@@ -29,6 +29,7 @@ public class Interactive : MonoBehaviour
         {
             if (component is IInteractive)
             {
+                Debug.Log("CheckActivated");
                 HideIcon();
                 (component as IInteractive).Interact();
                 break;

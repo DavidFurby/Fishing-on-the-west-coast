@@ -17,7 +17,7 @@ public class ItemMenu : MonoBehaviour
     {
         itemMenu.SetActive(false);
         allItems = MainManager.Instance.Inventory.FoundBaits.Cast<Item>().ToList();
-        allItems.AddRange(MainManager.Instance.Inventory.FoundFishingRods);
+        allItems.AddRange(MainManager.Instance.Inventory.FoundRods);
         allItems.AddRange(MainManager.Instance.Inventory.FoundHats);
         ExplorationController.OpenItemMenu += HandleInputs;
     }
@@ -41,8 +41,8 @@ public class ItemMenu : MonoBehaviour
                     case ItemTag.Bait:
                         wheel.SetItems(allItems.OfType<Bait>().ToArray());
                         break;
-                    case ItemTag.FishingRod:
-                        wheel.SetItems(allItems.OfType<FishingRod>().ToArray());
+                    case ItemTag.Rod:
+                        wheel.SetItems(allItems.OfType<Rod>().ToArray());
                         break;
                     case ItemTag.Hat:
                         wheel.SetItems(allItems.OfType<Hat>().ToArray());

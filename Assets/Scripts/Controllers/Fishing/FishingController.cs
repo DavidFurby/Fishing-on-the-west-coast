@@ -154,7 +154,7 @@ public class FishingController : FishingEventController
     /// <param name="setChargingThrowSpeed">The action to perform while charging the casting power.</param>
     public void ChargeCasting()
     {
-        if (castingPower < MainManager.Instance.Inventory.EquippedFishingRod.throwRange)
+        if (castingPower < MainManager.Instance.Inventory.EquippedRod.throwRange)
         {
             castingPower++;
         }

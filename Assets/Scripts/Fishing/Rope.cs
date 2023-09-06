@@ -4,14 +4,14 @@ using UnityEngine;
 public class Rope : MonoBehaviour
 {
     //Objects that will interact with the rope
-    public Transform whatTheRopeIsConnectedTo;
-    public Transform whatIsHangingFromTheRope;
+    private Transform whatTheRopeIsConnectedTo;
+    private Transform whatIsHangingFromTheRope;
 
     //Line renderer used to display the rope
     LineRenderer lineRenderer;
 
     //A list with all rope section
-    public List<RopeSection> allRopeSections = new();
+    private List<RopeSection> allRopeSections = new();
 
     //Rope data
     private readonly float ropeSectionLength = 1f;
@@ -29,6 +29,8 @@ public class Rope : MonoBehaviour
 
     void Start()
     {
+        whatTheRopeIsConnectedTo = GameObject.FindGameObjectWithTag("RodTop").transform;
+        whatIsHangingFromTheRope = GameObject.FindGameObjectWithTag("Bait").transform;
         //Init the line renderer we use to display the rope
         lineRenderer = GetComponent<LineRenderer>();
         SetLength(2);
@@ -53,7 +55,9 @@ public class Rope : MonoBehaviour
 
             // Make what's hanging from the rope look at the next to last rope position to make it rotate with the rope
             whatIsHangingFromTheRope.LookAt(allRopeSections[1].pos);
-        } else {
+        }
+        else
+        {
             lineRenderer.enabled = false;
         }
 

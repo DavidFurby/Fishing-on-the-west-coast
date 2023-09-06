@@ -24,9 +24,10 @@ public class NewGameController : MonoBehaviour
     // Populates the available items for the game
     private static void PopulateAvailableItems(Game game)
     {
-        game.Inventory.AvailableFishingRods = Resources.LoadAll<FishingRod>(ItemsPath + "FishingRods").OrderBy(r => r.id).ToArray();
+        game.Inventory.AvailableRods = Resources.LoadAll<Rod>(ItemsPath + "Rods").OrderBy(r => r.id).ToArray();
         game.Inventory.AvailableHats = Resources.LoadAll<Hat>(ItemsPath + "Hats").OrderBy(h => h.id).ToArray();
         game.Inventory.AvailableBaits = Resources.LoadAll<Bait>(ItemsPath + "Baits").OrderBy(b => b.id).ToArray();
+        Debug.Log(game.Inventory.AvailableRods[0].name);
     }
 
     // Resets the game state to its initial values
@@ -38,9 +39,9 @@ public class NewGameController : MonoBehaviour
         game.Scene = "Boat";
         game.PlayerLevel.SetPlayerLevel(1, 0);
         game.CaughtFishes.Clear();
-        game.Inventory.FoundFishingRods.Clear();
-        game.Inventory.FoundFishingRods.Add(game.Inventory.AvailableFishingRods[0]);
-        game.Inventory.EquippedFishingRod = game.Inventory.FoundFishingRods[0];
+        game.Inventory.FoundRods.Clear();
+        game.Inventory.FoundRods.Add(game.Inventory.AvailableRods[0]);
+        game.Inventory.EquippedRod = game.Inventory.FoundRods[0];
         game.Inventory.FoundBaits.Clear();
         game.Inventory.FoundBaits.Add(game.Inventory.AvailableBaits[0]);
         game.Inventory.EquippedBait = game.Inventory.FoundBaits[0];
