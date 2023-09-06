@@ -16,7 +16,7 @@ public class ExplorationCamera : MonoBehaviour
 
     internal void FollowPlayer()
     {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2, cameraDistance - 2);
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2, cameraDistance - 4);
         if (cameraDistance != originalCameraDistance)
         {
             cameraDistance = originalCameraDistance;
