@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-
+[RequireComponent(typeof(RodAnimations))]
 public class RodLogic : MonoBehaviour
 {
     private RodAnimations rodAnimations;

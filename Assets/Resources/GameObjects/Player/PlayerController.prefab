@@ -205,6 +205,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6326647731678324068}
     m_Modifications:
+    - target: {fileID: 80517778853719614, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_VersionIndex
+      value: 791
+      objectReference: {fileID: 0}
     - target: {fileID: 2432128814930967612, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: balance
       value: 
