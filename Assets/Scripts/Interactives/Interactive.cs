@@ -4,8 +4,8 @@ public class Interactive : MonoBehaviour
 {
     private GameObject InteractiveIcon;
     private GameObject iconInstance;
-   [HideInInspector] public float iconOffset = 2f;
-    private const string ItemsPath = "GameObjects/";
+    [HideInInspector] public float iconOffset = 2f;
+    private const string ItemsPath = "GameObjects/Interactive/";
 
     private void Start()
     {
@@ -23,18 +23,13 @@ public class Interactive : MonoBehaviour
 
     public void StartInteraction()
     {
-
-        Component[] components = GetComponents<Component>();
-        foreach (Component component in components)
+        if (TryGetComponent<IInteractive>(out var interactiveComponent))
         {
-            if (component is IInteractive)
-            {
-                HideIcon();
-                (component as IInteractive).Interact();
-                break;
-            }
+            HideIcon();
+            interactiveComponent.Interact();
         }
     }
+
 
     //Shows icon when player enters the trigger
     private void OnTriggerEnter(Collider other)

@@ -70,8 +70,6 @@ public class ExplorationController : ExplorationStateMachine
         {
             isWithinTriggerArea = true;
             interactive = other.GetComponent<Interactive>();
-            Debug.Log(isWithinTriggerArea);
-            Debug.Log(interactive);
         }
     }
 
