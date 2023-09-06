@@ -5,17 +5,17 @@ using UnityEngine;
 public class FishingController : FishingEventController
 {
     public static FishingController Instance { get; private set; }
-    [HideInInspector] public FishDisplay FishAttachedToBait { get; set; }
-    [HideInInspector] public List<FishDisplay> fishesOnHook = new();
-    [HideInInspector] public float chargeLevel = 1;
-    [HideInInspector] public float reelInSpeed;
-    [HideInInspector] public float castingPower;
-    [HideInInspector] public float initialCastingPower = 20;
-    [HideInInspector] public float initialReelInSpeed = 15f;
+    [HideInInspector] internal FishDisplay FishAttachedToBait { get; set; }
+    [HideInInspector] internal List<FishDisplay> fishesOnHook = new();
+    [HideInInspector] internal float chargeLevel = 1;
+    [HideInInspector] internal float reelInSpeed;
+    [HideInInspector] internal float castingPower;
+    [HideInInspector] internal float initialCastingPower = 20;
+    [HideInInspector] internal float initialReelInSpeed = 15f;
 
-    [HideInInspector] public bool IsInCatchArea { get; set; }
+    [HideInInspector] internal bool IsInCatchArea { get; set; }
 
-    [HideInInspector] public bool FishIsBaited { get; set; }
+    [HideInInspector] internal bool FishIsBaited { get; set; }
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -154,8 +154,10 @@ public class FishingController : FishingEventController
     /// <param name="setChargingThrowSpeed">The action to perform while charging the casting power.</param>
     public void ChargeCasting()
     {
+        Debug.Log(MainManager.Instance.Inventory.EquippedRod.throwRange);
         if (castingPower < MainManager.Instance.Inventory.EquippedRod.throwRange)
         {
+            Debug.Log(castingPower);
             castingPower++;
         }
     }

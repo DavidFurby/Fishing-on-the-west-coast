@@ -26,7 +26,6 @@ public class EveningTimer : MonoBehaviour
     }
     public void StartSunTimer()
     {
-        Debug.Log("StartSunTimer");
         sunAnimator.Play("Evening Light");
     }
 }
