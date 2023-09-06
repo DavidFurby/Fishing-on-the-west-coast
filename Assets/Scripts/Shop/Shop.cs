@@ -35,16 +35,16 @@ public class Shop : MonoBehaviour
     {
         emptySpot = Resources.Load<Item>(ItemsPath + "/Empty");
         shopItems = new Item[6];
-        shopItems[0] = Resources.Load<Item>(ItemsPath + "/Baits/AdvanceBait");
-        shopItems[1] = Resources.Load<Item>(ItemsPath + "/Hats/FancyHat");
-        shopItems[2] = Resources.Load<Item>(ItemsPath + "/Rods/AdvanceRod");
-        shopItems[3] = Resources.Load<Item>(ItemsPath + "/Baits/RareBait");
-        shopItems[4] = Resources.Load<Item>(ItemsPath + "/Hats/PremiumHat");
-        shopItems[5] = Resources.Load<Item>(ItemsPath + "/Rods/RareRod");
+        string[] itemNames = { "/Baits/AdvanceBait", "/Hats/FancyHat", "/Rods/AdvanceRod", "/Baits/RareBait", "/Hats/PremiumHat", "/Rods/RareRod" };
+        for (int i = 0; i < shopItems.Length; i++)
+        {
+            shopItems[i] = Resources.Load<Item>(ItemsPath + itemNames[i]);
+        }
         InitializeReferences();
         InitializeShopItemPositions();
         SpawnItems();
     }
+
 
     private void InitializeReferences()
     {
