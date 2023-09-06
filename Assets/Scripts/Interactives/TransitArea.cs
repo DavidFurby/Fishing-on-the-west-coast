@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class TransitArea : MonoBehaviour, IInteractive
 {
-    public SceneAsset toScene;
-    public Animator animator;
+    private readonly SceneAsset toScene;
+    private Animator animator;
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     public void Interact()
     {
         Transition();
