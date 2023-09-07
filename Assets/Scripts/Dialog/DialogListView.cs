@@ -17,6 +17,7 @@ namespace Yarn.Unity
         [SerializeField] float fadeTime = 0.1f;
 
         [SerializeField] bool showUnavailableOptions = false;
+
         // A cached pool of OptionView objects so that we can reuse them
         readonly List<OptionView> optionViews = new();
 
@@ -25,6 +26,8 @@ namespace Yarn.Unity
 
         // The line we saw most recently.
         LocalizedLine lastSeenLine;
+
+
 
         public void Start()
         {
@@ -62,7 +65,6 @@ namespace Yarn.Unity
                 var optionView = CreateNewOptionView();
                 optionView.gameObject.SetActive(false);
             }
-
             // Set up all of the option views
             int optionViewsCreated = 0;
 

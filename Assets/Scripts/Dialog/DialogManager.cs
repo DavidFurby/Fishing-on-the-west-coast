@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Yarn.Unity;
 
 public class DialogManager : MonoBehaviour
 {
-    [SerializeField] private DialogueRunner dialogueRunner;
+    #region Fields
+
+    private DialogueRunner dialogueRunner;
 
     public static event Action OnEndDialog;
 
@@ -14,11 +17,17 @@ public class DialogManager : MonoBehaviour
     {
         None = 0,
         ShopItem = 1 << 0,
+        ShopItemOptions = 1 << 1,
     }
+    private Dictionary<string, bool> addedHandlers = new();
+
+    #endregion
+
+    #region Unity Methods
 
     private void OnEnable()
     {
-        if (dialogueRunner != null)
+        if (TryGetComponent<DialogueRunner>(out dialogueRunner))
         {
             Conversation.StartConversation += StartDialog;
             OnEndDialog += dialogueRunner.Stop;
@@ -39,25 +48,22 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Private Methods
+
     private void SetDayHandler()
     {
         int day = MainManager.Instance.Days;
-        if (dialogueRunner != null)
+        dialogueRunner.AddCommandHandler(nameof(SetDayHandler), () =>
         {
-            dialogueRunner.AddCommandHandler("getDayOfMonth", () =>
-            {
-                dialogueRunner.VariableStorage.SetValue("$day", day);
-            });
-        }
+            dialogueRunner.VariableStorage.SetValue("$day", day);
+        });
     }
 
-    public void RemoveHandler(string handlerName)
-    {
-        if (dialogueRunner != null)
-        {
-            dialogueRunner.RemoveCommandHandler(handlerName);
-        }
-    }
+    #endregion
+
+    #region Public Methods
 
     public void StartDialog(string node)
     {
@@ -78,36 +84,44 @@ public class DialogManager : MonoBehaviour
 
     public bool CurrentNodeShouldShowTextDirectly()
     {
-        if (dialogueRunner != null)
-        {
-            return Enum.GetValues(typeof(InstantTextNodes))
-                .Cast<InstantTextNodes>()
-                .Any(value => value != InstantTextNodes.None && dialogueRunner.CurrentNodeName.Contains(value.ToString()));
-        }
-        return false;
+        return Enum.GetValues(typeof(InstantTextNodes))
+            .Cast<InstantTextNodes>()
+            .Any(value => value != InstantTextNodes.None && dialogueRunner.CurrentNodeName.Contains(value.ToString()) == true);
     }
 
     public void AddCommandHandler(string commandName, Action commandHandler)
     {
-        if (dialogueRunner != null)
-        {
-            dialogueRunner.AddCommandHandler(commandName, commandHandler);
-        }
+        dialogueRunner.AddCommandHandler(commandName, commandHandler);
     }
 
     public void SetVariableValue(string variableName, string value)
     {
-        if (dialogueRunner != null)
-        {
-            dialogueRunner.VariableStorage.SetValue(variableName, value);
-        }
+        dialogueRunner.VariableStorage.SetValue(variableName, value);
     }
 
     public void SetVariableValue(string variableName, int value)
     {
-        if (dialogueRunner != null)
+        dialogueRunner.VariableStorage.SetValue(variableName, value);
+    }
+
+    public void AddHandler(string handlerName, System.Action handler)
+    {
+        AddCommandHandler(handlerName, handler);
+        addedHandlers[handlerName] = true;
+    }
+
+    public void RemoveHandler(string handlerName)
+    {
+        if (HasHandler(handlerName))
         {
-            dialogueRunner.VariableStorage.SetValue(variableName, value);
+            dialogueRunner.RemoveCommandHandler(handlerName);
+            addedHandlers.Remove(handlerName);
         }
     }
+
+    public bool HasHandler(string handlerName)
+    {
+        return addedHandlers.ContainsKey(handlerName);
+    }
+    #endregion
 }

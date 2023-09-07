@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopHandlers : MonoBehaviour
@@ -17,42 +18,46 @@ public class ShopHandlers : MonoBehaviour
 
     private void OpenShopHandler()
     {
-        dialogManager.AddCommandHandler("openShop", () =>
+        dialogManager.AddHandler("openShop", () =>
         {
             StartCoroutine(shop.OpenShop());
         });
     }
+
     public void SetShopItemHandler(Item shopItem)
     {
         dialogManager.RemoveHandler("setShopItem");
-        dialogManager.AddCommandHandler("setShopItem", () =>
+        dialogManager.AddHandler("setShopItem", () =>
         {
             dialogManager.SetVariableValue("$shopItemId", shopItem.id);
             dialogManager.SetVariableValue("$shopItemName", shopItem.name);
             dialogManager.SetVariableValue("$shopItemPrice", shopItem.price);
             dialogManager.SetVariableValue("$shopItemDescription", shopItem.description);
-
         });
     }
+
     public void SetTokens()
     {
         dialogManager.RemoveHandler("setTokens");
-        dialogManager.AddCommandHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.TotalCatches));
+        dialogManager.AddHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.TotalCatches));
     }
+
     //lock controls if item has been selected in shop
     public void LockShopControls()
     {
         dialogManager.RemoveHandler("lockShopControls");
-        dialogManager.AddCommandHandler("lockShopControls", () =>
+        dialogManager.AddHandler("lockShopControls", () =>
         {
             shop.pauseShoppingControls = !shop.pauseShoppingControls;
         });
     }
+
     private void BuyShopItem()
     {
-        dialogManager.AddCommandHandler("buyShopItem", () =>
+        dialogManager.AddHandler("buyShopItem", () =>
         {
             shop.BuyItem();
         });
     }
+
 }
