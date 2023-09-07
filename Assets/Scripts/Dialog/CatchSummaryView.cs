@@ -11,7 +11,7 @@ namespace Yarn.Unity
     /// A Dialogue View that presents lines of dialogue, using Unity UI
     /// elements.
     /// </summary>
-    public class DialogView : DialogueViewBase
+    public class CatchSummaryView : DialogueViewBase
     {
         /// <summary>
         /// The canvas group that contains the UI elements used by this Line

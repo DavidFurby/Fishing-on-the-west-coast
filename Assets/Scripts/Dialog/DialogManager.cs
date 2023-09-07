@@ -69,7 +69,6 @@ public class DialogManager : MonoBehaviour
             dialogueRunner.StartDialogue(node);
         }
     }
-
     public void EndDialog()
     {
         OnEndDialog?.Invoke();
