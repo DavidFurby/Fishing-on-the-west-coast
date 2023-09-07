@@ -2,13 +2,12 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-
+[RequireComponent(typeof(CatchSummaryHandlers))]
 public class CatchSummary : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI isNewText;
     [SerializeField] private TextMeshProUGUI newRecordText;
     [HideInInspector] public FishDisplay currentlyDisplayedFish;
-
     private CatchSummaryHandlers summaryDialogHandlers;
     private int currentFishIndex = 0;
 

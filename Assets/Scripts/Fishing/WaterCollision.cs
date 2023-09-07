@@ -20,7 +20,6 @@ public class WaterCollision : MonoBehaviour
     {
         if (other.CompareTag("Bait"))
         {
-            Debug.Log("bait");
             OnEnterSea.Invoke();
         }
 
