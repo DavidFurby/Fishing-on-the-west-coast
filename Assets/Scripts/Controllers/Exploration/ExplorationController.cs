@@ -94,7 +94,6 @@ public class ExplorationController : ExplorationStateMachine
     //Activates interactive object if player is within trigger area and button is pressed
     private void ActivateInteractive()
     {
-        Debug.Log("Activating");
         SetState(new Interacting(this));
         interactive.StartInteraction();
     }

@@ -11,14 +11,16 @@ public class DistanceRecord : MonoBehaviour
     private GameObject distanceRecordMarker;
     [Tooltip("Text UI for displaying the distance value")] private TextMeshProUGUI distanceTextUI;
     [SerializeField][Tooltip("The sea game object")] private GameObject sea;
-    [SerializeField][Tooltip("The starting point for calculating the distance")] private GameObject from;
-    [SerializeField][Tooltip("The end point for calculating the distance")] private GameObject to;
+    [Tooltip("The starting point for calculating the distance")] private GameObject from;
+    [Tooltip("The end point for calculating the distance")] private GameObject to;
     private float distance;
     #endregion
 
     #region Unity Methods
     void OnEnable()
     {
+        from = GameObject.FindGameObjectWithTag("RodTop");
+        to = GameObject.FindGameObjectWithTag("Bait");
         distanceTextUI = GetComponent<TextMeshProUGUI>();
         distanceRecordMarker = Resources.Load<GameObject>(markerPath);
         FishingController.OnEnterFishing += UpdateDistanceRecord;

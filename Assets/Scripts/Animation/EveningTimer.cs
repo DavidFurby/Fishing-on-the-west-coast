@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[RequireComponent(typeof(TransitArea))]
 public class EveningTimer : MonoBehaviour
 {
     TransitArea transitArea;
