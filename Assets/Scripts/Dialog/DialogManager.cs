@@ -12,13 +12,6 @@ public class DialogManager : MonoBehaviour
 
     public static event Action OnEndDialog;
 
-    [Flags]
-    public enum InstantTextNodes
-    {
-        None = 0,
-        ShopItem = 1 << 0,
-        ShopItemOptions = 1 << 1,
-    }
     private Dictionary<string, bool> addedHandlers = new();
 
     #endregion
@@ -80,13 +73,6 @@ public class DialogManager : MonoBehaviour
     public void EndDialog()
     {
         OnEndDialog?.Invoke();
-    }
-
-    public bool CurrentNodeShouldShowTextDirectly()
-    {
-        return Enum.GetValues(typeof(InstantTextNodes))
-            .Cast<InstantTextNodes>()
-            .Any(value => value != InstantTextNodes.None && dialogueRunner.CurrentNodeName.Contains(value.ToString()) == true);
     }
 
     public void AddCommandHandler(string commandName, Action commandHandler)

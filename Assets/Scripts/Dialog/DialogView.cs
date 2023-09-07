@@ -12,7 +12,6 @@ public class DialogView : DialogueViewBase
     private DialogManager dialogManager;
     Action advanceHandler;
     private string dialogueLine;
-    private Coroutine textRevealCoroutine;
 
     private void OnEnable()
     {
@@ -44,7 +43,6 @@ public class DialogView : DialogueViewBase
             }
             else
             {
-                StopCoroutine(textRevealCoroutine);
                 if (textGUI != null)
                 {
                     textGUI.text = dialogueLine;
@@ -62,18 +60,11 @@ public class DialogView : DialogueViewBase
             speakerGUI.text = dialogueLine.CharacterName;
         }
         advanceHandler = requestInterrupt;
+        if (textGUI != null)
+        {
+            textGUI.text = this.dialogueLine;
+        }
 
-        if (dialogManager != null && !dialogManager.CurrentNodeShouldShowTextDirectly())
-        {
-            textRevealCoroutine = StartCoroutine(RevealText(this.dialogueLine));
-        }
-        else
-        {
-            if (textGUI != null)
-            {
-                textGUI.text = this.dialogueLine;
-            }
-        }
     }
 
     public override void DismissLine(Action onDismissalComplete)
@@ -104,18 +95,6 @@ public class DialogView : DialogueViewBase
     }
 
     #region Private Methods
-
-    private IEnumerator RevealText(string fullText)
-    {
-        for (int i = 0; i <= fullText.Length; i++)
-        {
-            if (textGUI != null)
-            {
-                textGUI.text = fullText[..i];
-            }
-            yield return new WaitForSeconds(0.05f);
-        }
-    }
 
     private IEnumerator EndDialogAfterDelay(float delay)
     {
