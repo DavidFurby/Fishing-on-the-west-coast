@@ -5,15 +5,12 @@ public class CatchSummaryHandlers : MonoBehaviour
 
 {
      private DialogManager dialogManager;
-     private readonly CatchSummaryView catchSummaryView;
      void Start()
      {
         dialogManager = FindAnyObjectByType<DialogManager>();
      }
     public void StartSummary(Fish fish)
     {
-        DialogueViewBase[] dialogueViewBases= new DialogueViewBase[1];
-        dialogueViewBases[0] = catchSummaryView;
         if (dialogManager != null)
         {
             dialogManager.EndDialog();
