@@ -4,84 +4,65 @@ using System.Collections;
 
 public class FishMovement : FishStateMachine
 {
+    #region Serialized Fields
     [HideInInspector] public GameObject target;
-    private Transform[] _bones;
-    [SerializeField] private float _speed = 0.3f;
-    [SerializeField] private float _baitedSpeed = 0.5f;
-
+    [SerializeField] private float _speed = 0.5f;
+    [SerializeField] private float _baitedSpeed = 0.8f;
     [SerializeField] private float _retreatSpeed = 50f;
-
-
     [SerializeField] private float _rotateSpeed = 2;
     public Transform tastyPart;
     [SerializeField] private float _offsetAmount = 0.4f;
-    private Vector3 _offset;
-    private Rigidbody _rigidBody;
+    #endregion
 
-    // Start is called before the first frame update
+    #region Private Fields
+    private Transform[] _bones;
+    private Rigidbody _rigidBody;
+    #endregion
+
+    #region Unity Methods
+    private void OnEnable()
+    {
+        SeaFloorCollision.OnSeaFloorCollision += StopBeingBaited;
+    }
+
     void Start()
     {
-        SetState(new Swimming(this));
-
-        _rigidBody = GetComponent<Rigidbody>();
-        //Gets an Array of Armatures's children aka all the bones, in order Head -> Tail
-        _bones = transform.Find("Armature").GetChild(0).GetComponentsInChildren<Transform>();
-
+        InitializeFish();
         SetTastyPart();
     }
 
-    private void SetTastyPart()
+    private void OnDisable()
     {
-        //If TastyPart Object already exists, then it's location is probably
-        //manually decided, so no need to set the position. If it doesn't exist
-        //then we create it and set the pos to the tail.
-        tastyPart = transform.Find("TastyPart");
-        if (tastyPart == null)
-        {
-            tastyPart = new GameObject("TastyPart").GetComponent<Transform>();
-            tastyPart.SetParent(gameObject.transform);
-
-            //sets tasty part to tail area (last in array) as default
-            //(not setting to tail directly as to not get unwanted interactions on tail animations)
-            SetTastyPartPosition(_bones[^1]);
-        }
+        SeaFloorCollision.OnSeaFloorCollision -= StopBeingBaited;
     }
+    #endregion
 
-    // Rotate towards the bait if baited
-    public void RotateTowardsBait()
-    {
-        if (target != null)
-            _offset.y = _offsetAmount;
-
-
-    }
-
-
+    #region Public Methods
     public void SwimAround()
     {
-        _rigidBody.velocity = transform.forward * _speed;
+        MoveFish(_speed);
     }
 
     public void SwimTowardsTarget()
     {
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance < 0.1)
+        if (IsCloseToTarget())
         {
             SetState(new Retreat(this));
         }
         else
         {
-            _rigidBody.velocity = transform.forward * _baitedSpeed;
+            MoveFish(_baitedSpeed);
         }
     }
-    //Retreat if too close too target
+
     public IEnumerator Retreat()
     {
-        Vector3 direction = transform.position - target.transform.position;
-        _rigidBody.velocity = direction.normalized * Random.Range(_retreatSpeed / 2, _retreatSpeed * 2);
+        Vector3 direction = GetDirectionAwayFromTarget();
+        MoveFishInDirection(direction, Random.Range(_retreatSpeed / 2, _retreatSpeed * 2));
         yield return new WaitForSeconds(Random.Range(2, 4));
         SetState(new Baited(this));
     }
+
     public void MunchOnFish()
     {
         if (target.TryGetComponent<FishMovement>(out var fishMovement))
@@ -92,53 +73,127 @@ public class FishMovement : FishStateMachine
 
     public void MunchOnBait()
     {
-        // Add a HingeJoint component to the fish game object
-        HingeJoint hinge = gameObject.AddComponent<HingeJoint>();
-
+        HingeJoint hinge = GetOrCreateHingeJoint();
         hinge.connectedBody = target.GetComponent<Rigidbody>();
-
-        // Set other properties of the hinge joint as desired
         hinge.anchor = Vector3.zero;
         hinge.axis = Vector3.right;
+
     }
 
-    public void RotateTowards()
+    public void RotateTowardsTarget()
     {
-        Vector3 direction = target.transform.position - transform.position;
-        if (direction == Vector3.zero)
-        {
-            //avoid direction viewing vector being zero
-            direction = new Vector3(0, 0, 0.01f);
-        }
+        Vector3 direction = GetDirectionTowardsTarget();
+        RotateTowards(direction);
+    }
+
+    private void RotateTowards(Vector3 direction)
+    {
         Quaternion _lookRotation = Quaternion.LookRotation(direction.normalized);
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _rotateSpeed);
     }
 
 
+    #endregion
+
+    #region Private Methods
+    private void InitializeFish()
+    {
+        SetState(new Swimming(this));
+        _rigidBody = GetComponent<Rigidbody>();
+        _bones = transform.Find("Armature").GetChild(0).GetComponentsInChildren<Transform>();
+    }
+
+    private void SetTastyPart()
+    {
+        tastyPart = transform.Find("TastyPart");
+        if (tastyPart == null)
+        {
+            tastyPart = new GameObject("TastyPart").GetComponent<Transform>();
+            tastyPart.SetParent(gameObject.transform);
+            SetTastyPartPosition(_bones[^1]);
+        }
+    }
 
     public void SetTastyPartPosition(Transform obj)
     {
-
-        //Because of how the armature is imported i need to rotate this :^)
         tastyPart.SetPositionAndRotation(obj.position, Quaternion.Euler(-89.98f, 0f, 0f));
     }
 
+    private bool IsCloseToTarget()
+    {
+        if (target != null)
+        {
+            float distance = Vector3.Distance(transform.position, target.transform.position);
+            return distance < 0.1f;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    private Vector3 GetDirectionTowardsTarget()
+    {
+        if (target != null)
+        {
+            return target.transform.position - transform.position;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
+    }
+
+    private Vector3 GetDirectionAwayFromTarget()
+    {
+        if (target != null)
+        {
+            return transform.position - target.transform.position;
+
+        }
+        else
+        {
+            return Vector3.zero;
+        }
+    }
+
+    private HingeJoint GetOrCreateHingeJoint()
+    {
+        HingeJoint hinge = gameObject.GetComponent<HingeJoint>();
+        if (hinge == null)
+        {
+            hinge = gameObject.AddComponent<HingeJoint>();
+        }
+        return hinge;
+    }
+
+    private void MoveFish(float speed)
+    {
+        _rigidBody.velocity = transform.forward * speed;
+    }
+
+    private void MoveFishInDirection(Vector3 direction, float speed)
+    {
+        _rigidBody.velocity = direction.normalized * speed;
+    }
 
     public void GetBaited(GameObject target)
     {
         this.target = target;
         SetState(new Baited(this));
     }
-    //Set the position of the fish to the bait if hooked
-    public void HookToTarget()
+
+    public void StopBeingBaited()
     {
-        if (target != null)
+        if (GetCurrentState() is Baited)
         {
-            _rotateSpeed = 10;
-        }
-        else
-        {
-            _rotateSpeed = 2;
+            SetState(new Swimming(this));
+            this.target = null;
+            Vector3 direction = transform.eulerAngles.z > 180 ? -transform.right : transform.right;
+            MoveFishInDirection(direction, _speed);
+            RotateTowards(direction);
         }
     }
+    #endregion
 }

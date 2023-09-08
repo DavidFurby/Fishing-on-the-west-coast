@@ -27,7 +27,6 @@ public class NewGameController : MonoBehaviour
         game.Inventory.AvailableRods = Resources.LoadAll<Rod>(ItemsPath + "Rods").OrderBy(r => r.id).ToArray();
         game.Inventory.AvailableHats = Resources.LoadAll<Hat>(ItemsPath + "Hats").OrderBy(h => h.id).ToArray();
         game.Inventory.AvailableBaits = Resources.LoadAll<Bait>(ItemsPath + "Baits").OrderBy(b => b.id).ToArray();
-        Debug.Log(game.Inventory.AvailableRods[0].name);
     }
 
     // Resets the game state to its initial values

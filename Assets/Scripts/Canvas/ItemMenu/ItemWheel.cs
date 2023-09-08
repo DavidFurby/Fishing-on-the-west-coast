@@ -42,7 +42,6 @@ public class ItemWheel : MonoBehaviour
         {
             if (i == middleIndex)
             {
-                Debug.Log(_listOfItemSlots[i].Id);
                 MainManager.Instance.Inventory.SetEquipment(_listOfItemSlots[i].Id, itemTag);
             }
         }

@@ -91,7 +91,6 @@ public class DistanceRecord : MonoBehaviour
     }
     private void SetActive()
     {
-        Debug.Log("active");
         distanceTextUI.gameObject.SetActive(true);
     }
     #endregion
