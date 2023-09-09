@@ -37,7 +37,7 @@ public class BaitLogic : MonoBehaviour
         AttachBait();
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         FishingController.OnWhileReelingBait -= ReelIn;
         FishingController.OnWhileCasting -= Cast;

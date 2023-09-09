@@ -22,7 +22,7 @@ public class ExplorationController : ExplorationStateMachine
 
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         DialogManager.OnEndDialog -= RaiseEndDialog;
         FishingSpot.StartFishing -= RaiseStartFishing;

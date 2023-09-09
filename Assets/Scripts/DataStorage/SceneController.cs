@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }

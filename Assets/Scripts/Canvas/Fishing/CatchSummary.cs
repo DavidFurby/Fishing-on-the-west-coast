@@ -21,7 +21,7 @@ public class CatchSummary : MonoBehaviour
         Initialize();
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         UnsubscribeFromEvents();
     }

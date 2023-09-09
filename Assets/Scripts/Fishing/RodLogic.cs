@@ -22,7 +22,7 @@ public class RodLogic : MonoBehaviour
         rodAnimations = GetComponent<RodAnimations>();
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         FishingController.OnChargeRelease -= WaitForSwingAnimation;
         FishingController.OnReeling -= ReelInSpeed;

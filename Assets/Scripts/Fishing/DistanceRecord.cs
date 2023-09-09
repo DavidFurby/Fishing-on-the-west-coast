@@ -34,7 +34,7 @@ public class DistanceRecord : MonoBehaviour
         distanceTextUI.gameObject.SetActive(false);
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         FishingController.OnEnterFishing -= UpdateDistanceRecord;
         FishingController.OnEnterIdle -= SpawnDistanceRecordMarker;

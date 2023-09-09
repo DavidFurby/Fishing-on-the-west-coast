@@ -42,7 +42,7 @@ public class FishingController : FishingEventController
         SubscribeToEvents();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         UnsubscribeFromEvents();
     }

@@ -20,7 +20,7 @@ public class Balance : MonoBehaviour
         SubscribeEvents();
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         UnsubscribeEvents();
     }

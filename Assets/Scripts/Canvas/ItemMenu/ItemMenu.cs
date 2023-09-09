@@ -16,19 +16,20 @@ public class ItemMenu : MonoBehaviour
     void Start()
     {
         itemMenu.SetActive(false);
-        allItems = MainManager.Instance.Inventory.FoundBaits.Cast<Item>().ToList();
-        allItems.AddRange(MainManager.Instance.Inventory.FoundRods);
-        allItems.AddRange(MainManager.Instance.Inventory.FoundHats);
+        allItems = GetItemsAsList(MainManager.Instance.Inventory.FoundBaits);
+        allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundRods));
+        allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundHats));
         ExplorationController.OpenItemMenu += HandleInputs;
     }
+
     void OnDestroy()
     {
         ExplorationController.OpenItemMenu -= HandleInputs;
 
     }
-    void OnDisable()
+    private List<Item> GetItemsAsList(IEnumerable<Item> items)
     {
-        ExplorationController.OpenItemMenu -= HandleInputs;
+        return items.Cast<Item>().ToList();
     }
     private void PopulateWheels()
     {

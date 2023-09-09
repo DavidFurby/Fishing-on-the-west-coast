@@ -68,7 +68,7 @@ public class Shop : MonoBehaviour
             }
         }
     }
-    void OnDisable()
+    void OnDestroy()
     {
         ExplorationController.NavigateShop -= HandleShoppingInput;
     }

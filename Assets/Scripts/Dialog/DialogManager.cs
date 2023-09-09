@@ -32,7 +32,7 @@ public class DialogManager : MonoBehaviour
         SetDayHandler();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (dialogueRunner != null)
         {

@@ -10,7 +10,7 @@ public class BaitArea : MonoBehaviour
         CatchArea.OnBaitFish += TryBaitingFish;
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         CatchArea.OnBaitFish -= TryBaitingFish;
     }

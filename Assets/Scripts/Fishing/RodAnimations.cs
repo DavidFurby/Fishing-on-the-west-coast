@@ -14,7 +14,7 @@ public class RodAnimations : MonoBehaviour
         FishingController.OnWhileCharging += PlaySwingAnimation;
         FishingController.OnChargeRelease += PlayReversSwingAnimation;
     }
-    void OnDisable()
+    void OnDestroy()
     {
         FishingController.OnWhileCharging -= PlaySwingAnimation;
         FishingController.OnChargeRelease -= PlayReversSwingAnimation;

@@ -22,7 +22,7 @@ public class LevelSlider : MonoBehaviour
         levelSlider.gameObject.SetActive(true);
         SetLevel();
     }
-    void OnDisable()
+    void OnDestroy()
     {
         PlayerLevel.OnLevelUp -= SetLevel;
     }

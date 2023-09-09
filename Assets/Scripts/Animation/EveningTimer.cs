@@ -15,7 +15,7 @@ public class EveningTimer : MonoBehaviour
         sunAnimator = GetComponent<Animator>();
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         FishingController.OnEnterIdle -= StartSunTimer;
     }

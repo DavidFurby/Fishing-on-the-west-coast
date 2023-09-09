@@ -16,12 +16,7 @@ public class SeaLogic : MonoBehaviour
         fishPrefabs = Resources.LoadAll<FishDisplay>("GameObjects/Fishes");
         SubscribeToEvents();
     }
-
     void OnDestroy()
-    {
-        UnsubscribeFromEvents();
-    }
-    void OnDisable()
     {
         UnsubscribeFromEvents();
     }

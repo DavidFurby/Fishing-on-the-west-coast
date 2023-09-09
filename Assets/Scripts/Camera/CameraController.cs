@@ -22,7 +22,7 @@ public class CameraController : CameraStateMachine
         explorationCamera = GetComponent<ExplorationCamera>();
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         FishingController.OnEnterFishing -= EnterFishingState;
         FishingController.OnEnterReelingFish -= EnterReelingFishState;

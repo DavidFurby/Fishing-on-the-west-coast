@@ -31,7 +31,7 @@ public class FishMovement : FishStateMachine
         SetTastyPart();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         SeaFloorCollision.OnSeaFloorCollision -= StopBeingBaited;
     }

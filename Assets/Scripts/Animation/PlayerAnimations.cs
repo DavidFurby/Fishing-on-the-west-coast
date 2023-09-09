@@ -14,7 +14,7 @@ public class PlayerAnimations : MonoBehaviour
         originalChargingThrowSpeed = playerAnimator.GetFloat("chargingThrowSpeed");
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         FishingController.OnStartCharging -= OnStartCharging;
         FishingController.OnChargeRelease -= OnChargeRelease;
