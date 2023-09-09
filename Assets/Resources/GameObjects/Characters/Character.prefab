@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7440961639117159417}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Interactible
+  m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a3d2302178e6f4797f27eb9a3576b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 5
+  character: 0
 --- !u!65 &7440961639117159417
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,7 +75,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

@@ -849,6 +849,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lars
       objectReference: {fileID: 0}
+    - target: {fileID: 7303602153788726921, guid: ead677062bcc6214ba079901f0285e98, type: 3}
+      propertyPath: character
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
