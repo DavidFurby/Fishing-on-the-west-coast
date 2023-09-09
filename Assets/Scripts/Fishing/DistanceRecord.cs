@@ -2,16 +2,15 @@ using TMPro;
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
 public class DistanceRecord : MonoBehaviour
 {
     #region Fields
-    private readonly string markerPath = "GameObjects/DistanceRecordMarker";
+    private readonly string markerPath = "GameObjects/Environment/DistanceRecordMarker";
     private GameObject currentDistanceRecordMarker;
     private GameObject distanceRecordMarker;
     [Tooltip("Text UI for displaying the distance value")] private TextMeshProUGUI distanceTextUI;
-    [SerializeField][Tooltip("The sea game object")] private GameObject sea;
-    [Tooltip("The starting point for calculating the distance")] private GameObject from;
+    [Tooltip("The sea game object")] private SeaLogic sea;
+    [Tooltip("The starting point for calculating the distance")] private FishingSpot from;
     [Tooltip("The end point for calculating the distance")] private GameObject to;
     private float distance;
     #endregion
@@ -19,9 +18,10 @@ public class DistanceRecord : MonoBehaviour
     #region Unity Methods
     void OnEnable()
     {
-        from = GameObject.FindGameObjectWithTag("RodTop");
+        sea = GameObject.FindGameObjectWithTag("Ocean").GetComponentInChildren<SeaLogic>();
+        from = GameObject.FindObjectOfType<FishingSpot>();
         to = GameObject.FindGameObjectWithTag("Bait");
-        distanceTextUI = GetComponent<TextMeshProUGUI>();
+        distanceTextUI = GetComponentInChildren<TextMeshProUGUI>();
         distanceRecordMarker = Resources.Load<GameObject>(markerPath);
         FishingController.OnEnterFishing += UpdateDistanceRecord;
         FishingController.OnEnterIdle += SpawnDistanceRecordMarker;

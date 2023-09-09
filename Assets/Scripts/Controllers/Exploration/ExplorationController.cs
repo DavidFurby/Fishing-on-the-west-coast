@@ -5,7 +5,6 @@ public class ExplorationController : ExplorationStateMachine
 {
 
     private PlayerAnimations playerAnimations;
-    private bool isWithinTriggerArea;
     private Interactive interactive;
     private readonly int movementSpeed = 10;
     public static event Action NavigateShop;
@@ -36,7 +35,7 @@ public class ExplorationController : ExplorationStateMachine
 
         playerAnimations.SetPlayerWalkAnimation(horizontalInput != 0 || verticalInput != 0);
 
-        if (Input.GetKeyDown(KeyCode.Space) && isWithinTriggerArea && interactive != null)
+        if (Input.GetKeyDown(KeyCode.Space) && interactive != null)
         {
             playerAnimations.SetPlayerWalkAnimation(false);
             ActivateInteractive();
@@ -68,7 +67,6 @@ public class ExplorationController : ExplorationStateMachine
     {
         if (other.CompareTag("Interactive"))
         {
-            isWithinTriggerArea = true;
             interactive = other.GetComponent<Interactive>();
         }
     }
@@ -78,7 +76,6 @@ public class ExplorationController : ExplorationStateMachine
     {
         if (other.CompareTag("Interactive"))
         {
-            isWithinTriggerArea = false;
             interactive = null;
         }
     }
