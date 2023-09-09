@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
         }
         mainMenu.SetActive(false);
 
-        SceneManager.LoadScene("Exploration Template");
+        SceneManager.LoadScene("Sandbox");
     }
 
     public void Continue()

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class DistanceRecord : MonoBehaviour
 {
@@ -9,18 +10,18 @@ public class DistanceRecord : MonoBehaviour
     private GameObject currentDistanceRecordMarker;
     private GameObject distanceRecordMarker;
     [Tooltip("Text UI for displaying the distance value")] private TextMeshProUGUI distanceTextUI;
-    [Tooltip("The sea game object")] private SeaLogic sea;
+   [SerializeField] [Tooltip("The sea game object")] private SeaLogic sea;
     [Tooltip("The starting point for calculating the distance")] private FishingSpot from;
-    [Tooltip("The end point for calculating the distance")] private GameObject to;
+    [Tooltip("The end point for calculating the distance")] private BaitLogic to;
     private float distance;
     #endregion
 
     #region Unity Methods
     void OnEnable()
     {
-        sea = GameObject.FindGameObjectWithTag("Ocean").GetComponentInChildren<SeaLogic>();
+        sea = GameObject.FindObjectOfType<SeaLogic>();
         from = GameObject.FindObjectOfType<FishingSpot>();
-        to = GameObject.FindGameObjectWithTag("Bait");
+        to = GameObject.FindObjectOfType<BaitLogic>();
         distanceTextUI = GetComponentInChildren<TextMeshProUGUI>();
         distanceRecordMarker = Resources.Load<GameObject>(markerPath);
         FishingController.OnEnterFishing += UpdateDistanceRecord;
@@ -56,6 +57,7 @@ public class DistanceRecord : MonoBehaviour
         }
     }
 
+
     private void SpawnDistanceRecordMarker()
     {
         if (MainManager.Instance.BestDistance != 0)
@@ -85,13 +87,18 @@ public class DistanceRecord : MonoBehaviour
     //Calculate distance cast
     private void CalculateDistance()
     {
-        distance = Vector3.Distance(from.transform.position, to.transform.position);
-        int roundedDistance = Mathf.RoundToInt(distance);
-        distanceTextUI.text = string.Format("Distance: {0:F1} meter", roundedDistance);
+        if (from != null && to != null)
+        {
+            distance = Vector3.Distance(from.transform.position, to.transform.position);
+            int roundedDistance = Mathf.RoundToInt(distance);
+            distanceTextUI.text = string.Format("Distance: {0:F1} meter", roundedDistance);
+        }
     }
+
     private void SetActive()
     {
         distanceTextUI.gameObject.SetActive(true);
     }
-    #endregion
+
 }
+#endregion

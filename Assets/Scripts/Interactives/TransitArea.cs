@@ -1,32 +1,36 @@
-
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TransitArea : MonoBehaviour, IInteractive
 {
-    private readonly SceneAsset toScene;
+    // Make sceneName a public field so its value can be set in the Unity editor
+    [SerializeField] private string sceneName;
     private Animator animator;
 
     void Start()
     {
         animator = GetComponent<Animator>();
     }
+    
     public void Interact()
     {
         Transition();
     }
+    
     public void Transition()
     {
-        if (toScene != null)
+        // Check if sceneName is not null before starting the transition
+        if (!string.IsNullOrEmpty(sceneName))
         {
-            StartCoroutine(TransitWithFade(toScene.name));
+            StartCoroutine(TransitWithFade(sceneName));
         }
     }
+    
     private IEnumerator TransitWithFade(string sceneName)
     {
-        animator.Play("Fade");
+        // Use SetTrigger instead of Play to start the fade animation
+        animator.SetTrigger("Fade");
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(sceneName);
     }
