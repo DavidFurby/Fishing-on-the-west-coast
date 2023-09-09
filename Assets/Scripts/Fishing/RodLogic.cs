@@ -5,16 +5,20 @@ using UnityEngine;
 public class RodLogic : MonoBehaviour
 {
     private RodAnimations rodAnimations;
+    private AudioSource swingAudio;
     public static event Action OnTriggerSetChargingBalance;
 
     void OnEnable()
     {
         FishingController.OnChargeRelease += WaitForSwingAnimation;
         FishingController.OnReeling += ReelInSpeed;
+        FishingController.OnChargeRelease += PlaySwingAudio;
         CatchArea.OnCatchWhileReeling += CalculateReelInSpeed;
+
     }
     void Start()
     {
+        swingAudio = GetComponent<AudioSource>();
         rodAnimations = GetComponent<RodAnimations>();
     }
 
@@ -22,7 +26,9 @@ public class RodLogic : MonoBehaviour
     {
         FishingController.OnChargeRelease -= WaitForSwingAnimation;
         FishingController.OnReeling -= ReelInSpeed;
+        FishingController.OnChargeRelease -= PlaySwingAudio;
         CatchArea.OnCatchWhileReeling -= CalculateReelInSpeed;
+
     }
 
     public void TriggerSetChargingBalance()
@@ -71,5 +77,9 @@ public class RodLogic : MonoBehaviour
     public void WaitForSwingAnimation()
     {
         StartCoroutine(SwingAnimation());
+    }
+    private void PlaySwingAudio()
+    {
+        swingAudio.Play();
     }
 }
