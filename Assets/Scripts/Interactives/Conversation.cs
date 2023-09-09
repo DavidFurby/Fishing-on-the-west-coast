@@ -10,11 +10,12 @@ public class Conversation : MonoBehaviour, IInteractive
     private enum GameCharacters
     {
         Player,
-        Neighbor,
+        Lotta,
+        Lars,
         NeighborsWife,
         Fisherman,
         Dog,
-        ShopKeeper
+        ShopKeeper,
     }
     public static event Action<String> StartConversation;
 
