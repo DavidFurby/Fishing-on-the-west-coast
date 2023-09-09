@@ -5,20 +5,20 @@ using static Item;
 
 public class ItemMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject itemMenu;
-    [SerializeField] private GameObject ItemFocus;
-    [SerializeField] private ItemWheel[] listOfWheels;
+    [SerializeField] private GameObject _itemMenu;
+    [SerializeField] private GameObject _ItemFocus;
+    [SerializeField] private ItemWheel[] _listOfWheels;
 
-    private ItemWheel focusedWheel;
-    private int focusedWheelIndex;
-    private List<Item> allItems;
+    private ItemWheel _focusedWheel;
+    private int _focusedWheelIndex;
+    private List<Item> _allItems;
 
     void Start()
     {
-        itemMenu.SetActive(false);
-        allItems = GetItemsAsList(MainManager.Instance.Inventory.FoundBaits);
-        allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundRods));
-        allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundHats));
+        _itemMenu.SetActive(false);
+        _allItems = GetItemsAsList(MainManager.Instance.Inventory.FoundBaits);
+        _allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundRods));
+        _allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundHats));
         ExplorationController.OpenItemMenu += HandleInputs;
     }
 
@@ -33,20 +33,20 @@ public class ItemMenu : MonoBehaviour
     }
     private void PopulateWheels()
     {
-        foreach (ItemWheel wheel in listOfWheels)
+        foreach (ItemWheel wheel in _listOfWheels)
         {
             if (wheel != null)
             {
-                switch (wheel.itemTag)
+                switch (wheel._itemTag)
                 {
                     case ItemTag.Bait:
-                        wheel.SetItems(allItems.OfType<Bait>().ToArray());
+                        wheel.SetItems(_allItems.OfType<Bait>().ToArray());
                         break;
                     case ItemTag.Rod:
-                        wheel.SetItems(allItems.OfType<Rod>().ToArray());
+                        wheel.SetItems(_allItems.OfType<Rod>().ToArray());
                         break;
                     case ItemTag.Hat:
-                        wheel.SetItems(allItems.OfType<Hat>().ToArray());
+                        wheel.SetItems(_allItems.OfType<Hat>().ToArray());
                         break;
                 }
             }
@@ -59,7 +59,7 @@ public class ItemMenu : MonoBehaviour
         {
             ToggleMenu();
         }
-        if (itemMenu != null && itemMenu.activeSelf)
+        if (_itemMenu != null && _itemMenu.activeSelf)
         {
             ScrollBetweenWheels();
             if (Input.GetKeyDown(KeyCode.Space))
@@ -71,9 +71,9 @@ public class ItemMenu : MonoBehaviour
 
     private void ToggleMenu()
     {
-        itemMenu.SetActive(!itemMenu.activeSelf);
-        Time.timeScale = itemMenu.activeSelf ? 0 : 1;
-        if (itemMenu.activeSelf)
+        _itemMenu.SetActive(!_itemMenu.activeSelf);
+        Time.timeScale = _itemMenu.activeSelf ? 0 : 1;
+        if (_itemMenu.activeSelf)
         {
             ResetValues();
         }
@@ -82,14 +82,14 @@ public class ItemMenu : MonoBehaviour
     private void ResetValues()
     {
         PopulateWheels();
-        focusedWheel = listOfWheels[0];
-        focusedWheelIndex = 0;
+        _focusedWheel = _listOfWheels[0];
+        _focusedWheelIndex = 0;
         SetFocus();
     }
 
     private void TriggerChangeEquippedItem()
     {
-        foreach (ItemWheel wheel in listOfWheels)
+        foreach (ItemWheel wheel in _listOfWheels)
         {
             wheel.ChangeEquippedItem();
         }
@@ -100,25 +100,25 @@ public class ItemMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            focusedWheelIndex = (focusedWheelIndex - 1 + listOfWheels.Length) % listOfWheels.Length;
+            _focusedWheelIndex = (_focusedWheelIndex - 1 + _listOfWheels.Length) % _listOfWheels.Length;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            focusedWheelIndex = (focusedWheelIndex + 1 + listOfWheels.Length) % listOfWheels.Length;
+            _focusedWheelIndex = (_focusedWheelIndex + 1 + _listOfWheels.Length) % _listOfWheels.Length;
         }
-        focusedWheel = listOfWheels[focusedWheelIndex];
+        _focusedWheel = _listOfWheels[_focusedWheelIndex];
         SetFocus();
     }
 
     private void SetFocus()
     {
-        if (focusedWheel != null)
+        if (_focusedWheel != null)
         {
-            ItemFocus.transform.SetParent(focusedWheel.transform);
-            ItemFocus.transform.position = focusedWheel.transform.position;
-            for (int i = 0; i < listOfWheels.Length; i++)
+            _ItemFocus.transform.SetParent(_focusedWheel.transform);
+            _ItemFocus.transform.position = _focusedWheel.transform.position;
+            for (int i = 0; i < _listOfWheels.Length; i++)
             {
-                listOfWheels[i].SetWheelFocus(i == focusedWheelIndex);
+                _listOfWheels[i].SetWheelFocus(i == _focusedWheelIndex);
             }
         }
     }
