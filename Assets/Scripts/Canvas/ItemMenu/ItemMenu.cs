@@ -6,7 +6,6 @@ using static Item;
 public class ItemMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _itemMenu;
-    [SerializeField] private GameObject _ItemFocus;
     [SerializeField] private ItemWheel[] _listOfWheels;
 
     private ItemWheel _focusedWheel;
@@ -114,8 +113,6 @@ public class ItemMenu : MonoBehaviour
     {
         if (_focusedWheel != null)
         {
-            _ItemFocus.transform.SetParent(_focusedWheel.transform);
-            _ItemFocus.transform.position = _focusedWheel.transform.position;
             for (int i = 0; i < _listOfWheels.Length; i++)
             {
                 _listOfWheels[i].SetWheelFocus(i == _focusedWheelIndex);
