@@ -1,20 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InfiniteScrollVertical : MonoBehaviour
 {
-    public ScrollRect scrollRect;
-    public RectTransform viewPortTransform;
-    public RectTransform contentPanelTransform;
-    public VerticalLayoutGroup VLG;
+    [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private RectTransform viewPortTransform;
+    [SerializeField] private RectTransform contentPanelTransform;
+    [SerializeField] private VerticalLayoutGroup VLG;
 
-    public RectTransform[] ItemList;
-
+    [SerializeField] private RectTransform[] ItemList;
     Vector2 OldVelocity;
     bool isUpdated;
-    // Start is called before the first frame update
+
     void Start()
     {
         isUpdated = false;
@@ -43,7 +40,6 @@ public class InfiniteScrollVertical : MonoBehaviour
             contentPanelTransform.localPosition.z);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isUpdated)
@@ -66,6 +62,24 @@ public class InfiniteScrollVertical : MonoBehaviour
             OldVelocity = scrollRect.velocity;
             contentPanelTransform.localPosition -= new Vector3(0, ItemList.Length * (ItemList[0].rect.height + VLG.spacing), 0);
             isUpdated = true;
+        }
+        ScrollOnInput();
+    }
+    private void ScrollOnInput()
+    {
+        if (scrollRect == null)
+        {
+            throw new System.Exception("Setup ScrollRectKeyController first!");
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            Debug.Log("up");
+            contentPanelTransform.localPosition += Vector3.up; 
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            Debug.Log("down");
+            contentPanelTransform.localPosition  += Vector3.down;
         }
     }
 }
