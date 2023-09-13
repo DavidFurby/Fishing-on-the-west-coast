@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class InfiniteScrollVertical : MonoBehaviour
     [SerializeField] private RectTransform[] ItemList;
     Vector2 OldVelocity;
     bool isUpdated;
+
+    private Vector2 targetPosition;
+
 
     void Start()
     {
@@ -65,21 +69,40 @@ public class InfiniteScrollVertical : MonoBehaviour
         }
         ScrollOnInput();
     }
-    private void ScrollOnInput()
+private IEnumerator ScrollToPosition(Vector2 target)
+{
+    float elapsedTime = 0f;
+    float duration = 0.5f; // Duration of the animation in seconds
+    Vector2 startPosition = contentPanelTransform.localPosition;
+
+    while (elapsedTime < duration)
     {
-        if (scrollRect == null)
-        {
-            throw new System.Exception("Setup ScrollRectKeyController first!");
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            Debug.Log("up");
-            contentPanelTransform.localPosition += Vector3.up; 
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            Debug.Log("down");
-            contentPanelTransform.localPosition  += Vector3.down;
-        }
+        contentPanelTransform.localPosition = Vector2.Lerp(startPosition, target, elapsedTime / duration);
+        elapsedTime += Time.deltaTime;
+        yield return null;
     }
+
+    // Ensure the final position is set correctly
+    contentPanelTransform.localPosition = target;
+}
+
+private void ScrollOnInput()
+{
+    if (scrollRect == null)
+    {
+        throw new System.Exception("Setup ScrollRectKeyController first!");
+    }
+    if (Input.GetKeyDown(KeyCode.UpArrow))
+    {
+        targetPosition = contentPanelTransform.localPosition + new Vector3(0, 1 * (ItemList[0].rect.height + VLG.spacing), 0);
+        StartCoroutine(ScrollToPosition(targetPosition));
+    }
+    else if (Input.GetKeyDown(KeyCode.DownArrow))
+    {
+        targetPosition = contentPanelTransform.localPosition + new Vector3(0, -1 * (ItemList[0].rect.height + VLG.spacing), 0);
+        StartCoroutine(ScrollToPosition(targetPosition));
+    }
+     // Force an immediate update of the layout
+    LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)contentPanelTransform.transform);
+}
 }
