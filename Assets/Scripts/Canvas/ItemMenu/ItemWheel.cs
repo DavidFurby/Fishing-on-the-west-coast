@@ -8,10 +8,9 @@ public class ItemWheel : InfiniteScrollVertical
 {
     public ItemTag itemTag;
     private ItemSlot[] listOfItemSlots;
-    private int middleIndex;
     private Image image;
 
-    private void Awake() {
+    private void Start() {
         image = GetComponent<Image>();
     }
 
@@ -24,21 +23,7 @@ public class ItemWheel : InfiniteScrollVertical
     public void SetItems(Item[] items)
     {
         if (items == null || items.Length == 0) return;
-        FindEquippedItemIndex(items);
         CreateNewEquipmentSlots(items);
-    }
-
-    private void FindEquippedItemIndex(Item[] items)
-    {
-        if (itemTag == ItemTag.None)
-        {
-
-        }
-        var equippedItem = MainManager.Instance.Inventory.GetEquipment(itemTag);
-        if (equippedItem != null)
-        {
-            middleIndex = Array.FindIndex(items, item => item.id == equippedItem.id);
-        }
     }
 
     private void CreateNewEquipmentSlots(Item[] items)

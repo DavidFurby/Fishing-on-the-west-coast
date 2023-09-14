@@ -16,12 +16,10 @@ public class InfiniteScrollVertical : MonoBehaviour
     private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     private ItemSlot itemSlotPrefab;
 
-    void Start()
+    void Awake()
     {
-        print("hie");
         itemSlotPrefab = Resources.Load<ItemSlot>(itemSlotPath);
-        print(itemSlotPrefab);
-        scrollRect.enabled = false;
+        print(itemSlotPrefab.GetComponent<RectTransform>());
     }
 
     private void InitialSetup()
@@ -52,30 +50,32 @@ public class InfiniteScrollVertical : MonoBehaviour
         return Mathf.CeilToInt(viewPortTransform.rect.height / (itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing));
     }
 
-private void InstantiateItems(int itemsToAdd)
-{
-    for (int i = 0; i < itemsToAdd; i++)
+    private void InstantiateItems(int itemsToAdd)
     {
-        RectTransform RT = Instantiate(_itemArray[i % _itemArray.Length], contentPanelTransform).GetComponent<RectTransform>();
-        RT.SetAsLastSibling();
-    }
+        for (int i = 0; i < itemsToAdd; i++)
+        {
+            ItemSlot slot = Instantiate(_itemArray[i % _itemArray.Length], contentPanelTransform);
+            slot.SetTextField(slot.ItemName);
+            slot.GetComponent<RectTransform>().SetAsLastSibling();
+        }
 
-    for (int i = 0; i < itemsToAdd; i++)
-    {
-        int num = _itemArray.Length - i - 1;
-        while (num < 0) num += _itemArray.Length;
+        for (int i = 0; i < itemsToAdd; i++)
+        {
+            int num = _itemArray.Length - i - 1;
+            while (num < 0) num += _itemArray.Length;
 
-        RectTransform RT = Instantiate(_itemArray[num], contentPanelTransform).GetComponent<RectTransform>();
-        RT.SetAsFirstSibling();
+            ItemSlot slot = Instantiate(_itemArray[num], contentPanelTransform);
+            slot.SetTextField(slot.ItemName);
+            slot.GetComponent<RectTransform>().SetAsFirstSibling();
+        }
     }
-}
 
 
     private void SetInitialContentPanelPosition(int itemsToAdd)
     {
         int var = _itemArray.Length > 1 ? itemsToAdd : 1;
         contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
-               0 - (_itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing) * var,
+               0 - (itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing) * var,
                contentPanelTransform.localPosition.z);
     }
 
@@ -107,12 +107,14 @@ private void InstantiateItems(int itemsToAdd)
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            targetPosition = contentPanelTransform.localPosition + new Vector3(0, _itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing, 0);
+            print("uP");
+            targetPosition = contentPanelTransform.localPosition + new Vector3(0, itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing, 0);
             StartCoroutine(ScrollToPosition(targetPosition));
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(_itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing), 0);
+            print("down");
+            targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing), 0);
             StartCoroutine(ScrollToPosition(targetPosition));
         }
         LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
@@ -143,7 +145,7 @@ private void InstantiateItems(int itemsToAdd)
                 ItemSlot newItem = Instantiate(itemSlotPrefab);
                 newItem.Id = items[i].Id;
                 newItem.ItemTag = items[i].ItemTag;
-                newItem.NameText.text = items[i].ItemName;
+                newItem.ItemName = items[i].ItemName;
                 _itemArray[i] = newItem;
             }
             InitialSetup();
