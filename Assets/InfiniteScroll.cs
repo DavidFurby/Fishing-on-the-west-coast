@@ -8,101 +8,122 @@ public class InfiniteScrollVertical : MonoBehaviour
     [SerializeField] private RectTransform viewPortTransform;
     [SerializeField] private RectTransform contentPanelTransform;
     [SerializeField] private VerticalLayoutGroup VLG;
-
-    [SerializeField] private RectTransform[] ItemList;
-    Vector2 OldVelocity;
-    bool isUpdated;
-
+    private RectTransform[] itemList;
+    private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
+    private Vector2 oldVelocity;
+    private bool isUpdated;
     private Vector2 targetPosition;
-
+    private GameObject itemSlot;
 
     void Start()
     {
-        isUpdated = false;
-        OldVelocity = Vector2.zero;
-        int ItemsToAdd = Mathf.CeilToInt(viewPortTransform.rect.height / (ItemList[0].rect.height + VLG.spacing));
-
-        for (int i = 0; i < ItemsToAdd; i++)
-        {
-            RectTransform RT = Instantiate(ItemList[i % ItemList.Length], contentPanelTransform);
-            RT.SetAsLastSibling();
-        }
-
-        for (int i = 0; i < ItemsToAdd; i++)
-        {
-            int num = ItemList.Length - i - 1;
-            while (num < 0)
-            {
-                num += ItemList.Length;
-            }
-            RectTransform RT = Instantiate(ItemList[num], contentPanelTransform);
-            RT.SetAsFirstSibling();
-        }
-
-        contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
-            (0 - (ItemList[0].rect.height + VLG.spacing) * ItemsToAdd),
-            contentPanelTransform.localPosition.z);
+        InitializeItemList();
+        int itemsToAdd = CalculateItemsToAdd();
+        InstantiateItems(itemsToAdd);
+        SetInitialContentPanelPosition(itemsToAdd);
     }
 
     void Update()
     {
+        HandleContentPanelPositionUpdate();
+        if (itemList.Length > 1) ScrollOnInput();
+    }
+
+    private void InitializeItemList()
+    {
+        itemSlot = Resources.Load<GameObject>(itemSlotPath);
+        isUpdated = false;
+        oldVelocity = Vector2.zero;
+        itemList = new RectTransform[1];
+        itemList[0] = itemSlot.GetComponent<RectTransform>();
+    }
+
+    private int CalculateItemsToAdd()
+    {
+        return Mathf.CeilToInt(viewPortTransform.rect.height / (itemList[0].rect.height + VLG.spacing));
+    }
+
+    private void InstantiateItems(int itemsToAdd)
+    {
+        if (itemsToAdd <= 1) return;
+
+        for (int i = 0; i < itemsToAdd; i++)
+        {
+            RectTransform RT = Instantiate(itemList[i % itemList.Length], contentPanelTransform);
+            RT.SetAsLastSibling();
+        }
+
+        for (int i = 0; i < itemsToAdd; i++)
+        {
+            int num = itemList.Length - i - 1;
+            while (num < 0) num += itemList.Length;
+
+            RectTransform RT = Instantiate(itemList[num], contentPanelTransform);
+            RT.SetAsFirstSibling();
+        }
+    }
+
+    private void SetInitialContentPanelPosition(int itemsToAdd)
+    {
+        contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
+            (0 - (itemList[0].rect.height + VLG.spacing) * itemsToAdd),
+            contentPanelTransform.localPosition.z);
+    }
+
+    private void HandleContentPanelPositionUpdate()
+    {
         if (isUpdated)
         {
             isUpdated = false;
-            scrollRect.velocity = OldVelocity;
+            scrollRect.velocity = oldVelocity;
         }
 
         if (contentPanelTransform.localPosition.y < 0)
         {
-            Canvas.ForceUpdateCanvases();
-            OldVelocity = scrollRect.velocity;
-            contentPanelTransform.localPosition += new Vector3(0, ItemList.Length * (ItemList[0].rect.height + VLG.spacing), 0);
-            isUpdated = true;
+            UpdateContentPanelPosition(itemList.Length * (itemList[0].rect.height + VLG.spacing));
         }
-
-        if (contentPanelTransform.localPosition.y > (ItemList.Length * (ItemList[0].rect.height + VLG.spacing)))
+        else if (contentPanelTransform.localPosition.y > (itemList.Length * (itemList[0].rect.height + VLG.spacing)))
         {
-            Canvas.ForceUpdateCanvases();
-            OldVelocity = scrollRect.velocity;
-            contentPanelTransform.localPosition -= new Vector3(0, ItemList.Length * (ItemList[0].rect.height + VLG.spacing), 0);
-            isUpdated = true;
+            UpdateContentPanelPosition(-itemList.Length * (itemList[0].rect.height + VLG.spacing));
         }
-        ScrollOnInput();
-    }
-private IEnumerator ScrollToPosition(Vector2 target)
-{
-    float elapsedTime = 0f;
-    float duration = 0.5f; // Duration of the animation in seconds
-    Vector2 startPosition = contentPanelTransform.localPosition;
-
-    while (elapsedTime < duration)
-    {
-        contentPanelTransform.localPosition = Vector2.Lerp(startPosition, target, elapsedTime / duration);
-        elapsedTime += Time.deltaTime;
-        yield return null;
     }
 
-    // Ensure the final position is set correctly
-    contentPanelTransform.localPosition = target;
-}
+    private void UpdateContentPanelPosition(float deltaY)
+    {
+        Canvas.ForceUpdateCanvases();
+        oldVelocity = scrollRect.velocity;
+        contentPanelTransform.localPosition += new Vector3(0, deltaY, 0);
+        isUpdated = true;
+    }
 
-private void ScrollOnInput()
-{
-    if (scrollRect == null)
+    private void ScrollOnInput()
     {
-        throw new System.Exception("Setup ScrollRectKeyController first!");
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            targetPosition = contentPanelTransform.localPosition + new Vector3(0, itemList[0].rect.height + VLG.spacing, 0);
+            StartCoroutine(ScrollToPosition(targetPosition));
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(itemList[0].rect.height + VLG.spacing), 0);
+            StartCoroutine(ScrollToPosition(targetPosition));
+        }
+        Debug.Log(contentPanelTransform.localPosition);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
     }
-    if (Input.GetKeyDown(KeyCode.UpArrow))
+
+    private IEnumerator ScrollToPosition(Vector2 target)
     {
-        targetPosition = contentPanelTransform.localPosition + new Vector3(0, 1 * (ItemList[0].rect.height + VLG.spacing), 0);
-        StartCoroutine(ScrollToPosition(targetPosition));
+        float elapsedTime = 0f;
+        float duration = 0.5f;
+        Vector2 startPosition = contentPanelTransform.localPosition;
+
+        while (elapsedTime < duration)
+        {
+            contentPanelTransform.localPosition = Vector2.Lerp(startPosition, target, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        contentPanelTransform.localPosition = target;
     }
-    else if (Input.GetKeyDown(KeyCode.DownArrow))
-    {
-        targetPosition = contentPanelTransform.localPosition + new Vector3(0, -1 * (ItemList[0].rect.height + VLG.spacing), 0);
-        StartCoroutine(ScrollToPosition(targetPosition));
-    }
-     // Force an immediate update of the layout
-    LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)contentPanelTransform.transform);
-}
 }
