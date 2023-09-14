@@ -13,15 +13,14 @@ public class InfiniteScrollVertical : MonoBehaviour
     private Vector2 oldVelocity;
     private bool isUpdated;
     private Vector2 targetPosition;
-    private const string slotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
+    private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     private ItemSlot itemSlotPrefab;
 
     void Start()
     {
         print("hie");
-        itemSlotPrefab = Resources.Load<ItemSlot>(slotPath);
+        itemSlotPrefab = Resources.Load<ItemSlot>(itemSlotPath);
         print(itemSlotPrefab);
-        InitialSetup();
         scrollRect.enabled = false;
     }
 
@@ -53,29 +52,24 @@ public class InfiniteScrollVertical : MonoBehaviour
         return Mathf.CeilToInt(viewPortTransform.rect.height / (itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing));
     }
 
-    private void InstantiateItems(int itemsToAdd)
+private void InstantiateItems(int itemsToAdd)
+{
+    for (int i = 0; i < itemsToAdd; i++)
     {
-        if (_itemArray.Length <= 1)
-        {
-            Instantiate(_itemArray[0], contentPanelTransform);
-            return;
-        }
-
-        for (int i = 0; i < itemsToAdd; i++)
-        {
-            RectTransform RT = Instantiate(_itemArray[i % _itemArray.Length], contentPanelTransform).GetComponent<RectTransform>();
-            RT.SetAsLastSibling();
-        }
-
-        for (int i = 0; i < itemsToAdd; i++)
-        {
-            int num = _itemArray.Length - i - 1;
-            while (num < 0) num += _itemArray.Length;
-
-            RectTransform RT = Instantiate(_itemArray[num], contentPanelTransform).GetComponent<RectTransform>();
-            RT.SetAsFirstSibling();
-        }
+        RectTransform RT = Instantiate(_itemArray[i % _itemArray.Length], contentPanelTransform).GetComponent<RectTransform>();
+        RT.SetAsLastSibling();
     }
+
+    for (int i = 0; i < itemsToAdd; i++)
+    {
+        int num = _itemArray.Length - i - 1;
+        while (num < 0) num += _itemArray.Length;
+
+        RectTransform RT = Instantiate(_itemArray[num], contentPanelTransform).GetComponent<RectTransform>();
+        RT.SetAsFirstSibling();
+    }
+}
+
 
     private void SetInitialContentPanelPosition(int itemsToAdd)
     {
@@ -141,16 +135,20 @@ public class InfiniteScrollVertical : MonoBehaviour
 
     internal void AddItems(ItemSlot[] items)
     {
-        _itemArray = new ItemSlot[items.Length];
-        for (int i = 0; i < items.Length; i++)
+        if (itemSlotPrefab != null)
         {
-            ItemSlot newItem = Instantiate(itemSlotPrefab);
-            newItem.Id = items[i].Id;
-            newItem.tag = items[i].tag;
-            newItem.NameText.text = items[i].ItemName;
-            _itemArray[i] = newItem;
+            _itemArray = new ItemSlot[items.Length];
+            for (int i = 0; i < items.Length; i++)
+            {
+                ItemSlot newItem = Instantiate(itemSlotPrefab);
+                newItem.Id = items[i].Id;
+                newItem.ItemTag = items[i].ItemTag;
+                newItem.NameText.text = items[i].ItemName;
+                _itemArray[i] = newItem;
+            }
+            InitialSetup();
         }
-        InitialSetup();
+
     }
 
 }

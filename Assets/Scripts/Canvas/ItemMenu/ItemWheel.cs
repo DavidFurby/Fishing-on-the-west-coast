@@ -11,8 +11,7 @@ public class ItemWheel : InfiniteScrollVertical
     private int middleIndex;
     private Image image;
 
-    void Start()
-    {
+    private void Awake() {
         image = GetComponent<Image>();
     }
 
@@ -61,6 +60,10 @@ public class ItemWheel : InfiniteScrollVertical
 
     public void SetWheelFocus(bool focus)
     {
-        image.color = focus ? Color.red : Color.white;
+        if (image != null)
+        {
+            image.color = focus ? Color.red : Color.white;
+
+        }
     }
 }
