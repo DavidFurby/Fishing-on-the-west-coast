@@ -2,90 +2,87 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(ScrollRect))]
 public class InfiniteScrollVertical : MonoBehaviour
 {
-    [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] internal ScrollRect scrollRect;
     [SerializeField] private RectTransform viewPortTransform;
     [SerializeField] private RectTransform contentPanelTransform;
     [SerializeField] private VerticalLayoutGroup VLG;
-
-    private RectTransform[] itemList;
-    private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
+    private ItemSlot[] _itemArray;
     private Vector2 oldVelocity;
     private bool isUpdated;
     private Vector2 targetPosition;
-    private GameObject itemSlot;
+    private const string slotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
+    private ItemSlot itemSlotPrefab;
 
     void Start()
     {
+        print("hie");
+        itemSlotPrefab = Resources.Load<ItemSlot>(slotPath);
+        print(itemSlotPrefab);
+        InitialSetup();
+        scrollRect.enabled = false;
+    }
 
+    private void InitialSetup()
+    {
         InitializeItemList();
         int itemsToAdd = CalculateItemsToAdd();
         InstantiateItems(itemsToAdd);
         SetInitialContentPanelPosition(itemsToAdd);
-
-        // Disable scrolling if there is only one item in the list
-
-        scrollRect.enabled = false;
-
     }
 
     void Update()
     {
-        if (itemList.Length > 1)
+        if (_itemArray != null && _itemArray.Length > 1)
         {
             HandleContentPanelPositionUpdate();
             ScrollOnInput();
         }
-
     }
 
     private void InitializeItemList()
     {
-        itemSlot = Resources.Load<GameObject>(itemSlotPath);
         isUpdated = false;
         oldVelocity = Vector2.zero;
-        itemList = new RectTransform[1];
-        itemList[0] = itemSlot.GetComponent<RectTransform>();
     }
 
     private int CalculateItemsToAdd()
     {
-        return Mathf.CeilToInt(viewPortTransform.rect.height / (itemList[0].rect.height + VLG.spacing));
+        return Mathf.CeilToInt(viewPortTransform.rect.height / (itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing));
     }
 
     private void InstantiateItems(int itemsToAdd)
     {
-        if (itemList.Length <= 1)
+        if (_itemArray.Length <= 1)
         {
-            Instantiate(itemList[0], contentPanelTransform);
+            Instantiate(_itemArray[0], contentPanelTransform);
             return;
         }
 
         for (int i = 0; i < itemsToAdd; i++)
         {
-            RectTransform RT = Instantiate(itemList[i % itemList.Length], contentPanelTransform);
+            RectTransform RT = Instantiate(_itemArray[i % _itemArray.Length], contentPanelTransform).GetComponent<RectTransform>();
             RT.SetAsLastSibling();
         }
 
         for (int i = 0; i < itemsToAdd; i++)
         {
-            int num = itemList.Length - i - 1;
-            while (num < 0) num += itemList.Length;
+            int num = _itemArray.Length - i - 1;
+            while (num < 0) num += _itemArray.Length;
 
-            RectTransform RT = Instantiate(itemList[num], contentPanelTransform);
+            RectTransform RT = Instantiate(_itemArray[num], contentPanelTransform).GetComponent<RectTransform>();
             RT.SetAsFirstSibling();
         }
     }
 
-
     private void SetInitialContentPanelPosition(int itemsToAdd)
     {
-        int var = itemList.Length > 1 ? itemsToAdd : 1;
+        int var = _itemArray.Length > 1 ? itemsToAdd : 1;
         contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
-               (0 - (itemList[0].rect.height + VLG.spacing) * var),
+               0 - (_itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing) * var,
                contentPanelTransform.localPosition.z);
-        Debug.Log(contentPanelTransform.localPosition);
     }
 
     private void HandleContentPanelPositionUpdate()
@@ -95,14 +92,12 @@ public class InfiniteScrollVertical : MonoBehaviour
             isUpdated = false;
             scrollRect.velocity = oldVelocity;
         }
-
-        if (contentPanelTransform.localPosition.y < 0)
+        float itemHeight = itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing;
+        float maxY = _itemArray.Length * itemHeight;
+        float y = Mathf.Clamp(contentPanelTransform.localPosition.y, 0, maxY);
+        if (y != contentPanelTransform.localPosition.y)
         {
-            UpdateContentPanelPosition(itemList.Length * (itemList[0].rect.height + VLG.spacing));
-        }
-        else if (contentPanelTransform.localPosition.y > (itemList.Length * (itemList[0].rect.height + VLG.spacing)))
-        {
-            UpdateContentPanelPosition(-itemList.Length * (itemList[0].rect.height + VLG.spacing));
+            UpdateContentPanelPosition(y - contentPanelTransform.localPosition.y);
         }
     }
 
@@ -118,15 +113,14 @@ public class InfiniteScrollVertical : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            targetPosition = contentPanelTransform.localPosition + new Vector3(0, itemList[0].rect.height + VLG.spacing, 0);
+            targetPosition = contentPanelTransform.localPosition + new Vector3(0, _itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing, 0);
             StartCoroutine(ScrollToPosition(targetPosition));
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(itemList[0].rect.height + VLG.spacing), 0);
+            targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(_itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing), 0);
             StartCoroutine(ScrollToPosition(targetPosition));
         }
-        Debug.Log(contentPanelTransform.localPosition);
         LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
     }
 
@@ -144,4 +138,19 @@ public class InfiniteScrollVertical : MonoBehaviour
         }
         contentPanelTransform.localPosition = target;
     }
+
+    internal void AddItems(ItemSlot[] items)
+    {
+        _itemArray = new ItemSlot[items.Length];
+        for (int i = 0; i < items.Length; i++)
+        {
+            ItemSlot newItem = Instantiate(itemSlotPrefab);
+            newItem.Id = items[i].Id;
+            newItem.tag = items[i].tag;
+            newItem.NameText.text = items[i].ItemName;
+            _itemArray[i] = newItem;
+        }
+        InitialSetup();
+    }
+
 }

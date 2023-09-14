@@ -4,8 +4,10 @@ using static Item;
 
 public class ItemSlot : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI nameText;
-
+    public TextMeshProUGUI NameText;
+    public string ItemName {
+        get; set;
+    }
     public int Id
     {
         get; set;
@@ -14,9 +16,18 @@ public class ItemSlot : MonoBehaviour
     {
         get; set;
     }
-
+    void Start()
+    {
+        NameText = GetComponentInChildren<TextMeshProUGUI>();
+    }
     public void SetTextField(string itemName)
     {
-        nameText.text = itemName;
+        if (NameText != null)
+        {
+            NameText.text = itemName;
+        print(NameText.name);
+
+        }
     }
+
 }

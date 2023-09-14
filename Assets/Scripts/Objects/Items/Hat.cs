@@ -20,7 +20,7 @@ using UnityEngine;
     {
         Hat hat = CreateInstance<Hat>();
         hat.id = hatData.id;
-        hat.name = hatData.name;
+        hat.itemName = hatData.name;
         hat.description = hatData.description;
         hat.price = hatData.price;
         return hat;

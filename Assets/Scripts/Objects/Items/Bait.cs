@@ -21,7 +21,7 @@ public class Bait : Item
     {
         Bait bait = CreateInstance<Bait>();
         bait.id = baitData.id;
-        bait.name = baitData.name;
+        bait.itemName = baitData.name;
         bait.description = baitData.description;
         bait.price = baitData.price;
         return bait;

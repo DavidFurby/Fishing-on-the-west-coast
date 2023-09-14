@@ -30,7 +30,7 @@ public class ShopHandlers : MonoBehaviour
         dialogManager.AddHandler("setShopItem", () =>
         {
             dialogManager.SetVariableValue("$shopItemId", shopItem.id);
-            dialogManager.SetVariableValue("$shopItemName", shopItem.name);
+            dialogManager.SetVariableValue("$shopItemName", shopItem.itemName);
             dialogManager.SetVariableValue("$shopItemPrice", shopItem.price);
             dialogManager.SetVariableValue("$shopItemDescription", shopItem.description);
         });

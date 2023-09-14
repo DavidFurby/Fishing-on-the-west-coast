@@ -11,7 +11,7 @@ public class HatData
     public HatData(Hat hat)
     {
         id = hat.id;
-        name = hat.name;
+        name = hat.itemName;
         description = hat.description;
         price = hat.price;
     }

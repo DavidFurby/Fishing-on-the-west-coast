@@ -36,7 +36,7 @@ public class ItemMenu : MonoBehaviour
         {
             if (wheel != null)
             {
-                switch (wheel._itemTag)
+                switch (wheel.itemTag)
                 {
                     case ItemTag.Bait:
                         wheel.SetItems(_allItems.OfType<Bait>().ToArray());

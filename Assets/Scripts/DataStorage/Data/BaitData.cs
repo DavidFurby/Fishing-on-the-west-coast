@@ -12,7 +12,7 @@ public class BaitData
     public BaitData(Bait bait)
     {
         id = bait.id;
-        name = bait.name;
+        name = bait.itemName;
         level = bait.level;
         description = bait.description;
         price = bait.price;

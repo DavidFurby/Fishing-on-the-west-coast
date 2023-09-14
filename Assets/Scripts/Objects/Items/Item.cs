@@ -4,11 +4,11 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     [HideInInspector] public ItemTag itemTag = ItemTag.None;
-    [SerializeField] public int id = 0;
-    [SerializeField] public new string name = "";
-    [SerializeField] public int price = 0;
-    [SerializeField] public string description = "";
-    [SerializeField] public GameObject model;
+    public int id = 0;
+    public  string itemName = "";
+    public int price = 0;
+    public string description = "";
+    public GameObject model;
 
     public enum ItemTag
     {
@@ -22,7 +22,7 @@ public class Item : ScriptableObject
     {
         itemTag = other.itemTag;
         id = other.id;
-        name = other.name;
+        itemName = other.itemName;
         price = other.price;
         description = other.description;
     }
