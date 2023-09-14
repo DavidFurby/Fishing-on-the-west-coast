@@ -8,6 +8,7 @@ public class InfiniteScrollVertical : MonoBehaviour
     [SerializeField] private RectTransform viewPortTransform;
     [SerializeField] private RectTransform contentPanelTransform;
     [SerializeField] private VerticalLayoutGroup VLG;
+
     private RectTransform[] itemList;
     private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     private Vector2 oldVelocity;
@@ -17,16 +18,26 @@ public class InfiniteScrollVertical : MonoBehaviour
 
     void Start()
     {
+
         InitializeItemList();
         int itemsToAdd = CalculateItemsToAdd();
         InstantiateItems(itemsToAdd);
         SetInitialContentPanelPosition(itemsToAdd);
+
+        // Disable scrolling if there is only one item in the list
+
+        scrollRect.enabled = false;
+
     }
 
     void Update()
     {
-        HandleContentPanelPositionUpdate();
-        if (itemList.Length > 1) ScrollOnInput();
+        if (itemList.Length > 1)
+        {
+            HandleContentPanelPositionUpdate();
+            ScrollOnInput();
+        }
+
     }
 
     private void InitializeItemList()
@@ -45,7 +56,11 @@ public class InfiniteScrollVertical : MonoBehaviour
 
     private void InstantiateItems(int itemsToAdd)
     {
-        if (itemsToAdd <= 1) return;
+        if (itemList.Length <= 1)
+        {
+            Instantiate(itemList[0], contentPanelTransform);
+            return;
+        }
 
         for (int i = 0; i < itemsToAdd; i++)
         {
@@ -63,11 +78,14 @@ public class InfiniteScrollVertical : MonoBehaviour
         }
     }
 
+
     private void SetInitialContentPanelPosition(int itemsToAdd)
     {
+        int var = itemList.Length > 1 ? itemsToAdd : 1;
         contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
-            (0 - (itemList[0].rect.height + VLG.spacing) * itemsToAdd),
-            contentPanelTransform.localPosition.z);
+               (0 - (itemList[0].rect.height + VLG.spacing) * var),
+               contentPanelTransform.localPosition.z);
+        Debug.Log(contentPanelTransform.localPosition);
     }
 
     private void HandleContentPanelPositionUpdate()
