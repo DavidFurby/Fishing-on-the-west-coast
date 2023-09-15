@@ -9,8 +9,13 @@ public class ItemWheel : InfiniteScrollVertical
     public ItemTag itemTag;
     private ItemSlot[] listOfItemSlots;
     private Image image;
+    private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
+    private GameObject itemSlotPrefab;
 
-    private void Start() {
+
+    private void Start()
+    {
+        itemSlotPrefab = Resources.Load<GameObject>(itemSlotPath);
         image = GetComponent<Image>();
     }
 
@@ -26,29 +31,40 @@ public class ItemWheel : InfiniteScrollVertical
         CreateNewEquipmentSlots(items);
     }
 
-    private void CreateNewEquipmentSlots(Item[] items)
-    {
-        listOfItemSlots = new ItemSlot[items.Length];
+private void CreateNewEquipmentSlots(Item[] items)
+{
+    listOfItemSlots = new ItemSlot[items.Length];
+    GameObject[] itemSlotGameObjects = new GameObject[items.Length];
 
-        for (int i = 0; i < items.Length; i++)
-        {
-            ItemSlot newItemSlot = new()
-            {
-                Id = items[i].id,
-                ItemTag = items[i].itemTag,
-                ItemName = items[i].itemName
-            };
-            listOfItemSlots[i] = newItemSlot;
-        }
-        AddItems(listOfItemSlots.Select(itemSlot => itemSlot).ToArray());
+    for (int i = 0; i < items.Length; i++)
+    {
+        // Get the item slot prefab
+        GameObject newItemSlotObject = itemSlotPrefab;
+        ItemSlot newItemSlot = newItemSlotObject.GetComponent<ItemSlot>();
+
+        // Set the properties of the ItemSlot
+        newItemSlot.Id = items[i].id;
+        newItemSlot.ItemTag = items[i].itemTag;
+        newItemSlot.ItemName = items[i].itemName;
+
+        // Add the new item slot object to the list
+        listOfItemSlots[i] = newItemSlot;
+        itemSlotGameObjects[i] = newItemSlotObject;
     }
+
+    if (listOfItemSlots.Length > 0)
+    {
+        print(itemSlotGameObjects[0].GetComponent<ItemSlot>().ItemName);
+        AddItems(itemSlotGameObjects);
+    }
+}
+
 
     public void SetWheelFocus(bool focus)
     {
         if (image != null)
         {
             image.color = focus ? Color.red : Color.white;
-
         }
     }
 }
