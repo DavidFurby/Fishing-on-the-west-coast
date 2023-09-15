@@ -24,7 +24,7 @@ public class Rod : Item
     {
         Rod rod = CreateInstance<Rod>();
         rod.id = rodData.id;
-        rod.itemName = rodData.name;
+        rod.itemName = rodData.rodName;
         rod.description = rodData.description;
         rod.price = rodData.price;
         rod.reelInSpeed = rodData.strength;

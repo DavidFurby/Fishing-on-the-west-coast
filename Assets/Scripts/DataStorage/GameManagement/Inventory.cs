@@ -34,16 +34,6 @@ public class Inventory
         }
         EquipmentChanged?.Invoke();
     }
-    public Item GetEquipment(ItemTag itemTag)
-    {
-        return itemTag switch
-        {
-            ItemTag.Rod => EquippedRod,
-            ItemTag.Bait => EquippedBait,
-            ItemTag.Hat => EquippedHat,
-            _ => null,
-        };
-    }
     //Check if item Exists in inventory
     public bool HasItem(Item item)
     {

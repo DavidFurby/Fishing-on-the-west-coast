@@ -18,6 +18,7 @@ public class ItemMenu : MonoBehaviour
         _allItems = GetItemsAsList(MainManager.Instance.Inventory.FoundBaits);
         _allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundRods));
         _allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundHats));
+        
         ExplorationController.OpenItemMenu += HandleInputs;
     }
 

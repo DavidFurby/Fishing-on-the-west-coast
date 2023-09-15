@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: 3
   id: 1
-  name: Old cap
+  itemName: Basic hat
   price: 0
   description: For plebs
   model: {fileID: 919132149155446097, guid: b8ffd9bc4d44a8347ae9a9911c6b5143, type: 3}

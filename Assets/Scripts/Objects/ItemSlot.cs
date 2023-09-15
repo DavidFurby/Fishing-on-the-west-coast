@@ -16,17 +16,19 @@ public class ItemSlot : MonoBehaviour
     {
         get; set;
     }
-    void Start()
+    void Awake()
     {
         NameText = GetComponentInChildren<TextMeshProUGUI>();
+        print(NameText);
     }
     public void SetTextField(string itemName)
     {
+        print("Set");
+        print(NameText);
         if (NameText != null)
         {
             NameText.text = itemName;
-        print(NameText.name);
-
+            print(NameText.text);
         }
     }
 

@@ -4,7 +4,7 @@
 public class RodData
 {
     public int id;
-    public string name;
+    public string rodName;
     public string description;
     public int strength;
     public int throwRange;
@@ -13,7 +13,7 @@ public class RodData
     public RodData(Rod rod)
     {
         id = rod.id;
-        name = rod.itemName;
+        rodName = rod.itemName;
         description = rod.description;
         strength = rod.reelInSpeed;
         throwRange = rod.throwRange;

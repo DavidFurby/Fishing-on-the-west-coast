@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +10,18 @@ public class InfiniteScrollVertical : MonoBehaviour
     [SerializeField] private RectTransform viewPortTransform;
     [SerializeField] private RectTransform contentPanelTransform;
     [SerializeField] private VerticalLayoutGroup VLG;
-    private GameObject[] _itemArray;
+    internal ItemSlot[] _itemArray;
     private Vector2 oldVelocity;
     private bool isUpdated;
     private Vector2 targetPosition;
+    private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
+    private ItemSlot itemSlotPrefab;
+
 
     private void Awake()
     {
+        itemSlotPrefab = Resources.Load<ItemSlot>(itemSlotPath);
+
         if (scrollRect == null)
         {
             scrollRect = GetComponent<ScrollRect>();
@@ -35,11 +41,12 @@ public class InfiniteScrollVertical : MonoBehaviour
         {
             VLG = contentPanelTransform.GetComponent<VerticalLayoutGroup>();
         }
+        isUpdated = false;
+        oldVelocity = Vector2.zero;
     }
 
-    private void InitialSetup()
+    internal void InitialSetup()
     {
-        InitializeItemList();
         int itemsToAdd = CalculateItemsToAdd();
         InstantiateItems(itemsToAdd);
         SetInitialContentPanelPosition(itemsToAdd);
@@ -54,36 +61,33 @@ public class InfiniteScrollVertical : MonoBehaviour
         }
     }
 
-
-    private void InitializeItemList()
-    {
-        isUpdated = false;
-        oldVelocity = Vector2.zero;
-    }
-
     private int CalculateItemsToAdd()
     {
-        return Mathf.CeilToInt(viewPortTransform.rect.height / (_itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing));
+        return Mathf.CeilToInt(viewPortTransform.rect.height / (itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing));
     }
 
-  private void InstantiateItems(int itemsToAdd)
+    private void InstantiateItems(int itemsToAdd)
     {
+
         if (_itemArray.Length <= 1)
         {
-            Instantiate(_itemArray[0], contentPanelTransform);
+            ItemSlot newSlot = Instantiate(itemSlotPrefab, contentPanelTransform);
+            newSlot.GetComponent<ItemSlot>().SetTextField(_itemArray[0].ItemName);
             return;
         }
         for (int i = 0; i < itemsToAdd; i++)
         {
-            RectTransform RT = Instantiate(_itemArray[i % _itemArray.Length], contentPanelTransform).GetComponent<RectTransform>();
-            RT.SetAsLastSibling();
+            ItemSlot slot = Instantiate(itemSlotPrefab, contentPanelTransform);
+            slot.SetTextField(_itemArray[0].ItemName);
+            slot.gameObject.GetComponent<RectTransform>().SetAsLastSibling();
         }
         for (int i = 0; i < itemsToAdd; i++)
         {
             int num = _itemArray.Length - i - 1;
             while (num < 0) num += _itemArray.Length;
-            RectTransform RT = Instantiate(_itemArray[num], contentPanelTransform).GetComponent<RectTransform>();
-            RT.SetAsFirstSibling();
+            ItemSlot slot = Instantiate(itemSlotPrefab, contentPanelTransform);
+            slot.SetTextField(_itemArray[0].ItemName);
+            slot.gameObject.GetComponent<RectTransform>().SetAsFirstSibling();
         }
     }
 
@@ -91,9 +95,8 @@ public class InfiniteScrollVertical : MonoBehaviour
     {
         int var = _itemArray.Length > 1 ? itemsToAdd : 1;
         contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
-               (0 - (_itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing) * var),
+               0 - (itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing) * var,
                contentPanelTransform.localPosition.z);
-        Debug.Log(contentPanelTransform.localPosition);
     }
 
 
@@ -104,7 +107,7 @@ public class InfiniteScrollVertical : MonoBehaviour
             isUpdated = false;
             scrollRect.velocity = oldVelocity;
         }
-        float itemHeight = _itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing;
+        float itemHeight = itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing;
         float maxY = _itemArray.Length * itemHeight;
         float y = Mathf.Clamp(contentPanelTransform.localPosition.y, 0, maxY);
         if (y != contentPanelTransform.localPosition.y)
@@ -117,21 +120,19 @@ public class InfiniteScrollVertical : MonoBehaviour
     {
         Canvas.ForceUpdateCanvases();
         oldVelocity = scrollRect.velocity;
-        contentPanelTransform.localPosition += new Vector3(0, deltaY, 0);
+        contentPanelTransform.SetPositionAndRotation(contentPanelTransform.localPosition + new Vector3(0, deltaY, 0), contentPanelTransform.localRotation);
         isUpdated = true;
     }
     private void ScrollOnInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            print("up");
-            targetPosition = contentPanelTransform.localPosition + new Vector3(0, _itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing, 0);
+            targetPosition = contentPanelTransform.localPosition + new Vector3(0, itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing, 0);
             StartCoroutine(ScrollToPosition(targetPosition));
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            print("down");
-            targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(_itemArray[0].GetComponent<RectTransform>().rect.height + VLG.spacing), 0);
+            targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(itemSlotPrefab.GetComponent<RectTransform>().rect.height + VLG.spacing), 0);
             StartCoroutine(ScrollToPosition(targetPosition));
         }
         LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
@@ -150,18 +151,6 @@ public class InfiniteScrollVertical : MonoBehaviour
             yield return null;
         }
         contentPanelTransform.localPosition = target;
-        Debug.Log(contentPanelTransform.localPosition);
 
     }
-
-    internal void AddItems(GameObject[] items)
-    {
-        _itemArray = new GameObject[items.Length];
-        for (int i = 0; i < items.Length; i++)
-        {
-            _itemArray[i] = items[i];
-        }
-        InitialSetup();
-    }
-
 }

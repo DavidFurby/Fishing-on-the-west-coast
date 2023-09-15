@@ -4,7 +4,7 @@
 public class BaitData
 {
     public int id;
-    public string name;
+    public string baitName;
     public int level;
     public string description;
     public int price;
@@ -12,7 +12,7 @@ public class BaitData
     public BaitData(Bait bait)
     {
         id = bait.id;
-        name = bait.itemName;
+        baitName = bait.itemName;
         level = bait.level;
         description = bait.description;
         price = bait.price;
