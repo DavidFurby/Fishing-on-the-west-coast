@@ -1,14 +1,11 @@
-using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static Item;
-
 public class ItemWheel : InfiniteScrollVertical
 {
     public ItemTag itemTag;
     private Image image;
-
 
     private void Start()
     {
@@ -29,24 +26,15 @@ public class ItemWheel : InfiniteScrollVertical
 
     private void CreateNewEquipmentSlots(Item[] items)
     {
-        _itemArray = new ItemSlot[items.Length];
-        print(_itemArray.Length);
-        for (int i = 0; i < items.Length; i++)
+        _itemArray = items.Select(item => new ItemSlot
         {
-            // Get the item slot prefab
-            ItemSlot newItemSlot = new()
-            {
-                // Set the properties of the ItemSlot
-                Id = items[i].id,
-                ItemTag = items[i].itemTag,
-                ItemName = items[i].itemName
-            };
-            // Add the new item slot object to the list
-            _itemArray[i] = newItemSlot;
-        }
+            Id = item.id,
+            ItemTag = item.itemTag,
+            ItemName = item.itemName
+        }).ToArray();
+
         InitialSetup();
     }
-
 
     public void SetWheelFocus(bool focus)
     {
