@@ -23,8 +23,6 @@ public class ItemSlot : MonoBehaviour
     }
     public void SetTextField(string itemName)
     {
-        print("Set");
-        print(NameText);
         if (NameText != null)
         {
             NameText.text = itemName;

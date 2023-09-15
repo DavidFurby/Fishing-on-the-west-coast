@@ -30,7 +30,7 @@ public class ItemWheel : InfiniteScrollVertical
     private void CreateNewEquipmentSlots(Item[] items)
     {
         _itemArray = new ItemSlot[items.Length];
-
+        print(_itemArray.Length);
         for (int i = 0; i < items.Length; i++)
         {
             // Get the item slot prefab
@@ -53,6 +53,7 @@ public class ItemWheel : InfiniteScrollVertical
         if (image != null)
         {
             image.color = focus ? Color.red : Color.white;
+            scrollEnabled = focus;
         }
     }
 }
