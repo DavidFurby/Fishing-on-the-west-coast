@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(ShopHandlers))]
 public class Shop : MonoBehaviour
@@ -31,24 +32,36 @@ public class Shop : MonoBehaviour
         ExplorationController.NavigateShop += HandleShoppingInput;
     }
     #region MonoBehaviour Methods
-    private void Start()
+    private void Awake()
     {
-        emptySpot = Resources.Load<Item>(ItemsPath + "/Empty");
-        shopItems = new Item[6];
-        string[] itemNames = { "/Baits/AdvanceBait", "/Hats/FancyHat", "/Rods/AdvanceRod", "/Baits/RareBait", "/Hats/PremiumHat", "/Rods/RareRod" };
-        for (int i = 0; i < shopItems.Length; i++)
-        {
-            shopItems[i] = Resources.Load<Item>(ItemsPath + itemNames[i]);
-        }
+        Item originalEmptySpot = Resources.Load<Item>(ItemsPath + "/Empty");
+        emptySpot = originalEmptySpot.CloneItem();
+        InitializeShopItems();
         InitializeReferences();
         InitializeShopItemPositions();
         SpawnItems();
     }
 
+    private void InitializeShopItems()
+    {
+        shopItems = new Item[6];
+        string[] itemNames = { "/Baits/AdvanceBait", "/Hats/FancyHat", "/Rods/AdvanceRod", "/Baits/RareBait", "/Hats/PremiumHat", "/Rods/RareRod" };
+        for (int i = 0; i < shopItems.Length; i++)
+        {
+            Item originalItem = Resources.Load<Item>(ItemsPath + itemNames[i]);
+            shopItems[i] = originalItem.CloneItem();
+            print(shopItems[i].itemName);
+            print(shopItems[i].itemTag);
+
+        }
+    }
 
     private void InitializeReferences()
     {
-        dialogHandlers = GetComponent<ShopHandlers>();
+        if (!TryGetComponent(out dialogHandlers))
+        {
+            Debug.LogError("ShopHandlers component is missing.");
+        }
         cameraController = FindObjectOfType<CameraController>();
         playerController = FindObjectOfType<ExplorationController>();
         dialogManager = FindObjectOfType<DialogManager>();

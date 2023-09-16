@@ -17,4 +17,17 @@ public class Item : ScriptableObject
         Bait,
         Hat,
     }
+
+public Item CloneItem()
+{
+    Item clone = ScriptableObject.CreateInstance<Item>();
+    clone.itemTag = this.itemTag;
+    clone.id = this.id;
+    clone.itemName = this.itemName;
+    clone.price = this.price;
+    clone.description = this.description;
+    clone.model = this.model;
+    return clone;
+}
+
 }
