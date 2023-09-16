@@ -16,6 +16,8 @@ public class InfiniteScrollVertical : MonoBehaviour
     private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     private ItemSlot itemSlotPrefab;
     internal bool scrollEnabled = true;
+    private bool isScrolling = false;
+
     private float itemSlotHeight;
     private float itemSpacing;
     internal ItemSlot centeredItem;
@@ -134,7 +136,7 @@ public class InfiniteScrollVertical : MonoBehaviour
 
     private void ScrollOnInput()
     {
-        if (scrollEnabled)
+        if (scrollEnabled && !isScrolling)
         {
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -158,6 +160,8 @@ public class InfiniteScrollVertical : MonoBehaviour
 
     private IEnumerator ScrollToPosition(Vector2 target)
     {
+        isScrolling = true;
+
         float elapsedTime = 0f;
         float duration = 0.5f;
         Vector2 startPosition = contentPanelTransform.localPosition;
@@ -168,6 +172,8 @@ public class InfiniteScrollVertical : MonoBehaviour
             yield return null;
         }
         contentPanelTransform.localPosition = target;
+        isScrolling = false;
+
     }
     private void SetCenterItemIndex()
     {
