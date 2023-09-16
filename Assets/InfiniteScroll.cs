@@ -157,7 +157,7 @@ public class InfiniteScrollVertical : MonoBehaviour
         {
             contentPanelTransform.localPosition = Vector2.Lerp(startPosition, target, elapsedTime / duration);
             elapsedTime += Time.fixedDeltaTime;
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
         contentPanelTransform.localPosition = target;
     }
