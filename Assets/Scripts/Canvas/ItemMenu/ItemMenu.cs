@@ -6,9 +6,9 @@ using static Item;
 public class ItemMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _itemMenu;
-    [SerializeField] private ItemWheel[] _listOfWheels;
+    [SerializeField] private ItemScroll[] _listOfWheels;
 
-    private ItemWheel _focusedWheel;
+    private ItemScroll _focusedWheel;
     private int _focusedWheelIndex;
     private List<Item> _allItems;
 
@@ -33,7 +33,7 @@ public class ItemMenu : MonoBehaviour
     }
     private void PopulateWheels()
     {
-        foreach (ItemWheel wheel in _listOfWheels)
+        foreach (ItemScroll wheel in _listOfWheels)
         {
             if (wheel != null)
             {
@@ -89,7 +89,7 @@ public class ItemMenu : MonoBehaviour
 
     private void TriggerChangeEquippedItem()
     {
-        foreach (ItemWheel wheel in _listOfWheels)
+        foreach (ItemScroll wheel in _listOfWheels)
         {
             wheel.ChangeEquippedItem();
         }

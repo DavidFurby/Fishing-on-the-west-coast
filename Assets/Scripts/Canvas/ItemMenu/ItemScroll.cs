@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static Item;
-public class ItemWheel : InfiniteScrollVertical
+public class ItemScroll : InfiniteScrollVertical
 {
     public ItemTag itemTag;
     private Image image;
