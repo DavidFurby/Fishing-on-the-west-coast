@@ -32,13 +32,6 @@ public class ItemScroll : InfiniteScrollVertical
 
     private void CreateNewEquipmentSlots(List<Item> items)
     {
-        Item equippedItem = items.FirstOrDefault(item => item.id == MainManager.Instance.Inventory.GetEquippedItem(itemTag).id);
-        if (equippedItem != null)
-        {
-            items.Remove(equippedItem);
-            items.Insert(0, equippedItem);
-        }
-
         itemArray = items.Select(item =>
         {
             GameObject slotObject = new("ItemSlot");

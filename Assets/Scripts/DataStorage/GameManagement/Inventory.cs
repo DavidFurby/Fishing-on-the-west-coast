@@ -45,6 +45,16 @@ public class Inventory
         };
     }
 
+   public Item[] GetEquipment(ItemTag tag)
+{
+        return tag switch
+        {
+            ItemTag.Rod => FoundRods.ToArray(),
+            ItemTag.Bait => FoundBaits.ToArray(),
+            ItemTag.Hat => FoundHats.ToArray(),
+            _ => null,
+        };
+    }
     //Check if item Exists in inventory
     public bool HasItem(Item item)
     {

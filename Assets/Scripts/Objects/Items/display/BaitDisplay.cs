@@ -29,7 +29,6 @@ public class BaitDisplay : ItemDisplay
         // Get the item component of the instantiated game object  
         if (current != equippedBait)
         {
-            print(equippedBait);
             current = equippedBait;
             SetNewItemModel(equippedBait);
         }
