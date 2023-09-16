@@ -50,8 +50,6 @@ public class Shop : MonoBehaviour
         {
             Item originalItem = Resources.Load<Item>(ItemsPath + itemNames[i]);
             shopItems[i] = originalItem.CloneItem();
-            print(shopItems[i].itemName);
-            print(shopItems[i].itemTag);
 
         }
     }

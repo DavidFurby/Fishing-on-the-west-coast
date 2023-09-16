@@ -19,7 +19,6 @@ public class ItemSlot : MonoBehaviour
     void Awake()
     {
         NameText = GetComponentInChildren<TextMeshProUGUI>();
-        print(NameText);
     }
     public void SetTextField(string itemName)
     {
