@@ -27,5 +27,13 @@ public class ItemSlot : MonoBehaviour
             NameText.text = itemName;
         }
     }
+    public static ItemSlot Create(GameObject target, int id, ItemTag itemTag, string itemName)
+    {
+        ItemSlot slot = target.AddComponent<ItemSlot>();
+        slot.ItemName = itemName;
+        slot.Id = id;
+        slot.ItemTag = itemTag;
+        return slot;
+    }
 
 }

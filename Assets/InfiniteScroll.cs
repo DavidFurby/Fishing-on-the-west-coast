@@ -18,6 +18,7 @@ public class InfiniteScrollVertical : MonoBehaviour
     internal bool scrollEnabled = true;
     private float itemSlotHeight;
     private float itemSpacing;
+    internal ItemSlot centeredItem;
 
     private void Awake()
     {
@@ -29,6 +30,8 @@ public class InfiniteScrollVertical : MonoBehaviour
         int itemsToAdd = CalculateItemsToAdd();
         InstantiateItems(itemsToAdd);
         SetInitialContentPanelPosition(itemsToAdd);
+        SetCenterItemIndex();
+
     }
 
     private void LateUpdate()
@@ -67,27 +70,29 @@ public class InfiniteScrollVertical : MonoBehaviour
     {
         if (_itemArray.Length <= 1)
         {
-            InstantiateItemSlot(contentPanelTransform, _itemArray[0].ItemName);
+            InstantiateItemSlot(contentPanelTransform, _itemArray[0]);
             return;
         }
         for (int i = 0; i < itemsToAdd; i++)
         {
-            InstantiateItemSlot(contentPanelTransform, _itemArray[i % _itemArray.Length].ItemName, true);
+            InstantiateItemSlot(contentPanelTransform, _itemArray[i % _itemArray.Length], true);
         }
 
         for (int i = 0; i < itemsToAdd; i++)
         {
             int num = _itemArray.Length - i - 1;
             while (num < 0) num += _itemArray.Length;
-            InstantiateItemSlot(contentPanelTransform, _itemArray[num % _itemArray.Length].ItemName, false);
+            InstantiateItemSlot(contentPanelTransform, _itemArray[num % _itemArray.Length], false);
         }
     }
 
-    private void InstantiateItemSlot(RectTransform parent, string itemName, bool asLastSibling = false)
+    private void InstantiateItemSlot(RectTransform parent, ItemSlot itemSlot, bool asLastSibling = false)
     {
-        print(itemName);
         ItemSlot slot = Instantiate(itemSlotPrefab, parent);
-        slot.SetTextField(itemName);
+        slot.SetTextField(itemSlot.ItemName);
+        slot.Id = itemSlot.Id;
+        slot.ItemTag = itemSlot.ItemTag;
+        slot.ItemName = itemSlot.ItemName;
         if (asLastSibling) slot.gameObject.GetComponent<RectTransform>().SetAsLastSibling();
         else slot.gameObject.GetComponent<RectTransform>().SetAsFirstSibling();
     }
@@ -107,7 +112,7 @@ public class InfiniteScrollVertical : MonoBehaviour
             isUpdated = false;
             scrollRect.velocity = oldVelocity;
         }
-      
+
         if (contentPanelTransform.localPosition.y < 0)
         {
             UpdateContentPanelPosition(_itemArray.Length * (itemSlotHeight + itemSpacing));
@@ -136,15 +141,18 @@ public class InfiniteScrollVertical : MonoBehaviour
             {
                 targetPosition = contentPanelTransform.localPosition + new Vector3(0, itemSlotHeight + itemSpacing, 0);
                 StartCoroutine(ScrollToPosition(targetPosition));
-                print(targetPosition);
+                LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
+                SetCenterItemIndex();
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(itemSlotHeight + itemSpacing), 0);
                 StartCoroutine(ScrollToPosition(targetPosition));
-                print(targetPosition);
+                LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
+                SetCenterItemIndex();
             }
-            LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
+
+
         }
     }
 
@@ -161,7 +169,13 @@ public class InfiniteScrollVertical : MonoBehaviour
         }
         contentPanelTransform.localPosition = target;
     }
-
+    private void SetCenterItemIndex()
+    {
+        float centerPosition = -contentPanelTransform.localPosition.y + viewPortTransform.rect.height / 2;
+        int index = Mathf.RoundToInt(centerPosition / (itemSlotHeight + itemSpacing)) % _itemArray.Length;
+        if (index < 0) index += _itemArray.Length;
+        centeredItem = _itemArray[index];
+    }
     internal void ClearScroll()
     {
         foreach (Transform child in contentPanelTransform)

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,9 +13,6 @@ public class ItemScroll : InfiniteScrollVertical
         image = GetComponent<Image>();
     }
 
-    /// <summary>
-    /// This function is called when the behaviour becomes disabled or inactive.
-    /// </summary>
     void OnDisable()
     {
         ClearScroll();
@@ -22,8 +20,9 @@ public class ItemScroll : InfiniteScrollVertical
 
     public void ChangeEquippedItem()
     {
-        int centerIndex = Mathf.RoundToInt(scrollRect.verticalNormalizedPosition * (_itemArray.Length - 1));
-        MainManager.Instance.Inventory.SetEquipment(_itemArray[centerIndex].Id, itemTag);
+        MainManager.Instance.Inventory.SetEquipment(centeredItem.Id, itemTag);
+        print(MainManager.Instance.Inventory.EquippedBait.itemName);
+
     }
 
     public void SetItems(Item[] items)
@@ -32,7 +31,7 @@ public class ItemScroll : InfiniteScrollVertical
         CreateNewEquipmentSlots(items);
     }
 
-    private void CreateNewEquipmentSlots(Item[] items)
+ private void CreateNewEquipmentSlots(Item[] items)
     {
         _itemArray = items.Select(item => new ItemSlot
         {
