@@ -18,7 +18,7 @@ public class Inventory
     public static event Action EquipmentChanged;
 
 
-    public void SetEquipment(int id, ItemTag tag)
+        public void SetEquipment(int id, ItemTag tag)
     {
         switch (tag)
         {

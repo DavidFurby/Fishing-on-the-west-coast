@@ -102,9 +102,9 @@ public class InfiniteScrollVertical : MonoBehaviour
 
     private void SetInitialContentPanelPosition(int itemsToAdd)
     {
-        int var = itemArray.Length > 1 ? itemsToAdd : 1;
+        int position = itemArray.Length > 1 ? itemsToAdd : 1;
         contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
-               - (itemSlotHeight + itemSpacing) * var,
+               - (itemSlotHeight + itemSpacing) * position,
                contentPanelTransform.localPosition.z);
     }
 
@@ -178,6 +178,7 @@ public class InfiniteScrollVertical : MonoBehaviour
         int index = Mathf.RoundToInt(centerPosition / (itemSlotHeight + itemSpacing)) % itemArray.Length;
         if (index < 0) index += itemArray.Length;
         centeredItem = itemArray[index];
+        print(centeredItem.ItemName);
     }
 
     internal void ClearScroll()
