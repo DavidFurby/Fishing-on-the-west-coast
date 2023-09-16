@@ -31,27 +31,17 @@ public class ItemMenu : MonoBehaviour
     {
         return items.Cast<Item>().ToList();
     }
-    private void PopulateWheels()
+private void PopulateWheels()
+{
+    foreach (ItemScroll wheel in _listOfWheels)
     {
-        foreach (ItemScroll wheel in _listOfWheels)
+        if (wheel != null)
         {
-            if (wheel != null)
-            {
-                switch (wheel.itemTag)
-                {
-                    case ItemTag.Bait:
-                        wheel.SetItems(_allItems.OfType<Bait>().ToArray());
-                        break;
-                    case ItemTag.Rod:
-                        wheel.SetItems(_allItems.OfType<Rod>().ToArray());
-                        break;
-                    case ItemTag.Hat:
-                        wheel.SetItems(_allItems.OfType<Hat>().ToArray());
-                        break;
-                }
-            }
+            var filteredItems = _allItems.Where(item => item.itemTag == wheel.itemTag).ToList();
+            wheel.SetItems(filteredItems);
         }
     }
+}
 
     public void HandleInputs()
     {
