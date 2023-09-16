@@ -107,16 +107,14 @@ public class InfiniteScrollVertical : MonoBehaviour
             isUpdated = false;
             scrollRect.velocity = oldVelocity;
         }
-        float itemHeight = itemSlotHeight + itemSpacing;
-        float maxY = _itemArray.Length * itemHeight;
-        float y = Mathf.Clamp(contentPanelTransform.localPosition.y, 0, maxY);
-      if (contentPanelTransform.localPosition.y < 0)
+      
+        if (contentPanelTransform.localPosition.y < 0)
         {
-            UpdateContentPanelPosition(_itemArray.Length * (itemHeight + itemSpacing));
+            UpdateContentPanelPosition(_itemArray.Length * (itemSlotHeight + itemSpacing));
         }
-        else if (contentPanelTransform.localPosition.y > (_itemArray.Length * (itemHeight + itemSpacing)))
+        else if (contentPanelTransform.localPosition.y > (_itemArray.Length * (itemSlotHeight + itemSpacing)))
         {
-            UpdateContentPanelPosition(-_itemArray.Length * (itemHeight + itemSpacing));
+            UpdateContentPanelPosition(-_itemArray.Length * (itemSlotHeight + itemSpacing));
         }
     }
 
@@ -133,15 +131,18 @@ public class InfiniteScrollVertical : MonoBehaviour
     {
         if (scrollEnabled)
         {
+
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 targetPosition = contentPanelTransform.localPosition + new Vector3(0, itemSlotHeight + itemSpacing, 0);
                 StartCoroutine(ScrollToPosition(targetPosition));
+                print(targetPosition);
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(itemSlotHeight + itemSpacing), 0);
                 StartCoroutine(ScrollToPosition(targetPosition));
+                print(targetPosition);
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
         }
