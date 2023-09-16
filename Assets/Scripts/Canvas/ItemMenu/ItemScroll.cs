@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static Item;
+
 public class ItemScroll : InfiniteScrollVertical
 {
     public ItemTag itemTag;
@@ -14,7 +14,7 @@ public class ItemScroll : InfiniteScrollVertical
         image = GetComponent<Image>();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         ClearScroll();
     }
@@ -22,8 +22,6 @@ public class ItemScroll : InfiniteScrollVertical
     public void ChangeEquippedItem()
     {
         MainManager.Instance.Inventory.SetEquipment(centeredItem.Id, itemTag);
-        print(MainManager.Instance.Inventory.EquippedBait.itemName);
-
     }
 
     public void SetItems(List<Item> items)
@@ -34,11 +32,14 @@ public class ItemScroll : InfiniteScrollVertical
 
     private void CreateNewEquipmentSlots(List<Item> items)
     {
-        Item equippedItem = items.First((Item item) => item.id == MainManager.Instance.Inventory.GetEquippedItem(itemTag).id);
-        items.Remove(equippedItem);
-        items.Insert(0, equippedItem);
+        Item equippedItem = items.FirstOrDefault(item => item.id == MainManager.Instance.Inventory.GetEquippedItem(itemTag).id);
+        if (equippedItem != null)
+        {
+            items.Remove(equippedItem);
+            items.Insert(0, equippedItem);
+        }
 
-        _itemArray = items.Select(item =>
+        itemArray = items.Select(item =>
         {
             GameObject slotObject = new("ItemSlot");
             return ItemSlot.Create(slotObject, item.id, item.itemTag, item.itemName);
@@ -46,7 +47,6 @@ public class ItemScroll : InfiniteScrollVertical
 
         InitialSetup();
     }
-
 
     public void SetWheelFocus(bool focus)
     {

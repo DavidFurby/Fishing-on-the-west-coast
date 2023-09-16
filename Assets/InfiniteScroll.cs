@@ -5,11 +5,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(ScrollRect))]
 public class InfiniteScrollVertical : MonoBehaviour
 {
-    [SerializeField] internal ScrollRect scrollRect;
+    [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private RectTransform viewPortTransform;
     [SerializeField] private RectTransform contentPanelTransform;
     [SerializeField] private VerticalLayoutGroup VLG;
-    internal ItemSlot[] _itemArray;
+    internal ItemSlot[] itemArray;
     private Vector2 oldVelocity;
     private bool isUpdated;
     private Vector2 targetPosition;
@@ -33,12 +33,11 @@ public class InfiniteScrollVertical : MonoBehaviour
         InstantiateItems(itemsToAdd);
         SetInitialContentPanelPosition(itemsToAdd);
         SetCenterItemIndex();
-
     }
 
     private void LateUpdate()
     {
-        if (_itemArray != null && _itemArray.Length > 1)
+        if (itemArray != null && itemArray.Length > 1)
         {
             HandleContentPanelPositionUpdate();
             ScrollOnInput();
@@ -54,9 +53,7 @@ public class InfiniteScrollVertical : MonoBehaviour
         scrollRect =
         scrollRect != null ? scrollRect : GetComponent<ScrollRect>();
         viewPortTransform = viewPortTransform != null ? viewPortTransform : scrollRect.viewport;
-        contentPanelTransform
-        = contentPanelTransform
-!= null ? contentPanelTransform : scrollRect.content;
+        contentPanelTransform = contentPanelTransform != null ? contentPanelTransform : scrollRect.content;
         VLG = VLG != null ? VLG : contentPanelTransform.GetComponent<VerticalLayoutGroup>();
 
         isUpdated = false;
@@ -70,21 +67,22 @@ public class InfiniteScrollVertical : MonoBehaviour
 
     private void InstantiateItems(int itemsToAdd)
     {
-        if (_itemArray.Length <= 1)
+        if (itemArray.Length <= 1)
         {
-            InstantiateItemSlot(contentPanelTransform, _itemArray[0]);
+            InstantiateItemSlot(contentPanelTransform, itemArray[0]);
             return;
-        }
-        for (int i = 0; i < itemsToAdd; i++)
-        {
-            InstantiateItemSlot(contentPanelTransform, _itemArray[i % _itemArray.Length], true);
         }
 
         for (int i = 0; i < itemsToAdd; i++)
         {
-            int num = _itemArray.Length - i - 1;
-            while (num < 0) num += _itemArray.Length;
-            InstantiateItemSlot(contentPanelTransform, _itemArray[num % _itemArray.Length], false);
+            InstantiateItemSlot(contentPanelTransform, itemArray[i % itemArray.Length], true);
+        }
+
+        for (int i = 0; i < itemsToAdd; i++)
+        {
+            int num = itemArray.Length - i - 1;
+            while (num < 0) num += itemArray.Length;
+            InstantiateItemSlot(contentPanelTransform, itemArray[num % itemArray.Length], false);
         }
     }
 
@@ -95,15 +93,18 @@ public class InfiniteScrollVertical : MonoBehaviour
         slot.Id = itemSlot.Id;
         slot.ItemTag = itemSlot.ItemTag;
         slot.ItemName = itemSlot.ItemName;
-        if (asLastSibling) slot.gameObject.GetComponent<RectTransform>().SetAsLastSibling();
-        else slot.gameObject.GetComponent<RectTransform>().SetAsFirstSibling();
+
+        if (asLastSibling)
+            slot.gameObject.GetComponent<RectTransform>().SetAsLastSibling();
+        else
+            slot.gameObject.GetComponent<RectTransform>().SetAsFirstSibling();
     }
 
     private void SetInitialContentPanelPosition(int itemsToAdd)
     {
-        int var = _itemArray.Length > 1 ? itemsToAdd : 1;
+        int var = itemArray.Length > 1 ? itemsToAdd : 1;
         contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
-               0 - (itemSlotHeight + itemSpacing) * var,
+               - (itemSlotHeight + itemSpacing) * var,
                contentPanelTransform.localPosition.z);
     }
 
@@ -117,11 +118,11 @@ public class InfiniteScrollVertical : MonoBehaviour
 
         if (contentPanelTransform.localPosition.y < 0)
         {
-            UpdateContentPanelPosition(_itemArray.Length * (itemSlotHeight + itemSpacing));
+            UpdateContentPanelPosition(itemArray.Length * (itemSlotHeight + itemSpacing));
         }
-        else if (contentPanelTransform.localPosition.y > (_itemArray.Length * (itemSlotHeight + itemSpacing)))
+        else if (contentPanelTransform.localPosition.y > (itemArray.Length * (itemSlotHeight + itemSpacing)))
         {
-            UpdateContentPanelPosition(-_itemArray.Length * (itemSlotHeight + itemSpacing));
+            UpdateContentPanelPosition(-itemArray.Length * (itemSlotHeight + itemSpacing));
         }
     }
 
@@ -133,12 +134,10 @@ public class InfiniteScrollVertical : MonoBehaviour
         isUpdated = true;
     }
 
-
     private void ScrollOnInput()
     {
         if (scrollEnabled && !isScrolling)
         {
-
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 targetPosition = contentPanelTransform.localPosition + new Vector3(0, itemSlotHeight + itemSpacing, 0);
@@ -153,8 +152,6 @@ public class InfiniteScrollVertical : MonoBehaviour
                 LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
                 SetCenterItemIndex();
             }
-
-
         }
     }
 
@@ -173,15 +170,16 @@ public class InfiniteScrollVertical : MonoBehaviour
         }
         contentPanelTransform.localPosition = target;
         isScrolling = false;
-
     }
+
     private void SetCenterItemIndex()
     {
         float centerPosition = -contentPanelTransform.localPosition.y + viewPortTransform.rect.height / 2;
-        int index = Mathf.RoundToInt(centerPosition / (itemSlotHeight + itemSpacing)) % _itemArray.Length;
-        if (index < 0) index += _itemArray.Length;
-        centeredItem = _itemArray[index];
+        int index = Mathf.RoundToInt(centerPosition / (itemSlotHeight + itemSpacing)) % itemArray.Length;
+        if (index < 0) index += itemArray.Length;
+        centeredItem = itemArray[index];
     }
+
     internal void ClearScroll()
     {
         foreach (Transform child in contentPanelTransform)
@@ -189,7 +187,6 @@ public class InfiniteScrollVertical : MonoBehaviour
             Destroy(child.gameObject);
         }
         contentPanelTransform.localPosition = Vector3.zero;
-        _itemArray = null;
+        itemArray = null;
     }
-
 }
