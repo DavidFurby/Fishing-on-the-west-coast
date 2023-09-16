@@ -26,7 +26,6 @@ public class ItemSlot : MonoBehaviour
         if (NameText != null)
         {
             NameText.text = itemName;
-            print(NameText.text);
         }
     }
 

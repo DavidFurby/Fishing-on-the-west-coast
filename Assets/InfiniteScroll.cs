@@ -70,7 +70,6 @@ public class InfiniteScrollVertical : MonoBehaviour
             InstantiateItemSlot(contentPanelTransform, _itemArray[0].ItemName);
             return;
         }
-
         for (int i = 0; i < itemsToAdd; i++)
         {
             InstantiateItemSlot(contentPanelTransform, _itemArray[0].ItemName, true);
@@ -155,4 +154,20 @@ public class InfiniteScrollVertical : MonoBehaviour
         }
         contentPanelTransform.localPosition = target;
     }
+
+    internal void ClearScroll()
+    {
+        // Destroy all existing child items in the content panel
+        foreach (Transform child in contentPanelTransform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Reset the content panel position
+        contentPanelTransform.localPosition = Vector3.zero;
+
+        // Reset the _itemArray
+        _itemArray = null;
+    }
+
 }

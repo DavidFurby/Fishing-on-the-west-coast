@@ -12,6 +12,14 @@ public class ItemWheel : InfiniteScrollVertical
         image = GetComponent<Image>();
     }
 
+    /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    void OnDisable()
+    {
+        ClearScroll();
+    }
+
     public void ChangeEquippedItem()
     {
         int centerIndex = Mathf.RoundToInt(scrollRect.verticalNormalizedPosition * (_itemArray.Length - 1));
@@ -32,7 +40,6 @@ public class ItemWheel : InfiniteScrollVertical
             ItemTag = item.itemTag,
             ItemName = item.itemName
         }).ToArray();
-
         InitialSetup();
     }
 
