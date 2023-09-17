@@ -1,16 +1,22 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static Item;
 
-public class ItemScroll : InfiniteScrollVertical
+public class ItemScroll : InfiniteScrollVertical<Item>
 {
     public ItemTag itemTag;
     private Image image;
+    private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
+    private ItemSlot itemSlotPrefab;
+    private RectTransform rectTransform;
 
-    private void Start()
+    private void Awake()
     {
+        rectTransform = GetComponent<RectTransform>();
+
+        itemSlotPrefab = Resources.Load<ItemSlot>(itemSlotPath);
+        itemHeight = itemSlotPrefab.GetComponent<RectTransform>().rect.height;
         image = GetComponent<Image>();
     }
 
@@ -21,7 +27,7 @@ public class ItemScroll : InfiniteScrollVertical
 
     public void ChangeEquippedItem()
     {
-        MainManager.Instance.Inventory.SetEquipment(centeredItem.Id, itemTag);
+        MainManager.Instance.Inventory.SetEquipment(centeredItem.id, itemTag);
     }
 
     public void SetItems(List<Item> items)
@@ -32,12 +38,7 @@ public class ItemScroll : InfiniteScrollVertical
 
     private void CreateNewEquipmentSlots(List<Item> items)
     {
-        itemArray = items.Select(item =>
-        {
-            
-            return ItemSlot.Create(item.id, item.itemTag, item.itemName);
-        }).ToArray();
-
+        itemArray = items.ToArray();
         InitialSetup();
     }
 
@@ -49,4 +50,14 @@ public class ItemScroll : InfiniteScrollVertical
             scrollEnabled = focus;
         }
     }
+    protected override void UpdateItemSlot(RectTransform parent, Item item, bool asLastSibling = false)
+    {
+        ItemSlot slot = Instantiate(itemSlotPrefab, parent);
+        slot.SetSlot(item.id, item.itemTag, item.itemName);
+        if (asLastSibling)
+            slot.transform.SetAsLastSibling();
+        else
+            slot.transform.SetAsFirstSibling();
+    }
+
 }

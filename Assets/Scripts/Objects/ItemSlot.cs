@@ -5,10 +5,6 @@ using static Item;
 public class ItemSlot : MonoBehaviour
 {
     public TextMeshProUGUI NameText;
-    public string ItemName
-    {
-        get; set;
-    }
     public int Id
     {
         get; set;
@@ -28,15 +24,14 @@ public class ItemSlot : MonoBehaviour
             NameText.text = itemName;
         }
     }
-    public static ItemSlot Create(int id, ItemTag itemTag, string itemName)
+    public void SetSlot(int id, ItemTag itemTag, string itemName)
     {
-        ItemSlot slot = new()
+        Id = id;
+        ItemTag = itemTag;
+        if (NameText != null)
         {
-            ItemName = itemName,
-            Id = id,
-            ItemTag = itemTag
-        };
-        return slot;
+            NameText.text = itemName;
+        }
     }
 
 }
