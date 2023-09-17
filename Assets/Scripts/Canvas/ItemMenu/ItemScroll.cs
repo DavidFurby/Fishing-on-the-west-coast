@@ -9,11 +9,9 @@ public class ItemScroll : InfiniteScrollVertical<Item>
     private Image image;
     private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     private ItemSlot itemSlotPrefab;
-    private RectTransform rectTransform;
 
-    private void Awake()
+    private void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
 
         itemSlotPrefab = Resources.Load<ItemSlot>(itemSlotPath);
         itemHeight = itemSlotPrefab.GetComponent<RectTransform>().rect.height;
@@ -55,9 +53,9 @@ public class ItemScroll : InfiniteScrollVertical<Item>
         ItemSlot slot = Instantiate(itemSlotPrefab, parent);
         slot.SetSlot(item.id, item.itemTag, item.itemName);
         if (asLastSibling)
-            slot.transform.SetAsLastSibling();
+            slot.gameObject.GetComponent<RectTransform>().SetAsLastSibling();
         else
-            slot.transform.SetAsFirstSibling();
+            slot.gameObject.GetComponent<RectTransform>().SetAsFirstSibling();
     }
 
 }

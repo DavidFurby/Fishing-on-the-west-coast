@@ -47,7 +47,6 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
     {
 
         itemSpacing = VLG.spacing;
-
         scrollRect =
         scrollRect != null ? scrollRect : GetComponent<ScrollRect>();
         viewPortTransform = viewPortTransform != null ? viewPortTransform : scrollRect.viewport;
