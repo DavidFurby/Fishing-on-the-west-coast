@@ -34,8 +34,8 @@ public class ItemScroll : InfiniteScrollVertical
     {
         itemArray = items.Select(item =>
         {
-            GameObject slotObject = new("ItemSlot");
-            return ItemSlot.Create(slotObject, item.id, item.itemTag, item.itemName);
+            
+            return ItemSlot.Create(item.id, item.itemTag, item.itemName);
         }).ToArray();
 
         InitialSetup();
