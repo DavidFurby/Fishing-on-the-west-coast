@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -130,21 +131,19 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 targetPosition = contentPanelTransform.localPosition + new Vector3(0, itemHeight + itemSpacing, 0);
-                StartCoroutine(ScrollToPosition(targetPosition));
+                StartCoroutine(ScrollToPosition(targetPosition, SetCenterContentChild));
                 LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
-                SetCenterContentChild();
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(itemHeight + itemSpacing), 0);
-                StartCoroutine(ScrollToPosition(targetPosition));
+                StartCoroutine(ScrollToPosition(targetPosition, SetCenterContentChild));
                 LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
-                SetCenterContentChild();
             }
         }
     }
 
-    private IEnumerator ScrollToPosition(Vector2 target)
+    private IEnumerator ScrollToPosition(Vector2 target, Action onScrollComplete = null)
     {
         isScrolling = true;
 
@@ -158,12 +157,13 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
             yield return null;
         }
         contentPanelTransform.localPosition = target;
+        onScrollComplete?.Invoke();
         isScrolling = false;
     }
     protected abstract void SetCenterContentChild();
 
 
- 
+
 
     internal void ClearScroll()
     {
