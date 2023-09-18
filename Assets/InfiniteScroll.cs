@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public abstract class InfiniteScrollVertical<T> : MonoBehaviour
 {
     [SerializeField] private ScrollRect scrollRect;
-    [SerializeField] private RectTransform viewPortTransform;
-    [SerializeField] private RectTransform contentPanelTransform;
+    [SerializeField] internal RectTransform viewPortTransform;
+    [SerializeField] internal RectTransform contentPanelTransform;
     [SerializeField] private VerticalLayoutGroup VLG;
     internal T[] itemArray;
     private Vector2 oldVelocity;
@@ -18,12 +18,13 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
     private bool isScrolling = false;
 
     internal float itemHeight;
-    private float itemSpacing;
-    internal T centeredItem;
+    internal float itemSpacing;
+    internal Transform centeredItem;
 
     private void Awake()
     {
         InitializeVariables();
+
     }
 
     internal void InitialSetup()
@@ -31,7 +32,8 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
         int itemsToAdd = CalculateItemsToAdd();
         InstantiateItems(itemsToAdd);
         SetInitialContentPanelPosition(itemsToAdd);
-        SetCenterItemIndex();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
+        SetCenterContentChild();
     }
 
     private void LateUpdate()
@@ -112,6 +114,7 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
         }
     }
 
+
     private void UpdateContentPanelPosition(float deltaY)
     {
         Canvas.ForceUpdateCanvases();
@@ -129,14 +132,14 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
                 targetPosition = contentPanelTransform.localPosition + new Vector3(0, itemHeight + itemSpacing, 0);
                 StartCoroutine(ScrollToPosition(targetPosition));
                 LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
-                SetCenterItemIndex();
+                SetCenterContentChild();
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 targetPosition = contentPanelTransform.localPosition + new Vector3(0, -(itemHeight + itemSpacing), 0);
                 StartCoroutine(ScrollToPosition(targetPosition));
                 LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
-                SetCenterItemIndex();
+                SetCenterContentChild();
             }
         }
     }
@@ -157,14 +160,10 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
         contentPanelTransform.localPosition = target;
         isScrolling = false;
     }
+    protected abstract void SetCenterContentChild();
 
-    private void SetCenterItemIndex()
-    {
-        float centerPosition = -contentPanelTransform.localPosition.y + viewPortTransform.rect.height / 2;
-        int index = Mathf.RoundToInt(centerPosition / (itemHeight + itemSpacing)) % itemArray.Length;
-        if (index < 0) index += itemArray.Length;
-        centeredItem = itemArray[index];
-    }
+
+ 
 
     internal void ClearScroll()
     {

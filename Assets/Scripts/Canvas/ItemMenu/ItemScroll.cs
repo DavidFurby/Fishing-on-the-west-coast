@@ -9,6 +9,7 @@ public class ItemScroll : InfiniteScrollVertical<Item>
     private Image image;
     private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     private ItemSlot itemSlotPrefab;
+    [SerializeField] private GameObject centerArea;
 
     private void Start()
     {
@@ -25,7 +26,7 @@ public class ItemScroll : InfiniteScrollVertical<Item>
 
     public void ChangeEquippedItem()
     {
-        MainManager.Instance.Inventory.SetEquipment(centeredItem.id, itemTag);
+        MainManager.Instance.Inventory.SetEquipment(centeredItem.GetComponent<ItemSlot>().Id, itemTag);
     }
 
     public void SetItems(List<Item> items)
@@ -36,9 +37,37 @@ public class ItemScroll : InfiniteScrollVertical<Item>
 
     private void CreateNewEquipmentSlots(List<Item> items)
     {
+        Item equippedItem = MainManager.Instance.Inventory.GetEquippedItem(itemTag);
+
+        int equippedItemIndex = items.FindIndex(item => item.id == equippedItem.id);
         itemArray = items.ToArray();
         InitialSetup();
+
     }
+    protected override void SetCenterContentChild()
+    {
+        float minDistance = float.MaxValue;
+        int minIndex = -1;
+        Transform centerChild = null;
+        Vector3 centerAreaPosition = centerArea.transform.position;
+        print(centerAreaPosition.y);
+        for (int i = 0; i < contentPanelTransform.childCount; i++)
+        {
+            Vector3 itemPosition = contentPanelTransform.GetChild(i).position;
+            float distance = Vector3.Distance(centerAreaPosition, itemPosition);
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                minIndex = i;
+                centerChild = contentPanelTransform.GetChild(i);
+            }
+        }
+        print(centerChild.GetComponent<ItemSlot>().NameText.text);
+        centeredItem = centerChild;
+    }
+
+
 
     public void SetWheelFocus(bool focus)
     {

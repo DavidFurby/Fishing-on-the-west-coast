@@ -9,14 +9,12 @@ public class ItemDisplay : MonoBehaviour
     protected void SetNewItemModel(Item newItem)
     {
         item = newItem;
-        print(item.model);
         Transform oldModel = null;
         for(int i = 0; i < transform.childCount; i++) {
             if(transform.GetChild(i).GetComponent<MeshRenderer>()) {
                 oldModel = transform.GetChild(i);
             }
         }
-        // Destroy the old model if it exists
         if (transform.childCount > 0)
         {
             Vector3 oldModelLocalPosition = oldModel.localPosition;
@@ -25,7 +23,6 @@ public class ItemDisplay : MonoBehaviour
 
             Destroy(oldModel.gameObject);
 
-            // Instantiate the new model and set its local position, rotation, and scale to be equal to the old model's local position, rotation, and scale
             GameObject newModel = Instantiate(item.model);
             newModel.transform.SetParent(transform, false);
             newModel.transform.SetLocalPositionAndRotation(oldModelLocalPosition, oldModelLocalRotation);
