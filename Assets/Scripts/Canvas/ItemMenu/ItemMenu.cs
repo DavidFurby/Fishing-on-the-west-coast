@@ -18,11 +18,13 @@ public class ItemMenu : MonoBehaviour
     void Start()
     {
         InitializeItemMenu();
+        ItemScroll.onSetCenterItem += UpdateItemText;
     }
 
     void OnDestroy()
     {
         UnsubscribeFromEvents();
+        ItemScroll.onSetCenterItem -= UpdateItemText;
     }
 
     private void InitializeItemMenu()
@@ -173,7 +175,7 @@ public class ItemMenu : MonoBehaviour
     {
         if (_focusedWheel.centeredItem != null)
         {
-            itemText.text = _focusedWheel.centeredItem?.GetComponent<ItemSlot>().NameText.text;
+            itemText.text = _focusedWheel.centeredItem.GetComponent<ItemSlot>().NameText.text;
         }
     }
 }

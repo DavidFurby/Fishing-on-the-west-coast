@@ -31,7 +31,6 @@ public class Shop : MonoBehaviour
     {
         ExplorationController.NavigateShop += HandleShoppingInput;
     }
-    
     void OnDestroy()
     {
         ExplorationController.NavigateShop -= HandleShoppingInput;
@@ -183,6 +182,7 @@ public class Shop : MonoBehaviour
                 SpawnEmptySpot(i);
             }
         }
+
 
         focusedShopItem = shopItems[focusedShopItemIndex];
     }

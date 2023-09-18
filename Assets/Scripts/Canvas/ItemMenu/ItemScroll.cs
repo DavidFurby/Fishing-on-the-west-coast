@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +11,11 @@ public class ItemScroll : InfiniteScrollVertical<Item>
     private readonly string ItemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     private ItemSlot itemSlotPrefab;
     [SerializeField] private GameObject centerArea;
+    public static event Action onSetCenterItem;
+
 
     private void Start()
     {
-
         itemSlotPrefab = Resources.Load<ItemSlot>(ItemSlotPath);
         itemHeight = itemSlotPrefab.GetComponent<RectTransform>().rect.height;
         image = GetComponent<Image>();
@@ -65,6 +67,7 @@ public class ItemScroll : InfiniteScrollVertical<Item>
             }
         }
         centeredItem = centerChild;
+        onSetCenterItem.Invoke();
     }
 
 
