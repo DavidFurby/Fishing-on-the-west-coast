@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using static Item;
 
@@ -7,6 +9,7 @@ public class ItemMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _itemMenu;
     [SerializeField] private ItemScroll[] _listOfWheels;
+    [SerializeField] private TextMeshProUGUI itemText;
 
     private ItemScroll _focusedWheel;
     private int _focusedWheelIndex;
@@ -18,7 +21,7 @@ public class ItemMenu : MonoBehaviour
         _allItems = GetItemsAsList(MainManager.Instance.Inventory.FoundBaits);
         _allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundRods));
         _allItems.AddRange(GetItemsAsList(MainManager.Instance.Inventory.FoundHats));
-        
+
         ExplorationController.OpenItemMenu += HandleInputs;
     }
 
@@ -31,17 +34,17 @@ public class ItemMenu : MonoBehaviour
     {
         return items.Cast<Item>().ToList();
     }
-private void PopulateWheels()
-{
-    foreach (ItemScroll wheel in _listOfWheels)
+    private void PopulateWheels()
     {
-        if (wheel != null)
+        foreach (ItemScroll wheel in _listOfWheels)
         {
-            var filteredItems = _allItems.Where(item => item.itemTag == wheel.itemTag).ToList();
-            wheel.SetItems(filteredItems);
+            if (wheel != null)
+            {
+                var filteredItems = _allItems.Where(item => item.itemTag == wheel.itemTag).ToList();
+                wheel.SetItems(filteredItems);
+            }
         }
     }
-}
 
     public void HandleInputs()
     {
@@ -65,18 +68,18 @@ private void PopulateWheels()
         Time.timeScale = _itemMenu.activeSelf ? 0 : 1;
         if (_itemMenu.activeSelf)
         {
-            ResetValues();
+            StartCoroutine(ResetValues());
         }
     }
 
-    private void ResetValues()
+    private IEnumerator ResetValues()
     {
         PopulateWheels();
         _focusedWheel = _listOfWheels[0];
         _focusedWheelIndex = 0;
+        yield return new WaitForEndOfFrame();
         SetFocus();
     }
-
     private void TriggerChangeEquippedItem()
     {
         foreach (ItemScroll wheel in _listOfWheels)
@@ -91,13 +94,16 @@ private void PopulateWheels()
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             _focusedWheelIndex = (_focusedWheelIndex - 1 + _listOfWheels.Length) % _listOfWheels.Length;
+            _focusedWheel = _listOfWheels[_focusedWheelIndex];
+            SetFocus();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             _focusedWheelIndex = (_focusedWheelIndex + 1 + _listOfWheels.Length) % _listOfWheels.Length;
+            _focusedWheel = _listOfWheels[_focusedWheelIndex];
+            SetFocus();
         }
-        _focusedWheel = _listOfWheels[_focusedWheelIndex];
-        SetFocus();
+
     }
 
     private void SetFocus()
@@ -108,6 +114,10 @@ private void PopulateWheels()
             {
                 _listOfWheels[i].SetWheelFocus(i == _focusedWheelIndex);
             }
+        }
+        if (_focusedWheel.centeredItem != null)
+        {
+            itemText.text = _focusedWheel.centeredItem.GetComponent<ItemSlot>().NameText.text;
         }
     }
 }

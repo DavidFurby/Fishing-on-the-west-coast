@@ -40,7 +40,8 @@ public class ItemScroll : InfiniteScrollVertical<Item>
         Item equippedItem = MainManager.Instance.Inventory.GetEquippedItem(itemTag);
 
         int equippedItemIndex = items.FindIndex(item => item.id == equippedItem.id);
-        if(equippedItemIndex > 0) {
+        if (equippedItemIndex > 0)
+        {
             items.Remove(equippedItem);
             items.Insert(0, equippedItem);
         }
@@ -63,7 +64,6 @@ public class ItemScroll : InfiniteScrollVertical<Item>
                 centerChild = contentPanelTransform.GetChild(i);
             }
         }
-        print(centerChild.GetComponent<ItemSlot>().NameText.text);
         centeredItem = centerChild;
     }
 
