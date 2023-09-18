@@ -28,12 +28,13 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
 
     }
 
-    internal void InitialSetup()
+    internal IEnumerator InitialSetup()
     {
         int itemsToAdd = CalculateItemsToAdd();
         InstantiateItems(itemsToAdd);
         SetInitialContentPanelPosition(itemsToAdd);
         LayoutRebuilder.ForceRebuildLayoutImmediate(contentPanelTransform);
+        yield return new WaitForEndOfFrame();
         SetCenterContentChild();
     }
 
@@ -69,25 +70,25 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
     {
         if (itemArray.Length <= 1)
         {
-            UpdateItemSlot(contentPanelTransform, itemArray[0]);
+            UpdateSlot(contentPanelTransform, itemArray[0]);
             return;
         }
 
         for (int i = 0; i < itemsToAdd; i++)
         {
-            UpdateItemSlot(contentPanelTransform, itemArray[i % itemArray.Length], true);
+            UpdateSlot(contentPanelTransform, itemArray[i % itemArray.Length], true);
         }
 
         for (int i = 0; i < itemsToAdd; i++)
         {
             int num = itemArray.Length - i - 1;
             while (num < 0) num += itemArray.Length;
-            UpdateItemSlot(contentPanelTransform, itemArray[num % itemArray.Length], false);
+            UpdateSlot(contentPanelTransform, itemArray[num % itemArray.Length], false);
         }
     }
 
 
-    protected abstract void UpdateItemSlot(RectTransform parent, T item, bool asLastSibling = false);
+    protected abstract void UpdateSlot(RectTransform parent, T item, bool asLastSibling = false);
 
     private void SetInitialContentPanelPosition(int itemsToAdd)
     {
@@ -95,6 +96,7 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
         contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
                -(itemHeight + itemSpacing) * position,
                contentPanelTransform.localPosition.z);
+        print(contentPanelTransform.localPosition);
     }
 
     private void HandleContentPanelPositionUpdate()

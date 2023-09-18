@@ -41,16 +41,13 @@ public class ItemScroll : InfiniteScrollVertical<Item>
 
         int equippedItemIndex = items.FindIndex(item => item.id == equippedItem.id);
         itemArray = items.ToArray();
-        InitialSetup();
-
+        StartCoroutine(InitialSetup());
     }
     protected override void SetCenterContentChild()
     {
         float minDistance = float.MaxValue;
-        int minIndex = -1;
         Transform centerChild = null;
         Vector3 centerAreaPosition = centerArea.transform.position;
-        print(centerAreaPosition.y);
         for (int i = 0; i < contentPanelTransform.childCount; i++)
         {
             Vector3 itemPosition = contentPanelTransform.GetChild(i).position;
@@ -59,7 +56,6 @@ public class ItemScroll : InfiniteScrollVertical<Item>
             if (distance < minDistance)
             {
                 minDistance = distance;
-                minIndex = i;
                 centerChild = contentPanelTransform.GetChild(i);
             }
         }
@@ -77,7 +73,7 @@ public class ItemScroll : InfiniteScrollVertical<Item>
             scrollEnabled = focus;
         }
     }
-    protected override void UpdateItemSlot(RectTransform parent, Item item, bool asLastSibling = false)
+    protected override void UpdateSlot(RectTransform parent, Item item, bool asLastSibling = false)
     {
         ItemSlot slot = Instantiate(itemSlotPrefab, parent);
         slot.SetSlot(item.id, item.itemTag, item.itemName);
