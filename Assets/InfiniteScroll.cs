@@ -93,7 +93,6 @@ public abstract class InfiniteScrollVertical<T> : MonoBehaviour
         contentPanelTransform.localPosition = new Vector3(contentPanelTransform.localPosition.x,
                -(itemHeight + itemSpacing),
                contentPanelTransform.localPosition.z);
-        print(contentPanelTransform.localPosition.y);
     }
 
     private void HandleContentPanelPositionUpdate()

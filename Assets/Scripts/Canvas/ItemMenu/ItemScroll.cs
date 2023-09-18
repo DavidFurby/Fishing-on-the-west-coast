@@ -7,14 +7,14 @@ public class ItemScroll : InfiniteScrollVertical<Item>
 {
     public ItemTag itemTag;
     private Image image;
-    private readonly string itemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
+    private readonly string ItemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     private ItemSlot itemSlotPrefab;
     [SerializeField] private GameObject centerArea;
 
     private void Start()
     {
 
-        itemSlotPrefab = Resources.Load<ItemSlot>(itemSlotPath);
+        itemSlotPrefab = Resources.Load<ItemSlot>(ItemSlotPath);
         itemHeight = itemSlotPrefab.GetComponent<RectTransform>().rect.height;
         image = GetComponent<Image>();
     }

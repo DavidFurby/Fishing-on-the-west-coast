@@ -31,6 +31,11 @@ public class Shop : MonoBehaviour
     {
         ExplorationController.NavigateShop += HandleShoppingInput;
     }
+    
+    void OnDestroy()
+    {
+        ExplorationController.NavigateShop -= HandleShoppingInput;
+    }
     #region MonoBehaviour Methods
     private void Awake()
     {
@@ -79,10 +84,7 @@ public class Shop : MonoBehaviour
             }
         }
     }
-    void OnDestroy()
-    {
-        ExplorationController.NavigateShop -= HandleShoppingInput;
-    }
+
     #endregion
 
     #region Public Methods
