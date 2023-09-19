@@ -58,6 +58,7 @@ public class Inventory
     //Check if item Exists in inventory
     public bool HasItem(Item item)
     {
+        
         return item.itemTag switch
         {
             ItemTag.Rod => FoundRods.Any((rod) => rod.id == item.id),

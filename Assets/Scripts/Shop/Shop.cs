@@ -20,14 +20,13 @@ public class Shop : MonoBehaviour
 
     #endregion
     #region MonoBehaviour Methods
-    private void Awake()
+    private void Start()
     {
         InitializeReferences();
         itemSpawner = GetComponent<ShopItemSpawner>();
         itemSpawner.InitializeShopItemPositions(transform.Find("ShopPositions"));
         itemSpawner.SpawnItems();
         focusedShopItem = itemSpawner.ShopItems[focusedShopItemIndex];
-        print(focusedShopItem);
     }
 
     private void InitializeReferences()

@@ -17,13 +17,11 @@ public class ItemMenu : MonoBehaviour
     void Start()
     {
         InitializeItemMenu();
-        ItemScroll.OnSetCenterItem += UpdateItemText;
     }
 
     void OnDestroy()
     {
         UnsubscribeFromEvents();
-        ItemScroll.OnSetCenterItem -= UpdateItemText;
     }
 
     private void InitializeItemMenu()
@@ -48,11 +46,14 @@ public class ItemMenu : MonoBehaviour
     private void SubscribeToEvents()
     {
         ExplorationController.OpenItemMenu += HandleInputs;
+        ItemScroll.OnSetCenterItem += UpdateItemText;
+
     }
 
     private void UnsubscribeFromEvents()
     {
         ExplorationController.OpenItemMenu -= HandleInputs;
+        ItemScroll.OnSetCenterItem -= UpdateItemText;
     }
 
     public void HandleInputs()
