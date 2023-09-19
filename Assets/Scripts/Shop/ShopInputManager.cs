@@ -8,7 +8,7 @@ public class ShopInputManager : MonoBehaviour
     {
         shop = FindObjectOfType<Shop>();
     }
-      void OnEnable()
+    void OnEnable()
     {
         ExplorationController.NavigateShop += HandleShoppingInput;
     }
@@ -38,7 +38,7 @@ public class ShopInputManager : MonoBehaviour
 
     private void ScrollBetweenItems(bool forward)
     {
-        int newIndex = (shop.focusedShopItemIndex + (forward ? 1 : -1) + shop.shopItems.Count) % shop.shopItems.Count;
+        int newIndex = (shop.focusedShopItemIndex + (forward ? 1 : -1) + shop.itemSpawner.ShopItems.Count) % shop.itemSpawner.ShopItems.Count;
         shop.SetFocusedShopItemIndex(newIndex);
         shop.FocusItem();
         shop.UpdateShopDialog();
