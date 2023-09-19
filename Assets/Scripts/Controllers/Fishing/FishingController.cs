@@ -25,11 +25,11 @@ public class FishingController : FishingEventController
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
     }
     private void Start()

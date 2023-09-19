@@ -6,21 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Home Exterior.unity
+    path: Assets/Scenes/HomeExterior.unity
     guid: 9799ed24bc986a145a59933cdef5e45f
-  - enabled: 0
-    path: Assets/Scenes/Boat.unity
-    guid: 876bb2ab86015ab4e988dda1c452318b
   - enabled: 1
-    path: Assets/Scenes/Exploration Template.unity
-    guid: 9b6cfda5a034a214596f1e387703d397
-  - enabled: 0
-    path: Assets/Scenes/NewShop.unity
-    guid: 69e001213287da84d852a72fbee1dd78
-  - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: 9bb023c09aa524746a5f7aa794aa6b4e
   - enabled: 1
     path: Assets/Scenes/Sandbox.unity
     guid: beb78e5f04b44d044974f0b949b3680e
+  - enabled: 1
+    path: Assets/Scenes/ExplorationTemplate.unity
+    guid: 9b6cfda5a034a214596f1e387703d397
   m_configObjects: {}
