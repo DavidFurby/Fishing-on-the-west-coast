@@ -1,40 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-[RequireComponent(typeof(ShopHandlers))]
+[RequireComponent(typeof(ShopHandlers), typeof(ShopInputManager))]
 public class Shop : MonoBehaviour
 {
     private const string ItemsPath = "ScriptableObjects/Items";
 
     #region Serialized Fields
-    private Item[] shopItems;
+    internal List<Item> shopItems;
 
     #endregion
 
     #region Private Fields
     [HideInInspector] public bool pauseShoppingControls;
     private Item focusedShopItem;
-    private int focusedShopItemIndex = 0;
+    internal int focusedShopItemIndex = 0;
     private readonly List<GameObject> shopItemPositions = new();
     private Item emptySpot;
-    private CameraController cameraController;
-    private ExplorationController playerController;
-    private DialogManager dialogManager;
+    internal CameraController cameraController;
+    internal ExplorationController playerController;
+    internal DialogManager dialogManager;
     private ShopHandlers dialogHandlers;
 
 
     #endregion
-
-
-    void OnEnable()
-    {
-        ExplorationController.NavigateShop += HandleShoppingInput;
-    }
-    void OnDestroy()
-    {
-        ExplorationController.NavigateShop -= HandleShoppingInput;
-    }
     #region MonoBehaviour Methods
     private void Awake()
     {
@@ -46,17 +35,17 @@ public class Shop : MonoBehaviour
         SpawnItems();
     }
 
-    private void InitializeShopItems()
+private void InitializeShopItems()
+{
+    shopItems = new List<Item>();
+    string[] itemNames = { "/Baits/AdvanceBait", "/Hats/FancyHat", "/Rods/AdvanceRod", "/Baits/RareBait", "/Hats/PremiumHat", "/Rods/RareRod" };
+    for (int i = 0; i < itemNames.Length; i++)
     {
-        shopItems = new Item[6];
-        string[] itemNames = { "/Baits/AdvanceBait", "/Hats/FancyHat", "/Rods/AdvanceRod", "/Baits/RareBait", "/Hats/PremiumHat", "/Rods/RareRod" };
-        for (int i = 0; i < shopItems.Length; i++)
-        {
-            Item originalItem = Resources.Load<Item>(ItemsPath + itemNames[i]);
-            shopItems[i] = originalItem.CloneItem();
-
-        }
+        Item originalItem = Resources.Load<Item>(ItemsPath + itemNames[i]);
+        shopItems.Add(originalItem.CloneItem());
     }
+}
+
 
     private void InitializeReferences()
     {
@@ -94,55 +83,12 @@ public class Shop : MonoBehaviour
         cameraController.explorationCamera.SetShopItem(shopItemPositions[focusedShopItemIndex].transform.position);
     }
 
-    /// <summary>
-    /// Opens the shop.
-    /// </summary>
     public IEnumerator OpenShop()
     {
         yield return new WaitForSeconds(0.5f);
         playerController.SetState(new Shopping(playerController));
         FocusItem();
         UpdateShopDialog();
-    }
-
-    /// <summary>
-    /// Closes the shop.
-    /// </summary>
-    public void CloseShop()
-    {
-        dialogManager.EndDialog();
-        playerController.SetState(new ExplorationIdle(playerController));
-        cameraController.SetState(new PlayerCamera(cameraController));
-        focusedShopItemIndex = 0;
-    }
-
-    /// <summary>
-    /// Scrolls between items in the shop.
-    /// </summary>
-    /// <param name="forward">If set to <c>true</c> forward.</param>
-    public void ScrollBetweenItems(bool forward)
-    {
-        focusedShopItemIndex = (focusedShopItemIndex + (forward ? 1 : -1) + shopItems.Length) % shopItems.Length;
-        focusedShopItem = shopItems[focusedShopItemIndex];
-        FocusItem();
-        UpdateShopDialog();
-    }
-    public void HandleShoppingInput()
-    {
-        if (pauseShoppingControls) return;
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            ScrollBetweenItems(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            ScrollBetweenItems(true);
-        }
-        else if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            CloseShop();
-        }
     }
 
     public void BuyItem()
@@ -173,7 +119,7 @@ public class Shop : MonoBehaviour
     {
         for (int i = 0; i < shopItemPositions.Count; i++)
         {
-            if (i < shopItems.Length && shopItems[i] != null && !MainManager.Instance.Inventory.HasItem(shopItems[i]))
+            if (i < shopItems.Count && shopItems[i] != null && !MainManager.Instance.Inventory.HasItem(shopItems[i]))
             {
                 SpawnShopItem(i);
             }
@@ -203,6 +149,10 @@ public class Shop : MonoBehaviour
     {
         SpawnObject(index, shopItems[index]);
     }
-
+    public void SetFocusedShopItemIndex(int newIndex)
+    {
+        focusedShopItemIndex = newIndex;
+        focusedShopItem = shopItems[focusedShopItemIndex];
+    }
 }
 #endregion
