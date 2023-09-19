@@ -29,7 +29,6 @@ public class ItemMenu : MonoBehaviour
     private void InitializeItemMenu()
     {
         _itemMenu.SetActive(false);
-        _allItems = GetAllItems();
         SubscribeToEvents();
     }
 
@@ -96,6 +95,7 @@ public class ItemMenu : MonoBehaviour
 
     private IEnumerator ResetValues()
     {
+        _allItems = GetAllItems();
         PopulateWheels();
         SetInitialFocus();
         yield return new WaitForEndOfFrame();
