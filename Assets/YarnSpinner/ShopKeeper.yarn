@@ -60,7 +60,7 @@ position: -2,38
 ---
 <<buyShopItem>>
 ShopKeeper: Aye thanks matey #line:02a3b7e 
-<<jump ShopItem>>
+<<jump SoldOut>>
 ===
 
 title: DeclineItem
