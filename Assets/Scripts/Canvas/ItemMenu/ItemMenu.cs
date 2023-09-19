@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using static Item;
 
 public class ItemMenu : MonoBehaviour
 {
@@ -18,13 +17,13 @@ public class ItemMenu : MonoBehaviour
     void Start()
     {
         InitializeItemMenu();
-        ItemScroll.onSetCenterItem += UpdateItemText;
+        ItemScroll.OnSetCenterItem += UpdateItemText;
     }
 
     void OnDestroy()
     {
         UnsubscribeFromEvents();
-        ItemScroll.onSetCenterItem -= UpdateItemText;
+        ItemScroll.OnSetCenterItem -= UpdateItemText;
     }
 
     private void InitializeItemMenu()
@@ -135,24 +134,18 @@ public class ItemMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            MoveFocusLeft();
+            ChangeFocus(-1);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            MoveFocusRight();
+            ChangeFocus(1);
         }
     }
 
-    private void MoveFocusLeft()
-    {
-        _focusedWheelIndex = (_focusedWheelIndex - 1 + _listOfWheels.Length) % _listOfWheels.Length;
-        _focusedWheel = _listOfWheels[_focusedWheelIndex];
-        SetFocus();
-    }
 
-    private void MoveFocusRight()
+    private void ChangeFocus(int direction)
     {
-        _focusedWheelIndex = (_focusedWheelIndex + 1 + _listOfWheels.Length) % _listOfWheels.Length;
+        _focusedWheelIndex = (_focusedWheelIndex + direction + _listOfWheels.Length) % _listOfWheels.Length;
         _focusedWheel = _listOfWheels[_focusedWheelIndex];
         SetFocus();
     }

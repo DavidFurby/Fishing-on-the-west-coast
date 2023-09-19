@@ -6,19 +6,23 @@ using static Item;
 
 public class ItemScroll : InfiniteScrollVertical<Item>
 {
+    private const string ItemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     public ItemTag itemTag;
     private Image image;
-    private readonly string ItemSlotPath = "GameObjects/Canvas/Components/ItemMenu/ItemSlot";
     private ItemSlot itemSlotPrefab;
     [SerializeField] private GameObject centerArea;
-    public static event Action onSetCenterItem;
-
+    public static event Action OnSetCenterItem;
 
     private void Start()
     {
+        LoadItemSlotPrefab();
+        image = GetComponent<Image>();
+    }
+
+    private void LoadItemSlotPrefab()
+    {
         itemSlotPrefab = Resources.Load<ItemSlot>(ItemSlotPath);
         itemHeight = itemSlotPrefab.GetComponent<RectTransform>().rect.height;
-        image = GetComponent<Image>();
     }
 
     private void OnDisable()
@@ -50,11 +54,19 @@ public class ItemScroll : InfiniteScrollVertical<Item>
         itemArray = items.ToArray();
         StartCoroutine(InitialSetup());
     }
+    
     protected override void SetCenterContentChild()
+    {
+        centeredItem = FindClosestChildToCenter();
+        OnSetCenterItem.Invoke();
+    }
+
+    private Transform FindClosestChildToCenter()
     {
         float minDistance = float.MaxValue;
         Transform centerChild = null;
         Vector3 centerAreaPosition = centerArea.transform.position;
+
         for (int i = 0; i < contentPanelTransform.childCount; i++)
         {
             Vector3 itemPosition = contentPanelTransform.GetChild(i).position;
@@ -66,11 +78,9 @@ public class ItemScroll : InfiniteScrollVertical<Item>
                 centerChild = contentPanelTransform.GetChild(i);
             }
         }
-        centeredItem = centerChild;
-        onSetCenterItem.Invoke();
+        
+        return centerChild;
     }
-
-
 
     public void SetWheelFocus(bool focus)
     {
@@ -80,14 +90,18 @@ public class ItemScroll : InfiniteScrollVertical<Item>
             scrollEnabled = focus;
         }
     }
+    
     protected override void UpdateSlot(RectTransform parent, Item item, bool asLastSibling = false)
     {
         ItemSlot slot = Instantiate(itemSlotPrefab, parent);
+        
         slot.SetSlot(item.id, item.itemTag, item.itemName);
+        
+        RectTransform slotRectTransform = slot.gameObject.GetComponent<RectTransform>();
+        
         if (asLastSibling)
-            slot.gameObject.GetComponent<RectTransform>().SetAsLastSibling();
+            slotRectTransform.SetAsLastSibling();
         else
-            slot.gameObject.GetComponent<RectTransform>().SetAsFirstSibling();
+            slotRectTransform.SetAsFirstSibling();
     }
-
 }
