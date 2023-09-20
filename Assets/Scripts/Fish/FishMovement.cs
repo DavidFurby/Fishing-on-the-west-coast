@@ -189,7 +189,7 @@ public class FishMovement : FishStateMachine
         if (GetCurrentState() is Baited)
         {
             SetState(new Swimming(this));
-            this.target = null;
+            target = null;
             Vector3 direction = transform.eulerAngles.z > 180 ? -transform.right : transform.right;
             MoveFishInDirection(direction, _speed);
             RotateTowards(direction);
