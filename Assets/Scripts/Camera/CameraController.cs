@@ -4,15 +4,31 @@ using UnityEngine;
 [RequireComponent(typeof(ExplorationCamera))]
 public class CameraController : CameraStateMachine
 {
+    public static CameraController Instance { get; private set; }
+
     internal FishingCamera fishingCamera;
     internal ExplorationCamera explorationCamera;
-
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
     private void OnEnable()
     {
-        FishingController.OnEnterFishing += EnterFishingState;
-        FishingController.OnEnterReelingFish += EnterReelingFishState;
-        FishingController.OnEnterCasting += EnterCastingState;
-        FishingController.OnEnterReeling += EnterPlayerState;
+        FishingEventController.OnEnterFishing += EnterFishingState;
+        FishingEventController.OnEnterReelingFish += EnterReelingFishState;
+        FishingEventController.OnEnterCasting += EnterCastingState;
+        FishingEventController.OnEnterReeling += EnterPlayerState;
     }
 
     void Start()
