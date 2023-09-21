@@ -11,7 +11,7 @@ public class RodLogic : MonoBehaviour
     void OnEnable()
     {
         FishingController.OnChargeRelease += WaitForSwingAnimation;
-        FishingController.OnReeling += ReelInSpeed;
+        FishingController.OnEnterReeling += ReelInSpeed;
         FishingController.OnChargeRelease += PlaySwingAudio;
         CatchArea.OnCatchWhileReeling += CalculateReelInSpeed;
 
@@ -25,7 +25,7 @@ public class RodLogic : MonoBehaviour
     void OnDestroy()
     {
         FishingController.OnChargeRelease -= WaitForSwingAnimation;
-        FishingController.OnReeling -= ReelInSpeed;
+        FishingController.OnEnterReeling -= ReelInSpeed;
         FishingController.OnChargeRelease -= PlaySwingAudio;
         CatchArea.OnCatchWhileReeling -= CalculateReelInSpeed;
 

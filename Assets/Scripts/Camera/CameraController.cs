@@ -12,6 +12,7 @@ public class CameraController : CameraStateMachine
         FishingController.OnEnterFishing += EnterFishingState;
         FishingController.OnEnterReelingFish += EnterReelingFishState;
         FishingController.OnEnterCasting += EnterCastingState;
+        FishingController.OnEnterReeling += EnterPlayerState;
     }
 
     void Start()
@@ -27,9 +28,15 @@ public class CameraController : CameraStateMachine
         FishingController.OnEnterFishing -= EnterFishingState;
         FishingController.OnEnterReelingFish -= EnterReelingFishState;
         FishingController.OnEnterCasting -= EnterCastingState;
+        FishingController.OnEnterReeling -= EnterPlayerState;
     }
 
     // These methods set the state of the camera during different actions.
+
+    public void EnterPlayerState()
+    {
+        SetState(new PlayerCamera(this));
+    }
     public void EnterCastingState()
     {
         SetState(new CastingBaitCamera(this));

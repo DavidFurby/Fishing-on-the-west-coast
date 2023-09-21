@@ -82,11 +82,10 @@ public class FishingController : FishingEventController
         {
             if (IsInCatchArea && FishAttachedToBait != null)
             {
-                RaiseStartReelingFish();
+                RaiseEnterReelingFish();
             }
             else
             {
-                RaiseStartReeling();
                 SetState(new Reeling(this));
             }
         }

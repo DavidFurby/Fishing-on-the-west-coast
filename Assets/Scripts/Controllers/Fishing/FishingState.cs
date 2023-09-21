@@ -102,6 +102,11 @@ public class Reeling : FishingState
     public Reeling(FishingController controller) : base()
     {
     }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        system.RaiseEnterReeling();
+    }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
