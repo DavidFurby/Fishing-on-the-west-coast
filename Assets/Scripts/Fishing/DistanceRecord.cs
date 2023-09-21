@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class DistanceRecord : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class DistanceRecord : MonoBehaviour
     private GameObject currentDistanceRecordMarker;
     private GameObject distanceRecordMarker;
     [Tooltip("Text UI for displaying the distance value")] private TextMeshProUGUI distanceTextUI;
-   [SerializeField] [Tooltip("The sea game object")] private SeaLogic sea;
+   [SerializeField] [Tooltip("The sea game object")] private GameObject ocean;
     [Tooltip("The starting point for calculating the distance")] private FishingSpot from;
     [Tooltip("The end point for calculating the distance")] private BaitLogic to;
     private float distance;
@@ -19,7 +18,7 @@ public class DistanceRecord : MonoBehaviour
     #region Unity Methods
     void OnEnable()
     {
-        sea = GameObject.FindObjectOfType<SeaLogic>();
+       
         from = GameObject.FindObjectOfType<FishingSpot>();
         to = GameObject.FindObjectOfType<BaitLogic>();
         distanceTextUI = GetComponentInChildren<TextMeshProUGUI>();
@@ -66,7 +65,7 @@ public class DistanceRecord : MonoBehaviour
             {
                 Destroy(currentDistanceRecordMarker);
             }
-            Vector3 position = new(from.transform.position.x + MainManager.Instance.BestDistance, sea.transform.position.y + sea.GetComponent<Renderer>().bounds.extents.y, to.transform.position.z);
+            Vector3 position = new(from.transform.position.x + MainManager.Instance.BestDistance, ocean.transform.position.y + ocean.GetComponentInChildren<Renderer>().bounds.extents.y, to.transform.position.z);
             currentDistanceRecordMarker = Instantiate(distanceRecordMarker, position, Quaternion.identity);
             StartCoroutine(MoveMarker(position, 5f));
         }

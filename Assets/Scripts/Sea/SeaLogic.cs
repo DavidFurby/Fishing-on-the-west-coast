@@ -8,11 +8,11 @@ public class SeaLogic : MonoBehaviour
     private Vector3 targetPosition;
     private FishDisplay[] fishPrefabs;
     private Renderer seaRenderer;
-
+    [SerializeField] private int fishPoolSize;
 
     private void Start()
     {
-        TryGetComponent<Renderer>(out seaRenderer);
+        TryGetComponent(out seaRenderer);
         fishPrefabs = Resources.LoadAll<FishDisplay>("GameObjects/Fishes");
         SubscribeToEvents();
     }
@@ -22,18 +22,18 @@ public class SeaLogic : MonoBehaviour
     }
     private void SubscribeToEvents()
     {
-        FishingController.OnEnterIdle += StopSpawnFish;
-        FishingController.OnEnterIdle += RemoveAllFishes;
-        FishingController.OnEnterFishing += InvokeSpawnFish;
+        FishingEventController.OnEnterIdle += StopSpawnFish;
+        FishingEventController.OnEnterIdle += RemoveAllFishes;
+        FishingEventController.OnEnterFishing += InvokeSpawnFish;
         BaitLogic.UpdatePosition += SetTargetPosition;
 
     }
 
     private void UnsubscribeFromEvents()
     {
-        FishingController.OnEnterIdle -= StopSpawnFish;
-        FishingController.OnEnterIdle -= RemoveAllFishes;
-        FishingController.OnEnterFishing -= InvokeSpawnFish;
+        FishingEventController.OnEnterIdle -= StopSpawnFish;
+        FishingEventController.OnEnterIdle -= RemoveAllFishes;
+        FishingEventController.OnEnterFishing -= InvokeSpawnFish;
         BaitLogic.UpdatePosition -= SetTargetPosition;
 
     }
@@ -60,7 +60,7 @@ public class SeaLogic : MonoBehaviour
 
         (Vector3 fishSpawnPosition, Quaternion fishSpawnRotation) = CalculateSpawnPosition();
 
-        GameObject fish = ObjectPool.Instance.GetFromPool(fishPrefabs[randomFishIndex].gameObject);
+        GameObject fish = ObjectPool.Instance.GetFromPool(fishPrefabs[randomFishIndex].gameObject, fishPoolSize);
         fish.transform.SetPositionAndRotation(fishSpawnPosition, fishSpawnRotation);
         fish.SetActive(true);
     }

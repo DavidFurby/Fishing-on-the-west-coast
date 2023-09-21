@@ -3,8 +3,8 @@ using UnityEngine;
 public class FishSpawnHandler : MonoBehaviour
 {
 
-    private float rightSideThreshold = 500f;
-    private float leftSideThreshold = 1000f;
+    private readonly float rightSideThreshold = 500f;
+    private readonly float leftSideThreshold = 1000f;
 
     private void OnBecameInvisible()
     {

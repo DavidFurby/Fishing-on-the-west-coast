@@ -5,10 +5,6 @@ public class ObjectPool : MonoBehaviour
 {
     // Singleton instance of the FishPool class
     public static ObjectPool Instance;
-
-    // The size of the pool for each prefab
-    [HideInInspector] private readonly int poolSize = 10;
-
     // Dictionary to store a queue of game objects for each prefab
     private Dictionary<GameObject, Queue<GameObject>> poolDictionary;
 
@@ -20,12 +16,12 @@ public class ObjectPool : MonoBehaviour
     }
 
     // Get a game object from the pool for the given prefab
-    public GameObject GetFromPool(GameObject prefab)
+    public GameObject GetFromPool(GameObject prefab, int poolSize)
     {
         // If the pool for this prefab doesn't exist, create it
         if (!poolDictionary.ContainsKey(prefab))
         {
-            CreateNewPool(prefab);
+            CreateNewPool(prefab, poolSize);
         }
 
         // If the pool is empty, add a new game object to it
@@ -48,7 +44,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     // Create a new pool for the given prefab
-    private void CreateNewPool(GameObject prefab)
+    private void CreateNewPool(GameObject prefab, int poolSize)
     {
         // Add a new entry to the dictionary for this prefab
         poolDictionary.Add(prefab, new Queue<GameObject>());
@@ -65,6 +61,7 @@ public class ObjectPool : MonoBehaviour
     {
         // Instantiate a new game object from the prefab
         GameObject obj = Instantiate(prefab);
+        obj.transform.SetParent(transform);
 
         // Add a Poolable component to store a reference to the prefab
         obj.AddComponent<Poolable>().Prefab = prefab;
