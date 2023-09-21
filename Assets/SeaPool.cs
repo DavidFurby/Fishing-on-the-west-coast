@@ -18,9 +18,7 @@ public class SeaPool : MonoBehaviour
     {
         seaTilePrefab = Resources.Load<GameObject>("GameObjects/Environment/SeaTile");
 
-        Vector3 newScale = new(100, 5, 50);
-        seaTilePrefab.transform.localScale = newScale;
-        CalculateSeaWidth(newScale.x);
+        seaWidth = seaTilePrefab.transform.localScale.x;
     }
 
     private void SpawnSeaTile()
@@ -42,21 +40,5 @@ public class SeaPool : MonoBehaviour
 
         }
         return spawnPosition;
-    }
-
-    private void CalculateSeaWidth(float scaleFactor)
-    {
-        Renderer renderer = seaTilePrefab.GetComponentInChildren<Renderer>();
-
-        if (renderer != null)
-        {
-            float originalWidth = renderer.bounds.size.x;
-            seaWidth = originalWidth * scaleFactor;
-            print(seaWidth);
-        }
-        else
-        {
-            Debug.LogError("Renderer component not found on Sea object or its children.");
-        }
     }
 }
