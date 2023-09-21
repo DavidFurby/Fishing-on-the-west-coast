@@ -11,7 +11,6 @@ public class FishMovement : FishStateMachine
     [SerializeField] private float _retreatSpeed = 50f;
     [SerializeField] private float _rotateSpeed = 2;
     public Transform tastyPart;
-    [SerializeField] private float _offsetAmount = 0.4f;
     #endregion
 
     #region Private Fields
