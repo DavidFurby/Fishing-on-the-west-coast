@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UnderwaterFog : MonoBehaviour
-{*
+{
 
     private void OnTriggerEnter(Collider other)
     {
