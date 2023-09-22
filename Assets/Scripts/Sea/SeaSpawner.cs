@@ -102,6 +102,7 @@ public class SeaSpawner : MonoBehaviour
             GameObject collider = new("SeaGroupCollider");
             collider.transform.SetParent(transform);
             seaGroupCollider = collider.AddComponent<BoxCollider>();
+            seaGroupCollider.isTrigger = true;
             seaGroupCollider.AddComponent<WaterCollision>();
         }
         seaGroupCollider.center = colliderCenter;
