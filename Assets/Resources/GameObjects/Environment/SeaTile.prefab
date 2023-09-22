@@ -10,11 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 461191177775057917}
   m_Layer: 0
-<<<<<<<< HEAD:Assets/Resources/GameObjects/Environment/SeaTile.prefab
   m_Name: SeaTile
-========
-  m_Name: OLD OCEAN
->>>>>>>> test:Assets/Resources/GameObjects/Environment/OLD OCEAN.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
