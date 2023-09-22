@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SeaSpawner : MonoBehaviour
@@ -7,7 +8,8 @@ public class SeaSpawner : MonoBehaviour
     [SerializeField] private int poolSize;
     private float seaWidth;
     private GameObject lastSpawnedTile;
-    private Queue<GameObject> seaTileQueue; // Changed from List to Queue for better performance
+    private Queue<GameObject> seaTileQueue;
+    private BoxCollider seaGroupCollider;
 
     private void Start()
     {
@@ -23,6 +25,7 @@ public class SeaSpawner : MonoBehaviour
     private void Update()
     {
         SpawnBasedOnCamera();
+        SetBoxCollider();
     }
 
     private void LoadSeaTilePrefab()
@@ -77,5 +80,31 @@ public class SeaSpawner : MonoBehaviour
     private void RemoveSeaTile(GameObject seaTile)
     {
         ObjectPool.Instance.ReturnToPool(seaTile);
+    }
+
+    private void SetBoxCollider()
+    {
+        float xMin = Mathf.Infinity;
+        float xMax = -Mathf.Infinity;
+        float zMin = Mathf.Infinity;
+        float zMax = -Mathf.Infinity;
+        foreach (GameObject seaTile in seaTileQueue)
+        {
+            Bounds bounds = seaTile.GetComponentInChildren<Renderer>().bounds;
+            xMin = Mathf.Min(xMin, bounds.min.x);
+            xMax = Mathf.Max(xMax, bounds.max.x);
+            zMin = Mathf.Min(zMin, bounds.min.z);
+            zMax = Mathf.Max(zMax, bounds.max.z);
+        }
+        Vector3 colliderCenter = new((xMin + xMax) / 2, transform.position.y, (zMin + zMax) /2);
+        Vector3 colliderSize = new(xMax - xMin, transform.position.y, zMax- zMin);
+        if(seaGroupCollider == null) {
+            GameObject collider = new("SeaGroupCollider");
+            collider.transform.SetParent(transform);
+            seaGroupCollider = collider.AddComponent<BoxCollider>();
+            seaGroupCollider.AddComponent<WaterCollision>();
+        }
+        seaGroupCollider.center = colliderCenter;
+        seaGroupCollider.size = colliderSize; 
     }
 }

@@ -486,7 +486,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1275003126}
-  - component: {fileID: 1275003127}
+  - component: {fileID: 1275003129}
+  - component: {fileID: 1275003130}
   m_Layer: 0
   m_Name: OceanContainer
   m_TagString: Untagged
@@ -509,7 +510,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 459377856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1275003127
+--- !u!114 &1275003129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275003125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac495199f0570d45a3dedc12608a764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnDelay: 10
+  fishPoolSize: 5
+--- !u!114 &1275003130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -521,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156d962ee5fb2a64db8e12fc5f1254b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolSize: 10
+  poolSize: 3
 --- !u!1001 &1363698399
 PrefabInstance:
   m_ObjectHideFlags: 0

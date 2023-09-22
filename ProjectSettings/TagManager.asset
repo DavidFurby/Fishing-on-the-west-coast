@@ -14,6 +14,8 @@ TagManager:
   - Bait
   - RodTop
   - Ocean
+  - Sea
+  - SeaFloor
   layers:
   - Default
   - TransparentFX

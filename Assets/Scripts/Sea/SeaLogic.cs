@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SeaLogic : MonoBehaviour
+public class FishSpawner : MonoBehaviour
 {
     [SerializeField] private int spawnDelay;
     private Vector3 targetPosition;

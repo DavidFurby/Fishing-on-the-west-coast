@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 3209866949432825708}
   m_Layer: 0
   m_Name: SeaFloor
-  m_TagString: Untagged
+  m_TagString: SeaFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,12 +215,10 @@ GameObject:
   - component: {fileID: 4496191628256237055}
   - component: {fileID: 6374819970451387302}
   - component: {fileID: 8563356597124495356}
-  - component: {fileID: 4561376883764502359}
-  - component: {fileID: 348305260801675067}
   - component: {fileID: 6540140712291471355}
   m_Layer: 0
   m_Name: Sea
-  m_TagString: Untagged
+  m_TagString: Sea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -321,32 +319,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaterVolume: {fileID: 6374819970451387302}
---- !u!114 &4561376883764502359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4420369388534195486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac495199f0570d45a3dedc12608a764, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnDelay: 5
-  fishPoolSize: 5
---- !u!114 &348305260801675067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4420369388534195486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb26da4d20179f43ad8d6f45aed9ec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &6540140712291471355
 BoxCollider:
   m_ObjectHideFlags: 0
