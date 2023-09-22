@@ -5,14 +5,12 @@ using Random = UnityEngine.Random;
 public class FishSpawner : MonoBehaviour
 {
     [SerializeField] private int spawnDelay;
+    [SerializeField] private int fishPoolSize;
     private Vector3 targetPosition;
     private FishDisplay[] fishPrefabs;
-    private Renderer seaRenderer;
-    [SerializeField] private int fishPoolSize;
-
     private void Start()
     {
-        seaRenderer = GetComponentInChildren<Renderer>();
+
         fishPrefabs = Resources.LoadAll<FishDisplay>("GameObjects/Fishes");
         SubscribeToEvents();
     }
@@ -68,12 +66,10 @@ public class FishSpawner : MonoBehaviour
     private (Vector3, Quaternion) CalculateSpawnPosition()
     {
         float fishSpawnX = Random.value < 0.5 ? targetPosition.x - 5 : targetPosition.x + 5;
-        float spawnVertical = Random.Range(transform.position.y, transform.position.y + seaRenderer.bounds.extents.y);
+        float spawnVertical = Random.Range(targetPosition.y - 5, targetPosition.y + 5);
 
         Quaternion fishSpawnRotation = fishSpawnX < targetPosition.x ? Quaternion.Euler(0, 90, 0) : Quaternion.Euler(0, -90, 0);
-
         Vector3 fishSpawnPosition = new(fishSpawnX, spawnVertical, targetPosition.z);
-
 
         return (fishSpawnPosition, fishSpawnRotation);
     }

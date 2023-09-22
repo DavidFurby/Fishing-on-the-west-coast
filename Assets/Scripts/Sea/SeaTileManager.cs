@@ -4,13 +4,13 @@ using UnityEngine;
 public class SeaTileManager : MonoBehaviour
 {
     internal GameObject seaTilePrefab;
-    internal int poolSize;
+    public int poolSize;
     internal float seaWidth;
     internal GameObject lastSpawnedTile;
 
     internal Queue<GameObject> seaTileQueue;
 
-    private void Start()
+    private void Awake()
     {
         LoadSeaTilePrefab();
         seaTileQueue = new Queue<GameObject>();
@@ -24,6 +24,7 @@ public class SeaTileManager : MonoBehaviour
 
     public GameObject SpawnSeaTile()
     {
+        print(seaTilePrefab);
         GameObject sea = ObjectPool.Instance.GetFromPool(seaTilePrefab, poolSize);
         sea.transform.SetParent(transform);
         Vector3 seaSpawnPosition = CalculateSpawnPosition();

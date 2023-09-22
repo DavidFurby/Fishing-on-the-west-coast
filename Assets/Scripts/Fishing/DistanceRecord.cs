@@ -9,7 +9,7 @@ public class DistanceRecord : MonoBehaviour
     private GameObject currentDistanceRecordMarker;
     private GameObject distanceRecordMarker;
     [Tooltip("Text UI for displaying the distance value")] private TextMeshProUGUI distanceTextUI;
-   [SerializeField] [Tooltip("The sea game object")] private GameObject ocean;
+    [SerializeField][Tooltip("The sea game object")] private GameObject ocean;
     [Tooltip("The starting point for calculating the distance")] private FishingSpot from;
     [Tooltip("The end point for calculating the distance")] private BaitLogic to;
     private float distance;
@@ -18,14 +18,16 @@ public class DistanceRecord : MonoBehaviour
     #region Unity Methods
     void OnEnable()
     {
-       
-        from = GameObject.FindObjectOfType<FishingSpot>();
-        to = GameObject.FindObjectOfType<BaitLogic>();
+
+        from = FindObjectOfType<FishingSpot>();
+        to = FindObjectOfType<BaitLogic>();
         distanceTextUI = GetComponentInChildren<TextMeshProUGUI>();
         distanceRecordMarker = Resources.Load<GameObject>(markerPath);
-        FishingController.OnEnterFishing += UpdateDistanceRecord;
-        FishingController.OnEnterIdle += SpawnDistanceRecordMarker;
-        FishingController.OnEnterIdle += SetActive;
+        FishingEventController.OnEnterFishing += UpdateDistanceRecord;
+        FishingEventController.OnEnterIdle += SpawnDistanceRecordMarker;
+        FishingEventController.OnEnterCasting += SetActive;
+        FishingEventController.OnEnterIdle += SetInactive;
+
     }
 
     private void Start()
@@ -35,9 +37,11 @@ public class DistanceRecord : MonoBehaviour
 
     void OnDestroy()
     {
-        FishingController.OnEnterFishing -= UpdateDistanceRecord;
-        FishingController.OnEnterIdle -= SpawnDistanceRecordMarker;
-        FishingController.OnEnterIdle -= SetActive;
+        FishingEventController.OnEnterFishing -= UpdateDistanceRecord;
+        FishingEventController.OnEnterIdle -= SpawnDistanceRecordMarker;
+        FishingEventController.OnEnterCasting -= SetActive;
+        FishingEventController.OnEnterIdle += SetInactive;
+
     }
 
     void Update()
@@ -83,7 +87,6 @@ public class DistanceRecord : MonoBehaviour
     #endregion
 
     #region Private Methods
-    //Calculate distance cast
     private void CalculateDistance()
     {
         if (from != null && to != null)
@@ -98,6 +101,9 @@ public class DistanceRecord : MonoBehaviour
     {
         distanceTextUI.gameObject.SetActive(true);
     }
-
+    private void SetInactive()
+    {
+        distanceTextUI.gameObject.SetActive(false);
+    }
 }
 #endregion
