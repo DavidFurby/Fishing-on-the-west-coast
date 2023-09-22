@@ -99,11 +99,18 @@ public class DistanceRecord : MonoBehaviour
 
     private void SetActive()
     {
-        distanceTextUI.gameObject.SetActive(true);
+        if (!distanceTextUI.gameObject.activeSelf)
+        {
+            distanceTextUI.gameObject.SetActive(true);
+
+        }
     }
     private void SetInactive()
     {
-        distanceTextUI.gameObject.SetActive(false);
+        if (!distanceTextUI.gameObject.activeSelf)
+        {
+            distanceTextUI.gameObject.SetActive(false);
+        }
     }
 }
 #endregion
