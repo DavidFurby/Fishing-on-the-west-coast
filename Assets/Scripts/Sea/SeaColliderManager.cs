@@ -1,0 +1,69 @@
+using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+
+public class SeaColliderManager : MonoBehaviour
+{
+    internal BoxCollider seaGroupCollider;
+    internal BoxCollider seaFloorGroupCollider;
+
+    internal void UpdateColliders(Queue<GameObject> seaTileQueue)
+    {
+        SetBoxCollider(seaTileQueue);
+    }
+    private void SetBoxCollider(Queue<GameObject> seaTileQueue)
+    {
+        float xMin = Mathf.Infinity;
+        float xMax = -Mathf.Infinity;
+        float zMin = Mathf.Infinity;
+        float zMax = -Mathf.Infinity;
+        foreach (GameObject seaTile in seaTileQueue)
+        {
+            Bounds seaBounds = seaTile.GetComponentsInChildren<Renderer>().First(r => r.CompareTag("Sea")).bounds;
+            xMin = Mathf.Min(xMin, seaBounds.min.x);
+            xMax = Mathf.Max(xMax, seaBounds.max.x);
+            zMin = Mathf.Min(zMin, seaBounds.min.z);
+            zMax = Mathf.Max(zMax, seaBounds.max.z);
+        }
+        Vector3 colliderCenter = new((xMin + xMax) / 2, transform.position.y, (zMin + zMax) / 2);
+        Vector3 colliderSize = new(xMax - xMin, transform.position.y, zMax - zMin);
+        if (seaGroupCollider == null)
+        {
+            GameObject collider = new("SeaGroupCollider");
+            collider.transform.SetParent(transform);
+            seaGroupCollider = collider.AddComponent<BoxCollider>();
+            seaGroupCollider.isTrigger = true;
+            seaGroupCollider.AddComponent<WaterCollision>();
+        }
+        seaGroupCollider.center = colliderCenter;
+        seaGroupCollider.size = colliderSize;
+        xMin = Mathf.Infinity;
+        xMax = -Mathf.Infinity;
+        zMin = Mathf.Infinity;
+        zMax = -Mathf.Infinity;
+        float seaFloorYPosition = 0;
+
+        foreach (GameObject seaTile in seaTileQueue)
+        {
+            Bounds floorBounds = seaTile.GetComponentsInChildren<Renderer>().First(r => r.CompareTag("SeaFloor")).bounds;
+            xMin = Mathf.Min(xMin, floorBounds.min.x);
+            xMax = Mathf.Max(xMax, floorBounds.max.x);
+            zMin = Mathf.Min(zMin, floorBounds.min.z);
+            zMax = Mathf.Max(zMax, floorBounds.max.z);
+            seaFloorYPosition = floorBounds.center.y;
+        }
+        if (seaFloorGroupCollider == null)
+        {
+            GameObject collider = new("SeaFloorGroupCollider");
+            collider.transform.SetParent(transform);
+            seaFloorGroupCollider = collider.AddComponent<BoxCollider>();
+            seaFloorGroupCollider.isTrigger = true;
+            seaFloorGroupCollider.AddComponent<SeaFloorCollision>();
+        }
+        Vector3 seaFloorColliderCenter = new((xMin + xMax) / 2, seaFloorYPosition, (zMin + zMax) / 2);
+        Vector3 seaFloorColliderSize = new(xMax - xMin, transform.position.y, zMax - zMin);
+        seaFloorGroupCollider.center = seaFloorColliderCenter;
+        seaFloorGroupCollider.size = seaFloorColliderSize;
+    }
+}

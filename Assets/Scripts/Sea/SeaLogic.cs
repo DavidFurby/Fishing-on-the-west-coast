@@ -12,7 +12,7 @@ public class FishSpawner : MonoBehaviour
 
     private void Start()
     {
-        TryGetComponent(out seaRenderer);
+        seaRenderer = GetComponentInChildren<Renderer>();
         fishPrefabs = Resources.LoadAll<FishDisplay>("GameObjects/Fishes");
         SubscribeToEvents();
     }
