@@ -20,12 +20,7 @@ public class SeaTileManager : MonoBehaviour
     private void LoadSeaTilePrefab()
     {
         seaTilePrefab = Resources.Load<GameObject>("GameObjects/Environment/Ocean");
-        seaWidth = GetSeaWidth(seaTilePrefab);
-    }
-
-    private float GetSeaWidth(GameObject seaTile)
-    {
-        return seaTile.GetComponentsInChildren<Transform>().First(r => r.CompareTag("Sea")).GetComponentInChildren<Renderer>().transform.localScale.x;
+        seaWidth = seaTilePrefab.GetComponent<BoxCollider>().size.x;
     }
 
     private void InitializeSeaTileQueue()
@@ -58,7 +53,7 @@ public class SeaTileManager : MonoBehaviour
     {
         if (lastSpawnedTile == null)
             return Vector3.zero;
-
+            print(seaWidth);
         return lastSpawnedTile.transform.localPosition + new Vector3(seaWidth, 0, 0);
     }
 
