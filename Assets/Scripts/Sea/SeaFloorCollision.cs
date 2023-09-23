@@ -10,14 +10,14 @@ public class SeaFloorCollision : MonoBehaviour
         if (other.CompareTag("Bait"))
         {
             print("collided");
-            OnSeaFloorCollision.Invoke();
+            OnSeaFloorCollision?.Invoke();
         }
     }
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Bait"))
         {
-            OnSeaFloorCollision.Invoke();
+            OnSeaFloorCollision?.Invoke();
         }
     }
 }
