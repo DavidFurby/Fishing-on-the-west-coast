@@ -61,6 +61,7 @@ public class SeaColliderManager : MonoBehaviour
             seaFloorGroupCollider = collider.AddComponent<BoxCollider>();
             seaFloorGroupCollider.isTrigger = true;
             seaFloorGroupCollider.AddComponent<SeaFloorCollision>();
+            seaFloorGroupCollider = collider.AddComponent<BoxCollider>();
         }
         Vector3 seaFloorColliderCenter = new((xMin + xMax) / 2, seaFloorYPosition, (zMin + zMax) / 2);
         Vector3 seaFloorColliderSize = new(xMax - xMin, transform.position.y, zMax - zMin);
