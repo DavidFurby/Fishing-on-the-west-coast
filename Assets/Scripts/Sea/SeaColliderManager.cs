@@ -2,62 +2,70 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+
 public class SeaColliderController : MonoBehaviour
 {
-    BoxCollider seaGroupCollider;
-    BoxCollider seaFloorGroupCollider;
+    private BoxCollider SeaGroupCollider { get; set; }
+    private BoxCollider SeaFloorGroupCollider { get; set; }
 
-    public void UpdateSeaColliders(List<GameObject> seaTileList)
+    public void UpdateSeaAndSeaFloorColliders(List<GameObject> seaTiles)
     {
-        SetBoxCollider(seaTileList);
-    }
-    private void SetBoxCollider(List<GameObject> seaTileList)
-    {
-        var seaBounds = CalculateSeaFloorBounds(seaTileList, "Sea");
-        var (xMin, xMax, zMin, zMax, seaFloorYPosition) = CalculateSeaFloorBounds(seaTileList, "SeaFloor");
-
-        seaGroupCollider = CreateOrUpdateCollider(seaGroupCollider, (seaBounds.xMin, seaBounds.xMax, seaBounds.zMin, seaBounds.zMax), "SeaGroupCollider", typeof(WaterCollision));
-        seaFloorGroupCollider = CreateOrUpdateCollider(seaFloorGroupCollider, (xMin, xMax, zMin, zMax), "SeaFloorGroupCollider", typeof(SeaFloorCollision), seaFloorYPosition);
+        SetBoxCollider(seaTiles);
     }
 
-    private (float xMin, float xMax, float zMin, float zMax, float seaFloorYPosition) CalculateSeaFloorBounds(List<GameObject> seaTileList, string tag)
+    private void SetBoxCollider(List<GameObject> seaTiles)
+    {
+        if (seaTiles.Count == 0)
+        {
+            return;
+        }
+
+        var seaBounds = CalculateSeaFloorBounds(seaTiles, "Sea");
+        var (xMin, xMax, zMin, zMax, seaFloorYPosition) = CalculateSeaFloorBounds(seaTiles, "SeaFloor");
+
+        SeaGroupCollider = CreateOrUpdateCollider(SeaGroupCollider, (seaBounds.xMin, seaBounds.xMax, seaBounds.zMin, seaBounds.zMax), "SeaGroupCollider", typeof(WaterCollision));
+        SeaFloorGroupCollider = CreateOrUpdateCollider(SeaFloorGroupCollider, (xMin, xMax, zMin, zMax), "SeaFloorGroupCollider", typeof(SeaFloorCollision), seaFloorYPosition);
+    }
+
+    private (float xMin, float xMax, float zMin, float zMax, float seaFloorYPosition) CalculateSeaFloorBounds(List<GameObject> seaTiles, string seaObjectType)
     {
         float xMin = Mathf.Infinity;
         float xMax = -Mathf.Infinity;
         float zMin = Mathf.Infinity;
         float zMax = -Mathf.Infinity;
-        float yPosition = 0;
+        float seaFloorYPosition = 0;
 
-        foreach (GameObject seaTile in seaTileList)
+        foreach (GameObject seaTile in seaTiles)
         {
-            Transform seaObject = seaTile.GetComponentsInChildren<Transform>().First(r => r.CompareTag(tag));
-            Bounds bounds = tag == "Sea" ? seaObject.GetComponentInChildren<Renderer>().bounds : seaObject.GetComponent<Renderer>().bounds;
+            Transform seaTileObject = seaTile.GetComponentsInChildren<Transform>().First(childTransform => childTransform.CompareTag(seaObjectType));
+            Bounds bounds = seaObjectType == "Sea" ? seaTileObject.GetComponentInChildren<Renderer>().bounds : seaTileObject.GetComponent<Renderer>().bounds;
             xMin = Mathf.Min(xMin, bounds.min.x);
             xMax = Mathf.Max(xMax, bounds.max.x);
             zMin = Mathf.Min(zMin, bounds.min.z);
             zMax = Mathf.Max(zMax, bounds.max.z);
-            yPosition = bounds.center.y;
+            seaFloorYPosition = bounds.center.y;
         }
 
-        return (xMin, xMax, zMin, zMax, yPosition);
+        return (xMin, xMax, zMin, zMax, seaFloorYPosition);
     }
-    private BoxCollider CreateOrUpdateCollider(BoxCollider collider, (float xMin, float xMax, float zMin, float zMax) bounds, string colliderName, Type collisionComponentType, float yPosition = 0)
-    {
-        Vector3 colliderCenter = new((bounds.xMin + bounds.xMax) / 2, yPosition == 0 ? transform.position.y : yPosition, (bounds.zMin + bounds.zMax) / 2);
-        Vector3 colliderSize = new(bounds.xMax - bounds.xMin, transform.position.y, bounds.zMax - bounds.zMin);
 
-        if (collider == null)
+    private BoxCollider CreateOrUpdateCollider(BoxCollider boxCollider, (float xMin, float xMax, float zMin, float zMax) colliderBounds, string colliderName, Type collisionComponentType, float yPosition = 0)
+    {
+        Vector3 colliderCenter = new((colliderBounds.xMin + colliderBounds.xMax) / 2, yPosition == 0 ? transform.position.y : yPosition, (colliderBounds.zMin + colliderBounds.zMax) / 2);
+        Vector3 colliderSize = new(colliderBounds.xMax - colliderBounds.xMin, transform.position.y, colliderBounds.zMax - colliderBounds.zMin);
+
+        if (boxCollider == null)
         {
             GameObject colliderObject = new(colliderName);
             colliderObject.transform.SetParent(transform);
-            collider = colliderObject.AddComponent<BoxCollider>();
-            collider.isTrigger = true;
+            boxCollider = colliderObject.AddComponent<BoxCollider>();
+            boxCollider.isTrigger = true;
             colliderObject.AddComponent(collisionComponentType);
         }
 
-        collider.center = colliderCenter;
-        collider.size = colliderSize;
+        boxCollider.center = colliderCenter;
+        boxCollider.size = colliderSize;
 
-        return collider;
+        return boxCollider;
     }
 }

@@ -20,7 +20,7 @@ public class SeaSpawner : MonoBehaviour
     private void Update()
     {
         SpawnBasedOnCamera();
-        seaColliderManager.UpdateSeaColliders(seaTileManager.seaTileList);
+        seaColliderManager.UpdateSeaAndSeaFloorColliders(seaTileManager.seaTileList);
     }
 
     private void SpawnBasedOnCamera()
