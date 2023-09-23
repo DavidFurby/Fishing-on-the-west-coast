@@ -2,11 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(SeaTileManager))]
-[RequireComponent(typeof(SeaColliderManager))]
+[RequireComponent(typeof(SeaColliderController))]
 public class SeaSpawner : MonoBehaviour
 {
     [SerializeField] private SeaTileManager seaTileManager;
-    [SerializeField] private SeaColliderManager seaColliderManager;
+    [SerializeField] private SeaColliderController seaColliderManager;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class SeaSpawner : MonoBehaviour
     private void Update()
     {
         SpawnBasedOnCamera();
-        seaColliderManager.UpdateColliders(seaTileManager.seaTileList);
+        seaColliderManager.UpdateSeaColliders(seaTileManager.seaTileList);
     }
 
     private void SpawnBasedOnCamera()
