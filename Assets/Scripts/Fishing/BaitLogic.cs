@@ -30,19 +30,19 @@ public class BaitLogic : MonoBehaviour
         splashSound = GetComponent<AudioSource>();
         rigidBody = GetComponent<Rigidbody>();
         rodTop = GameObject.FindGameObjectWithTag("RodTop");
-        FishingController.OnWhileReelingBait += ReelIn;
-        FishingController.OnWhileCasting += Cast;
+        FishingEventController.OnWhileReelingBait += ReelIn;
+        FishingEventController.OnWhileCasting += Cast;
         WaterCollision.OnEnterSea += PlaySplashSound;
-        FishingController.OnWhileFishing += PullBaitTowardsTarget;
+        FishingEventController.OnWhileFishing += PullBaitTowardsTarget;
         AttachBait();
     }
 
     void OnDestroy()
     {
-        FishingController.OnWhileReelingBait -= ReelIn;
-        FishingController.OnWhileCasting -= Cast;
+        FishingEventController.OnWhileReelingBait -= ReelIn;
+        FishingEventController.OnWhileCasting -= Cast;
         WaterCollision.OnEnterSea -= PlaySplashSound;
-        FishingController.OnWhileFishing -= PullBaitTowardsTarget;
+        FishingEventController.OnWhileFishing -= PullBaitTowardsTarget;
 
     }
 
@@ -55,10 +55,8 @@ public class BaitLogic : MonoBehaviour
     {
         transform.position = rodTop.transform.position;
 
-        // Create a FixedJoint component and attach it to the bait
         fixedJoint = gameObject.AddComponent<FixedJoint>();
 
-        // Set the connected body of the FixedJoint to be the rodTop
         fixedJoint.connectedBody = rodTop.GetComponent<Rigidbody>();
 
         forceFactor = 1;
@@ -78,7 +76,6 @@ public class BaitLogic : MonoBehaviour
 
     private void DetachBait()
     {
-        // Destroy the FixedJoint component to detach the bait from the rodTop
         Destroy(fixedJoint);
     }
 
@@ -101,6 +98,10 @@ public class BaitLogic : MonoBehaviour
             AttachBait();
             SetState();
         }
+        else if (IsFarFromTarget(targetPosition, 100))
+        {
+            transform.position = new Vector3(targetPosition.x + 50, transform.position.y, targetPosition.z);
+        }
         else
         {
             MoveTowardsTarget(targetPosition);
@@ -111,18 +112,21 @@ public class BaitLogic : MonoBehaviour
     {
         return Vector3.Distance(transform.position, targetPosition) < distance;
     }
+    private bool IsFarFromTarget(Vector3 targetPosition, float distance)
+    {
+        return Vector3.Distance(transform.position, targetPosition) > distance;
+    }
 
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, FishingController.Instance.reelInSpeed * Time.fixedDeltaTime);
 
-        transform.position = new Vector3(transform.position.x, (transform.position.y + balance.GetBalanceValue() * Time.deltaTime * (balance.GetBalanceValue() >= 0.5 ? 1 : -1) * 10), transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + balance.GetBalanceValue() * Time.deltaTime * (balance.GetBalanceValue() >= 0.5 ? 1 : -1) * 10, transform.position.z);
 
     }
 
     public void PullBaitTowardsTarget()
     {
-        // Execute the original method logic
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             IsPulling = true;

@@ -5,7 +5,7 @@ public class WaterCollision : MonoBehaviour
 {
     private float waterLevel;
     private const float FloatHeight = 120f;
-    private float BounceDamp = 0.01f;
+    private readonly float BounceDamp = 0.01f;
 
     public static event Action OnEnterSea;
 
@@ -26,8 +26,6 @@ public class WaterCollision : MonoBehaviour
             rigidBody.drag += 2;
             // Calculate the magnitude of the impact force
             float impactForce = rigidBody.velocity.magnitude * rigidBody.mass;
-            // Adjust BounceDamp based on the impact force
-            BounceDamp *= impactForce;
         }
     }
 

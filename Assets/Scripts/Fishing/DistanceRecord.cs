@@ -25,7 +25,9 @@ public class DistanceRecord : MonoBehaviour
         FishingEventController.OnEnterFishing += UpdateDistanceRecord;
         FishingEventController.OnEnterIdle += SpawnDistanceRecordMarker;
         FishingEventController.OnEnterCasting += SetActive;
-        FishingEventController.OnEnterIdle += SetInactive;
+        FishingEventController.OnEnterReeling += SetInactive;
+        FishingEventController.OnEnterReelingFish += SetInactive;
+
     }
 
     private void Start()
@@ -38,7 +40,9 @@ public class DistanceRecord : MonoBehaviour
         FishingEventController.OnEnterFishing -= UpdateDistanceRecord;
         FishingEventController.OnEnterIdle -= SpawnDistanceRecordMarker;
         FishingEventController.OnEnterCasting -= SetActive;
-        FishingEventController.OnEnterIdle -= SetInactive;
+        FishingEventController.OnEnterReeling -= SetInactive;
+        FishingEventController.OnEnterReelingFish -= SetInactive;
+
     }
 
     void Update()
@@ -79,33 +83,33 @@ public class DistanceRecord : MonoBehaviour
             yield return null;
         }
     }
-    
-     #endregion
 
-     #region Private Methods
-     private void CalculateDistance()
-     {
-         if (from != null && to != null)
-         {
-             distance = Vector3.Distance(from.transform.position, to.transform.position);
-             int roundedDistance = Mathf.RoundToInt(distance);
-             distanceTextUI.text = string.Format("Distance: {0:F1} meter", roundedDistance);
-         }
-     }
+    #endregion
 
-     private void SetActive()
-     {
-         if (distanceTextUI != null)
-         {
-             distanceTextUI.gameObject.SetActive(true);
-         }
-     }
-     private void SetInactive()
-     {
-         if (distanceTextUI != null)
-         {
-             distanceTextUI.gameObject.SetActive(false);
-         }
-     }
-     #endregion
+    #region Private Methods
+    private void CalculateDistance()
+    {
+        if (from != null && to != null)
+        {
+            distance = Vector3.Distance(from.transform.position, to.transform.position);
+            int roundedDistance = Mathf.RoundToInt(distance);
+            distanceTextUI.text = string.Format("Distance: {0:F1} meter", roundedDistance);
+        }
+    }
+
+    private void SetActive()
+    {
+        if (distanceTextUI != null)
+        {
+            distanceTextUI.gameObject.SetActive(true);
+        }
+    }
+    private void SetInactive()
+    {
+        if (distanceTextUI != null)
+        {
+            distanceTextUI.gameObject.SetActive(false);
+        }
+    }
+    #endregion
 }
