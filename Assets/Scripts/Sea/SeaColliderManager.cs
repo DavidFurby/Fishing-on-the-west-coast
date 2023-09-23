@@ -8,17 +8,17 @@ public class SeaColliderManager : MonoBehaviour
     internal BoxCollider seaGroupCollider;
     internal BoxCollider seaFloorGroupCollider;
 
-    internal void UpdateColliders(Queue<GameObject> seaTileQueue)
+    internal void UpdateColliders(List<GameObject> seaTileList)
     {
-        SetBoxCollider(seaTileQueue);
+        SetBoxCollider(seaTileList);
     }
-    private void SetBoxCollider(Queue<GameObject> seaTileQueue)
+    private void SetBoxCollider(List<GameObject> seaTileList)
     {
         float xMin = Mathf.Infinity;
         float xMax = -Mathf.Infinity;
         float zMin = Mathf.Infinity;
         float zMax = -Mathf.Infinity;
-        foreach (GameObject seaTile in seaTileQueue)
+        foreach (GameObject seaTile in seaTileList)
         {
             Transform seaObject = seaTile.GetComponentsInChildren<Transform>().First(r => r.CompareTag("Sea"));
             Bounds seaPlaneBounds = seaObject.GetComponentInChildren<Renderer>().bounds;
@@ -45,7 +45,7 @@ public class SeaColliderManager : MonoBehaviour
         zMax = -Mathf.Infinity;
         float seaFloorYPosition = 0;
 
-        foreach (GameObject seaTile in seaTileQueue)
+        foreach (GameObject seaTile in seaTileList)
         {
             Bounds floorBounds = seaTile.GetComponentsInChildren<Renderer>().First(r => r.CompareTag("SeaFloor")).bounds;
             xMin = Mathf.Min(xMin, floorBounds.min.x);

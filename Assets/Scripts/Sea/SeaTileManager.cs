@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class SeaTileManager : MonoBehaviour
@@ -9,7 +8,7 @@ public class SeaTileManager : MonoBehaviour
     internal float seaWidth;
     internal GameObject lastSpawnedTile;
 
-    internal Queue<GameObject> seaTileQueue;
+    internal List<GameObject> seaTileList;
 
     private void Awake()
     {
@@ -25,7 +24,7 @@ public class SeaTileManager : MonoBehaviour
 
     private void InitializeSeaTileQueue()
     {
-        seaTileQueue = new Queue<GameObject>();
+        seaTileList = new List<GameObject>();
     }
 
     public GameObject SpawnSeaTile()
@@ -53,7 +52,6 @@ public class SeaTileManager : MonoBehaviour
     {
         if (lastSpawnedTile == null)
             return Vector3.zero;
-            print(seaWidth);
         return lastSpawnedTile.transform.localPosition + new Vector3(seaWidth, 0, 0);
     }
 
