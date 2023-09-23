@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SeaTileManager : MonoBehaviour
@@ -13,35 +14,52 @@ public class SeaTileManager : MonoBehaviour
     private void Awake()
     {
         LoadSeaTilePrefab();
-        seaTileQueue = new Queue<GameObject>();
+        InitializeSeaTileQueue();
     }
 
     private void LoadSeaTilePrefab()
     {
-        seaTilePrefab = Resources.Load<GameObject>("GameObjects/Environment/SeaTile");
-        seaWidth = seaTilePrefab.transform.localScale.x;
+        seaTilePrefab = Resources.Load<GameObject>("GameObjects/Environment/Ocean");
+        seaWidth = GetSeaWidth(seaTilePrefab);
+    }
+
+    private float GetSeaWidth(GameObject seaTile)
+    {
+        return seaTile.GetComponentsInChildren<Transform>().First(r => r.CompareTag("Sea")).GetComponentInChildren<Renderer>().transform.localScale.x;
+    }
+
+    private void InitializeSeaTileQueue()
+    {
+        seaTileQueue = new Queue<GameObject>();
     }
 
     public GameObject SpawnSeaTile()
     {
-        print(seaTilePrefab);
-        GameObject sea = ObjectPool.Instance.GetFromPool(seaTilePrefab, poolSize);
-        sea.transform.SetParent(transform);
-        Vector3 seaSpawnPosition = CalculateSpawnPosition();
-        sea.transform.localPosition = seaSpawnPosition;
+        GameObject sea = GetSeaFromPool();
+        SetSeaPosition(sea);
         sea.SetActive(true);
         lastSpawnedTile = sea;
         return sea;
     }
 
+    private GameObject GetSeaFromPool()
+    {
+        return ObjectPool.Instance.GetFromPool(seaTilePrefab, poolSize);
+    }
+
+    private void SetSeaPosition(GameObject sea)
+    {
+        sea.transform.SetParent(transform);
+        Vector3 seaSpawnPosition = CalculateSpawnPosition();
+        sea.transform.localPosition = seaSpawnPosition;
+    }
+
     private Vector3 CalculateSpawnPosition()
     {
-        Vector3 spawnPosition = Vector3.zero;
-        if (lastSpawnedTile != null)
-        {
-            spawnPosition = lastSpawnedTile.transform.localPosition + new Vector3(seaWidth, 0, 0);
-        }
-        return spawnPosition;
+        if (lastSpawnedTile == null)
+            return Vector3.zero;
+
+        return lastSpawnedTile.transform.localPosition + new Vector3(seaWidth, 0, 0);
     }
 
     public void RemoveSeaTile(GameObject seaTile)

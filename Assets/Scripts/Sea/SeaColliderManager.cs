@@ -20,11 +20,12 @@ public class SeaColliderManager : MonoBehaviour
         float zMax = -Mathf.Infinity;
         foreach (GameObject seaTile in seaTileQueue)
         {
-            Bounds seaBounds = seaTile.GetComponentsInChildren<Renderer>().First(r => r.CompareTag("Sea")).bounds;
-            xMin = Mathf.Min(xMin, seaBounds.min.x);
-            xMax = Mathf.Max(xMax, seaBounds.max.x);
-            zMin = Mathf.Min(zMin, seaBounds.min.z);
-            zMax = Mathf.Max(zMax, seaBounds.max.z);
+            Transform seaObject = seaTile.GetComponentsInChildren<Transform>().First(r => r.CompareTag("Sea"));
+            Bounds seaPlaneBounds = seaObject.GetComponentInChildren<Renderer>().bounds;
+            xMin = Mathf.Min(xMin, seaPlaneBounds.min.x);
+            xMax = Mathf.Max(xMax, seaPlaneBounds.max.x);
+            zMin = Mathf.Min(zMin, seaPlaneBounds.min.z);
+            zMax = Mathf.Max(zMax, seaPlaneBounds.max.z);
         }
         Vector3 colliderCenter = new((xMin + xMax) / 2, transform.position.y, (zMin + zMax) / 2);
         Vector3 colliderSize = new(xMax - xMin, transform.position.y, zMax - zMin);
