@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System;
-using Unity.VisualScripting;
 
 public class SeaColliderController : MonoBehaviour
 {
@@ -21,14 +20,14 @@ public class SeaColliderController : MonoBehaviour
             return;
         }
 
-        var seaBounds = CalculateSeaFloorBounds(seaTiles, "Sea");
-        var (xMin, xMax, zMin, zMax, seaFloorYPosition) = CalculateSeaFloorBounds(seaTiles, "SeaFloor");
+        var seaBounds = CalculateBounds(seaTiles, "Sea");
+        var (xMin, xMax, zMin, zMax, seaFloorYPosition) = CalculateBounds(seaTiles, "SeaFloor");
 
         SeaGroupCollider = CreateOrUpdateCollider(SeaGroupCollider, (seaBounds.xMin, seaBounds.xMax, seaBounds.zMin, seaBounds.zMax), "SeaGroupCollider", typeof(WaterCollision));
         SeaFloorGroupCollider = CreateOrUpdateCollider(SeaFloorGroupCollider, (xMin, xMax, zMin, zMax), "SeaFloorGroupCollider", typeof(SeaFloorCollision), seaFloorYPosition);
     }
 
-    private (float xMin, float xMax, float zMin, float zMax, float seaFloorYPosition) CalculateSeaFloorBounds(List<GameObject> seaTiles, string seaObjectType)
+    private (float xMin, float xMax, float zMin, float zMax, float seaFloorYPosition) CalculateBounds(List<GameObject> seaTiles, string seaObjectType)
     {
         float xMin = Mathf.Infinity;
         float xMax = -Mathf.Infinity;

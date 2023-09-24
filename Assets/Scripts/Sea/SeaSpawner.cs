@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(SeaTileManager))]
 [RequireComponent(typeof(SeaColliderController))]
@@ -33,11 +32,12 @@ public class SeaSpawner : MonoBehaviour
             seaTileManager.RemoveSeaTile(removedTile);
             seaTileManager.seaTileList.RemoveAt(0);
             GameObject newTile = seaTileManager.SpawnSeaTile();
+            newTile.transform.localPosition = seaTileManager.seaTileList[^1].transform.localPosition + new Vector3(seaTileManager.seaWidth, 0, 0);
             seaTileManager.seaTileList.Add(newTile);
         }
         else if (cameraX < middleTileX - seaTileManager.seaWidth / 2)
         {
-            GameObject removedTile = seaTileManager.seaTileList[seaTileManager.seaTileList.Count - 1];
+            GameObject removedTile = seaTileManager.seaTileList[^1];
             seaTileManager.RemoveSeaTile(removedTile);
             seaTileManager.seaTileList.RemoveAt(seaTileManager.seaTileList.Count - 1);
             GameObject newTile = seaTileManager.SpawnSeaTile();
