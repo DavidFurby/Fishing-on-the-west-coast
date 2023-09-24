@@ -5,7 +5,7 @@ public class SeaTileManager : MonoBehaviour
 {
     internal GameObject seaTilePrefab;
     public int poolSize;
-    internal float seaWidth;
+    internal Vector3 seaSize;
     internal GameObject lastSpawnedTile;
 
     internal List<GameObject> seaTileList;
@@ -19,7 +19,7 @@ public class SeaTileManager : MonoBehaviour
     private void LoadSeaTilePrefab()
     {
         seaTilePrefab = Resources.Load<GameObject>("GameObjects/Environment/Ocean");
-        seaWidth = seaTilePrefab.GetComponent<BoxCollider>().size.x;
+        seaSize = seaTilePrefab.GetComponent<BoxCollider>().size;
     }
 
     private void InitializeSeaTileQueue()
@@ -52,7 +52,7 @@ public class SeaTileManager : MonoBehaviour
     {
         if (lastSpawnedTile == null)
             return Vector3.zero;
-        return lastSpawnedTile.transform.localPosition + new Vector3(seaWidth, 0, 0);
+        return lastSpawnedTile.transform.localPosition + new Vector3(seaSize.x, 0, 0);
     }
 
     public void RemoveSeaTile(GameObject seaTile)

@@ -8,22 +8,19 @@ public class SeaColliderController : MonoBehaviour
     private BoxCollider SeaGroupCollider { get; set; }
     private BoxCollider SeaFloorGroupCollider { get; set; }
 
-    public void UpdateSeaAndSeaFloorColliders(List<GameObject> seaTiles)
-    {
-        SetBoxCollider(seaTiles);
-    }
 
-    private void SetBoxCollider(List<GameObject> seaTiles)
+
+    public void SetBoxCollider(List<GameObject> seaTiles, Vector3 seaSize)
     {
         if (seaTiles.Count == 0)
         {
             return;
         }
 
-        var seaBounds = CalculateBounds(seaTiles, "Sea");
+        var seaBounds = CalculateBounds(seaTiles, "SeaFloor");
         var (xMin, xMax, zMin, zMax, seaFloorYPosition) = CalculateBounds(seaTiles, "SeaFloor");
 
-        SeaGroupCollider = CreateOrUpdateCollider(SeaGroupCollider, (seaBounds.xMin, seaBounds.xMax, seaBounds.zMin, seaBounds.zMax), "SeaGroupCollider", typeof(WaterCollision));
+        SeaGroupCollider = CreateOrUpdateCollider(SeaGroupCollider, (seaBounds.xMin, seaBounds.xMax, seaBounds.zMin, seaBounds.zMax), "SeaGroupCollider", typeof(WaterCollision), seaFloorYPosition / 2, seaSize.y);
         SeaFloorGroupCollider = CreateOrUpdateCollider(SeaFloorGroupCollider, (xMin, xMax, zMin, zMax), "SeaFloorGroupCollider", typeof(SeaFloorCollision), seaFloorYPosition);
     }
 
@@ -38,7 +35,7 @@ public class SeaColliderController : MonoBehaviour
         foreach (GameObject seaTile in seaTiles)
         {
             Transform seaTileObject = seaTile.GetComponentsInChildren<Transform>().First(childTransform => childTransform.CompareTag(seaObjectType));
-            Bounds bounds = seaObjectType == "Sea" ? seaTileObject.GetComponentInChildren<Renderer>().bounds : seaTileObject.GetComponent<Renderer>().bounds;
+            Bounds bounds = seaTileObject.GetComponent<Renderer>().bounds;
             xMin = Mathf.Min(xMin, bounds.min.x);
             xMax = Mathf.Max(xMax, bounds.max.x);
             zMin = Mathf.Min(zMin, bounds.min.z);
@@ -49,10 +46,10 @@ public class SeaColliderController : MonoBehaviour
         return (xMin, xMax, zMin, zMax, seaFloorYPosition);
     }
 
-    private BoxCollider CreateOrUpdateCollider(BoxCollider boxCollider, (float xMin, float xMax, float zMin, float zMax) colliderBounds, string colliderName, Type collisionComponentType, float yPosition = 0)
+    private BoxCollider CreateOrUpdateCollider(BoxCollider boxCollider, (float xMin, float xMax, float zMin, float zMax) colliderBounds, string colliderName, Type collisionComponentType, float yPosition = 0, float ySize = 0)
     {
         Vector3 colliderCenter = new((colliderBounds.xMin + colliderBounds.xMax) / 2, yPosition == 0 ? transform.position.y : yPosition, (colliderBounds.zMin + colliderBounds.zMax) / 2);
-        Vector3 colliderSize = new(colliderBounds.xMax - colliderBounds.xMin, transform.position.y, colliderBounds.zMax - colliderBounds.zMin);
+        Vector3 colliderSize = new(colliderBounds.xMax - colliderBounds.xMin, ySize, colliderBounds.zMax - colliderBounds.zMin);
 
         if (boxCollider == null)
         {

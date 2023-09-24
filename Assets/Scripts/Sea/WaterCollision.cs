@@ -7,7 +7,7 @@ public class WaterCollision : MonoBehaviour
     private float waterLevel;
     private const float FloatHeight = 150f;
     private readonly float BounceDamp = 0.1f;
-    private const float dragMultiplier = 2f;
+    private const float dragMultiplier = 0.5f;
     private readonly Dictionary<int, float> addedDragByInstanceID = new();
     private readonly Dictionary<int, Vector3> previousVelocityByInstanceID = new();
 
@@ -30,6 +30,7 @@ public class WaterCollision : MonoBehaviour
     {
         if (other.TryGetComponent<Rigidbody>(out var rigidBody))
         {
+            print("within");
             ApplyBuoyancy(rigidBody);
             ApplyDrag(other, rigidBody);
 
@@ -40,13 +41,14 @@ public class WaterCollision : MonoBehaviour
     {
         int instanceID = other.GetInstanceID();
         Vector3 currentVelocity = rigidBody.velocity;
-        if(previousVelocityByInstanceID.TryGetValue(instanceID, out Vector3 previousVelocity)) {
+        if (previousVelocityByInstanceID.TryGetValue(instanceID, out Vector3 previousVelocity))
+        {
             Vector3 velocityDifference = currentVelocity - previousVelocity;
             float addedDrag = velocityDifference.magnitude * dragMultiplier;
             rigidBody.drag = addedDrag;
             addedDragByInstanceID[instanceID] = addedDrag;
         }
-       previousVelocityByInstanceID[instanceID] = currentVelocity;
+        previousVelocityByInstanceID[instanceID] = currentVelocity;
     }
 
     private void OnTriggerExit(Collider other)
