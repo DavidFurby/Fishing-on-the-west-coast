@@ -1,30 +1,22 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BaitLogic : MonoBehaviour
 {
     public bool IsPulling { get; private set; }
 
-    #region Serialized Fields
     private GameObject rodTop;
     private Balance balance;
-    #endregion
-
-    #region Private Fields
     private AudioSource splashSound;
+
     private float forceFactor = 1f;
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
     private FixedJoint fixedJoint;
 
-    #endregion
-
-    #region Events
     public static event Action<Vector3> UpdatePosition;
-    #endregion
 
-    public void Start()
+    private void Start()
     {
         balance = FindObjectOfType<Balance>();
         splashSound = GetComponent<AudioSource>();
@@ -37,16 +29,15 @@ public class BaitLogic : MonoBehaviour
         AttachBait();
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         FishingEventController.OnWhileReelingBait -= ReelIn;
         FishingEventController.OnWhileCasting -= Cast;
         WaterCollision.OnEnterSea -= PlaySplashSound;
         FishingEventController.OnWhileFishing -= PullBaitTowardsTarget;
-
     }
 
-    void Update()
+    private void Update()
     {
         UpdatePosition?.Invoke(transform.position);
     }
@@ -56,21 +47,20 @@ public class BaitLogic : MonoBehaviour
         transform.position = rodTop.transform.position;
 
         fixedJoint = gameObject.AddComponent<FixedJoint>();
-
         fixedJoint.connectedBody = rodTop.GetComponent<Rigidbody>();
 
         forceFactor = 1;
     }
 
-    private static void SetState()
+    private static void SetState(FishingController fishingController)
     {
-        if (FishingController.Instance.fishesOnHook.Count > 0)
+        if (fishingController.fishesOnHook.Count > 0)
         {
-            FishingController.Instance.SetState(new InspectFish(FishingController.Instance));
+            fishingController.SetState(new InspectFish(fishingController));
         }
         else
         {
-            FishingController.Instance.SetState(new FishingIdle(FishingController.Instance));
+            fishingController.SetState(new FishingIdle(fishingController));
         }
     }
 
@@ -79,7 +69,7 @@ public class BaitLogic : MonoBehaviour
         Destroy(fixedJoint);
     }
 
-    public void Cast()
+    private void Cast()
     {
         DetachBait();
         rigidBody.AddForceAtPosition(forceFactor * FishingController.Instance.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
@@ -89,14 +79,14 @@ public class BaitLogic : MonoBehaviour
         }
     }
 
-    public void ReelIn()
+    private void ReelIn()
     {
         targetPosition = rodTop.transform.position;
 
         if (IsCloseToTarget(targetPosition, 2))
         {
             AttachBait();
-            SetState();
+            SetState(FishingController.Instance);
         }
         else if (IsFarFromTarget(targetPosition, 100))
         {
@@ -112,6 +102,7 @@ public class BaitLogic : MonoBehaviour
     {
         return Vector3.Distance(transform.position, targetPosition) < distance;
     }
+
     private bool IsFarFromTarget(Vector3 targetPosition, float distance)
     {
         return Vector3.Distance(transform.position, targetPosition) > distance;
@@ -122,10 +113,9 @@ public class BaitLogic : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, FishingController.Instance.reelInSpeed * Time.fixedDeltaTime);
 
         transform.position = new Vector3(transform.position.x, transform.position.y + balance.GetBalanceValue() * Time.deltaTime * (balance.GetBalanceValue() >= 0.5 ? 1 : -1) * 10, transform.position.z);
-
     }
 
-    public void PullBaitTowardsTarget()
+    private void PullBaitTowardsTarget()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -139,7 +129,8 @@ public class BaitLogic : MonoBehaviour
             }
         }
     }
-    public void PlaySplashSound()
+
+    private void PlaySplashSound()
     {
         splashSound.Play();
     }
