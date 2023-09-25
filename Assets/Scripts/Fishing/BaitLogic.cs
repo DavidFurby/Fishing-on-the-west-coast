@@ -123,7 +123,7 @@ public class BaitLogic : MonoBehaviour
             Vector3 direction = (rodTop.transform.position - transform.position).normalized;
             rigidBody.AddForce(direction * 1.5f, ForceMode.Impulse);
             IsPulling = false;
-            if (IsCloseToTarget(targetPosition, 10))
+            if (IsCloseToTarget(targetPosition, 20))
             {
                 FishingController.Instance.SetState(new Reeling());
             }

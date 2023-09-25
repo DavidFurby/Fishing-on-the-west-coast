@@ -8,7 +8,7 @@ public class CameraController : CameraStateMachine
     internal FishingCamera fishingCamera;
     internal ExplorationCamera explorationCamera;
     internal float cameraDistance;
-    internal readonly float originalCameraDistance = 0;
+    private readonly float originalCameraDistance = 0;
 
     void Awake()
     {
@@ -22,8 +22,8 @@ public class CameraController : CameraStateMachine
             return;
         }
         cameraDistance = originalCameraDistance;
-
     }
+
     private void OnEnable()
     {
         FishingEventController.OnEnterFishing += EnterFishingState;
@@ -48,18 +48,18 @@ public class CameraController : CameraStateMachine
         FishingEventController.OnEnterCasting -= EnterCastingState;
         FishingEventController.OnEnterInspecting -= EnterPlayerState;
         FishingEventController.OnEnterReeling -= EnterPlayerState;
-
     }
+
     public void SetCameraToTarget(Transform target, float YValue = 0)
     {
         if (target != null)
-            gameObject.transform.position = new Vector3(target.position.x, target.position.y + YValue, cameraDistance);
+            transform.position = new Vector3(target.position.x, target.position.y + YValue, cameraDistance);
     }
 
-    public void MoveCameraToTarget(Transform target, float speed = 0.1f, float distanceFrom = 2)
+    public void MoveCameraToTarget(Transform target, float speed = 0.1f, float distanceFrom = 2, bool instant = false)
     {
         if (target != null && cameraDistance != target.position.z - distanceFrom)
-            cameraDistance = Mathf.MoveTowards(cameraDistance, target.position.z - distanceFrom, speed);
+            cameraDistance = instant ? target.position.z - distanceFrom : Mathf.MoveTowards(cameraDistance, target.position.z - distanceFrom, speed);
     }
 
     public void MoveCameraToOriginal(float speed = 0.01f)
@@ -72,6 +72,7 @@ public class CameraController : CameraStateMachine
     {
         SetState(new PlayerCamera(this));
     }
+
     public void EnterCastingState()
     {
         SetState(new CastingBaitCamera(this));

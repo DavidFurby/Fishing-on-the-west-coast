@@ -13,7 +13,7 @@ public class ExplorationCamera : MonoBehaviour
     internal void FollowPlayer()
     {
         CameraController.Instance.SetCameraToTarget(player.transform, 2);
-        CameraController.Instance.MoveCameraToTarget(player.transform, 1, 6);
+        CameraController.Instance.MoveCameraToTarget(player.transform, 1, 6, true);
     }
     internal void FollowShopItem()
     {
