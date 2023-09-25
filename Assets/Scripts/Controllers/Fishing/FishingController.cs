@@ -10,7 +10,7 @@ public class FishingController : FishingEventController
     [HideInInspector] internal float reelInSpeed;
     [HideInInspector] internal float castingPower;
     [HideInInspector] internal float initialCastingPower = 20;
-    [HideInInspector] internal float initialReelInSpeed = 15f;
+    [HideInInspector] internal float initialReelInSpeed = 5f;
 
     [HideInInspector] internal bool IsInCatchArea { get; set; }
 

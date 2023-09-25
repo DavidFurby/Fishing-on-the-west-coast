@@ -27,7 +27,7 @@ public class Rod : Item
         rod.itemName = rodData.rodName;
         rod.description = rodData.description;
         rod.price = rodData.price;
-        rod.reelInSpeed = rodData.strength;
+        rod.reelInSpeed = rodData.reelInSpeed;
         rod.throwRange = rodData.throwRange;
         return rod;
     }

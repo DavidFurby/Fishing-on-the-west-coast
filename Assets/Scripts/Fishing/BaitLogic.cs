@@ -87,7 +87,7 @@ public class BaitLogic : MonoBehaviour
             AttachBait();
             SetState(FishingController.Instance);
         }
-        else if (IsFarFromTarget(targetPosition, 100))
+        else if (IsFarFromTarget(targetPosition, 100) && FishingController.Instance.GetCurrentState() is Reeling)
         {
             transform.position = new Vector3(targetPosition.x + 50, transform.position.y, targetPosition.z);
         }
@@ -109,18 +109,19 @@ public class BaitLogic : MonoBehaviour
 
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, FishingController.Instance.reelInSpeed * Time.fixedDeltaTime);
-
-        transform.position = new Vector3(transform.position.x, transform.position.y + balance.GetBalanceValue() * Time.deltaTime * (balance.GetBalanceValue() >= 0.5 ? 1 : -1) * 10, transform.position.z);
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        rigidBody.AddForce(FishingController.Instance.reelInSpeed * MainManager.Instance.Inventory.EquippedRod.reelInSpeed * direction, ForceMode.Impulse);
+        float newY = transform.position.y + balance.GetBalanceValue() * Time.deltaTime * (balance.GetBalanceValue() >= 0.5 ? 1 : -1);
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 
     private void PullBaitTowardsTarget()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             IsPulling = true;
             Vector3 direction = (rodTop.transform.position - transform.position).normalized;
-            rigidBody.AddForce(direction * 10f, ForceMode.Impulse);
+            rigidBody.AddForce(direction * 2f, ForceMode.Impulse);
             IsPulling = false;
             if (IsCloseToTarget(targetPosition, 10))
             {

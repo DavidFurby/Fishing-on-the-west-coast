@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class FishSpawner : MonoBehaviour
 {
-    [SerializeField] private int spawnDelay = 5;
-    [SerializeField] private int fishPoolSize = 10;
+    [SerializeField] private int spawnDelay = 3;
+    [SerializeField] private int fishPoolSize = 5;
     private Vector3 targetPosition;
     private FishDisplay[] fishPrefabs;
     private BoxCollider seaCollider;
@@ -66,8 +65,6 @@ public class FishSpawner : MonoBehaviour
 
     private (Vector3, Quaternion) CalculateSpawnPosition()
     {
-        print(transform.position.y);
-        print(seaCollider.bounds.extents.y);
         float fishSpawnX = Random.value < 0.5 ? targetPosition.x - 5 : targetPosition.x + 5;
         float fishSpawnY = Random.Range(seaCollider.bounds.min.y, seaCollider.bounds.max.y);
 
