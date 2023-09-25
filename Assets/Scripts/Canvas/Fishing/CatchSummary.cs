@@ -51,7 +51,7 @@ public class CatchSummary : MonoBehaviour
             }
             else
             {
-                FishingController.Instance.SetState(new FishingIdle(FishingController.Instance));
+                FishingController.Instance.SetState(new FishingIdle());
             }
         }
     }

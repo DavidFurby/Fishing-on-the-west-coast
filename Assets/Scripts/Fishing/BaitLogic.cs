@@ -48,7 +48,6 @@ public class BaitLogic : MonoBehaviour
 
         fixedJoint = gameObject.AddComponent<FixedJoint>();
         fixedJoint.connectedBody = rodTop.GetComponent<Rigidbody>();
-
         forceFactor = 1;
     }
 
@@ -56,11 +55,11 @@ public class BaitLogic : MonoBehaviour
     {
         if (fishingController.fishesOnHook.Count > 0)
         {
-            fishingController.SetState(new InspectFish(fishingController));
+            fishingController.SetState(new InspectFish());
         }
         else
         {
-            fishingController.SetState(new FishingIdle(fishingController));
+            fishingController.SetState(new FishingIdle());
         }
     }
 
@@ -83,7 +82,7 @@ public class BaitLogic : MonoBehaviour
     {
         targetPosition = rodTop.transform.position;
 
-        if (IsCloseToTarget(targetPosition, 2))
+        if (IsCloseToTarget(targetPosition, 8))
         {
             AttachBait();
             SetState(FishingController.Instance);
@@ -125,7 +124,7 @@ public class BaitLogic : MonoBehaviour
             IsPulling = false;
             if (IsCloseToTarget(targetPosition, 10))
             {
-                FishingController.Instance.SetState(new Reeling(FishingController.Instance));
+                FishingController.Instance.SetState(new Reeling());
             }
         }
     }

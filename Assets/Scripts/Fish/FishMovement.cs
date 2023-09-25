@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
 
 public class FishMovement : FishStateMachine
@@ -61,23 +60,20 @@ public class FishMovement : FishStateMachine
         yield return new WaitForSeconds(Random.Range(2, 4));
         SetState(new Baited(this));
     }
-
     public void MunchOnFish()
     {
-        if (target.TryGetComponent<FishMovement>(out var fishMovement))
+        if (target.TryGetComponent<FishMovement>(out _))
         {
-            transform.position = fishMovement.tastyPart.position;
+            GetOrCreateConfigurableJoint();
+
         }
     }
 
     public void MunchOnBait()
     {
-        HingeJoint hinge = GetOrCreateHingeJoint();
-        hinge.connectedBody = target.GetComponent<Rigidbody>();
-        hinge.anchor = Vector3.zero;
-        hinge.axis = Vector3.right;
-
+        GetOrCreateConfigurableJoint();
     }
+
 
     public void RotateTowardsTarget()
     {
@@ -157,14 +153,19 @@ public class FishMovement : FishStateMachine
         }
     }
 
-    private HingeJoint GetOrCreateHingeJoint()
+    private void GetOrCreateConfigurableJoint()
     {
-        HingeJoint hinge = gameObject.GetComponent<HingeJoint>();
-        if (hinge == null)
+        if (!gameObject.TryGetComponent<ConfigurableJoint>(out _))
         {
-            hinge = gameObject.AddComponent<HingeJoint>();
+            ConfigurableJoint joint = gameObject.AddComponent<ConfigurableJoint>();
+            joint.connectedBody = target.GetComponent<Rigidbody>();
+            joint.xMotion = ConfigurableJointMotion.Locked;
+            joint.yMotion = ConfigurableJointMotion.Locked;
+            joint.zMotion = ConfigurableJointMotion.Locked;
+            joint.angularXMotion = ConfigurableJointMotion.Locked;
+            joint.angularYMotion = ConfigurableJointMotion.Free;
+            joint.angularZMotion = ConfigurableJointMotion.Free;
         }
-        return hinge;
     }
 
     private void MoveFish(float speed)

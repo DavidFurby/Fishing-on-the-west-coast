@@ -1,22 +1,20 @@
-using System.Diagnostics;
-
 public abstract class FishingState : State
 {
     protected FishingController system;
 
     public FishingState()
     {
-        this.system = FishingController.Instance;
+        system = FishingController.Instance;
     }
 }
 public class NotFishing : FishingState
 {
-    public NotFishing(FishingController system) : base() { }
+    public NotFishing() : base() { }
 }
 
 public class FishingIdle : FishingState
 {
-    public FishingIdle(FishingController system) : base()
+    public FishingIdle() : base()
     {
     }
 
@@ -34,7 +32,7 @@ public class FishingIdle : FishingState
 
 public class Charging : FishingState
 {
-    public Charging(FishingController system) : base()
+    public Charging() : base()
     {
     }
 
@@ -46,7 +44,7 @@ public class Charging : FishingState
 }
 public class Swinging : FishingState
 {
-    public Swinging(FishingController system) : base()
+    public Swinging() : base()
     {
 
     }
@@ -60,7 +58,7 @@ public class Swinging : FishingState
 
 public class Casting : FishingState
 {
-    public Casting(FishingController system) : base()
+    public Casting() : base()
     {
 
     }
@@ -76,7 +74,7 @@ public class Casting : FishingState
 
 public class Fishing : FishingState
 {
-    public Fishing(FishingController system) : base()
+    public Fishing() : base()
     {
     }
 
@@ -99,7 +97,7 @@ public class Fishing : FishingState
 
 public class Reeling : FishingState
 {
-    public Reeling(FishingController controller) : base()
+    public Reeling() : base()
     {
     }
     public override void OnEnter()
@@ -117,7 +115,7 @@ public class Reeling : FishingState
 
 public class ReelingFish : FishingState
 {
-    public ReelingFish(FishingController controller) : base()
+    public ReelingFish() : base()
     {
     }
     public override void Update()
@@ -144,7 +142,7 @@ public class ReelingFish : FishingState
 
 public class InspectFish : FishingState
 {
-    public InspectFish(FishingController controller) : base()
+    public InspectFish() : base()
     {
 
     }

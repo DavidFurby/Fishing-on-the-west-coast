@@ -33,7 +33,7 @@ public class FishingController : FishingEventController
     }
     private void Start()
     {
-        SetState(new NotFishing(this));
+        SetState(new NotFishing());
     }
 
     void OnEnable()
@@ -49,9 +49,9 @@ public class FishingController : FishingEventController
     private void SubscribeToEvents()
     {
         WaterCollision.OnEnterSea += EnterSea;
-        FishingSpot.StartFishing += () => SetState(new FishingIdle(this));
+        FishingSpot.StartFishing += () => SetState(new FishingIdle());
         OnEnterReelingFish += CatchFish;
-        OnEnterReelingFish += () => SetState(new ReelingFish(this));
+        OnEnterReelingFish += () => SetState(new ReelingFish());
         OnEnterIdle += ResetValues;
         OnWhileCharging += Release;
         OnWhileFishing += StartReeling;
@@ -62,9 +62,9 @@ public class FishingController : FishingEventController
     private void UnsubscribeFromEvents()
     {
         WaterCollision.OnEnterSea -= EnterSea;
-        FishingSpot.StartFishing -= () => SetState(new FishingIdle(this));
+        FishingSpot.StartFishing -= () => SetState(new FishingIdle());
         OnEnterReelingFish -= CatchFish;
-        OnEnterReelingFish -= () => SetState(new ReelingFish(this));
+        OnEnterReelingFish -= () => SetState(new ReelingFish());
         OnEnterIdle -= ResetValues;
         OnWhileCharging -= Release;
         OnWhileFishing -= StartReeling;
@@ -86,7 +86,7 @@ public class FishingController : FishingEventController
             }
             else
             {
-                SetState(new Reeling(this));
+                SetState(new Reeling());
             }
         }
     }
@@ -99,7 +99,7 @@ public class FishingController : FishingEventController
         if (Input.GetKey(KeyCode.Space))
         {
             RaiseStartCharging();
-            SetState(new Charging(this));
+            SetState(new Charging());
         }
     }
 
@@ -110,14 +110,14 @@ public class FishingController : FishingEventController
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            SetState(new Swinging(this));
+            SetState(new Swinging());
         }
     }
     public void EnterSea()
     {
         if (GetCurrentState() is Casting)
         {
-            SetState(new Fishing(this));
+            SetState(new Fishing());
         }
     }
 
@@ -137,7 +137,7 @@ public class FishingController : FishingEventController
     public void LoseCatch()
     {
         ResetValues();
-        SetState(new Reeling(this));
+        SetState(new Reeling());
     }
 
     //Add fish to totalFishes list

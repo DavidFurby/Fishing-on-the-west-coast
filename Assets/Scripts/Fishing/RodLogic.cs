@@ -65,7 +65,7 @@ public class RodLogic : MonoBehaviour
         {
             yield return null;
         }
-        FishingController.Instance.SetState(new Casting(FishingController.Instance));
+        FishingController.Instance.SetState(new Casting());
     }
 
     // Play the reverse swing animation

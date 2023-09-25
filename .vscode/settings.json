@@ -60,6 +60,7 @@
     "Rebuilder",
     "Rigidbody",
     "Scriptable",
+    "Slerp",
     "UGUI"
   ],
   "dotnet.defaultSolution": "Fisherman.sln"
