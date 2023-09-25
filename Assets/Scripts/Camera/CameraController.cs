@@ -5,12 +5,11 @@ using UnityEngine;
 public class CameraController : CameraStateMachine
 {
     public static CameraController Instance { get; private set; }
-
     internal FishingCamera fishingCamera;
     internal ExplorationCamera explorationCamera;
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
+    internal float cameraDistance;
+    internal readonly float originalCameraDistance = 0;
+
     void Awake()
     {
         if (Instance == null)
@@ -22,12 +21,15 @@ public class CameraController : CameraStateMachine
             Destroy(gameObject);
             return;
         }
+        cameraDistance = originalCameraDistance;
+
     }
     private void OnEnable()
     {
         FishingEventController.OnEnterFishing += EnterFishingState;
         FishingEventController.OnEnterReelingFish += EnterReelingFishState;
         FishingEventController.OnEnterCasting += EnterCastingState;
+        FishingEventController.OnEnterInspecting += EnterPlayerState;
         FishingEventController.OnEnterReeling += EnterPlayerState;
     }
 
@@ -41,13 +43,30 @@ public class CameraController : CameraStateMachine
 
     void OnDestroy()
     {
-        FishingController.OnEnterFishing -= EnterFishingState;
-        FishingController.OnEnterReelingFish -= EnterReelingFishState;
-        FishingController.OnEnterCasting -= EnterCastingState;
-        FishingController.OnEnterReeling -= EnterPlayerState;
+        FishingEventController.OnEnterFishing -= EnterFishingState;
+        FishingEventController.OnEnterReelingFish -= EnterReelingFishState;
+        FishingEventController.OnEnterCasting -= EnterCastingState;
+        FishingEventController.OnEnterInspecting -= EnterPlayerState;
+        FishingEventController.OnEnterReeling -= EnterPlayerState;
+
+    }
+    public void SetCameraToTarget(Transform target, float YValue = 0)
+    {
+        if (target != null)
+            gameObject.transform.position = new Vector3(target.position.x, target.position.y + YValue, cameraDistance);
     }
 
-    // These methods set the state of the camera during different actions.
+    public void MoveCameraToTarget(Transform target, float speed = 0.1f, float distanceFrom = 2)
+    {
+        if (target != null && cameraDistance != target.position.z - distanceFrom)
+            cameraDistance = Mathf.MoveTowards(cameraDistance, target.position.z - distanceFrom, speed);
+    }
+
+    public void MoveCameraToOriginal(float speed = 0.01f)
+    {
+        if (cameraDistance != originalCameraDistance)
+            cameraDistance = Mathf.MoveTowards(cameraDistance, originalCameraDistance, speed);
+    }
 
     public void EnterPlayerState()
     {

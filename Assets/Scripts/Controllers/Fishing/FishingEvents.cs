@@ -10,7 +10,7 @@ public abstract class FishingEventController : FishingStateMachine
     public static event Action OnEnterFishing;
     public static event Action OnEnterCasting;
     public static event Action OnReelingFish;
-    public static event Action OnStartInspecting;
+    public static event Action OnEnterInspecting;
     public static event Action OnNextSummary;
     public static event Action OnEndSummary;
     public static event Action OnEnterReeling;
@@ -54,7 +54,6 @@ public abstract class FishingEventController : FishingStateMachine
         OnReelingFish?.Invoke();
     }
 
-
     public void RaiseEnterIdle()
     {
         OnEnterIdle?.Invoke();
@@ -75,7 +74,7 @@ public abstract class FishingEventController : FishingStateMachine
 
     internal void RaiseStartInspecting()
     {
-        OnStartInspecting?.Invoke();
+        OnEnterInspecting?.Invoke();
     }
 
     internal void RaiseNextSummary()

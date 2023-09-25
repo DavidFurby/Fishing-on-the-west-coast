@@ -82,7 +82,7 @@ public class BaitLogic : MonoBehaviour
     {
         targetPosition = rodTop.transform.position;
 
-        if (IsCloseToTarget(targetPosition, 8))
+        if (IsCloseToTarget(targetPosition, 4))
         {
             AttachBait();
             SetState(FishingController.Instance);
@@ -121,7 +121,7 @@ public class BaitLogic : MonoBehaviour
         {
             IsPulling = true;
             Vector3 direction = (rodTop.transform.position - transform.position).normalized;
-            rigidBody.AddForce(direction * 2f, ForceMode.Impulse);
+            rigidBody.AddForce(direction * 1.5f, ForceMode.Impulse);
             IsPulling = false;
             if (IsCloseToTarget(targetPosition, 10))
             {
