@@ -2,11 +2,12 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using Unity.VisualScripting;
 
 public class SeaColliderController : MonoBehaviour
 {
-    [SerializeField] private BoxCollider SeaGroupCollider;
-    [SerializeField] private BoxCollider SeaFloorGroupCollider;
+    private BoxCollider SeaGroupCollider;
+    private BoxCollider SeaFloorGroupCollider;
 
     public struct BoundsData
     {
@@ -24,6 +25,11 @@ public class SeaColliderController : MonoBehaviour
         var seaBounds = CalculateBounds(seaTiles, "SeaFloor");
         SeaGroupCollider = CreateOrUpdateCollider(SeaGroupCollider, seaBounds, "SeaGroupCollider", typeof(WaterCollision), seaBounds.seaFloorYPosition / 2, seaSize.y);
         SeaFloorGroupCollider = CreateOrUpdateCollider(SeaFloorGroupCollider, seaBounds, "SeaFloorGroupCollider", typeof(SeaFloorCollision), seaBounds.seaFloorYPosition);
+        if (SeaGroupCollider.GetComponent<FishSpawner>() == null)
+        {
+            SeaGroupCollider.AddComponent<FishSpawner>();
+
+        }
     }
 
     private BoundsData CalculateBounds(List<GameObject> seaTiles, string seaObjectType)

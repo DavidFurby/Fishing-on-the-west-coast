@@ -6,8 +6,10 @@ public class WaterCollision : MonoBehaviour
 {
     private float waterLevel;
     private const float FloatHeight = 150f;
-    private readonly float BounceDamp = 0.1f;
-    private const float dragMultiplier = 0.5f;
+    private const float BounceDamp = 0.1f;
+    private const float dragMultiplier = 2f;
+    private const float minDrag = 3f;
+
     private readonly Dictionary<int, float> addedDragByInstanceID = new();
     private readonly Dictionary<int, Vector3> previousVelocityByInstanceID = new();
 
@@ -22,7 +24,7 @@ public class WaterCollision : MonoBehaviour
     {
         if (other.CompareTag("Bait"))
         {
-            OnEnterSea.Invoke();
+            OnEnterSea?.Invoke();
         }
     }
 
@@ -30,10 +32,8 @@ public class WaterCollision : MonoBehaviour
     {
         if (other.TryGetComponent<Rigidbody>(out var rigidBody))
         {
-            print("within");
             ApplyBuoyancy(rigidBody);
             ApplyDrag(other, rigidBody);
-
         }
     }
 
@@ -44,7 +44,7 @@ public class WaterCollision : MonoBehaviour
         if (previousVelocityByInstanceID.TryGetValue(instanceID, out Vector3 previousVelocity))
         {
             Vector3 velocityDifference = currentVelocity - previousVelocity;
-            float addedDrag = velocityDifference.magnitude * dragMultiplier;
+            float addedDrag = MathF.Max(velocityDifference.magnitude * dragMultiplier, minDrag);
             rigidBody.drag = addedDrag;
             addedDragByInstanceID[instanceID] = addedDrag;
         }
@@ -64,7 +64,7 @@ public class WaterCollision : MonoBehaviour
         }
     }
 
-    public void ApplyBuoyancy(Rigidbody rigidBody)
+    private void ApplyBuoyancy(Rigidbody rigidBody)
     {
         Vector3 actionPoint = transform.position + transform.TransformDirection(Vector3.down);
         float forceFactor = 1f - ((actionPoint.y - waterLevel) / FloatHeight);

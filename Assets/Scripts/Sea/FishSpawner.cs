@@ -4,8 +4,8 @@ using Random = UnityEngine.Random;
 
 public class FishSpawner : MonoBehaviour
 {
-    [SerializeField] private int spawnDelay;
-    [SerializeField] private int fishPoolSize;
+    [SerializeField] private int spawnDelay = 5;
+    [SerializeField] private int fishPoolSize = 5;
     private Vector3 targetPosition;
     private FishDisplay[] fishPrefabs;
     private void Start()
