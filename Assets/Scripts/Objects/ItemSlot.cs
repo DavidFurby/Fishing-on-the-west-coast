@@ -1,20 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static Item;
 
 public class ItemSlot : MonoBehaviour
 {
-    private int itemId;
-    [SerializeField] private TextMeshProUGUI nameText;
-
-    public int ItemId
+    public TextMeshProUGUI NameText;
+    public int Id
     {
-        get => itemId;
-        set => itemId = value;
+        get; set;
+    }
+    public ItemTag ItemTag
+    {
+        get; set;
+    }
+    void Awake()
+    {
+        NameText = GetComponentInChildren<TextMeshProUGUI>();
     }
     public void SetTextField(string itemName)
     {
-        nameText.text = itemName;
+        if (NameText != null)
+        {
+            NameText.text = itemName;
+        }
     }
+    public void SetSlot(int id, ItemTag itemTag, string itemName)
+    {
+        Id = id;
+        ItemTag = itemTag;
+        if (NameText != null)
+        {
+            NameText.text = itemName;
+        }
+    }
+
 }

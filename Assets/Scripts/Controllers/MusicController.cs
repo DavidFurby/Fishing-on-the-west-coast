@@ -3,7 +3,12 @@ using UnityEngine;
 public class MusicController : MonoBehaviour
 {
 
-    [SerializeField] AudioSource theMusic;
+    private AudioSource theMusic;
+
+    void OnEnable()
+    {
+        theMusic = GetComponent<AudioSource>();
+    }
     public void PlayMiniGameMusic()
     {
         theMusic.Play();

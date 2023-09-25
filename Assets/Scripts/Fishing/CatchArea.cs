@@ -1,93 +1,61 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-/// <summary>
-/// Represents an area where fish can be caught.
-/// </summary>
 public class CatchArea : MonoBehaviour
 {
-    /// <summary>
-    /// Gets a value indicating whether a fish is in the catch area.
-    /// </summary>
-    public bool IsInCatchArea { get; private set; }
-    public readonly List<Catch> totalCatches = new();
-    private FishMovement fishMovement;
-    [HideInInspector] public Catch fish;
-    [SerializeField] private FishingController fishingControlls;
-    [SerializeField] private FishingRodLogic FishingRodLogic;
+    public static event Action<Collider, GameObject> OnBaitFish;
+    public static event Action OnCatchWhileReeling;
+
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Fish") && fish == null)
+        if (other.CompareTag("Fish"))
         {
-            IsInCatchArea = true;
-            if (other.GetComponent<FishMovement>().state == FishMovement.FishState.Baited)
+            if (FishingController.Instance.GetCurrentState() is ReelingFish)
             {
-                if (other.TryGetComponent(out FishMovement fishMovement))
-                {
-                    this.fishMovement = fishMovement;
-                }
-                if (other.TryGetComponent(out Catch fish))
-                {
-                    this.fish = fish;
-                }
+                CatchFishDuringReelingState(other);
             }
-
-        }
-        else if (fishingControlls != null && fishingControlls.fishingStatus == FishingController.FishingStatus.ReelingFish && other.CompareTag("Fish") && fish != null)
-        {
-            CatchFishWhileReeling(other);
+            else
+            {
+                HandleFishEnter(other);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && fish == other.gameObject)
+        if (other.CompareTag("Fish") && FishingController.Instance.FishAttachedToBait == other.GetComponent<FishDisplay>())
         {
-            IsInCatchArea = false;
-            fish = null;
+            FishingController.Instance.IsInCatchArea = true;
         }
     }
 
-    //Automatically catch another fish if it collides while reeling another fish
-    private void CatchFishWhileReeling(Collider other)
+    private void HandleFishEnter(Collider other)
     {
-        StartCoroutine(fishingControlls?.CatchAlert());
-        if (other.TryGetComponent(out FishMovement newFishMovement))
+        var fishMovement = other.GetComponent<FishMovement>();
+        if (fishMovement.GetCurrentState() is Baited)
         {
-            if (totalCatches.Count > 0)
+            FishingController.Instance.IsInCatchArea = true;
+            if (other.TryGetComponent(out FishDisplay fish))
             {
-                newFishMovement.GetBaited(totalCatches[totalCatches.Count - 1].gameObject);
+                FishingController.Instance.FishAttachedToBait = fish;
             }
-            newFishMovement.SetFishState(FishMovement.FishState.Hooked);
-            if (other.TryGetComponent(out Catch newFishComponent))
-            {
-                totalCatches.Add(newFishComponent);
-            }
-            FishingRodLogic.CalculateReelInSpeed();
         }
-
     }
 
-    //Catch fish while fishing
-    public void CatchFish()
+    private void CatchFishDuringReelingState(Collider other)
     {
-        if (fish != null && fishMovement != null && fishMovement.state != FishMovement.FishState.Hooked)
+        FishMovement fishMovement = other.GetComponent<FishMovement>();
+        OnBaitFish.Invoke(other, FishingController.Instance.fishesOnHook[^1].gameObject);
+        if (fishMovement.GetCurrentState() is Baited)
         {
-            fishMovement.SetFishState(FishMovement.FishState.Hooked);
-            totalCatches.Add(fish.GetComponent<Catch>());
+            OnCatchWhileReeling.Invoke();
+            fishMovement.SetState(new HookedToFish(fishMovement));
+            if (other.TryGetComponent(out FishDisplay newFishComponent))
+            {
+                FishingController.Instance.AddFish(newFishComponent);
+            }
         }
-    }
-
-    //Reset the values if the catch is lost
-    public void RemoveCatch()
-    {
-
-        fish?.DestroyFish();
-
-        fishMovement = null;
-        fish = null;
-        IsInCatchArea = false;
-        totalCatches.Clear();
     }
 }

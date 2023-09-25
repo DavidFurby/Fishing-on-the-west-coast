@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
         {
             mainMenu.SetActive(true);
         }
-        if (MainManager.Instance.game.Scene == "")
+        if (MainManager.Instance.Scene == "")
         {
             continueButton.SetActive(false);
         }
@@ -22,22 +22,22 @@ public class MainMenu : MonoBehaviour
     {
         if (MainManager.Instance != null)
         {
-            MainManager.Instance.game.NewGame();
+            MainManager.Instance.NewGame();
         }
         mainMenu.SetActive(false);
 
-        SceneManager.LoadScene("Boat");
+        SceneManager.LoadScene("Sandbox");
     }
 
     public void Continue()
     {
         if (MainManager.Instance != null)
         {
-            MainManager.Instance.game.LoadGame();
-            if (MainManager.Instance.game.Scene != null)
+            MainManager.Instance.LoadGame();
+            if (MainManager.Instance.Scene != null)
             {
                 mainMenu.SetActive(false);
-                SceneManager.LoadScene(MainManager.Instance.game.Scene);
+                SceneManager.LoadScene(MainManager.Instance.Scene);
             }
         }
 

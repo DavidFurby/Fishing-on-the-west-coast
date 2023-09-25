@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846bd8f5c68d2d64584660f0095bb136, type: 3}
+  m_Name: AdvanceRod
+  m_EditorClassIdentifier: 
+  itemTag: 1
+  id: 2
+  itemName: Advance rod
+  price: 5
+  description: More advance
+  model: {fileID: 5076685828461310335, guid: d0c27d96c29be3e4db4b1932404d4f91, type: 3}
+  reelInSpeed: 5
+  throwRange: 500

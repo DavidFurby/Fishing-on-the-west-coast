@@ -1,15 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainManager : MonoBehaviour
+public class MainManager : Game
 {
 
     public static MainManager Instance;
-    public Game game;
 
     private void Awake()
     {
-
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -18,7 +16,7 @@ public class MainManager : MonoBehaviour
         Instance = this;
         if (Instance != null && SceneManager.GetActiveScene().name != "Main Menu")
         {
-            Instance.game.LoadGame();
+            Instance.LoadGame();
         }
         DontDestroyOnLoad(gameObject);
     }
@@ -26,7 +24,7 @@ public class MainManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Instance.game.SaveGame();
+            Instance.SaveGame();
 
         }
     }

@@ -4,14 +4,14 @@ using UnityEngine;
 public class Rope : MonoBehaviour
 {
     //Objects that will interact with the rope
-    public Transform whatTheRopeIsConnectedTo;
-    public Transform whatIsHangingFromTheRope;
+    private Transform whatTheRopeIsConnectedTo;
+    private Transform whatIsHangingFromTheRope;
 
     //Line renderer used to display the rope
     LineRenderer lineRenderer;
 
     //A list with all rope section
-    public List<RopeSection> allRopeSections = new();
+    private List<RopeSection> allRopeSections = new();
 
     //Rope data
     private readonly float ropeSectionLength = 1f;
@@ -29,6 +29,8 @@ public class Rope : MonoBehaviour
 
     void Start()
     {
+        whatTheRopeIsConnectedTo = GameObject.FindGameObjectWithTag("RodTop").transform;
+        whatIsHangingFromTheRope = GameObject.FindGameObjectWithTag("Bait").transform;
         //Init the line renderer we use to display the rope
         lineRenderer = GetComponent<LineRenderer>();
         SetLength(2);
@@ -37,17 +39,30 @@ public class Rope : MonoBehaviour
 
     void Update()
     {
-        //Display the rope with the line renderer
-        DisplayRope();
+        // Calculate the distance between whatTheRopeIsConnectedTo and whatIsHangingFromTheRope
+        float distance = Vector3.Distance(whatTheRopeIsConnectedTo.position, whatIsHangingFromTheRope.position);
 
-        //Move what is hanging from the rope to the end of the rope
-        RopeSection endRope = allRopeSections[0];
-        endRope.pos = whatIsHangingFromTheRope.position;
-        allRopeSections[0] = endRope;
+        // Check if the distance is greater than a certain threshold
+        if (distance > 0.5)
+        {
+            lineRenderer.enabled = true;
+            // Display the rope with the line renderer
+            DisplayRope();
+            // Move what is hanging from the rope to the end of the rope
+            RopeSection endRope = allRopeSections[0];
+            endRope.pos = whatIsHangingFromTheRope.position;
+            allRopeSections[0] = endRope;
 
-        //Make what's hanging from the rope look at the next to last rope position to make it rotate with the rope
-        whatIsHangingFromTheRope.LookAt(allRopeSections[1].pos);
+            // Make what's hanging from the rope look at the next to last rope position to make it rotate with the rope
+            whatIsHangingFromTheRope.LookAt(allRopeSections[1].pos);
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+        }
+
     }
+
     //
     //Create the rope
     //
@@ -163,10 +178,10 @@ public class Rope : MonoBehaviour
 
             //Heuns method
             //vel = vel + (acc + accFromForwardEuler) * 0.5 * t
-            thisRopeSection.vel = allRopeSections[i].vel + (accelerations[i] + accelerationFromEuler[i]) * 0.5f * timeStep;
+            thisRopeSection.vel = allRopeSections[i].vel + 0.5f * timeStep * (accelerations[i] + accelerationFromEuler[i]);
 
             //pos = pos + (vel + velFromForwardEuler) * 0.5f * t
-            thisRopeSection.pos = allRopeSections[i].pos + (allRopeSections[i].vel + nextPosVelForwardEuler[i].vel) * 0.5f * timeStep;
+            thisRopeSection.pos = allRopeSections[i].pos + 0.5f * timeStep * (allRopeSections[i].vel + nextPosVelForwardEuler[i].vel);
 
             //Save the new data in a temporarily list
             nextPosVelHeunsMethod.Add(thisRopeSection);

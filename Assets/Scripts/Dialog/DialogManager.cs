@@ -1,61 +1,112 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Yarn.Unity;
 
 public class DialogManager : MonoBehaviour
 {
-    [SerializeField] private DialogueRunner dialogueRunner;
-    [SerializeField] private DialogView view;
-    // Start is called before the first frame update
+    #region Fields
 
-    //Nodes that should present text instantly
-    public enum InstantTextNodes
+    private DialogueRunner dialogueRunner;
+
+    public static event Action OnEndDialog;
+
+    private Dictionary<string, bool> addedHandlers = new();
+
+    #endregion
+
+    #region Unity Methods
+
+    private void OnEnable()
     {
-        ShopItem,
+        if (TryGetComponent<DialogueRunner>(out dialogueRunner))
+        {
+            Conversation.StartConversation += StartDialog;
+            OnEndDialog += dialogueRunner.Stop;
+        }
     }
 
-    void Start()
+    private void Start()
     {
         SetDayHandler();
     }
 
+    private void OnDestroy()
+    {
+        if (dialogueRunner != null)
+        {
+            Conversation.StartConversation -= StartDialog;
+            OnEndDialog -= dialogueRunner.Stop;
+        }
+    }
+
+    #endregion
+
+    #region Private Methods
+
     private void SetDayHandler()
     {
-        int day = MainManager.Instance.game.Days;
-        dialogueRunner.AddCommandHandler("getDayOfMonth", () =>
+        int day = MainManager.Instance.Days;
+        dialogueRunner.AddCommandHandler(nameof(SetDayHandler), () =>
         {
             dialogueRunner.VariableStorage.SetValue("$day", day);
         });
     }
 
-    public void RemoveHandler(string handlerName)
-    {
-        dialogueRunner.RemoveCommandHandler(handlerName);
-    }
+    #endregion
+
+    #region Public Methods
+
     public void StartDialog(string node)
     {
-        if (dialogueRunner.IsDialogueRunning)
+        if (dialogueRunner != null)
         {
-            dialogueRunner.Stop();
+            if (dialogueRunner.IsDialogueRunning)
+            {
+                dialogueRunner.Stop();
+            }
+            dialogueRunner.StartDialogue(node);
         }
-        dialogueRunner.StartDialogue(node);
     }
     public void EndDialog()
     {
-        view.ShowDialog(false);
-        dialogueRunner.Stop();
+        OnEndDialog?.Invoke();
     }
-    public bool CurrentNodeShouldShowTextDirectly()
-    {
-        return System.Enum.GetNames(typeof(InstantTextNodes)).Contains(dialogueRunner.CurrentNodeName);
-    }
-    public void AddCommandHandler(string commandName, System.Action commandHandler)
+
+    public void AddCommandHandler(string commandName, Action commandHandler)
     {
         dialogueRunner.AddCommandHandler(commandName, commandHandler);
     }
+
     public void SetVariableValue(string variableName, string value)
     {
         dialogueRunner.VariableStorage.SetValue(variableName, value);
     }
 
+    public void SetVariableValue(string variableName, int value)
+    {
+        dialogueRunner.VariableStorage.SetValue(variableName, value);
+    }
+
+    public void AddHandler(string handlerName, System.Action handler)
+    {
+        AddCommandHandler(handlerName, handler);
+        addedHandlers[handlerName] = true;
+    }
+
+    public void RemoveHandler(string handlerName)
+    {
+        if (HasHandler(handlerName))
+        {
+            dialogueRunner.RemoveCommandHandler(handlerName);
+            addedHandlers.Remove(handlerName);
+        }
+    }
+
+    public bool HasHandler(string handlerName)
+    {
+        return addedHandlers.ContainsKey(handlerName);
+    }
+    #endregion
 }

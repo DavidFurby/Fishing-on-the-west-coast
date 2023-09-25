@@ -1,184 +1,91 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static ExplorationController;
-
+[RequireComponent(typeof(ShopHandlers))]
+[RequireComponent(typeof(ShopInputManager))]
+[RequireComponent(typeof(ShopItemSpawner))]
 public class Shop : MonoBehaviour
 {
-    #region Serialized Fields
-    [SerializeField] private ShopItem[] shopItems;
-    [SerializeField] private PlayerCamera playerCamera;
-    [SerializeField] private ExplorationController playerController;
-    [SerializeField] private DialogManager dialogManager;
-    [SerializeField] private ShopHandlers dialogHandlers;
-    [SerializeField] ShopItem emptySpot;
-    private readonly List<Vector3> shopItemPositions = new();
-    [HideInInspector] public bool pauseShoppingControls;
 
-    #endregion
 
     #region Private Fields
-    [HideInInspector] public ShopItem focusedShopItem;
-    private int focusedShopItemIndex = 0;
-    #endregion
+    [HideInInspector] public bool pauseShoppingControls;
+    private Item focusedShopItem;
+    internal int focusedShopItemIndex = 0;
+    internal CameraController cameraController;
+    internal ExplorationController playerController;
+    internal DialogManager dialogManager;
+    private ShopHandlers dialogHandlers;
+    internal ShopItemSpawner itemSpawner;
 
+
+    #endregion
     #region MonoBehaviour Methods
     private void Start()
     {
-        for (int positionIndex = 1; positionIndex <= 6; positionIndex++)
-        {
-            string positionName = "Position " + positionIndex;
-            Transform childTransform = transform.Find(positionName);
-            if (childTransform != null)
-            {
-                Vector3 childPosition = childTransform.position;
-                shopItemPositions.Add(childPosition);
-            }
-        }
-        SpawnItems();
+        InitializeReferences();
+        itemSpawner = GetComponent<ShopItemSpawner>();
+        itemSpawner.InitializeShopItemPositions(transform.Find("ShopPositions"));
+        itemSpawner.SpawnItems();
+        focusedShopItem = itemSpawner.ShopItems[focusedShopItemIndex];
     }
-    private void Update()
+
+    private void InitializeReferences()
     {
-        HandleShoppingInput();
+        if (!TryGetComponent(out dialogHandlers))
+        {
+            Debug.LogError("ShopHandlers component is missing.");
+        }
+        cameraController = FindObjectOfType<CameraController>();
+        playerController = FindObjectOfType<ExplorationController>();
+        dialogManager = FindObjectOfType<DialogManager>();
     }
     #endregion
 
     #region Public Methods
 
-    /// <summary>
-    /// Focuses on an item in the shop.
-    /// </summary>
-    /// 
-
     public void FocusItem()
     {
-        playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.ShoppingItem);
-        playerCamera.SetShopItem(shopItemPositions[focusedShopItemIndex]);
+        cameraController.SetState(new ShopItemCamera(cameraController));
+        cameraController.explorationCamera.SetShopItem(itemSpawner.shopItemPositions[focusedShopItemIndex].transform.position);
     }
 
-    /// <summary>
-    /// Opens the shop.
-    /// </summary>
     public IEnumerator OpenShop()
     {
         yield return new WaitForSeconds(0.5f);
-        playerController.SetPlayerStatus(PlayerStatus.Shopping);
-        playerController.gameObject.SetActive(false);
+        playerController.SetState(new Shopping(playerController));
         FocusItem();
-        UpdateDialog();
+        UpdateShopDialog();
     }
 
-    /// <summary>
-    /// Closes the shop.
-    /// </summary>
-    public void CloseShop()
-    {
-        dialogManager.EndDialog();
-        playerController.SetPlayerStatus(PlayerStatus.StandBy);
-        playerCamera.SetCameraStatus(PlayerCamera.CameraStatus.Player);
-        playerController.gameObject.SetActive(true);
-        focusedShopItemIndex = 0;
-    }
-
-    /// <summary>
-    /// Scrolls between items in the shop.
-    /// </summary>
-    /// <param name="forward">If set to <c>true</c> forward.</param>
-    public void ScrollBetweenItems(bool forward)
-    {
-        focusedShopItemIndex = (focusedShopItemIndex + (forward ? 1 : -1) + shopItems.Length) % shopItems.Length;
-        focusedShopItem = shopItems[focusedShopItemIndex];
-        FocusItem();
-        UpdateDialog();
-    }
     public void BuyItem()
     {
         if (focusedShopItem != null)
         {
-            if (!IsFishingRodInInventory(focusedShopItem))
-            {
-                FishingRod fishingRod = focusedShopItem.gameObject.GetComponent<FishingRod>();
-                fishingRod.AddFishingRodToInstance();
-            }
-            GameObject replacement = Instantiate(gameObject, shopItemPositions[focusedShopItemIndex], focusedShopItem.transform.rotation);
-            replacement.transform.parent = transform.parent;
-            shopItems[focusedShopItemIndex] = replacement.GetComponent<ShopItem>();
-            focusedShopItem = replacement.GetComponent<ShopItem>();
+            MainManager.Instance.Inventory.AddItem(focusedShopItem);
+            ReplaceItemOnSelf();
             FocusItem();
         }
     }
-    public void UpdateDialog()
+
+    private void ReplaceItemOnSelf()
     {
-        dialogManager.EndDialog();
+        GameObject replacement = Instantiate(itemSpawner.emptySpot.model, itemSpawner.shopItemPositions[focusedShopItemIndex].transform.position, focusedShopItem.model.transform.rotation);
+        replacement.transform.parent = transform;
+        focusedShopItem.model = replacement;
+        itemSpawner.ShopItems[focusedShopItemIndex] = itemSpawner.emptySpot;
+    }
+
+
+    public void UpdateShopDialog()
+    {
         dialogHandlers.SetShopItemHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
     }
-    private void HandleShoppingInput()
+
+    public void SetFocusedShopItemIndex(int newIndex)
     {
-        if (playerController.playerStatus == PlayerStatus.Shopping && !pauseShoppingControls)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                ScrollBetweenItems(false);
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                ScrollBetweenItems(true);
-
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                CloseShop();
-            }
-        }
-    }
-    private void SpawnItems()
-    {
-        // Loop through all shop item positions
-        for (int i = 0; i < shopItemPositions.Count; i++)
-        {
-            // Check if the current shop item is a fishing rod and is already in the player's inventory
-            if (IsFishingRodInInventory(shopItems[i]))
-            {
-                // If the fishing rod is already in the player's inventory, spawn an empty spot instead
-                SpawnEmptySpot(i);
-            }
-            else
-            {
-                // Otherwise, spawn the shop item
-                SpawnShopItem(i);
-            }
-        }
-
-        // Set the initial focused shop item
-        focusedShopItem = shopItems[focusedShopItemIndex];
-    }
-
-    private bool IsFishingRodInInventory(ShopItem shopItem)
-    {
-        if (shopItem.gameObject.TryGetComponent<FishingRod>(out var fishingRod))
-        {
-            return MainManager.Instance.game.FoundFishingRods.Any(f => f.Id == fishingRod.Id);
-        }
-        else
-        {
-            return false;
-        }
-
-    }
-
-    private void SpawnEmptySpot(int index)
-    {
-        shopItems[index] = emptySpot;
-        GameObject gameObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
-        gameObject.transform.parent = transform;
-    }
-
-    private void SpawnShopItem(int index)
-    {
-        GameObject newObject = Instantiate(shopItems[index].gameObject, shopItemPositions[index], Quaternion.identity);
-        newObject.transform.parent = transform;
+        focusedShopItemIndex = newIndex;
+        focusedShopItem = itemSpawner.ShopItems[focusedShopItemIndex];
     }
 }
 #endregion

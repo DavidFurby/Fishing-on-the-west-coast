@@ -1,0 +1,115 @@
+﻿title: Neighbor
+tags: 
+colorID: 0
+position: -223,-79
+---
+<<declare $day = 0 as number>>
+
+<<getDayOfMonth>>
+<<if $day is 1>>
+    <<jump DayOne>>
+<<elseif $day is 2>>
+    <<jump DayTwo>>
+<<elseif $day is 3>>
+    <<jump DayThree>>
+<<elseif $day is 4>>
+    <<jump DayFour>>
+<<elseif $day is 5>>
+    <<jump DayFive>>
+<<elseif $day is 6>>
+    <<jump DaySix>>
+<<elseif $day is 7>>
+    <<jump DaySeven>>
+<<endif>>
+===
+
+title: DayOne
+tags:
+colorID: 0
+position: -223,-79
+---
+Companion: Hi there! What do you feel like doing today? #line:0f0599a 
+
+-> Player: I want to go swimming. #line:0aa4ce3 
+    Companion: Okay, let's go swimming. #line:0708ef7 
+    Companion: Where do you want to swim? #line:043f9f1 
+    -> Player: The lake! #line:074bfbe 
+        Companion: Nice! It's a great day for it. #line:0901e25 
+    -> Player: The swimming pool! #line:0aed14e 
+        Companion: Oh, awesome! I heard they installed a new slide. #line:0679c80 
+-> Player: I'd prefer to go hiking. #line:01fe8bc 
+    Companion: Cool, we'll go hiking then. #line:082ef99 
+    
+Player: Sounds good! #line:0b3e227 
+    
+===
+
+title: DayTwo
+tags:
+colorID: 0
+position: -223,-79
+---
+Today is the second day of the month! #line:036e2aa 
+===
+
+title: DayThree
+tags:
+colorID: 0
+position: -223,-79
+---
+Today is the third day of the month! #line:0a82ed5 
+Neightbour: NEti! #line:0663127 
+-> Okay Cool #line:0ae9252 
+-> Not cool #line:02c75eb 
+===
+
+title: DayFour
+tags:
+colorID: 0
+position: -537,1
+---
+Neighbour: Today is the fourth day of the month! #line:004e16e 
+Neightbour: NEti! #line:0823480 
+-> Okay Cool #line:037e0d5 
+-> Not cool #line:0cf6553 
+===
+
+title: DayFive
+tags:
+colorID: 0
+position: 160,393
+---
+Today is the fifth day of the month! #line:066f9bd 
+===
+
+title: DaySix
+tags:
+colorID: 0
+position: -135,172
+---
+Today is the sixth day of the month! #line:0c1777b 
+===
+
+title: DaySeven
+tags:
+colorID: 0
+position: 34,-222
+---
+Today is the seventh day of the month! #line:09d8b6e 
+===
+
+title: DayEight
+tags:
+colorID: 0
+position: 253,151
+---
+Today is the eighth day of the month! #line:0e6bf84 
+===
+
+title: DayNine
+tags:
+colorID: 0
+position: -434,391
+---
+Today is the ninth day of the month! #line:0e0ecff 
+===

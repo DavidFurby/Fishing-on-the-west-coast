@@ -2,13 +2,12 @@
 tags:
 position: 288,-188
 ---
+<<declare $shopItemId = 0 as number>>
 <<declare $shopItemName = "" as string>>
 <<declare $shopItemPrice = 0 as number>>
 <<declare $shopItemDescription = "" as string>>
 <<declare $currentTokens = 0 as number>>
-
-ShopKeeper: Hiya what can i do for you today?
-ShopKeeper: Testing testing
+ShopKeeper: Hiya what can i do for you today? #line:074f25e 
 <<openShop>>
 ===
 
@@ -19,10 +18,10 @@ position: -193,-302
 ---
 <<setShopItem>>
 <<setTokens>>
-<<if $shopItemName == "Empty spot">>
-Sold out
+<<if $shopItemId == 0>>
+<<jump SoldOut>>
 <<else>>
-{$shopItemName}<br>{$shopItemPrice}<br>{$shopItemDescription}
+{$shopItemName}<br>{$shopItemPrice}<br>{$shopItemDescription} #line:03d77ca 
 <<jump ShopItemOptions>>
 <<endif>>
 ===
@@ -32,18 +31,26 @@ colorID: 0
 position: -285,-135
 ---
 <<lockShopControls>>
-ShopKepper: that will be {$shopItemPrice}
-
--> Player: Cool ill buy it
+ShopKepper: that will be {$shopItemPrice} #line:08cee00 
+-> Player: Cool ill buy it #line:0e0b90d 
     <<lockShopControls>>
     <<if $shopItemPrice <= $currentTokens>>
     <<jump BuyItem>>
     <<else>>
     <<jump InsufficentPayment>>
     <<endif>>
--> Player: Think ill skip
+-> Player: Think ill skip #line:05ae444 
     <<lockShopControls>>
     <<jump DeclineItem>>
+===
+
+
+title: SoldOut
+tags:
+colorID: 0
+position: -2,38
+---
+Sold out #line:0e030bc 
 ===
 
 title: BuyItem
@@ -51,8 +58,9 @@ tags:
 colorID: 0
 position: -2,38
 ---
- <<buyShopItem>>
- ShopKepper: Aye thanks matey
+<<buyShopItem>>
+ShopKeeper: Aye thanks matey #line:02a3b7e 
+<<jump SoldOut>>
 ===
 
 title: DeclineItem
@@ -60,7 +68,7 @@ tags:
 colorID: 0
 position: -129,307
 ---
-ShopKepper: Oh maybe next time then
+ShopKepper: Oh maybe next time then #line:0b3e9cf 
 <<jump ShopItem>>
 ===
 title: InsufficentPayment
@@ -68,6 +76,6 @@ tags:
 colorID: 0
 position: -2,38
 ---
-Ohh looks like you don't have enough fishes for that one yet.
+ShopKeeper: Ohh looks like you don't have enough fishes for that one yet. #line:092e479 
 <<jump ShopItem>>
 ===

@@ -5,19 +5,22 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Interactible
   - Character
   - TransitionArea
   - Fish
-  - FishingLine
-  - Sea
   - Key
   - PlayerModel
+  - Interactive
+  - Bait
+  - RodTop
+  - Ocean
+  - Sea
+  - SeaFloor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Post Processing
   - Water
   - UI
   - 

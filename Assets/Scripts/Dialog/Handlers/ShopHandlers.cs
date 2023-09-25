@@ -1,13 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
-using Yarn.Unity;
 
 public class ShopHandlers : MonoBehaviour
 {
-    [SerializeField] private DialogManager dialogManager;
-    [SerializeField] private Shop shop;
+    private DialogManager dialogManager;
+    private Shop shop;
 
     private void Start()
     {
+        shop = GetComponent<Shop>();
+        dialogManager = FindObjectOfType<DialogManager>();
         OpenShopHandler();
         SetTokens();
         LockShopControls();
@@ -16,40 +18,46 @@ public class ShopHandlers : MonoBehaviour
 
     private void OpenShopHandler()
     {
-        dialogManager.AddCommandHandler("openShop", () =>
+        dialogManager.AddHandler("openShop", () =>
         {
             StartCoroutine(shop.OpenShop());
         });
     }
-    public void SetShopItemHandler(ShopItem shopItem)
+
+    public void SetShopItemHandler(Item shopItem)
     {
         dialogManager.RemoveHandler("setShopItem");
-        dialogManager.AddCommandHandler("setShopItem", () =>
+        dialogManager.AddHandler("setShopItem", () =>
         {
-            dialogManager.SetVariableValue("$shopItemName", shopItem.Name);
-            dialogManager.SetVariableValue("$shopItemPrice", shopItem.Price.ToString());
-            dialogManager.SetVariableValue("$shopItemDescription", shopItem.Description);
-
+            dialogManager.SetVariableValue("$shopItemId", shopItem.id);
+            dialogManager.SetVariableValue("$shopItemName", shopItem.itemName);
+            dialogManager.SetVariableValue("$shopItemPrice", shopItem.price);
+            dialogManager.SetVariableValue("$shopItemDescription", shopItem.description);
         });
     }
+
     public void SetTokens()
     {
         dialogManager.RemoveHandler("setTokens");
-        dialogManager.AddCommandHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.game.Catches.ToString()));
+        dialogManager.AddHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.TotalCatches));
     }
+
     //lock controls if item has been selected in shop
     public void LockShopControls()
     {
-        dialogManager.AddCommandHandler("lockShopControls", () =>
+        dialogManager.RemoveHandler("lockShopControls");
+        dialogManager.AddHandler("lockShopControls", () =>
         {
             shop.pauseShoppingControls = !shop.pauseShoppingControls;
         });
     }
+
     private void BuyShopItem()
     {
-        dialogManager.AddCommandHandler("buyShopItem", () =>
+        dialogManager.AddHandler("buyShopItem", () =>
         {
             shop.BuyItem();
         });
     }
+
 }

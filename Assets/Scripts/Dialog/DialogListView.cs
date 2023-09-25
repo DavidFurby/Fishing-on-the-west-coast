@@ -19,13 +19,15 @@ namespace Yarn.Unity
         [SerializeField] bool showUnavailableOptions = false;
 
         // A cached pool of OptionView objects so that we can reuse them
-        List<OptionView> optionViews = new();
+        readonly List<OptionView> optionViews = new();
 
         // The method we should call when an option has been selected.
         Action<int> OnOptionSelected;
 
         // The line we saw most recently.
         LocalizedLine lastSeenLine;
+
+
 
         public void Start()
         {
@@ -50,6 +52,7 @@ namespace Yarn.Unity
 
         public override void RunOptions(DialogueOption[] dialogueOptions, Action<int> onOptionSelected)
         {
+
             // Hide all existing option views
             foreach (var optionView in optionViews)
             {
@@ -62,7 +65,6 @@ namespace Yarn.Unity
                 var optionView = CreateNewOptionView();
                 optionView.gameObject.SetActive(false);
             }
-
             // Set up all of the option views
             int optionViewsCreated = 0;
 

@@ -2,12 +2,33 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    private Animator playerAnimator;
+    [SerializeField] private Animator playerAnimator;
+    private float originalChargingThrowSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerAnimator = GetComponent<Animator>();
+        FishingController.OnStartCharging += OnStartCharging;
+        FishingController.OnChargeRelease += OnChargeRelease;
+        FishingController.OnEnterIdle += ResetChargingThrowSpeed;
+        originalChargingThrowSpeed = playerAnimator.GetFloat("chargingThrowSpeed");
+    }
+
+    void OnDestroy()
+    {
+        FishingController.OnStartCharging -= OnStartCharging;
+        FishingController.OnChargeRelease -= OnChargeRelease;
+        FishingController.OnEnterIdle -= ResetChargingThrowSpeed;
+    }
+
+    private void OnStartCharging()
+    {
+        SetChargingThrowAnimation(true);
+    }
+
+    private void OnChargeRelease()
+    {
+        SetChargingThrowAnimation(false);
     }
 
     public void SetChargingThrowAnimation(bool active)
@@ -17,13 +38,28 @@ public class PlayerAnimations : MonoBehaviour
             playerAnimator.SetBool("chargingThrow", active);
         }
     }
-    public void SetChargingThrowSpeed()
+
+    public void IncreaseChargingThrowSpeed()
     {
-        playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.01f);
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.02f);
+        }
+    }
+
+    public void ResetChargingThrowSpeed()
+    {
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetFloat("chargingThrowSpeed", originalChargingThrowSpeed);
+        }
     }
 
     public void SetPlayerWalkAnimation(bool active)
     {
-        playerAnimator.SetBool("walking", active);
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool("walking", active);
+        }
     }
 }

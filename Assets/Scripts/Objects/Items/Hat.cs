@@ -1,0 +1,29 @@
+using System;
+using System.Linq;
+using UnityEngine;
+
+[Serializable]
+[CreateAssetMenu(fileName = "Hat", menuName = "ScriptableObjects/Hat", order = 1)]
+    public class Hat : Item
+{
+
+    public Hat() : base()
+    {
+        itemTag = ItemTag.Hat;
+    }
+    public void AddHatToInstance()
+    {
+        MainManager.Instance.Inventory.FoundHats =
+            MainManager.Instance.Inventory.FoundHats.Append(this).ToList();
+    }
+    public static Hat SetHat(HatData hatData)
+    {
+        Hat hat = CreateInstance<Hat>();
+        hat.id = hatData.id;
+        hat.itemName = hatData.hatName;
+        hat.description = hatData.description;
+        hat.price = hatData.price;
+        return hat;
+    }
+
+}
