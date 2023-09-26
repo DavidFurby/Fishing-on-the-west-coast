@@ -51,7 +51,7 @@ public class SeaTileManager : MonoBehaviour
     private Vector3 CalculateSpawnPosition()
     {
         if (lastSpawnedTile == null)
-            return Vector3.zero;
+            return new Vector3(0, 0, 390);
         return lastSpawnedTile.transform.localPosition + new Vector3(seaSize.x, 0, 0);
     }
 
