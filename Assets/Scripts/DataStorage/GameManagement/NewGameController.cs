@@ -5,7 +5,6 @@ public class NewGameController : MonoBehaviour
 {
     private const string ItemsPath = "ScriptableObjects/Items/";
 
-    // Initializes a new game by resetting the game state and populating the available items
     public static void InitializeNewGame(Game game)
     {
         bool removed = SaveSystem.NewGame();
@@ -15,21 +14,40 @@ public class NewGameController : MonoBehaviour
             PopulateAvailableItems(game);
             ResetGameState(game);
         }
-        else
-        {
-            // Handle error case when SaveSystem.NewGame() returns false
-        }
     }
 
-    // Populates the available items for the game
     private static void PopulateAvailableItems(Game game)
     {
-        game.Inventory.AvailableRods = Resources.LoadAll<Rod>(ItemsPath + "Rods").OrderBy(r => r.id).ToArray();
-        game.Inventory.AvailableHats = Resources.LoadAll<Hat>(ItemsPath + "Hats").OrderBy(h => h.id).ToArray();
-        game.Inventory.AvailableBaits = Resources.LoadAll<Bait>(ItemsPath + "Baits").OrderBy(b => b.id).ToArray();
+        int currentId = 1;
+
+        game.Inventory.AvailableRods = Resources.LoadAll<Rod>(ItemsPath + "Rods");
+        foreach (var rod in game.Inventory.AvailableRods)
+        {
+            rod.id = currentId;
+            currentId++;
+        }
+        game.Inventory.AvailableRods = game.Inventory.AvailableRods.OrderBy(r => r.rodId).ToArray();
+
+        game.Inventory.AvailableHats = Resources.LoadAll<Hat>(ItemsPath + "Hats");
+        foreach (var hat in game.Inventory.AvailableHats)
+        {
+            hat.id = currentId;
+            currentId++;
+        }
+        game.Inventory.AvailableHats = game.Inventory.AvailableHats.OrderBy(r => r.hatId).ToArray();
+
+        game.Inventory.AvailableBaits = Resources.LoadAll<Bait>(ItemsPath + "Baits");
+        foreach (var bait in game.Inventory.AvailableBaits)
+        {
+            bait.id = currentId;
+            currentId++;
+        }
+        game.Inventory.AvailableBaits = game.Inventory.AvailableBaits.OrderBy(r => r.baitId).ToArray();
+
+        print(game.Inventory.AvailableBaits[0].baitId);
+
     }
 
-    // Resets the game state to its initial values
     private static void ResetGameState(Game game)
     {
         game.Days = 1;

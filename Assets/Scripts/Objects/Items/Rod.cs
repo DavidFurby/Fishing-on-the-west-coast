@@ -6,15 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Rod", menuName = "ScriptableObjects/Rod", order = 1)]
 public class Rod : Item
 {
+    public int rodId;
     public int reelInSpeed;
     public int throwRange;
-
-
-
-    public Rod() : base()
-    {
-        itemTag = ItemTag.Rod;
-    }
 
     public void AddRodToInstance()
     {

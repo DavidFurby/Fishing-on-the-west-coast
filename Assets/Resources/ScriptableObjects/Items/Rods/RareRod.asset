@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: RareRod
   m_EditorClassIdentifier: 
   itemTag: 1
-  id: 2
   itemName: Rare rod
   price: 10
   description: Rarest of rods
   model: {fileID: 143842397030981815, guid: fe8b751336031bd4898d0a22ae3ba0cb, type: 3}
+  rodId: 3
   reelInSpeed: 10
   throwRange: 1000

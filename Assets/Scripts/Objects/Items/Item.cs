@@ -4,7 +4,7 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     [HideInInspector] public ItemTag itemTag = ItemTag.None;
-    public int id = 0;
+    internal int id = 0;
     public string itemName = "";
     public int price = 0;
     public string description = "";
@@ -18,16 +18,16 @@ public class Item : ScriptableObject
         Hat,
     }
 
-public Item CloneItem()
-{
-    Item clone = ScriptableObject.CreateInstance<Item>();
-    clone.itemTag = this.itemTag;
-    clone.id = this.id;
-    clone.itemName = this.itemName;
-    clone.price = this.price;
-    clone.description = this.description;
-    clone.model = this.model;
-    return clone;
-}
+    public Item CloneItem()
+    {
+        Item clone = CreateInstance<Item>();
+        clone.itemTag = itemTag;
+        clone.id = id;
+        clone.itemName = itemName;
+        clone.price = price;
+        clone.description = description;
+        clone.model = model;
+        return clone;
+    }
 
 }

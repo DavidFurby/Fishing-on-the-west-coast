@@ -27,11 +27,11 @@ public class GameData
         experience = game.PlayerLevel.Exp;
         scene = game.Scene.ToString();
         foundCatchesId = game.CaughtFishes.Select(fish => fish.id).ToArray();
-        foundRodsId = game.Inventory.FoundRods.Select(rod => rod.id).ToArray();
-        equippedRodId = game.Inventory.EquippedRod.id;
-        foundBaitsId = game.Inventory.FoundBaits.Select(bait => bait.id).ToArray();
-        equippedBaitId = game.Inventory.EquippedBait.id;
-        foundHatsId = game.Inventory.FoundHats.Select(hat => hat.id).ToArray();
-        equippedHatId = game.Inventory.EquippedHat.id;
+        foundRodsId = game.Inventory.FoundRods.Select(rod => rod.rodId).ToArray();
+        equippedRodId = game.Inventory.EquippedRod.rodId;
+        foundBaitsId = game.Inventory.FoundBaits.Select(bait => bait.baitId).ToArray();
+        equippedBaitId = game.Inventory.EquippedBait.baitId;
+        foundHatsId = game.Inventory.FoundHats.Select(hat => hat.hatId).ToArray();
+        equippedHatId = game.Inventory.EquippedHat.hatId;
     }
 }

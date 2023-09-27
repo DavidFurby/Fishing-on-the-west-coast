@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
         {
             mainMenu.SetActive(true);
         }
-        if (MainManager.Instance.Scene == "")
+        if (MainManager.Instance.Scene == null)
         {
             continueButton.SetActive(false);
         }

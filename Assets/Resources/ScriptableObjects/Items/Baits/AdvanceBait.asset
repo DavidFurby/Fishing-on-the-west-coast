@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: AdvanceBait
   m_EditorClassIdentifier: 
   itemTag: 2
-  id: 2
   itemName: Advance bait
   price: 0
   description: A more advanced bait
   model: {fileID: 1903607795261860847, guid: b7db0e9844093d34583ef6957b933b9e, type: 3}
+  baitId: 2
   level: 2
