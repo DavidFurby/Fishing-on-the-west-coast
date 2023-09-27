@@ -20,15 +20,4 @@ public class Rod : Item
     {
         MainManager.Instance.Inventory.FoundRods = MainManager.Instance.Inventory.FoundRods.Append(this).ToList();
     }
-    public static Rod SetRod(RodData rodData)
-    {
-        Rod rod = CreateInstance<Rod>();
-        rod.id = rodData.id;
-        rod.itemName = rodData.rodName;
-        rod.description = rodData.description;
-        rod.price = rodData.price;
-        rod.reelInSpeed = rodData.reelInSpeed;
-        rod.throwRange = rodData.throwRange;
-        return rod;
-    }
 }

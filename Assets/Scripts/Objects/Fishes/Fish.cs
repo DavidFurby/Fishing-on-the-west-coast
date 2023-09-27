@@ -30,16 +30,4 @@ public class Fish : ScriptableObject
     {
         MainManager.Instance.CaughtFishes[index] = this;
     }
-
-    public static Fish SetFish(FishData fishData)
-    {
-        Fish fish = CreateInstance<Fish>();
-        fish.id = fishData.id;
-        fish.name = fishData.name;
-        fish.description = fishData.description;
-        fish.size = fishData.size;
-        fish.level = fishData.level;
-        fish.exp = fishData.exp;
-        return fish;
-    }
 }

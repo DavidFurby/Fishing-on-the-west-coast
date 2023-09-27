@@ -16,14 +16,5 @@ using UnityEngine;
         MainManager.Instance.Inventory.FoundHats =
             MainManager.Instance.Inventory.FoundHats.Append(this).ToList();
     }
-    public static Hat SetHat(HatData hatData)
-    {
-        Hat hat = CreateInstance<Hat>();
-        hat.id = hatData.id;
-        hat.itemName = hatData.hatName;
-        hat.description = hatData.description;
-        hat.price = hatData.price;
-        return hat;
-    }
 
 }

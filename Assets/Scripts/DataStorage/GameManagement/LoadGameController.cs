@@ -14,7 +14,7 @@ public class LoadGameController : MonoBehaviour
         game.BestDistance = gameData.bestDistance;
         game.Scene = gameData.scene;
         game.AvailableFishes = Resources.LoadAll<Fish>("ScriptableObjects/Fishes");
-        game.CaughtFishes = gameData.foundCatches.Select(fishData => Fish.SetFish(fishData)).ToList();
+        game.CaughtFishes = gameData.foundCatchesId.Select((int catchId) => game.AvailableFishes.First((Fish fish) => fish.id == catchId)).ToList();
         game.PlayerLevel.SetPlayerLevel(gameData.level, gameData.experience);
         LoadRod(game, gameData);
         LoadBait(game, gameData);
@@ -24,24 +24,24 @@ public class LoadGameController : MonoBehaviour
 
     private static void LoadHats(Game game, GameData gameData)
     {
-        game.Inventory.AvailableHats = Resources.LoadAll<Hat>(ItemsPath + "Hats");
-        game.Inventory.FoundHats = gameData.foundHats.Select(hatData =>
-            Hat.SetHat(hatData)
+        game.Inventory.AvailableHats = Resources.LoadAll<Hat>(ItemsPath + "Hats").OrderBy(r => r.id).ToArray();
+        game.Inventory.FoundHats = gameData.foundHatsId.Select((int hatId) =>
+            game.Inventory.AvailableHats.First((Hat hat) => hat.id == hatId)
             ).ToList();
-        game.Inventory.EquippedHat = game.Inventory.FoundHats.First((hat) => hat.id == gameData.equippedHat.id);
+        game.Inventory.EquippedHat = game.Inventory.FoundHats.First((hat) => hat.id == gameData.equippedHatId);
     }
 
     private static void LoadBait(Game game, GameData gameData)
     {
-        game.Inventory.AvailableBaits = Resources.LoadAll<Bait>(ItemsPath + "Baits");
-        game.Inventory.FoundBaits = gameData.foundBaits.Select(baitData => Bait.SetBait(baitData)).ToList();
-        game.Inventory.EquippedBait = game.Inventory.FoundBaits.First((bait) => bait.id == gameData.equippedBait.id);
+        game.Inventory.AvailableBaits = Resources.LoadAll<Bait>(ItemsPath + "Baits").OrderBy(r => r.id).ToArray();
+        game.Inventory.FoundBaits = gameData.foundBaitsId.Select((int baitId) => game.Inventory.AvailableBaits.First((Bait bait) => bait.id == baitId)).ToList();
+        game.Inventory.EquippedBait = game.Inventory.FoundBaits.First((bait) => bait.id == gameData.equippedBaitId);
     }
 
     private static void LoadRod(Game game, GameData gameData)
     {
-        game.Inventory.AvailableRods = Resources.LoadAll<Rod>(ItemsPath + "Rods");
-        game.Inventory.FoundRods = gameData.foundRods.Select((rodData) => Rod.SetRod((rodData))).ToList();
-        game.Inventory.EquippedRod = game.Inventory.FoundRods.First((rod) => rod.id == gameData.equippedRod?.id);
+        game.Inventory.AvailableRods = Resources.LoadAll<Rod>(ItemsPath + "Rods").OrderBy(r => r.id).ToArray();
+        game.Inventory.FoundRods = gameData.foundRodsId.Select((int rodId) => game.Inventory.AvailableRods.First((Rod rod) => rod.id == rodId)).ToList();
+        game.Inventory.EquippedRod = game.Inventory.FoundRods.First((rod) => rod.id == gameData.equippedRodId);
     }
 }
