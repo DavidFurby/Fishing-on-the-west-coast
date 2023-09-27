@@ -23,7 +23,7 @@ public class MainManager : Game
     }
     private void OnApplicationQuit()
     {
-        if (Instance != null)
+        if (Instance != null && SceneManager.GetActiveScene().name != "MainMenu")
         {
             Instance.SaveGame();
 
