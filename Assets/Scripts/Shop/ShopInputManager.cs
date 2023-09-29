@@ -10,11 +10,11 @@ public class ShopInputManager : MonoBehaviour
     }
     void OnEnable()
     {
-        ExplorationController.NavigateShop += HandleShoppingInput;
+        PlayerController.NavigateShop += HandleShoppingInput;
     }
     void OnDestroy()
     {
-        ExplorationController.NavigateShop -= HandleShoppingInput;
+        PlayerController.NavigateShop -= HandleShoppingInput;
     }
 
     public void HandleShoppingInput()
@@ -47,7 +47,7 @@ public class ShopInputManager : MonoBehaviour
     private void CloseShop()
     {
         shop.dialogManager.EndDialog();
-        shop.playerController.SetState(new ExplorationIdle(shop.playerController));
+        PlayerController.Instance.SetState(new ExplorationIdle());
         shop.cameraController.SetState(new PlayerCamera(shop.cameraController));
         shop.SetFocusedShopItemIndex(0);
     }

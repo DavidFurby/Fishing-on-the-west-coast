@@ -12,7 +12,6 @@ public class Shop : MonoBehaviour
     private Item focusedShopItem;
     internal int focusedShopItemIndex = 0;
     internal CameraController cameraController;
-    internal ExplorationController playerController;
     internal DialogManager dialogManager;
     private ShopHandlers dialogHandlers;
     internal ShopItemSpawner itemSpawner;
@@ -36,7 +35,6 @@ public class Shop : MonoBehaviour
             Debug.LogError("ShopHandlers component is missing.");
         }
         cameraController = FindObjectOfType<CameraController>();
-        playerController = FindObjectOfType<ExplorationController>();
         dialogManager = FindObjectOfType<DialogManager>();
     }
     #endregion
@@ -52,7 +50,7 @@ public class Shop : MonoBehaviour
     public IEnumerator OpenShop()
     {
         yield return new WaitForSeconds(0.5f);
-        playerController.SetState(new Shopping(playerController));
+        PlayerController.Instance.SetState(new Shopping());
         FocusItem();
         UpdateShopDialog();
     }

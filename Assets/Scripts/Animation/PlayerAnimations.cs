@@ -5,20 +5,19 @@ public class PlayerAnimations : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     private float originalChargingThrowSpeed;
 
-    // Start is called before the first frame update
     void Start()
     {
-        FishingController.OnStartCharging += OnStartCharging;
-        FishingController.OnChargeRelease += OnChargeRelease;
-        FishingController.OnEnterIdle += ResetChargingThrowSpeed;
+        PlayerEventController.OnStartCharging += OnStartCharging;
+        PlayerEventController.OnEnterSwinging += OnChargeRelease;
+        PlayerEventController.OnEnterIdle += ResetChargingThrowSpeed;
         originalChargingThrowSpeed = playerAnimator.GetFloat("chargingThrowSpeed");
     }
 
     void OnDestroy()
     {
-        FishingController.OnStartCharging -= OnStartCharging;
-        FishingController.OnChargeRelease -= OnChargeRelease;
-        FishingController.OnEnterIdle -= ResetChargingThrowSpeed;
+        PlayerEventController.OnStartCharging -= OnStartCharging;
+        PlayerEventController.OnEnterSwinging -= OnChargeRelease;
+        PlayerEventController.OnEnterIdle -= ResetChargingThrowSpeed;
     }
 
     private void OnStartCharging()

@@ -27,16 +27,16 @@ public class Balance : MonoBehaviour
     private void SubscribeEvents()
     {
 
-        FishingController.OnEnterReelingFish += StartBalanceMiniGame;
-        FishingController.OnReelingFish += MiniGameHandler;
-        FishingController.OnExitReelingFish += EndBalanceMiniGame;
+        PlayerEventController.OnEnterReelingFish += StartBalanceMiniGame;
+        PlayerEventController.OnReelingFish += MiniGameHandler;
+        PlayerEventController.OnExitReelingFish += EndBalanceMiniGame;
     }
 
     private void UnsubscribeEvents()
     {
-        FishingController.OnEnterReelingFish -= StartBalanceMiniGame;
-        FishingController.OnReelingFish -= MiniGameHandler;
-        FishingController.OnExitReelingFish -= EndBalanceMiniGame;
+        PlayerEventController.OnEnterReelingFish -= StartBalanceMiniGame;
+        PlayerEventController.OnReelingFish -= MiniGameHandler;
+        PlayerEventController.OnExitReelingFish -= EndBalanceMiniGame;
     }
 
     public void MiniGameHandler()
@@ -49,11 +49,11 @@ public class Balance : MonoBehaviour
     #region Balance
     private void CalculateBalance()
     {
-        if (FishingController.Instance.fishesOnHook.Count > 0)
+        if (PlayerController.Instance.fishesOnHook.Count > 0)
         {
             float weight = 0f;
 
-            foreach (var fish in FishingController.Instance.fishesOnHook)
+            foreach (var fish in PlayerController.Instance.fishesOnHook)
             {
                 weight += fish.fish.size;
             }
@@ -96,7 +96,7 @@ public class Balance : MonoBehaviour
     {
         if (reelingBalance.value <= 0f || reelingBalance.value >= 1f)
         {
-            FishingController.Instance.LoseCatch();
+            PlayerController.Instance.LoseCatch();
         }
     }
     #endregion

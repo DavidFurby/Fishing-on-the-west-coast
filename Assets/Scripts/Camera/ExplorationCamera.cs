@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class ExplorationCamera : MonoBehaviour
 {
-    ExplorationController player;
+    PlayerController player;
     private Vector3 shopItemPosition;
 
     private void Start()
     {
-        player = FindAnyObjectByType<ExplorationController>();
+        player = FindAnyObjectByType<PlayerController>();
     }
 
     internal void FollowPlayer()

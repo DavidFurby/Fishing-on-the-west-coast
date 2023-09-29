@@ -20,18 +20,18 @@ public class FishSpawner : MonoBehaviour
     }
     private void SubscribeToEvents()
     {
-        FishingEventController.OnEnterIdle += StopSpawnFish;
-        FishingEventController.OnEnterIdle += RemoveAllFishes;
-        FishingEventController.OnEnterFishing += InvokeSpawnFish;
+        PlayerEventController.OnEnterIdle += StopSpawnFish;
+        PlayerEventController.OnEnterIdle += RemoveAllFishes;
+        PlayerEventController.OnEnterFishing += InvokeSpawnFish;
         BaitLogic.UpdatePosition += SetTargetPosition;
 
     }
 
     private void UnsubscribeFromEvents()
     {
-        FishingEventController.OnEnterIdle -= StopSpawnFish;
-        FishingEventController.OnEnterIdle -= RemoveAllFishes;
-        FishingEventController.OnEnterFishing -= InvokeSpawnFish;
+        PlayerEventController.OnEnterIdle -= StopSpawnFish;
+        PlayerEventController.OnEnterIdle -= RemoveAllFishes;
+        PlayerEventController.OnEnterFishing -= InvokeSpawnFish;
         BaitLogic.UpdatePosition -= SetTargetPosition;
 
     }

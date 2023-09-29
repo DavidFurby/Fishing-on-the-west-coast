@@ -1,33 +1,71 @@
 using UnityEngine;
 using System;
 
-public class ExplorationController : ExplorationStateMachine
+public class PlayerController : FishingController
 {
-
+    public static PlayerController Instance { get; private set; }
     private PlayerAnimations playerAnimations;
     private Interactive interactive;
     private readonly int movementSpeed = 10;
     public static event Action NavigateShop;
     public static event Action OpenItemMenu;
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
     private void OnEnable()
     {
-        DialogManager.OnEndDialog += RaiseEndDialog;
         FishingSpot.StartFishing += RaiseStartFishing;
+        SubscribeToEvents();
     }
     void Start()
     {
         playerAnimations = GetComponentInChildren<PlayerAnimations>();
-        SetState(new ExplorationIdle(this));
+        SetState(new ExplorationIdle());
 
     }
 
     private void OnDestroy()
     {
-        DialogManager.OnEndDialog -= RaiseEndDialog;
         FishingSpot.StartFishing -= RaiseStartFishing;
+        UnsubscribeFromEvents();
+
     }
 
+    private void SubscribeToEvents()
+    {
+        WaterCollision.OnEnterSea += EnterSea;
+        FishingSpot.StartFishing += () => SetState(new FishingIdle());
+        OnEnterReelingFish += CatchFish;
+        OnEnterReelingFish += () => SetState(new ReelingFish());
+        OnEnterIdle += ResetValues;
+        OnWhileCharging += ChargeCasting;
+        OnWhileCharging += Release;
+        OnWhileFishing += StartReeling;
+
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        WaterCollision.OnEnterSea -= EnterSea;
+        FishingSpot.StartFishing -= () => SetState(new FishingIdle());
+        OnEnterReelingFish -= CatchFish;
+        OnEnterReelingFish -= () => SetState(new ReelingFish());
+        OnEnterIdle -= ResetValues;
+        OnWhileCharging -= ChargeCasting;
+        OnWhileCharging -= Release;
+        OnWhileFishing -= StartReeling;
+
+    }
     public void HandleInput()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -80,13 +118,11 @@ public class ExplorationController : ExplorationStateMachine
 
     public void RaiseNavigateShopEvent() => NavigateShop?.Invoke();
 
-    public void RaiseEndDialog() => SetState(new ExplorationIdle(this));
-
-    public void RaiseStartFishing() => SetState(new StartFishing(this));
+    public void RaiseStartFishing() => SetState(new FishingIdle());
 
     private void ActivateInteractive()
     {
-        SetState(new Interacting(this));
+        SetState(new Interacting());
         interactive.StartInteraction();
     }
 }

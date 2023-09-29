@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopHandlers : MonoBehaviour
@@ -42,7 +41,6 @@ public class ShopHandlers : MonoBehaviour
         dialogManager.AddHandler("setTokens", () => dialogManager.SetVariableValue("$currentTokens", MainManager.Instance.TotalCatches));
     }
 
-    //lock controls if item has been selected in shop
     public void LockShopControls()
     {
         dialogManager.RemoveHandler("lockShopControls");

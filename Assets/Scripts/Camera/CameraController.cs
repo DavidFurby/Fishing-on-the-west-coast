@@ -26,11 +26,11 @@ public class CameraController : CameraStateMachine
 
     private void OnEnable()
     {
-        FishingEventController.OnEnterFishing += EnterFishingState;
-        FishingEventController.OnEnterReelingFish += EnterReelingFishState;
-        FishingEventController.OnEnterCasting += EnterCastingState;
-        FishingEventController.OnEnterInspecting += EnterPlayerState;
-        FishingEventController.OnEnterReeling += EnterPlayerState;
+        PlayerEventController.OnEnterFishing += EnterFishingState;
+        PlayerEventController.OnEnterReelingFish += EnterReelingFishState;
+        PlayerEventController.OnEnterCasting += EnterCastingState;
+        PlayerEventController.OnEnterSummary += EnterPlayerState;
+        PlayerEventController.OnEnterReeling += EnterPlayerState;
     }
 
     void Start()
@@ -43,11 +43,11 @@ public class CameraController : CameraStateMachine
 
     void OnDestroy()
     {
-        FishingEventController.OnEnterFishing -= EnterFishingState;
-        FishingEventController.OnEnterReelingFish -= EnterReelingFishState;
-        FishingEventController.OnEnterCasting -= EnterCastingState;
-        FishingEventController.OnEnterInspecting -= EnterPlayerState;
-        FishingEventController.OnEnterReeling -= EnterPlayerState;
+        PlayerEventController.OnEnterFishing -= EnterFishingState;
+        PlayerEventController.OnEnterReelingFish -= EnterReelingFishState;
+        PlayerEventController.OnEnterCasting -= EnterCastingState;
+        PlayerEventController.OnEnterSummary -= EnterPlayerState;
+        PlayerEventController.OnEnterReeling -= EnterPlayerState;
     }
 
     public void SetCameraToTarget(Transform target, float YValue = 0)

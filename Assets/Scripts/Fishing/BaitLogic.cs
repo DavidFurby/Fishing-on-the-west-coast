@@ -22,19 +22,19 @@ public class BaitLogic : MonoBehaviour
         splashSound = GetComponent<AudioSource>();
         rigidBody = GetComponent<Rigidbody>();
         rodTop = GameObject.FindGameObjectWithTag("RodTop");
-        FishingEventController.OnWhileReelingBait += ReelIn;
-        FishingEventController.OnWhileCasting += Cast;
+        PlayerEventController.OnWhileReelingBait += ReelIn;
+        PlayerEventController.OnWhileCasting += Cast;
         WaterCollision.OnEnterSea += PlaySplashSound;
-        FishingEventController.OnWhileFishing += PullBaitTowardsTarget;
+        PlayerEventController.OnWhileFishing += PullBaitTowardsTarget;
         AttachBait();
     }
 
     private void OnDestroy()
     {
-        FishingEventController.OnWhileReelingBait -= ReelIn;
-        FishingEventController.OnWhileCasting -= Cast;
+        PlayerEventController.OnWhileReelingBait -= ReelIn;
+        PlayerEventController.OnWhileCasting -= Cast;
         WaterCollision.OnEnterSea -= PlaySplashSound;
-        FishingEventController.OnWhileFishing -= PullBaitTowardsTarget;
+        PlayerEventController.OnWhileFishing -= PullBaitTowardsTarget;
     }
 
     private void Update()
@@ -71,7 +71,7 @@ public class BaitLogic : MonoBehaviour
     private void Cast()
     {
         DetachBait();
-        rigidBody.AddForceAtPosition(forceFactor * FishingController.Instance.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
+        rigidBody.AddForceAtPosition(forceFactor * PlayerController.Instance.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
         if (forceFactor > 0)
         {
             forceFactor -= 0.1f;
@@ -85,9 +85,9 @@ public class BaitLogic : MonoBehaviour
         if (IsCloseToTarget(targetPosition, 4))
         {
             AttachBait();
-            SetState(FishingController.Instance);
+            SetState(PlayerController.Instance);
         }
-        else if (IsFarFromTarget(targetPosition, 100) && FishingController.Instance.GetCurrentState() is Reeling)
+        else if (IsFarFromTarget(targetPosition, 100) && PlayerController.Instance.GetCurrentState() is Reeling)
         {
             transform.position = new Vector3(targetPosition.x + 50, transform.position.y, targetPosition.z);
         }
@@ -110,7 +110,7 @@ public class BaitLogic : MonoBehaviour
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
-        rigidBody.AddForce(FishingController.Instance.reelInSpeed * MainManager.Instance.Inventory.EquippedRod.reelInSpeed * direction, ForceMode.Impulse);
+        rigidBody.AddForce(PlayerController.Instance.reelInSpeed * MainManager.Instance.Inventory.EquippedRod.reelInSpeed * direction, ForceMode.Impulse);
         float newY = transform.position.y + balance.GetBalanceValue() * Time.deltaTime * (balance.GetBalanceValue() >= 0.5 ? 1 : -1);
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
@@ -125,7 +125,7 @@ public class BaitLogic : MonoBehaviour
             IsPulling = false;
             if (IsCloseToTarget(targetPosition, 20))
             {
-                FishingController.Instance.SetState(new Reeling());
+                PlayerController.Instance.SetState(new Reeling());
             }
         }
     }

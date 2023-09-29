@@ -1,76 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishingController : FishingEventController
+public class FishingController : PlayerEventController
 {
-    public static FishingController Instance { get; private set; }
-    [HideInInspector] internal FishDisplay FishAttachedToBait { get; set; }
-    [HideInInspector] internal List<FishDisplay> fishesOnHook = new();
-    [HideInInspector] internal float chargeLevel = 1;
-    [HideInInspector] internal float reelInSpeed;
-    [HideInInspector] internal float castingPower;
-    [HideInInspector] internal float initialCastingPower = 20;
-    [HideInInspector] internal float initialReelInSpeed = 5f;
-
-    [HideInInspector] internal bool IsInCatchArea { get; set; }
-
-    [HideInInspector] internal bool FishIsBaited { get; set; }
-
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
-    private void Start()
-    {
-        SetState(new NotFishing());
-    }
-
-    void OnEnable()
-    {
-        SubscribeToEvents();
-    }
-
-    private void OnDestroy()
-    {
-        UnsubscribeFromEvents();
-    }
-
-    private void SubscribeToEvents()
-    {
-        WaterCollision.OnEnterSea += EnterSea;
-        FishingSpot.StartFishing += () => SetState(new FishingIdle());
-        OnEnterReelingFish += CatchFish;
-        OnEnterReelingFish += () => SetState(new ReelingFish());
-        OnEnterIdle += ResetValues;
-        OnWhileCharging += Release;
-        OnWhileFishing += StartReeling;
-        OnWhileCharging += ChargeCasting;
-
-    }
-
-    private void UnsubscribeFromEvents()
-    {
-        WaterCollision.OnEnterSea -= EnterSea;
-        FishingSpot.StartFishing -= () => SetState(new FishingIdle());
-        OnEnterReelingFish -= CatchFish;
-        OnEnterReelingFish -= () => SetState(new ReelingFish());
-        OnEnterIdle -= ResetValues;
-        OnWhileCharging -= Release;
-        OnWhileFishing -= StartReeling;
-        OnWhileCharging -= ChargeCasting;
-
-    }
+    internal FishDisplay FishAttachedToBait { get; set; }
+    internal List<FishDisplay> fishesOnHook = new();
+    internal float chargeLevel = 1;
+    internal float reelInSpeed;
+    internal float castingPower;
+    internal float initialCastingPower = 20;
+    internal float initialReelInSpeed = 5f;
+    internal bool IsInCatchArea { get; set; }
+    internal bool FishIsBaited { get; set; }
 
     #region Public Methods
 
@@ -91,9 +32,9 @@ public class FishingController : FishingEventController
 
     public void StartCharging()
     {
+
         if (Input.GetKey(KeyCode.Space))
         {
-            RaiseStartCharging();
             SetState(new Charging());
         }
     }

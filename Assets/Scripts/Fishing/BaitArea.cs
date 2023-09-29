@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class BaitArea : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (FishingController.Instance != null && collider.CompareTag("Fish") && !FishingController.Instance.FishIsBaited)
+        if (PlayerController.Instance != null && collider.CompareTag("Fish") && !PlayerController.Instance.FishIsBaited)
         {
             TryBaitingFish(collider, baitLogic.gameObject);
         }
@@ -25,7 +24,7 @@ public class BaitArea : MonoBehaviour
     private void OnTriggerStay(Collider collider)
     {
         // Check if the bait is being pulled and if the collider is a fish
-        if (baitLogic.IsPulling && FishingController.Instance != null && collider.CompareTag("Fish") && !FishingController.Instance.FishIsBaited)
+        if (baitLogic.IsPulling && PlayerController.Instance != null && collider.CompareTag("Fish") && !PlayerController.Instance.FishIsBaited)
         {
             // Call the TryBaitingFish method
             TryBaitingFish(collider, baitLogic.gameObject);
@@ -34,12 +33,12 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && FishingController.Instance.FishIsBaited)
+        if (other.CompareTag("Fish") && PlayerController.Instance.FishIsBaited)
         {
             FishMovement fishMovement = other.GetComponent<FishMovement>();
             if (fishMovement != null && fishMovement.GetCurrentState() is Baited)
             {
-                FishingController.Instance.FishIsBaited = false;
+                PlayerController.Instance.FishIsBaited = false;
                 fishMovement.SetState(new Swimming(fishMovement));
             }
         }
@@ -50,10 +49,11 @@ public class BaitArea : MonoBehaviour
         FishMovement fishMovement = collider.GetComponent<FishMovement>();
         FishDisplay fish = collider.GetComponent<FishDisplay>();
         float probability = GetProbability(fish.fish.level, MainManager.Instance.Inventory.EquippedBait.level);
-        if (UnityEngine.Random.Range(0f, 1f) < probability)
+        if (
+            Random.Range(0f, 1f) < probability)
         {
             fishMovement.GetBaited(target);
-            FishingController.Instance.FishIsBaited = true;
+            PlayerController.Instance.FishIsBaited = true;
         }
     }
 

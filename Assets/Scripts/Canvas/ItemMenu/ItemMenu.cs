@@ -45,14 +45,14 @@ public class ItemMenu : MonoBehaviour
 
     private void SubscribeToEvents()
     {
-        ExplorationController.OpenItemMenu += HandleInputs;
+        PlayerController.OpenItemMenu += HandleInputs;
         ItemScroll.OnSetCenterItem += UpdateItemText;
 
     }
 
     private void UnsubscribeFromEvents()
     {
-        ExplorationController.OpenItemMenu -= HandleInputs;
+        PlayerController.OpenItemMenu -= HandleInputs;
         ItemScroll.OnSetCenterItem -= UpdateItemText;
     }
 

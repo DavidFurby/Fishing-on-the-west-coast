@@ -10,9 +10,9 @@ public class RodLogic : MonoBehaviour
 
     void OnEnable()
     {
-        FishingController.OnChargeRelease += WaitForSwingAnimation;
-        FishingController.OnEnterReeling += ReelInSpeed;
-        FishingController.OnChargeRelease += PlaySwingAudio;
+        PlayerEventController.OnEnterSwinging += WaitForSwingAnimation;
+        PlayerEventController.OnEnterReeling += ReelInSpeed;
+        PlayerEventController.OnEnterSwinging += PlaySwingAudio;
         CatchArea.OnCatchWhileReeling += CalculateReelInSpeed;
 
     }
@@ -24,9 +24,9 @@ public class RodLogic : MonoBehaviour
 
     void OnDestroy()
     {
-        FishingController.OnChargeRelease -= WaitForSwingAnimation;
-        FishingController.OnEnterReeling -= ReelInSpeed;
-        FishingController.OnChargeRelease -= PlaySwingAudio;
+        PlayerEventController.OnEnterSwinging -= WaitForSwingAnimation;
+        PlayerEventController.OnEnterReeling -= ReelInSpeed;
+        PlayerEventController.OnEnterSwinging -= PlaySwingAudio;
         CatchArea.OnCatchWhileReeling -= CalculateReelInSpeed;
 
     }
@@ -36,27 +36,22 @@ public class RodLogic : MonoBehaviour
         OnTriggerSetChargingBalance?.Invoke();
     }
 
-    // Calculate the reel in speed based on the size of the caught fishes
     public void CalculateReelInSpeed()
     {
-        foreach (FishDisplay @catch in FishingController.Instance.fishesOnHook)
+        foreach (FishDisplay @catch in PlayerController.Instance.fishesOnHook)
         {
-            FishingController.Instance.reelInSpeed = (FishingController.Instance.initialReelInSpeed * MainManager.Instance.PlayerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
+            PlayerController.Instance.reelInSpeed = (PlayerController.Instance.initialReelInSpeed * MainManager.Instance.PlayerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
         }
     }
 
-    // Set the reel in speed to a fixed value
     public void ReelInSpeed()
     {
-        FishingController.Instance.reelInSpeed = 50;
+        PlayerController.Instance.reelInSpeed = 50;
     }
 
-
-
-    // Play the swing animation and wait for it to finish
     private IEnumerator SwingAnimation()
     {
-        FishingController.Instance.castingPower *= FishingController.Instance.chargeLevel * MainManager.Instance.PlayerLevel.ThrowRangeModifier();
+        PlayerController.Instance.castingPower *= PlayerController.Instance.chargeLevel * MainManager.Instance.PlayerLevel.ThrowRangeModifier();
         while (!rodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
             yield return null;
@@ -65,10 +60,9 @@ public class RodLogic : MonoBehaviour
         {
             yield return null;
         }
-        FishingController.Instance.SetState(new Casting());
+        PlayerController.Instance.SetState(new Casting());
     }
 
-    // Play the reverse swing animation
     public void PlayerReverseSwingAnimation()
     {
         rodAnimations.PlayReversSwingAnimation();

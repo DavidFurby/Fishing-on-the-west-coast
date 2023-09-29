@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using Yarn.Unity;
 public class CatchSummaryHandlers : MonoBehaviour
 
 {
@@ -21,7 +19,6 @@ public class CatchSummaryHandlers : MonoBehaviour
 
     public void SetCatchSummaryHandler(Fish catchResult)
     {
-        dialogManager.RemoveHandler("setCatchSummary");
         dialogManager.AddCommandHandler("setCatchSummary", () =>
         {
             dialogManager.SetVariableValue("$catchName", catchResult.name);
@@ -29,9 +26,5 @@ public class CatchSummaryHandlers : MonoBehaviour
             dialogManager.SetVariableValue("$catchDescription", catchResult.description);
 
         });
-    }
-    public void EndSummary()
-    {
-        dialogManager.EndDialog();
     }
 }

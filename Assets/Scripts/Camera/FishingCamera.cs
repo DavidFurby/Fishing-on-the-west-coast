@@ -23,14 +23,14 @@ public class FishingCamera : MonoBehaviour
     {
         if (subscribe)
         {
-            FishingEventController.OnEndSummary += OnEndSummary;
-            FishingEventController.OnEnterReelingFish += OnEnterReelingFish;
+            PlayerEventController.OnEndSummary += OnEndSummary;
+            PlayerEventController.OnEnterReelingFish += OnEnterReelingFish;
             CatchArea.OnCatchWhileReeling += OnCatchWhileReeling;
         }
         else
         {
-            FishingEventController.OnEndSummary -= OnEndSummary;
-            FishingEventController.OnEnterReelingFish -= OnEnterReelingFish;
+            PlayerEventController.OnEndSummary -= OnEndSummary;
+            PlayerEventController.OnEnterReelingFish -= OnEnterReelingFish;
             CatchArea.OnCatchWhileReeling -= OnCatchWhileReeling;
         }
     }

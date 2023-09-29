@@ -30,14 +30,6 @@ public abstract class StateMachine : MonoBehaviour
     }
 }
 
-public class ExplorationStateMachine : StateMachine
-{
-    public void SetState(ExplorationState state)
-    {
-        base.SetState(state);
-    }
-}
-
 public class FishStateMachine : StateMachine
 {
 
@@ -47,9 +39,9 @@ public class FishStateMachine : StateMachine
     }
 }
 
-public abstract class FishingStateMachine : StateMachine
+public abstract class PlayerStateMachine : StateMachine
 {
-    public void SetState(FishingState state)
+    public void SetState(PlayerState state)
     {
         base.SetState(state);
     }

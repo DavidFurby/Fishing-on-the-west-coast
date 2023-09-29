@@ -26,11 +26,11 @@ public class CatchSummary : MonoBehaviour
         UnsubscribeFromEvents();
     }
 
-    public void InitiateCatchSummary()
+    private void InitiateCatchSummary()
     {
-        if (FishingController.Instance.fishesOnHook.Count <= 0)
+        if (PlayerController.Instance.fishesOnHook.Count <= 0)
         {
-            Debug.LogError($"{nameof(FishingController.Instance.fishesOnHook)} is empty");
+            Debug.LogError($"{nameof(PlayerController.Instance.fishesOnHook)} is empty");
             return;
         }
         SetCurrentlyDisplayedFish();
@@ -38,7 +38,7 @@ public class CatchSummary : MonoBehaviour
         summaryDialogHandlers.StartSummary(currentlyDisplayedFish.fish);
     }
 
-    public void NextSummary()
+    private void NextSummary()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -49,24 +49,20 @@ public class CatchSummary : MonoBehaviour
                 UpdateDataValues();
                 summaryDialogHandlers.StartSummary(currentlyDisplayedFish.fish);
             }
-            else
-            {
-                FishingController.Instance.SetState(new FishingIdle());
-            }
         }
-    }
 
-    public void EndSummary()
-    {
-        ResetValues();
-        summaryDialogHandlers.EndSummary();
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            PlayerController.Instance.SetState(new FishingIdle());
+        }
+
     }
 
     private void SubscribeToEvents()
     {
-        FishingEventController.OnEnterInspecting += InitiateCatchSummary;
-        FishingEventController.OnNextSummary += NextSummary;
-        FishingEventController.OnEndSummary += EndSummary;
+        PlayerEventController.OnEnterSummary += InitiateCatchSummary;
+        PlayerEventController.OnNextSummary += NextSummary;
+        PlayerEventController.OnEndSummary += ResetValues;
     }
 
     private void Initialize()
@@ -78,14 +74,14 @@ public class CatchSummary : MonoBehaviour
 
     private void UnsubscribeFromEvents()
     {
-        FishingEventController.OnEnterInspecting -= InitiateCatchSummary;
-        FishingEventController.OnNextSummary -= NextSummary;
-        FishingEventController.OnEndSummary -= EndSummary;
+        PlayerEventController.OnEnterSummary -= InitiateCatchSummary;
+        PlayerEventController.OnNextSummary -= NextSummary;
+        PlayerEventController.OnEndSummary -= ResetValues;
     }
 
     private void SetCurrentlyDisplayedFish()
     {
-        currentlyDisplayedFish = FishingController.Instance.fishesOnHook[currentFishIndex];
+        currentlyDisplayedFish = PlayerController.Instance.fishesOnHook[currentFishIndex];
     }
 
     private void UpdateDataValues()
@@ -103,10 +99,10 @@ public class CatchSummary : MonoBehaviour
 
     private bool HasMoreFishes()
     {
-        return currentFishIndex < FishingController.Instance.fishesOnHook.Count - 1;
+        return currentFishIndex < PlayerController.Instance.fishesOnHook.Count - 1;
     }
 
-     private bool IsNewRecord(Fish fish)
+    private bool IsNewRecord(Fish fish)
     {
         if (MainManager.Instance.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size) is Fish existingFish)
         {

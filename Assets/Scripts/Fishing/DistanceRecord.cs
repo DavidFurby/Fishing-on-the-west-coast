@@ -22,11 +22,11 @@ public class DistanceRecord : MonoBehaviour
         to = FindObjectOfType<BaitLogic>();
         distanceTextUI = GetComponentInChildren<TextMeshProUGUI>();
         distanceRecordMarker = Resources.Load<GameObject>(markerPath);
-        FishingEventController.OnEnterFishing += UpdateDistanceRecord;
-        FishingEventController.OnEnterIdle += SpawnDistanceRecordMarker;
-        FishingEventController.OnEnterCasting += SetActive;
-        FishingEventController.OnEnterReeling += SetInactive;
-        FishingEventController.OnEnterReelingFish += SetInactive;
+        PlayerEventController.OnEnterFishing += UpdateDistanceRecord;
+        PlayerEventController.OnEnterIdle += SpawnDistanceRecordMarker;
+        PlayerEventController.OnEnterCasting += SetActive;
+        PlayerEventController.OnEnterReeling += SetInactive;
+        PlayerEventController.OnEnterReelingFish += SetInactive;
 
     }
 
@@ -37,11 +37,11 @@ public class DistanceRecord : MonoBehaviour
 
     void OnDestroy()
     {
-        FishingEventController.OnEnterFishing -= UpdateDistanceRecord;
-        FishingEventController.OnEnterIdle -= SpawnDistanceRecordMarker;
-        FishingEventController.OnEnterCasting -= SetActive;
-        FishingEventController.OnEnterReeling -= SetInactive;
-        FishingEventController.OnEnterReelingFish -= SetInactive;
+        PlayerEventController.OnEnterFishing -= UpdateDistanceRecord;
+        PlayerEventController.OnEnterIdle -= SpawnDistanceRecordMarker;
+        PlayerEventController.OnEnterCasting -= SetActive;
+        PlayerEventController.OnEnterReeling -= SetInactive;
+        PlayerEventController.OnEnterReelingFish -= SetInactive;
 
     }
 
