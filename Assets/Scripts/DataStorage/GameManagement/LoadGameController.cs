@@ -41,9 +41,7 @@ public class LoadGameController : MonoBehaviour
 
     private static void LoadRod(Game game, GameData gameData)
     {
-        print(gameData.foundRodsId[0]);
         game.Inventory.AvailableRods = Resources.LoadAll<Rod>(ItemsPath + "Rods").OrderBy(r => r.rodId).ToArray();
-        print(game.Inventory.AvailableRods[0].rodId);
 
         game.Inventory.FoundRods = gameData.foundRodsId.Select((int rodId) => game.Inventory.AvailableRods.First((Rod rod) => rod.rodId == rodId)).ToList();
         game.Inventory.EquippedRod = game.Inventory.FoundRods.First((rod) => rod.rodId == gameData.equippedRodId);

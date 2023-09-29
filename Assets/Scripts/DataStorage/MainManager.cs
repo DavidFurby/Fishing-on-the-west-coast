@@ -15,7 +15,6 @@ public class MainManager : Game
         Instance = this;
         if (Instance != null && SceneManager.GetActiveScene().name != "MainMenu")
         {
-            print(SceneManager.GetActiveScene().name);
             Instance.LoadGame();
         }
         DontDestroyOnLoad(gameObject);

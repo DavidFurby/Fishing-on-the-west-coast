@@ -43,9 +43,6 @@ public class NewGameController : MonoBehaviour
             currentId++;
         }
         game.Inventory.AvailableBaits = game.Inventory.AvailableBaits.OrderBy(r => r.baitId).ToArray();
-
-        print(game.Inventory.AvailableBaits[0].baitId);
-
     }
 
     private static void ResetGameState(Game game)
