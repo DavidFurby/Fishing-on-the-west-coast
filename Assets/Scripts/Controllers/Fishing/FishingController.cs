@@ -73,9 +73,7 @@ public class FishingController : FishingEventController
     }
 
     #region Public Methods
-    /// <summary>
-    /// Reels in the bait if the space key is pressed.
-    /// </summary>
+
     public void StartReeling()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -91,9 +89,6 @@ public class FishingController : FishingEventController
         }
     }
 
-    /// <summary>
-    /// Starts fishing if the space key is held down.
-    /// </summary>
     public void StartCharging()
     {
         if (Input.GetKey(KeyCode.Space))
@@ -103,9 +98,6 @@ public class FishingController : FishingEventController
         }
     }
 
-    /// <summary>
-    /// Releases the fishing line when the space key is released.
-    /// </summary>
     public void Release()
     {
         if (Input.GetKeyUp(KeyCode.Space))
@@ -121,9 +113,6 @@ public class FishingController : FishingEventController
         }
     }
 
-    /// <summary>
-    /// Catches a fish if it is attached to the bait.
-    /// </summary>
     public void CatchFish()
     {
         if (GetCurrentState() is Fishing)
@@ -133,23 +122,17 @@ public class FishingController : FishingEventController
         }
     }
 
-    //Drop the fish if you fail the mini game
     public void LoseCatch()
     {
         ResetValues();
         SetState(new Reeling());
     }
 
-    //Add fish to totalFishes list
     public void AddFish(FishDisplay fish)
     {
         fishesOnHook.Add(fish);
     }
 
-    /// <summary>
-    /// Charges the casting power while the space key is held down.
-    /// </summary>
-    /// <param name="setChargingThrowSpeed">The action to perform while charging the casting power.</param>
     public void ChargeCasting()
     {
         if (castingPower < MainManager.Instance.Inventory.EquippedRod.throwRange)

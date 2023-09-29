@@ -64,9 +64,9 @@ public class CatchSummary : MonoBehaviour
 
     private void SubscribeToEvents()
     {
-        FishingController.OnEnterInspecting += InitiateCatchSummary;
-        FishingController.OnNextSummary += NextSummary;
-        FishingController.OnEndSummary += EndSummary;
+        FishingEventController.OnEnterInspecting += InitiateCatchSummary;
+        FishingEventController.OnNextSummary += NextSummary;
+        FishingEventController.OnEndSummary += EndSummary;
     }
 
     private void Initialize()
@@ -78,9 +78,9 @@ public class CatchSummary : MonoBehaviour
 
     private void UnsubscribeFromEvents()
     {
-        FishingController.OnEnterInspecting -= InitiateCatchSummary;
-        FishingController.OnNextSummary -= NextSummary;
-        FishingController.OnEndSummary -= EndSummary;
+        FishingEventController.OnEnterInspecting -= InitiateCatchSummary;
+        FishingEventController.OnNextSummary -= NextSummary;
+        FishingEventController.OnEndSummary -= EndSummary;
     }
 
     private void SetCurrentlyDisplayedFish()

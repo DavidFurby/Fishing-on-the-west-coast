@@ -72,7 +72,7 @@ public abstract class FishingEventController : FishingStateMachine
         OnStartCharging?.Invoke();
     }
 
-    internal void RaiseStartInspecting()
+    internal void RaiseEnterInspecting()
     {
         OnEnterInspecting?.Invoke();
     }

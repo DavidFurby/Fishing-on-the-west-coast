@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -12,7 +11,7 @@ public class DialogManager : MonoBehaviour
 
     public static event Action OnEndDialog;
 
-    private Dictionary<string, bool> addedHandlers = new();
+    private readonly Dictionary<string, bool> addedHandlers = new();
 
     #endregion
 

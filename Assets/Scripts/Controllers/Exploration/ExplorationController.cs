@@ -27,7 +27,7 @@ public class ExplorationController : ExplorationStateMachine
         DialogManager.OnEndDialog -= RaiseEndDialog;
         FishingSpot.StartFishing -= RaiseStartFishing;
     }
-    //Handle player input
+
     public void HandleInput()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -42,7 +42,6 @@ public class ExplorationController : ExplorationStateMachine
         }
     }
 
-    //Handle player movement and rotation
     public void HandleMovement()
     {
         Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
@@ -50,13 +49,11 @@ public class ExplorationController : ExplorationStateMachine
         RotatePlayer(movementDirection);
     }
 
-    //Move player in specified direction
     private void MovePlayer(Vector3 movementDirection)
     {
         transform.Translate(movementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
     }
 
-    //Rotate the player to face the specified direction
     private void RotatePlayer(Vector3 movementDirection)
     {
         if (movementDirection != Vector3.zero)
@@ -71,7 +68,6 @@ public class ExplorationController : ExplorationStateMachine
         }
     }
 
-    //Called when player exists trigger
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Interactive"))
@@ -88,7 +84,6 @@ public class ExplorationController : ExplorationStateMachine
 
     public void RaiseStartFishing() => SetState(new StartFishing(this));
 
-    //Activates interactive object if player is within trigger area and button is pressed
     private void ActivateInteractive()
     {
         SetState(new Interacting(this));
