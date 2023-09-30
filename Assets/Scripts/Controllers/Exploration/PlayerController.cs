@@ -136,7 +136,7 @@ public class PlayerController : FishingController
     public void RaiseNavigateShopEvent() => NavigateShop?.Invoke();
     public void ReturnControls()
     {
-        if (GetCurrentState() is Conversing || GetCurrentState() is Shopping)
+        if (GetCurrentState() is Conversing)
         {
             SetState(new ExplorationIdle());
             CameraController.Instance.SetState(new PlayerCamera());
