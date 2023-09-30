@@ -6,6 +6,7 @@ public abstract class PlayerEventController : PlayerStateMachine
     public static event Action OnStartCharging;
     public static event Action OnEnterSwinging;
     public static event Action OnEnterIdle;
+    public static event Action OnExitConversation;
     public static event Action OnEnterFishing;
     public static event Action OnEnterCasting;
     public static event Action OnReelingFish;

@@ -15,14 +15,12 @@ public class Conversation : MonoBehaviour, IInteractive
         Dog,
         ShopKeeper,
     }
-    public static event Action<String> StartConversation;
+    public static event Action<string> StartConversation;
 
     public void Interact()
     {
-        StartDialog();
-    }
-    public void StartDialog()
-    {
         StartConversation.Invoke(character.ToString());
+        PlayerController.Instance.SetState(new Conversing());
     }
+
 }

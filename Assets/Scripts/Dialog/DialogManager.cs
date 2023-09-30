@@ -17,18 +17,22 @@ public class DialogManager : MonoBehaviour
 
     #region Unity Methods
 
+    private void Start()
+    {
+        SetDayHandler();
+    }
+
+    #endregion
+
+    #region Event Subscription
+
     private void OnEnable()
     {
         if (TryGetComponent<DialogueRunner>(out dialogueRunner))
         {
             Conversation.StartConversation += StartDialog;
-            OnEndDialog += dialogueRunner.Stop;
+            dialogueRunner.onDialogueComplete.AddListener(EndDialog);
         }
-    }
-
-    private void Start()
-    {
-        SetDayHandler();
     }
 
     private void OnDestroy()
@@ -36,7 +40,7 @@ public class DialogManager : MonoBehaviour
         if (dialogueRunner != null)
         {
             Conversation.StartConversation -= StartDialog;
-            OnEndDialog -= dialogueRunner.Stop;
+            dialogueRunner.onDialogueComplete.RemoveListener(EndDialog);
         }
     }
 
@@ -55,7 +59,7 @@ public class DialogManager : MonoBehaviour
 
     #endregion
 
-    #region Public Methods
+    #region Dialogue Control
 
     public void StartDialog(string node)
     {
@@ -68,10 +72,19 @@ public class DialogManager : MonoBehaviour
             dialogueRunner.StartDialogue(node);
         }
     }
+
     public void EndDialog()
     {
         OnEndDialog?.Invoke();
+        if (dialogueRunner != null && dialogueRunner.IsDialogueRunning)
+        {
+            dialogueRunner.Stop();
+        }
     }
+
+    #endregion
+
+    #region Dialogue Utilities
 
     public void AddCommandHandler(string commandName, Action commandHandler)
     {
@@ -88,7 +101,7 @@ public class DialogManager : MonoBehaviour
         dialogueRunner.VariableStorage.SetValue(variableName, value);
     }
 
-    public void AddHandler(string handlerName, System.Action handler)
+    public void AddHandler(string handlerName, Action handler)
     {
         AddCommandHandler(handlerName, handler);
         addedHandlers[handlerName] = true;
@@ -107,5 +120,6 @@ public class DialogManager : MonoBehaviour
     {
         return addedHandlers.ContainsKey(handlerName);
     }
+
     #endregion
 }

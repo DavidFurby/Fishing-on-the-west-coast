@@ -51,6 +51,7 @@ public class PlayerController : FishingController
         OnWhileCharging += ChargeCasting;
         OnWhileCharging += Release;
         OnWhileFishing += StartReeling;
+        DialogManager.OnEndDialog += ReturnControls;
 
     }
 
@@ -64,6 +65,7 @@ public class PlayerController : FishingController
         OnWhileCharging -= ChargeCasting;
         OnWhileCharging -= Release;
         OnWhileFishing -= StartReeling;
+        DialogManager.OnEndDialog -= ReturnControls;
 
     }
     public void HandleInput()
@@ -115,8 +117,14 @@ public class PlayerController : FishingController
     }
 
     public void RaiseOpenItemMenuEvent() => OpenItemMenu?.Invoke();
-
     public void RaiseNavigateShopEvent() => NavigateShop?.Invoke();
+    public void ReturnControls()
+    {
+        if (GetCurrentState() is Conversing)
+        {
+            SetState(new ExplorationIdle());
+        }
+    }
 
     public void RaiseStartFishing() => SetState(new FishingIdle());
 

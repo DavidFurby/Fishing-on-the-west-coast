@@ -33,6 +33,17 @@ public class Interacting : PlayerState
     {
     }
 
+    public override void OnExit()
+    {
+        base.OnExit();
+
+    }
+}
+public class Conversing : PlayerState
+{
+    public Conversing() : base()
+    {
+    }
 }
 
 public class Shopping : PlayerState
@@ -60,7 +71,7 @@ public class FishingIdle : PlayerState
     public override void Update()
     {
         base.Update();
-            controller.StartCharging();
+        controller.StartCharging();
     }
 }
 
@@ -73,7 +84,7 @@ public class Charging : PlayerState
     public override void OnEnter()
     {
         base.OnEnter();
-        controller.RaiseEnterCharging(); 
+        controller.RaiseEnterCharging();
     }
     public override void Update()
     {

@@ -190,7 +190,7 @@ namespace Yarn.Unity
         /// </remarks>
         [SerializeField]
         internal bool autoAdvance = false;
-        
+
         /// <summary>
         /// The current <see cref="LocalizedLine"/> that this line view is
         /// displaying.
@@ -234,12 +234,12 @@ namespace Yarn.Unity
                 yield return StartCoroutine(Effects.FadeAlpha(canvasGroup, 1, 0, fadeOutTime, currentStopToken));
                 currentStopToken.Complete();
             }
-            
+
             canvasGroup.alpha = 0;
             canvasGroup.blocksRaycasts = false;
             // turning interaction back on, if it needs it
             canvasGroup.interactable = interactable;
-            
+
             if (onDismissalComplete != null)
             {
                 onDismissalComplete();
@@ -254,7 +254,7 @@ namespace Yarn.Unity
             // Cancel all coroutines that we're currently running. This will
             // stop the RunLineInternal coroutine, if it's running.
             StopAllCoroutines();
-            
+
             // for now we are going to just immediately show everything
             // later we will make it fade in
             lineText.gameObject.SetActive(true);
@@ -362,7 +362,8 @@ namespace Yarn.Unity
                 if (useFadeEffect)
                 {
                     yield return StartCoroutine(Effects.FadeAlpha(canvasGroup, 0, 1, fadeInTime, currentStopToken));
-                    if (currentStopToken.WasInterrupted) {
+                    if (currentStopToken.WasInterrupted)
+                    {
                         // The fade effect was interrupted. Stop this entire
                         // coroutine.
                         yield break;
@@ -385,7 +386,8 @@ namespace Yarn.Unity
                             currentStopToken
                         )
                     );
-                    if (currentStopToken.WasInterrupted) {
+                    if (currentStopToken.WasInterrupted)
+                    {
                         // The typewriter effect was interrupted. Stop this
                         // entire coroutine.
                         yield break;
@@ -452,7 +454,7 @@ namespace Yarn.Unity
             // animation coroutine is what actually interrupts
             // for now this is fine.
             // Is an animation running that we can stop?
-            if (currentStopToken.CanInterrupt) 
+            if (currentStopToken.CanInterrupt)
             {
                 // Stop the current animation, and skip to the end of whatever
                 // started it.
