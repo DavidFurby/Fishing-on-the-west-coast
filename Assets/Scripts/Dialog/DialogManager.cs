@@ -75,11 +75,11 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialog()
     {
-        OnEndDialog?.Invoke();
         if (dialogueRunner != null && dialogueRunner.IsDialogueRunning)
         {
             dialogueRunner.Stop();
         }
+        OnEndDialog?.Invoke();
     }
 
     #endregion

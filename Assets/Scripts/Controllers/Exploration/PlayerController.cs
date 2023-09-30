@@ -6,11 +6,16 @@ public class PlayerController : FishingController
     public static PlayerController Instance { get; private set; }
     private PlayerAnimations playerAnimations;
     private Interactive interactive;
-    private readonly int movementSpeed = 10;
+    private const int MovementSpeed = 10;
     public static event Action NavigateShop;
     public static event Action OpenItemMenu;
 
     void Awake()
+    {
+        InitializeSingleton();
+    }
+
+    private void InitializeSingleton()
     {
         if (Instance == null)
         {
@@ -22,23 +27,26 @@ public class PlayerController : FishingController
             return;
         }
     }
+
     private void OnEnable()
     {
-        FishingSpot.StartFishing += RaiseStartFishing;
         SubscribeToEvents();
     }
+
     void Start()
+    {
+        InitializeComponents();
+    }
+
+    private void InitializeComponents()
     {
         playerAnimations = GetComponentInChildren<PlayerAnimations>();
         SetState(new ExplorationIdle());
-
     }
 
     private void OnDestroy()
     {
-        FishingSpot.StartFishing -= RaiseStartFishing;
         UnsubscribeFromEvents();
-
     }
 
     private void SubscribeToEvents()
@@ -52,7 +60,6 @@ public class PlayerController : FishingController
         OnWhileCharging += Release;
         OnWhileFishing += StartReeling;
         DialogManager.OnEndDialog += ReturnControls;
-
     }
 
     private void UnsubscribeFromEvents()
@@ -66,15 +73,24 @@ public class PlayerController : FishingController
         OnWhileCharging -= Release;
         OnWhileFishing -= StartReeling;
         DialogManager.OnEndDialog -= ReturnControls;
-
     }
+
     public void HandleInput()
+    {
+        ProcessMovementInput();
+        ProcessInteractionInput();
+    }
+
+    private void ProcessMovementInput()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         playerAnimations.SetPlayerWalkAnimation(horizontalInput != 0 || verticalInput != 0);
+    }
 
+    private void ProcessInteractionInput()
+    {
         if (Input.GetKeyDown(KeyCode.Space) && interactive != null)
         {
             playerAnimations.SetPlayerWalkAnimation(false);
@@ -84,14 +100,14 @@ public class PlayerController : FishingController
 
     public void HandleMovement()
     {
-        Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        Vector3 movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         MovePlayer(movementDirection);
         RotatePlayer(movementDirection);
     }
 
     private void MovePlayer(Vector3 movementDirection)
     {
-        transform.Translate(movementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
+        transform.Translate(MovementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
     }
 
     private void RotatePlayer(Vector3 movementDirection)
