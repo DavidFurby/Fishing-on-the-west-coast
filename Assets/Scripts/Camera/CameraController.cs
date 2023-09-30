@@ -35,7 +35,7 @@ public class CameraController : CameraStateMachine
 
     void Start()
     {
-        SetState(new PlayerCamera(this));
+        SetState(new PlayerCamera());
 
         fishingCamera = GetComponent<FishingCamera>();
         explorationCamera = GetComponent<ExplorationCamera>();
@@ -70,21 +70,21 @@ public class CameraController : CameraStateMachine
 
     public void EnterPlayerState()
     {
-        SetState(new PlayerCamera(this));
+        SetState(new PlayerCamera());
     }
 
     public void EnterCastingState()
     {
-        SetState(new CastingBaitCamera(this));
+        SetState(new CastingBaitCamera());
     }
 
     public void EnterFishingState()
     {
-        SetState(new FishingBaitCamera(this));
+        SetState(new FishingBaitCamera());
     }
 
     public void EnterReelingFishState()
     {
-        SetState(new ReelingBaitCamera(this));
+        SetState(new ReelingBaitCamera());
     }
 }

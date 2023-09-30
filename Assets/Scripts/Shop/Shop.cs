@@ -43,7 +43,7 @@ public class Shop : MonoBehaviour
 
     public void FocusItem()
     {
-        cameraController.SetState(new ShopItemCamera(cameraController));
+        cameraController.SetState(new ShopItemCamera());
         cameraController.explorationCamera.SetShopItem(itemSpawner.shopItemPositions[focusedShopItemIndex].transform.position);
     }
 

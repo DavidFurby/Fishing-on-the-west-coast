@@ -1,15 +1,15 @@
 public class CameraState : State
 {
     protected CameraController controller;
-    public CameraState(CameraController controller)
+    public CameraState()
     {
-        this.controller = controller;
+        this.controller = CameraController.Instance;
     }
 }
 
 public class PlayerCamera : CameraState
 {
-    public PlayerCamera(CameraController controller) : base(controller) { }
+    public PlayerCamera() : base() { }
 
     public override void LateUpdate()
     {
@@ -20,7 +20,7 @@ public class PlayerCamera : CameraState
 
 public class ShopItemCamera : CameraState
 {
-    public ShopItemCamera(CameraController controller) : base(controller) { }
+    public ShopItemCamera() : base() { }
 
     public override void LateUpdate()
     {
@@ -32,7 +32,7 @@ public class ShopItemCamera : CameraState
 
 public class CastingBaitCamera : CameraState
 {
-    public CastingBaitCamera(CameraController controller) : base(controller) { }
+    public CastingBaitCamera() : base() { }
 
 
     public override void LateUpdate()
@@ -44,7 +44,7 @@ public class CastingBaitCamera : CameraState
 
 public class FishingBaitCamera : CameraState
 {
-    public FishingBaitCamera(CameraController controller) : base(controller) { }
+    public FishingBaitCamera() : base() { }
 
     public override void LateUpdate()
     {
@@ -54,7 +54,7 @@ public class FishingBaitCamera : CameraState
 }
 public class ReelingBaitCamera : CameraState
 {
-    public ReelingBaitCamera(CameraController controller) : base(controller) { }
+    public ReelingBaitCamera() : base() { }
 
     public override void LateUpdate()
     {
@@ -65,5 +65,5 @@ public class ReelingBaitCamera : CameraState
 
 public class FishCamera : CameraState
 {
-    public FishCamera(CameraController controller) : base(controller) { }
+    public FishCamera() : base() { }
 }

@@ -47,8 +47,6 @@ public class ShopInputManager : MonoBehaviour
     private void CloseShop()
     {
         shop.dialogManager.EndDialog();
-        PlayerController.Instance.SetState(new ExplorationIdle());
-        shop.cameraController.SetState(new PlayerCamera(shop.cameraController));
         shop.SetFocusedShopItemIndex(0);
     }
 }
