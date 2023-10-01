@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaterCollision : MonoBehaviour
 {
     private const float dragMultiplier = 2f;
-    private const float minDrag = 3f;
+    private const float minDrag = 10f;
 
     private readonly Dictionary<int, float> addedDragByInstanceID = new();
     private readonly Dictionary<int, Vector3> previousVelocityByInstanceID = new();

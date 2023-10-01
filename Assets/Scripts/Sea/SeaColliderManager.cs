@@ -24,7 +24,7 @@ public class SeaColliderController : MonoBehaviour
 
         var seaBounds = CalculateBounds(seaTiles, "SeaFloor");
         SeaGroupCollider = CreateOrUpdateCollider(SeaGroupCollider, seaBounds, "SeaGroupCollider", typeof(WaterCollision), seaBounds.seaFloorYPosition / 2, seaSize.y);
-        SeaFloorGroupCollider = CreateOrUpdateCollider(SeaFloorGroupCollider, seaBounds, "SeaFloorGroupCollider", typeof(SeaFloorCollision), seaBounds.seaFloorYPosition);
+        SeaFloorGroupCollider = CreateOrUpdateCollider(SeaFloorGroupCollider, seaBounds, "SeaFloorGroupCollider", typeof(SeaFloorCollision), seaBounds.seaFloorYPosition - 2, 4);
         if (SeaGroupCollider.GetComponent<FishSpawner>() == null)
         {
             SeaGroupCollider.AddComponent<FishSpawner>();
