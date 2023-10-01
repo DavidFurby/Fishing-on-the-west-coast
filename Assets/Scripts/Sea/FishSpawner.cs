@@ -67,7 +67,6 @@ public class FishSpawner : MonoBehaviour
     {
         float fishSpawnX = Random.value < 0.5 ? targetPosition.x - 5 : targetPosition.x + 5;
         float fishSpawnY = Random.Range(seaCollider.bounds.min.y, seaCollider.bounds.max.y);
-
         Quaternion fishSpawnRotation = fishSpawnX < targetPosition.x ? Quaternion.Euler(0, 90, 0) : Quaternion.Euler(0, -90, 0);
         Vector3 fishSpawnPosition = new(fishSpawnX, fishSpawnY, targetPosition.z);
 

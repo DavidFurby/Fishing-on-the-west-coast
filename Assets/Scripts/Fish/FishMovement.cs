@@ -60,7 +60,7 @@ public class FishMovement : FishStateMachine
         yield return new WaitForSeconds(Random.Range(2, 4));
         SetState(new Baited(this));
     }
-    public void MunchOnFish()
+    public void AttachToFish()
     {
         if (target.TryGetComponent<FishMovement>(out _))
         {
@@ -69,7 +69,7 @@ public class FishMovement : FishStateMachine
         }
     }
 
-    public void MunchOnBait()
+    public void AttachToBait()
     {
         GetOrCreateConfigurableJoint();
     }
@@ -98,6 +98,7 @@ public class FishMovement : FishStateMachine
         _bones = transform.Find("Armature").GetChild(0).GetComponentsInChildren<Transform>();
     }
 
+
     private void SetTastyPart()
     {
         tastyPart = transform.Find("TastyPart");
@@ -119,7 +120,7 @@ public class FishMovement : FishStateMachine
         if (target != null)
         {
             float distance = Vector3.Distance(transform.position, target.transform.position);
-            return distance < 0.1f;
+            return Mathf.Approximately(distance, 0.1f);
         }
         else
         {
@@ -157,15 +158,21 @@ public class FishMovement : FishStateMachine
     {
         if (!gameObject.TryGetComponent<ConfigurableJoint>(out _))
         {
-            ConfigurableJoint joint = gameObject.AddComponent<ConfigurableJoint>();
+            ConfigurableJoint joint = _bones[0].gameObject.AddComponent<ConfigurableJoint>();
             joint.connectedBody = target.GetComponent<Rigidbody>();
-            joint.xMotion = ConfigurableJointMotion.Locked;
-            joint.yMotion = ConfigurableJointMotion.Locked;
+            joint.xMotion = ConfigurableJointMotion.Limited;
+            joint.yMotion = ConfigurableJointMotion.Limited;
             joint.zMotion = ConfigurableJointMotion.Locked;
             joint.angularXMotion = ConfigurableJointMotion.Locked;
             joint.angularYMotion = ConfigurableJointMotion.Free;
             joint.angularZMotion = ConfigurableJointMotion.Free;
         }
+
+        _rigidBody.constraints &= ~RigidbodyConstraints.FreezeRotationX;
+
+        _rigidBody.constraints &= ~RigidbodyConstraints.FreezeRotationY;
+
+        _rigidBody.constraints &= ~RigidbodyConstraints.FreezeRotationZ;
     }
 
     private void MoveFish(float speed)

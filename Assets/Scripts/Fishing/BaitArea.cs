@@ -23,10 +23,8 @@ public class BaitArea : MonoBehaviour
     }
     private void OnTriggerStay(Collider collider)
     {
-        // Check if the bait is being pulled and if the collider is a fish
         if (baitLogic.IsPulling && PlayerController.Instance != null && collider.CompareTag("Fish") && !PlayerController.Instance.FishIsBaited)
         {
-            // Call the TryBaitingFish method
             TryBaitingFish(collider, baitLogic.gameObject);
         }
     }

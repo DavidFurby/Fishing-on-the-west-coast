@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class WaterCollision : MonoBehaviour
 {
-    private float waterLevel;
-    private const float FloatHeight = 150f;
-    private const float BounceDamp = 0.1f;
     private const float dragMultiplier = 2f;
     private const float minDrag = 3f;
 
@@ -14,11 +11,6 @@ public class WaterCollision : MonoBehaviour
     private readonly Dictionary<int, Vector3> previousVelocityByInstanceID = new();
 
     public static event Action OnEnterSea;
-
-    void Start()
-    {
-        waterLevel = transform.position.y;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,7 +24,6 @@ public class WaterCollision : MonoBehaviour
     {
         if (other.TryGetComponent<Rigidbody>(out var rigidBody))
         {
-            ApplyBuoyancy(rigidBody);
             ApplyDrag(other, rigidBody);
         }
     }
@@ -61,17 +52,6 @@ public class WaterCollision : MonoBehaviour
                 addedDragByInstanceID.Remove(other.GetInstanceID());
                 previousVelocityByInstanceID.Remove(other.GetInstanceID());
             }
-        }
-    }
-
-    private void ApplyBuoyancy(Rigidbody rigidBody)
-    {
-        Vector3 actionPoint = transform.position + transform.TransformDirection(Vector3.down);
-        float forceFactor = 1f - ((actionPoint.y - waterLevel) / FloatHeight);
-        if (forceFactor > 0f)
-        {
-            Vector3 uplift = -Physics.gravity * (forceFactor - rigidBody.velocity.y * BounceDamp);
-            rigidBody.AddForceAtPosition(uplift, actionPoint);
         }
     }
 }

@@ -62,7 +62,7 @@ public class Hooked : FishState
     public override void OnEnter()
     {
         base.OnEnter();
-        fishMovement.MunchOnBait();
+        fishMovement.AttachToBait();
     }
     public override void FixedUpdate()
     {
@@ -79,13 +79,12 @@ public class HookedToFish : FishState
     public override void OnEnter()
     {
         base.OnEnter();
-
+        fishMovement.AttachToFish();
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
         fishMovement.RotateTowardsTarget();
-        fishMovement.MunchOnFish();
     }
 }
 
