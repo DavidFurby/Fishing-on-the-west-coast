@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,8 @@ public class SeaTileManager : MonoBehaviour
     internal Vector3 seaSize;
     internal GameObject lastSpawnedTile;
     internal List<GameObject> seaTileList;
+    private int currentTileIndex = -1;
+    private int lastDistancePos;
 
     private void Awake()
     {
@@ -41,13 +42,27 @@ public class SeaTileManager : MonoBehaviour
 
     private GameObject GetSeaFromPool()
     {
-        int index = (int) distanceRecord.distance / 1000;
-        print(index);
-        if(index >= seaTilePrefabs.Length) {
-            index = seaTilePrefabs.Length - 1;
+        if (distanceRecord.distance / 100 >= lastDistancePos)
+        {
+            currentTileIndex++;
+
+            if (currentTileIndex >= seaTilePrefabs.Length)
+            {
+                currentTileIndex = seaTilePrefabs.Length - 1;
+            }
         }
-        currentSeaTilePrefab = seaTilePrefabs[index];
-        print(currentSeaTilePrefab.name);
+        else if (distanceRecord.distance / 100 <= lastDistancePos)
+        {
+            if (currentTileIndex <= 0)
+            {
+                currentTileIndex--;
+
+            }
+        }
+
+        currentSeaTilePrefab = seaTilePrefabs[currentTileIndex];
+        lastDistancePos = (int)distanceRecord.distance / 100;
+
         return ObjectPool.Instance.GetFromPool(currentSeaTilePrefab, poolSize);
     }
 
