@@ -166,8 +166,17 @@ public class FishMovement : FishStateMachine
             joint.angularXMotion = ConfigurableJointMotion.Locked;
             joint.angularYMotion = ConfigurableJointMotion.Free;
             joint.angularZMotion = ConfigurableJointMotion.Free;
-            transform.position = target.transform.position;
+
+            JointDrive jointDrive = new()
+            {
+                positionSpring = 1000f,
+                positionDamper = 100f,
+                maximumForce = Mathf.Infinity
+            };
+            joint.angularXDrive = jointDrive;
+            joint.angularYZDrive = jointDrive;
         }
+        transform.position = target.transform.position;
 
         _rigidBody.constraints &= ~RigidbodyConstraints.FreezeRotationX;
 
