@@ -5,7 +5,7 @@ using static Item;
 public class ItemSlot : MonoBehaviour
 {
     public TextMeshProUGUI NameText;
-    public int Id
+    public string Id
     {
         get; set;
     }
@@ -24,7 +24,7 @@ public class ItemSlot : MonoBehaviour
             NameText.text = itemName;
         }
     }
-    public void SetSlot(int id, ItemTag itemTag, string itemName)
+    public void SetSlot(string id, ItemTag itemTag, string itemName)
     {
         Id = id;
         ItemTag = itemTag;

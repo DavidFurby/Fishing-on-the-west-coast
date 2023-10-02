@@ -6,7 +6,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Hat", menuName = "ScriptableObjects/Hat", order = 1)]
 public class Hat : Item
 {
-    public int hatId;
+    public string hatId;
+    public string HatId => hatId;
+
+        private void OnValidate()
+    {
+        if (string.IsNullOrEmpty(hatId))
+        {
+            hatId = Guid.NewGuid().ToString();
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+    }
+
 
     public void AddHatToInstance()
     {

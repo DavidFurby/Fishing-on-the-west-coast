@@ -6,9 +6,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Rod", menuName = "ScriptableObjects/Rod", order = 1)]
 public class Rod : Item
 {
-    public int rodId;
+    public string rodId;
+    public string RodId => rodId;
     public int reelInSpeed;
     public int throwRange;
+
+    private void OnValidate()
+    {
+        if (string.IsNullOrEmpty(rodId))
+        {
+            rodId = Guid.NewGuid().ToString();
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+    }
 
     public void AddRodToInstance()
     {

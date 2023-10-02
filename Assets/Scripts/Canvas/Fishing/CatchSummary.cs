@@ -104,7 +104,7 @@ public class CatchSummary : MonoBehaviour
 
     private bool IsNewRecord(Fish fish)
     {
-        if (MainManager.Instance.CaughtFishes.FirstOrDefault(f => f.id == fish.id && f.size < fish.size) is Fish existingFish)
+        if (MainManager.Instance.CaughtFishes.FirstOrDefault(f => f.fishId == fish.fishId && f.size < fish.size) is Fish existingFish)
         {
             int index = Array.IndexOf(MainManager.Instance.CaughtFishes.ToArray(), existingFish);
             fish.ReplaceFishInInstance(index);
@@ -114,7 +114,7 @@ public class CatchSummary : MonoBehaviour
     }
     private bool IsNewCatch(Fish fish)
     {
-        if (MainManager.Instance.CaughtFishes.All(f => f.id != fish.id))
+        if (MainManager.Instance.CaughtFishes.All(f => f.fishId != fish.fishId))
         {
             fish.AddFishToInstance();
             return true;

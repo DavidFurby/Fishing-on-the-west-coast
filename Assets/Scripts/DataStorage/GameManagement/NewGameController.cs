@@ -10,7 +10,7 @@ public class NewGameController : MonoBehaviour
         bool removed = SaveSystem.NewGame();
         if (removed)
         {
-            game.AvailableFishes = Resources.LoadAll<Fish>("ScriptableObjects/Fishes").OrderBy(c => c.id).ToArray();
+            game.AvailableFishes = Resources.LoadAll<Fish>("ScriptableObjects/Fishes").OrderBy(c => c.fishId).ToArray();
             PopulateAvailableItems(game);
             ResetGameState(game);
         }
@@ -18,31 +18,18 @@ public class NewGameController : MonoBehaviour
 
     private static void PopulateAvailableItems(Game game)
     {
-        int currentId = 1;
 
         game.Inventory.AvailableRods = Resources.LoadAll<Rod>(ItemsPath + "Rods");
-        foreach (var rod in game.Inventory.AvailableRods)
-        {
-            rod.id = currentId;
-            currentId++;
-        }
-        game.Inventory.AvailableRods = game.Inventory.AvailableRods.OrderBy(r => r.rodId).ToArray();
+
+        game.Inventory.AvailableRods = game.Inventory.AvailableRods;
 
         game.Inventory.AvailableHats = Resources.LoadAll<Hat>(ItemsPath + "Hats");
-        foreach (var hat in game.Inventory.AvailableHats)
-        {
-            hat.id = currentId;
-            currentId++;
-        }
-        game.Inventory.AvailableHats = game.Inventory.AvailableHats.OrderBy(r => r.hatId).ToArray();
+
+        game.Inventory.AvailableHats = game.Inventory.AvailableHats;
 
         game.Inventory.AvailableBaits = Resources.LoadAll<Bait>(ItemsPath + "Baits");
-        foreach (var bait in game.Inventory.AvailableBaits)
-        {
-            bait.id = currentId;
-            currentId++;
-        }
-        game.Inventory.AvailableBaits = game.Inventory.AvailableBaits.OrderBy(r => r.baitId).ToArray();
+
+        game.Inventory.AvailableBaits = game.Inventory.AvailableBaits;
     }
 
     private static void ResetGameState(Game game)
@@ -50,17 +37,17 @@ public class NewGameController : MonoBehaviour
         game.Days = 1;
         game.TotalCatches = 0;
         game.BestDistance = 0;
-        game.Scene = "Boat";
+        game.Scene = "Sandbox";
         game.PlayerLevel.SetPlayerLevel(1, 0);
         game.CaughtFishes.Clear();
         game.Inventory.FoundRods.Clear();
-        game.Inventory.FoundRods.Add(game.Inventory.AvailableRods[0]);
+        game.Inventory.FoundRods.Add(game.Inventory.AvailableRods.First((Rod rod) => rod.itemName == "Basic rod"));
         game.Inventory.EquippedRod = game.Inventory.FoundRods[0];
         game.Inventory.FoundBaits.Clear();
-        game.Inventory.FoundBaits.Add(game.Inventory.AvailableBaits[0]);
+        game.Inventory.FoundBaits.Add(game.Inventory.AvailableBaits.First((Bait bait) => bait.itemName == "Basic bait"));
         game.Inventory.EquippedBait = game.Inventory.FoundBaits[0];
         game.Inventory.FoundHats.Clear();
-        game.Inventory.FoundHats.Add(game.Inventory.AvailableHats[0]);
+        game.Inventory.FoundHats.Add(game.Inventory.AvailableHats.First((Hat hat) => hat.itemName == "Basic hat"));
         game.Inventory.EquippedHat = game.Inventory.FoundHats[0];
     }
 }

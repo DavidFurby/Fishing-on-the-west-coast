@@ -23,6 +23,7 @@ public class RodDisplay : ItemDisplay
     public void SelectRod()
     {
         Rod[] rodPrefabs = Resources.LoadAll<Rod>(ItemsPath);
+        print(MainManager.Instance.Inventory.EquippedRod.rodId);
         Rod equippedRod = rodPrefabs.FirstOrDefault(rod => MainManager.Instance.Inventory.EquippedRod.rodId == rod.rodId);
         // Get the item component of the instantiated game object  
         if (current != equippedRod)

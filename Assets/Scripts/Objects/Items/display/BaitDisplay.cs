@@ -26,7 +26,6 @@ public class BaitDisplay : ItemDisplay
     {
         Bait[] baitPrefabs = Resources.LoadAll<Bait>(ItemsPath);
         Bait equippedBait = baitPrefabs.FirstOrDefault(bait => MainManager.Instance.Inventory.EquippedBait.baitId == bait.baitId);
-        // Get the item component of the instantiated game object  
         if (current != equippedBait)
         {
             current = equippedBait;

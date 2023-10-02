@@ -9,14 +9,14 @@ public class GameData
     public float bestDistance;
     public int level;
     public int experience;
-    public int[] foundCatchesId;
-    public int[] foundRodsId;
-    public int equippedRodId;
+    public string[] foundCatchesId;
+    public string[] foundRodsId;
+    public string equippedRodId;
     public string scene;
-    public int[] foundBaitsId;
-    public int equippedBaitId;
-    public int[] foundHatsId;
-    public int equippedHatId;
+    public string[] foundBaitsId;
+    public string equippedBaitId;
+    public string[] foundHatsId;
+    public string equippedHatId;
 
     public GameData(Game game)
     {
@@ -26,7 +26,7 @@ public class GameData
         level = game.PlayerLevel.Level;
         experience = game.PlayerLevel.Exp;
         scene = game.Scene.ToString();
-        foundCatchesId = game.CaughtFishes.Select(fish => fish.id).ToArray();
+        foundCatchesId = game.CaughtFishes.Select(fish => fish.fishId).ToArray();
         foundRodsId = game.Inventory.FoundRods.Select(rod => rod.rodId).ToArray();
         equippedRodId = game.Inventory.EquippedRod.rodId;
         foundBaitsId = game.Inventory.FoundBaits.Select(bait => bait.baitId).ToArray();
