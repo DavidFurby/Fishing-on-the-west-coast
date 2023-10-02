@@ -121,7 +121,7 @@ public class BaitLogic : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             IsPulling = true;
-            Vector3 direction = (rodTop.transform.position - transform.position).normalized;
+            Vector3 direction = (rodTop.transform.position - transform.position).normalized + new Vector3(0, 0.1f, 0);
             rigidBody.AddForce(direction * 1.5f, ForceMode.Impulse);
             IsPulling = false;
             if (IsCloseToTarget(targetPosition, 20))
