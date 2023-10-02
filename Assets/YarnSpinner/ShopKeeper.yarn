@@ -2,7 +2,7 @@
 tags:
 position: 288,-188
 ---
-<<declare $shopItemId = 0 as number>>
+<<declare $shopItemId = "" as string>>
 <<declare $shopItemName = "" as string>>
 <<declare $shopItemPrice = 0 as number>>
 <<declare $shopItemDescription = "" as string>>
@@ -18,7 +18,7 @@ position: -193,-302
 ---
 <<setShopItem>>
 <<setTokens>>
-<<if $shopItemId == 0>>
+<<if $shopItemId == "0">>
 <<jump SoldOut>>
 <<else>>
 {$shopItemName}<br>{$shopItemPrice}<br>{$shopItemDescription} #line:03d77ca 
