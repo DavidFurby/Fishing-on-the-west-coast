@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public abstract class PlayerEventController : PlayerStateMachine
 {
@@ -17,7 +18,7 @@ public abstract class PlayerEventController : PlayerStateMachine
     public static event Action OnWhileCharging;
     public static event Action OnExitReelingFish;
     public static event Action OnWhileFishing;
-    public static event Action OnWhileCasting;
+    public static event Action<Transform> OnWhileCasting;
     public static event Action OnWhileReelingBait;
 
     #endregion
@@ -27,7 +28,7 @@ public abstract class PlayerEventController : PlayerStateMachine
     }
     internal void RaiseWhileCasting()
     {
-        OnWhileCasting.Invoke();
+        OnWhileCasting.Invoke(transform);
     }
     internal void RaiseReelInBait()
     {

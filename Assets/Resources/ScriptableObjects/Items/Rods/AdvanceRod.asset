@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: AdvanceRod
   m_EditorClassIdentifier: 
   itemTag: 1
+  id: 10e708bc-3e60-4562-9f91-1d7ffd10d2c1
   itemName: Advance rod
   price: 5
   description: More advance
   model: {fileID: 5076685828461310335, guid: d0c27d96c29be3e4db4b1932404d4f91, type: 3}
-  rodId: 2
+  rodId: 77809013-821a-4003-82fb-75aa62125c6d
   reelInSpeed: 5
   throwRange: 500

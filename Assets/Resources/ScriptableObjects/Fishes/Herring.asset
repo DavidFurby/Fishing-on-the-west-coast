@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab95bfe04cb95e4ea5edbba88061426, type: 3}
   m_Name: Herring
   m_EditorClassIdentifier: 
-  id: 1
+  fishId: b2d8e606-580f-448a-81c1-dabd7ab88010
   name: Herring
   averageSize: 10
   description: "Herring j\xE4vlar"
   level: 1
   exp: 10
-  size: 11.040659
+  size: 11.599465

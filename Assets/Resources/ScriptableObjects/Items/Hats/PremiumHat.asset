@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PremiumHat
   m_EditorClassIdentifier: 
   itemTag: 3
+  id: 45b35242-4cbb-432c-ad18-bb1aa31bcca5
   itemName: Premium hat
   price: 10
   description: Desc
   model: {fileID: 3092470733926639002, guid: d61dab2e98dda0945aba3d3189b69702, type: 3}
-  hatId: 3
+  hatId: 3274d3b3-4a47-469b-93ac-799c30a49304

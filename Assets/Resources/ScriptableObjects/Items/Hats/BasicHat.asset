@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: BasicHat
   m_EditorClassIdentifier: 
   itemTag: 3
+  id: 3effe65d-e338-4e98-978f-da155d9b7ed5
   itemName: Basic hat
   price: 0
   description: For plebs
   model: {fileID: 919132149155446097, guid: b8ffd9bc4d44a8347ae9a9911c6b5143, type: 3}
-  hatId: 1
+  hatId: 9ef17856-ab13-4ed8-8899-019c6b611bf9

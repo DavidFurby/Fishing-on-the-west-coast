@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: BasicBait
   m_EditorClassIdentifier: 
   itemTag: 2
+  id: ce48ba54-542e-4a06-883b-edf33902c1cd
   itemName: Basic bait
   price: 0
   description: Basic bait given at childbirth
   model: {fileID: 4914880736227982372, guid: f8fcaaa72c2f22d46a5310ffd76a26d7, type: 3}
-  baitId: 1
+  baitId: 7a0b2e6a-f243-470f-b1ec-1ce8b458d901
   level: 1

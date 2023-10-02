@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: FancyHat
   m_EditorClassIdentifier: 
   itemTag: 3
+  id: 495de9e6-62e5-4dbd-bf96-c27105d71fdd
   itemName: Fancy hat
   price: 2
   description: Very fancy indeed
   model: {fileID: 8524232125385298991, guid: bf2845a5b6fdb8a4ea461d4a8af2a874, type: 3}
-  hatId: 2
+  hatId: 2c5d09fb-f9da-4a4e-8e94-e696768a98d2

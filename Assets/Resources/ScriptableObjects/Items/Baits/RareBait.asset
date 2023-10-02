@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: RareBait
   m_EditorClassIdentifier: 
   itemTag: 2
+  id: 191e86e7-4bb3-42ce-9731-50f03c817c6c
   itemName: Rare bait
   price: 20
   description: Rarest of baits
   model: {fileID: 6062419474202388115, guid: f188f73a03d53f04e9a6bba69d13d476, type: 3}
-  baitId: 3
+  baitId: 1cbcf545-f2d9-42b0-ab03-187267cde3ca
   level: 3

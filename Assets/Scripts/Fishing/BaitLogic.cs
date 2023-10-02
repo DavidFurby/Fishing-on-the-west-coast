@@ -13,7 +13,6 @@ public class BaitLogic : MonoBehaviour
     private Vector3 targetPosition;
     private Rigidbody rigidBody;
     private FixedJoint fixedJoint;
-
     public static event Action<Vector3> UpdatePosition;
 
     private void Start()
@@ -68,10 +67,12 @@ public class BaitLogic : MonoBehaviour
         Destroy(fixedJoint);
     }
 
-    private void Cast()
+    private void Cast(Transform playerTransform)
     {
         DetachBait();
-        rigidBody.AddForceAtPosition(forceFactor * PlayerController.Instance.castingPower * Time.fixedDeltaTime * new Vector3(1, 1, 0), rigidBody.position, ForceMode.Impulse);
+        float upwardFactor = 1f;
+        Vector3 forceDirection = playerTransform.forward + (Vector3.up * upwardFactor);
+        rigidBody.AddForceAtPosition(forceFactor * PlayerController.Instance.castingPower * Time.fixedDeltaTime * forceDirection, rigidBody.position, ForceMode.Impulse);
         if (forceFactor > 0)
         {
             forceFactor -= 0.1f;
