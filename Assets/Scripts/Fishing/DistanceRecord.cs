@@ -5,14 +5,14 @@ using System.Collections;
 public class DistanceRecord : MonoBehaviour
 {
     #region Fields
+    [SerializeField] private SeaTileManager seaTileManager;
     private readonly string markerPath = "GameObjects/Environment/DistanceRecordMarker";
     private GameObject currentDistanceRecordMarker;
     private GameObject distanceRecordMarker;
-    [Tooltip("Text UI for displaying the distance value")] private TextMeshProUGUI distanceTextUI;
-    [SerializeField][Tooltip("The sea game object")] private GameObject ocean;
-    [Tooltip("The starting point for calculating the distance")] private FishingSpot from;
-    [Tooltip("The end point for calculating the distance")] private BaitLogic to;
-    private float distance;
+    private TextMeshProUGUI distanceTextUI;
+    private FishingSpot from;
+    private BaitLogic to;
+    internal float distance;
     #endregion
 
     #region Unity Methods
@@ -27,7 +27,6 @@ public class DistanceRecord : MonoBehaviour
         PlayerEventController.OnEnterCasting += SetActive;
         PlayerEventController.OnEnterReeling += SetInactive;
         PlayerEventController.OnEnterReelingFish += SetInactive;
-
     }
 
     private void Start()
@@ -69,7 +68,7 @@ public class DistanceRecord : MonoBehaviour
             {
                 Destroy(currentDistanceRecordMarker);
             }
-            Vector3 position = new(from.transform.position.x + MainManager.Instance.BestDistance, ocean.transform.position.y + ocean.GetComponentInChildren<Renderer>().bounds.extents.y, to.transform.position.z);
+            Vector3 position = new(from.transform.position.x + MainManager.Instance.BestDistance, seaTileManager.currentSeaTilePrefab.transform.position.y +  seaTileManager.currentSeaTilePrefab.GetComponentInChildren<Renderer>().bounds.extents.y, to.transform.position.z);
             currentDistanceRecordMarker = Instantiate(distanceRecordMarker, position, Quaternion.identity);
             StartCoroutine(MoveMarker(position, 5f));
         }

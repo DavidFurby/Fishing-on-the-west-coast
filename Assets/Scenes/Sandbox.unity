@@ -537,6 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76b879778f7d51419d6fd175cf038a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceRecord: {fileID: 2078709172}
   poolSize: 3
 --- !u!114 &1275003132
 MonoBehaviour:
@@ -1157,6 +1158,17 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &2078709172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1967660672961353023, guid: ce953d5844f080646b43deee588308e8, type: 3}
+  m_PrefabInstance: {fileID: 6256846804534400011}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0ceb6772e595e498088c45b4a0f9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2096369982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1750,6 +1762,10 @@ PrefabInstance:
       propertyPath: ocean
       value: 
       objectReference: {fileID: 1275003125}
+    - target: {fileID: 1967660672961353023, guid: ce953d5844f080646b43deee588308e8, type: 3}
+      propertyPath: seaTileManager
+      value: 
+      objectReference: {fileID: 1275003131}
     - target: {fileID: 4037752068935223273, guid: ce953d5844f080646b43deee588308e8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

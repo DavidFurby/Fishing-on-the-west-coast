@@ -1,13 +1,15 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SeaTileManager : MonoBehaviour
 {
-    internal GameObject seaTilePrefab;
+    [SerializeField] DistanceRecord distanceRecord;
+    internal GameObject[] seaTilePrefabs;
+    internal GameObject currentSeaTilePrefab;
     public int poolSize;
     internal Vector3 seaSize;
     internal GameObject lastSpawnedTile;
-
     internal List<GameObject> seaTileList;
 
     private void Awake()
@@ -18,8 +20,9 @@ public class SeaTileManager : MonoBehaviour
 
     private void LoadSeaTilePrefab()
     {
-        seaTilePrefab = Resources.Load<GameObject>("GameObjects/Environment/Ocean");
-        seaSize = seaTilePrefab.GetComponent<BoxCollider>().size;
+        seaTilePrefabs = Resources.LoadAll<GameObject>("GameObjects/Environment/Oceans");
+        currentSeaTilePrefab = seaTilePrefabs[0];
+        seaSize = currentSeaTilePrefab.GetComponent<BoxCollider>().size;
     }
 
     private void InitializeSeaTileQueue()
@@ -38,7 +41,14 @@ public class SeaTileManager : MonoBehaviour
 
     private GameObject GetSeaFromPool()
     {
-        return ObjectPool.Instance.GetFromPool(seaTilePrefab, poolSize);
+        int index = (int) distanceRecord.distance / 1000;
+        print(index);
+        if(index >= seaTilePrefabs.Length) {
+            index = seaTilePrefabs.Length - 1;
+        }
+        currentSeaTilePrefab = seaTilePrefabs[index];
+        print(currentSeaTilePrefab.name);
+        return ObjectPool.Instance.GetFromPool(currentSeaTilePrefab, poolSize);
     }
 
     private void SetSeaPosition(GameObject sea)
