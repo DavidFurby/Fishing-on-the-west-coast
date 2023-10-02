@@ -1,15 +1,12 @@
 using System;
 using UnityEngine;
-using Yarn.Unity;
 [RequireComponent(typeof(Interactive))]
 public class FishingSpot : MonoBehaviour, IInteractive
 {
-    public static event Action StartFishing;
+    public static event Action<Vector3, Quaternion> StartFishing;
 
     public void Interact()
     {
-        StartFishing.Invoke();
-
+        StartFishing.Invoke(transform.position, transform.rotation);
     }
-
 }

@@ -52,7 +52,8 @@ public class PlayerController : FishingController
     private void SubscribeToEvents()
     {
         WaterCollision.OnEnterSea += EnterSea;
-        FishingSpot.StartFishing += () => SetState(new FishingIdle());
+        FishingSpot.StartFishing += (_, _) => SetState(new FishingIdle());
+        FishingSpot.StartFishing += SetPlayerPositionAndRotation;
         OnEnterReelingFish += CatchFish;
         OnEnterReelingFish += () => SetState(new ReelingFish());
         OnEnterIdle += ResetValues;
@@ -65,7 +66,8 @@ public class PlayerController : FishingController
     private void UnsubscribeFromEvents()
     {
         WaterCollision.OnEnterSea -= EnterSea;
-        FishingSpot.StartFishing -= () => SetState(new FishingIdle());
+        FishingSpot.StartFishing -= (_, _) => SetState(new FishingIdle());
+        FishingSpot.StartFishing -= SetPlayerPositionAndRotation;
         OnEnterReelingFish -= CatchFish;
         OnEnterReelingFish -= () => SetState(new ReelingFish());
         OnEnterIdle -= ResetValues;
@@ -100,7 +102,7 @@ public class PlayerController : FishingController
 
     public void HandleMovement()
     {
-        Vector3 movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         MovePlayer(movementDirection);
         RotatePlayer(movementDirection);
     }
@@ -149,5 +151,11 @@ public class PlayerController : FishingController
     {
         SetState(new Interacting());
         interactive.StartInteraction();
+    }
+    private void SetPlayerPositionAndRotation(Vector3 position, Quaternion quaternion)
+    {
+        transform.position = position;
+        transform.rotation = quaternion;
+
     }
 }
