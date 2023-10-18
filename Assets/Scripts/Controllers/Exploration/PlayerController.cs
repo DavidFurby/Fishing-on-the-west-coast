@@ -114,8 +114,12 @@ public class PlayerController : FishingController
 
     private void RotatePlayer(Vector3 movementDirection)
     {
+        Quaternion newRotation;
         if (movementDirection != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(movementDirection);
+        {
+            newRotation = Quaternion.LookRotation(movementDirection);
+            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, newRotation, 50);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
