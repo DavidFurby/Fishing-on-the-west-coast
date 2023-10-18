@@ -9,7 +9,6 @@ public class SeaFloorCollision : MonoBehaviour
     {
         if (other.CompareTag("Bait"))
         {
-            print("collision");
             OnSeaFloorCollision?.Invoke();
         }
     }
