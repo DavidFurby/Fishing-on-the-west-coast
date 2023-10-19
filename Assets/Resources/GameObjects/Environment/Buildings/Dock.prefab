@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7637069133344670947}
   - component: {fileID: 5627430940927914025}
   - component: {fileID: 8520219844570995365}
+  - component: {fileID: 5800511444695323781}
   m_Layer: 0
   m_Name: Dock
   m_TagString: Untagged
@@ -106,3 +107,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4444820182756387513, guid: dbd6a70a91ba09f4e88a0cd6ab2eea6c, type: 3}
+--- !u!65 &5800511444695323781
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131750742847083004}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.025382362, y: 0.082605906, z: 0.027400732}
+  m_Center: {x: -0.0000000013969839, y: 0.00901746, z: 0.013700366}

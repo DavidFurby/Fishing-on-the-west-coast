@@ -103,7 +103,13 @@ public class PlayerController : FishingController
     public void HandleMovement()
     {
         Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-        MovePlayer(movementDirection);
+
+        if (IsGrounded())
+        {
+            MovePlayer(movementDirection);
+
+        }
+
         RotatePlayer(movementDirection);
     }
 
@@ -119,6 +125,7 @@ public class PlayerController : FishingController
         {
             newRotation = Quaternion.LookRotation(movementDirection);
             gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, newRotation, 50);
+
         }
     }
 
@@ -148,18 +155,29 @@ public class PlayerController : FishingController
             CameraController.Instance.SetState(new PlayerCamera());
         }
     }
-
-    public void RaiseStartFishing() => SetState(new FishingIdle());
-
     private void ActivateInteractive()
     {
         SetState(new Interacting());
         interactive.StartInteraction();
     }
+    private bool IsGrounded()
+    {
+        Vector3 offset = transform.rotation * (Vector3.forward * 0.5f + Vector3.up * 0.01f);
+        if (Physics.Raycast(transform.position + offset, -transform.up, out _, 1f))
+        {
+            Debug.Log("Hit");
+            Debug.DrawRay(transform.position + offset, Vector3.down * 2f, Color.red);
+            return true;
+        }
+        else
+        {
+            Debug.Log("Miss");
+            return false;
+        }
+
+    }
     private void SetPlayerPositionAndRotation(Vector3 position, Quaternion quaternion)
     {
-        transform.position = position;
-        transform.rotation = quaternion;
-
+        transform.SetPositionAndRotation(position, quaternion);
     }
 }

@@ -1043,6 +1043,14 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5260980467124115617, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5979957840728314634, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6496314239847597855, guid: edf500c8f0a65b7438361bd6da621194, type: 3}
       propertyPath: whatTheRopeIsConnectedTo
       value: 

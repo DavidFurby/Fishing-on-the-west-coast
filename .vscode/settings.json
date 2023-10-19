@@ -57,6 +57,7 @@
     "Lerp",
     "Mathf",
     "Poolable",
+    "Raycast",
     "Rebuilder",
     "Rigidbody",
     "Scriptable",
