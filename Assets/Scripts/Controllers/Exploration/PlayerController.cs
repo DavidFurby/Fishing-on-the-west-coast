@@ -1,12 +1,12 @@
 using UnityEngine;
 using System;
-
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerController : FishingController
 {
     public static PlayerController Instance { get; private set; }
     private PlayerAnimations playerAnimations;
     private Interactive interactive;
-    private const int MovementSpeed = 10;
+    private PlayerMovement playerMovement;
     public static event Action NavigateShop;
     public static event Action OpenItemMenu;
 
@@ -41,6 +41,7 @@ public class PlayerController : FishingController
     private void InitializeComponents()
     {
         playerAnimations = GetComponentInChildren<PlayerAnimations>();
+        playerMovement = GetComponentInChildren<PlayerMovement>();
         SetState(new ExplorationIdle());
     }
 
@@ -106,28 +107,13 @@ public class PlayerController : FishingController
 
         if (IsGrounded())
         {
-            MovePlayer(movementDirection);
+            playerMovement.MovePlayer(movementDirection);
 
         }
 
-        RotatePlayer(movementDirection);
+        playerMovement.RotatePlayer(movementDirection);
     }
 
-    private void MovePlayer(Vector3 movementDirection)
-    {
-        transform.Translate(MovementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
-    }
-
-    private void RotatePlayer(Vector3 movementDirection)
-    {
-        Quaternion newRotation;
-        if (movementDirection != Vector3.zero)
-        {
-            newRotation = Quaternion.LookRotation(movementDirection);
-            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, newRotation, 50);
-
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -155,28 +141,17 @@ public class PlayerController : FishingController
             CameraController.Instance.SetState(new PlayerCamera());
         }
     }
+    private bool IsGrounded()
+    {
+        Vector3 offset = transform.rotation * (Vector3.forward * 0.5f + Vector3.up * 0.01f);
+        return Physics.Raycast(transform.position + offset, -transform.up, out _, 1f);
+    }
     private void ActivateInteractive()
     {
         SetState(new Interacting());
         interactive.StartInteraction();
     }
-    private bool IsGrounded()
-    {
-        Vector3 offset = transform.rotation * (Vector3.forward * 0.5f + Vector3.up * 0.01f);
-        if (Physics.Raycast(transform.position + offset, -transform.up, out _, 1f))
-        {
-            Debug.Log("Hit");
-            Debug.DrawRay(transform.position + offset, Vector3.down * 2f, Color.red);
-            return true;
-        }
-        else
-        {
-            Debug.Log("Miss");
-            return false;
-        }
-
-    }
-    private void SetPlayerPositionAndRotation(Vector3 position, Quaternion quaternion)
+        internal void SetPlayerPositionAndRotation(Vector3 position, Quaternion quaternion)
     {
         transform.SetPositionAndRotation(position, quaternion);
     }
