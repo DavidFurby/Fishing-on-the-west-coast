@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 7821062118129322843}
   - component: {fileID: 3784535631446491242}
   - component: {fileID: 1191445035072591900}
+  - component: {fileID: 9149757029335659380}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Player
@@ -623,7 +624,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 96
   m_CollisionDetection: 0
 --- !u!65 &3784535631446491242
 BoxCollider:
@@ -656,6 +657,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46e2669d04061e54f990f9000de1e1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9149757029335659380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7661169753038949569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a2072c26ae85446975620af6ebb881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7861434320658258523

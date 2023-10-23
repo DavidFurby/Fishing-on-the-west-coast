@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private const int MovementSpeed = 10;
-
+    private readonly float interpolationSpeed = 10;
 
 
     internal void MovePlayer(Vector3 movementDirection)
@@ -24,5 +24,23 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    internal void GroundAlignment()
+    {
+        if (IsGrounded())
+        {
+            Vector3 rayOrigin = transform.position - new Vector3(0, transform.localScale.y / 2, 0);
+            if (Physics.Raycast(rayOrigin, -transform.up, out RaycastHit hit, 1))
+            {
+                Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal);
 
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation * transform.rotation, interpolationSpeed * Time.deltaTime);
+            }
+        }
+    }
+    internal bool IsGrounded()
+    {
+        Vector3 offset = transform.rotation * (Vector3.forward * 0.5f + Vector3.up * 0.01f);
+
+        return Physics.Raycast(transform.position + offset, -transform.up, out _, 1f);
+    }
 }

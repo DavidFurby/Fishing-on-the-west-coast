@@ -38,6 +38,7 @@ public class PlayerController : FishingController
         InitializeComponents();
     }
 
+
     private void InitializeComponents()
     {
         playerAnimations = GetComponentInChildren<PlayerAnimations>();
@@ -105,7 +106,7 @@ public class PlayerController : FishingController
     {
         Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 
-        if (IsGrounded())
+        if (playerMovement.IsGrounded())
         {
             playerMovement.MovePlayer(movementDirection);
 
@@ -141,17 +142,13 @@ public class PlayerController : FishingController
             CameraController.Instance.SetState(new PlayerCamera());
         }
     }
-    private bool IsGrounded()
-    {
-        Vector3 offset = transform.rotation * (Vector3.forward * 0.5f + Vector3.up * 0.01f);
-        return Physics.Raycast(transform.position + offset, -transform.up, out _, 1f);
-    }
+
     private void ActivateInteractive()
     {
         SetState(new Interacting());
         interactive.StartInteraction();
     }
-        internal void SetPlayerPositionAndRotation(Vector3 position, Quaternion quaternion)
+    internal void SetPlayerPositionAndRotation(Vector3 position, Quaternion quaternion)
     {
         transform.SetPositionAndRotation(position, quaternion);
     }
