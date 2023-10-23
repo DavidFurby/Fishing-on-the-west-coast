@@ -81,7 +81,7 @@ public class FishingController : PlayerEventController
             castingPower++;
         }
     }
-    public void ClearCaughtFishes()
+    private void ClearCaughtFishes()
     {
         foreach (FishDisplay fish in fishesOnHook)
         {

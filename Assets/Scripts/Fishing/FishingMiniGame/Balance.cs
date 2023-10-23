@@ -52,11 +52,11 @@ public class Balance : MonoBehaviour
         if (PlayerController.Instance.fishesOnHook.Count > 0)
         {
             float weight = 0f;
-
             foreach (var fish in PlayerController.Instance.fishesOnHook)
             {
                 weight += fish.fish.size;
             }
+            print(weight);
             float targetValue = Random.value < 0.5 ? reelingBalance.value - Random.Range(0, weight * downwardForce) : reelingBalance.value + Random.Range(0, weight * upwardForce);
 
             targetValue = Mathf.Clamp(targetValue, 0f, 1f);
