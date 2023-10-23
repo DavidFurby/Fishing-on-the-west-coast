@@ -43,26 +43,31 @@ public class SeaTileManager : MonoBehaviour
     private GameObject GetSeaFromPool()
     {
         int currentPos = (int)distanceRecord.distance / 100;
-        if (currentPos >= lastDistancePos)
-        {
-            currentTileIndex++;
-
-            if (currentTileIndex >= seaTilePrefabs.Length)
-            {
-                currentTileIndex = seaTilePrefabs.Length - 1;
-            }
-        }
-        else if (currentPos <= lastDistancePos)
-        {
-
-            if (currentTileIndex > 0)
-            {
-                currentTileIndex--;
-            }
-        }
+        UpdateCurrentTileIndex(currentPos);
         currentSeaTilePrefab = seaTilePrefabs[currentTileIndex];
         lastDistancePos = currentPos;
         return ObjectPool.Instance.GetFromPool(currentSeaTilePrefab, poolSize);
+    }
+
+    private void UpdateCurrentTileIndex(int currentPos)
+    {
+        if (currentPos >= lastDistancePos)
+        {
+            IncrementCurrentTileIndex();
+        }
+        else if (currentPos <= lastDistancePos && currentTileIndex > 0)
+        {
+            currentTileIndex--;
+        }
+    }
+
+    private void IncrementCurrentTileIndex()
+    {
+        currentTileIndex++;
+        if (currentTileIndex >= seaTilePrefabs.Length)
+        {
+            currentTileIndex = seaTilePrefabs.Length - 1;
+        }
     }
 
     private void SetSeaPosition(GameObject sea)
