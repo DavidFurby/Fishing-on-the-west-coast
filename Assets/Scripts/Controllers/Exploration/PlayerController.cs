@@ -36,6 +36,9 @@ public class PlayerController : FishingController
     void Start()
     {
         InitializeComponents();
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        rigidbody.centerOfMass = new Vector3(0, -0.5f, 0);
+        
     }
 
 
