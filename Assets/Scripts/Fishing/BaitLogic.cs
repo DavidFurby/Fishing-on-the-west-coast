@@ -14,17 +14,19 @@ public class BaitLogic : MonoBehaviour
     private Rigidbody rigidBody;
     private FixedJoint fixedJoint;
     public static event Action<Vector3> UpdatePosition;
-
+    private void OnEnable()
+    {
+        PlayerEventController.OnWhileReelingBait += ReelIn;
+        PlayerEventController.OnWhileCasting += Cast;
+        WaterCollision.OnEnterSea += PlaySplashSound;
+        PlayerEventController.OnWhileFishing += PullBaitTowardsTarget;
+    }
     private void Start()
     {
         balance = FindObjectOfType<Balance>();
         splashSound = GetComponent<AudioSource>();
         rigidBody = GetComponent<Rigidbody>();
         rodTop = GameObject.FindGameObjectWithTag("RodTop");
-        PlayerEventController.OnWhileReelingBait += ReelIn;
-        PlayerEventController.OnWhileCasting += Cast;
-        WaterCollision.OnEnterSea += PlaySplashSound;
-        PlayerEventController.OnWhileFishing += PullBaitTowardsTarget;
         AttachBait();
     }
 
@@ -83,14 +85,14 @@ public class BaitLogic : MonoBehaviour
     {
         targetPosition = rodTop.transform.position;
 
-        if (IsCloseToTarget(targetPosition, 4))
+        if (IsCloseToTarget(targetPosition, 5))
         {
             AttachBait();
             SetState(PlayerController.Instance);
         }
-        else if (IsFarFromTarget(targetPosition, 100) && PlayerController.Instance.GetCurrentState() is Reeling)
+        else if (IsFarFromTarget(targetPosition, 50) && PlayerController.Instance.GetCurrentState() is Reeling)
         {
-            transform.position = new Vector3(targetPosition.x + 50, transform.position.y, targetPosition.z);
+            transform.position = new Vector3(targetPosition.x + 20, transform.position.y, targetPosition.z);
         }
         else
         {
@@ -124,7 +126,7 @@ public class BaitLogic : MonoBehaviour
             Vector3 direction = (rodTop.transform.position - transform.position).normalized + new Vector3(0, 0.1f, 0);
             rigidBody.AddForce(direction * 1.5f, ForceMode.Impulse);
             IsPulling = false;
-            if (IsCloseToTarget(targetPosition, 20))
+            if (IsCloseToTarget(targetPosition, 50))
             {
                 PlayerController.Instance.SetState(new Reeling());
             }
