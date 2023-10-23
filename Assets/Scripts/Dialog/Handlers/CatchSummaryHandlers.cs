@@ -2,11 +2,11 @@ using UnityEngine;
 public class CatchSummaryHandlers : MonoBehaviour
 
 {
-     private DialogManager dialogManager;
-     void Start()
-     {
+    private DialogManager dialogManager;
+    void Start()
+    {
         dialogManager = FindAnyObjectByType<DialogManager>();
-     }
+    }
     public void StartSummary(Fish fish)
     {
         if (dialogManager != null)
@@ -19,6 +19,7 @@ public class CatchSummaryHandlers : MonoBehaviour
 
     public void SetCatchSummaryHandler(Fish catchResult)
     {
+        dialogManager.RemoveHandler("setCatchSummary");
         dialogManager.AddCommandHandler("setCatchSummary", () =>
         {
             dialogManager.SetVariableValue("$catchName", catchResult.name);

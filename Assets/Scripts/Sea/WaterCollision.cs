@@ -27,7 +27,6 @@ public class WaterCollision : MonoBehaviour
             ApplyDrag(other, rigidBody);
         }
     }
-
     private void ApplyDrag(Collider other, Rigidbody rigidBody)
     {
         int instanceID = other.GetInstanceID();
@@ -52,6 +51,11 @@ public class WaterCollision : MonoBehaviour
                 addedDragByInstanceID.Remove(other.GetInstanceID());
                 previousVelocityByInstanceID.Remove(other.GetInstanceID());
             }
+        }
+        if (other.CompareTag("Fish"))
+        {
+            FishMovement fishMovement = other.GetComponent<FishMovement>();
+            fishMovement.IfExitSea(other.transform.position.y > transform.position.y);
         }
     }
 }

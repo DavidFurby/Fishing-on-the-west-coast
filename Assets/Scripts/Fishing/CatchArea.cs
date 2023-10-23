@@ -27,13 +27,13 @@ public class CatchArea : MonoBehaviour
     {
         if (other.CompareTag("Fish") && PlayerController.Instance.FishAttachedToBait == other.GetComponent<FishDisplay>())
         {
-            PlayerController.Instance.IsInCatchArea = true;
+            PlayerController.Instance.IsInCatchArea = false;
         }
     }
 
     private void HandleFishEnter(Collider other)
     {
-        var fishMovement = other.GetComponent<FishMovement>();
+        FishMovement fishMovement = other.GetComponent<FishMovement>();
         if (fishMovement.GetCurrentState() is Baited)
         {
             PlayerController.Instance.IsInCatchArea = true;

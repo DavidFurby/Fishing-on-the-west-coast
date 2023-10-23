@@ -5,7 +5,6 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private const int MovementSpeed = 10;
-    private readonly float interpolationSpeed = 10;
 
     internal void MovePlayer(Vector3 movementDirection)
     {

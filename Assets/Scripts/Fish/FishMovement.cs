@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-
 public class FishMovement : FishStateMachine
 {
     #region Serialized Fields
@@ -15,12 +14,13 @@ public class FishMovement : FishStateMachine
     #region Private Fields
     private Transform[] _bones;
     private Rigidbody _rigidBody;
+
     #endregion
 
     #region Unity Methods
     private void OnEnable()
     {
-        SeaFloorCollision.OnSeaFloorCollision += StopBeingBaited;
+        SeaFloorCollision.OnBaitCollision += StopBeingBaited;
     }
 
     void Start()
@@ -31,7 +31,7 @@ public class FishMovement : FishStateMachine
 
     private void OnDestroy()
     {
-        SeaFloorCollision.OnSeaFloorCollision -= StopBeingBaited;
+        SeaFloorCollision.OnBaitCollision -= StopBeingBaited;
     }
     #endregion
 
@@ -199,6 +199,15 @@ public class FishMovement : FishStateMachine
     {
         this.target = target;
         SetState(new Baited(this));
+    }
+    internal void IfExitSea(bool isTop)
+    {
+        if (gameObject != null && GetCurrentState() is Swimming || GetCurrentState() is Baited)
+        {
+            Vector3 direction = isTop ? -transform.up : transform.up;
+            MoveFishInDirection(direction, _speed);
+            RotateTowards(direction);
+        }
     }
 
     public void StopBeingBaited()

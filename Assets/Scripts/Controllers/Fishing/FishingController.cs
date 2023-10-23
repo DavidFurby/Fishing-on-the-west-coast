@@ -98,6 +98,7 @@ public class FishingController : PlayerEventController
         FishIsBaited = false;
         reelInSpeed = initialReelInSpeed;
         castingPower = initialCastingPower;
+        chargeLevel = 1;
     }
 }
 #endregion

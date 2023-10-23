@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class SeaFloorCollision : MonoBehaviour
 {
-    public static event Action OnSeaFloorCollision;
+    public static event Action OnBaitCollision;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bait"))
         {
-            OnSeaFloorCollision?.Invoke();
+            OnBaitCollision?.Invoke();
         }
     }
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Bait"))
         {
-            OnSeaFloorCollision?.Invoke();
+            OnBaitCollision?.Invoke();
         }
     }
 }

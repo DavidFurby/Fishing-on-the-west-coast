@@ -13,6 +13,6 @@ public struct RopeSection
     {
         this.pos = pos;
 
-        this.vel = Vector3.zero;
+        vel = Vector3.zero;
     }
 }

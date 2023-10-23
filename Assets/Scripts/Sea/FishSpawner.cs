@@ -3,8 +3,8 @@ using Random = UnityEngine.Random;
 
 public class FishSpawner : MonoBehaviour
 {
-    [SerializeField] private int spawnDelay = 3;
-    [SerializeField] private int fishPoolSize = 5;
+    [SerializeField] private int spawnDelay = 2;
+    [SerializeField] private int fishPoolSize = 10;
     private Vector3 targetPosition;
     private FishDisplay[] fishPrefabs;
     private BoxCollider seaCollider;
@@ -65,13 +65,29 @@ public class FishSpawner : MonoBehaviour
 
     private (Vector3, Quaternion) CalculateSpawnPosition()
     {
-        float fishSpawnX = Random.value < 0.5 ? targetPosition.x - 5 : targetPosition.x + 5;
+        // Determine fish spawn X position
+        float fishSpawnX;
+        if (PlayerController.Instance.GetCurrentState() is ReelingFish)
+        {
+            fishSpawnX = targetPosition.x - 50;
+        }
+        else
+        {
+            fishSpawnX = Random.value < 0.5 ? targetPosition.x - 10 : targetPosition.x + 5;
+        }
+
+        // Determine fish spawn Y position within sea collider bounds
         float fishSpawnY = Random.Range(seaCollider.bounds.min.y, seaCollider.bounds.max.y);
+
+        // Determine fish spawn rotation based on X position
         Quaternion fishSpawnRotation = fishSpawnX < targetPosition.x ? Quaternion.Euler(0, 90, 0) : Quaternion.Euler(0, -90, 0);
+
+        // Create fish spawn position vector
         Vector3 fishSpawnPosition = new(fishSpawnX, fishSpawnY, targetPosition.z);
 
         return (fishSpawnPosition, fishSpawnRotation);
     }
+
 
     public void RemoveAllFishes()
     {

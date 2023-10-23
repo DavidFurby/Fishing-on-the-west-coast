@@ -42,7 +42,8 @@ public class SeaTileManager : MonoBehaviour
 
     private GameObject GetSeaFromPool()
     {
-        if (distanceRecord.distance / 100 >= lastDistancePos)
+        int currentPos = (int)distanceRecord.distance / 100;
+        if (currentPos >= lastDistancePos)
         {
             currentTileIndex++;
 
@@ -51,18 +52,16 @@ public class SeaTileManager : MonoBehaviour
                 currentTileIndex = seaTilePrefabs.Length - 1;
             }
         }
-        else if (distanceRecord.distance / 100 <= lastDistancePos)
+        else if (currentPos <= lastDistancePos)
         {
-            if (currentTileIndex <= 0)
+
+            if (currentTileIndex > 0)
             {
                 currentTileIndex--;
-
             }
         }
-
         currentSeaTilePrefab = seaTilePrefabs[currentTileIndex];
-        lastDistancePos = (int)distanceRecord.distance / 100;
-
+        lastDistancePos = currentPos;
         return ObjectPool.Instance.GetFromPool(currentSeaTilePrefab, poolSize);
     }
 
