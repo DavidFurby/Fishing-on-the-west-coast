@@ -175,6 +175,7 @@ public class FishMovement : FishStateMachine
             joint.angularXDrive = jointDrive;
             joint.angularYZDrive = jointDrive;
         }
+        PositionOnTarget();
     }
 
     private void PositionOnTarget()

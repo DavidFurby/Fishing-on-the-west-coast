@@ -18,8 +18,11 @@ public class BaitLogic : MonoBehaviour
     {
         PlayerEventController.OnWhileReelingBait += ReelIn;
         PlayerEventController.OnWhileCasting += Cast;
-        WaterCollision.OnEnterSea += PlaySplashSound;
         PlayerEventController.OnWhileFishing += PullBaitTowardsTarget;
+        PlayerEventController.OnEnterFishing += FreezeZPosition;
+        PlayerEventController.OnEnterIdle += UnFreezeZPosition;
+        WaterCollision.OnEnterSea += PlaySplashSound;
+
     }
     private void Start()
     {
@@ -34,8 +37,10 @@ public class BaitLogic : MonoBehaviour
     {
         PlayerEventController.OnWhileReelingBait -= ReelIn;
         PlayerEventController.OnWhileCasting -= Cast;
-        WaterCollision.OnEnterSea -= PlaySplashSound;
         PlayerEventController.OnWhileFishing -= PullBaitTowardsTarget;
+        PlayerEventController.OnEnterFishing -= FreezeZPosition;
+        PlayerEventController.OnEnterIdle -= UnFreezeZPosition;
+        WaterCollision.OnEnterSea -= PlaySplashSound;
     }
 
     private void Update()
@@ -131,6 +136,16 @@ public class BaitLogic : MonoBehaviour
                 PlayerController.Instance.SetState(new Reeling());
             }
         }
+    }
+    private void FreezeZPosition()
+    {
+
+        rigidBody.constraints = RigidbodyConstraints.FreezePositionZ;
+    }
+
+    private void UnFreezeZPosition()
+    {
+        rigidBody.constraints &= ~RigidbodyConstraints.FreezePositionZ;
     }
 
     private void PlaySplashSound()
