@@ -54,7 +54,6 @@ public class ObjectPool : MonoBehaviour
         {
             AddToPool(prefab);
         }
-        print(poolDictionary.Count);
     }
     public void RemovePool(string tag)
     {
@@ -79,13 +78,13 @@ public class ObjectPool : MonoBehaviour
             {
                 keysToRemove.Add(kvp.Key);
             }
-            foreach (GameObject key in keysToRemove)
-            {
-                poolDictionary.Remove(key);
-            }
         }
-
+        foreach (GameObject key in keysToRemove)
+        {
+            poolDictionary.Remove(key);
+        }
     }
+
 
     // Add a new game object to the pool for the given prefab
     private void AddToPool(GameObject prefab)

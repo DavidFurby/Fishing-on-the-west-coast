@@ -76,7 +76,6 @@ public class FishMovement : FishStateMachine
 
     public void RotateTowardsTarget()
     {
-        print("hooked");
         Vector3 direction = GetDirectionTowardsTarget();
         RotateTowards(direction);
     }
