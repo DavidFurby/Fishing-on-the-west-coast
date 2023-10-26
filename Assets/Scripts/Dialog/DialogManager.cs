@@ -116,7 +116,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    public bool HasHandler(string handlerName)
+    private bool HasHandler(string handlerName)
     {
         return addedHandlers.ContainsKey(handlerName);
     }

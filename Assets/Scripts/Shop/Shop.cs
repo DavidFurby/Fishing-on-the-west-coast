@@ -69,6 +69,7 @@ public class Shop : MonoBehaviour
     {
         GameObject replacement = Instantiate(itemSpawner.emptySpot.model, itemSpawner.shopItemPositions[focusedShopItemIndex].transform.position, focusedShopItem.model.transform.rotation);
         replacement.transform.parent = transform;
+        replacement.transform.localScale = itemSpawner.shopItemPositions[focusedShopItemIndex].transform.localScale;
         focusedShopItem.model = replacement;
         itemSpawner.ShopItems[focusedShopItemIndex] = itemSpawner.emptySpot;
     }
