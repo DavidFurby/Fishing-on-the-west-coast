@@ -73,8 +73,7 @@ public class FishMovement : FishStateMachine
     {
         GetOrCreateConfigurableJoint();
     }
-
-
+    
     public void RotateTowardsTarget()
     {
         Vector3 direction = GetDirectionTowardsTarget();
@@ -156,6 +155,7 @@ public class FishMovement : FishStateMachine
 
     private void GetOrCreateConfigurableJoint()
     {
+        print("im a fish");
         if (!gameObject.TryGetComponent<ConfigurableJoint>(out _))
         {
             ConfigurableJoint joint = _bones[0].gameObject.AddComponent<ConfigurableJoint>();
@@ -176,6 +176,11 @@ public class FishMovement : FishStateMachine
             joint.angularXDrive = jointDrive;
             joint.angularYZDrive = jointDrive;
         }
+        PositionOnTarget();
+    }
+
+    private void PositionOnTarget()
+    {
         transform.position = target.transform.position;
 
         _rigidBody.constraints &= ~RigidbodyConstraints.FreezeRotationX;

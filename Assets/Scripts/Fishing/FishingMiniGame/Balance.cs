@@ -56,7 +56,6 @@ public class Balance : MonoBehaviour
             {
                 weight += fish.fish.size;
             }
-            print(weight);
             float targetValue = Random.value < 0.5 ? reelingBalance.value - Random.Range(0, weight * downwardForce) : reelingBalance.value + Random.Range(0, weight * upwardForce);
 
             targetValue = Mathf.Clamp(targetValue, 0f, 1f);

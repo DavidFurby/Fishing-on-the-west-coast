@@ -14,9 +14,9 @@ public class CatchArea : MonoBehaviour
         {
             if (PlayerController.Instance.GetCurrentState() is ReelingFish)
             {
-                CatchFishDuringReelingState(other);
+                CatchFishWhileReelingState(other);
             }
-            else
+            else if (PlayerController.Instance.GetCurrentState() is Fishing)
             {
                 HandleFishEnter(other);
             }
@@ -27,7 +27,7 @@ public class CatchArea : MonoBehaviour
     {
         if (other.CompareTag("Fish") && PlayerController.Instance.FishAttachedToBait == other.GetComponent<FishDisplay>())
         {
-            PlayerController.Instance.IsInCatchArea = false;
+            PlayerController.Instance.FishInCatchArea = null;
         }
     }
 
@@ -36,15 +36,14 @@ public class CatchArea : MonoBehaviour
         FishMovement fishMovement = other.GetComponent<FishMovement>();
         if (fishMovement.GetCurrentState() is Baited)
         {
-            PlayerController.Instance.IsInCatchArea = true;
             if (other.TryGetComponent(out FishDisplay fish))
             {
-                PlayerController.Instance.FishAttachedToBait = fish;
+                PlayerController.Instance.FishInCatchArea = fish;
             }
         }
     }
 
-    private void CatchFishDuringReelingState(Collider other)
+    private void CatchFishWhileReelingState(Collider other)
     {
         FishMovement fishMovement = other.GetComponent<FishMovement>();
         OnBaitFish.Invoke(other, PlayerController.Instance.fishesOnHook[^1].gameObject);

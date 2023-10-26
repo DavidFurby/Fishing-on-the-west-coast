@@ -10,8 +10,8 @@ public class FishingController : PlayerEventController
     internal float castingPower;
     internal float initialCastingPower = 20;
     internal float initialReelInSpeed = 5f;
-    internal bool IsInCatchArea { get; set; }
-    internal bool FishIsBaited { get; set; }
+    internal FishDisplay FishInCatchArea { get; set; }
+    internal FishDisplay BaitedFish { get; set; }
 
     #region Public Methods
 
@@ -19,7 +19,7 @@ public class FishingController : PlayerEventController
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (IsInCatchArea && FishAttachedToBait != null)
+            if (FishInCatchArea != null)
             {
                 RaiseEnterReelingFish();
             }
@@ -56,10 +56,11 @@ public class FishingController : PlayerEventController
 
     public void CatchFish()
     {
-        if (GetCurrentState() is Fishing)
+        if (GetCurrentState() is Fishing && FishInCatchArea != null)
         {
-            FishAttachedToBait.GetComponent<FishMovement>().SetState(new Hooked(FishAttachedToBait.GetComponent<FishMovement>()));
+            FishAttachedToBait = FishInCatchArea;
             AddFish(FishAttachedToBait);
+            FishAttachedToBait.GetComponent<FishMovement>().SetState(new Hooked(FishAttachedToBait.GetComponent<FishMovement>()));
         }
     }
 
@@ -94,8 +95,8 @@ public class FishingController : PlayerEventController
     {
         ClearCaughtFishes();
         FishAttachedToBait = null;
-        IsInCatchArea = false;
-        FishIsBaited = false;
+        FishInCatchArea = null;
+        BaitedFish = null;
         reelInSpeed = initialReelInSpeed;
         castingPower = initialCastingPower;
         chargeLevel = 1;

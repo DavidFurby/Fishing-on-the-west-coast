@@ -16,14 +16,14 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (PlayerController.Instance != null && collider.CompareTag("Fish") && !PlayerController.Instance.FishIsBaited)
+        if (PlayerController.Instance != null && collider.CompareTag("Fish") && !PlayerController.Instance.BaitedFish)
         {
             TryBaitingFish(collider, baitLogic.gameObject);
         }
     }
     private void OnTriggerStay(Collider collider)
     {
-        if (baitLogic.IsPulling && PlayerController.Instance != null && collider.CompareTag("Fish") && !PlayerController.Instance.FishIsBaited)
+        if (baitLogic.IsPulling && PlayerController.Instance != null && collider.CompareTag("Fish") && !PlayerController.Instance.BaitedFish)
         {
             TryBaitingFish(collider, baitLogic.gameObject);
         }
@@ -31,12 +31,12 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && PlayerController.Instance.FishIsBaited)
+        if (other.CompareTag("Fish") && PlayerController.Instance.BaitedFish)
         {
             FishMovement fishMovement = other.GetComponent<FishMovement>();
             if (fishMovement != null && fishMovement.GetCurrentState() is Baited)
             {
-                PlayerController.Instance.FishIsBaited = false;
+                PlayerController.Instance.BaitedFish = null;
                 fishMovement.SetState(new Swimming(fishMovement));
             }
         }
@@ -51,7 +51,7 @@ public class BaitArea : MonoBehaviour
             Random.Range(0f, 1f) < probability)
         {
             fishMovement.GetBaited(target);
-            PlayerController.Instance.FishIsBaited = true;
+            PlayerController.Instance.BaitedFish = target.GetComponent<FishDisplay>();
         }
     }
 
