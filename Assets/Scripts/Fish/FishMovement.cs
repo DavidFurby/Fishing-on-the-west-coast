@@ -8,12 +8,12 @@ public class FishMovement : FishStateMachine
     [SerializeField] private float _baitedSpeed = 0.8f;
     [SerializeField] private float _retreatSpeed = 50f;
     [SerializeField] private float _rotateSpeed = 2;
-    public Transform tastyPart;
     #endregion
 
     #region Private Fields
     private Transform[] _bones;
     private Rigidbody _rigidBody;
+    private Transform tastyPart;
 
     #endregion
 
@@ -73,9 +73,10 @@ public class FishMovement : FishStateMachine
     {
         GetOrCreateConfigurableJoint();
     }
-    
+
     public void RotateTowardsTarget()
     {
+        print("hooked");
         Vector3 direction = GetDirectionTowardsTarget();
         RotateTowards(direction);
     }
@@ -155,7 +156,6 @@ public class FishMovement : FishStateMachine
 
     private void GetOrCreateConfigurableJoint()
     {
-        print("im a fish");
         if (!gameObject.TryGetComponent<ConfigurableJoint>(out _))
         {
             ConfigurableJoint joint = _bones[0].gameObject.AddComponent<ConfigurableJoint>();
@@ -176,7 +176,6 @@ public class FishMovement : FishStateMachine
             joint.angularXDrive = jointDrive;
             joint.angularYZDrive = jointDrive;
         }
-        PositionOnTarget();
     }
 
     private void PositionOnTarget()

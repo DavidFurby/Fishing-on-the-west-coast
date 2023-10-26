@@ -37,17 +37,17 @@ public class FishSpawner : MonoBehaviour
     }
 
 
-    public void InvokeSpawnFish()
+    private void InvokeSpawnFish()
     {
         InvokeRepeating(nameof(SpawnFish), 2, spawnDelay);
     }
 
-    public void StopSpawnFish()
+    private void StopSpawnFish()
     {
         if (this != null)
             CancelInvoke(nameof(SpawnFish));
     }
-    public void SetTargetPosition(Vector3 position)
+    private void SetTargetPosition(Vector3 position)
     {
         targetPosition = position;
     }
@@ -60,6 +60,7 @@ public class FishSpawner : MonoBehaviour
 
         GameObject fish = ObjectPool.Instance.GetFromPool(fishPrefabs[randomFishIndex].gameObject, fishPoolSize);
         fish.transform.SetPositionAndRotation(fishSpawnPosition, fishSpawnRotation);
+        fish.GetComponent<FishMovement>().SetState(new Swimming(fish.GetComponent<FishMovement>()));
         fish.SetActive(true);
     }
 
@@ -89,12 +90,9 @@ public class FishSpawner : MonoBehaviour
     }
 
 
-    public void RemoveAllFishes()
+    private void RemoveAllFishes()
     {
-        GameObject[] fishes = GameObject.FindGameObjectsWithTag("Fish");
-        if (fishes.Length != 0)
-            foreach (GameObject fish in fishes)
-                ObjectPool.Instance.ReturnToPool(fish);
-
+        
+        ObjectPool.Instance.RemovePool("Fish");
     }
 }

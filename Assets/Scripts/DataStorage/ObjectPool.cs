@@ -54,6 +54,37 @@ public class ObjectPool : MonoBehaviour
         {
             AddToPool(prefab);
         }
+        print(poolDictionary.Count);
+    }
+    public void RemovePool(string tag)
+    {
+        List<GameObject> keysToRemove = new();
+        GameObject[] fishes = GameObject.FindGameObjectsWithTag(tag);
+        if (fishes.Length != 0)
+            foreach (GameObject fish in fishes)
+                Instance.ReturnToPool(fish);
+        foreach (var kvp in poolDictionary)
+        {
+            Queue<GameObject> gameObjects = kvp.Value;
+            GameObject[] arr = gameObjects.ToArray();
+            foreach (GameObject go in arr)
+            {
+                if (go.CompareTag(tag))
+                {
+                    gameObjects.Dequeue();
+                    Destroy(go);
+                }
+            }
+            if (gameObjects.Count == 0)
+            {
+                keysToRemove.Add(kvp.Key);
+            }
+            foreach (GameObject key in keysToRemove)
+            {
+                poolDictionary.Remove(key);
+            }
+        }
+
     }
 
     // Add a new game object to the pool for the given prefab

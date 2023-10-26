@@ -20,8 +20,11 @@ public class FishDisplay : MonoBehaviour
     {
         if (gameObject != null)
         {
+            if (gameObject.TryGetComponent(out ConfigurableJoint joint))
+            {
+                Destroy(joint);
+            }
             ObjectPool.Instance.ReturnToPool(gameObject);
-
         }
     }
 }

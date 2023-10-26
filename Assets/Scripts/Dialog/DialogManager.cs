@@ -28,7 +28,7 @@ public class DialogManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (TryGetComponent<DialogueRunner>(out dialogueRunner))
+        if (TryGetComponent(out dialogueRunner))
         {
             Conversation.StartConversation += StartDialog;
             dialogueRunner.onDialogueComplete.AddListener(EndDialog);

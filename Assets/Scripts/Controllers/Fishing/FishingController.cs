@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class FishingController : PlayerEventController
 {
+    #region Internal Properties
+
     internal FishDisplay FishAttachedToBait { get; set; }
+    internal FishDisplay FishInCatchArea { get; set; }
+    internal FishDisplay BaitedFish { get; set; }
     internal List<FishDisplay> fishesOnHook = new();
     internal float chargeLevel = 1;
     internal float reelInSpeed;
     internal float castingPower;
     internal float initialCastingPower = 20;
     internal float initialReelInSpeed = 5f;
-    internal FishDisplay FishInCatchArea { get; set; }
-    internal FishDisplay BaitedFish { get; set; }
+
+    #endregion
 
     #region Public Methods
 
@@ -32,7 +36,6 @@ public class FishingController : PlayerEventController
 
     public void StartCharging()
     {
-
         if (Input.GetKey(KeyCode.Space))
         {
             SetState(new Charging());
@@ -46,6 +49,7 @@ public class FishingController : PlayerEventController
             SetState(new Swinging());
         }
     }
+
     public void EnterSea()
     {
         if (GetCurrentState() is Casting)
@@ -59,8 +63,8 @@ public class FishingController : PlayerEventController
         if (GetCurrentState() is Fishing && FishInCatchArea != null)
         {
             FishAttachedToBait = FishInCatchArea;
-            AddFish(FishAttachedToBait);
             FishAttachedToBait.GetComponent<FishMovement>().SetState(new Hooked(FishAttachedToBait.GetComponent<FishMovement>()));
+            AddFish(FishAttachedToBait);
         }
     }
 
@@ -82,14 +86,6 @@ public class FishingController : PlayerEventController
             castingPower++;
         }
     }
-    private void ClearCaughtFishes()
-    {
-        foreach (FishDisplay fish in fishesOnHook)
-        {
-            fish.ReturnToPool();
-        }
-        fishesOnHook.Clear();
-    }
 
     public void ResetValues()
     {
@@ -101,5 +97,19 @@ public class FishingController : PlayerEventController
         castingPower = initialCastingPower;
         chargeLevel = 1;
     }
+
+   #endregion
+
+   #region Private Methods
+
+   private void ClearCaughtFishes()
+   {
+       foreach (FishDisplay fish in fishesOnHook)
+       {
+           fish.ReturnToPool();
+       }
+       fishesOnHook.Clear();
+   }
+
+   #endregion
 }
-#endregion

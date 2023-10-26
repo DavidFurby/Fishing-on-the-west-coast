@@ -12,9 +12,9 @@ public class FishSpawnHandler : MonoBehaviour
     }
     void Update()
     {
-        OnBecameInvisible();
+        OnOutOfBounds();
     }
-    private void OnBecameInvisible()
+    private void OnOutOfBounds()
     {
 
         if (fishScreenPosition.x > Screen.width + rightSideThreshold)
