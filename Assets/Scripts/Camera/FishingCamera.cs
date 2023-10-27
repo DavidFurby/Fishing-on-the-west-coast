@@ -5,6 +5,7 @@ public class FishingCamera : MonoBehaviour
 {
     private AudioSource alertSound;
     private BaitLogic bait;
+    private int fishingCameraDistance = 5;
 
 
     private void Start()
@@ -26,12 +27,15 @@ public class FishingCamera : MonoBehaviour
             PlayerEventController.OnEndSummary += OnEndSummary;
             PlayerEventController.OnEnterReelingFish += OnEnterReelingFish;
             CatchArea.OnCatchWhileReeling += OnCatchWhileReeling;
+            CatchArea.OnCatchWhileReeling += IncreaseFishingCameraDistance;
+
         }
         else
         {
             PlayerEventController.OnEndSummary -= OnEndSummary;
             PlayerEventController.OnEnterReelingFish -= OnEnterReelingFish;
             CatchArea.OnCatchWhileReeling -= OnCatchWhileReeling;
+            CatchArea.OnCatchWhileReeling -= IncreaseFishingCameraDistance;
         }
     }
 
@@ -44,7 +48,7 @@ public class FishingCamera : MonoBehaviour
     internal void UpdateCameraDuringFishing()
     {
         CameraController.Instance.SetCameraToTarget(bait.transform);
-        CameraController.Instance.MoveCameraToTarget(bait.transform, 0.005f, 6);
+        CameraController.Instance.MoveCameraToTarget(bait.transform, 0.005f, fishingCameraDistance);
     }
 
     internal void UpdateCameraDuringReeling()
@@ -53,8 +57,14 @@ public class FishingCamera : MonoBehaviour
         CameraController.Instance.MoveCameraToTarget(bait.transform);
     }
 
-
-
+    private void IncreaseFishingCameraDistance()
+    {
+        if (fishingCameraDistance < 15)
+        {
+            fishingCameraDistance += 10;
+            print(fishingCameraDistance);
+        }
+    }
     private void CatchAlertSound()
     {
         if (alertSound != null)

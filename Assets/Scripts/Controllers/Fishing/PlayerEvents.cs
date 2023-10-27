@@ -13,10 +13,10 @@ public abstract class PlayerEventController : PlayerStateMachine
     public static event Action OnWhileFishing;
     public static event Action OnEnterCasting;
     public static event Action<Transform> OnWhileCasting;
-    public static event Action OnWhileReelingBait;
+    public static event Action OnWhileReeling;
     public static event Action OnEnterReeling;
     public static event Action OnEnterReelingFish;
-    public static event Action OnReelingFish;
+    public static event Action OnWhileReelingFish;
     public static event Action OnExitReelingFish;
     public static event Action OnEnterSummary;
     public static event Action OnNextSummary;
@@ -36,7 +36,7 @@ public abstract class PlayerEventController : PlayerStateMachine
 
     internal void RaiseReelInBait()
     {
-        OnWhileReelingBait?.Invoke();
+        OnWhileReeling?.Invoke();
     }
 
     internal void RaiseWhileFishing()
@@ -56,7 +56,7 @@ public abstract class PlayerEventController : PlayerStateMachine
 
     internal void RaiseReelingFish()
     {
-        OnReelingFish?.Invoke();
+        OnWhileReelingFish?.Invoke();
     }
 
     public void RaiseEnterIdle()

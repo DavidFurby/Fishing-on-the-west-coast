@@ -3,7 +3,7 @@ public class CameraState : State
     protected CameraController controller;
     public CameraState()
     {
-        this.controller = CameraController.Instance;
+        controller = CameraController.Instance;
     }
 }
 

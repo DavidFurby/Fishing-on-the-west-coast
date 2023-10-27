@@ -18,19 +18,20 @@ public class DistanceRecord : MonoBehaviour
     #region Unity Methods
     void OnEnable()
     {
-        from = FindObjectOfType<FishingSpot>();
-        to = FindObjectOfType<BaitLogic>();
-        distanceTextUI = GetComponentInChildren<TextMeshProUGUI>();
-        distanceRecordMarker = Resources.Load<GameObject>(markerPath);
         PlayerEventController.OnEnterFishing += UpdateDistanceRecord;
         PlayerEventController.OnEnterIdle += SpawnDistanceRecordMarker;
         PlayerEventController.OnEnterCasting += SetActive;
         PlayerEventController.OnEnterReeling += SetInactive;
         PlayerEventController.OnEnterReelingFish += SetInactive;
+        PlayerEventController.OnWhileReelingFish += IsDistanceNegative;
     }
 
     private void Start()
     {
+        from = FindObjectOfType<FishingSpot>();
+        to = FindObjectOfType<BaitLogic>();
+        distanceTextUI = GetComponentInChildren<TextMeshProUGUI>();
+        distanceRecordMarker = Resources.Load<GameObject>(markerPath);
         distanceTextUI.gameObject.SetActive(false);
     }
 
@@ -41,6 +42,8 @@ public class DistanceRecord : MonoBehaviour
         PlayerEventController.OnEnterCasting -= SetActive;
         PlayerEventController.OnEnterReeling -= SetInactive;
         PlayerEventController.OnEnterReelingFish -= SetInactive;
+        PlayerEventController.OnWhileReelingFish -= IsDistanceNegative;
+
 
     }
 
@@ -68,7 +71,7 @@ public class DistanceRecord : MonoBehaviour
             {
                 Destroy(currentDistanceRecordMarker);
             }
-            Vector3 position = new(from.transform.position.x + MainManager.Instance.BestDistance, seaTileManager.currentSeaTilePrefab.transform.position.y +  seaTileManager.currentSeaTilePrefab.GetComponentInChildren<Renderer>().bounds.extents.y, to.transform.position.z);
+            Vector3 position = new(from.transform.position.x + MainManager.Instance.BestDistance, seaTileManager.currentSeaTilePrefab.transform.position.y + seaTileManager.currentSeaTilePrefab.GetComponentInChildren<Renderer>().bounds.extents.y, to.transform.position.z);
             currentDistanceRecordMarker = Instantiate(distanceRecordMarker, position, Quaternion.identity);
             StartCoroutine(MoveMarker(position, 5f));
         }
@@ -93,6 +96,15 @@ public class DistanceRecord : MonoBehaviour
             distance = Vector3.Distance(from.transform.position, to.transform.position);
             int roundedDistance = Mathf.RoundToInt(distance);
             distanceTextUI.text = string.Format("Distance: {0:F1} meter", roundedDistance);
+        }
+    }
+
+    private void IsDistanceNegative()
+    {
+        if (distance < 0)
+        {
+            print("Is Negative");
+            to.AttachBait();
         }
     }
 

@@ -16,7 +16,7 @@ public class BaitLogic : MonoBehaviour
     public static event Action<Vector3> UpdatePosition;
     private void OnEnable()
     {
-        PlayerEventController.OnWhileReelingBait += ReelIn;
+        PlayerEventController.OnWhileReeling += ReelIn;
         PlayerEventController.OnWhileCasting += Cast;
         PlayerEventController.OnWhileFishing += PullBaitTowardsTarget;
         PlayerEventController.OnEnterFishing += FreezeZPosition;
@@ -35,7 +35,7 @@ public class BaitLogic : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerEventController.OnWhileReelingBait -= ReelIn;
+        PlayerEventController.OnWhileReeling -= ReelIn;
         PlayerEventController.OnWhileCasting -= Cast;
         PlayerEventController.OnWhileFishing -= PullBaitTowardsTarget;
         PlayerEventController.OnEnterFishing -= FreezeZPosition;
@@ -48,10 +48,9 @@ public class BaitLogic : MonoBehaviour
         UpdatePosition?.Invoke(transform.position);
     }
 
-    private void AttachBait()
+    public void AttachBait()
     {
         transform.position = rodTop.transform.position;
-
         fixedJoint = gameObject.AddComponent<FixedJoint>();
         fixedJoint.connectedBody = rodTop.GetComponent<Rigidbody>();
         forceFactor = 1;
@@ -139,7 +138,6 @@ public class BaitLogic : MonoBehaviour
     }
     private void FreezeZPosition()
     {
-
         rigidBody.constraints = RigidbodyConstraints.FreezePositionZ;
     }
 
