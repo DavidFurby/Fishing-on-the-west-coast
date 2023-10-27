@@ -54,8 +54,8 @@ public class WaterCollision : MonoBehaviour
         }
         if (other.CompareTag("Fish"))
         {
-            FishMovement fishMovement = other.GetComponent<FishMovement>();
-            fishMovement.IfExitSea(other.transform.position.y > transform.position.y);
+            FishBehaviour fishBehaviour = other.GetComponent<FishBehaviour>();
+            fishBehaviour.IfExitSea(other.transform.position.y > transform.position.y);
         }
     }
 }

@@ -60,7 +60,7 @@ public class FishSpawner : MonoBehaviour
 
         GameObject fish = ObjectPool.Instance.GetFromPool(fishPrefabs[randomFishIndex].gameObject, fishPoolSize);
         fish.transform.SetPositionAndRotation(fishSpawnPosition, fishSpawnRotation);
-        fish.GetComponent<FishMovement>().SetState(new Swimming(fish.GetComponent<FishMovement>()));
+        fish.GetComponent<FishBehaviour>().SetState(new Swimming(fish.GetComponent<FishBehaviour>()));
         fish.SetActive(true);
     }
 

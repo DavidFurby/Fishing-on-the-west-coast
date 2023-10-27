@@ -1,10 +1,10 @@
 
 public class FishState : State
 {
-    protected FishMovement fishMovement;
-    public FishState(FishMovement fishMovement)
+    protected FishBehaviour fishBehaviour;
+    public FishState(FishBehaviour fishBehaviour)
     {
-        this.fishMovement = fishMovement;
+        this.fishBehaviour = fishBehaviour;
     }
     public override void FixedUpdate()
     {
@@ -14,18 +14,18 @@ public class FishState : State
 
 public class Swimming : FishState
 {
-    public Swimming(FishMovement fishMovement) : base(fishMovement)
+    public Swimming(FishBehaviour fishBehaviour) : base(fishBehaviour)
     {
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.SwimAround();
+        fishBehaviour.fishMovement.SwimAround();
     }
 }
 public class Baited : FishState
 {
-    public Baited(FishMovement fishMovement) : base(fishMovement)
+    public Baited(FishBehaviour fishBehaviour) : base(fishBehaviour)
     {
 
     }
@@ -33,13 +33,13 @@ public class Baited : FishState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.SwimTowardsTarget();
-        fishMovement.RotateTowardsTarget();
+        fishBehaviour.fishMovement.SwimTowardsTarget();
+        fishBehaviour.fishMovement.RotateTowardsTarget();
     }
 }
 public class Retreat : FishState
 {
-    public Retreat(FishMovement fishMovement) : base(fishMovement)
+    public Retreat(FishBehaviour fishBehaviour) : base(fishBehaviour)
     {
 
     }
@@ -50,47 +50,47 @@ public class Retreat : FishState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.StartCoroutine(fishMovement.Retreat());
-        fishMovement.RotateTowardsTarget();
+        fishBehaviour.StartCoroutine(fishBehaviour.fishMovement.Retreat());
+        fishBehaviour.fishMovement.RotateTowardsTarget();
     }
 }
 public class Hooked : FishState
 {
-    public Hooked(FishMovement fishMovement) : base(fishMovement)
+    public Hooked(FishBehaviour fishBehaviour) : base(fishBehaviour)
     {
     }
     public override void OnEnter()
     {
         base.OnEnter();
-        fishMovement.AttachToBait();
+        fishBehaviour.AttachToBait();
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.RotateTowardsTarget();
+        fishBehaviour.fishMovement.RotateTowardsTarget();
     }
 }
 
 public class HookedToFish : FishState
 {
-    public HookedToFish(FishMovement fishMovement) : base(fishMovement)
+    public HookedToFish(FishBehaviour fishBehaviour) : base(fishBehaviour)
     {
     }
     public override void OnEnter()
     {
         base.OnEnter();
-        fishMovement.AttachToFish();
+        fishBehaviour.AttachToFish();
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishMovement.RotateTowardsTarget();
+        fishBehaviour.fishMovement.RotateTowardsTarget();
     }
 }
 
 public class Inspected : FishState
 {
-    public Inspected(FishMovement fishMovement) : base(fishMovement)
+    public Inspected(FishBehaviour fishBehaviour) : base(fishBehaviour)
     {
     }
 }

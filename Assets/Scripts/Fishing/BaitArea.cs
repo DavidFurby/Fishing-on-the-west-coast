@@ -33,7 +33,7 @@ public class BaitArea : MonoBehaviour
     {
         if (other.CompareTag("Fish") && PlayerController.Instance.BaitedFish)
         {
-            FishMovement fishMovement = other.GetComponent<FishMovement>();
+            FishBehaviour fishMovement = other.GetComponent<FishBehaviour>();
             if (fishMovement != null && fishMovement.GetCurrentState() is Baited)
             {
                 PlayerController.Instance.BaitedFish = null;
@@ -44,13 +44,13 @@ public class BaitArea : MonoBehaviour
 
     public void TryBaitingFish(Collider collider, GameObject target)
     {
-        FishMovement fishMovement = collider.GetComponent<FishMovement>();
+        FishBehaviour fishBehaviour = collider.GetComponent<FishBehaviour>();
         FishDisplay fish = collider.GetComponent<FishDisplay>();
         float probability = GetProbability(fish.fish.level, MainManager.Instance.Inventory.EquippedBait.level);
         if (
             Random.Range(0f, 1f) < probability)
         {
-            fishMovement.GetBaited(target);
+            fishBehaviour.GetBaited(target);
             PlayerController.Instance.BaitedFish = target.GetComponent<FishDisplay>();
         }
     }
