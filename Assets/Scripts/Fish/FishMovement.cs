@@ -8,14 +8,14 @@ public class FishMovement : MonoBehaviour
     [SerializeField] private float _baitedSpeed = 0.8f;
     [SerializeField] private float _retreatSpeed = 50f;
     [SerializeField] private float _rotateSpeed = 2;
-    internal FishBehaviour fishBehaviour;
+    internal FishController fishController;
+
     #endregion
 
-    void Start()
+    public void Initialize(FishController controller)
     {
-        fishBehaviour = GetComponent<FishBehaviour>();
+        fishController = controller;
     }
-
     #region Public Methods
     public void SwimAround()
     {
@@ -26,7 +26,7 @@ public class FishMovement : MonoBehaviour
     {
         if (IsCloseToTarget())
         {
-            fishBehaviour.SetState(new Retreat(fishBehaviour));
+            fishController.SetState(new Retreat(fishController));
         }
         else
         {
@@ -39,7 +39,7 @@ public class FishMovement : MonoBehaviour
         Vector3 direction = GetDirectionAwayFromTarget();
         MoveFishInDirection(direction, Random.Range(_retreatSpeed / 2, _retreatSpeed * 2));
         yield return new WaitForSeconds(Random.Range(2, 4));
-        fishBehaviour.SetState(new Baited(fishBehaviour));
+        fishController.SetState(new Baited(fishController));
     }
 
     public void RotateTowardsTarget()
@@ -47,43 +47,43 @@ public class FishMovement : MonoBehaviour
         Vector3 direction = GetDirectionTowardsTarget();
         RotateTowards(direction);
     }
-    
+
     internal void RotateTowards(Vector3 direction)
     {
         Quaternion _lookRotation = Quaternion.LookRotation(direction.normalized);
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _rotateSpeed);
     }
-    
+
     internal void MoveFish(float speed)
     {
-        fishBehaviour.rigidBody.velocity = transform.forward * speed;
+        fishController.fishBehaviour.rigidBody.velocity = transform.forward * speed;
     }
 
     internal void MoveFishInDirection(Vector3 direction, float speed)
     {
-        fishBehaviour.rigidBody.velocity = direction.normalized * speed;
+        fishController.fishBehaviour.rigidBody.velocity = direction.normalized * speed;
     }
-    
+
     #endregion
 
     #region Private Methods
     private bool IsCloseToTarget()
     {
-        return fishBehaviour.target != null && Mathf.Approximately(Vector3.Distance(transform.position, fishBehaviour.target.transform.position), 0.1f);
-        
+        return fishController.fishBehaviour.target != null && Mathf.Approximately(Vector3.Distance(transform.position, fishController.fishBehaviour.target.transform.position), 0.1f);
+
     }
 
     private Vector3 GetDirectionTowardsTarget()
     {
-        return fishBehaviour.target != null ? fishBehaviour.target.transform.position - transform.position : Vector3.zero;
-        
+        return fishController.fishBehaviour.target != null ? fishController.fishBehaviour.target.transform.position - transform.position : Vector3.zero;
+
     }
 
     private Vector3 GetDirectionAwayFromTarget()
     {
-        return fishBehaviour.target != null ? transform.position - fishBehaviour.target.transform.position : Vector3.zero;
-        
+        return fishController.fishBehaviour.target != null ? transform.position - fishController.fishBehaviour.target.transform.position : Vector3.zero;
+
     }
-    
-   #endregion
+
+    #endregion
 }

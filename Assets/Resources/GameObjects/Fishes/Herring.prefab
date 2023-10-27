@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 6650865527275564235}
   - component: {fileID: 7136184536284613082}
   - component: {fileID: -9171576176661077273}
+  - component: {fileID: -4861810650790333408}
   m_Layer: 0
   m_Name: Herring
   m_TagString: Fish
@@ -250,6 +251,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+--- !u!114 &-4861810650790333408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757828987218130099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a481f1b9bb95b0e458d2003e94256e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishBehaviour: {fileID: -9171576176661077273}
+  fishMovement: {fileID: 5992753728950181139}
 --- !u!1 &4532301887607983535
 GameObject:
   m_ObjectHideFlags: 0

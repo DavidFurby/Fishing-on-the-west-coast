@@ -33,11 +33,11 @@ public class BaitArea : MonoBehaviour
     {
         if (other.CompareTag("Fish") && PlayerController.Instance.BaitedFish)
         {
-            FishBehaviour fishMovement = other.GetComponent<FishBehaviour>();
-            if (fishMovement != null && fishMovement.GetCurrentState() is Baited)
+            FishController fishController = other.GetComponent<FishController>();
+            if (fishController != null && fishController.GetCurrentState() is Baited)
             {
                 PlayerController.Instance.BaitedFish = null;
-                fishMovement.SetState(new Swimming(fishMovement));
+                fishController.SetState(new Swimming(fishController));
             }
         }
     }

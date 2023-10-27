@@ -1,10 +1,10 @@
 
 public class FishState : State
 {
-    protected FishBehaviour fishBehaviour;
-    public FishState(FishBehaviour fishBehaviour)
+    protected FishController fishController;
+    public FishState(FishController fishController)
     {
-        this.fishBehaviour = fishBehaviour;
+        this.fishController = fishController;
     }
     public override void FixedUpdate()
     {
@@ -14,18 +14,18 @@ public class FishState : State
 
 public class Swimming : FishState
 {
-    public Swimming(FishBehaviour fishBehaviour) : base(fishBehaviour)
+    public Swimming(FishController fishController) : base(fishController)
     {
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishBehaviour.fishMovement.SwimAround();
+        fishController.fishMovement.SwimAround();
     }
 }
 public class Baited : FishState
 {
-    public Baited(FishBehaviour fishBehaviour) : base(fishBehaviour)
+    public Baited(FishController fishController) : base(fishController)
     {
 
     }
@@ -33,13 +33,13 @@ public class Baited : FishState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishBehaviour.fishMovement.SwimTowardsTarget();
-        fishBehaviour.fishMovement.RotateTowardsTarget();
+        fishController.fishMovement.SwimTowardsTarget();
+        fishController.fishMovement.RotateTowardsTarget();
     }
 }
 public class Retreat : FishState
 {
-    public Retreat(FishBehaviour fishBehaviour) : base(fishBehaviour)
+    public Retreat(FishController fishController) : base(fishController)
     {
 
     }
@@ -50,47 +50,47 @@ public class Retreat : FishState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishBehaviour.StartCoroutine(fishBehaviour.fishMovement.Retreat());
-        fishBehaviour.fishMovement.RotateTowardsTarget();
+        fishController.StartCoroutine(fishController.fishMovement.Retreat());
+        fishController.fishMovement.RotateTowardsTarget();
     }
 }
 public class Hooked : FishState
 {
-    public Hooked(FishBehaviour fishBehaviour) : base(fishBehaviour)
+    public Hooked(FishController fishController) : base(fishController)
     {
     }
     public override void OnEnter()
     {
         base.OnEnter();
-        fishBehaviour.AttachToBait();
+        fishController.fishBehaviour.AttachToBait();
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishBehaviour.fishMovement.RotateTowardsTarget();
+        fishController.fishMovement.RotateTowardsTarget();
     }
 }
 
 public class HookedToFish : FishState
 {
-    public HookedToFish(FishBehaviour fishBehaviour) : base(fishBehaviour)
+    public HookedToFish(FishController fishController) : base(fishController)
     {
     }
     public override void OnEnter()
     {
         base.OnEnter();
-        fishBehaviour.AttachToFish();
+        fishController.fishBehaviour.AttachToFish();
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishBehaviour.fishMovement.RotateTowardsTarget();
+        fishController.fishMovement.RotateTowardsTarget();
     }
 }
 
 public class Inspected : FishState
 {
-    public Inspected(FishBehaviour fishBehaviour) : base(fishBehaviour)
+    public Inspected(FishController fishController) : base(fishController)
     {
     }
 }

@@ -63,7 +63,7 @@ public class FishingController : PlayerEventController
         if (GetCurrentState() is Fishing && FishInCatchArea != null)
         {
             FishAttachedToBait = FishInCatchArea;
-            FishAttachedToBait.GetComponent<FishBehaviour>().SetState(new Hooked(FishAttachedToBait.GetComponent<FishBehaviour>()));
+            FishAttachedToBait.GetComponent<FishController>().SetState(new Hooked(FishAttachedToBait.GetComponent<FishController>()));
             AddFish(FishAttachedToBait);
         }
     }

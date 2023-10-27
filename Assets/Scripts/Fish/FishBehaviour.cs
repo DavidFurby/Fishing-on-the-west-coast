@@ -1,12 +1,12 @@
 using UnityEngine;
-[RequireComponent(typeof(FishMovement))]
-public class FishBehaviour : FishStateMachine
+[RequireComponent(typeof(Rigidbody))]
+public class FishBehaviour : MonoBehaviour
 {
     [HideInInspector] public GameObject target;
     private Transform[] _bones;
     private Transform tastyPart;
-    internal FishMovement fishMovement;
     internal Rigidbody rigidBody;
+    internal FishController fishController;
 
 
     private void OnEnable()
@@ -16,15 +16,19 @@ public class FishBehaviour : FishStateMachine
 
     void Start()
     {
-        fishMovement = GetComponent<FishMovement>();
+    
         InitializeFish();
         SetTastyPart();
     }
+
     private void OnDestroy()
     {
         SeaFloorCollision.OnBaitCollision -= StopBeingBaited;
     }
-
+    public void Initialize(FishController controller)
+    {
+        fishController = controller;
+    }
     public void AttachToFish()
     {
         if (target.TryGetComponent<FishMovement>(out _))
@@ -77,32 +81,32 @@ public class FishBehaviour : FishStateMachine
     public void GetBaited(GameObject target)
     {
         this.target = target;
-        SetState(new Baited(this));
+        fishController.SetState(new Baited(fishController));
     }
     internal void IfExitSea(bool isTop)
     {
-        if (gameObject != null && GetCurrentState() is Swimming || GetCurrentState() is Baited)
+        if (gameObject != null && fishController.GetCurrentState() is Swimming || fishController.GetCurrentState() is Baited)
         {
             Vector3 direction = isTop ? -transform.up : transform.up;
-            fishMovement.MoveFishInDirection(direction, fishMovement.speed);
-            fishMovement.RotateTowards(direction);
+            fishController.fishMovement.MoveFishInDirection(direction, fishController.fishMovement.speed);
+            fishController.fishMovement.RotateTowards(direction);
         }
     }
     public void StopBeingBaited()
     {
-        if (GetCurrentState() is Baited)
+        if (fishController.GetCurrentState() is Baited)
         {
-            SetState(new Swimming(this));
+            fishController.SetState(new Swimming(fishController));
             target = null;
             Vector3 direction = transform.eulerAngles.z > 180 ? -transform.right : transform.right;
-            fishMovement.MoveFishInDirection(direction, fishMovement.speed);
-            fishMovement.RotateTowards(direction);
+            fishController.fishMovement.MoveFishInDirection(direction, fishController.fishMovement.speed);
+            fishController.fishMovement.RotateTowards(direction);
         }
     }
 
     private void InitializeFish()
     {
-        SetState(new Swimming(this));
+        fishController.SetState(new Swimming(fishController));
         rigidBody = GetComponent<Rigidbody>();
         _bones = transform.Find("Armature").GetChild(0).GetComponentsInChildren<Transform>();
     }
