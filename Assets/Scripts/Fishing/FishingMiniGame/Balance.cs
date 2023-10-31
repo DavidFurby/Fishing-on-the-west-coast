@@ -126,7 +126,7 @@ public class Balance : MonoBehaviour
    private void StartBalanceMiniGame()
    {
        reelingBalance.gameObject.SetActive(true);
-       InvokeRepeating(nameof(AddForce), 2, 2);
+       InvokeRepeating(nameof(AddForce), 2, 4);
        musicController.PlayMiniGameMusic();
    }
 

@@ -45,7 +45,11 @@ public class FishMovement : MonoBehaviour
     public void RotateTowardsTarget()
     {
         Vector3 direction = GetDirectionTowardsTarget();
-        RotateTowards(direction);
+        if (direction != Vector3.zero)
+        {
+            RotateTowards(direction);
+
+        }
     }
 
     internal void RotateTowards(Vector3 direction)

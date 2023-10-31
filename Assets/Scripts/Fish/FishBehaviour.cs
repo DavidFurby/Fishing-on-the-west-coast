@@ -16,7 +16,7 @@ public class FishBehaviour : MonoBehaviour
 
     void Start()
     {
-    
+
         InitializeFish();
         SetTastyPart();
     }
@@ -33,51 +33,21 @@ public class FishBehaviour : MonoBehaviour
     {
         if (target.TryGetComponent<FishMovement>(out _))
         {
-            GetOrCreateConfigurableJoint();
-
+          AddFixedJoint();
         }
     }
     public void AttachToBait()
     {
-        GetOrCreateConfigurableJoint();
+        AddFixedJoint();
     }
+private void AddFixedJoint()
+{
+    FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+    joint.connectedBody = target.GetComponent<Rigidbody>();
 
-    private void GetOrCreateConfigurableJoint()
-    {
-        if (!gameObject.TryGetComponent<ConfigurableJoint>(out _))
-        {
-            ConfigurableJoint joint = _bones[0].gameObject.AddComponent<ConfigurableJoint>();
-            joint.connectedBody = target.GetComponent<Rigidbody>();
-            joint.xMotion = ConfigurableJointMotion.Limited;
-            joint.yMotion = ConfigurableJointMotion.Limited;
-            joint.zMotion = ConfigurableJointMotion.Locked;
-            joint.angularXMotion = ConfigurableJointMotion.Locked;
-            joint.angularYMotion = ConfigurableJointMotion.Free;
-            joint.angularZMotion = ConfigurableJointMotion.Free;
+    joint.anchor = gameObject.transform.InverseTransformPoint(_bones[0].position);
+}
 
-            JointDrive jointDrive = new()
-            {
-                positionSpring = 1000f,
-                positionDamper = 100f,
-                maximumForce = Mathf.Infinity
-            };
-            joint.angularXDrive = jointDrive;
-            joint.angularYZDrive = jointDrive;
-        }
-        PositionOnTarget();
-    }
-    private void PositionOnTarget()
-    {
-        transform.position = target.transform.position;
-
-        rigidBody.constraints &= ~RigidbodyConstraints.FreezeRotationX;
-
-        rigidBody.constraints &= ~RigidbodyConstraints.FreezeRotationY;
-
-        rigidBody.constraints &= ~RigidbodyConstraints.FreezeRotationZ;
-
-        print(transform.position);
-    }
     public void GetBaited(GameObject target)
     {
         this.target = target;
@@ -96,8 +66,8 @@ public class FishBehaviour : MonoBehaviour
     {
         if (fishController.GetCurrentState() is Baited)
         {
-            fishController.SetState(new Swimming(fishController));
             target = null;
+            fishController.SetState(new Swimming(fishController));
             Vector3 direction = transform.eulerAngles.z > 180 ? -transform.right : transform.right;
             fishController.fishMovement.MoveFishInDirection(direction, fishController.fishMovement.speed);
             fishController.fishMovement.RotateTowards(direction);
@@ -119,12 +89,7 @@ public class FishBehaviour : MonoBehaviour
         {
             tastyPart = new GameObject("TastyPart").GetComponent<Transform>();
             tastyPart.SetParent(gameObject.transform);
-            SetTastyPartPosition(_bones[^1]);
+            tastyPart.SetPositionAndRotation(_bones[^1].position, Quaternion.Euler(-89.98f, 0f, 0f));
         }
-    }
-
-    public void SetTastyPartPosition(Transform obj)
-    {
-        tastyPart.SetPositionAndRotation(obj.position, Quaternion.Euler(-89.98f, 0f, 0f));
     }
 }

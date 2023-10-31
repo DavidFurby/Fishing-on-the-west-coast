@@ -62,7 +62,6 @@ public class FishingCamera : MonoBehaviour
         if (fishingCameraDistance < 15)
         {
             fishingCameraDistance += 10;
-            print(fishingCameraDistance);
         }
     }
     private void CatchAlertSound()
