@@ -42,7 +42,7 @@ public class FishMovement : MonoBehaviour
         fishController.SetState(new Baited(fishController));
     }
 
-    public void RotateTowardsTarget()
+    internal void RotateTowardsTarget()
     {
         Vector3 direction = GetDirectionTowardsTarget();
         if (direction != Vector3.zero)

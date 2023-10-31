@@ -64,11 +64,6 @@ public class Hooked : FishState
         base.OnEnter();
         fishController.fishBehaviour.AttachToBait();
     }
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-        fishController.fishMovement.RotateTowardsTarget();
-    }
 }
 
 public class HookedToFish : FishState
