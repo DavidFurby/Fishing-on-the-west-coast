@@ -19,8 +19,8 @@ public class BaitLogic : MonoBehaviour
         PlayerEventController.OnWhileReeling += ReelIn;
         PlayerEventController.OnWhileCasting += Cast;
         PlayerEventController.OnWhileFishing += PullBaitTowardsTarget;
-        PlayerEventController.OnEnterFishing += FreezeZPosition;
-        PlayerEventController.OnEnterIdle += UnFreezeZPosition;
+        PlayerEventController.OnEnterFishing += FreezeRotationAndPosition;
+        PlayerEventController.OnEnterIdle += UnfreezeRotationAndPosition;
         WaterCollision.OnEnterSea += PlaySplashSound;
 
     }
@@ -38,8 +38,8 @@ public class BaitLogic : MonoBehaviour
         PlayerEventController.OnWhileReeling -= ReelIn;
         PlayerEventController.OnWhileCasting -= Cast;
         PlayerEventController.OnWhileFishing -= PullBaitTowardsTarget;
-        PlayerEventController.OnEnterFishing -= FreezeZPosition;
-        PlayerEventController.OnEnterIdle -= UnFreezeZPosition;
+        PlayerEventController.OnEnterFishing -= FreezeRotationAndPosition;
+        PlayerEventController.OnEnterIdle -= UnfreezeRotationAndPosition;
         WaterCollision.OnEnterSea -= PlaySplashSound;
     }
 
@@ -136,14 +136,16 @@ public class BaitLogic : MonoBehaviour
             }
         }
     }
-    private void FreezeZPosition()
+    private void FreezeRotationAndPosition()
     {
-        rigidBody.constraints = RigidbodyConstraints.FreezePositionZ;
+        rigidBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
     }
 
-    private void UnFreezeZPosition()
+
+    private void UnfreezeRotationAndPosition()
     {
         rigidBody.constraints &= ~RigidbodyConstraints.FreezePositionZ;
+        rigidBody.constraints &= ~RigidbodyConstraints.FreezeRotation;
     }
 
     private void PlaySplashSound()
