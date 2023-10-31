@@ -33,20 +33,22 @@ public class FishBehaviour : MonoBehaviour
     {
         if (target.TryGetComponent<FishMovement>(out _))
         {
-          AddFixedJoint();
+            AddFixedJoint();
         }
     }
     public void AttachToBait()
     {
         AddFixedJoint();
     }
-private void AddFixedJoint()
-{
-    FixedJoint joint = gameObject.AddComponent<FixedJoint>();
-    joint.connectedBody = target.GetComponent<Rigidbody>();
-
-    joint.anchor = gameObject.transform.InverseTransformPoint(_bones[0].position);
-}
+    private void AddFixedJoint()
+    {
+        if (!gameObject.TryGetComponent<FixedJoint>(out _))
+        {
+            FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+            joint.connectedBody = target.GetComponent<Rigidbody>();
+            joint.anchor = gameObject.transform.InverseTransformPoint(_bones[0].position);
+        }
+    }
 
     public void GetBaited(GameObject target)
     {

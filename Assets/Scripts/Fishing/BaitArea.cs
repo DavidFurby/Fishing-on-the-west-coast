@@ -44,12 +44,12 @@ public class BaitArea : MonoBehaviour
 
     public void TryBaitingFish(Collider collider, GameObject target)
     {
-        FishBehaviour fishBehaviour = collider.GetComponent<FishBehaviour>();
+        FishController fishController = collider.GetComponent<FishController>();
         FishDisplay fish = collider.GetComponent<FishDisplay>();
         float probability = GetProbability(fish.fish.level, MainManager.Instance.Inventory.EquippedBait.level);
-        if (Random.Range(0f, 1f) < probability)
+        if (Random.Range(0f, 1f) < probability && fishController.GetCurrentState() is Swimming)
         {
-            fishBehaviour.GetBaited(target);
+            fishController.fishBehaviour.GetBaited(target);
             PlayerController.Instance.BaitedFish = target.GetComponent<FishDisplay>();
         }
     }

@@ -47,6 +47,7 @@ public class CatchArea : MonoBehaviour
     {
         FishController fishController = other.GetComponent<FishController>();
         OnBaitFish.Invoke(other, PlayerController.Instance.fishesOnHook[^1].gameObject);
+        print(fishController.GetCurrentState());
         if (fishController.GetCurrentState() is Baited)
         {
             OnCatchWhileReeling.Invoke();
