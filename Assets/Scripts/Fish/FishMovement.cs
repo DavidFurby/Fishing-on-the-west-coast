@@ -4,10 +4,10 @@ using System.Collections;
 public class FishMovement : MonoBehaviour
 {
     #region Serialized Fields
-    [SerializeField] internal float speed = 20f;
-    [SerializeField] private float _baitedSpeed = 50f;
-    [SerializeField] private float _retreatSpeed = 100f;
-    [SerializeField] private float _rotateSpeed = 8;
+    [SerializeField] internal float speed;
+    [SerializeField] private float _baitedSpeed;
+    [SerializeField] private float _retreatSpeed;
+    private float _rotateSpeed = 0.5f;
     internal FishController fishController;
     #endregion
 

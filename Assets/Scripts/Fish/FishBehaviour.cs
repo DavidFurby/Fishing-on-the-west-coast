@@ -42,9 +42,14 @@ public class FishBehaviour : MonoBehaviour
         joint.anchor = gameObject.transform.InverseTransformPoint(_bones[0].position);
         joint.useSpring = true;
         JointSpring joint_spring = joint.spring;
-        joint_spring.spring = 10;
+        joint_spring.spring = 1;
         joint.spring = joint_spring;
 
+    }
+    public void ApplyWaterDrag()
+    {
+        Vector3 oppositeDirection = -rigidBody.velocity.normalized;
+        //rigidBody.AddForce(oppositeDirection, ForceMode.Impulse);
     }
 
     public void GetBaited(GameObject target)

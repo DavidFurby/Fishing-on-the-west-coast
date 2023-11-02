@@ -1,4 +1,6 @@
 
+using System.Numerics;
+
 public class FishState : State
 {
     protected FishController fishController;
@@ -64,6 +66,11 @@ public class Hooked : FishState
         base.OnEnter();
         fishController.fishBehaviour.AttachToTarget();
     }
+    public override void Update()
+    {
+        base.Update();
+        fishController.fishBehaviour.ApplyWaterDrag();
+    }
 }
 
 public class HookedToFish : FishState
@@ -76,10 +83,10 @@ public class HookedToFish : FishState
         base.OnEnter();
         fishController.fishBehaviour.AttachToTarget();
     }
-    public override void FixedUpdate()
+    public override void Update()
     {
-        base.FixedUpdate();
-        fishController.fishMovement.RotateTowardsTarget();
+        base.Update();
+        fishController.fishBehaviour.ApplyWaterDrag();
     }
 }
 
