@@ -9,13 +9,15 @@ public class FishMovement : MonoBehaviour
     [SerializeField] private float _retreatSpeed = 50f;
     [SerializeField] private float _rotateSpeed = 2;
     internal FishController fishController;
-
     #endregion
 
+    #region Initialization
     public void Initialize(FishController controller)
     {
         fishController = controller;
     }
+    #endregion
+
     #region Public Methods
     public void SwimAround()
     {
@@ -41,14 +43,15 @@ public class FishMovement : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(2, 4));
         fishController.SetState(new Baited(fishController));
     }
+    #endregion
 
+    #region Internal Methods
     internal void RotateTowardsTarget()
     {
         Vector3 direction = GetDirectionTowardsTarget();
         if (direction != Vector3.zero)
         {
             RotateTowards(direction);
-
         }
     }
 
@@ -67,27 +70,22 @@ public class FishMovement : MonoBehaviour
     {
         fishController.fishBehaviour.rigidBody.velocity = direction.normalized * speed;
     }
-
     #endregion
 
     #region Private Methods
     private bool IsCloseToTarget()
     {
         return fishController.fishBehaviour.target != null && Mathf.Approximately(Vector3.Distance(transform.position, fishController.fishBehaviour.target.transform.position), 0.1f);
-
     }
 
     private Vector3 GetDirectionTowardsTarget()
     {
         return fishController.fishBehaviour.target != null ? fishController.fishBehaviour.target.transform.position - transform.position : Vector3.zero;
-
     }
 
     private Vector3 GetDirectionAwayFromTarget()
     {
         return fishController.fishBehaviour.target != null ? transform.position - fishController.fishBehaviour.target.transform.position : Vector3.zero;
-
     }
-
-    #endregion
+   #endregion
 }
