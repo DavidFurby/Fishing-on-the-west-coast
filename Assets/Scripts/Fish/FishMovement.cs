@@ -4,10 +4,10 @@ using System.Collections;
 public class FishMovement : MonoBehaviour
 {
     #region Serialized Fields
-    [SerializeField] internal float speed = 0.5f;
-    [SerializeField] private float _baitedSpeed = 0.8f;
-    [SerializeField] private float _retreatSpeed = 50f;
-    [SerializeField] private float _rotateSpeed = 2;
+    [SerializeField] internal float speed = 20f;
+    [SerializeField] private float _baitedSpeed = 50f;
+    [SerializeField] private float _retreatSpeed = 100f;
+    [SerializeField] private float _rotateSpeed = 8;
     internal FishController fishController;
     #endregion
 
@@ -63,7 +63,10 @@ public class FishMovement : MonoBehaviour
 
     internal void MoveFish(float speed)
     {
-        fishController.fishBehaviour.rigidBody.velocity = transform.forward * speed;
+        if (fishController.fishBehaviour != null)
+        {
+            fishController.fishBehaviour.rigidBody.velocity = transform.forward * speed;
+        }
     }
 
     internal void MoveFishInDirection(Vector3 direction, float speed)
@@ -87,5 +90,5 @@ public class FishMovement : MonoBehaviour
     {
         return fishController.fishBehaviour.target != null ? transform.position - fishController.fishBehaviour.target.transform.position : Vector3.zero;
     }
-   #endregion
+    #endregion
 }

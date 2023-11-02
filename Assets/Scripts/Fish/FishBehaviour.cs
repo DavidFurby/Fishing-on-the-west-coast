@@ -7,7 +7,7 @@ public class FishBehaviour : MonoBehaviour
     private Transform[] _bones;
     private Transform tastyPart;
     internal Rigidbody rigidBody;
-    internal FishController fishController;
+    internal FishController controller;
 
     private void OnEnable()
     {
@@ -26,57 +26,58 @@ public class FishBehaviour : MonoBehaviour
 
     public void Initialize(FishController controller)
     {
-        fishController = controller;
+        this.controller = controller;
     }
 
     public void AttachToTarget()
     {
-        if (target.TryGetComponent<FishMovement>(out _) || target.TryGetComponent<FixedJoint>(out _))
-        {
-            AddFixedJoint();
-        }
+        AddHingeJoint();
+        transform.position = target.transform.TransformPoint(_bones[0].localPosition);
     }
 
-    private void AddFixedJoint()
+    private void AddHingeJoint()
     {
-        FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+        HingeJoint joint = gameObject.AddComponent<HingeJoint>();
         joint.connectedBody = target.GetComponent<Rigidbody>();
         joint.anchor = gameObject.transform.InverseTransformPoint(_bones[0].position);
+        joint.useSpring = true;
+        JointSpring joint_spring = joint.spring;
+        joint_spring.spring = 10;
+        joint.spring = joint_spring;
 
-        transform.position = target.transform.TransformPoint(_bones[0].localPosition);
     }
 
     public void GetBaited(GameObject target)
     {
         this.target = target;
-        fishController.SetState(new Baited(fishController));
+        controller.SetState(new Baited(controller));
     }
 
     internal void IfExitSea(bool isTop)
     {
-        if (gameObject != null && (fishController.GetCurrentState() is Swimming || fishController.GetCurrentState() is Baited))
+        if (gameObject != null && (controller.GetCurrentState() is Swimming || controller.GetCurrentState() is Baited))
         {
             Vector3 direction = isTop ? -transform.up : transform.up;
-            fishController.fishMovement.MoveFishInDirection(direction, fishController.fishMovement.speed);
-            fishController.fishMovement.RotateTowards(direction);
+            controller.fishMovement.MoveFishInDirection(direction, controller.fishMovement.speed);
+            controller.fishMovement.RotateTowards(direction);
         }
     }
 
     public void StopBeingBaited()
     {
-        if (fishController.GetCurrentState() is Baited)
+        if (controller.GetCurrentState() is Baited)
         {
             target = null;
-            fishController.SetState(new Swimming(fishController));
+            controller.SetState(new Swimming(controller));
             Vector3 direction = transform.eulerAngles.z > 180 ? -transform.right : transform.right;
-            fishController.fishMovement.MoveFishInDirection(direction, fishController.fishMovement.speed);
-            fishController.fishMovement.RotateTowards(direction);
+            controller.fishMovement.MoveFishInDirection(direction, controller.fishMovement.speed);
+            controller.fishMovement.RotateTowards(direction);
         }
     }
 
     private void InitializeFish()
     {
-        fishController.SetState(new Swimming(fishController));
+        controller.SetState(new Swimming(controller));
         rigidBody = GetComponent<Rigidbody>();
         _bones = transform.Find("Armature").GetChild(0).GetComponentsInChildren<Transform>();
     }

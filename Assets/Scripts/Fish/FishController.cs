@@ -8,7 +8,7 @@ public class FishController : FishStateMachine
     public FishBehaviour fishBehaviour;
     public FishMovement fishMovement;
 
-    private void Start()
+    private void Awake()
     {
         if (!TryGetComponent(out fishBehaviour))
         {
