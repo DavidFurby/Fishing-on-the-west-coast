@@ -12,6 +12,9 @@ public class FishBehaviour : MonoBehaviour
     private void OnEnable()
     {
         SeaFloorCollision.OnBaitCollision += StopBeingBaited;
+    }
+    void Start()
+    {
         InitializeFish();
         SetTastyPart();
     }
@@ -39,7 +42,7 @@ public class FishBehaviour : MonoBehaviour
         FixedJoint joint = gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = target.GetComponent<Rigidbody>();
         joint.anchor = gameObject.transform.InverseTransformPoint(_bones[0].position);
-        
+
         transform.position = target.transform.TransformPoint(_bones[0].localPosition);
     }
 
@@ -81,7 +84,7 @@ public class FishBehaviour : MonoBehaviour
     private void SetTastyPart()
     {
         tastyPart = transform.Find("TastyPart");
-        
+
         if (tastyPart == null)
         {
             tastyPart = new GameObject("TastyPart").GetComponent<Transform>();

@@ -103,7 +103,6 @@ public class DistanceRecord : MonoBehaviour
     {
         if (distance < 0)
         {
-            print("Is Negative");
             to.AttachBait();
         }
     }
