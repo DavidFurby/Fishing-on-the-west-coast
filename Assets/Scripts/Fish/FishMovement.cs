@@ -7,7 +7,7 @@ public class FishMovement : MonoBehaviour
     [SerializeField] internal float speed;
     [SerializeField] private float _baitedSpeed;
     [SerializeField] private float _retreatSpeed;
-    private float _rotateSpeed = 0.5f;
+    private readonly float _rotateSpeed = 0.5f;
     internal FishController fishController;
     #endregion
 

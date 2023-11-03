@@ -31,8 +31,11 @@ public class FishBehaviour : MonoBehaviour
 
     public void AttachToTarget()
     {
-        AddHingeJoint();
-        transform.position = target.transform.TransformPoint(_bones[0].localPosition);
+        if (target != null)
+        {
+            AddHingeJoint();
+            transform.position = target.transform.TransformPoint(_bones[0].localPosition);
+        }
     }
 
     private void AddHingeJoint()
@@ -49,7 +52,9 @@ public class FishBehaviour : MonoBehaviour
     public void ApplyWaterDrag()
     {
         Vector3 oppositeDirection = -rigidBody.velocity.normalized;
-        //rigidBody.AddForce(oppositeDirection, ForceMode.Impulse);
+        Vector3 torqueDirection = Vector3.Cross(oppositeDirection, transform.up);
+        float torqueAmount = 0.1f;
+        rigidBody.AddTorque(torqueDirection * torqueAmount, ForceMode.Force);
     }
 
     public void GetBaited(GameObject target)

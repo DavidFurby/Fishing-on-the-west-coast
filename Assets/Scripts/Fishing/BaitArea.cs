@@ -4,41 +4,37 @@ public class BaitArea : MonoBehaviour
 {
     [SerializeField] private BaitLogic baitLogic;
 
-    void OnEnable()
+    private void OnEnable()
     {
         CatchArea.OnBaitFish += TryBaitingFish;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         CatchArea.OnBaitFish -= TryBaitingFish;
     }
-
     private void OnTriggerEnter(Collider collider)
     {
-        if (PlayerController.Instance != null && collider.CompareTag("Fish") && !PlayerController.Instance.BaitedFish)
+        if (CanFishBeBaited(collider))
         {
             TryBaitingFish(collider, baitLogic.gameObject);
         }
     }
+
     private void OnTriggerStay(Collider collider)
     {
-        if (baitLogic.IsPulling && PlayerController.Instance != null && collider.CompareTag("Fish") && !PlayerController.Instance.BaitedFish)
+        if (baitLogic.IsPulling && CanFishBeBaited(collider))
         {
+            print("In trigger");
             TryBaitingFish(collider, baitLogic.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && PlayerController.Instance.BaitedFish)
+        if (IsFishLeavingBaitArea(other))
         {
-            FishController fishController = other.GetComponent<FishController>();
-            if (fishController != null && fishController.GetCurrentState() is Baited)
-            {
-                PlayerController.Instance.BaitedFish = null;
-                fishController.SetState(new Swimming(fishController));
-            }
+            ReleaseBaitedFish(other);
         }
     }
 
@@ -47,10 +43,9 @@ public class BaitArea : MonoBehaviour
         FishController fishController = collider.GetComponent<FishController>();
         FishDisplay fish = collider.GetComponent<FishDisplay>();
         float probability = GetProbability(fish.fish.level, MainManager.Instance.Inventory.EquippedBait.level);
-        if (Random.Range(0f, 1f) < probability && fishController.GetCurrentState() is Swimming)
+        if (WillGetBaited(fishController, probability))
         {
-            fishController.fishBehaviour.GetBaited(target);
-            PlayerController.Instance.BaitedFish = target.GetComponent<FishDisplay>();
+            BaitFish(fishController, target);
         }
     }
 
@@ -58,5 +53,37 @@ public class BaitArea : MonoBehaviour
     {
         int difference = Mathf.Abs(fishLevel - baitLevel);
         return 1f / (1f + difference);
+    }
+
+    private bool CanFishBeBaited(Collider collider)
+    {
+        return collider.CompareTag("Fish") && !PlayerController.Instance.BaitedFish;
+    }
+
+    private bool IsFishLeavingBaitArea(Collider other)
+    {
+        return other.CompareTag("Fish") && PlayerController.Instance.BaitedFish;
+    }
+
+    private void ReleaseBaitedFish(Collider other)
+    {
+        FishController fishController = other.GetComponent<FishController>();
+        if (fishController != null && fishController.GetCurrentState() is Baited)
+        {
+            PlayerController.Instance.BaitedFish = null;
+            fishController.SetState(new Swimming(fishController));
+        }
+    }
+
+    private bool WillGetBaited(FishController fishController, float probability)
+    {
+        return Random.Range(0f, 1f) < probability && fishController.GetCurrentState() is Swimming;
+    }
+
+    private void BaitFish(FishController fishController, GameObject target)
+    {
+        print(target.name);
+        fishController.fishBehaviour.GetBaited(target);
+        PlayerController.Instance.BaitedFish = target.GetComponent<FishDisplay>();
     }
 }
