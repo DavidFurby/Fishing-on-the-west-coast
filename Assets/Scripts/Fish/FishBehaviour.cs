@@ -36,7 +36,7 @@ public class FishBehaviour : MonoBehaviour
         {
             transform.position = target.transform.TransformPoint(_bones[0].localPosition);
 
-            AddHingeJoint(target.GetComponent<Rigidbody>());
+            AddHingeJoint(target.GetComponent<Rigidbody>(), target.transform.position);
         }
     }
     public void AttachToFish()
@@ -49,17 +49,18 @@ public class FishBehaviour : MonoBehaviour
                 if (targetTastyPart != null && targetTastyPart)
                 {
                     transform.position = target.transform.TransformPoint(targetTastyPart.localPosition);
-                    AddHingeJoint(targetTastyPart.GetComponent<Rigidbody>());
+                    AddHingeJoint(target.GetComponent<Rigidbody>(), targetTastyPart.localPosition);
                 }
             }
 
         }
     }
 
-    private void AddHingeJoint(Rigidbody targetBody)
+    private void AddHingeJoint(Rigidbody targetBody, Vector3 targetAnchor)
     {
         HingeJoint joint = gameObject.AddComponent<HingeJoint>();
         joint.connectedBody = targetBody;
+        joint.connectedAnchor = targetAnchor;
         joint.anchor = gameObject.transform.InverseTransformPoint(_bones[0].position);
         SetSpring(joint);
 
