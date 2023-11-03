@@ -19,5 +19,5 @@ MonoBehaviour:
   description: Rarest of rods
   model: {fileID: 143842397030981815, guid: fe8b751336031bd4898d0a22ae3ba0cb, type: 3}
   rodId: f0af2cef-6637-4813-8588-bfec8770a0c8
-  reelInSpeed: 50
+  reelInSpeed: 10
   throwRange: 1000

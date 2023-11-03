@@ -3,7 +3,7 @@ public class CatchSummaryHandlers : MonoBehaviour
 
 {
     private DialogManager dialogManager;
-    void Start()
+    private void Start()
     {
         dialogManager = FindAnyObjectByType<DialogManager>();
     }
@@ -11,7 +11,6 @@ public class CatchSummaryHandlers : MonoBehaviour
     {
         if (dialogManager != null)
         {
-            dialogManager.EndDialog();
             SetCatchSummaryHandler(fish);
             dialogManager.StartDialog("CatchSummary");
         }
@@ -20,7 +19,8 @@ public class CatchSummaryHandlers : MonoBehaviour
     public void SetCatchSummaryHandler(Fish catchResult)
     {
         dialogManager.RemoveHandler("setCatchSummary");
-        dialogManager.AddCommandHandler("setCatchSummary", () =>
+        
+        dialogManager.AddHandler("setCatchSummary", () =>
         {
             dialogManager.SetVariableValue("$catchName", catchResult.name);
             dialogManager.SetVariableValue("$catchSize", $"Size: {catchResult.size:F2} cm");

@@ -74,14 +74,6 @@ public class FishBehaviour : MonoBehaviour
         joint.spring = joint_spring;
     }
 
-    public void ApplyWaterDrag()
-    {
-        Vector3 oppositeDirection = -rigidBody.velocity.normalized;
-        Vector3 torqueDirection = Vector3.Cross(oppositeDirection, transform.up);
-        float torqueAmount = 0.1f;
-        rigidBody.AddTorque(torqueDirection * torqueAmount, ForceMode.Force);
-    }
-
     public void GetBaited(GameObject target)
     {
         this.target = target;

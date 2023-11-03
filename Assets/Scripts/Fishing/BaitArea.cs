@@ -25,6 +25,7 @@ public class BaitArea : MonoBehaviour
     {
         if (baitLogic.IsPulling && CanFishBeBaited(collider))
         {
+            print(PlayerController.Instance.BaitedFish == null);
             print("In trigger");
             TryBaitingFish(collider, baitLogic.gameObject);
         }

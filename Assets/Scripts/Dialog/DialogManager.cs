@@ -8,9 +8,7 @@ public class DialogManager : MonoBehaviour
     #region Fields
 
     private DialogueRunner dialogueRunner;
-
     public static event Action OnEndDialog;
-
     private readonly Dictionary<string, bool> addedHandlers = new();
 
     #endregion
@@ -22,20 +20,30 @@ public class DialogManager : MonoBehaviour
         SetDayHandler();
     }
 
-    #endregion
-
-    #region Event Subscription
-
     private void OnEnable()
     {
         if (TryGetComponent(out dialogueRunner))
         {
-            Conversation.StartConversation += StartDialog;
-            dialogueRunner.onDialogueComplete.AddListener(EndDialog);
+            SubscribeToEvents();
         }
     }
 
     private void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    #endregion
+
+    #region Event Subscription
+
+    private void SubscribeToEvents()
+    {
+        Conversation.StartConversation += StartDialog;
+        dialogueRunner.onDialogueComplete.AddListener(EndDialog);
+    }
+
+    private void UnsubscribeFromEvents()
     {
         if (dialogueRunner != null)
         {
@@ -63,14 +71,11 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(string node)
     {
-        if (dialogueRunner != null)
+        if (dialogueRunner != null && dialogueRunner.IsDialogueRunning)
         {
-            if (dialogueRunner.IsDialogueRunning)
-            {
-                dialogueRunner.Stop();
-            }
-            dialogueRunner.StartDialogue(node);
+            dialogueRunner.Stop();
         }
+        dialogueRunner.StartDialogue(node);
     }
 
     public void EndDialog()
@@ -86,7 +91,7 @@ public class DialogManager : MonoBehaviour
 
     #region Dialogue Utilities
 
-    public void AddCommandHandler(string commandName, Action commandHandler)
+    private void AddCommandHandler(string commandName, Action commandHandler)
     {
         dialogueRunner.AddCommandHandler(commandName, commandHandler);
     }

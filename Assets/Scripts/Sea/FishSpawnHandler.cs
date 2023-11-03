@@ -3,12 +3,12 @@ using UnityEngine;
 public class FishSpawnHandler : MonoBehaviour
 {
 
-    private readonly float rightSideThreshold = 500f;
-    Vector3 fishScreenPosition;
+    private readonly float rightSideThreshold = 50f;
+    Vector3 cameraPosition;
 
     void Start()
     {
-        fishScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        cameraPosition = Camera.main.WorldToScreenPoint(transform.position);
     }
     void Update()
     {
@@ -17,9 +17,8 @@ public class FishSpawnHandler : MonoBehaviour
     private void OnOutOfBounds()
     {
 
-        if (fishScreenPosition.x > Screen.width + rightSideThreshold)
+        if (cameraPosition.x > Screen.width + rightSideThreshold)
         {
-            // Use object pooling instead of destroying the game object
             ObjectPool.Instance.ReturnToPool(gameObject);
         }
     }

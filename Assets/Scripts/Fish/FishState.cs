@@ -66,11 +66,6 @@ public class Hooked : FishState
         base.OnEnter();
         fishController.fishBehaviour.AttachToBait();
     }
-    public override void Update()
-    {
-        base.Update();
-        fishController.fishBehaviour.ApplyWaterDrag();
-    }
 }
 
 public class HookedToFish : FishState
@@ -82,11 +77,6 @@ public class HookedToFish : FishState
     {
         base.OnEnter();
         fishController.fishBehaviour.AttachToFish();
-    }
-    public override void Update()
-    {
-        base.Update();
-        fishController.fishBehaviour.ApplyWaterDrag();
     }
 }
 
