@@ -7,7 +7,7 @@ public class FishMovement : MonoBehaviour
     [SerializeField] internal float speed;
     [SerializeField] private float _baitedSpeed;
     [SerializeField] private float _retreatSpeed;
-    private readonly float _rotateSpeed = 0.5f;
+    private readonly float _rotateSpeed = 0.8f;
     internal FishController fishController;
     #endregion
 
@@ -53,11 +53,12 @@ public class FishMovement : MonoBehaviour
         {
             RotateTowards(direction);
         }
-    }
+    } 
 
     internal void RotateTowards(Vector3 direction)
     {
         Quaternion _lookRotation = Quaternion.LookRotation(direction.normalized);
+        
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _rotateSpeed);
     }
 
@@ -78,7 +79,7 @@ public class FishMovement : MonoBehaviour
     #region Private Methods
     private bool IsCloseToTarget()
     {
-        return fishController.fishBehaviour.target != null && Mathf.Approximately(Vector3.Distance(transform.position, fishController.fishBehaviour.target.transform.position), 0.1f);
+        return fishController.fishBehaviour.target != null && Vector3.Distance(transform.position, fishController.fishBehaviour.target.transform.position) <= 0.2f;
     }
 
     private Vector3 GetDirectionTowardsTarget()

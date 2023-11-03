@@ -57,12 +57,12 @@ public class BaitArea : MonoBehaviour
 
     private bool CanFishBeBaited(Collider collider)
     {
-        return collider.CompareTag("Fish") && !PlayerController.Instance.BaitedFish;
+        return collider.CompareTag("Fish") && PlayerController.Instance.BaitedFish == null;
     }
 
     private bool IsFishLeavingBaitArea(Collider other)
     {
-        return other.CompareTag("Fish") && PlayerController.Instance.BaitedFish;
+        return other.CompareTag("Fish") && PlayerController.Instance.BaitedFish != null;
     }
 
     private void ReleaseBaitedFish(Collider other)
@@ -82,8 +82,9 @@ public class BaitArea : MonoBehaviour
 
     private void BaitFish(FishController fishController, GameObject target)
     {
-        print(target.name);
         fishController.fishBehaviour.GetBaited(target);
-        PlayerController.Instance.BaitedFish = target.GetComponent<FishDisplay>();
+        PlayerController.Instance.BaitedFish = fishController.GetComponent<FishDisplay>();
+        print(PlayerController.Instance.BaitedFish);
+
     }
 }
