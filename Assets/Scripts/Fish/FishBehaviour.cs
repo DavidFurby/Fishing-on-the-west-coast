@@ -116,7 +116,6 @@ public class FishBehaviour : MonoBehaviour
         _bones = transform.Find("Armature").GetChild(0).GetComponentsInChildren<Transform>();
     }
 
-    //The part of the fish that other fishes should attach to
     private void SetTastyPart()
     {
         tastyPart = transform.Find("TastyPart");
@@ -124,9 +123,9 @@ public class FishBehaviour : MonoBehaviour
         if (tastyPart == null)
         {
             tastyPart = new GameObject("TastyPart").GetComponent<Transform>();
-            tastyPart.SetParent(gameObject.transform);
-            tastyPart.SetPositionAndRotation(_bones[^1].position, Quaternion.Euler(-89.98f, 0f, 0f));
-            tastyPart.AddComponent<Rigidbody>();
+            tastyPart.SetParent(transform);
         }
+        tastyPart.SetLocalPositionAndRotation(transform.InverseTransformPoint(_bones[^1].position), Quaternion.identity);
     }
+
 }

@@ -19,5 +19,5 @@ MonoBehaviour:
   description: More advance
   model: {fileID: 5076685828461310335, guid: d0c27d96c29be3e4db4b1932404d4f91, type: 3}
   rodId: 77809013-821a-4003-82fb-75aa62125c6d
-  reelInSpeed: 5
+  reelInSpeed: 20
   throwRange: 500

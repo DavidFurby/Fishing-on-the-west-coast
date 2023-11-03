@@ -19,5 +19,5 @@ MonoBehaviour:
   description: The most basic Rod
   model: {fileID: 5800666673709144979, guid: 91c31fa3c3233f74ab91c02e298a7276, type: 3}
   rodId: 63e77dfa-322c-4cf2-b678-c550d2c5eec4
-  reelInSpeed: 1
+  reelInSpeed: 5
   throwRange: 200
