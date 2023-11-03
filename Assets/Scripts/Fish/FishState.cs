@@ -64,7 +64,7 @@ public class Hooked : FishState
     public override void OnEnter()
     {
         base.OnEnter();
-        fishController.fishBehaviour.AttachToTarget();
+        fishController.fishBehaviour.AttachToBait();
     }
     public override void Update()
     {
@@ -81,7 +81,7 @@ public class HookedToFish : FishState
     public override void OnEnter()
     {
         base.OnEnter();
-        fishController.fishBehaviour.AttachToTarget();
+        fishController.fishBehaviour.AttachToFish();
     }
     public override void Update()
     {

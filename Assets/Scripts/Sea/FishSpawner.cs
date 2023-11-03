@@ -70,7 +70,7 @@ public class FishSpawner : MonoBehaviour
         float fishSpawnX;
         if (PlayerController.Instance.GetCurrentState() is ReelingFish)
         {
-            fishSpawnX = targetPosition.x - 50;
+            fishSpawnX = targetPosition.x - 20;
         }
         else
         {
