@@ -129,11 +129,15 @@ public class BaitLogic : MonoBehaviour
             IsPulling = true;
             Vector3 direction = (rodTop.transform.position - transform.position).normalized + new Vector3(0, 0.1f, 0);
             rigidBody.AddForce(direction * 1.2f, ForceMode.Impulse);
-            IsPulling = false;
             if (IsCloseToTarget(targetPosition, 50))
             {
                 PlayerController.Instance.SetState(new Reeling());
             }
+        }
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            IsPulling = false;
+
         }
     }
     private void FreezeRotationAndPosition()

@@ -23,10 +23,9 @@ public class BaitArea : MonoBehaviour
 
     private void OnTriggerStay(Collider collider)
     {
+
         if (baitLogic.IsPulling && CanFishBeBaited(collider))
         {
-            print(PlayerController.Instance.BaitedFish == null);
-            print("In trigger");
             TryBaitingFish(collider, baitLogic.gameObject);
         }
     }
@@ -61,9 +60,9 @@ public class BaitArea : MonoBehaviour
         return collider.CompareTag("Fish") && PlayerController.Instance.BaitedFish == null;
     }
 
-    private bool IsFishLeavingBaitArea(Collider other)
+    private bool IsFishLeavingBaitArea(Collider collider)
     {
-        return other.CompareTag("Fish") && PlayerController.Instance.BaitedFish != null;
+        return collider.CompareTag("Fish") && PlayerController.Instance.BaitedFish != null;
     }
 
     private void ReleaseBaitedFish(Collider other)
