@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -14,7 +13,8 @@ public class FishBehaviour : MonoBehaviour
     {
         SeaFloorCollision.OnBaitCollision += StopBeingBaited;
     }
-    void Start()
+
+    private void Start()
     {
         InitializeFish();
         SetTastyPart();
@@ -32,27 +32,31 @@ public class FishBehaviour : MonoBehaviour
 
     public void AttachToBait()
     {
-        if (target != null)
-        {
-            transform.position = target.transform.TransformPoint(_bones[0].localPosition);
+        AttachToTarget(_bones[0].localPosition);
+    }
 
-            AddHingeJoint(target.GetComponent<Rigidbody>(), target.transform.position);
+    public void AttachToFish()
+    {
+        if (target != null && target.TryGetComponent<FishBehaviour>(out var targetFishBehaviour))
+        {
+            Transform targetTastyPart = targetFishBehaviour.tastyPart;
+            if (targetTastyPart != null && targetTastyPart)
+            {
+                AttachToTarget(targetTastyPart.localPosition);
+            }
         }
     }
-    public void AttachToFish()
+
+    private void AttachToTarget(Vector3 targetPosition)
     {
         if (target != null)
         {
-            if (target.TryGetComponent<FishBehaviour>(out var targetFishBehaviour))
-            {
-                Transform targetTastyPart = targetFishBehaviour.tastyPart;
-                if (targetTastyPart != null && targetTastyPart)
-                {
-                    transform.position = target.transform.TransformPoint(targetTastyPart.localPosition);
-                    AddHingeJoint(target.GetComponent<Rigidbody>(), targetTastyPart.localPosition);
-                }
-            }
-
+            Vector3 rotation = transform.rotation.eulerAngles;
+            rotation.y = -90;
+            transform.rotation = Quaternion.Euler(rotation);
+            controller.fishMovement.RotateTowardsTarget();
+            transform.position = target.transform.TransformPoint(targetPosition);
+            AddHingeJoint(target.GetComponent<Rigidbody>(), targetPosition);
         }
     }
 
@@ -63,7 +67,6 @@ public class FishBehaviour : MonoBehaviour
         joint.connectedAnchor = targetAnchor;
         joint.anchor = gameObject.transform.InverseTransformPoint(_bones[0].position);
         SetSpring(joint);
-
     }
 
     private static void SetSpring(HingeJoint joint)
@@ -120,5 +123,4 @@ public class FishBehaviour : MonoBehaviour
         }
         tastyPart.SetLocalPositionAndRotation(transform.InverseTransformPoint(_bones[^1].position), Quaternion.identity);
     }
-
 }
