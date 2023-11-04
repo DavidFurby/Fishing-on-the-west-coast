@@ -38,7 +38,7 @@ public class Balance : MonoBehaviour
     private void SubscribeEvents()
     {
         PlayerEventController.OnEnterReelingFish += StartBalanceMiniGame;
-        PlayerEventController.OnEnterReelingFish += CalculateWeight;
+        FishingController.OnAddFishToHook += CalculateWeight;
         PlayerEventController.OnWhileReelingFish += MiniGameHandler;
         PlayerEventController.OnExitReelingFish += EndBalanceMiniGame;
     }
@@ -47,7 +47,7 @@ public class Balance : MonoBehaviour
     private void UnsubscribeEvents()
     {
         PlayerEventController.OnEnterReelingFish -= StartBalanceMiniGame;
-        PlayerEventController.OnEnterReelingFish -= CalculateWeight;
+        FishingController.OnAddFishToHook -= CalculateWeight;
         PlayerEventController.OnWhileReelingFish -= MiniGameHandler;
         PlayerEventController.OnExitReelingFish -= EndBalanceMiniGame;
     }
@@ -77,7 +77,7 @@ public class Balance : MonoBehaviour
 
     private void CalculateWeight()
     {
-
+        weight = 0;
         foreach (var fish in PlayerController.Instance.fishesOnHook)
         {
             weight += fish.fish.size;

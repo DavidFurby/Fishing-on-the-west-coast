@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class FishingController : PlayerEventController
     internal float castingPower;
     internal float initialCastingPower = 20;
     internal float initialReelInSpeed = 5f;
+    public static event Action OnAddFishToHook;
+
 
     #endregion
 
@@ -77,6 +80,7 @@ public class FishingController : PlayerEventController
     public void AddFish(FishDisplay fish)
     {
         fishesOnHook.Add(fish);
+        OnAddFishToHook.Invoke();
     }
 
     public void ChargeCasting()
@@ -98,18 +102,18 @@ public class FishingController : PlayerEventController
         chargeLevel = 1;
     }
 
-   #endregion
+    #endregion
 
-   #region Private Methods
+    #region Private Methods
 
-   private void ClearCaughtFishes()
-   {
-       foreach (FishDisplay fish in fishesOnHook)
-       {
-           fish.ReturnToPool();
-       }
-       fishesOnHook.Clear();
-   }
+    private void ClearCaughtFishes()
+    {
+        foreach (FishDisplay fish in fishesOnHook)
+        {
+            fish.ReturnToPool();
+        }
+        fishesOnHook.Clear();
+    }
 
-   #endregion
+    #endregion
 }
