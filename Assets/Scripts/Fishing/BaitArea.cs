@@ -3,14 +3,22 @@ using UnityEngine;
 public class BaitArea : MonoBehaviour
 {
     [SerializeField] private BaitLogic baitLogic;
+        private Collider _collider;
+
 
     private void OnEnable()
     {
+        _collider = GetComponent<Collider>();
+        _collider.enabled = false;
+        PlayerEventController.OnEnterFishing += SetTriggerActive;
+        PlayerEventController.OnEnterIdle += SetTriggerInactive;
         CatchArea.OnBaitFish += TryBaitingFish;
     }
 
     private void OnDestroy()
     {
+        PlayerEventController.OnEnterFishing -= SetTriggerActive;
+        PlayerEventController.OnEnterIdle -= SetTriggerInactive;
         CatchArea.OnBaitFish -= TryBaitingFish;
     }
     private void OnTriggerEnter(Collider collider)
@@ -36,6 +44,14 @@ public class BaitArea : MonoBehaviour
         {
             ReleaseBaitedFish(other);
         }
+    }
+    private void SetTriggerActive()
+    {
+        _collider.enabled = true;
+    }
+    private void SetTriggerInactive()
+    {
+        _collider.enabled = false;
     }
 
     public void TryBaitingFish(Collider collider, GameObject target)

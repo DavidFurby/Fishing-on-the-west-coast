@@ -5,7 +5,21 @@ public class CatchArea : MonoBehaviour
 {
     public static event Action<Collider, GameObject> OnBaitFish;
     public static event Action OnCatchWhileReeling;
+    private Collider _collider;
 
+    private void OnEnable()
+    {
+        _collider = GetComponent<Collider>();
+        _collider.enabled = false;
+        PlayerEventController.OnEnterFishing += SetTriggerActive;
+        PlayerEventController.OnEnterIdle += SetTriggerInactive;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerEventController.OnEnterFishing -= SetTriggerActive;
+        PlayerEventController.OnEnterIdle -= SetTriggerInactive;
+    }
 
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +43,15 @@ public class CatchArea : MonoBehaviour
         {
             PlayerController.Instance.FishInCatchArea = null;
         }
+    }
+
+    private void SetTriggerActive()
+    {
+        _collider.enabled = true;
+    }
+    private void SetTriggerInactive()
+    {
+        _collider.enabled = false;
     }
 
     private void HandleFishEnter(Collider other)
