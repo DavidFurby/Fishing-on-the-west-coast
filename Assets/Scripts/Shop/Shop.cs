@@ -67,11 +67,14 @@ public class Shop : MonoBehaviour
 
     private void ReplaceItemOnSelf()
     {
-        GameObject replacement = Instantiate(itemSpawner.emptySpot.model, itemSpawner.shopItemPositions[focusedShopItemIndex].transform.position, focusedShopItem.model.transform.rotation);
-        replacement.transform.parent = transform;
-        replacement.transform.localScale = itemSpawner.shopItemPositions[focusedShopItemIndex].transform.localScale;
-        focusedShopItem.model = replacement;
-        itemSpawner.ShopItems[focusedShopItemIndex] = itemSpawner.emptySpot;
+        Destroy(focusedShopItem.model);
+        GameObject replacementModel = Instantiate(itemSpawner.emptySpot.model, itemSpawner.shopItemPositions[focusedShopItemIndex].transform.position, focusedShopItem.model.transform.rotation);
+        replacementModel.transform.parent = transform;
+        replacementModel.transform.localScale = itemSpawner.shopItemPositions[focusedShopItemIndex].transform.localScale;
+        Item replacementItem = Instantiate(itemSpawner.emptySpot);
+        replacementItem.model = replacementModel;
+        itemSpawner.ShopItems[focusedShopItemIndex] = replacementItem;
+        focusedShopItem = itemSpawner.ShopItems[focusedShopItemIndex];
     }
 
 

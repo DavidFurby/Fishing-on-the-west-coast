@@ -63,6 +63,7 @@ public class ShopItemSpawner : MonoBehaviour
         GameObject newObject = Instantiate(item.model, shopItemPositions[index].transform.position, Quaternion.identity);
         newObject.transform.SetParent(shopItemPositions[index].transform, false);
         newObject.transform.position = shopItemPositions[index].transform.position;
+        item.model = newObject;
     }
 
     private void SpawnEmptySpot(int index)
