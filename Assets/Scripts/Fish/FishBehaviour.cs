@@ -88,7 +88,7 @@ public class FishBehaviour : MonoBehaviour
         if (gameObject != null && (controller.GetCurrentState() is Swimming || controller.GetCurrentState() is Baited))
         {
             Vector3 direction = isTop ? -transform.up : transform.up;
-            controller.fishMovement.MoveFishInDirection(direction, controller.fishMovement.speed);
+            controller.fishMovement.MoveFish(controller.fishMovement.speed, direction);
             controller.fishMovement.RotateTowards(direction);
         }
     }
@@ -100,7 +100,7 @@ public class FishBehaviour : MonoBehaviour
             target = null;
             controller.SetState(new Swimming(controller));
             Vector3 direction = transform.eulerAngles.z > 180 ? -transform.right : transform.right;
-            controller.fishMovement.MoveFishInDirection(direction, controller.fishMovement.speed);
+            controller.fishMovement.MoveFish(controller.fishMovement.speed, direction);
             controller.fishMovement.RotateTowards(direction);
         }
     }

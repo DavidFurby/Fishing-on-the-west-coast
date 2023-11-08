@@ -1,5 +1,4 @@
 
-using System.Numerics;
 
 public class FishState : State
 {
@@ -19,6 +18,11 @@ public class Swimming : FishState
     public Swimming(FishController fishController) : base(fishController)
     {
     }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        fishController.fishMovement.SetSpeed(1, 2);
+    }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
@@ -31,7 +35,11 @@ public class Baited : FishState
     {
 
     }
-
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        fishController.fishMovement.SetSpeed(5, 6);
+    }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
@@ -48,6 +56,7 @@ public class Retreat : FishState
     public override void OnEnter()
     {
         base.OnEnter();
+        fishController.fishMovement.SetSpeed(8, 6);
     }
     public override void FixedUpdate()
     {
@@ -65,6 +74,12 @@ public class Hooked : FishState
     {
         base.OnEnter();
         fishController.fishBehaviour.AttachToBait();
+        fishController.fishMovement.SetSpeed(8, 6);
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        fishController.StartCoroutine(fishController.fishMovement.PullBait());
     }
 }
 
@@ -77,6 +92,8 @@ public class HookedToFish : FishState
     {
         base.OnEnter();
         fishController.fishBehaviour.AttachToFish();
+        fishController.fishMovement.SetSpeed(8, 6);
+
     }
 }
 
@@ -85,4 +102,10 @@ public class Inspected : FishState
     public Inspected(FishController fishController) : base(fishController)
     {
     }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        fishController.fishMovement.SetSpeed(0, 0);
+    }
+
 }

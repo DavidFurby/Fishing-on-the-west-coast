@@ -9,6 +9,7 @@ public class FishMovement : MonoBehaviour
     [SerializeField] private float _retreatSpeed;
     private readonly float _rotateSpeed = 0.8f;
     internal FishController fishController;
+    private Animator animator;
     #endregion
 
     #region Initialization
@@ -18,6 +19,10 @@ public class FishMovement : MonoBehaviour
     }
     #endregion
 
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     #region Public Methods
     public void SwimAround()
     {
@@ -39,7 +44,7 @@ public class FishMovement : MonoBehaviour
     public IEnumerator Retreat()
     {
         Vector3 direction = GetDirectionAwayFromTarget();
-        MoveFishInDirection(direction, Random.Range(_retreatSpeed / 2, _retreatSpeed * 2));
+        MoveFish(_retreatSpeed, direction);
         yield return new WaitForSeconds(Random.Range(2, 4));
         fishController.SetState(new Baited(fishController));
     }
@@ -53,26 +58,42 @@ public class FishMovement : MonoBehaviour
         {
             RotateTowards(direction);
         }
-    } 
+    }
 
     internal void RotateTowards(Vector3 direction)
     {
         Quaternion _lookRotation = Quaternion.LookRotation(direction.normalized);
-        
+
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _rotateSpeed);
     }
-
-    internal void MoveFish(float speed)
+    internal void MoveFish(float speed, Vector3? direction = null)
     {
         if (fishController.fishBehaviour != null)
         {
-            fishController.fishBehaviour.rigidBody.velocity = transform.forward * speed;
+            Vector3 moveDirection = direction ?? transform.forward;
+            fishController.fishBehaviour.rigidBody.velocity = moveDirection.normalized * Random.Range(speed / 2, speed * 2);
+
         }
+
     }
 
-    internal void MoveFishInDirection(Vector3 direction, float speed)
+    internal void SetSpeed(int animationSpeed, float duration)
     {
-        fishController.fishBehaviour.rigidBody.velocity = direction.normalized * speed;
+        float time = 0;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float normalizedTime = time / duration;
+            animator.speed = Mathf.Lerp(animationSpeed, 0, normalizedTime);
+        }
+        animator.speed = animationSpeed;
+    }
+
+    internal IEnumerator PullBait()
+    {
+        Vector3 direction = GetDirectionAwayFromTarget();
+        yield return new WaitForSeconds(Random.Range(1, 5));
+        MoveFish(_baitedSpeed, direction);
     }
     #endregion
 
