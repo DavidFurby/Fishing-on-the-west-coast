@@ -33,16 +33,21 @@ public class Interacting : PlayerState
     {
     }
 
-    public override void OnExit()
+    public override void FixedUpdate()
     {
-        base.OnExit();
-
+        base.FixedUpdate();
+        controller.RotateTowardsInteractive();
     }
 }
 public class Conversing : PlayerState
 {
     public Conversing() : base()
     {
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        controller.RotateTowardsInteractive();
     }
 }
 

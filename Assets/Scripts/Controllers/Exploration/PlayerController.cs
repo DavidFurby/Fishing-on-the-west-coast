@@ -57,7 +57,6 @@ public class PlayerController : FishingController
     private void SubscribeToEvents()
     {
         WaterCollision.OnBaitEnterSea += EnterSea;
-        Interactive.OnStartInteraction += RotateTowardsTarget;
         FishingSpot.StartFishing += (_, _) => SetState(new FishingIdle());
         FishingSpot.StartFishing += SetPlayerPositionAndRotation;
         OnEnterReelingFish += CatchFish;
@@ -72,7 +71,6 @@ public class PlayerController : FishingController
     private void UnsubscribeFromEvents()
     {
         WaterCollision.OnBaitEnterSea -= EnterSea;
-        Interactive.OnStartInteraction -= RotateTowardsTarget;
         FishingSpot.StartFishing -= (_, _) => SetState(new FishingIdle());
         FishingSpot.StartFishing -= SetPlayerPositionAndRotation;
         OnEnterReelingFish -= CatchFish;
@@ -114,10 +112,14 @@ public class PlayerController : FishingController
         if (playerMovement.IsGrounded())
         {
             playerMovement.MovePlayer(movementDirection);
-
+    
         }
-
         playerMovement.RotatePlayer(movementDirection);
+    }
+    internal void RotateTowardsInteractive()
+    {
+        print("rotate");
+        playerMovement.RotatePlayer(interactive.transform.position);
     }
 
 
@@ -152,12 +154,6 @@ public class PlayerController : FishingController
     {
         SetState(new Interacting());
         interactive.StartInteraction();
-    }
-    internal void RotateTowardsTarget(Vector3 targetPosition)
-    {
-        Vector3 direction = targetPosition - transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = targetRotation;
     }
     internal void SetPlayerPositionAndRotation(Vector3 position, Quaternion quaternion)
     {

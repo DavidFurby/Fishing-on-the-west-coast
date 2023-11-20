@@ -6,8 +6,6 @@ public class Interactive : MonoBehaviour
 {
     private GameObject iconInstance;
     private const string ItemsPath = "GameObjects/Interactive/";
-    public static event Action<Vector3> OnStartInteraction;
-
     private void Start()
     {
         InstantiateInteractiveIcon();
@@ -30,7 +28,6 @@ public class Interactive : MonoBehaviour
     {
         if (TryGetComponent<IInteractive>(out var interactiveComponent))
         {
-            OnStartInteraction.Invoke(gameObject.transform.position);
             interactiveComponent.Interact();
             HideIcon();
         }
