@@ -112,14 +112,14 @@ public class PlayerController : FishingController
         if (playerMovement.IsGrounded())
         {
             playerMovement.MovePlayer(movementDirection);
-    
+
         }
         playerMovement.RotatePlayer(movementDirection);
     }
     internal void RotateTowardsInteractive()
     {
-        print("rotate");
-        playerMovement.RotatePlayer(interactive.transform.position);
+        Vector3 direction = interactive.transform.position -transform.position;
+        playerMovement.RotatePlayer(direction);
     }
 
 

@@ -958,8 +958,12 @@ PrefabInstance:
       value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 512599514616886611, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1866473790}
+    - target: {fileID: 512599514616886611, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: character
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3897574520849325545, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: m_TagString
@@ -1094,6 +1098,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8225615314772720655, guid: ce953d5844f080646b43deee588308e8, type: 3}
   m_PrefabInstance: {fileID: 6256846804534400011}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1866473790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1191445035072591900, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+  m_PrefabInstance: {fileID: 1395823287}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e2669d04061e54f990f9000de1e1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1890992549
 GameObject:
   m_ObjectHideFlags: 0
