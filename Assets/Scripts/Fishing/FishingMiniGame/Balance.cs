@@ -134,7 +134,7 @@ public class Balance : MonoBehaviour
     {
         reelingBalance.gameObject.SetActive(true);
         InvokeRepeating(nameof(AddForce), 2, 4);
-        musicController.PlayMiniGameMusic();
+        musicController.PlayMusic("Balance");
     }
 
     // End mini game
@@ -145,7 +145,7 @@ public class Balance : MonoBehaviour
             weight = 0;
             reelingBalance.value = 0.5f;
             reelingBalance.gameObject.SetActive(false);
-            musicController.StopFishingMiniGameMusic();
+            musicController.StopMusic();
         }
     }
 

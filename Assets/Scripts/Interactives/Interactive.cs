@@ -1,19 +1,24 @@
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class Interactive : MonoBehaviour
 {
-    private GameObject InteractiveIcon;
     private GameObject iconInstance;
-    [HideInInspector] public float iconOffset = 2f;
     private const string ItemsPath = "GameObjects/Interactive/";
+    public static event Action<Vector3> OnStartInteraction;
 
     private void Start()
     {
-        InteractiveIcon = Resources.Load<GameObject>(ItemsPath + "InteractiveIcon");
+        InstantiateInteractiveIcon();
+    }
 
+    private void InstantiateInteractiveIcon()
+    {
+        var InteractiveIcon = Resources.Load<GameObject>(ItemsPath + "InteractiveIcon");
         if (InteractiveIcon != null)
         {
-            iconInstance = Instantiate(InteractiveIcon, transform.position + Vector3.up * iconOffset, Quaternion.identity);
+            iconInstance = Instantiate(InteractiveIcon, transform.position + Vector3.up * 2f, Quaternion.identity);
             iconInstance.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
             iconInstance.transform.SetParent(transform);
             iconInstance.AddComponent<IconAnimator>();
@@ -25,13 +30,12 @@ public class Interactive : MonoBehaviour
     {
         if (TryGetComponent<IInteractive>(out var interactiveComponent))
         {
-            HideIcon();
+            OnStartInteraction.Invoke(gameObject.transform.position);
             interactiveComponent.Interact();
+            HideIcon();
         }
     }
 
-
-    //Shows icon when player enters the trigger
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -40,7 +44,6 @@ public class Interactive : MonoBehaviour
         }
     }
 
-    //Hides the icon when player exits the trigger
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

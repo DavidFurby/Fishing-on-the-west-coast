@@ -789,6 +789,14 @@ PrefabInstance:
       propertyPath: character
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4522345598250432116, guid: 0cb17ea4033672541bae8b90d24ad76b, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522345598250432116, guid: 0cb17ea4033672541bae8b90d24ad76b, type: 3}
+      propertyPath: m_Center.z
+      value: -2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -38,7 +38,7 @@ public class PlayerController : FishingController
         InitializeComponents();
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = new Vector3(0, -0.5f, 0);
-        
+
     }
 
 
@@ -56,7 +56,8 @@ public class PlayerController : FishingController
 
     private void SubscribeToEvents()
     {
-        WaterCollision.OnEnterSea += EnterSea;
+        WaterCollision.OnBaitEnterSea += EnterSea;
+        Interactive.OnStartInteraction += RotateTowardsTarget;
         FishingSpot.StartFishing += (_, _) => SetState(new FishingIdle());
         FishingSpot.StartFishing += SetPlayerPositionAndRotation;
         OnEnterReelingFish += CatchFish;
@@ -70,7 +71,8 @@ public class PlayerController : FishingController
 
     private void UnsubscribeFromEvents()
     {
-        WaterCollision.OnEnterSea -= EnterSea;
+        WaterCollision.OnBaitEnterSea -= EnterSea;
+        Interactive.OnStartInteraction -= RotateTowardsTarget;
         FishingSpot.StartFishing -= (_, _) => SetState(new FishingIdle());
         FishingSpot.StartFishing -= SetPlayerPositionAndRotation;
         OnEnterReelingFish -= CatchFish;
@@ -151,8 +153,15 @@ public class PlayerController : FishingController
         SetState(new Interacting());
         interactive.StartInteraction();
     }
+    internal void RotateTowardsTarget(Vector3 targetPosition)
+    {
+        Vector3 direction = targetPosition - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = targetRotation;
+    }
     internal void SetPlayerPositionAndRotation(Vector3 position, Quaternion quaternion)
     {
         transform.SetPositionAndRotation(position, quaternion);
     }
 }
+

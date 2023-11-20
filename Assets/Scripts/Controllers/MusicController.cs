@@ -3,19 +3,37 @@ using UnityEngine;
 public class MusicController : MonoBehaviour
 {
 
-    private AudioSource theMusic;
+    private AudioSource music;
 
     void OnEnable()
     {
-        theMusic = GetComponent<AudioSource>();
+        music = GetComponent<AudioSource>();
+        WaterCollision.OnPlayerEnterSea += PlayMusic;
     }
-    public void PlayMiniGameMusic()
+
+    void OnDestroy()
     {
-        theMusic.Play();
+        WaterCollision.OnPlayerEnterSea -= PlayMusic;
+    }
+    public void PlayMusic(string newSong = null)
+    {
+        if (newSong != null)
+        {
+            ChangeMusic(newSong);
+        }
+        music.Play();
 
     }
-    public void StopFishingMiniGameMusic()
+    public void StopMusic()
     {
-        theMusic.Stop();
+        music.Stop();
+    }
+
+    public void ChangeMusic(string clipName)
+    {
+        print(clipName);
+        AudioClip newClip = Resources.Load("Sound/Music/" + clipName) as AudioClip;
+        music.clip = newClip;
+        print(music.clip);
     }
 }

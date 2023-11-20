@@ -10,13 +10,19 @@ public class WaterCollision : MonoBehaviour
     private readonly Dictionary<int, float> addedDragByInstanceID = new();
     private readonly Dictionary<int, Vector3> previousVelocityByInstanceID = new();
 
-    public static event Action OnEnterSea;
+    public static event Action OnBaitEnterSea;
+    public static event Action<string> OnPlayerEnterSea;
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bait"))
         {
-            OnEnterSea?.Invoke();
+            OnBaitEnterSea?.Invoke();
+        }
+        if (other.CompareTag("Player"))
+        {
+            OnPlayerEnterSea?.Invoke("SC");
         }
     }
 

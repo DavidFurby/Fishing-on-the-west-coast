@@ -21,7 +21,7 @@ public class BaitLogic : MonoBehaviour
         PlayerEventController.OnWhileFishing += PullBaitTowardsTarget;
         PlayerEventController.OnEnterFishing += FreezeRotationAndPosition;
         PlayerEventController.OnEnterIdle += UnfreezeRotationAndPosition;
-        WaterCollision.OnEnterSea += PlaySplashSound;
+        WaterCollision.OnBaitEnterSea += PlaySplashSound;
 
     }
     private void Start()
@@ -40,7 +40,7 @@ public class BaitLogic : MonoBehaviour
         PlayerEventController.OnWhileFishing -= PullBaitTowardsTarget;
         PlayerEventController.OnEnterFishing -= FreezeRotationAndPosition;
         PlayerEventController.OnEnterIdle -= UnfreezeRotationAndPosition;
-        WaterCollision.OnEnterSea -= PlaySplashSound;
+        WaterCollision.OnBaitEnterSea -= PlaySplashSound;
     }
 
     private void Update()
