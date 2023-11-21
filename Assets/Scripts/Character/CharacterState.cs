@@ -34,4 +34,10 @@ public class CharacterInDialog : CharacterState
         base.OnEnter();
         controller.RotateTowardsPlayer();
     }
+    public override void Update()
+    {
+        base.Update();
+
+        controller.expression.MouthFlaps();
+    }
 }

@@ -127,7 +127,7 @@ public class PlayerController : FishingController
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactive"))
+        if (IsInteractive(other))
         {
             interactive = other.GetComponent<Interactive>();
         }
@@ -135,10 +135,15 @@ public class PlayerController : FishingController
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Interactive"))
+        if (IsInteractive(other))
         {
             interactive = null;
         }
+    }
+
+    private bool IsInteractive(Collider other)
+    {
+        return other.CompareTag("Interactive") || other.CompareTag("Character");
     }
 
     public void RaiseOpenItemMenuEvent() => OnOpenItemMenu?.Invoke();

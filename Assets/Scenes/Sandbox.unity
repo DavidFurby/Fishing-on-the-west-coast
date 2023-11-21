@@ -965,6 +965,10 @@ PrefabInstance:
       propertyPath: character
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 527355508283390866, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1866473790}
     - target: {fileID: 3897574520849325545, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: m_TagString
       value: Interactive
@@ -1016,6 +1020,34 @@ PrefabInstance:
     - target: {fileID: 7437166623380843929, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: m_Name
       value: Shop
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697517849398410814, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697517849398410814, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697517849398410814, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697517849398410814, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[4]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697517849398410814, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[5]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697517849398410814, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[6]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697517849398410814, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[7]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9041225235856990245, guid: be58a9ba9022a3d478b3f75e4ee48135, type: 3}
       propertyPath: character
