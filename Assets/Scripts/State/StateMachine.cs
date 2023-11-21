@@ -54,3 +54,11 @@ public abstract class CameraStateMachine : StateMachine
         base.SetState(state);
     }
 }
+
+public abstract class CharacterStateMachine : StateMachine
+{
+    public void SetState(CharacterState state)
+    {
+        base.SetState(state);
+    }
+}

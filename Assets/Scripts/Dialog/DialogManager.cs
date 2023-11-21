@@ -39,7 +39,7 @@ public class DialogManager : MonoBehaviour
 
     private void SubscribeToEvents()
     {
-        Conversation.StartConversation += StartDialog;
+        CharacterDialog.OnStartConversation += StartDialog;
         dialogueRunner.onDialogueComplete.AddListener(EndDialog);
     }
 
@@ -47,7 +47,7 @@ public class DialogManager : MonoBehaviour
     {
         if (dialogueRunner != null)
         {
-            Conversation.StartConversation -= StartDialog;
+            CharacterDialog.OnStartConversation -= StartDialog;
             dialogueRunner.onDialogueComplete.RemoveListener(EndDialog);
         }
     }

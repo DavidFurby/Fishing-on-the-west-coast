@@ -1,45 +1,41 @@
 public class FishState : State
 {
-    protected FishController fishController;
-    public FishState(FishController fishController)
+    protected FishController controller;
+    public FishState(FishController controller)
     {
-        this.fishController = fishController;
-    }
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
+        this.controller = controller;
     }
 }
 
 public class Swimming : FishState
 {
-    public Swimming(FishController fishController) : base(fishController)
+    public Swimming(FishController controller) : base(controller)
     {
     }
     public override void OnEnter()
     {
         base.OnEnter();
-        if (fishController.gameObject.activeInHierarchy)
+        if (controller.gameObject.activeInHierarchy)
         {
-            fishController.StartCoroutine(fishController.fishMovement.SetSpeed(1, 2, fishController.fishMovement.swimmingSpeed));
+            controller.StartCoroutine(controller.movement.SetSpeed(1, 2, controller.movement.swimmingSpeed));
         }
 
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishController.fishMovement.SwimAround();
+        controller.movement.SwimAround();
     }
     public override void OnExit()
     {
         base.OnEnter();
-        fishController.StopCoroutine(fishController.fishMovement.SetSpeed(1, 2, fishController.fishMovement.swimmingSpeed));
+        controller.StopCoroutine(controller.movement.SetSpeed(1, 2, controller.movement.swimmingSpeed));
 
     }
 }
 public class Baited : FishState
 {
-    public Baited(FishController fishController) : base(fishController)
+    public Baited(FishController controller) : base(controller)
     {
 
     }
@@ -47,55 +43,55 @@ public class Baited : FishState
     public override void OnEnter()
     {
         base.OnEnter();
-        fishController.StartCoroutine(fishController.fishMovement.SetSpeed(5, 2, fishController.fishMovement.baitedSpeed));
+        controller.StartCoroutine(controller.movement.SetSpeed(5, 2, controller.movement.baitedSpeed));
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishController.fishMovement.SwimTowardsTarget();
-        fishController.fishMovement.RotateTowardsTarget();
+        controller.movement.SwimTowardsTarget();
+        controller.movement.RotateTowardsTarget();
     }
     public override void OnExit()
     {
         base.OnExit();
-        fishController.StopCoroutine(fishController.fishMovement.SetSpeed(5, 2, fishController.fishMovement.baitedSpeed));
+        controller.StopCoroutine(controller.movement.SetSpeed(5, 2, controller.movement.baitedSpeed));
     }
 }
 public class Retreat : FishState
 {
-    public Retreat(FishController fishController) : base(fishController)
+    public Retreat(FishController controller) : base(controller)
     {
 
     }
     public override void OnEnter()
     {
         base.OnEnter();
-        fishController.StartCoroutine(fishController.fishMovement.SetSpeed(8, 2, fishController.fishMovement.retreatSpeed));
+        controller.StartCoroutine(controller.movement.SetSpeed(8, 2, controller.movement.retreatSpeed));
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        fishController.StartCoroutine(fishController.fishMovement.Retreat());
-        fishController.fishMovement.RotateTowardsTarget();
+        controller.StartCoroutine(controller.movement.Retreat());
+        controller.movement.RotateTowardsTarget();
     }
 
     public override void OnExit()
     {
         base.OnExit();
-        fishController.StopCoroutine(fishController.fishMovement.SetSpeed(8, 2, fishController.fishMovement.retreatSpeed));
+        controller.StopCoroutine(controller.movement.SetSpeed(8, 2, controller.movement.retreatSpeed));
 
     }
 }
 public class Hooked : FishState
 {
-    public Hooked(FishController fishController) : base(fishController)
+    public Hooked(FishController controller) : base(controller)
     {
     }
     public override void OnEnter()
     {
         base.OnEnter();
-        fishController.fishBehaviour.AttachToBait();
-        fishController.StartCoroutine(fishController.fishMovement.SetSpeed(8, 2, fishController.fishMovement.baitedSpeed));
+        controller.behaviour.AttachToBait();
+        controller.StartCoroutine(controller.movement.SetSpeed(8, 2, controller.movement.baitedSpeed));
     }
     public override void Update()
     {
@@ -105,43 +101,43 @@ public class Hooked : FishState
     public override void OnExit()
     {
         base.OnExit();
-        fishController.StopCoroutine(fishController.fishMovement.SetSpeed(8, 2, fishController.fishMovement.baitedSpeed));
+        controller.StopCoroutine(controller.movement.SetSpeed(8, 2, controller.movement.baitedSpeed));
     }
 }
 
 public class HookedToFish : FishState
 {
-    public HookedToFish(FishController fishController) : base(fishController)
+    public HookedToFish(FishController controller) : base(controller)
     {
     }
     public override void OnEnter()
     {
         base.OnEnter();
-        fishController.fishBehaviour.AttachToFish();
-        fishController.StartCoroutine(fishController.fishMovement.SetSpeed(8, 2, fishController.fishMovement.baitedSpeed));
+        controller.behaviour.AttachToFish();
+        controller.StartCoroutine(controller.movement.SetSpeed(8, 2, controller.movement.baitedSpeed));
     }
     public override void OnExit()
     {
         base.OnExit();
-        fishController.StopCoroutine(fishController.fishMovement.SetSpeed(8, 2, fishController.fishMovement.baitedSpeed));
+        controller.StopCoroutine(controller.movement.SetSpeed(8, 2, controller.movement.baitedSpeed));
     }
 }
 
 public class Inspected : FishState
 {
-    public Inspected(FishController fishController) : base(fishController)
+    public Inspected(FishController controller) : base(controller)
     {
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
-        fishController.StartCoroutine(fishController.fishMovement.SetSpeed(1, 5, fishController.fishMovement.swimmingSpeed));
+        controller.StartCoroutine(controller.movement.SetSpeed(1, 5, controller.movement.swimmingSpeed));
 
     }
     public override void OnExit()
     {
         base.OnExit();
-        fishController.StopCoroutine(fishController.fishMovement.SetSpeed(1, 5, fishController.fishMovement.swimmingSpeed));
+        controller.StopCoroutine(controller.movement.SetSpeed(1, 5, controller.movement.swimmingSpeed));
     }
 }

@@ -39,9 +39,9 @@ public class Interacting : PlayerState
         controller.RotateTowardsInteractive();
     }
 }
-public class Conversing : PlayerState
+public class PlayerInDialog : PlayerState
 {
-    public Conversing() : base()
+    public PlayerInDialog() : base()
     {
     }
     public override void FixedUpdate()

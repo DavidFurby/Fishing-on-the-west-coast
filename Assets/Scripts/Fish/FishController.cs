@@ -5,22 +5,15 @@ using UnityEngine;
 
 public class FishController : FishStateMachine
 {
-    public FishBehaviour fishBehaviour;
-    public FishMovement fishMovement;
+    public FishBehaviour behaviour;
+    public FishMovement movement;
 
     private void Awake()
     {
-        if (!TryGetComponent(out fishBehaviour))
-        {
-            Debug.LogError("FishBehaviour not found!");
-        }
+        behaviour = GetComponent<FishBehaviour>();
+        movement = GetComponent<FishMovement>();
 
-        if (!TryGetComponent(out fishMovement))
-        {
-            Debug.LogError("FishMovement not found!");
-        }
-
-        fishBehaviour.Initialize(this);
-        fishMovement.Initialize(this);
+        behaviour.Initialize(this);
+        movement.Initialize(this);
     }
 }

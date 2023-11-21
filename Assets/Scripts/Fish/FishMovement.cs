@@ -8,7 +8,6 @@ public class FishMovement : MonoBehaviour
     [SerializeField] internal float baitedSpeed;
     [SerializeField] internal float retreatSpeed;
     private float speed;
-    private bool settingSpeed = false;
     private readonly float _rotateSpeed = 0.8f;
     internal FishController fishController;
     private Animator animator;
@@ -71,10 +70,10 @@ public class FishMovement : MonoBehaviour
     internal void MoveFish(float newSpeed, Vector3? direction = null)
     {
         speed = newSpeed;
-        if (fishController.fishBehaviour != null)
+        if (fishController.behaviour != null)
         {
             Vector3 moveDirection = direction ?? transform.forward;
-            fishController.fishBehaviour.rigidBody.velocity = moveDirection.normalized * Random.Range(speed / 2, speed * 2);
+            fishController.behaviour.rigidBody.velocity = moveDirection.normalized * Random.Range(speed / 2, speed * 2);
         }
     }
 
@@ -108,17 +107,17 @@ public class FishMovement : MonoBehaviour
     #region Private Methods
     private bool IsCloseToTarget()
     {
-        return fishController.fishBehaviour.target != null && Vector3.Distance(transform.position, fishController.fishBehaviour.target.transform.position) <= 0.2f;
+        return fishController.behaviour.target != null && Vector3.Distance(transform.position, fishController.behaviour.target.transform.position) <= 0.2f;
     }
 
     private Vector3 GetDirectionTowardsTarget()
     {
-        return fishController.fishBehaviour.target != null ? fishController.fishBehaviour.target.transform.position - transform.position : Vector3.zero;
+        return fishController.behaviour.target != null ? fishController.behaviour.target.transform.position - transform.position : Vector3.zero;
     }
 
     private Vector3 GetDirectionAwayFromTarget()
     {
-        return fishController.fishBehaviour.target != null ? transform.position - fishController.fishBehaviour.target.transform.position : Vector3.zero;
+        return fishController.behaviour.target != null ? transform.position - fishController.behaviour.target.transform.position : Vector3.zero;
     }
     #endregion
 }

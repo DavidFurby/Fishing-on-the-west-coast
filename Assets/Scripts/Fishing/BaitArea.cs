@@ -98,7 +98,7 @@ public class BaitArea : MonoBehaviour
 
     private void BaitFish(FishController fishController, GameObject target)
     {
-        fishController.fishBehaviour.GetBaited(target);
+        fishController.behaviour.GetBaited(target);
         PlayerController.Instance.BaitedFish = fishController.GetComponent<FishDisplay>();
 
     }

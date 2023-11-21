@@ -65,6 +65,7 @@ public class PlayerController : FishingController
         OnWhileCharging += ChargeCasting;
         OnWhileCharging += Release;
         OnWhileFishing += StartReeling;
+        CharacterDialog.OnStartConversation += (_) => SetState(new PlayerInDialog());
         DialogManager.OnEndDialog += ReturnControls;
     }
 
@@ -79,6 +80,7 @@ public class PlayerController : FishingController
         OnWhileCharging -= ChargeCasting;
         OnWhileCharging -= Release;
         OnWhileFishing -= StartReeling;
+        CharacterDialog.OnStartConversation -= (_) => SetState(new PlayerInDialog());
         DialogManager.OnEndDialog -= ReturnControls;
     }
 
@@ -118,7 +120,7 @@ public class PlayerController : FishingController
     }
     internal void RotateTowardsInteractive()
     {
-        Vector3 direction = interactive.transform.position -transform.position;
+        Vector3 direction = interactive.transform.position - transform.position;
         playerMovement.RotatePlayer(direction);
     }
 
@@ -143,7 +145,7 @@ public class PlayerController : FishingController
     public void RaiseNavigateShopEvent() => NavigateShop?.Invoke();
     public void ReturnControls()
     {
-        if (GetCurrentState() is Conversing)
+        if (GetCurrentState() is PlayerInDialog)
         {
             SetState(new ExplorationIdle());
             CameraController.Instance.SetState(new PlayerCamera());
