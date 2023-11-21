@@ -7,8 +7,8 @@ public class PlayerController : FishingController
     private PlayerAnimations playerAnimations;
     private Interactive interactive;
     private PlayerMovement playerMovement;
-    public static event Action NavigateShop;
-    public static event Action OpenItemMenu;
+    public static event Action OnNavigateShop;
+    public static event Action OnOpenItemMenu;
 
     void Awake()
     {
@@ -141,14 +141,16 @@ public class PlayerController : FishingController
         }
     }
 
-    public void RaiseOpenItemMenuEvent() => OpenItemMenu?.Invoke();
-    public void RaiseNavigateShopEvent() => NavigateShop?.Invoke();
+    public void RaiseOpenItemMenuEvent() => OnOpenItemMenu?.Invoke();
+    public void RaiseNavigateShopEvent() => OnNavigateShop?.Invoke();
+
+    //Return to idle state only if current state is dialog
     public void ReturnControls()
     {
         if (GetCurrentState() is PlayerInDialog)
         {
             SetState(new ExplorationIdle());
-            CameraController.Instance.SetState(new PlayerCamera());
+            CameraController.Instance.EnterPlayerState();
         }
     }
 

@@ -17,11 +17,11 @@ public class ShopInputManager : MonoBehaviour
     }
     void OnEnable()
     {
-        PlayerController.NavigateShop += HandleShoppingInput;
+        PlayerController.OnNavigateShop += HandleShoppingInput;
     }
     void OnDestroy()
     {
-        PlayerController.NavigateShop -= HandleShoppingInput;
+        PlayerController.OnNavigateShop -= HandleShoppingInput;
     }
 
     public void HandleShoppingInput()

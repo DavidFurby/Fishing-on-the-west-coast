@@ -48,6 +48,7 @@ public class CameraController : CameraStateMachine
         PlayerEventController.OnEnterCasting -= EnterCastingState;
         PlayerEventController.OnEnterSummary -= EnterPlayerState;
         PlayerEventController.OnEnterReeling -= EnterPlayerState;
+
     }
 
     public void SetCameraToTarget(Transform target, float YValue = 0)

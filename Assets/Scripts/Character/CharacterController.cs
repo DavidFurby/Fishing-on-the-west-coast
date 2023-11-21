@@ -17,12 +17,19 @@ public class CharacterController : CharacterStateMachine
         movement.Initialize(this);
         dialog.Initialize(this);
     }
-
+    void OnEnable()
+    {
+        DialogManager.OnEndDialog += () => SetState(new CharacterIdle(this));
+    }
     void Start()
     {
         defaultRotation = transform.rotation;
     }
 
+   void OnDestroy()
+    {
+        DialogManager.OnEndDialog -= () => SetState(new CharacterIdle(this));
+    }
     internal void RotateTowardsPlayer()
     {
         if (player == null)
