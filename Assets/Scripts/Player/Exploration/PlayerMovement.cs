@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] internal int movementSpeed = 10;
-    [SerializeField] internal int rotationSpeed = 50;
+    private const int movementSpeed = 10;
+    private const int rotationSpeed = 50;
     protected CharacterController controller;
 
     public void Initialize(CharacterController controller)

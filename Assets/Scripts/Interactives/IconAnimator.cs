@@ -2,18 +2,25 @@ using UnityEngine;
 
 public class IconAnimator : MonoBehaviour
 {
-    public float speed = 1f;
-    public float amplitude = 0.5f;
+    private const float speed = 1f;
 
-    private Vector3 startPosition;
+    private const float amplitude = 0.5f;
+
+    private float startYPosition;
 
     private void Start()
     {
-        startPosition = transform.position;
+        startYPosition = transform.position.y;
     }
 
     private void Update()
     {
-        transform.position = startPosition + amplitude * Mathf.Sin(Time.time * speed) * Vector3.up;
+        SetPosition();
+    }
+
+    private void SetPosition()
+    {
+        float newYPosition = startYPosition + amplitude * Mathf.Sin(Time.time * speed);
+        transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
     }
 }

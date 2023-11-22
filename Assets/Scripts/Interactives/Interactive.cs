@@ -24,6 +24,8 @@ public class Interactive : MonoBehaviour
         }
     }
 
+
+
     public void StartInteraction()
     {
         if (TryGetComponent<IInteractive>(out var interactiveComponent))
@@ -49,7 +51,7 @@ public class Interactive : MonoBehaviour
         }
     }
 
-    public void ShowIcon()
+    private void ShowIcon()
     {
         if (iconInstance != null)
         {
@@ -57,7 +59,7 @@ public class Interactive : MonoBehaviour
         }
     }
 
-    public void HideIcon()
+    private void HideIcon()
     {
         if (iconInstance != null)
         {

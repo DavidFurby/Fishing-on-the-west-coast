@@ -556,8 +556,8 @@ Transform:
   - {fileID: 778212260670138932}
   - {fileID: 7221775013890059983}
   - {fileID: 220277180808734550}
-  - {fileID: 1054534417}
   - {fileID: 5674257118395647014}
+  - {fileID: 1054534417}
   - {fileID: 1556579337}
   - {fileID: 64522333}
   m_Father: {fileID: 0}
@@ -1772,6 +1772,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7821062118129322843, guid: c571a1887222b6645a5ac60200805bbb, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2165,7 +2169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8006691519124213545, guid: df7fd0416c4861643a596e02eaba5c5c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.729996
+      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: 8006691519124213545, guid: df7fd0416c4861643a596e02eaba5c5c, type: 3}
       propertyPath: m_LocalPosition.z
