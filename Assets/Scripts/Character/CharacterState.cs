@@ -20,6 +20,11 @@ public class CharacterIdle : CharacterState
         base.OnEnter();
         controller.SetDefaultRotation();
     }
+    public override void Update()
+    {
+        base.Update();
+        controller.movement.Move();
+    }
 
 }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(CharacterMovement))]
 [RequireComponent(typeof(CharacterDialog))]
@@ -9,8 +10,9 @@ public class CharacterController : CharacterStateMachine
     internal CharacterMovement movement;
     internal CharacterDialog dialog;
     internal CharacterExpression expression;
-    [SerializeField] private PlayerController player;
+    private PlayerController player;
     private Quaternion defaultRotation;
+   
 
     void Awake()
     {
@@ -28,13 +30,17 @@ public class CharacterController : CharacterStateMachine
     }
     void Start()
     {
+        player = FindFirstObjectByType<PlayerController>();
         defaultRotation = transform.rotation;
+        SetIdle();
+        print(GetCurrentState());
     }
 
-   void OnDestroy()
+    void OnDestroy()
     {
         DialogManager.OnEndDialog -= SetIdle;
     }
+
     internal void RotateTowardsPlayer()
     {
         if (player == null)
@@ -54,7 +60,8 @@ public class CharacterController : CharacterStateMachine
         transform.rotation = defaultRotation;
     }
 
-    private void SetIdle() {
+    private void SetIdle()
+    {
         SetState(new CharacterIdle(this));
     }
 }

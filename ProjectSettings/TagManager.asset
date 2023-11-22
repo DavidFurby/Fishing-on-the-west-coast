@@ -16,6 +16,7 @@ TagManager:
   - Ocean
   - Sea
   - SeaFloor
+  - Waypoint
   layers:
   - Default
   - TransparentFX

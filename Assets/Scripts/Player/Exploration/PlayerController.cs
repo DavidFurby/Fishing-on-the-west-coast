@@ -4,9 +4,9 @@ using System;
 public class PlayerController : FishingController
 {
     public static PlayerController Instance { get; private set; }
-    private PlayerAnimations playerAnimations;
+    private PlayerAnimations animations;
     private Interactive interactive;
-    private PlayerMovement playerMovement;
+    private PlayerMovement movement;
     public static event Action OnNavigateShop;
     public static event Action OnOpenItemMenu;
 
@@ -38,14 +38,14 @@ public class PlayerController : FishingController
         InitializeComponents();
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = new Vector3(0, -0.5f, 0);
-
+        print(GetCurrentState());
     }
 
 
     private void InitializeComponents()
     {
-        playerAnimations = GetComponentInChildren<PlayerAnimations>();
-        playerMovement = GetComponentInChildren<PlayerMovement>();
+        animations = GetComponentInChildren<PlayerAnimations>();
+        movement = GetComponentInChildren<PlayerMovement>();
         SetState(new ExplorationIdle());
     }
 
@@ -95,33 +95,33 @@ public class PlayerController : FishingController
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        playerAnimations.SetPlayerWalkAnimation(horizontalInput != 0 || verticalInput != 0);
+        animations.SetPlayerWalkAnimation(horizontalInput != 0 || verticalInput != 0);
     }
 
     private void ProcessInteractionInput()
     {
         if (Input.GetKeyDown(KeyCode.Space) && interactive != null)
         {
-            playerAnimations.SetPlayerWalkAnimation(false);
+            animations.SetPlayerWalkAnimation(false);
             ActivateInteractive();
         }
     }
 
     public void HandleMovement()
     {
-        Vector3 movementDirection = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        Vector3 direction = new(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 
-        if (playerMovement.IsGrounded())
+        if (movement.IsGrounded())
         {
-            playerMovement.MovePlayer(movementDirection);
+            movement.MoveCharacter(direction);
 
         }
-        playerMovement.RotatePlayer(movementDirection);
+        movement.RotateCharacter(direction);
     }
     internal void RotateTowardsInteractive()
     {
         Vector3 direction = interactive.transform.position - transform.position;
-        playerMovement.RotatePlayer(direction);
+        movement.RotateCharacter(direction);
     }
 
 

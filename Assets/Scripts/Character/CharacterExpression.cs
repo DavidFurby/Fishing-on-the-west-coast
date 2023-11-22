@@ -4,7 +4,7 @@ using UnityEngine;
 public class CharacterExpression : MonoBehaviour
 {
     SkinnedMeshRenderer skinnedMeshRenderer;
-    CharacterController controller;
+    private CharacterController controller;
 
     int blendShapeCount;
     public List<Expression> ExpressionList { get; set; } = new List<Expression>();
@@ -34,7 +34,6 @@ public class CharacterExpression : MonoBehaviour
     private void UpdateExpressionValues(int index, float newValue)
     {
         skinnedMeshRenderer.SetBlendShapeWeight(index, newValue);
-        print(skinnedMeshRenderer.GetBlendShapeWeight(index));
         ExpressionList[index].value = newValue;
     }
 
@@ -42,8 +41,6 @@ public class CharacterExpression : MonoBehaviour
     {
         Expression mouthMovement = ExpressionList[0];
         float newValue = mouthMovement.value <= 50 ? 100 : 0;
-        print(mouthMovement.Name);
-        print(newValue);
         UpdateExpressionValues(0, newValue);
     }
 }
