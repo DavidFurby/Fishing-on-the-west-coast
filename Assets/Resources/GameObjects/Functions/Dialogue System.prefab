@@ -52,7 +52,6 @@ MonoBehaviour:
   dialogueViews:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   startNode: Start
   startAutomatically: 0
   runSelectedOptionAsLine: 0
