@@ -38,7 +38,6 @@ public class PlayerController : FishingController
         InitializeComponents();
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = new Vector3(0, -0.5f, 0);
-        print(GetCurrentState());
     }
 
 
@@ -120,8 +119,11 @@ public class PlayerController : FishingController
     }
     internal void RotateTowardsInteractive()
     {
-        Vector3 direction = interactive.transform.position - transform.position;
-        movement.RotateCharacter(direction);
+        if (interactive != null)
+        {
+            Vector3 direction = interactive.transform.position - transform.position;
+            movement.RotateCharacter(direction);
+        }
     }
 
 

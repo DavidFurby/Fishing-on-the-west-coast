@@ -19,6 +19,7 @@ public class CharacterIdle : CharacterState
     {
         base.OnEnter();
         controller.SetDefaultRotation();
+        controller.movement.EnabledMovement();
     }
     public override void FixedUpdate()
     {
@@ -38,6 +39,7 @@ public class CharacterInDialog : CharacterState
     {
         base.OnEnter();
         controller.RotateTowardsPlayer();
+        controller.movement.PauseMovement();
     }
     public override void Update()
     {

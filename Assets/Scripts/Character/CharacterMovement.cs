@@ -51,6 +51,21 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
+    internal void PauseMovement()
+    {
+        if (agent != null)
+        {
+            agent.enabled = false;
+        }
+    }
+    internal void EnabledMovement()
+    {
+        if (agent != null)
+        {
+            agent.enabled = true;
+
+        }
+    }
 
     internal int NextPositionIndex()
     {
