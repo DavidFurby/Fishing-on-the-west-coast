@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 484372260692342270}
   - component: {fileID: 1266185162701935606}
   - component: {fileID: 3094193391354624411}
+  - component: {fileID: 3294844768598940689}
   m_Layer: 0
   m_Name: Small House
   m_TagString: Untagged
@@ -106,3 +107,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2890288202208180238, guid: bbd3a91837dbc2842aadfd7cab5635f4, type: 3}
+--- !u!65 &3294844768598940689
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513978076956981954}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.023615396, y: 0.029776655, z: 0.017404793}
+  m_Center: {x: -0.000000007479829, y: -0.000000007529524, z: 0.008762086}

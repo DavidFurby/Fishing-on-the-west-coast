@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4508640420096946931}
   - component: {fileID: 1834407448308893241}
   - component: {fileID: 2400523830405098677}
+  - component: {fileID: 4551203654319646495}
   m_Layer: 0
   m_Name: Boathouse (1)
   m_TagString: Untagged
@@ -106,6 +107,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3703199623469567337, guid: 26c47aec50f432b46bd9772c0d85e1fd, type: 3}
+--- !u!65 &4551203654319646495
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177298083383076844}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.021992711, y: 0.02270438, z: 0.026361994}
+  m_Center: {x: -0.000066592664, y: 0.000000014477578, z: 0.013260979}
 --- !u!1 &859423827153814304
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,11 +137,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8006691519124213545}
-  - component: {fileID: 1067262589934318801}
-  - component: {fileID: 5142141361281183959}
-  - component: {fileID: 2005080990378519198}
   m_Layer: 0
-  m_Name: Boathouse
+  m_Name: Boathouses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,26 +157,62 @@ Transform:
   m_LocalScale: {x: 216.21332, y: 216.21332, z: 216.21332}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6106618708064716645}
   - {fileID: 666025896931999062}
   - {fileID: 7670407064452388303}
   - {fileID: 3760133285675268128}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -60}
---- !u!33 &1067262589934318801
+--- !u!1 &3582021079184971344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6106618708064716645}
+  - component: {fileID: 5111934293861058879}
+  - component: {fileID: 6386125184321859483}
+  - component: {fileID: 5906806727997913693}
+  - component: {fileID: 4805100000805624454}
+  m_Layer: 0
+  m_Name: Boathouse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6106618708064716645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582021079184971344}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8006691519124213545}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -60}
+--- !u!33 &5111934293861058879
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859423827153814304}
+  m_GameObject: {fileID: 3582021079184971344}
   m_Mesh: {fileID: -3703199623469567337, guid: 26c47aec50f432b46bd9772c0d85e1fd, type: 3}
---- !u!23 &5142141361281183959
+--- !u!23 &6386125184321859483
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859423827153814304}
+  m_GameObject: {fileID: 3582021079184971344}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -193,13 +248,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2005080990378519198
+--- !u!64 &5906806727997913693
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859423827153814304}
+  m_GameObject: {fileID: 3582021079184971344}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -215,6 +270,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3703199623469567337, guid: 26c47aec50f432b46bd9772c0d85e1fd, type: 3}
+--- !u!65 &4805100000805624454
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582021079184971344}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.021992711, y: 0.02270438, z: 0.026361994}
+  m_Center: {x: -0.000066592664, y: -0.0000000041488732, z: 0.013260979}
 --- !u!1 &4568195805487014554
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +303,7 @@ GameObject:
   - component: {fileID: 252613725918656389}
   - component: {fileID: 2622644820146127695}
   - component: {fileID: 2035840336545950147}
+  - component: {fileID: 6222207320875204303}
   m_Layer: 0
   m_Name: Boathouse (3)
   m_TagString: Untagged
@@ -321,6 +398,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3703199623469567337, guid: 26c47aec50f432b46bd9772c0d85e1fd, type: 3}
+--- !u!65 &6222207320875204303
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568195805487014554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.021992711, y: 0.02270438, z: 0.026361994}
+  m_Center: {x: -0.000066592664, y: -4.235828e-10, z: 0.013260977}
 --- !u!1 &7005650733486083957
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +431,7 @@ GameObject:
   - component: {fileID: 6763589705878198890}
   - component: {fileID: 8807332544862957216}
   - component: {fileID: 4763873989059970092}
+  - component: {fileID: 3492783701514911623}
   m_Layer: 0
   m_Name: Boathouse (2)
   m_TagString: Untagged
@@ -427,3 +526,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3703199623469567337, guid: 26c47aec50f432b46bd9772c0d85e1fd, type: 3}
+--- !u!65 &3492783701514911623
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7005650733486083957}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.021992711, y: 0.02270438, z: 0.026361994}
+  m_Center: {x: -0.000066592664, y: 0.0000000070269977, z: 0.013260978}

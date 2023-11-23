@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d208545511ed644840dbbe29ee4472, type: 3}
   m_Name: Lars
   m_EditorClassIdentifier: 
-  characterId: 2
-  name: Lars
+  name: 2
   description: Sus

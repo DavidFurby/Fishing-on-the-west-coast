@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +8,7 @@ public class CharacterMovement : MonoBehaviour
     private NavMeshAgent agent;
     private List<Waypoint> waypoints;
     private Waypoint currentWaypoint;
+    private int currentWaypointIndex = 0;
 
     public void Initialize(CharacterController controller)
     {
@@ -38,6 +38,7 @@ public class CharacterMovement : MonoBehaviour
             currentWaypoint = waypoints[0];
         }
     }
+
     internal void Move()
     {
         if (currentWaypoint != null)
@@ -45,20 +46,15 @@ public class CharacterMovement : MonoBehaviour
             agent.destination = currentWaypoint.transform.position;
             if (transform.position == agent.destination)
             {
-                currentWaypoint = waypoints[NextPositionIndex(currentWaypoint)];
+                currentWaypointIndex = NextPositionIndex();
+                currentWaypoint = waypoints[NextPositionIndex()];
             }
         }
     }
 
-    internal int NextPositionIndex(Waypoint current)
+    internal int NextPositionIndex()
     {
-        if (waypoints.IndexOf(current) + 1 >= waypoints.Count)
-        {
-            return 0;
-        }
-        else
-        {
-            return waypoints.IndexOf(currentWaypoint) + 1;
-        }
+        // Use modulo operation to loop back to the start of the list
+        return (currentWaypointIndex + 1) % waypoints.Count;
     }
 }
