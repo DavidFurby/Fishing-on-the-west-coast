@@ -853,9 +853,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lotta
       objectReference: {fileID: 0}
+    - target: {fileID: 7284307376114470984, guid: ead677062bcc6214ba079901f0285e98, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 11400000, guid: 30d0d7d5dea7f5042ba485cae71a3a34, type: 2}
     - target: {fileID: 7303602153788726921, guid: ead677062bcc6214ba079901f0285e98, type: 3}
       propertyPath: character
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -7,8 +7,6 @@ using UnityEngine;
 public class Fish : ScriptableObject
 {
     public string fishId;
-    public string FishId => fishId;
-
     public new string name;
     public float averageSize;
     public string description;

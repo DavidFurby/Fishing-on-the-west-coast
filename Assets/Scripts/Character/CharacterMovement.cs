@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,7 +7,8 @@ public class CharacterMovement : MonoBehaviour
 {
     protected CharacterController controller;
     private NavMeshAgent agent;
-    private GameObject waypoint;
+    private List<Waypoint> waypoints;
+    private Waypoint currentWaypoint;
 
     public void Initialize(CharacterController controller)
     {
@@ -15,22 +18,47 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        foreach (Transform child in transform)
+        GetWayPoints();
+    }
+
+    private void GetWayPoints()
+    {
+        waypoints = new List<Waypoint>();
+        Waypoint[] waypointsInScene = FindObjectsOfType<Waypoint>();
+        foreach (Waypoint waypoint in waypointsInScene)
         {
-            if (child.CompareTag("Waypoint"))
+            if (waypoint.character == controller.character.name)
             {
-                waypoint = child.gameObject;
-                print(waypoint);
-                break;
+                waypoints.Add(waypoint);
             }
+        }
+        waypoints.Sort((a, b) => a.orderPosition.CompareTo(b.orderPosition));
+        if (waypoints.Count > 0)
+        {
+            currentWaypoint = waypoints[0];
         }
     }
     internal void Move()
     {
-        if (waypoint != null)
+        if (currentWaypoint != null)
         {
-            agent.destination = waypoint.transform.position;
-            print(agent.destination);
+            agent.destination = currentWaypoint.transform.position;
+            if (transform.position == agent.destination)
+            {
+                currentWaypoint = waypoints[NextPositionIndex(currentWaypoint)];
+            }
+        }
+    }
+
+    internal int NextPositionIndex(Waypoint current)
+    {
+        if (waypoints.IndexOf(current) + 1 >= waypoints.Count)
+        {
+            return 0;
+        }
+        else
+        {
+            return waypoints.IndexOf(currentWaypoint) + 1;
         }
     }
 }

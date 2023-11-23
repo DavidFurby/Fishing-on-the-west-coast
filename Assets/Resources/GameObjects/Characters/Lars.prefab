@@ -853,6 +853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lars
       objectReference: {fileID: 0}
+    - target: {fileID: 7284307376114470984, guid: ead677062bcc6214ba079901f0285e98, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 11400000, guid: 56048687df37fab49b43a665d7831302, type: 2}
     - target: {fileID: 7303602153788726921, guid: ead677062bcc6214ba079901f0285e98, type: 3}
       propertyPath: character
       value: 2

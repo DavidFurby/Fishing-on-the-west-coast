@@ -3,23 +3,13 @@ using UnityEngine;
 
 public class CharacterDialog : MonoBehaviour, IInteractive
 {
-    [SerializeField] private GameCharacters character;
     internal CharacterController controller;
-    private enum GameCharacters
-    {
-        Player,
-        Lotta,
-        Lars,
-        NeighborsWife,
-        Fisherman,
-        Dog,
-        ShopKeeper,
-    }
+
     public static event Action<string> OnStartConversation;
 
     public void Interact()
     {
-        OnStartConversation.Invoke(character.ToString());
+        OnStartConversation.Invoke(controller.character.name.ToString());
         controller.SetState(new CharacterInDialog(controller));
     }
 

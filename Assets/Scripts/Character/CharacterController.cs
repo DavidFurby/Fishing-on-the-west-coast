@@ -7,12 +7,13 @@ using UnityEngine.AI;
 
 public class CharacterController : CharacterStateMachine
 {
+    public Character character;
     internal CharacterMovement movement;
     internal CharacterDialog dialog;
     internal CharacterExpression expression;
     private PlayerController player;
     private Quaternion defaultRotation;
-   
+
 
     void Awake()
     {
@@ -33,7 +34,6 @@ public class CharacterController : CharacterStateMachine
         player = FindFirstObjectByType<PlayerController>();
         defaultRotation = transform.rotation;
         SetIdle();
-        print(GetCurrentState());
     }
 
     void OnDestroy()
