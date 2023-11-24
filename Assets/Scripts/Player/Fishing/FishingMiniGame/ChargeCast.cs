@@ -47,7 +47,7 @@ public class ChargeCast : MonoBehaviour
     {
         if (castingPowerBalance.gameObject.activeSelf)
         {
-            PlayerController.Instance.chargeLevel = Mathf.Min(castingPowerBalance.value, 1 - castingPowerBalance.value) + 1f;
+            PlayerManager.Instance.fishingController.chargeLevel = Mathf.Min(castingPowerBalance.value, 1 - castingPowerBalance.value) + 1f;
             castingPowerBalance.value += (castingPowerDirection ?  1 : -1) * Time.deltaTime * 5f;
             if (castingPowerBalance.value >= 1)
             {

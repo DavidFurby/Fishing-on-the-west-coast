@@ -1,16 +1,19 @@
 using UnityEngine;
 using System;
+
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerSubscriptions))]
 [RequireComponent(typeof(PlayerAnimations))]
 [RequireComponent(typeof(Interactive))]
-public class PlayerController : FishingController
+[RequireComponent(typeof(FishingController))]
+public class PlayerManager : PlayerEventController
 {
-    public static PlayerController Instance { get; private set; }
+    public static PlayerManager Instance { get; private set; }
     private PlayerAnimations animations;
     internal Interactive interactive;
     private PlayerMovement movement;
     private PlayerSubscriptions subscriptions;
+    internal FishingController fishingController;
     public static event Action OnNavigateShop;
     public static event Action OnOpenItemMenu;
 
@@ -20,6 +23,7 @@ public class PlayerController : FishingController
         InitializeComponents();
         movement.Initialize(Instance);
         subscriptions.Initialize(Instance);
+        fishingController.Initialize(Instance);
     }
 
     private void InitializeSingleton()
@@ -47,6 +51,7 @@ public class PlayerController : FishingController
         animations = GetComponentInChildren<PlayerAnimations>();
         movement = GetComponentInChildren<PlayerMovement>();
         subscriptions = GetComponent<PlayerSubscriptions>();
+        fishingController = GetComponent<FishingController>();
         SetState(new ExplorationIdle());
     }
 

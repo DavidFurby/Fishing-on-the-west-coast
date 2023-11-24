@@ -26,11 +26,11 @@ public class CatchArea : MonoBehaviour
     {
         if (other.CompareTag("Fish"))
         {
-            if (PlayerController.Instance.GetCurrentState() is ReelingFish)
+            if (PlayerManager.Instance.GetCurrentState() is ReelingFish)
             {
                 CatchFishWhileReelingState(other);
             }
-            else if (PlayerController.Instance.GetCurrentState() is Fishing)
+            else if (PlayerManager.Instance.GetCurrentState() is Fishing)
             {
                 HandleFishEnter(other);
             }
@@ -39,9 +39,9 @@ public class CatchArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fish") && PlayerController.Instance.FishAttachedToBait == other.GetComponent<FishDisplay>())
+        if (other.CompareTag("Fish") && PlayerManager.Instance.fishingController.FishAttachedToBait == other.GetComponent<FishDisplay>())
         {
-            PlayerController.Instance.FishInCatchArea = null;
+            PlayerManager.Instance.fishingController.FishInCatchArea = null;
         }
     }
 
@@ -61,7 +61,7 @@ public class CatchArea : MonoBehaviour
         {
             if (other.TryGetComponent(out FishDisplay fish))
             {
-                PlayerController.Instance.FishInCatchArea = fish;
+                PlayerManager.Instance.fishingController.FishInCatchArea = fish;
             }
         }
     }
@@ -69,14 +69,14 @@ public class CatchArea : MonoBehaviour
     private void CatchFishWhileReelingState(Collider other)
     {
         FishController fishController = other.GetComponent<FishController>();
-        OnBaitFish.Invoke(other, PlayerController.Instance.fishesOnHook[^1].gameObject);
+        OnBaitFish.Invoke(other, PlayerManager.Instance.fishingController.fishesOnHook[^1].gameObject);
         if (fishController.GetCurrentState() is Baited)
         {
             OnCatchWhileReeling.Invoke();
             fishController.SetState(new HookedToFish(fishController));
             if (other.TryGetComponent(out FishDisplay newFishComponent))
             {
-                PlayerController.Instance.AddFish(newFishComponent);
+                PlayerManager.Instance.fishingController.AddFish(newFishComponent);
             }
         }
     }

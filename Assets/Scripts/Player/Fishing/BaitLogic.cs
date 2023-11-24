@@ -60,11 +60,11 @@ public class BaitLogic : MonoBehaviour
     {
         if (fishingController.fishesOnHook.Count > 0)
         {
-            fishingController.SetState(new InspectFish());
+            PlayerManager.Instance.SetState(new InspectFish());
         }
         else
         {
-            fishingController.SetState(new FishingIdle());
+            PlayerManager.Instance.SetState(new FishingIdle());
         }
     }
 
@@ -78,7 +78,7 @@ public class BaitLogic : MonoBehaviour
         DetachBait();
         float upwardFactor = 1f;
         Vector3 forceDirection = playerTransform.forward + (Vector3.up * upwardFactor);
-        rigidBody.AddForceAtPosition(forceFactor * PlayerController.Instance.castingPower * Time.fixedDeltaTime * forceDirection, rigidBody.position, ForceMode.Impulse);
+        rigidBody.AddForceAtPosition(forceFactor * PlayerManager.Instance.fishingController.castingPower * Time.fixedDeltaTime * forceDirection, rigidBody.position, ForceMode.Impulse);
         if (forceFactor > 0)
         {
             forceFactor -= 0.1f;
@@ -92,9 +92,9 @@ public class BaitLogic : MonoBehaviour
         if (IsCloseToTarget(targetPosition, 5))
         {
             AttachBait();
-            SetState(PlayerController.Instance);
+            SetState(PlayerManager.Instance.fishingController);
         }
-        else if (IsFarFromTarget(targetPosition, 50) && PlayerController.Instance.GetCurrentState() is Reeling)
+        else if (IsFarFromTarget(targetPosition, 50) && PlayerManager.Instance.GetCurrentState() is Reeling)
         {
             transform.position = new Vector3(targetPosition.x + 20, transform.position.y, targetPosition.z);
         }
@@ -117,7 +117,7 @@ public class BaitLogic : MonoBehaviour
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
         Vector3 direction = (targetPosition - transform.position).normalized;
-        rigidBody.AddForce(PlayerController.Instance.reelInSpeed * MainManager.Instance.Inventory.EquippedRod.reelInSpeed * direction, ForceMode.Impulse);
+        rigidBody.AddForce(PlayerManager.Instance.fishingController.reelInSpeed * MainManager.Instance.Inventory.EquippedRod.reelInSpeed * direction, ForceMode.Impulse);
         float newY = transform.position.y + balance.GetBalanceValue() * Time.deltaTime * (balance.GetBalanceValue() >= 0.5 ? 1 : -1);
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
@@ -131,7 +131,7 @@ public class BaitLogic : MonoBehaviour
             rigidBody.AddForce(direction * 1.2f, ForceMode.Impulse);
             if (IsCloseToTarget(targetPosition, 50))
             {
-                PlayerController.Instance.SetState(new Reeling());
+                PlayerManager.Instance.SetState(new Reeling());
             }
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))

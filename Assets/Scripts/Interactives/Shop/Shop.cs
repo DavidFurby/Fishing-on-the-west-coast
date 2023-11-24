@@ -50,7 +50,7 @@ public class Shop : MonoBehaviour
     public IEnumerator OpenShop()
     {
         yield return new WaitForSeconds(0.5f);
-        PlayerController.Instance.SetState(new Shopping());
+        PlayerManager.Instance.SetState(new Shopping());
         FocusItem();
         UpdateShopDialog();
     }

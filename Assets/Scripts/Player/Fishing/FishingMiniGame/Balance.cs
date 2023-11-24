@@ -66,7 +66,7 @@ public class Balance : MonoBehaviour
     // Calculate balance based on fish weight
     private void CalculateBalance()
     {
-        if (PlayerController.Instance.fishesOnHook.Count > 0)
+        if (PlayerManager.Instance.fishingController.fishesOnHook.Count > 0)
         {
             float targetValue = Random.value < 0.5 ? reelingBalance.value - Random.Range(0, weight * downwardForce) : reelingBalance.value + Random.Range(0, weight * upwardForce);
 
@@ -78,7 +78,7 @@ public class Balance : MonoBehaviour
     private void CalculateWeight()
     {
         weight = 0;
-        foreach (var fish in PlayerController.Instance.fishesOnHook)
+        foreach (var fish in PlayerManager.Instance.fishingController.fishesOnHook)
         {
             weight += fish.fish.size;
         }
@@ -123,7 +123,7 @@ public class Balance : MonoBehaviour
     {
         if (reelingBalance.value <= 0f || reelingBalance.value >= 1f)
         {
-            PlayerController.Instance.LoseCatch();
+            PlayerManager.Instance.fishingController.LoseCatch();
         }
     }
 

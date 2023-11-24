@@ -7,7 +7,7 @@ public class EveningTimer : MonoBehaviour
 
     void OnEnable()
     {
-        FishingController.OnEnterIdle += StartSunTimer;
+        PlayerEventController.OnEnterIdle += StartSunTimer;
     }
     void Start()
     {
@@ -17,7 +17,7 @@ public class EveningTimer : MonoBehaviour
 
     void OnDestroy()
     {
-        FishingController.OnEnterIdle -= StartSunTimer;
+        PlayerEventController.OnEnterIdle -= StartSunTimer;
     }
     public void EndDay()
     {

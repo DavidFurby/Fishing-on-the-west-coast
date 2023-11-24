@@ -73,12 +73,12 @@ public class BaitArea : MonoBehaviour
 
     private bool CanFishBeBaited(Collider collider)
     {
-        return collider.CompareTag("Fish") && PlayerController.Instance.BaitedFish == null;
+        return collider.CompareTag("Fish") && PlayerManager.Instance.fishingController.BaitedFish == null;
     }
 
     private bool IsFishLeavingBaitArea(Collider collider)
     {
-        return collider.CompareTag("Fish") && PlayerController.Instance.BaitedFish != null;
+        return collider.CompareTag("Fish") && PlayerManager.Instance.fishingController.BaitedFish != null;
     }
 
     private void ReleaseBaitedFish(Collider other)
@@ -86,7 +86,7 @@ public class BaitArea : MonoBehaviour
         FishController fishController = other.GetComponent<FishController>();
         if (fishController != null && fishController.GetCurrentState() is Baited)
         {
-            PlayerController.Instance.BaitedFish = null;
+            PlayerManager.Instance.fishingController.BaitedFish = null;
             fishController.SetState(new Swimming(fishController));
         }
     }
@@ -99,7 +99,7 @@ public class BaitArea : MonoBehaviour
     private void BaitFish(FishController fishController, GameObject target)
     {
         fishController.behaviour.GetBaited(target);
-        PlayerController.Instance.BaitedFish = fishController.GetComponent<FishDisplay>();
+        PlayerManager.Instance.fishingController.BaitedFish = fishController.GetComponent<FishDisplay>();
 
     }
 }

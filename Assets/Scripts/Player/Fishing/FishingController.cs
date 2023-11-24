@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishingController : PlayerEventController
+public class FishingController : MonoBehaviour
 {
     #region Internal Properties
 
@@ -16,7 +16,12 @@ public class FishingController : PlayerEventController
     internal float initialCastingPower = 20;
     internal float initialReelInSpeed = 5f;
     public static event Action OnAddFishToHook;
+    protected PlayerManager manager;
 
+    public void Initialize(PlayerManager manager)
+    {
+        this.manager = manager;
+    }
 
     #endregion
 
@@ -28,11 +33,11 @@ public class FishingController : PlayerEventController
         {
             if (FishInCatchArea != null)
             {
-                RaiseEnterReelingFish();
+                manager.RaiseEnterReelingFish();
             }
             else
             {
-                SetState(new Reeling());
+                manager.SetState(new Reeling());
             }
         }
     }
@@ -41,7 +46,7 @@ public class FishingController : PlayerEventController
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            SetState(new Charging());
+            manager.SetState(new Charging());
         }
     }
 
@@ -49,21 +54,21 @@ public class FishingController : PlayerEventController
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            SetState(new Swinging());
+            manager.SetState(new Swinging());
         }
     }
 
     public void EnterSea()
     {
-        if (GetCurrentState() is Casting)
+        if (manager.GetCurrentState() is Casting)
         {
-            SetState(new Fishing());
+            manager.SetState(new Fishing());
         }
     }
 
     public void CatchFish()
     {
-        if (GetCurrentState() is Fishing && FishInCatchArea != null)
+        if (manager.GetCurrentState() is Fishing && FishInCatchArea != null)
         {
             FishAttachedToBait = FishInCatchArea;
             FishAttachedToBait.GetComponent<FishController>().SetState(new Hooked(FishAttachedToBait.GetComponent<FishController>()));
@@ -74,7 +79,7 @@ public class FishingController : PlayerEventController
     public void LoseCatch()
     {
         ResetValues();
-        SetState(new Reeling());
+        manager.SetState(new Reeling());
     }
 
     public void AddFish(FishDisplay fish)

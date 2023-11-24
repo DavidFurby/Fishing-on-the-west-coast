@@ -28,9 +28,9 @@ public class CatchSummary : MonoBehaviour
 
     private void InitiateCatchSummary()
     {
-        if (PlayerController.Instance.fishesOnHook.Count <= 0)
+        if (PlayerManager.Instance.fishingController.fishesOnHook.Count <= 0)
         {
-            Debug.LogError($"{nameof(PlayerController.Instance.fishesOnHook)} is empty");
+            Debug.LogError($"{nameof(PlayerManager.Instance.fishingController.fishesOnHook)} is empty");
             return;
         }
         SetCurrentlyDisplayedFish();
@@ -53,7 +53,7 @@ public class CatchSummary : MonoBehaviour
 
         else if (Input.GetKeyUp(KeyCode.Space))
         {
-            PlayerController.Instance.SetState(new FishingIdle());
+            PlayerManager.Instance.SetState(new FishingIdle());
         }
 
     }
@@ -81,7 +81,7 @@ public class CatchSummary : MonoBehaviour
 
     private void SetCurrentlyDisplayedFish()
     {
-        currentlyDisplayedFish = PlayerController.Instance.fishesOnHook[currentFishIndex];
+        currentlyDisplayedFish = PlayerManager.Instance.fishingController.fishesOnHook[currentFishIndex];
     }
 
     private void UpdateDataValues()
@@ -99,7 +99,7 @@ public class CatchSummary : MonoBehaviour
 
     private bool HasMoreFishes()
     {
-        return currentFishIndex < PlayerController.Instance.fishesOnHook.Count - 1;
+        return currentFishIndex < PlayerManager.Instance.fishingController.fishesOnHook.Count - 1;
     }
 
     private bool IsNewRecord(Fish fish)

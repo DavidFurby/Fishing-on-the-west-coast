@@ -11,7 +11,7 @@ public class CharacterController : CharacterStateMachine
     internal CharacterMovement movement;
     internal CharacterDialog dialog;
     internal CharacterExpression expression;
-    private PlayerController player;
+    private PlayerManager player;
     private Quaternion defaultRotation;
 
 
@@ -31,7 +31,7 @@ public class CharacterController : CharacterStateMachine
     }
     void Start()
     {
-        player = FindFirstObjectByType<PlayerController>();
+        player = FindFirstObjectByType<PlayerManager>();
         defaultRotation = transform.rotation;
         SetIdle();
     }

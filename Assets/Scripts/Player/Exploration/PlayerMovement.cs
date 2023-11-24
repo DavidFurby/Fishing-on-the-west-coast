@@ -4,11 +4,11 @@ public class PlayerMovement : MonoBehaviour
 {
     private const int movementSpeed = 10;
     private const int rotationSpeed = 50;
-    protected PlayerController controller;
+    protected PlayerManager manager;
 
-    public void Initialize(PlayerController controller)
+    public void Initialize(PlayerManager manager)
     {
-        this.controller = controller;
+        this.manager = manager;
     }
     internal virtual void MoveCharacter(Vector3 direction)
     {

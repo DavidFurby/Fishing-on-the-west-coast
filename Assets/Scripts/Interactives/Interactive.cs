@@ -41,7 +41,7 @@ public class Interactive : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && other.GetComponent<PlayerController>().interactive == null)
+        if (other.CompareTag("Player") && other.GetComponent<PlayerManager>().interactive == null)
         {
             ShowIcon();
             OnEnterInteractive.Invoke(gameObject);
@@ -50,7 +50,7 @@ public class Interactive : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && other.GetComponent<PlayerController>().interactive == this)
+        if (other.CompareTag("Player") && other.GetComponent<PlayerManager>().interactive == this)
         {
             HideIcon();
             OnExitInteractive.Invoke();

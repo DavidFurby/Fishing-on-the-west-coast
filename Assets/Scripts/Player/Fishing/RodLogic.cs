@@ -38,20 +38,20 @@ public class RodLogic : MonoBehaviour
 
     public void CalculateReelInSpeed()
     {
-        foreach (FishDisplay @catch in PlayerController.Instance.fishesOnHook)
+        foreach (FishDisplay @catch in PlayerManager.Instance.fishingController.fishesOnHook)
         {
-            PlayerController.Instance.reelInSpeed = (PlayerController.Instance.initialReelInSpeed * MainManager.Instance.PlayerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
+            PlayerManager.Instance.fishingController.reelInSpeed = (PlayerManager.Instance.fishingController.initialReelInSpeed * MainManager.Instance.PlayerLevel.ReelingSpeedModifier()) - (@catch.fish.size / 10);
         }
     }
 
     public void ReelInSpeed()
     {
-        PlayerController.Instance.reelInSpeed = 50;
+        PlayerManager.Instance.fishingController.reelInSpeed = 50;
     }
 
     private IEnumerator SwingAnimation()
     {
-        PlayerController.Instance.castingPower *= PlayerController.Instance.chargeLevel * MainManager.Instance.PlayerLevel.ThrowRangeModifier();
+        PlayerManager.Instance.fishingController.castingPower *= PlayerManager.Instance.fishingController.chargeLevel * MainManager.Instance.PlayerLevel.ThrowRangeModifier();
         while (!rodAnimations.GetCurrentAnimationState().IsName("Reverse Swing"))
         {
             yield return null;
@@ -60,7 +60,7 @@ public class RodLogic : MonoBehaviour
         {
             yield return null;
         }
-        PlayerController.Instance.SetState(new Casting());
+        PlayerManager.Instance.SetState(new Casting());
     }
 
     public void PlayerReverseSwingAnimation()

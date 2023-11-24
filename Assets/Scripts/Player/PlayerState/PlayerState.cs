@@ -1,10 +1,10 @@
 public abstract class PlayerState : State
 {
-    protected PlayerController controller;
+    protected PlayerManager controller;
 
     public PlayerState()
     {
-        controller = PlayerController.Instance;
+        controller = PlayerManager.Instance;
     }
 }
 public class ExplorationIdle : PlayerState
@@ -76,7 +76,7 @@ public class FishingIdle : PlayerState
     public override void Update()
     {
         base.Update();
-        controller.StartCharging();
+        controller.fishingController.StartCharging();
     }
 }
 

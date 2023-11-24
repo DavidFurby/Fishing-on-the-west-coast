@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class PlayerSubscriptions : MonoBehaviour
 {
-    protected PlayerController controller;
+    protected PlayerManager manager;
 
-    public void Initialize(PlayerController controller)
+    public void Initialize(PlayerManager manager)
     {
-        this.controller = controller;
-        print(this.controller);
+        this.manager = manager;
     }
     private void Start()
     {
@@ -19,35 +18,35 @@ public class PlayerSubscriptions : MonoBehaviour
     }
     private void SubscribeToEvents()
     {
-        WaterCollision.OnBaitEnterSea += controller.EnterSea;
-        FishingSpot.StartFishing += (_, _) => controller.SetState(new FishingIdle());
-        FishingSpot.StartFishing += controller.SetPlayerPositionAndRotation;
-        PlayerEventController.OnEnterReelingFish += controller.CatchFish;
-        PlayerEventController.OnEnterReelingFish += () => controller.SetState(new ReelingFish());
-        PlayerEventController.OnEnterIdle += controller.ResetValues;
-        PlayerEventController.OnWhileCharging += controller.ChargeCasting;
-        PlayerEventController.OnWhileCharging += controller.Release;
-        PlayerEventController.OnWhileFishing += controller.StartReeling;
-        CharacterDialog.OnStartConversation += (_) => controller.SetState(new PlayerInDialog());
-        DialogManager.OnEndDialog += controller.ReturnControls;
-        Interactive.OnEnterInteractive += controller.SetInteractive;
-        Interactive.OnExitInteractive += controller.RemoveInteractive;
+        WaterCollision.OnBaitEnterSea += manager.fishingController.EnterSea;
+        FishingSpot.StartFishing += (_, _) => manager.SetState(new FishingIdle());
+        FishingSpot.StartFishing += manager.SetPlayerPositionAndRotation;
+        PlayerEventController.OnEnterReelingFish += manager.fishingController.CatchFish;
+        PlayerEventController.OnEnterReelingFish += () => manager.SetState(new ReelingFish());
+        PlayerEventController.OnEnterIdle += manager.fishingController.ResetValues;
+        PlayerEventController.OnWhileCharging += manager.fishingController.ChargeCasting;
+        PlayerEventController.OnWhileCharging += manager.fishingController.Release;
+        PlayerEventController.OnWhileFishing += manager.fishingController.StartReeling;
+        CharacterDialog.OnStartConversation += (_) => manager.SetState(new PlayerInDialog());
+        DialogManager.OnEndDialog += manager.ReturnControls;
+        Interactive.OnEnterInteractive += manager.SetInteractive;
+        Interactive.OnExitInteractive += manager.RemoveInteractive;
     }
 
     private void UnsubscribeFromEvents()
     {
-        WaterCollision.OnBaitEnterSea -= controller.EnterSea;
-        FishingSpot.StartFishing -= (_, _) => controller.SetState(new FishingIdle());
-        FishingSpot.StartFishing -= controller.SetPlayerPositionAndRotation;
-        PlayerEventController.OnEnterReelingFish -= controller.CatchFish;
-        PlayerEventController.OnEnterReelingFish -= () => controller.SetState(new ReelingFish());
-        PlayerEventController.OnEnterIdle -= controller.ResetValues;
-        PlayerEventController.OnWhileCharging -= controller.ChargeCasting;
-        PlayerEventController.OnWhileCharging -= controller.Release;
-        PlayerEventController.OnWhileFishing -= controller.StartReeling;
-        CharacterDialog.OnStartConversation -= (_) => controller.SetState(new PlayerInDialog());
-        DialogManager.OnEndDialog -= controller.ReturnControls;
-        Interactive.OnEnterInteractive -= controller.SetInteractive;
-        Interactive.OnExitInteractive -= controller.RemoveInteractive;
+        WaterCollision.OnBaitEnterSea -= manager.fishingController.EnterSea;
+        FishingSpot.StartFishing -= (_, _) => manager.SetState(new FishingIdle());
+        FishingSpot.StartFishing -= manager.SetPlayerPositionAndRotation;
+        PlayerEventController.OnEnterReelingFish -= manager.fishingController.CatchFish;
+        PlayerEventController.OnEnterReelingFish -= () => manager.SetState(new ReelingFish());
+        PlayerEventController.OnEnterIdle -= manager.fishingController.ResetValues;
+        PlayerEventController.OnWhileCharging -= manager.fishingController.ChargeCasting;
+        PlayerEventController.OnWhileCharging -= manager.fishingController.Release;
+        PlayerEventController.OnWhileFishing -= manager.fishingController.StartReeling;
+        CharacterDialog.OnStartConversation -= (_) => manager.SetState(new PlayerInDialog());
+        DialogManager.OnEndDialog -= manager.ReturnControls;
+        Interactive.OnEnterInteractive -= manager.SetInteractive;
+        Interactive.OnExitInteractive -= manager.RemoveInteractive;
     }
 }
