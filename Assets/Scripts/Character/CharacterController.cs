@@ -49,7 +49,7 @@ public class CharacterController : CharacterStateMachine
             return;
         }
 
-        Vector3 direction = transform.position - player.transform.position;
+        Vector3 direction = player.transform.position -transform.position;
         Quaternion playerRotation = Quaternion.LookRotation(direction);
 
         transform.rotation = playerRotation;

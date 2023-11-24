@@ -3,9 +3,8 @@ tags:
 colorID: 0
 position: -223,-79
 ---
-<<declare $day = 0 as number>>
+<<declare $day = 1 as number>>
 
-<<getDayOfMonth>>
 <<if $day is 1>>
     <<jump DayOne>>
 <<elseif $day is 2>>

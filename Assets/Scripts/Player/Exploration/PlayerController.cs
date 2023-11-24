@@ -5,11 +5,10 @@ public class PlayerController : FishingController
 {
     public static PlayerController Instance { get; private set; }
     private PlayerAnimations animations;
-    private Interactive interactive;
+    internal Interactive interactive;
     private PlayerMovement movement;
     public static event Action OnNavigateShop;
     public static event Action OnOpenItemMenu;
-    internal Interactive insideInteractive;
 
     void Awake()
     {
@@ -67,6 +66,8 @@ public class PlayerController : FishingController
         OnWhileFishing += StartReeling;
         CharacterDialog.OnStartConversation += (_) => SetState(new PlayerInDialog());
         DialogManager.OnEndDialog += ReturnControls;
+        Interactive.OnEnterInteractive += SetInteractive;
+        Interactive.OnExitInteractive += RemoveInteractive;
     }
 
     private void UnsubscribeFromEvents()
@@ -82,6 +83,9 @@ public class PlayerController : FishingController
         OnWhileFishing -= StartReeling;
         CharacterDialog.OnStartConversation -= (_) => SetState(new PlayerInDialog());
         DialogManager.OnEndDialog -= ReturnControls;
+        Interactive.OnEnterInteractive -= SetInteractive;
+        Interactive.OnExitInteractive -= RemoveInteractive;
+
     }
 
     public void HandleInput()
@@ -127,26 +131,13 @@ public class PlayerController : FishingController
         }
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void SetInteractive(GameObject interactiveObject)
     {
-        if (IsInteractive(other))
-        {
-            interactive = other.GetComponent<Interactive>();
-        }
+        interactive = interactiveObject.GetComponent<Interactive>();
     }
-
-    private void OnTriggerExit(Collider other)
+    private void RemoveInteractive()
     {
-        if (IsInteractive(other))
-        {
-            interactive = null;
-        }
-    }
-
-    private bool IsInteractive(Collider other)
-    {
-        return other.CompareTag("Interactive") || other.CompareTag("Character");
+        interactive = null;
     }
 
     public void RaiseOpenItemMenuEvent() => OnOpenItemMenu?.Invoke();

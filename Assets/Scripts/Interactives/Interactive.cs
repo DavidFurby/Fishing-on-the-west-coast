@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -5,6 +6,10 @@ public class Interactive : MonoBehaviour
 {
     private GameObject iconInstance;
     private const string ItemsPath = "GameObjects/Interactive/";
+    public static event Action<GameObject> OnEnterInteractive;
+    public static event Action OnExitInteractive;
+
+
     private void Start()
     {
         InstantiateInteractiveIcon();
@@ -34,29 +39,21 @@ public class Interactive : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetComponent<PlayerController>().interactive == null)
         {
-            PlayerController controller = other.GetComponent<PlayerController>();
-            if (controller.insideInteractive == null)
-            {
-                ShowIcon();
-                controller.insideInteractive = this;
-            }
+            ShowIcon();
+            OnEnterInteractive.Invoke(gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetComponent<PlayerController>().interactive == this)
         {
-            PlayerController controller = other.GetComponent<PlayerController>();
-            if (controller.insideInteractive == this)
-            {
-                controller.insideInteractive = null;
-            }
             HideIcon();
+            OnExitInteractive.Invoke();
         }
     }
 
