@@ -9,6 +9,7 @@ public class PlayerController : FishingController
     private PlayerMovement movement;
     public static event Action OnNavigateShop;
     public static event Action OnOpenItemMenu;
+    internal Interactive insideInteractive;
 
     void Awake()
     {

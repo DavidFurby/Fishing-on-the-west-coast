@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -28,7 +27,7 @@ public class Interactive : MonoBehaviour
 
     public void StartInteraction()
     {
-        if (TryGetComponent<IInteractive>(out var interactiveComponent))
+        if (TryGetComponent<IInteractive>(out var interactiveComponent) && iconInstance.activeSelf)
         {
             interactiveComponent.Interact();
             HideIcon();
@@ -39,7 +38,12 @@ public class Interactive : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ShowIcon();
+            PlayerController controller = other.GetComponent<PlayerController>();
+            if (controller.insideInteractive == null)
+            {
+                ShowIcon();
+                controller.insideInteractive = this;
+            }
         }
     }
 
@@ -47,6 +51,11 @@ public class Interactive : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            PlayerController controller = other.GetComponent<PlayerController>();
+            if (controller.insideInteractive == this)
+            {
+                controller.insideInteractive = null;
+            }
             HideIcon();
         }
     }
