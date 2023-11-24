@@ -27,17 +27,17 @@ tags:
 colorID: 0
 position: -223,-79
 ---
-Companion: Hi there! What do you feel like doing today? #line:0f0599a 
+Lars: Hi there! What do you feel like doing today? #line:0f0599a 
 
 -> Player: I want to go swimming. #line:0aa4ce3 
-    Companion: Okay, let's go swimming. #line:0708ef7 
-    Companion: Where do you want to swim? #line:043f9f1 
+    Lars: Okay, let's go swimming. #line:0708ef7 
+    Lars: Where do you want to swim? #line:043f9f1 
     -> Player: The lake! #line:074bfbe 
-        Companion: Nice! It's a great day for it. #line:0901e25 
+        Lars: Nice! It's a great day for it. #line:0901e25 
     -> Player: The swimming pool! #line:0aed14e 
-        Companion: Oh, awesome! I heard they installed a new slide. #line:0679c80 
+        Lars: Oh, awesome! I heard they installed a new slide. #line:0679c80 
 -> Player: I'd prefer to go hiking. #line:01fe8bc 
-    Companion: Cool, we'll go hiking then. #line:082ef99 
+    Lars: Cool, we'll go hiking then. #line:082ef99 
     
 Player: Sounds good! #line:0b3e227 
     

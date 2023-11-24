@@ -4,9 +4,9 @@ public class PlayerMovement : MonoBehaviour
 {
     private const int movementSpeed = 10;
     private const int rotationSpeed = 50;
-    protected CharacterController controller;
+    protected PlayerController controller;
 
-    public void Initialize(CharacterController controller)
+    public void Initialize(PlayerController controller)
     {
         this.controller = controller;
     }

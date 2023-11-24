@@ -1,18 +1,25 @@
 using UnityEngine;
 using System;
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerSubscriptions))]
+[RequireComponent(typeof(PlayerAnimations))]
+[RequireComponent(typeof(Interactive))]
 public class PlayerController : FishingController
 {
     public static PlayerController Instance { get; private set; }
     private PlayerAnimations animations;
     internal Interactive interactive;
     private PlayerMovement movement;
+    private PlayerSubscriptions subscriptions;
     public static event Action OnNavigateShop;
     public static event Action OnOpenItemMenu;
 
     void Awake()
     {
         InitializeSingleton();
+        InitializeComponents();
+        movement.Initialize(Instance);
+        subscriptions.Initialize(Instance);
     }
 
     private void InitializeSingleton()
@@ -28,14 +35,8 @@ public class PlayerController : FishingController
         }
     }
 
-    private void OnEnable()
-    {
-        SubscribeToEvents();
-    }
-
     void Start()
     {
-        InitializeComponents();
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = new Vector3(0, -0.5f, 0);
     }
@@ -45,47 +46,8 @@ public class PlayerController : FishingController
     {
         animations = GetComponentInChildren<PlayerAnimations>();
         movement = GetComponentInChildren<PlayerMovement>();
+        subscriptions = GetComponent<PlayerSubscriptions>();
         SetState(new ExplorationIdle());
-    }
-
-    private void OnDestroy()
-    {
-        UnsubscribeFromEvents();
-    }
-
-    private void SubscribeToEvents()
-    {
-        WaterCollision.OnBaitEnterSea += EnterSea;
-        FishingSpot.StartFishing += (_, _) => SetState(new FishingIdle());
-        FishingSpot.StartFishing += SetPlayerPositionAndRotation;
-        OnEnterReelingFish += CatchFish;
-        OnEnterReelingFish += () => SetState(new ReelingFish());
-        OnEnterIdle += ResetValues;
-        OnWhileCharging += ChargeCasting;
-        OnWhileCharging += Release;
-        OnWhileFishing += StartReeling;
-        CharacterDialog.OnStartConversation += (_) => SetState(new PlayerInDialog());
-        DialogManager.OnEndDialog += ReturnControls;
-        Interactive.OnEnterInteractive += SetInteractive;
-        Interactive.OnExitInteractive += RemoveInteractive;
-    }
-
-    private void UnsubscribeFromEvents()
-    {
-        WaterCollision.OnBaitEnterSea -= EnterSea;
-        FishingSpot.StartFishing -= (_, _) => SetState(new FishingIdle());
-        FishingSpot.StartFishing -= SetPlayerPositionAndRotation;
-        OnEnterReelingFish -= CatchFish;
-        OnEnterReelingFish -= () => SetState(new ReelingFish());
-        OnEnterIdle -= ResetValues;
-        OnWhileCharging -= ChargeCasting;
-        OnWhileCharging -= Release;
-        OnWhileFishing -= StartReeling;
-        CharacterDialog.OnStartConversation -= (_) => SetState(new PlayerInDialog());
-        DialogManager.OnEndDialog -= ReturnControls;
-        Interactive.OnEnterInteractive -= SetInteractive;
-        Interactive.OnExitInteractive -= RemoveInteractive;
-
     }
 
     public void HandleInput()
@@ -131,11 +93,11 @@ public class PlayerController : FishingController
         }
     }
 
-    private void SetInteractive(GameObject interactiveObject)
+    internal void SetInteractive(GameObject interactiveObject)
     {
         interactive = interactiveObject.GetComponent<Interactive>();
     }
-    private void RemoveInteractive()
+    internal void RemoveInteractive()
     {
         interactive = null;
     }
