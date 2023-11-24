@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CharacterDialog : MonoBehaviour, IInteractive
 {
-    internal CharacterController controller;
+    internal CharacterManager controller;
 
     public static event Action<string> OnStartConversation;
 
@@ -13,7 +13,7 @@ public class CharacterDialog : MonoBehaviour, IInteractive
         controller.SetState(new CharacterInDialog(controller));
     }
 
-    internal void Initialize(CharacterController controller)
+    internal void Initialize(CharacterManager controller)
     {
         this.controller = controller;
     }

@@ -3,29 +3,25 @@ using UnityEngine;
 public class PlayerAnimations : MonoBehaviour
 {
     [SerializeField] private Animator playerAnimator;
-    private float originalChargingThrowSpeed;
+    private float originalChargingThrowSpeed; 
+    protected PlayerManager manager;
+
+    public void Initialize(PlayerManager manager)
+    {
+        this.manager = manager;
+    }
 
     void Start()
     {
-        PlayerEventController.OnStartCharging += OnStartCharging;
-        PlayerEventController.OnEnterSwinging += OnChargeRelease;
-        PlayerEventController.OnEnterIdle += ResetChargingThrowSpeed;
         originalChargingThrowSpeed = playerAnimator.GetFloat("chargingThrowSpeed");
     }
 
-    void OnDestroy()
-    {
-        PlayerEventController.OnStartCharging -= OnStartCharging;
-        PlayerEventController.OnEnterSwinging -= OnChargeRelease;
-        PlayerEventController.OnEnterIdle -= ResetChargingThrowSpeed;
-    }
-
-    private void OnStartCharging()
+    internal void OnStartCharging()
     {
         SetChargingThrowAnimation(true);
     }
 
-    private void OnChargeRelease()
+    internal void OnChargeRelease()
     {
         SetChargingThrowAnimation(false);
     }

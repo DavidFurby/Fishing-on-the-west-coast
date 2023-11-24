@@ -1,8 +1,8 @@
 
 public class CharacterState : State
 {
-    protected CharacterController controller;
-    public CharacterState(CharacterController controller)
+    protected CharacterManager controller;
+    public CharacterState(CharacterManager controller)
     {
         this.controller = controller;
     }
@@ -12,7 +12,7 @@ public class CharacterState : State
 
 public class CharacterIdle : CharacterState
 {
-    public CharacterIdle(CharacterController controller) : base(controller)
+    public CharacterIdle(CharacterManager controller) : base(controller)
     {
     }
     public override void OnEnter()
@@ -31,7 +31,7 @@ public class CharacterIdle : CharacterState
 
 public class CharacterInDialog : CharacterState
 {
-    public CharacterInDialog(CharacterController controller) : base(controller)
+    public CharacterInDialog(CharacterManager controller) : base(controller)
     {
     }
 

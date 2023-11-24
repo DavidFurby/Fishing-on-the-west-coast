@@ -4,13 +4,13 @@ using UnityEngine.AI;
 
 public class CharacterMovement : MonoBehaviour
 {
-    protected CharacterController controller;
+    protected CharacterManager controller;
     private NavMeshAgent agent;
     private List<Waypoint> waypoints;
     private Waypoint currentWaypoint;
     private int currentWaypointIndex = 0;
 
-    public void Initialize(CharacterController controller)
+    public void Initialize(CharacterManager controller)
     {
         this.controller = controller;
     }

@@ -4,12 +4,12 @@ using UnityEngine;
 public class CharacterExpression : MonoBehaviour
 {
     SkinnedMeshRenderer skinnedMeshRenderer;
-    private CharacterController controller;
+    private CharacterManager controller;
 
     int blendShapeCount;
     public List<Expression> ExpressionList { get; set; } = new List<Expression>();
 
-    internal void Initialize(CharacterController controller)
+    internal void Initialize(CharacterManager controller)
     {
         this.controller = controller;
     }

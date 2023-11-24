@@ -27,6 +27,9 @@ public class PlayerSubscriptions : MonoBehaviour
         PlayerEventController.OnWhileCharging += manager.fishingController.ChargeCasting;
         PlayerEventController.OnWhileCharging += manager.fishingController.Release;
         PlayerEventController.OnWhileFishing += manager.fishingController.StartReeling;
+        PlayerEventController.OnStartCharging += manager.animations.OnStartCharging;
+        PlayerEventController.OnEnterSwinging += manager.animations.OnChargeRelease;
+        PlayerEventController.OnEnterIdle += manager.animations.ResetChargingThrowSpeed;
         CharacterDialog.OnStartConversation += (_) => manager.SetState(new PlayerInDialog());
         DialogManager.OnEndDialog += manager.ReturnControls;
         Interactive.OnEnterInteractive += manager.SetInteractive;
@@ -44,6 +47,9 @@ public class PlayerSubscriptions : MonoBehaviour
         PlayerEventController.OnWhileCharging -= manager.fishingController.ChargeCasting;
         PlayerEventController.OnWhileCharging -= manager.fishingController.Release;
         PlayerEventController.OnWhileFishing -= manager.fishingController.StartReeling;
+            PlayerEventController.OnStartCharging -= manager.animations.OnStartCharging;
+        PlayerEventController.OnEnterSwinging -= manager.animations.OnChargeRelease;
+        PlayerEventController.OnEnterIdle -= manager.animations.ResetChargingThrowSpeed;
         CharacterDialog.OnStartConversation -= (_) => manager.SetState(new PlayerInDialog());
         DialogManager.OnEndDialog -= manager.ReturnControls;
         Interactive.OnEnterInteractive -= manager.SetInteractive;

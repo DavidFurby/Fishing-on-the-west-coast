@@ -9,11 +9,12 @@ using System;
 public class PlayerManager : PlayerEventController
 {
     public static PlayerManager Instance { get; private set; }
-    private PlayerAnimations animations;
+    internal PlayerAnimations animations;
     internal Interactive interactive;
-    private PlayerMovement movement;
-    private PlayerSubscriptions subscriptions;
+    internal PlayerMovement movement;
+    internal PlayerSubscriptions subscriptions;
     internal FishingController fishingController;
+
     public static event Action OnNavigateShop;
     public static event Action OnOpenItemMenu;
 
@@ -21,9 +22,7 @@ public class PlayerManager : PlayerEventController
     {
         InitializeSingleton();
         InitializeComponents();
-        movement.Initialize(Instance);
-        subscriptions.Initialize(Instance);
-        fishingController.Initialize(Instance);
+
     }
 
     private void InitializeSingleton()
@@ -52,6 +51,10 @@ public class PlayerManager : PlayerEventController
         movement = GetComponentInChildren<PlayerMovement>();
         subscriptions = GetComponent<PlayerSubscriptions>();
         fishingController = GetComponent<FishingController>();
+        movement.Initialize(Instance);
+        subscriptions.Initialize(Instance);
+        fishingController.Initialize(Instance);
+        animations.Initialize(Instance);
         SetState(new ExplorationIdle());
     }
 
