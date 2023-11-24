@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    [SerializeField] private Animator playerAnimator;
-    private float originalChargingThrowSpeed; 
+    private Animator animator;
+    private float originalChargingThrowSpeed;
     protected PlayerManager manager;
 
     public void Initialize(PlayerManager manager)
@@ -13,7 +13,8 @@ public class PlayerAnimations : MonoBehaviour
 
     void Start()
     {
-        originalChargingThrowSpeed = playerAnimator.GetFloat("chargingThrowSpeed");
+        animator = GetComponentInChildren<Animator>();
+        originalChargingThrowSpeed = animator.GetFloat("chargingThrowSpeed");
     }
 
     internal void OnStartCharging()
@@ -28,33 +29,25 @@ public class PlayerAnimations : MonoBehaviour
 
     public void SetChargingThrowAnimation(bool active)
     {
-        if (playerAnimator != null)
+        if (animator != null)
         {
-            playerAnimator.SetBool("chargingThrow", active);
-        }
-    }
-
-    public void IncreaseChargingThrowSpeed()
-    {
-        if (playerAnimator != null)
-        {
-            playerAnimator.SetFloat("chargingThrowSpeed", playerAnimator.GetFloat("chargingThrowSpeed") + 0.02f);
+            animator.SetBool("chargingThrow", active);
         }
     }
 
     public void ResetChargingThrowSpeed()
     {
-        if (playerAnimator != null)
+        if (animator != null)
         {
-            playerAnimator.SetFloat("chargingThrowSpeed", originalChargingThrowSpeed);
+            animator.SetFloat("chargingThrowSpeed", originalChargingThrowSpeed);
         }
     }
 
-    public void SetPlayerWalkAnimation(bool active)
+    public void SetWalkAnimation(bool active)
     {
-        if (playerAnimator != null)
+        if (animator != null)
         {
-            playerAnimator.SetBool("walking", active);
+            animator.SetBool("walking", active);
         }
     }
 }

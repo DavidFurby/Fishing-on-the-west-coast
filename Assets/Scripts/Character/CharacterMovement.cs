@@ -43,6 +43,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (currentWaypoint != null)
         {
+            EnabledMovement();
             agent.destination = currentWaypoint.transform.position;
             if (transform.position == agent.destination)
             {
@@ -56,6 +57,8 @@ public class CharacterMovement : MonoBehaviour
         if (agent != null)
         {
             agent.enabled = false;
+
+            controller.animations.SetWalkAnimation(false);
         }
     }
     internal void EnabledMovement()
@@ -63,7 +66,7 @@ public class CharacterMovement : MonoBehaviour
         if (agent != null)
         {
             agent.enabled = true;
-
+            controller.animations.SetWalkAnimation(true);
         }
     }
 

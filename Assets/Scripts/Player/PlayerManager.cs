@@ -69,14 +69,14 @@ public class PlayerManager : PlayerEventController
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        animations.SetPlayerWalkAnimation(horizontalInput != 0 || verticalInput != 0);
+        animations.SetWalkAnimation(horizontalInput != 0 || verticalInput != 0);
     }
 
     private void ProcessInteractionInput()
     {
         if (Input.GetKeyDown(KeyCode.Space) && interactive != null)
         {
-            animations.SetPlayerWalkAnimation(false);
+            animations.SetWalkAnimation(false);
             ActivateInteractive();
         }
     }
