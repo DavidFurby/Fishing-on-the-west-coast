@@ -6,20 +6,20 @@ public class CharacterHandlers : MonoBehaviour
     private DialogManager dialogManager;
     protected CharacterManager manager;
 
-  internal void Initialize(CharacterManager manager)
+    internal void Initialize(CharacterManager manager)
     {
         this.manager = manager;
     }
     private void Start()
     {
         dialogManager = FindAnyObjectByType<DialogManager>();
-        SetGesture();
+        TriggerGesture();
     }
 
-    public void SetGesture()
+    public void TriggerGesture()
     {
-        dialogManager.RemoveHandler("setGesture");
-        dialogManager.AddHandler("setGesture", (string name) =>
+        dialogManager.RemoveHandler("triggerGesture");
+        dialogManager.AddHandler("triggerGesture", (string name) =>
         {
             if (Enum.TryParse(name, out GestureName gesture))
             {
