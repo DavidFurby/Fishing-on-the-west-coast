@@ -38,6 +38,7 @@ public class PlayerSubscriptions : MonoBehaviour
         PlayerEventController.OnStartCharging += manager.animations.OnStartCharging;
         PlayerEventController.OnEnterSwinging += manager.animations.OnChargeRelease;
         PlayerEventController.OnEnterIdle += manager.animations.ResetChargingThrowSpeed;
+        PlayerEventController.OnWhileCharacterDialog += manager.movement.RotateTowardsInteractive;
 
         // CharacterDialog events
         CharacterDialog.OnStartConversation += (_) => manager.SetState(new PlayerInDialog());
@@ -69,6 +70,8 @@ public class PlayerSubscriptions : MonoBehaviour
         PlayerEventController.OnStartCharging -= manager.animations.OnStartCharging;
         PlayerEventController.OnEnterSwinging -= manager.animations.OnChargeRelease;
         PlayerEventController.OnEnterIdle -= manager.animations.ResetChargingThrowSpeed;
+        PlayerEventController.OnWhileCharacterDialog -= manager.movement.RotateTowardsInteractive;
+
 
         // CharacterDialog events
         CharacterDialog.OnStartConversation -= (_) => manager.SetState(new PlayerInDialog());

@@ -92,14 +92,7 @@ public class PlayerManager : PlayerEventController
         }
         movement.RotateCharacter(direction);
     }
-    internal void RotateTowardsInteractive()
-    {
-        if (interactive != null)
-        {
-            Vector3 direction = interactive.transform.position - transform.position;
-            movement.RotateCharacter(direction);
-        }
-    }
+ 
 
     internal void SetInteractive(GameObject interactiveObject)
     {
@@ -119,7 +112,7 @@ public class PlayerManager : PlayerEventController
         if (GetCurrentState() is PlayerInDialog)
         {
             SetState(new ExplorationIdle());
-            CameraController.Instance.EnterPlayerState();
+            CameraManager.Instance.EnterPlayerState();
         }
     }
 

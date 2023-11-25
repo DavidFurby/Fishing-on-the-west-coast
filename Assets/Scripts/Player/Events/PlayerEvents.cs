@@ -9,6 +9,8 @@ public abstract class PlayerEventController : PlayerStateMachine
     public static event Action OnWhileCharging;
     public static event Action OnEnterSwinging;
     public static event Action OnEnterIdle;
+    public static event Action OnEnterCharacterDialog;
+    public static event Action OnWhileCharacterDialog;
     public static event Action OnEnterFishing;
     public static event Action OnWhileFishing;
     public static event Action OnEnterCasting;
@@ -63,6 +65,14 @@ public abstract class PlayerEventController : PlayerStateMachine
     {
         OnEnterIdle?.Invoke();
     }
+    public void RaiseEnterCharacterDialog()
+    {
+        OnEnterCharacterDialog.Invoke();
+    }
+
+    public void RaiseWhileCharacterDialog() {
+        OnWhileCharacterDialog.Invoke();
+    }
 
     public void RaiseEnterFishing()
     {
@@ -74,33 +84,33 @@ public abstract class PlayerEventController : PlayerStateMachine
         OnStartCharging?.Invoke();
     }
 
-     internal void RaiseWhileCharging()
-     {
-         OnWhileCharging?.Invoke();
-     }
+    internal void RaiseWhileCharging()
+    {
+        OnWhileCharging?.Invoke();
+    }
 
-     internal void RaiseEnterSwinging()
-     {
-         OnEnterSwinging?.Invoke();
-     }
+    internal void RaiseEnterSwinging()
+    {
+        OnEnterSwinging?.Invoke();
+    }
 
-     internal void RaiseEnterInspecting()
-     {
-         OnEnterSummary?.Invoke();
-     }
+    internal void RaiseEnterInspecting()
+    {
+        OnEnterSummary?.Invoke();
+    }
 
-     internal void RaiseNextSummary()
-     {
-         OnNextSummary?.Invoke();
-     }
+    internal void RaiseNextSummary()
+    {
+        OnNextSummary?.Invoke();
+    }
 
-     internal void RaiseEndSummary()
-     {
-         OnEndSummary?.Invoke();
-     }
+    internal void RaiseEndSummary()
+    {
+        OnEndSummary?.Invoke();
+    }
 
-     internal void RaiseOnExitReelingFish()
-     {
-         OnExitReelingFish?.Invoke();
-     }
+    internal void RaiseOnExitReelingFish()
+    {
+        OnExitReelingFish?.Invoke();
+    }
 }

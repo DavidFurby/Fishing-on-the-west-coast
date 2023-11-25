@@ -14,6 +14,14 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.Translate(movementSpeed * Time.fixedDeltaTime * direction, Space.World);
     }
+    internal void RotateTowardsInteractive()
+    {
+        if (manager.interactive != null)
+        {
+            Vector3 direction = manager.interactive.transform.position - transform.position;
+            manager.movement.RotateCharacter(direction);
+        }
+    }
     internal virtual void RotateCharacter(Vector3 direction)
     {
         if (direction != Vector3.zero)

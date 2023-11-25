@@ -2,13 +2,15 @@ using UnityEngine;
 
 [RequireComponent(typeof(FishingCamera))]
 [RequireComponent(typeof(ExplorationCamera))]
-public class CameraController : CameraStateMachine
+[RequireComponent(typeof(CameraMovement))]
+public class CameraManager : CameraStateMachine
 {
-    public static CameraController Instance { get; private set; }
-    internal FishingCamera fishingCamera;
-    internal ExplorationCamera explorationCamera;
+    public static CameraManager Instance { get; private set; }
+    internal FishingCamera fishing;
+    internal ExplorationCamera exploration;
+    internal CameraMovement movement;
     internal float cameraDistance;
-    private readonly float originalCameraDistance = 0;
+    internal float originalCameraDistance = 0;
 
     void Awake()
     {
@@ -31,14 +33,16 @@ public class CameraController : CameraStateMachine
         PlayerEventController.OnEnterCasting += EnterCastingState;
         PlayerEventController.OnEnterSummary += EnterPlayerState;
         PlayerEventController.OnEnterReeling += EnterPlayerState;
+        PlayerEventController.OnEnterCharacterDialog += EnterCharacterDialogState;
+
     }
 
     void Start()
     {
         SetState(new PlayerCamera());
-
-        fishingCamera = GetComponent<FishingCamera>();
-        explorationCamera = GetComponent<ExplorationCamera>();
+        fishing = GetComponent<FishingCamera>();
+        exploration = GetComponent<ExplorationCamera>();
+        movement = GetComponent<CameraMovement>();
     }
 
     void OnDestroy()
@@ -48,32 +52,17 @@ public class CameraController : CameraStateMachine
         PlayerEventController.OnEnterCasting -= EnterCastingState;
         PlayerEventController.OnEnterSummary -= EnterPlayerState;
         PlayerEventController.OnEnterReeling -= EnterPlayerState;
-
-    }
-
-    public void SetCameraToTarget(Transform target, float YValue = 0)
-    {
-        if (target != null)
-            transform.position = new Vector3(target.position.x, target.position.y + YValue, cameraDistance);
-    }
-
-    public void MoveCameraToTarget(Transform target, float speed = 0.1f, float distanceFrom = 2, bool instant = false)
-    {
-        if (target != null && cameraDistance != target.position.z - distanceFrom)
-            cameraDistance = instant ? target.position.z - distanceFrom : Mathf.MoveTowards(cameraDistance, target.position.z - distanceFrom, speed);
-    }
-
-    public void MoveCameraToOriginal(float speed = 0.01f)
-    {
-        if (cameraDistance != originalCameraDistance)
-            cameraDistance = Mathf.MoveTowards(cameraDistance, originalCameraDistance, speed);
+        PlayerEventController.OnEnterCharacterDialog -= EnterCharacterDialogState;
     }
 
     public void EnterPlayerState()
     {
         SetState(new PlayerCamera());
     }
-
+    public void EnterCharacterDialogState()
+    {
+        SetState(new CharacterDialogCamera());
+    }
     public void EnterCastingState()
     {
         SetState(new CastingBaitCamera());

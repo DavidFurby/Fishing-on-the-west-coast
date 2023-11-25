@@ -1,9 +1,9 @@
 public class CameraState : State
 {
-    protected CameraController controller;
+    protected CameraManager controller;
     public CameraState()
     {
-        controller = CameraController.Instance;
+        controller = CameraManager.Instance;
     }
 }
 
@@ -14,7 +14,19 @@ public class PlayerCamera : CameraState
     public override void LateUpdate()
     {
         base.Update();
-        controller.explorationCamera.FollowPlayer();
+        controller.exploration.FollowPlayer();
+    }
+}
+public class CharacterDialogCamera : CameraState
+{
+    public CharacterDialogCamera() : base()
+    {
+
+    }
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
+        controller.exploration.UpdateCameraDuringDialog();
     }
 }
 
@@ -25,7 +37,7 @@ public class ShopItemCamera : CameraState
     public override void LateUpdate()
     {
         base.LateUpdate();
-        controller.explorationCamera.FollowShopItem();
+        controller.exploration.FollowShopItem();
 
     }
 }
@@ -38,7 +50,7 @@ public class CastingBaitCamera : CameraState
     public override void LateUpdate()
     {
         base.LateUpdate();
-        controller.fishingCamera.UpdateCameraDuringCasting();
+        controller.fishing.UpdateCameraDuringCasting();
     }
 }
 
@@ -49,7 +61,7 @@ public class FishingBaitCamera : CameraState
     public override void LateUpdate()
     {
         base.LateUpdate();
-        controller.fishingCamera.UpdateCameraDuringFishing();
+        controller.fishing.UpdateCameraDuringFishing();
     }
 }
 public class ReelingBaitCamera : CameraState
@@ -59,7 +71,7 @@ public class ReelingBaitCamera : CameraState
     public override void LateUpdate()
     {
         base.LateUpdate();
-        controller.fishingCamera.UpdateCameraDuringReeling();
+        controller.fishing.UpdateCameraDuringReeling();
     }
 }
 

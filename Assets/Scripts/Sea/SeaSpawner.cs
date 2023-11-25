@@ -24,7 +24,7 @@ public class SeaSpawner : MonoBehaviour
 
     private void SpawnBasedOnCamera()
     {
-        float cameraX = CameraController.Instance.transform.position.x;
+        float cameraX = CameraManager.Instance.transform.position.x;
         float middleTileX = seaTileManager.seaTileList[seaTileManager.seaTileList.Count / 2].transform.position.x;
         if (cameraX > middleTileX + seaTileManager.seaSize.x / 2)
         {

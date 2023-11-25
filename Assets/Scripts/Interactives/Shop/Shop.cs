@@ -11,7 +11,7 @@ public class Shop : MonoBehaviour
     [HideInInspector] public bool pauseShoppingControls;
     private Item focusedShopItem;
     internal int focusedShopItemIndex = 0;
-    internal CameraController cameraController;
+    internal CameraManager cameraController;
     internal DialogManager dialogManager;
     private ShopHandlers handler;
     internal ShopItemSpawner itemSpawner;
@@ -31,7 +31,7 @@ public class Shop : MonoBehaviour
     private void InitializeReferences()
     {
         handler = GetComponent<ShopHandlers>();
-        cameraController = FindObjectOfType<CameraController>();
+        cameraController = FindObjectOfType<CameraManager>();
         dialogManager = FindObjectOfType<DialogManager>();
     }
     #endregion
@@ -41,7 +41,7 @@ public class Shop : MonoBehaviour
     public void FocusItem()
     {
         cameraController.SetState(new ShopItemCamera());
-        cameraController.explorationCamera.SetShopItem(itemSpawner.shopItemPositions[focusedShopItemIndex].transform.position);
+        cameraController.exploration.SetShopItem(itemSpawner.shopItemPositions[focusedShopItemIndex].transform.position);
     }
 
     public IEnumerator OpenShop()

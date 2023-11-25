@@ -36,7 +36,7 @@ public class Interacting : PlayerState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        controller.RotateTowardsInteractive();
+        controller.movement.RotateTowardsInteractive();
     }
 }
 public class PlayerInDialog : PlayerState
@@ -44,10 +44,15 @@ public class PlayerInDialog : PlayerState
     public PlayerInDialog() : base()
     {
     }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        controller.RaiseEnterCharacterDialog();
+    }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        controller.RotateTowardsInteractive();
+        controller.RaiseWhileCharacterDialog();
     }
 }
 

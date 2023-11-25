@@ -21,6 +21,7 @@ public class CharacterHandlers : MonoBehaviour
         dialogManager.RemoveHandler("triggerGesture");
         dialogManager.AddHandler("triggerGesture", (string name) =>
         {
+            
             if (Enum.TryParse(name, out GestureName gesture))
             {
                 manager.animations.TriggerGesture(gesture, true);
