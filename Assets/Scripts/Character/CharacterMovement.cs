@@ -58,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
         {
             agent.enabled = false;
 
-            controller.animations.SetWalkAnimation(false);
+            controller.animations.TriggerWalkAnimation(false);
         }
     }
     internal void EnabledMovement()
@@ -66,7 +66,7 @@ public class CharacterMovement : MonoBehaviour
         if (agent != null)
         {
             agent.enabled = true;
-            controller.animations.SetWalkAnimation(true);
+            controller.animations.TriggerWalkAnimation(true);
         }
     }
 

@@ -13,7 +13,7 @@ public class Shop : MonoBehaviour
     internal int focusedShopItemIndex = 0;
     internal CameraController cameraController;
     internal DialogManager dialogManager;
-    private ShopHandlers dialogHandlers;
+    private ShopHandlers handler;
     internal ShopItemSpawner itemSpawner;
 
 
@@ -30,10 +30,7 @@ public class Shop : MonoBehaviour
 
     private void InitializeReferences()
     {
-        if (!TryGetComponent(out dialogHandlers))
-        {
-            Debug.LogError("ShopHandlers component is missing.");
-        }
+        handler = GetComponent<ShopHandlers>();
         cameraController = FindObjectOfType<CameraController>();
         dialogManager = FindObjectOfType<DialogManager>();
     }
@@ -80,7 +77,7 @@ public class Shop : MonoBehaviour
 
     public void UpdateShopDialog()
     {
-        dialogHandlers.SetShopItemHandler(focusedShopItem);
+        handler.SetShopItemHandler(focusedShopItem);
         dialogManager.StartDialog("ShopItem");
     }
 

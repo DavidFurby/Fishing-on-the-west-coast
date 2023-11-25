@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterDialog))]
 [RequireComponent(typeof(CharacterExpression))]
 [RequireComponent(typeof(CharacterAnimation))]
+[RequireComponent(typeof(CharacterHandlers))]
 public class CharacterManager : CharacterStateMachine
 {
     public Character character;
@@ -12,6 +13,7 @@ public class CharacterManager : CharacterStateMachine
     internal CharacterExpression expression;
     internal CharacterAnimation animations;
     private PlayerManager player;
+    private CharacterHandlers handlers;
     private Quaternion defaultRotation;
 
 
@@ -21,11 +23,12 @@ public class CharacterManager : CharacterStateMachine
         dialog = GetComponent<CharacterDialog>();
         expression = GetComponent<CharacterExpression>();
         animations = GetComponent<CharacterAnimation>();
+        handlers = GetComponent<CharacterHandlers>();
         movement.Initialize(this);
         dialog.Initialize(this);
         expression.Initialize(this);
-        print(animations);
         animations.Initialize(this);
+        handlers.Initialize(this);
     }
     void OnEnable()
     {

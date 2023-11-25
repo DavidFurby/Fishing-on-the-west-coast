@@ -91,11 +91,6 @@ public class DialogManager : MonoBehaviour
 
     #region Dialogue Utilities
 
-    private void AddCommandHandler(string commandName, Action commandHandler)
-    {
-        dialogueRunner.AddCommandHandler(commandName, commandHandler);
-    }
-
     public void SetVariableValue(string variableName, string value)
     {
         dialogueRunner.VariableStorage.SetValue(variableName, value);
@@ -108,9 +103,16 @@ public class DialogManager : MonoBehaviour
 
     public void AddHandler(string handlerName, Action handler)
     {
-        AddCommandHandler(handlerName, handler);
+        dialogueRunner.AddCommandHandler(handlerName, handler);
         addedHandlers[handlerName] = true;
     }
+
+    public void AddHandler(string handlerName, Action<string> handler)
+    {
+        dialogueRunner.AddCommandHandler(handlerName, handler);
+        addedHandlers[handlerName] = true;
+    }
+
 
     public void RemoveHandler(string handlerName)
     {
