@@ -72,7 +72,7 @@ public class Interactive : MonoBehaviour
 
     private bool IsNotUsingInteractive(Collider other)
     {
-        return other.GetComponent<PlayerManager>().GetCurrentState() is not PlayerInDialog and Interacting; 
+        return other.GetComponent<PlayerManager>().GetCurrentState() is not PlayerInDialog or Interacting; 
     }
 
     private void SetIconActiveState(bool state)
