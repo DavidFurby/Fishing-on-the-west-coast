@@ -4,7 +4,6 @@ using System;
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerSubscriptions))]
 [RequireComponent(typeof(PlayerAnimations))]
-[RequireComponent(typeof(Interactive))]
 [RequireComponent(typeof(FishingController))]
 public class PlayerManager : PlayerEventController
 {
