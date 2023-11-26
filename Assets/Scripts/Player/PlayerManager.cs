@@ -110,8 +110,9 @@ public class PlayerManager : PlayerEventController
     {
         if (GetCurrentState() is PlayerInDialog)
         {
-            SetState(new ExplorationIdle());
+            RemoveInteractive();
             CameraManager.Instance.EnterPlayerState();
+            SetState(new ExplorationIdle());
         }
     }
 
