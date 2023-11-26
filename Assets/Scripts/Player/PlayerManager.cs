@@ -74,9 +74,8 @@ public class PlayerManager : PlayerEventController
 
     private void ProcessInteractionInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && interactive != null)
+        if (interactive != null && Input.GetKeyDown(KeyCode.Space))
         {
-            animations.SetWalkAnimation(false);
             ActivateInteractive();
         }
     }
@@ -92,7 +91,7 @@ public class PlayerManager : PlayerEventController
         }
         movement.RotateCharacter(direction);
     }
- 
+
 
     internal void SetInteractive(GameObject interactiveObject)
     {
@@ -119,6 +118,7 @@ public class PlayerManager : PlayerEventController
     private void ActivateInteractive()
     {
         SetState(new Interacting());
+        animations.SetWalkAnimation(false);
         interactive.StartInteraction();
     }
     internal void SetPlayerPositionAndRotation(Vector3 position, Quaternion quaternion)

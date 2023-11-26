@@ -31,9 +31,7 @@ public class MusicController : MonoBehaviour
 
     public void ChangeMusic(string clipName)
     {
-        print(clipName);
         AudioClip newClip = Resources.Load("Sound/Music/" + clipName) as AudioClip;
         music.clip = newClip;
-        print(music.clip);
     }
 }

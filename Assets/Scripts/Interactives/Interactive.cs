@@ -9,7 +9,6 @@ public class Interactive : MonoBehaviour
     public static event Action<GameObject> OnEnterInteractive;
     public static event Action OnExitInteractive;
 
-
     private void Start()
     {
         InstantiateInteractiveIcon();
@@ -20,56 +19,67 @@ public class Interactive : MonoBehaviour
         var InteractiveIcon = Resources.Load<GameObject>(ItemsPath + "InteractiveIcon");
         if (InteractiveIcon != null)
         {
-            iconInstance = Instantiate(InteractiveIcon, transform.position + Vector3.up * 2f, Quaternion.identity);
-            iconInstance.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-            iconInstance.transform.SetParent(transform);
-            iconInstance.AddComponent<IconAnimator>();
-            iconInstance.SetActive(false);
+            iconInstance = InstantiateIcon(InteractiveIcon);
         }
     }
 
-
+    private GameObject InstantiateIcon(GameObject InteractiveIcon)
+    {
+        var icon = Instantiate(InteractiveIcon, transform.position + Vector3.up * 2f, Quaternion.identity);
+        icon.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        icon.transform.SetParent(transform);
+        icon.AddComponent<IconAnimator>();
+        icon.SetActive(false);
+        return icon;
+    }
 
     public void StartInteraction()
     {
         if (TryGetComponent<IInteractive>(out var interactiveComponent) && iconInstance.activeSelf)
         {
             interactiveComponent.Interact();
-            HideIcon();
+            SetIconActiveState(false);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && other.GetComponent<PlayerManager>().interactive == null)
+        if (IsPlayer(other) && other.GetComponent<PlayerManager>().interactive == null)
         {
-            ShowIcon();
+            SetIconActiveState(true);
             OnEnterInteractive.Invoke(gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && other.GetComponent<PlayerManager>().interactive == this)
+        if (IsPlayer(other) && IsPlayerInteractive(other) && IsNotUsingInteractive(other))
         {
-            HideIcon();
+            SetIconActiveState(false);
             OnExitInteractive.Invoke();
         }
     }
 
-    private void ShowIcon()
+    private bool IsPlayer(Collider other)
     {
-        if (iconInstance != null)
-        {
-            iconInstance.SetActive(true);
-        }
+        return other.CompareTag("Player");
     }
 
-    private void HideIcon()
+    private bool IsPlayerInteractive(Collider other)
+    {
+        return other.GetComponent<PlayerManager>().interactive == this;
+    }
+
+    private bool IsNotUsingInteractive(Collider other)
+    {
+        return other.GetComponent<PlayerManager>().GetCurrentState() is not PlayerInDialog and Interacting; 
+    }
+
+    private void SetIconActiveState(bool state)
     {
         if (iconInstance != null)
         {
-            iconInstance.SetActive(false);
+            iconInstance.SetActive(state);
         }
     }
 }
