@@ -58,7 +58,7 @@ public class CharacterExpression : MonoBehaviour
         Expression expression = listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == expressionName);
         if (activeExpression == null && manager.animations.animator != null && expression != null)
         {
-            print(expression);
+            print(expression.Name);
             manager.animations.animator.SetBool(expression.Name.ToString().ToLower(), active);
             activeExpression = expression;
         }
