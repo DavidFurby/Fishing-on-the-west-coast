@@ -9,6 +9,7 @@ public class CharacterExpression : MonoBehaviour
     int blendShapeCount;
     public List<BlendShape> ShapeList { get; set; } = new List<BlendShape>();
     public List<Expression> listOfExpressions = new();
+    private Expression activeExpression;
     internal void Initialize(CharacterManager manager)
     {
         this.manager = manager;
@@ -52,7 +53,16 @@ public class CharacterExpression : MonoBehaviour
         skinnedMeshRenderer.SetBlendShapeWeight(index, newValue);
         ShapeList[index].value = newValue;
     }
-
+    internal void TriggerExpression(ExpressionName expressionName, bool active)
+    {
+        Expression expression = listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == expressionName);
+        if (activeExpression == null && manager.animations.animator != null && expression != null)
+        {
+            print(expression);
+            manager.animations.animator.SetBool(expression.Name.ToString().ToLower(), active);
+            activeExpression = expression;
+        }
+    }
     internal void MouthFlaps()
     {
         BlendShape mouthMovement = ShapeList[0];

@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
-    private Animator animator;
+    internal Animator animator;
     protected CharacterManager manager;
     internal List<Gesture> gestures = new();
     private Gesture activeGesture;
@@ -50,6 +50,7 @@ public class CharacterAnimation : MonoBehaviour
         {
             animator.SetBool(gesture.Name.ToString().ToLower(), active);
             activeGesture = gesture;
+            manager.expression.TriggerExpression(gesture.expression.Name, active);
         }
     }
     public void CheckIfGestureIsDone()
