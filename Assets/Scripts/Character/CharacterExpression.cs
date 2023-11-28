@@ -47,7 +47,11 @@ public class CharacterExpression : MonoBehaviour
                 ExpressionName.Sad => ShapeList.Where((BlendShape shape) => shape.Name == "Eyes Sad" || shape.Name == "Mouth Sad").ToArray(),
                 _ => ShapeList.ToArray(),
             };
-            shapes[0].value = 100;
+            foreach (BlendShape shape in shapes)
+            {
+                shape.value = 100;
+            }
+
             listOfExpressions.Add(new Expression(name, shapes));
         }
     }
@@ -82,22 +86,19 @@ public class CharacterExpression : MonoBehaviour
                 int blendShapeIndex = skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex(shape.Name);
                 if (blendShapeIndex != -1)
                 {
-                    print(shape.Name);
-                    print(blendShapeIndex);
-                    AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, shape.value);
-                    string relativePath = GetRelativePath(skinnedMeshRenderer.transform);
+                    AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, 100f);
                     string propertyName = "blendShape." + shape.Name;
-                    clip.SetCurve(relativePath, typeof(SkinnedMeshRenderer), propertyName, curve);
+                    clip.SetCurve(skinnedMeshRenderer.transform.name, typeof(SkinnedMeshRenderer), propertyName, curve);
+
                 }
             }
+        
             ChildAnimatorState expressionState = states.FirstOrDefault((ChildAnimatorState state) => state.state.name == expression.Name.ToString());
             if (expressionState.state != null)
             {
                 expressionState.state.motion = clip;
-
             }
         }
-
     }
     private string GetRelativePath(Transform current)
     {
