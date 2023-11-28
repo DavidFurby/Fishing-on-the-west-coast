@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEditor;
 
 public class CharacterExpression : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class CharacterExpression : MonoBehaviour
         SetBlendShapes();
         SetExpressions();
         manager.animations.SetGestures();
+        SetExpressionMotions();
     }
 
     private void SetBlendShapes()
@@ -46,7 +49,6 @@ public class CharacterExpression : MonoBehaviour
             };
             listOfExpressions.Add(new Expression(name, shapes));
         }
-
     }
     private void UpdateExpressionValues(int index, float newValue)
     {
@@ -56,13 +58,51 @@ public class CharacterExpression : MonoBehaviour
     internal void TriggerExpression(ExpressionName expressionName, bool active)
     {
         Expression expression = listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == expressionName);
+
         if (activeExpression == null && manager.animations.animator != null && expression != null)
         {
-            print(expression.Name);
-            manager.animations.animator.SetBool(expression.Name.ToString().ToLower(), active);
+            print(expression.shapes[0].value);
+            manager.animations.animator.SetBool(expressionName.ToString().ToLower(), active);
             activeExpression = expression;
         }
     }
+    private void SetExpressionMotions()
+    {
+        ChildAnimatorState[] states = GetExpressionStates();
+        foreach (Expression expression in listOfExpressions)
+        {
+            AnimationClip clip = new()
+            {
+                name = expression.Name.ToString()
+            };
+
+            foreach (BlendShape shape in expression.shapes)
+            {
+                AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, shape.value);
+                string propertyName = "blendShape." + shape.Name;
+                clip.SetCurve("", typeof(SkinnedMeshRenderer), propertyName, curve);
+            }
+
+            ChildAnimatorState expressionState = states.FirstOrDefault((ChildAnimatorState state) => state.state.name == expression.Name.ToString());
+            if (expressionState.state != null)
+            {
+                print(expressionState.state.name);
+                expressionState.state.motion = clip;
+
+            }
+        }
+
+    }
+
+    private ChildAnimatorState[] GetExpressionStates()
+    {
+        AnimatorController ac = manager.animations.animator.runtimeAnimatorController as AnimatorController;
+        AnimatorControllerLayer layer = ac.layers[1];
+        AnimatorStateMachine stateMachine = layer.stateMachine;
+        ChildAnimatorState[] states = stateMachine.states;
+        return states;
+    }
+
     internal void MouthFlaps()
     {
         BlendShape mouthMovement = ShapeList[0];
