@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
-using UnityEditor;
 
 public class CharacterExpression : MonoBehaviour
 {
@@ -47,6 +47,7 @@ public class CharacterExpression : MonoBehaviour
                 ExpressionName.Sad => ShapeList.Where((BlendShape shape) => shape.Name == "Eyes Sad" || shape.Name == "Mouth Sad").ToArray(),
                 _ => ShapeList.ToArray(),
             };
+            shapes[0].value = 100;
             listOfExpressions.Add(new Expression(name, shapes));
         }
     }
@@ -78,20 +79,32 @@ public class CharacterExpression : MonoBehaviour
 
             foreach (BlendShape shape in expression.shapes)
             {
-                AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, shape.value);
-                string propertyName = "blendShape." + shape.Name;
-                clip.SetCurve("", typeof(SkinnedMeshRenderer), propertyName, curve);
+                int blendShapeIndex = skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex(shape.Name);
+                if (blendShapeIndex != -1)
+                {
+                    print(shape.Name);
+                    print(blendShapeIndex);
+                    AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, shape.value);
+                    string relativePath = GetRelativePath(skinnedMeshRenderer.transform);
+                    string propertyName = "blendShape." + shape.Name;
+                    clip.SetCurve(relativePath, typeof(SkinnedMeshRenderer), propertyName, curve);
+                }
             }
-
             ChildAnimatorState expressionState = states.FirstOrDefault((ChildAnimatorState state) => state.state.name == expression.Name.ToString());
             if (expressionState.state != null)
             {
-                print(expressionState.state.name);
                 expressionState.state.motion = clip;
 
             }
         }
 
+    }
+    private string GetRelativePath(Transform current)
+    {
+        if (current.parent == null)
+            return "/" + current.name;
+        else
+            return GetRelativePath(current.parent) + "/" + current.name;
     }
 
     private ChildAnimatorState[] GetExpressionStates()
