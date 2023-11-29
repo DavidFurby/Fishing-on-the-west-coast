@@ -49,7 +49,7 @@ public class CharacterMovement : MonoBehaviour
             if (transform.position == agent.destination)
             {
                 currentWaypointIndex = NextPositionIndex();
-                currentWaypoint = waypoints[NextPositionIndex()];
+                currentWaypoint = waypoints[currentWaypointIndex];
             }
         }
     }

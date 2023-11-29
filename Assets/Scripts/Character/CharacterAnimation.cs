@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Animations;
 using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
@@ -16,6 +15,7 @@ public class CharacterAnimation : MonoBehaviour
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        print(animator.runtimeAnimatorController != null);
     }
     private void Update()
     {
@@ -38,9 +38,17 @@ public class CharacterAnimation : MonoBehaviour
 
     public void TriggerWalkAnimation()
     {
-        if (animator != null && animator.runtimeAnimatorController != null && animator.gameObject.activeSelf)
+        if (animator != null && animator.gameObject.activeSelf)
         {
-            animator.CrossFade("Walk", 0.3f, 0);
+            if (animator.runtimeAnimatorController != null)
+            {
+                Debug.Log("Animator Controller Exists");
+                animator.CrossFade("Walk", 0.3f, 0);
+            }
+            else
+            {
+                Debug.Log("Animator Controller is NULL");
+            }
         }
     }
     public void TriggerIdleAnimation()

@@ -20,12 +20,11 @@ public class CharacterIdle : CharacterState
         base.OnEnter();
         controller.SetDefaultRotation();
     }
-    public override void FixedUpdate()
+    public override void LateUpdate()
     {
-        base.FixedUpdate();
-        //controller.movement.Move();
+        base.LateUpdate();
+        controller.movement.Move();
     }
-
 }
 
 public class CharacterInDialog : CharacterState
