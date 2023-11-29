@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class CharacterAnimation : MonoBehaviour
     {
         this.manager = manager;
     }
-    private void Start()
+    private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
     }
@@ -35,11 +36,18 @@ public class CharacterAnimation : MonoBehaviour
         }
     }
 
-    public void TriggerWalkAnimation(bool active)
+    public void TriggerWalkAnimation()
+    {
+        if (animator != null && animator.runtimeAnimatorController != null && animator.gameObject.activeSelf)
+        {
+            animator.CrossFade("Walk", 0.3f, 0);
+        }
+    }
+    public void TriggerIdleAnimation()
     {
         if (animator != null)
         {
-            animator.SetBool("walking", active);
+            animator.CrossFade("Idle", 0.3f, 0);
         }
     }
     public void TriggerGesture(GestureName gestureName, bool active)
@@ -48,19 +56,21 @@ public class CharacterAnimation : MonoBehaviour
 
         if (activeGesture == null && animator != null && gesture != null)
         {
-            animator.SetBool(gesture.Name.ToString().ToLower(), active);
+            print(activeGesture);
+            animator.CrossFade(gesture.Name.ToString(), 0.3f, 0);
             activeGesture = gesture;
             manager.expression.TriggerExpression(gesture.expression.Name, active);
         }
     }
     public void CheckIfGestureIsDone()
     {
-        if (activeGesture != null && animator.GetBool(activeGesture.Name.ToString().ToLower()))
+        if (activeGesture != null)
         {
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.normalizedTime > 1 && !animator.IsInTransition(0))
+            if (stateInfo.IsName(activeGesture.Name.ToString()) && stateInfo.normalizedTime > 1)
             {
-                animator.SetBool(activeGesture.Name.ToString().ToLower(), false);
+                print("done");
+                animator.CrossFade("Idle", 0.3f, 0);
                 activeGesture = null;
             }
         }

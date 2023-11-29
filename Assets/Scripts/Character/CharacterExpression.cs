@@ -26,6 +26,9 @@ public class CharacterExpression : MonoBehaviour
         manager.animations.SetGestures();
         SetExpressionMotions();
     }
+    void Update() {
+        CheckIfExpressionIsDone();
+    }
 
     private void SetBlendShapes()
     {
@@ -66,11 +69,25 @@ public class CharacterExpression : MonoBehaviour
 
         if (activeExpression == null && manager.animations.animator != null && expression != null)
         {
-            print(expression.shapes[0].value);
-            manager.animations.animator.SetBool(expressionName.ToString().ToLower(), active);
+            manager.animations.animator.CrossFade(expression.Name.ToString(), 0.3f, 1);
             activeExpression = expression;
         }
     }
+    public void CheckIfExpressionIsDone()
+    {
+        if (activeExpression != null)
+        {
+            int index = manager.animations.animator.GetLayerIndex("Expression Layer");
+            AnimatorStateInfo stateInfo = manager.animations.animator.GetCurrentAnimatorStateInfo(index);
+            if (stateInfo.IsName(activeExpression.Name.ToString()) && stateInfo.normalizedTime > 1)
+            {
+                print("expression done");
+                manager.animations.animator.CrossFade("Default", 0.3f, index);
+                activeExpression = null;
+            }
+        }
+    }
+
     private void SetExpressionMotions()
     {
         ChildAnimatorState[] states = GetExpressionStates();
@@ -78,7 +95,9 @@ public class CharacterExpression : MonoBehaviour
         {
             AnimationClip clip = new()
             {
-                name = expression.Name.ToString()
+                name = expression.Name.ToString(),
+                wrapMode = WrapMode.Once
+
             };
 
             foreach (BlendShape shape in expression.shapes)
@@ -89,10 +108,9 @@ public class CharacterExpression : MonoBehaviour
                     AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, 100f);
                     string propertyName = "blendShape." + shape.Name;
                     clip.SetCurve(skinnedMeshRenderer.transform.name, typeof(SkinnedMeshRenderer), propertyName, curve);
-
                 }
             }
-        
+
             ChildAnimatorState expressionState = states.FirstOrDefault((ChildAnimatorState state) => state.state.name == expression.Name.ToString());
             if (expressionState.state != null)
             {

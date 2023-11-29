@@ -19,12 +19,11 @@ public class CharacterIdle : CharacterState
     {
         base.OnEnter();
         controller.SetDefaultRotation();
-        controller.movement.EnabledMovement();
     }
     public override void FixedUpdate()
     {
-        base.Update();
-        controller.movement.Move();
+        base.FixedUpdate();
+        //controller.movement.Move();
     }
 
 }

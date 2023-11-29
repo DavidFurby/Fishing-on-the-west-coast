@@ -18,6 +18,7 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.enabled = false;
         GetWayPoints();
     }
 
@@ -54,19 +55,18 @@ public class CharacterMovement : MonoBehaviour
     }
     internal void PauseMovement()
     {
-        if (agent != null)
+        if (agent != null && agent.enabled)
         {
             agent.enabled = false;
-
-            controller.animations.TriggerWalkAnimation(false);
+            controller.animations.TriggerIdleAnimation();
         }
     }
     internal void EnabledMovement()
     {
-        if (agent != null)
+        if (agent != null && !agent.enabled)
         {
             agent.enabled = true;
-            controller.animations.TriggerWalkAnimation(true);
+            controller.animations.TriggerWalkAnimation();
         }
     }
 
