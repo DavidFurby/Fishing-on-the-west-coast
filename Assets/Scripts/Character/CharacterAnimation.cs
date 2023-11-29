@@ -6,7 +6,6 @@ public class CharacterAnimation : MonoBehaviour
     internal Animator animator;
     protected CharacterManager manager;
     internal List<Gesture> gestures = new();
-    private Gesture activeGesture;
 
     internal void Initialize(CharacterManager manager)
     {
@@ -48,14 +47,15 @@ public class CharacterAnimation : MonoBehaviour
     public void TriggerGesture(GestureName gestureName)
     {
         Gesture gesture = gestures.FirstOrDefault((Gesture gesture) => gesture.Name == gestureName);
-        if (activeGesture == null && animator != null && gesture != null)
+        if (animator != null && gesture != null)
         {
-            animator.CrossFade(gesture.Name.ToString(), 0f);
-            activeGesture = gesture;
+            animator.CrossFade(gesture.Name.ToString(), 0f, 0);
             manager.expression.TriggerExpression(gesture.expression.Name);
         }
+
+
     }
-   
+
 }
 public class Gesture
 {

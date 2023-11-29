@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class CharacterExpression : MonoBehaviour
 {
-    SkinnedMeshRenderer skinnedMeshRenderer;
+    internal SkinnedMeshRenderer skinnedMeshRenderer;
     private CharacterManager manager;
     int blendShapeCount;
     public List<BlendShape> ShapeList { get; set; } = new List<BlendShape>();
     public List<Expression> listOfExpressions = new();
-    private Expression activeExpression;
     private int layerIndex;
     internal void Initialize(CharacterManager manager)
     {
@@ -25,6 +24,7 @@ public class CharacterExpression : MonoBehaviour
         SetBlendShapes();
         SetExpressions();
         manager.animations.SetGestures();
+        manager.blink.SetBlinkMotion();
         SetExpressionMotions();
     }
 
@@ -56,53 +56,24 @@ public class CharacterExpression : MonoBehaviour
             listOfExpressions.Add(new Expression(name, shapes));
         }
     }
-    private void UpdateExpressionValues(int index, float newValue)
-    {
-        skinnedMeshRenderer.SetBlendShapeWeight(index, newValue);
-        ShapeList[index].value = newValue;
-    }
+
     internal void TriggerExpression(ExpressionName expressionName)
     {
         Expression expression = listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == expressionName);
         AnimatorClipInfo[] clipInfo = manager.animations.animator.GetCurrentAnimatorClipInfo(layerIndex);
-        print("enter");
         if (manager.animations.animator != null && expression != null)
         {
-            print(activeExpression);
-            if (activeExpression != null)
-            {
-                print("is active");
-                // End the current animation immediately
-                manager.animations.animator.Play(activeExpression.Name.ToString(), layerIndex, 1);
-            }
+
             manager.animations.animator.CrossFade(expression.Name.ToString(), 0.3f, layerIndex);
-            activeExpression = expression;
         }
     }
 
     private void SetExpressionMotions()
     {
-        ChildAnimatorState[] states = GetExpressionStates();
+        ChildAnimatorState[] states = GetLayerStates(layerIndex);
         foreach (Expression expression in listOfExpressions)
         {
-            AnimationClip clip = new()
-            {
-                name = expression.Name.ToString(),
-                wrapMode = WrapMode.Once
-
-            };
-
-            foreach (BlendShape shape in expression.shapes)
-            {
-                int blendShapeIndex = skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex(shape.Name);
-                if (blendShapeIndex != -1)
-                {
-                    AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, 100f);
-                    string propertyName = "blendShape." + shape.Name;
-                    clip.SetCurve(skinnedMeshRenderer.transform.name, typeof(SkinnedMeshRenderer), propertyName, curve);
-                }
-            }
-
+            AnimationClip clip = CreateClip(expression);
             ChildAnimatorState expressionState = states.FirstOrDefault((ChildAnimatorState state) => state.state.name == expression.Name.ToString());
             if (expressionState.state != null)
             {
@@ -110,6 +81,30 @@ public class CharacterExpression : MonoBehaviour
             }
         }
     }
+
+    internal AnimationClip CreateClip(Expression expression)
+    {
+        AnimationClip clip = new()
+        {
+            name = expression.Name.ToString(),
+            wrapMode = WrapMode.Once
+
+        };
+
+        foreach (BlendShape shape in expression.shapes)
+        {
+            int blendShapeIndex = skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex(shape.Name);
+            if (blendShapeIndex != -1)
+            {
+                AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, 100f);
+                string propertyName = "blendShape." + shape.Name;
+                clip.SetCurve(skinnedMeshRenderer.transform.name, typeof(SkinnedMeshRenderer), propertyName, curve);
+            }
+        }
+        return clip;
+
+    }
+
     private string GetRelativePath(Transform current)
     {
         if (current.parent == null)
@@ -118,20 +113,19 @@ public class CharacterExpression : MonoBehaviour
             return GetRelativePath(current.parent) + "/" + current.name;
     }
 
-    private ChildAnimatorState[] GetExpressionStates()
+    internal ChildAnimatorState[] GetLayerStates(int index)
     {
         AnimatorController ac = manager.animations.animator.runtimeAnimatorController as AnimatorController;
-        AnimatorControllerLayer layer = ac.layers[1];
+        AnimatorControllerLayer layer = ac.layers[index];
         AnimatorStateMachine stateMachine = layer.stateMachine;
         ChildAnimatorState[] states = stateMachine.states;
         return states;
     }
-
     internal void MouthFlaps()
     {
         BlendShape mouthMovement = ShapeList[0];
         float newValue = mouthMovement.value <= 50 ? 100 : 0;
-        UpdateExpressionValues(0, newValue);
+
     }
 }
 public class BlendShape
@@ -165,5 +159,4 @@ public enum ExpressionName
     Angry,
     Confused,
     Shocked,
-
 }
