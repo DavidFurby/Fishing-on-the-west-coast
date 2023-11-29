@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class CharacterHandlers : MonoBehaviour
@@ -21,10 +22,9 @@ public class CharacterHandlers : MonoBehaviour
         dialogManager.RemoveHandler("triggerGesture");
         dialogManager.AddHandler("triggerGesture", (string name) =>
         {
-            
             if (Enum.TryParse(name, out GestureName gesture))
             {
-                manager.animations.TriggerGesture(gesture, true);
+                StartCoroutine(TriggerGestureWithDelay(gesture, 0.5f));
             }
             else
             {
@@ -33,4 +33,10 @@ public class CharacterHandlers : MonoBehaviour
         });
     }
 
+    private IEnumerator TriggerGestureWithDelay(GestureName gesture, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        manager.animations.TriggerGesture(gesture, true);
+    }
 }

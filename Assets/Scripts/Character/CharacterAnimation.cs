@@ -55,7 +55,7 @@ public class CharacterAnimation : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.CrossFade("Idle", 0.3f, 0);
+            animator.CrossFade("Idle", 0, 0);
         }
     }
     public void TriggerGesture(GestureName gestureName, bool active)
@@ -65,7 +65,7 @@ public class CharacterAnimation : MonoBehaviour
         if (activeGesture == null && animator != null && gesture != null)
         {
             print(activeGesture);
-            animator.CrossFade(gesture.Name.ToString(), 0.3f, 0);
+            animator.CrossFade(gesture.Name.ToString(), 0f);
             activeGesture = gesture;
             manager.expression.TriggerExpression(gesture.expression.Name, active);
         }
