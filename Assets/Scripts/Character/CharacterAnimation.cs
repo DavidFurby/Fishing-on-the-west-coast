@@ -15,11 +15,6 @@ public class CharacterAnimation : MonoBehaviour
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        print(animator.runtimeAnimatorController != null);
-    }
-    private void Update()
-    {
-        CheckIfGestureIsDone();
     }
     internal void SetGestures()
     {
@@ -40,15 +35,7 @@ public class CharacterAnimation : MonoBehaviour
     {
         if (animator != null && animator.gameObject.activeSelf)
         {
-            if (animator.runtimeAnimatorController != null)
-            {
-                Debug.Log("Animator Controller Exists");
-                animator.CrossFade("Walk", 0.3f, 0);
-            }
-            else
-            {
-                Debug.Log("Animator Controller is NULL");
-            }
+            animator.CrossFade("Walk", 0.3f, 0);
         }
     }
     public void TriggerIdleAnimation()
@@ -58,31 +45,17 @@ public class CharacterAnimation : MonoBehaviour
             animator.CrossFade("Idle", 0, 0);
         }
     }
-    public void TriggerGesture(GestureName gestureName, bool active)
+    public void TriggerGesture(GestureName gestureName)
     {
         Gesture gesture = gestures.FirstOrDefault((Gesture gesture) => gesture.Name == gestureName);
-
         if (activeGesture == null && animator != null && gesture != null)
         {
-            print(activeGesture);
             animator.CrossFade(gesture.Name.ToString(), 0f);
             activeGesture = gesture;
-            manager.expression.TriggerExpression(gesture.expression.Name, active);
+            manager.expression.TriggerExpression(gesture.expression.Name);
         }
     }
-    public void CheckIfGestureIsDone()
-    {
-        if (activeGesture != null)
-        {
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName(activeGesture.Name.ToString()) && stateInfo.normalizedTime > 1)
-            {
-                print("done");
-                animator.CrossFade("Idle", 0.3f, 0);
-                activeGesture = null;
-            }
-        }
-    }
+   
 }
 public class Gesture
 {

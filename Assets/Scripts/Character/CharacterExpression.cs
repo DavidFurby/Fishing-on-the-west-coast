@@ -11,6 +11,7 @@ public class CharacterExpression : MonoBehaviour
     public List<BlendShape> ShapeList { get; set; } = new List<BlendShape>();
     public List<Expression> listOfExpressions = new();
     private Expression activeExpression;
+    private int layerIndex;
     internal void Initialize(CharacterManager manager)
     {
         this.manager = manager;
@@ -18,15 +19,13 @@ public class CharacterExpression : MonoBehaviour
 
     void Start()
     {
+        layerIndex = manager.animations.animator.GetLayerIndex("Expression Layer");
         skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         blendShapeCount = skinnedMeshRenderer.sharedMesh.blendShapeCount;
         SetBlendShapes();
         SetExpressions();
         manager.animations.SetGestures();
         SetExpressionMotions();
-    }
-    void Update() {
-        CheckIfExpressionIsDone();
     }
 
     private void SetBlendShapes()
@@ -62,28 +61,22 @@ public class CharacterExpression : MonoBehaviour
         skinnedMeshRenderer.SetBlendShapeWeight(index, newValue);
         ShapeList[index].value = newValue;
     }
-    internal void TriggerExpression(ExpressionName expressionName, bool active)
+    internal void TriggerExpression(ExpressionName expressionName)
     {
         Expression expression = listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == expressionName);
-
-        if (activeExpression == null && manager.animations.animator != null && expression != null)
+        AnimatorClipInfo[] clipInfo = manager.animations.animator.GetCurrentAnimatorClipInfo(layerIndex);
+        print("enter");
+        if (manager.animations.animator != null && expression != null)
         {
-            manager.animations.animator.CrossFade(expression.Name.ToString(), 0.3f, 1);
-            activeExpression = expression;
-        }
-    }
-    public void CheckIfExpressionIsDone()
-    {
-        if (activeExpression != null)
-        {
-            int index = manager.animations.animator.GetLayerIndex("Expression Layer");
-            AnimatorStateInfo stateInfo = manager.animations.animator.GetCurrentAnimatorStateInfo(index);
-            if (stateInfo.IsName(activeExpression.Name.ToString()) && stateInfo.normalizedTime > 1)
+            print(activeExpression);
+            if (activeExpression != null)
             {
-                print("expression done");
-                manager.animations.animator.CrossFade("Default", 0.3f, index);
-                activeExpression = null;
+                print("is active");
+                // End the current animation immediately
+                manager.animations.animator.Play(activeExpression.Name.ToString(), layerIndex, 1);
             }
+            manager.animations.animator.CrossFade(expression.Name.ToString(), 0.3f, layerIndex);
+            activeExpression = expression;
         }
     }
 
