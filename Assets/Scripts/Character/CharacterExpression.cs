@@ -73,7 +73,12 @@ public class CharacterExpression : MonoBehaviour
         ChildAnimatorState[] states = GetLayerStates(layerIndex);
         foreach (Expression expression in listOfExpressions)
         {
-            AnimationClip clip = CreateClip(expression);
+            AnimationClip clip = CreateClip(expression.Name.ToString());
+
+            foreach (BlendShape shape in expression.shapes)
+            {
+                CreateLinearCurve(clip, shape.Name);
+            }
             ChildAnimatorState expressionState = states.FirstOrDefault((ChildAnimatorState state) => state.state.name == expression.Name.ToString());
             if (expressionState.state != null)
             {
@@ -82,27 +87,26 @@ public class CharacterExpression : MonoBehaviour
         }
     }
 
-    internal AnimationClip CreateClip(Expression expression)
+    internal AnimationClip CreateClip(string clipName)
     {
         AnimationClip clip = new()
         {
-            name = expression.Name.ToString(),
-            wrapMode = WrapMode.Once
-
+            name = clipName,
         };
 
-        foreach (BlendShape shape in expression.shapes)
-        {
-            int blendShapeIndex = skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex(shape.Name);
-            if (blendShapeIndex != -1)
-            {
-                AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, 100f);
-                string propertyName = "blendShape." + shape.Name;
-                clip.SetCurve(skinnedMeshRenderer.transform.name, typeof(SkinnedMeshRenderer), propertyName, curve);
-            }
-        }
         return clip;
 
+    }
+
+    internal void CreateLinearCurve(AnimationClip clip, string shapeName)
+    {
+        int blendShapeIndex = skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex(shapeName);
+        if (blendShapeIndex != -1)
+        {
+            AnimationCurve curve = AnimationCurve.Linear(0f, 0, 1f, 100);
+            string propertyName = "blendShape." + shapeName;
+            clip.SetCurve(skinnedMeshRenderer.transform.name, typeof(SkinnedMeshRenderer), propertyName, curve);
+        }
     }
 
     private string GetRelativePath(Transform current)
@@ -120,12 +124,6 @@ public class CharacterExpression : MonoBehaviour
         AnimatorStateMachine stateMachine = layer.stateMachine;
         ChildAnimatorState[] states = stateMachine.states;
         return states;
-    }
-    internal void MouthFlaps()
-    {
-        BlendShape mouthMovement = ShapeList[0];
-        float newValue = mouthMovement.value <= 50 ? 100 : 0;
-
     }
 }
 public class BlendShape

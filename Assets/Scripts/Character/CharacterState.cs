@@ -42,7 +42,5 @@ public class CharacterInDialog : CharacterState
     public override void Update()
     {
         base.Update();
-
-        controller.expression.MouthFlaps();
     }
 }
