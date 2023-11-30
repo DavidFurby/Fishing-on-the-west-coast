@@ -6,7 +6,6 @@ using UnityEngine;
 public class CharacterExpression : MonoBehaviour
 {
     private CharacterAnimationController controller;
-    public List<BlendShape> ShapeList { get; set; } = new List<BlendShape>();
     public List<Expression> listOfExpressions = new();
     private int layerIndex;
     internal void Initialize(CharacterAnimationController controller)
@@ -16,7 +15,9 @@ public class CharacterExpression : MonoBehaviour
 
     void Start()
     {
-        layerIndex = controller.gesture.animator.GetLayerIndex("Expression Layer");
+        layerIndex = controller.animator.GetLayerIndex("Expression Layer");
+        SetExpressions();
+        SetExpressionMotions();
     }
 
 
@@ -26,10 +27,10 @@ public class CharacterExpression : MonoBehaviour
         {
             BlendShape[] shapes = name switch
             {
-                ExpressionName.Happy => ShapeList.Where((BlendShape shape) => shape.Name == "Blink Happy" || shape.Name == "Mouth Open").ToArray(),
-                ExpressionName.Shocked => ShapeList.Where((BlendShape shape) => shape.Name == "Mouth Open").ToArray(),
-                ExpressionName.Sad => ShapeList.Where((BlendShape shape) => shape.Name == "Eyes Sad" || shape.Name == "Mouth Sad").ToArray(),
-                _ => ShapeList.ToArray(),
+                ExpressionName.Happy => controller.ShapeList.Where((BlendShape shape) => shape.Name == "Blink Happy" || shape.Name == "Mouth Open").ToArray(),
+                ExpressionName.Shocked => controller.ShapeList.Where((BlendShape shape) => shape.Name == "Mouth Open").ToArray(),
+                ExpressionName.Sad => controller.ShapeList.Where((BlendShape shape) => shape.Name == "Eyes Sad" || shape.Name == "Mouth Sad").ToArray(),
+                _ => controller.ShapeList.ToArray(),
             };
             foreach (BlendShape shape in shapes)
             {
@@ -43,17 +44,17 @@ public class CharacterExpression : MonoBehaviour
     internal void TriggerExpression(ExpressionName expressionName)
     {
         Expression expression = listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == expressionName);
-        AnimatorClipInfo[] clipInfo = controller.gesture.animator.GetCurrentAnimatorClipInfo(layerIndex);
-        if (controller.gesture.animator != null && expression != null)
+        AnimatorClipInfo[] clipInfo = controller.animator.GetCurrentAnimatorClipInfo(layerIndex);
+        if (controller.animator != null && expression != null)
         {
 
-            controller.gesture.animator.CrossFade(expression.Name.ToString(), 0.3f, layerIndex);
+            controller.animator.CrossFade(expression.Name.ToString(), 0.3f, layerIndex);
         }
     }
 
     internal void SetExpressionMotions()
     {
-        ChildAnimatorState[] states = GetLayerStates(layerIndex);
+        ChildAnimatorState[] states = controller.GetLayerStates(layerIndex);
         foreach (Expression expression in listOfExpressions)
         {
             AnimationClip clip = controller.CreateClip(expression.Name.ToString());
@@ -70,18 +71,7 @@ public class CharacterExpression : MonoBehaviour
         }
     }
 
-
-    internal ChildAnimatorState[] GetLayerStates(int index)
-    {
-        AnimatorController ac = controller.gesture.animator.runtimeAnimatorController as AnimatorController;
-        AnimatorControllerLayer layer = ac.layers[index];
-        AnimatorStateMachine stateMachine = layer.stateMachine;
-        ChildAnimatorState[] states = stateMachine.states;
-        return states;
-    }
 }
-
-
 public class Expression
 {
     public ExpressionName Name;

@@ -1,14 +1,17 @@
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterBlink))]
 [RequireComponent(typeof(CharacterExpression))]
 [RequireComponent(typeof(CharacterGesture))]
+[RequireComponent(typeof(CharacterTalk))]
 public class CharacterAnimationController : MonoBehaviour
 {
     internal CharacterExpression expression;
     internal CharacterGesture gesture;
     internal CharacterBlink blink;
+    internal CharacterTalk talk;
     internal CharacterManager manager;
     internal SkinnedMeshRenderer skinnedMeshRenderer;
     internal Animator animator;
@@ -24,24 +27,24 @@ public class CharacterAnimationController : MonoBehaviour
 
     void Awake()
     {
+        skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        blendShapeCount = skinnedMeshRenderer.sharedMesh.blendShapeCount;
+        animator = GetComponentInChildren<Animator>();
+        SetBlendShapes();
+
+    }
+    void OnEnable()
+    {
         expression = GetComponent<CharacterExpression>();
         gesture = GetComponent<CharacterGesture>();
         blink = GetComponent<CharacterBlink>();
+        talk = GetComponent<CharacterTalk>();
         expression.Initialize(this);
         gesture.Initialize(this);
         blink.Initialize(this);
+        talk.Initialize(this);
+    }
 
-    }
-    void Start()
-    {
-        skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        blendShapeCount = skinnedMeshRenderer.sharedMesh.blendShapeCount;
-        SetBlendShapes();
-        expression.SetExpressions();
-        gesture.SetGestures();
-        blink.SetBlinkMotion();
-        expression.SetExpressionMotions();
-    }
     private void SetBlendShapes()
     {
         for (int i = 0; i < blendShapeCount; i++)
@@ -80,6 +83,14 @@ public class CharacterAnimationController : MonoBehaviour
             return GetRelativePath(current.parent) + "/" + current.name;
     }
 
+    internal ChildAnimatorState[] GetLayerStates(int index)
+    {
+        AnimatorController ac = animator.runtimeAnimatorController as AnimatorController;
+        AnimatorControllerLayer layer = ac.layers[index];
+        AnimatorStateMachine stateMachine = layer.stateMachine;
+        ChildAnimatorState[] states = stateMachine.states;
+        return states;
+    }
 }
 public class BlendShape
 {

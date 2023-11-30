@@ -3,7 +3,6 @@ using System.Linq;
 using UnityEngine;
 public class CharacterGesture : MonoBehaviour
 {
-    internal Animator animator;
     protected CharacterAnimationController controller;
     internal List<Gesture> gestures = new();
 
@@ -11,10 +10,10 @@ public class CharacterGesture : MonoBehaviour
     {
         this.controller = controller;
     }
-    private void Awake()
-    {
-        animator = GetComponentInChildren<Animator>();
+    void Start() {
+        SetGestures();
     }
+
     internal void SetGestures()
     {
         foreach (GestureName name in System.Enum.GetValues(typeof(GestureName)))
@@ -32,24 +31,24 @@ public class CharacterGesture : MonoBehaviour
 
     public void TriggerWalkAnimation()
     {
-        if (animator != null && animator.gameObject.activeSelf)
+        if (controller.animator != null && controller.animator.gameObject.activeSelf)
         {
-            animator.CrossFade("Walk", 0.3f, 0);
+            controller.animator.CrossFade("Walk", 0.3f, 0);
         }
     }
     public void TriggerIdleAnimation()
     {
-        if (animator != null)
+        if (controller.animator != null)
         {
-            animator.CrossFade("Idle", 0, 0);
+            controller.animator.CrossFade("Idle", 0, 0);
         }
     }
     public void TriggerGesture(GestureName gestureName)
     {
         Gesture gesture = gestures.FirstOrDefault((Gesture gesture) => gesture.Name == gestureName);
-        if (animator != null && gesture != null)
+        if (controller.animator != null && gesture != null)
         {
-            animator.CrossFade(gesture.Name.ToString(), 0f, 0);
+            controller.animator.CrossFade(gesture.Name.ToString(), 0f, 0);
             controller.expression.TriggerExpression(gesture.expression.Name);
         }
 
