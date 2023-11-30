@@ -32,6 +32,7 @@ public class CharacterBlink : MonoBehaviour
         int blendShapeIndex = manager.expression.skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex("Blink");
         if (blendShapeIndex != -1)
         {
+            AnimationCurve curve = new(keys);
             string propertyName = "blendShape." + "Blink";
             clip.SetCurve(manager.expression.skinnedMeshRenderer.transform.name, typeof(SkinnedMeshRenderer), propertyName, curve);
         }
