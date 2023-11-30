@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Animations;
@@ -6,18 +5,18 @@ using UnityEngine;
 
 public class CharacterBlink : MonoBehaviour
 {
-    private CharacterManager manager;
+    private CharacterAnimationController controller;
     private int layerIndex;
-    internal void Initialize(CharacterManager manager)
+    internal void Initialize(CharacterAnimationController controller)
     {
-        this.manager = manager;
+        this.controller = controller;
     }
 
     internal void SetBlinkMotion()
     {
-        layerIndex = manager.animations.animator.GetLayerIndex("Eyes Layer");
-        ChildAnimatorState[] states = manager.expression.GetLayerStates(layerIndex);
-        AnimationClip clip = manager.expression.CreateClip("Blink");
+        layerIndex = controller.gesture.animator.GetLayerIndex("Eyes Layer");
+        ChildAnimatorState[] states = controller.expression.GetLayerStates(layerIndex);
+        AnimationClip clip = controller.CreateClip("Blink");
         AnimationClipSettings settings = AnimationUtility.GetAnimationClipSettings(clip);
         settings.loopTime = true;
         AnimationUtility.SetAnimationClipSettings(clip, settings);
@@ -29,12 +28,12 @@ public class CharacterBlink : MonoBehaviour
 
 
 
-        int blendShapeIndex = manager.expression.skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex("Blink");
+        int blendShapeIndex = controller.skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex("Blink");
         if (blendShapeIndex != -1)
         {
             AnimationCurve curve = new(keys);
             string propertyName = "blendShape." + "Blink";
-            clip.SetCurve(manager.expression.skinnedMeshRenderer.transform.name, typeof(SkinnedMeshRenderer), propertyName, curve);
+            clip.SetCurve(controller.skinnedMeshRenderer.transform.name, typeof(SkinnedMeshRenderer), propertyName, curve);
         }
         ChildAnimatorState blinkState = states.FirstOrDefault((ChildAnimatorState state) => state.state.name == "Blink");
         if (blinkState.state != null)

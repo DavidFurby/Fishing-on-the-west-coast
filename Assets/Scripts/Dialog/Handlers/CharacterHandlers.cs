@@ -37,6 +37,6 @@ public class CharacterHandlers : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        manager.animations.TriggerGesture(gesture);
+        manager.animationController.gesture.TriggerGesture(gesture);
     }
 }

@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class CharacterDialog : MonoBehaviour, IInteractive
 {
-    internal CharacterManager controller;
+    internal CharacterManager manager;
 
     public static event Action<string> OnStartConversation;
 
     public void Interact()
     {
-        OnStartConversation.Invoke(controller.character.name.ToString());
-        controller.SetState(new CharacterInDialog(controller));
+        OnStartConversation.Invoke(manager.character.name.ToString());
+        manager.SetState(new CharacterInDialog(manager));
     }
 
     internal void Initialize(CharacterManager controller)
     {
-        this.controller = controller;
+        this.manager = controller;
     }
 }

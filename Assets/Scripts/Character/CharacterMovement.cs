@@ -4,15 +4,15 @@ using UnityEngine.AI;
 
 public class CharacterMovement : MonoBehaviour
 {
-    protected CharacterManager controller;
+    protected CharacterManager manager;
     private NavMeshAgent agent;
     private List<Waypoint> waypoints;
     private Waypoint currentWaypoint;
     private int currentWaypointIndex = 0;
 
-    public void Initialize(CharacterManager controller)
+    public void Initialize(CharacterManager manager)
     {
-        this.controller = controller;
+        this.manager = manager;
     }
 
     void Start()
@@ -28,7 +28,7 @@ public class CharacterMovement : MonoBehaviour
         Waypoint[] waypointsInScene = FindObjectsOfType<Waypoint>();
         foreach (Waypoint waypoint in waypointsInScene)
         {
-            if (waypoint.character == controller.character.name)
+            if (waypoint.character == manager.character.name)
             {
                 waypoints.Add(waypoint);
             }
@@ -58,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
         if (agent != null && agent.enabled)
         {
             agent.enabled = false;
-            controller.animations.TriggerIdleAnimation();
+            manager.animationController.gesture.TriggerIdleAnimation();
         }
     }
     internal void EnabledMovement()
@@ -66,7 +66,7 @@ public class CharacterMovement : MonoBehaviour
         if (agent != null && !agent.enabled)
         {
             agent.enabled = true;
-            controller.animations.TriggerWalkAnimation();
+            manager.animationController.gesture.TriggerWalkAnimation();
         }
     }
 

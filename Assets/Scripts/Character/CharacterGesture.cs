@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-public class CharacterAnimation : MonoBehaviour
+public class CharacterGesture : MonoBehaviour
 {
     internal Animator animator;
-    protected CharacterManager manager;
+    protected CharacterAnimationController controller;
     internal List<Gesture> gestures = new();
 
-    internal void Initialize(CharacterManager manager)
+    internal void Initialize(CharacterAnimationController controller)
     {
-        this.manager = manager;
+        this.controller = controller;
     }
     private void Awake()
     {
@@ -21,10 +21,10 @@ public class CharacterAnimation : MonoBehaviour
         {
             Expression expression = name switch
             {
-                GestureName.Wave => manager.expression.listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == ExpressionName.Happy),
-                GestureName.Point => manager.expression.listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == ExpressionName.Shocked),
-                GestureName.Mope => manager.expression.listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == ExpressionName.Sad),
-                _ => manager.expression.listOfExpressions[0],
+                GestureName.Wave => controller.expression.listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == ExpressionName.Happy),
+                GestureName.Point => controller.expression.listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == ExpressionName.Shocked),
+                GestureName.Mope => controller.expression.listOfExpressions.FirstOrDefault((Expression expression) => expression.Name == ExpressionName.Sad),
+                _ => controller.expression.listOfExpressions[0],
             };
             gestures.Add(new Gesture(name, expression));
         }
@@ -50,7 +50,7 @@ public class CharacterAnimation : MonoBehaviour
         if (animator != null && gesture != null)
         {
             animator.CrossFade(gesture.Name.ToString(), 0f, 0);
-            manager.expression.TriggerExpression(gesture.expression.Name);
+            controller.expression.TriggerExpression(gesture.expression.Name);
         }
 
 
